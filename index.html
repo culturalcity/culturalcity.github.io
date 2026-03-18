@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+  :root {
+    /* VI 色系 */
+    --wg1:  #EAE7E1;   /* Warm Grey 1C  — 最淺底色 */
+    --wg9:  #898480;   /* Warm Grey 9C  — 中灰 */
+    --wg11: #696460;   /* Warm Grey 11C — 深灰 */
+    --wg41: #3C3835;   /* 412C          — 近黑主色 */
+    --white: #F7F5F2;  /* 帶暖調的白 */
+    --line:  rgba(60,56,53,0.12);
+    --radius: 2px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--wg1);
+    color: var(--wg41);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--wg41);
+    color: var(--wg1);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 石材紋路暗紋 */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        92deg,
+        transparent,
+        transparent 120px,
+        rgba(234,231,225,0.03) 120px,
+        rgba(234,231,225,0.03) 121px
+      ),
+      repeating-linear-gradient(
+        178deg,
+        transparent,
+        transparent 60px,
+        rgba(234,231,225,0.02) 60px,
+        rgba(234,231,225,0.02) 61px
+      );
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--wg9);
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--wg9);
+    letter-spacing: 0.18em;
+  }
+  /* 細橫線 accent */
+  .header-rule {
+    width: 36px;
+    height: 1px;
+    background: var(--wg9);
+    margin: 20px 0;
+  }
+  .header-desc {
+    font-size: 13px;
+    color: rgba(234,231,225,0.55);
+    max-width: 360px;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 40px 72px;
+  }
+  @media(max-width:600px){
+    .header { padding: 36px 24px 30px; }
+    .main { padding: 32px 20px 56px; }
+    .header h1 { font-size: 24px; }
+  }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--wg9);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  /* ── MODULE CARDS ── */
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  @media(max-width:700px){ .module-grid { grid-template-columns: 1fr; } }
+
+  .module-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--wg41);
+    display: block;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .module-card:hover {
+    border-color: var(--wg11);
+    box-shadow: 0 4px 16px rgba(60,56,53,0.08);
+  }
+  .module-card .mc-accent {
+    height: 3px;
+    background: var(--wg41);
+  }
+  .module-card.finance .mc-accent { background: var(--wg41); }
+  .module-card.notice  .mc-accent { background: var(--wg11); }
+
+  .module-card .mc-body {
+    padding: 24px 24px 20px;
+  }
+  .mc-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .mc-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--wg41);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .mc-desc {
+    font-size: 12px;
+    color: var(--wg9);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .mc-link {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--wg11);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.18s;
+  }
+  .module-card:hover .mc-link { gap: 9px; }
+  .mc-link::after { content: '→'; }
+
+  /* ── INFO STRIP ── */
+  .info-strip {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 48px;
+  }
+  @media(max-width:520px){ .info-strip { grid-template-columns: 1fr; } }
+  .info-item {
+    padding: 0 20px;
+    border-left: 1px solid var(--line);
+  }
+  .info-item:first-child { padding-left: 0; border-left: none; }
+  @media(max-width:520px){
+    .info-item { padding: 14px 0; border-left: none; border-top: 1px solid var(--line); }
+    .info-item:first-child { padding-top: 0; border-top: none; }
+  }
+  .info-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--wg9);
+    margin-bottom: 4px;
+  }
+  .info-value {
+    font-size: 13.5px;
+    color: var(--wg41);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-left {
+    font-size: 11px;
+    color: var(--wg9);
+    letter-spacing: 0.06em;
+    line-height: 1.8;
+  }
+  .footer-right {
+    font-size: 10px;
+    color: rgba(137,132,128,0.6);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">TAIPEI · DA'AN DISTRICT</div>
+    <h1>閱大安</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · RESIDENT PORTAL</div>
+    <div class="header-rule"></div>
+    <div class="header-desc">住戶資訊服務平台<br>財務月報 · 社區公告</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="sec-label">SERVICES &nbsp;·&nbsp; 服務項目</div>
+
+  <div class="module-grid">
+
+    <a href="https://culturalcity.github.io/finance/" class="module-card finance">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📊</span>
+        <div class="mc-title">財務月報</div>
+        <div class="mc-desc">每月收支損益、資產負債表、環比同比分析。管委會財務公開透明。</div>
+        <div class="mc-link">查看財務報表</div>
+      </div>
+    </a>
+
+    <a href="https://culturalcity.github.io/notice/" class="module-card notice">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📋</span>
+        <div class="mc-title">社區公告</div>
+        <div class="mc-desc">施工通知、會議紀錄、設備停用、規約公告、節日活動等官方公告。</div>
+        <div class="mc-link">查看公告列表</div>
+      </div>
+    </a>
+
+    <a href="https://culturalcity.github.io/finance/utility.html" class="module-card notice">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">⚡</span>
+        <div class="mc-title">水電帳單明細</div>
+        <div class="mc-desc">大公電與公水歷年帳單、用量趨勢、同比分析。民國 111～115 年完整紀錄。</div>
+        <div class="mc-link">查看水電帳單</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="sec-label">CONTACT &nbsp;·&nbsp; 聯絡資訊</div>
+
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-label">社區地址</div>
+      <div class="info-value">台北市大安區<br>羅斯福路二段 85 號</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">管理室電話</div>
+      <div class="info-value">(02) 2367-7065</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">行動電話</div>
+      <div class="info-value">0989-648-285</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      閱大安管理委員會<br>
+      本平台資訊僅供本社區住戶參考使用
+    </div>
+    <div class="footer-right">CULTURAL CITY COMMUNITY</div>
+  </div>
+
+</div>
+
+</body>
+</html>
