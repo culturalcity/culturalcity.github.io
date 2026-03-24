@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安・114年度中元普渡活動</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+:root{
+  --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+  --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--c-event:#1F5C38;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:15px;line-height:1.8;min-height:100vh;}
+.header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+.header-inner{max-width:680px;margin:0 auto;position:relative;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+.back::before{content:'←';}.back:hover{color:var(--wg1);}
+.header h1{font-size:20px;font-weight:700;letter-spacing:.04em;line-height:1.4;margin-bottom:4px;}
+.header-meta{font-size:11px;color:var(--wg9);letter-spacing:.08em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.type-pill{font-size:10px;padding:2px 9px;border-radius:1px;border:1px solid;}
+.pill-event{color:var(--c-event);border-color:rgba(31,92,56,.3);background:rgba(31,92,56,.06);}
+.lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
+.lang-bar-inner{max-width:680px;margin:0 auto;display:flex;}
+.lang-btn{padding:10px 18px;font-size:12px;font-family:'Noto Sans TC','Noto Sans JP',sans-serif;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.lang-btn:hover{color:rgba(234,231,225,0.8);}.lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+.main{max-width:680px;margin:0 auto;padding:36px 40px 64px;}
+@media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:28px 20px 48px;}}
+.lang-block{display:none;}.lang-block.active{display:block;}
+.body-text{font-size:14px;color:var(--wg41);line-height:1.9;}
+.body-text p{margin-bottom:1em;}
+.body-text p:last-child{margin-bottom:0;}
+.sec{margin-bottom:28px;}
+.sec-label{font-size:10px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+.info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
+.info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+.info-row:last-child{border-bottom:none;}
+.info-label{font-size:11px;letter-spacing:.08em;color:var(--wg9);width:70px;flex-shrink:0;padding-top:2px;}
+.info-value{font-size:14px;color:var(--wg41);font-weight:500;}
+.ul-clean{list-style:none;padding:0;margin:4px 0;}
+.ul-clean li{padding:8px 0 8px 16px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--wg11);position:relative;line-height:1.75;}
+.ul-clean li::before{content:'·';position:absolute;left:0;color:var(--wg9);}
+.ul-clean li:last-child{border-bottom:none;}
+.note{background:rgba(60,56,53,0.05);border-left:3px solid var(--wg11);padding:12px 16px;font-size:13px;color:var(--wg11);line-height:1.8;margin-top:4px;}
+.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--wg9);letter-spacing:.06em;}
+</style>
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.lang-block').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el=>{el.style.display=el.dataset.langText===lang?'':'none';});
+  const typeMap={zh:'節日活動',en:'Event',ja:'イベント'};
+  if(typeMap[lang]) document.getElementById('type-label').textContent=typeMap[lang];
+}
+</script>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <a href="https://culturalcity.github.io/" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:6px;margin-right:16px;transition:color .18s" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">← 社區主頁</a>
+    <a href="../notice/" class="back">社區公告</a>
+    <h1>
+      <span data-lang-text="zh">114年度中元普渡活動</span>
+      <span data-lang-text="en" style="display:none">2025 Ghost Festival Community Offering Ceremony</span>
+      <span data-lang-text="ja" style="display:none">2025年度　中元節・普渡（お盆供養）行事のご案内</span>
+    </h1>
+    <div class="header-meta">
+      <span class="type-pill pill-event" id="type-label">節日活動</span>
+      <span>2025/08/29</span>
+      <span>閱大安管理委員會</span>
+    </div>
+  </div>
+</div>
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>
+<div class="main">
+
+  <!-- 中文 -->
+  <div class="lang-block active" data-lang="zh">
+    <div class="sec">
+      <div class="sec-label">活動資訊</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">時間</span><span class="info-value">114年9月20日（農曆七月二十九日）星期六　14:00</span></div>
+        <div class="info-row"><span class="info-label">地點</span><span class="info-value">本社區大廳正門前</span></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">注意事項</div>
+      <ul class="ul-clean">
+        <li><strong>祭品準備：</strong>管理中心備有供桌、法器、紙錢與基本祭品；住戶亦可自行準備三牲、水果、餅乾、飲料、金紙香燭等（依個人習俗斟酌準備，量力而為），置於供桌上。</li>
+        <li><strong>擺放時間：</strong>請於下午 14:00 前依工作人員指示完成整齊擺放，並於普渡儀式結束後自行取回。</li>
+        <li><strong>紙錢焚燒：</strong>為維護安全與落實環保法令，現場不提供金爐、不焚燒紙錢，將集中交由環保局清潔隊收取統一代燒。亦請住戶勿於陽台或公設空間焚燒。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- English -->
+  <div class="lang-block" data-lang="en">
+    <div class="sec">
+      <div class="sec-label">About This Event</div>
+      <div class="body-text">
+        <p>The Ghost Festival (中元節, Zhongyuanjie) is a traditional Taiwanese folk ritual observed during the seventh lunar month. On the designated day, communities hold a communal offering ceremony (普渡, Pǔdù) to pay respects to ancestral spirits and wandering souls. The Management Committee is pleased to organize this annual event on behalf of all residents.</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">Event Details</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">Date &amp; Time</span><span class="info-value">Saturday, 20 September 2025 (Lunar 7th Month, 29th Day)　14:00</span></div>
+        <div class="info-row"><span class="info-label">Venue</span><span class="info-value">In front of the main lobby entrance</span></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">Notes</div>
+      <ul class="ul-clean">
+        <li><strong>Offerings:</strong> The Management Center will provide offering tables, ritual items, spirit money, and basic offerings. Residents who wish to participate may also bring their own offerings such as three sacrificial meats, fruit, biscuits, beverages, incense sticks and candles (according to personal customs and as you see fit), and place them on the offering table.</li>
+        <li><strong>Setup time:</strong> Please arrange your offerings neatly on the table by 14:00, following staff guidance. All personal offerings should be retrieved after the ceremony.</li>
+        <li><strong>Spirit money burning:</strong> In the interest of safety and environmental regulations, no incinerator will be provided on-site. Spirit money will be collected centrally and sent to the Environmental Protection Bureau for official burning. Residents are also asked not to burn offerings on their balconies or in any common areas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 日本語 -->
+  <div class="lang-block" data-lang="ja">
+    <div class="sec">
+      <div class="sec-label">行事について</div>
+      <div class="body-text">
+        <p>中元節（ちゅうげんせつ）は、旧暦7月に行われる台湾の伝統的な民間行事です。この時期に行われる「普渡（プードゥ）」は、先祖の霊や浮遊する魂に供物を捧げ、供養する儀式です。管理委員会は毎年、全居住者様のためにこの地域行事を執り行っております。</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">行事詳細</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">日時</span><span class="info-value">2025年9月20日（土曜日・旧暦7月29日）　14:00</span></div>
+        <div class="info-row"><span class="info-label">場所</span><span class="info-value">本マンションのメインロビー正面玄関前</span></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">ご注意事項</div>
+      <ul class="ul-clean">
+        <li><strong>お供え物について：</strong>管理センターでは供え台、法具、紙銭および基本的なお供え物を用意いたします。ご希望の居住者様は、三牲（豚・鶏・魚）、果物、お菓子、飲料、線香・ろうそくなど（各自の慣習に応じてご準備ください）をお持ちいただき、供え台に置くことができます。</li>
+        <li><strong>配置時間：</strong>14:00までにスタッフの指示に従ってお供え物を整えてください。儀式終了後はご自身でお引き取りください。</li>
+        <li><strong>紙銭の焚き上げについて：</strong>安全確保と環境法令の遵守のため、現地では焼却炉を設置せず、紙銭の焚き上げは行いません。紙銭は一括して回収し、環境保護局の清掃業者に委託して代わりに焚き上げいたします。また、ベランダや共用スペースでの焚き上げも固くお断りしております。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">閱大安管理委員會・如有疑問請洽管理室</div>
+</div>
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.lang-block').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el=>{el.style.display=el.dataset.langText===lang?'':'none';});
+  const typeMap={zh:'節日活動',en:'Event',ja:'イベント'};
+  if(typeMap[lang]) document.getElementById('type-label').textContent=typeMap[lang];
+}
+</script>
+</body>
+</html>

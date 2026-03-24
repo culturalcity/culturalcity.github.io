@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安・會議紀錄</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+:root{
+  --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+  --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--blue:#2B4A6B;
+  --orange:#6B3A1F;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:15px;line-height:1.7;}
+
+/* ── HEADER ── */
+.header{background:var(--wg41);color:var(--wg1);padding:40px 40px 0;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+.header-inner{max-width:720px;margin:0 auto;position:relative;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:18px;transition:color .18s;}
+.back::before{content:'←';}.back:hover{color:var(--wg1);}
+.eyebrow{font-size:10px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+.header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
+.header-sub{font-size:11px;color:var(--wg9);letter-spacing:.16em;margin-bottom:24px;}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
+.tab-btn{
+  padding:12px 24px;font-size:12px;
+  font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  letter-spacing:.08em;color:rgba(234,231,225,0.45);
+  background:transparent;border:none;border-bottom:2px solid transparent;
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.tab-btn:hover{color:rgba(234,231,225,0.8);}
+.tab-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+
+/* ── MAIN ── */
+.main{max-width:720px;margin:0 auto;padding:36px 40px 64px;}
+@media(max-width:600px){
+  .header{padding:28px 20px 0;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}
+  .tab-btn{padding:10px 16px;font-size:11px;}
+}
+.tab-content{display:none;}.tab-content.active{display:block;}
+
+/* ── NOTICE BANNER ── */
+.notice{background:rgba(60,56,53,.05);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:12.5px;color:var(--wg11);line-height:1.8;margin-bottom:28px;}
+
+/* ── ACCORDION (屆次) ── */
+.term-block{margin-bottom:16px;}
+.term-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;background:none;border:none;cursor:pointer;
+  padding:9px 0;border-bottom:1px solid var(--line);
+  font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+}
+.term-toggle:hover .term-label-text{color:var(--wg41);}
+.term-label-text{font-size:10px;letter-spacing:.22em;color:var(--wg11);display:flex;align-items:center;gap:10px;}
+.term-label-text::before{content:'';flex:0 0 0;}
+.term-count{font-size:10px;color:var(--wg9);letter-spacing:.06em;}
+.term-chevron{font-size:12px;color:var(--wg9);transition:transform .22s;flex-shrink:0;}
+.term-block.open .term-chevron{transform:rotate(90deg);}
+.term-body{display:none;padding-top:6px;}
+.term-block.open .term-body{display:block;}
+
+/* ── MEETING LIST ── */
+.meeting-list{display:flex;flex-direction:column;gap:1px;margin-bottom:8px;}
+.mc{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
+.mc+.mc{border-top:none;}
+.mc:first-child{border-radius:var(--radius) var(--radius) 0 0;}
+.mc:last-child{border-radius:0 0 var(--radius) var(--radius);}
+.mc:hover{background:#F2F0EC;border-color:rgba(60,56,53,.25);z-index:1;}
+.mc-stripe{width:3px;flex-shrink:0;background:var(--blue);}
+.mc-stripe.orange{background:var(--orange);}
+.mc-body{flex:1;padding:13px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.mc-seq{font-size:22px;font-weight:700;color:var(--blue);min-width:32px;letter-spacing:-.02em;flex-shrink:0;}
+.mc-seq.orange{color:var(--orange);}
+.mc-info{flex:1;}
+.mc-title{font-size:14px;font-weight:500;color:var(--wg41);margin-bottom:2px;}
+.mc-date{font-size:11px;color:var(--wg9);}
+.mc-badge{font-size:10px;padding:2px 8px;border:1px solid rgba(43,74,107,.25);border-radius:1px;color:var(--blue);background:rgba(43,74,107,.05);white-space:nowrap;}
+.mc-badge.orange{border-color:rgba(107,58,31,.25);color:var(--orange);background:rgba(107,58,31,.05);}
+.mc-arrow{padding:0 16px;font-size:16px;color:var(--wg9);transition:transform .18s;}
+.mc:hover .mc-arrow{transform:translateX(3px);}
+
+/* 區權人會議用較大的序號排版 */
+.agm-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+.agm{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;border-radius:var(--radius);}
+.agm:hover{background:#F2F0EC;border-color:rgba(60,56,53,.25);}
+.agm-stripe{width:3px;flex-shrink:0;background:var(--orange);}
+.agm-body{flex:1;padding:16px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.agm-term{font-size:28px;font-weight:700;color:var(--orange);min-width:36px;letter-spacing:-.02em;flex-shrink:0;line-height:1;}
+.agm-info{flex:1;}
+.agm-title{font-size:14px;font-weight:600;color:var(--wg41);margin-bottom:3px;}
+.agm-meta{font-size:11px;color:var(--wg9);line-height:1.7;}
+.agm-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.agm-badge{font-size:10px;padding:2px 8px;border:1px solid rgba(107,58,31,.25);border-radius:1px;color:var(--orange);background:rgba(107,58,31,.05);white-space:nowrap;}
+.agm-arrow{padding:0 16px;font-size:16px;color:var(--wg9);transition:transform .18s;}
+.agm:hover .agm-arrow{transform:translateX(3px);}
+
+/* ── PLACEHOLDER ── */
+.placeholder{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px;font-size:12.5px;color:var(--wg9);text-align:center;line-height:1.8;}
+
+.footer{border-top:1px solid var(--line);padding-top:18px;font-size:11px;color:var(--wg9);letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+</style>
+<script>
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
+}
+function toggleTerm(el){
+  el.closest('.term-block').classList.toggle('open');
+}
+</script>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="back">返回社區主頁</a>
+    <div class="eyebrow">MINUTES OF MEETING</div>
+    <h1>會議紀錄</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="board" onclick="switchTab('board')">管委會議</button>
+      <button class="tab-btn" data-tab="agm" onclick="switchTab('agm')">區權人會議</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══ 管委會議 ══ -->
+<div id="tab-board" class="tab-content active">
+  <div class="notice">
+    每次管委會會議頁面包含兩個部分：<strong>開會通知</strong>（會議前公告的議程）與<strong>會議紀錄</strong>（會議後記錄的討論與決議）。歡迎住戶列席旁聽，如有意願請洽管理室。
+  </div>
+
+  <!-- 第四屆（預設展開） -->
+  <div class="term-block open">
+    <button class="term-toggle" onclick="toggleTerm(this)">
+      <span class="term-label-text">第四屆管理委員會　2025/07 ～ 2026/06</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <span class="term-count">8 次會議</span>
+        <span class="term-chevron">›</span>
+      </span>
+    </button>
+    <div class="term-body">
+      <div class="meeting-list">
+        <a href="minutes-4-8.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">8</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第八次管理委員會議</div>
+              <div class="mc-date">開會日期：115/03/09　・　通知發出：115/03/05</div>
+            </div>
+            <span class="mc-badge">10 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-7.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">7</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第七次管理委員會議</div>
+              <div class="mc-date">開會日期：115/02/09　・　通知發出：115/02/05</div>
+            </div>
+            <span class="mc-badge">7 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-6.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">6</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第六次管理委員會議</div>
+              <div class="mc-date">開會日期：115/01/12　・　通知發出：115/01/07</div>
+            </div>
+            <span class="mc-badge">10 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-5.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">5</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第五次管理委員會議</div>
+              <div class="mc-date">開會日期：114/12/15　・　通知發出：114/12/09</div>
+            </div>
+            <span class="mc-badge">15 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-4.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">4</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第四次管理委員會議</div>
+              <div class="mc-date">開會日期：114/11/24　・　通知發出：114/11/18</div>
+            </div>
+            <span class="mc-badge">15 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-3.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">3</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第三次管理委員會議</div>
+              <div class="mc-date">開會日期：114/09/25　・　通知發出：114/09/19</div>
+            </div>
+            <span class="mc-badge">10 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-2.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">2</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第二次管理委員會議</div>
+              <div class="mc-date">開會日期：114/08/28　・　通知發出：114/08/22</div>
+            </div>
+            <span class="mc-badge">15 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+        <a href="minutes-4-1.html" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">1</div>
+            <div class="mc-info">
+              <div class="mc-title">第四屆第一次管理委員會議</div>
+              <div class="mc-date">開會日期：114/07/24　・　通知發出：114/07/18</div>
+            </div>
+            <span class="mc-badge">14 項議案</span>
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三屆（預設收合） -->
+  <div class="term-block">
+    <button class="term-toggle" onclick="toggleTerm(this)">
+      <span class="term-label-text">第三屆管理委員會　2024/07 ～ 2025/06</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <span class="term-count">待上傳</span>
+        <span class="term-chevron">›</span>
+      </span>
+    </button>
+    <div class="term-body">
+      <div class="placeholder">第三屆會議紀錄整理中，敬請期待。</div>
+    </div>
+  </div>
+
+  <!-- 第二屆（預設收合） -->
+  <div class="term-block">
+    <button class="term-toggle" onclick="toggleTerm(this)">
+      <span class="term-label-text">第二屆管理委員會　2023/07 ～ 2024/06</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <span class="term-count">待上傳</span>
+        <span class="term-chevron">›</span>
+      </span>
+    </button>
+    <div class="term-body">
+      <div class="placeholder">第二屆會議紀錄整理中，敬請期待。</div>
+    </div>
+  </div>
+
+  <!-- 第一屆（預設收合） -->
+  <div class="term-block">
+    <button class="term-toggle" onclick="toggleTerm(this)">
+      <span class="term-label-text">第一屆管理委員會　2022/07 ～ 2023/06</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <span class="term-count">待上傳</span>
+        <span class="term-chevron">›</span>
+      </span>
+    </button>
+    <div class="term-body">
+      <div class="placeholder">第一屆會議紀錄整理中，敬請期待。</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>閱大安管理委員會</span>
+    <span>如有疑問請洽管理室</span>
+  </div>
+</div>
+
+<!-- ══ 區權人會議 ══ -->
+<div id="tab-agm" class="tab-content">
+  <div class="notice">
+    區分所有權人會議為社區最高決策機構，依公寓大廈管理條例每年至少召開一次，重大事項須經區權會決議方可執行。
+  </div>
+
+  <div class="agm-list">
+    <a href="#" class="agm" style="opacity:.5;pointer-events:none">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">5</div>
+        <div class="agm-info">
+          <div class="agm-title">第五屆第一次區分所有權人會議</div>
+          <div class="agm-meta">預定日期：115年5月16日（星期六）13:00　・　地點：待公告</div>
+          <div class="agm-badges">
+            <span class="agm-badge">籌備中</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-4-agm-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">4</div>
+        <div class="agm-info">
+          <div class="agm-title">第四屆第一次區分所有權人會議</div>
+          <div class="agm-meta">開會日期：114年5月17日（星期六）14:00　・　2樓管委會使用空間</div>
+          <div class="agm-badges">
+            <span class="agm-badge">委員選任</span>
+            <span class="agm-badge">年度工作報告</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-3-agm-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">3</div>
+        <div class="agm-info">
+          <div class="agm-title">第三屆第一次區分所有權人會議</div>
+          <div class="agm-meta">開會日期：113年5月18日（星期六）14:00　・　2樓管委會使用空間</div>
+          <div class="agm-badges">
+            <span class="agm-badge">委員選任</span>
+            <span class="agm-badge">管理費調漲（通過）</span>
+            <span class="agm-badge">任期調整（通過）</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-3-agm-temp-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">3</div>
+        <div class="agm-info">
+          <div class="agm-title">第三屆第一次臨時區分所有權人會議</div>
+          <div class="agm-meta">開會日期：113年6月15日（星期六）10:00　・　2樓管委會使用空間</div>
+          <div class="agm-badges">
+            <span class="agm-badge">臨時</span>
+            <span class="agm-badge">委員選任</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-2-agm-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">2</div>
+        <div class="agm-info">
+          <div class="agm-title">第二屆第一次區分所有權人會議</div>
+          <div class="agm-meta">開會日期：112年5月20日（星期六）14:00　・　2樓管委會使用空間</div>
+          <div class="agm-badges">
+            <span class="agm-badge">委員選任</span>
+            <span class="agm-badge">財務管理辦法（通過）</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-1-agm-temp-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">1</div>
+        <div class="agm-info">
+          <div class="agm-title">第一屆第一次臨時區分所有權人會議</div>
+          <div class="agm-meta">開會日期：111年9月17日（星期六）14:00　・　2樓管委會使用空間</div>
+          <div class="agm-badges">
+            <span class="agm-badge">臨時</span>
+            <span class="agm-badge">公設點交授權</span>
+            <span class="agm-badge">禁菸規約（通過）</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+    <a href="minutes-1-agm-1.html" class="agm">
+      <div class="agm-stripe"></div>
+      <div class="agm-body">
+        <div class="agm-term">1</div>
+        <div class="agm-info">
+          <div class="agm-title">第一屆第一次區分所有權人會議</div>
+          <div class="agm-meta">開會日期：111年6月24日（星期五）13:50　・　台北遠東香格里拉飯店 B1 華西園會議室</div>
+          <div class="agm-badges">
+            <span class="agm-badge">社區規約訂立</span>
+            <span class="agm-badge">委員選任</span>
+          </div>
+        </div>
+      </div>
+      <div class="agm-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <span>閱大安管理委員會</span>
+    <span>如有疑問請洽管理室</span>
+  </div>
+</div>
+
+</div><!-- /main -->
+</body>
+</html>

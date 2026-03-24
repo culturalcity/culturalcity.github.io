@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安 2026年2月 財務月報</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+  
+  :root {
+    --wg1:  #EAE7E1;
+    --wg9:  #898480;
+    --wg11: #696460;
+    --wg41: #3C3835;
+    --white: #F7F5F2;
+    --line:  rgba(60,56,53,0.12);
+    --ink:#3C3835;--ink2:#696460;--ink3:#898480;
+    --paper:#EAE7E1;--paper2:#F0EDE8;--paper3:#E8E4DD;
+    --gold:#898480;--gold2:#696460;
+    --red:#8C1F1F;--green:#1F5C38;--blue:#2B4A6B;
+    --border:rgba(60,56,53,0.12);--radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;}
+
+  /* PRINT */
+  @media print{
+    .no-print{display:none!important;}
+    body{background:white;font-size:12px;}
+    .page-break{page-break-before:always;}
+    .panel,.kpi-card{break-inside:avoid;}
+    canvas{max-height:200px!important;}
+  }
+
+  /* HEADER */
+  .header{background:var(--ink);color:var(--paper);padding:28px 48px 22px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),
+      repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);
+    pointer-events:none;}
+  .header-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .back-nav{display:flex;gap:16px;margin-bottom:14px;}
+  .back-nav a{display:inline-flex;align-items:center;gap:4px;font-size:11px;letter-spacing:.08em;color:var(--wg9);text-decoration:none;transition:color .18s;}
+  .back-nav a::before{content:'←';}
+  .back-nav a:hover{color:var(--wg1);}
+  .header h1{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:24px;font-weight:700;letter-spacing:0.06em;}
+  .header .period{font-size:12px;color:rgba(248,245,240,0.5);letter-spacing:0.12em;margin-top:3px;}
+  .header-right{text-align:right;font-size:11px;color:rgba(248,245,240,0.5);}
+  .header-right strong{color:var(--wg1);font-size:13px;display:block;}
+
+  /* TABS */
+  .tabs{display:flex;background:var(--ink2);padding:0 40px;overflow-x:auto;}
+  .tab{padding:11px 18px;font-size:13px;color:rgba(248,245,240,0.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
+  .tab:hover{color:rgba(248,245,240,0.8);}
+  .tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+
+  .main{max-width:1060px;margin:0 auto;padding:28px 20px 60px;}
+  .tab-content{display:none;}.tab-content.active{display:block;}
+
+  /* SECTION LABEL */
+  .sl{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--wg11);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .sl::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  /* KPI ROW */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+  @media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
+  .kpi-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px 12px;position:relative;overflow:hidden;}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+  .kpi-card.g::before{background:var(--green);}.kpi-card.r::before{background:var(--red);}
+  .kpi-card.gd::before{background:var(--wg9);}.kpi-card.b::before{background:var(--blue);}
+  .kpi-title{font-size:10px;color:var(--ink3);letter-spacing:.05em;margin-bottom:8px;}
+  .kpi-val{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:22px;font-weight:700;color:var(--ink);}
+  .kpi-val.pos{color:var(--green);}.kpi-val.neg{color:var(--red);}
+  .badge{display:inline-flex;align-items:center;gap:2px;font-size:10px;padding:2px 6px;border-radius:10px;margin-top:6px;}
+  .badge.up{background:rgba(26,107,60,.1);color:var(--green);}
+  .badge.dn{background:rgba(192,57,43,.1);color:var(--red);}
+  .badge.nt{background:rgba(184,134,11,.1);color:var(--gold);}
+
+  /* PANELS */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px;}
+  @media(max-width:800px){.grid3{grid-template-columns:1fr;}}
+  .panel{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:0;}
+  .panel.mb{margin-bottom:18px;}
+  .ph{padding:11px 16px;background:var(--paper2);border-bottom:1px solid var(--border);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:space-between;}
+  .tag{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:9px;background:var(--wg11);color:var(--wg1);padding:2px 7px;border-radius:10px;}
+  .tag.b{background:var(--blue);}.tag.g{background:var(--green);}
+  .pb{padding:14px 16px;}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th{text-align:left;padding:6px 9px;background:var(--paper2);color:var(--ink3);font-weight:500;font-size:10px;letter-spacing:.04em;border-bottom:1px solid var(--border);}
+  th:not(:first-child){text-align:right;}
+  td{padding:7px 9px;border-bottom:1px solid rgba(26,24,20,.05);color:var(--ink2);}
+  td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:none;}
+  tr.tot td{font-weight:600;color:var(--ink);background:rgba(184,134,11,.04);}
+  .dp{color:var(--green);}.dn2{color:var(--red);}.dz{color:var(--ink3);}
+
+  /* SUMMARY */
+  .sumbox{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:22px 26px;margin-bottom:22px;position:relative;overflow:hidden;}
+  .sumbox::before{content:'財務摘要';position:absolute;top:12px;right:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:44px;color:rgba(255,255,255,.04);font-weight:700;pointer-events:none;}
+  .sumbox h3{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:13px;color:var(--wg1);margin-bottom:12px;letter-spacing:.06em;}
+  .si{display:flex;gap:9px;margin-bottom:9px;font-size:12.5px;line-height:1.7;color:rgba(248,245,240,.85);}
+  .si .bul{color:var(--wg1);font-size:15px;flex-shrink:0;}
+  .alert{background:rgba(192,57,43,.15);border-left:2px solid var(--red);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:12px;margin-top:12px;}
+  .ok{background:rgba(31,92,56,.12);border-left:2px solid var(--green);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:12px;margin-top:8px;}
+
+  /* CHARTS */
+  .ch{position:relative;height:210px;}
+  .ch-sm{position:relative;height:170px;}
+
+  /* PRINT BTN */
+
+  .btn-pdf {
+    display:inline-flex;align-items:center;gap:6px;
+    padding:9px 18px;font-size:12px;
+    font-family:'Noto Sans TC',sans-serif;
+    border-radius:var(--radius);cursor:pointer;transition:all .2s;
+    border:1px solid var(--wg11);
+    background:transparent;color:var(--wg11);
+    text-decoration:none;letter-spacing:0.04em;
+  }
+  .btn-pdf:hover{background:var(--wg11);color:var(--wg1);}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;font-size:12px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--ink2);}
+  .btn:hover{background:var(--paper2);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="back-nav no-print">
+    <a href="../index.html">返回社區首頁</a>
+    <a href="../finance/">返回財務月報</a>
+  </div>
+  <div class="header-row">
+    <div>
+      <h1>閱大安・財務月報分析</h1>
+      <div class="period">2026年2月 ／ 2026-02-01 ～ 2026-02-28</div>
+    </div>
+    <div class="header-right">
+      <strong>2026 年 2 月</strong>
+      繁體中文 ／ 新台幣 NTD<br>
+      發布日期：2026/03/19
+    </div>
+  </div>
+</div>
+
+<div class="tabs no-print">
+  <div class="tab active" onclick="sw('overview')">📊 總覽</div>
+  <div class="tab" onclick="sw('mom')">📈 環比分析</div>
+  <div class="tab" onclick="sw('yoy')">📅 同比分析</div>
+  <div class="tab" onclick="sw('bs')">🏦 資產負債</div>
+  <div class="tab" onclick="sw('summary')">📋 財務總結</div>
+</div>
+
+<div class="main">
+<a href="../finance/" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:0.1em;color:var(--wg11);text-decoration:none;margin-bottom:20px;transition:color .18s" onmouseover="this.style.color='#3C3835'" onmouseout="this.style.color='#696460'">← 財務月報總覽</a>
+
+<!-- ══ TAB: 總覽 ══ -->
+<div id="tab-overview" class="tab-content active">
+
+  <div class="kpi-row">
+    <div class="kpi-card g">
+      <div class="kpi-title">本月盈餘</div>
+      <div class="kpi-val pos">+15,326</div>
+      <div class="badge dn">▼ 環比 -83.6%</div>
+    </div>
+    <div class="kpi-card b">
+      <div class="kpi-title">總收入</div>
+      <div class="kpi-val">431,539</div>
+      <div class="badge dn">▼ 環比 -16.1%</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">總支出</div>
+      <div class="kpi-val">416,213</div>
+      <div class="badge up">▲ 節省 +1.1%</div>
+    </div>
+    <div class="kpi-card gd">
+      <div class="kpi-title">現金+存款</div>
+      <div class="kpi-val">6,646,910</div>
+      <div class="badge up">▲ +5.0%</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">本月收入結構 <span class="tag">2026/02</span></div>
+      <div class="pb"><div class="ch"><canvas id="pie-income"></canvas></div></div>
+    </div>
+    <div class="panel">
+      <div class="ph">本月支出結構 <span class="tag">2026/02</span></div>
+      <div class="pb"><div class="ch"><canvas id="pie-expense"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">三期損益對比（2025/02 同期・2026/01 上月・2026/02 本月）</div>
+    <div class="pb"><div class="ch"><canvas id="bar-3period"></canvas></div></div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">現金及存款餘額趨勢</div>
+    <div class="pb"><div class="ch-sm"><canvas id="line-cash"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ══ TAB: 環比 ══ -->
+<div id="tab-mom" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card r">
+      <div class="kpi-title">盈餘環比</div>
+      <div class="kpi-val pos">+15,326</div>
+      <div class="badge dn">▼ -77,960 (-83.6%)</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">收入環比</div>
+      <div class="kpi-val">431,539</div>
+      <div class="badge dn">▼ -82,627 (-16.1%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">支出環比</div>
+      <div class="kpi-val">416,213</div>
+      <div class="badge up">▲ 少支出 4,667 (-1.1%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">現金+存款</div>
+      <div class="kpi-val">6,646,910</div>
+      <div class="badge up">▲ +314,850 (+5.0%)</div>
+    </div>
+  </div>
+
+  <div class="sl">損益表環比明細</div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">收入項目環比 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2026/01</th><th>2026/02</th><th>差異</th><th>環比</th></tr></thead>
+          <tbody>
+            <tr><td>管理費收入</td><td>377,419</td><td>377,419</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>車位清潔費</td><td>39,200</td><td>39,200</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電椿收入</td><td>1,650</td><td>1,650</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電椿電費</td><td>—</td><td>6,961</td><td class="dp">+6,961</td><td class="dp">新增</td></tr>
+            <tr><td>機車清潔費</td><td>2,800</td><td>2,800</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>利息收入</td><td>3,097</td><td>1,509</td><td class="dn2">-1,588</td><td class="dn2">▼ -51.3%</td></tr>
+            <tr><td>回饋金收入</td><td>90,000</td><td>2,000</td><td class="dn2">-88,000</td><td class="dn2">▼ -97.8%</td></tr>
+            <tr class="tot"><td>收入合計</td><td>514,166</td><td>431,539</td><td class="dn2">-82,627</td><td class="dn2">▼ -16.1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">支出項目環比 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2026/01</th><th>2026/02</th><th>差異</th><th>環比</th></tr></thead>
+          <tbody>
+            <tr><td>保全服務費</td><td>189,000</td><td>189,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>管理服務費</td><td>126,000</td><td>126,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>電梯維護費</td><td>12,870</td><td>12,870</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>垃圾清運費</td><td>9,450</td><td>10,500</td><td class="dn2">+1,050</td><td class="dn2">▲ +11.1%</td></tr>
+            <tr><td>機電保養費</td><td>4,600</td><td>4,600</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>公共電費（含充電樁代收）</td><td>2,065</td><td>7,313</td><td class="dz">+5,248</td><td class="dz">代收代付，見說明</td></tr>
+            <tr><td>修繕費</td><td>—</td><td>1,500</td><td class="dn2">+1,500</td><td class="dn2">新增</td></tr>
+            <tr><td>清潔用品</td><td>—</td><td>4,100</td><td class="dn2">+4,100</td><td class="dn2">新增</td></tr>
+            <tr><td>AED租賃</td><td>15,120</td><td>—</td><td class="dp">-15,120</td><td class="dp">▼ -100%</td></tr>
+            <tr><td>維修基金提撥</td><td>60,000</td><td>60,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr class="tot"><td>支出合計</td><td>420,880</td><td>416,213</td><td class="dp">-4,667</td><td class="dp">▼ -1.1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">收入環比視覺化</div>
+    <div class="pb"><div class="ch"><canvas id="mom-bar"></canvas></div></div>
+  </div>
+
+  <div class="sl">說明</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+      <p>• <strong>收入下降主因</strong>：1月有 2025 氣候行動獎獎金 90,000 元一次性入帳，2月僅有太古回饋金 2,000 元，屬正常波動，非結構性衰退。</p>
+      <p>• <strong>公共電費波動（代收代付性質）</strong>：本月公共電費 7,313 元，其中電信室固定電費約 190 元，其餘 7,123 元為充電樁用電費用。充電樁電費由管委會代為向台電繳納後，再向各充電用戶收回，對社區整體財務為中性影響，帳面波動不代表社區費用實質增加。此外，B1+B2 充電樁採累積電價（約兩個月收到一次帳單），B3+B4 採時間電價（每月收到帳單），因此每月入帳金額本即不規律，不宜與前月直接比較。</p>
+      <p>• <strong>AED租賃</strong>：1月支出 15,120 元為年度費用，2月無此支出，屬週期性差異。</p>
+      <p>• <strong>管理費核心收入穩定</strong>：管理費、車位清潔費連續兩月完全一致，基本盤穩固。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 同比 ══ -->
+<div id="tab-yoy" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card g">
+      <div class="kpi-title">盈餘同比</div>
+      <div class="kpi-val pos">+15,326</div>
+      <div class="badge up">▲ +47 (+0.3%)</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">收入同比</div>
+      <div class="kpi-val">431,539</div>
+      <div class="badge dn">▼ -4,134 (-0.9%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">支出同比</div>
+      <div class="kpi-val">416,213</div>
+      <div class="badge up">▲ 少支出 4,181 (-1.0%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">現金+存款同比</div>
+      <div class="kpi-val">6,646,910</div>
+      <div class="badge up">▲ +1,003,435 (+17.8%)</div>
+    </div>
+  </div>
+
+  <div class="sl">損益表同比明細</div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">收入項目同比 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2025/02</th><th>2026/02</th><th>差異</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>管理費收入</td><td>377,419</td><td>377,419</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>車位清潔費</td><td>39,200</td><td>39,200</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電椿收入</td><td>1,650</td><td>1,650</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電椿電費</td><td>1,471</td><td>6,961</td><td class="dp">+5,490</td><td class="dp">▲ +373.2%</td></tr>
+            <tr><td>機車清潔費</td><td>-800</td><td>2,800</td><td class="dp">+3,600</td><td class="dp">轉正</td></tr>
+            <tr><td>利息收入</td><td>3,523</td><td>1,509</td><td class="dn2">-2,014</td><td class="dn2">▼ -57.2%</td></tr>
+            <tr><td>電梯保護費</td><td>13,000</td><td>—</td><td class="dn2">-13,000</td><td class="dn2">無</td></tr>
+            <tr><td>回饋金/其他</td><td>—</td><td>2,000</td><td class="dp">+2,000</td><td class="dp">新增</td></tr>
+            <tr class="tot"><td>收入合計</td><td>435,673</td><td>431,539</td><td class="dn2">-4,134</td><td class="dn2">▼ -0.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">支出項目同比 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2025/02</th><th>2026/02</th><th>差異</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>保全服務費</td><td>189,000</td><td>189,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>管理服務費</td><td>116,000</td><td>126,000</td><td class="dn2">+10,000</td><td class="dn2">▲ +8.6%</td></tr>
+            <tr><td>電梯維護費</td><td>12,870</td><td>12,870</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>垃圾清運費</td><td>7,875</td><td>10,500</td><td class="dn2">+2,625</td><td class="dn2">▲ +33.3%</td></tr>
+            <tr><td>機電保養費</td><td>4,600</td><td>4,600</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>公共電費</td><td>2,107</td><td>7,313</td><td class="dn2">+5,206</td><td class="dn2">▲ +247.0%</td></tr>
+            <tr><td>修繕費</td><td>3,500</td><td>1,500</td><td class="dp">-2,000</td><td class="dp">▼ -57.1%</td></tr>
+            <tr><td>清潔用品</td><td>4,032</td><td>4,100</td><td class="dn2">+68</td><td class="dn2">▲ +1.7%</td></tr>
+            <tr><td>雜項支出</td><td>18,000</td><td>—</td><td class="dp">-18,000</td><td class="dp">消除</td></tr>
+            <tr><td>維修基金提撥</td><td>60,000</td><td>60,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr class="tot"><td>支出合計</td><td>420,394</td><td>416,213</td><td class="dp">-4,181</td><td class="dp">▼ -1.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">同比視覺化對比</div>
+    <div class="pb"><div class="ch"><canvas id="yoy-bar"></canvas></div></div>
+  </div>
+
+  <div class="sl">說明</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+      <p>• <strong>管理服務費增加</strong>：同比增加 10,000 元（+8.6%），為物業管理合約年度調整後新基準，後續月份將持續反映。</p>
+      <p>• <strong>垃圾清運費階段性調漲</strong>：清運費在一年中歷經兩次調漲——2025年2月至3月為 7,875 元、2025年4月起受台北市調高垃圾焚化費用影響，調至 9,450 元、2026年2月起再因社區垃圾量增加調至 10,500 元。本月同比增幅（+33.3%）即反映此兩次調漲的累積效果。</p>
+      <p>• <strong>公共電費（代收代付，不影響社區財務）</strong>：公共電費科目包含兩部分——電信室固定電費（每月約 190 元）以及充電樁用電費用（由充電用戶負擔，管委會代收代付）。因 B1+B2 充電樁採累積電價（約兩個月出一張帳單），B3+B4 採時間電價（每月出帳），帳單頻率本即不規律，每月入帳金額無法與去年同期直接比較，同比數字僅供參考。充電樁電費由管委會代向台電繳納後向充電用戶收回，對社區整體財務為中性。</p>
+      <p>• <strong>現金餘額注意事項</strong>：本月帳面現金及存款較去年同期增加約 100 萬元，惟須特別說明：2月底應匯出之固定費用（保全、管理服務費等）因農曆新年長假期間簽核遞延，款項實際於3月初才完成匯出。因此 <strong>2月底帳面現金及存款數字偏高，並不代表社區實際財務狀況改善幅度如此顯著</strong>，待3月份報表公布後方可得出更準確的同比比較。</p>
+      <p>• <strong>貨梯保護費收入消失</strong>：2025年2月有電梯（貨梯）保護費收入 13,000 元，2026年起無此收入。原因為社區大裝潢期已結束，目前無住戶進行裝潢工程，因此不再有貨梯保護費之需求與收取，此為正常情況。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 資產負債 ══ -->
+<div id="tab-bs" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card g">
+      <div class="kpi-title">資產總計</div>
+      <div class="kpi-val">6,709,907</div>
+      <div class="badge up">▲ +364,071 (+5.7%)</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">流動負債</div>
+      <div class="kpi-val">720,801</div>
+      <div class="badge dn">▲ +288,745 (+66.8%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">業主權益</div>
+      <div class="kpi-val">5,989,106</div>
+      <div class="badge up">▲ +75,326 (+1.3%)</div>
+    </div>
+    <div class="kpi-card gd">
+      <div class="kpi-title">累積盈虧</div>
+      <div class="kpi-val">2,852,981</div>
+      <div class="badge up">▲ 穩健累積</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">資產結構 <span class="tag g">2026/02</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>金額</th><th>比率</th><th>vs 上月</th></tr></thead>
+          <tbody>
+            <tr><td>零用金</td><td>10,000</td><td>0.15%</td><td class="dz">—</td></tr>
+            <tr><td>在途未入帳-智生活</td><td>55,125</td><td>0.82%</td><td class="dp">+51,349</td></tr>
+            <tr><td>銀行存款</td><td>1,335,910</td><td>19.91%</td><td class="dp">+303,850</td></tr>
+            <tr><td>　永豐#31219</td><td>1,090,460</td><td>16.25%</td><td class="dp">+310,877</td></tr>
+            <tr><td>　永豐#31202(公共)</td><td>212,648</td><td>3.17%</td><td class="dz">+84</td></tr>
+            <tr><td>　永豐#33932(充電椿)</td><td>32,802</td><td>0.49%</td><td class="dn2">-7,111</td></tr>
+            <tr><td>定期存款</td><td>5,300,000</td><td>78.99%</td><td class="dz">—</td></tr>
+            <tr><td>應收帳款</td><td>8,872</td><td>0.13%</td><td class="dp">+8,872</td></tr>
+            <tr class="tot"><td>資產總計</td><td>6,709,907</td><td>100%</td><td class="dp">+364,071</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">負債與業主權益 <span class="tag g">2026/02</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>金額</th><th>比率</th></tr></thead>
+          <tbody>
+            <tr><td>應付帳款合計</td><td>348,570</td><td>5.19%</td></tr>
+            <tr><td>　保全服務費</td><td>189,000</td><td>2.82%</td></tr>
+            <tr><td>　管理服務費</td><td>126,000</td><td>1.88%</td></tr>
+            <tr><td>預收款項</td><td>245,031</td><td>3.65%</td></tr>
+            <tr><td>存入-裝潢保證金</td><td>100,000</td><td>1.49%</td></tr>
+            <tr class="tot"><td>負債總計</td><td>720,801</td><td>10.74%</td></tr>
+            <tr><td>公共管理基金</td><td>1,920,799</td><td>28.63%</td></tr>
+            <tr><td>維修基金提撥</td><td>1,200,000</td><td>17.88%</td></tr>
+            <tr><td>累積盈虧</td><td>2,852,981</td><td>42.52%</td></tr>
+            <tr><td>本期損益</td><td>15,326</td><td>0.23%</td></tr>
+            <tr class="tot"><td>業主權益總計</td><td>5,989,106</td><td>89.26%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">三期資產規模趨勢</div>
+    <div class="pb"><div class="ch-sm"><canvas id="bs-trend"></canvas></div></div>
+  </div>
+
+  <div class="panel mb">
+    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+      <p>• <strong>【重要說明】帳面現金偏高</strong>：2月底應支付之固定費用（保全費、管理服務費等）因農曆新年假期間匯款單簽核遞延，款項於3月初才實際匯出。因此本期帳面現金及存款數字 6,646,910 元<strong>偏高於實際水位</strong>，俟3月份報表公布後方可得出準確數字。</p>
+      <p>• <strong>定期存款穩定</strong>：530萬定存持續鎖定，佔資產 78.99%，流動性充足。</p>
+      <p>• <strong>維修基金累積</strong>：維修基金提撥達 120萬，較去年同期 48萬大幅提升。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 財務總結 ══ -->
+<div id="tab-summary" class="tab-content">
+
+  <div class="sumbox">
+    <h3>▌ 閱大安・2026年2月財務月報總結</h3>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>收入表現：</strong>本月總收入 431,539 元，較上月減少 82,627 元（-16.1%）。減少主因為上月 2025 氣候行動獎獎金 90,000 元一次性入帳不再重複，剔除此非常規收入後，核心收入實質持平。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>支出控管：</strong>本月總支出 416,213 元，較上月微降 4,667 元（-1.1%），較去年同期減少 4,181 元（-1.0%）。主要結構性支出（保全、物業、電梯）均維持固定，管理服務費較去年增加 10,000 元（+8.6%）為今年調漲後新基準。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>財務結果：</strong>本月盈餘 15,326 元，與去年同期（15,279 元）幾乎一致，顯示社區財務結構高度穩定。期末帳面現金及存款總額 6,646,910 元，較上月增加 314,850 元（+5.0%）。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>【特別說明】帳面現金偏高：</strong>本月底應支付之固定費用（保全費、管理服務費等大額款項）因農曆新年連假期間匯款單簽核未及，相關款項遞延至3月初才完成匯出。因此 2月底帳面現金及存款數字偏高，不代表社區實際可用資金顯著增加，請住戶知悉，俟3月份報表公布後將呈現調整後的正確水位。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>資產負債：</strong>資產總計 6,709,907 元，業主權益 5,989,106 元（佔比 89.26%），財務結構健全。累積盈虧達 285 萬元，維修基金提撥累計 120 萬元，中長期財務儲備充裕。</span>
+    </div>
+    <div class="ok">✓ 整體評估：本月財務運營正常，核心收入穩定，本期盈餘與去年同期幾乎一致，財務結構健全。</div>
+    <div class="alert">⚠ 注意事項：(1)【帳面現金偏高】2月底大額費用因春節簽核遞延至3月初匯出，帳面現金數字高於實際水位，3月報表公布後方可得出準確比較；(2) 垃圾清運費在一年中歷經兩次調漲——2025年2月至3月為 7,875 元、2025年4月起受台北市調高垃圾焚化費用影響調至 9,450 元、2026年2月起再因社區垃圾量增加調至 10,500 元。</div>
+  </div>
+
+  <div class="sl">詳細版</div>
+  <div class="grid3">
+    <div class="panel">
+      <div class="ph">環比重點 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>指標</th><th>上月</th><th>本月</th><th>變動</th></tr></thead>
+          <tbody>
+            <tr><td>總收入</td><td>514,166</td><td>431,539</td><td class="dn2">▼ -16.1%</td></tr>
+            <tr><td>總支出</td><td>420,880</td><td>416,213</td><td class="dp">▼ -1.1%</td></tr>
+            <tr><td>本期盈虧</td><td class="dp">+93,286</td><td class="dp">+15,326</td><td class="dn2">▼ -83.6%</td></tr>
+            <tr><td>現金+存款</td><td>6,332,060</td><td>6,646,910</td><td class="dp">▲ +5.0%</td></tr>
+            <tr><td>資產總計</td><td>6,345,836</td><td>6,709,907</td><td class="dp">▲ +5.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">同比重點 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>指標</th><th>去年同期</th><th>本月</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>總收入</td><td>435,673</td><td>431,539</td><td class="dn2">▼ -0.9%</td></tr>
+            <tr><td>總支出</td><td>420,394</td><td>416,213</td><td class="dp">▼ -1.0%</td></tr>
+            <tr><td>本期盈虧</td><td class="dp">+15,279</td><td class="dp">+15,326</td><td class="dp">▲ +0.3%</td></tr>
+            <tr><td>現金+存款</td><td>5,643,475</td><td>6,646,910</td><td class="dp">▲ +17.8%</td></tr>
+            <tr><td>資產總計</td><td>5,701,071</td><td>6,709,907</td><td class="dp">▲ +17.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">重大項目說明</div>
+      <div class="pb" style="font-size:11.5px;line-height:1.9;color:var(--ink2)">
+        <p>① 盈餘環比 -83.6%：因上月有 2025 氣候行動獎獎金 9 萬（一次性），非結構性衰退</p>
+        <p>② 帳面現金偏高：2月底大額費用因春節簽核遞延至3月初，帳面數字高於實際水位</p>
+        <p>③ 貨梯保護費消失：大裝潢期結束，無住戶進行裝潢，此收入已終止</p>
+        <p>④ 維修基金：累計已達 120 萬，儲備充裕</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sl" style="margin-top:20px">精簡版</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:14px;line-height:2.2;color:var(--ink2)">
+      <p>📅 <strong>2026年2月・閱大安 財務摘要</strong></p>
+      <p>• 本月收入：<strong>431,539 元</strong>（管理費 377,419 / 車位清潔費 39,200 / 其他 14,920）</p>
+      <p>• 本月支出：<strong>416,213 元</strong>（保全 189,000 / 管理費 126,000 / 電梯 12,870 / 其他 88,343）</p>
+      <p>• 本月盈餘：<strong style="color:var(--green)">+15,326 元</strong></p>
+      <p>• 帳戶現金及存款餘額：<strong>6,646,910 元</strong></p>
+      <p>• 維修基金累計：<strong>1,200,000 元</strong></p>
+      <p style="background:rgba(192,57,43,.08);border-left:2px solid var(--red);padding:8px 12px;margin-top:10px;font-size:12px;color:var(--ink2);border-radius:2px">⚠ <strong>特別說明：</strong>本月底應支付之大額費用（保全費、管理服務費等）因農曆新年假期間簽核遞延，款項於3月初才完成匯出，因此2月底帳面現金數字偏高，不代表社區可用資金實際增加，請住戶知悉。</p>
+    </div>
+  </div>
+
+  <div class="no-print" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn" onclick="window.print()">🖨 列印 / 儲存 PDF</button>
+    <a href="https://drive.google.com/file/d/1_f0wz6LXSNTgyIjpU3LH-rYCNRH8A_ia/view?usp=sharing" target="_blank" class="btn-pdf">↓ 原始財報 PDF</a>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+function sw(name){
+  const names=['overview','mom','yoy','bs','summary'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='overview')drawOverview();
+  if(name==='mom')drawMoM();
+  if(name==='yoy')drawYoY();
+  if(name==='bs')drawBS();
+}
+const charts={};
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+const FONT='Noto Sans TC';
+const tickCb=v=>(v/10000).toFixed(0)+'萬';
+
+function drawOverview(){
+  // Pie income
+  dc('pie-income');
+  charts['pie-income']=new Chart(document.getElementById('pie-income'),{
+    type:'doughnut',
+    data:{labels:['管理費收入','車位清潔費','充電椿收入','充電椿電費','機車清潔費','利息收入','回饋金'],
+      datasets:[{data:[377419,39200,1650,6961,2800,1509,2000],
+        backgroundColor:['rgba(26,74,107,.75)','rgba(184,134,11,.75)','rgba(26,107,60,.75)','rgba(192,57,43,.6)','rgba(122,118,112,.6)','rgba(100,60,180,.6)','rgba(200,100,50,.6)'],borderWidth:1}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}}}}
+  });
+  // Pie expense
+  dc('pie-expense');
+  charts['pie-expense']=new Chart(document.getElementById('pie-expense'),{
+    type:'doughnut',
+    data:{labels:['保全服務費','管理服務費','電梯維護費','垃圾清運費','機電保養費','公共電費','修繕費','清潔用品','維修基金提撥','其他'],
+      datasets:[{data:[189000,126000,12870,10500,4600,7313,1500,4100,60000,430],
+        backgroundColor:['rgba(192,57,43,.75)','rgba(192,57,43,.6)','rgba(184,134,11,.7)','rgba(26,107,60,.6)','rgba(26,74,107,.6)','rgba(100,60,180,.5)','rgba(200,100,50,.5)','rgba(122,118,112,.5)','rgba(26,74,107,.4)','rgba(150,150,150,.4)'],borderWidth:1}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}}}}
+  });
+  // 3-period bar
+  dc('bar-3period');
+  charts['bar-3period']=new Chart(document.getElementById('bar-3period'),{
+    type:'bar',
+    data:{labels:['2025/02 同期','2026/01 上月','2026/02 本月'],
+      datasets:[
+        {label:'收入',data:[435673,514166,431539],backgroundColor:['rgba(26,74,107,.5)','rgba(26,74,107,.5)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
+        {label:'支出',data:[420394,420880,416213],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
+        {label:'盈虧',data:[15279,93286,15326],backgroundColor:['rgba(26,107,60,.4)','rgba(26,107,60,.4)','rgba(26,107,60,.8)'],borderColor:'rgba(26,107,60,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+  // Cash line
+  dc('line-cash');
+  charts['line-cash']=new Chart(document.getElementById('line-cash'),{
+    type:'line',
+    data:{labels:['2025/02','2026/01','2026/02'],
+      datasets:[{label:'現金+存款',data:[5643475,6332060,6646910],
+        borderColor:'#b8860b',backgroundColor:'rgba(184,134,11,.12)',tension:.3,pointRadius:5,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawMoM(){
+  dc('mom-bar');
+  charts['mom-bar']=new Chart(document.getElementById('mom-bar'),{
+    type:'bar',
+    data:{labels:['管理費收入','車位清潔費','充電椿收入','利息收入','回饋金收入','支出合計','盈虧'],
+      datasets:[
+        {label:'2026/01',data:[377419,39200,1650,3097,90000,420880,93286],backgroundColor:'rgba(122,118,112,.4)',borderColor:'rgba(122,118,112,.8)',borderWidth:1},
+        {label:'2026/02',data:[377419,39200,1650,1509,2000,416213,15326],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawYoY(){
+  dc('yoy-bar');
+  charts['yoy-bar']=new Chart(document.getElementById('yoy-bar'),{
+    type:'bar',
+    data:{labels:['管理費收入','車位清潔費','保全服務費','管理服務費','垃圾清運費','支出合計','盈虧'],
+      datasets:[
+        {label:'2025/02',data:[377419,39200,189000,116000,7875,420394,15279],backgroundColor:'rgba(184,134,11,.45)',borderColor:'rgba(184,134,11,.8)',borderWidth:1},
+        {label:'2026/02',data:[377419,39200,189000,126000,10500,416213,15326],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawBS(){
+  dc('bs-trend');
+  charts['bs-trend']=new Chart(document.getElementById('bs-trend'),{
+    type:'bar',
+    data:{labels:['2025/02 同期','2026/01 上月','2026/02 本月'],
+      datasets:[
+        {label:'資產總計',data:[5701071,6345836,6709907],backgroundColor:['rgba(26,74,107,.4)','rgba(26,74,107,.4)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
+        {label:'流動負債',data:[556646,432056,720801],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
+        {type:'line',label:'業主權益',data:[5144425,5913780,5989106],borderColor:'#b8860b',backgroundColor:'transparent',tension:.3,pointRadius:5}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+// Init overview on load
+drawOverview();
+</script>
+</body>
+</html>
