@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --wg1:  #EAE7E1;
+    --wg9:  #898480;
+    --wg11: #696460;
+    --wg41: #3C3835;
+    --white: #F7F5F2;
+    --line:  rgba(60,56,53,0.12);
+    --radius: 2px;
+    --c-finance: #2B4A6B;
+    --c-minutes: #3C3835;
+    --c-notice:  #6B3A1F;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--wg1);
+    color: var(--wg41);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--wg41);
+    color: var(--wg1);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
+      repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
+  .header-eyebrow { font-size: 11px; letter-spacing: 0.25em; color: var(--wg9); margin-bottom: 12px; }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 0.12em; color: var(--white); margin-bottom: 6px; line-height: 1.2; }
+  .header-sub { font-size: 12px; color: var(--wg9); letter-spacing: 0.18em; }
+  .header-rule { width: 36px; height: 1px; background: var(--wg9); margin: 20px 0; }
+  .header-desc { font-size: 13px; color: rgba(234,231,225,0.55); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }
+
+  /* ── MAIN ── */
+  .main { max-width: 760px; margin: 0 auto; padding: 48px 40px 72px; }
+  @media(max-width:600px) {
+    .header { padding: 36px 24px 30px; }
+    .main { padding: 32px 20px 56px; }
+    .header h1 { font-size: 24px; }
+  }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    font-size: 10px; letter-spacing: 0.28em; color: var(--wg9);
+    margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  /* ── MODULE CARDS ── */
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  @media(max-width:700px) { .module-grid { grid-template-columns: 1fr 1fr; } }
+  @media(max-width:400px) { .module-grid { grid-template-columns: 1fr; } }
+
+  .module-card {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    text-decoration: none; color: var(--wg41); display: block; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .module-card:hover { border-color: var(--wg11); box-shadow: 0 4px 16px rgba(60,56,53,0.08); }
+  .mc-accent { height: 3px; }
+  .module-card.finance .mc-accent { background: var(--c-finance); }
+  .module-card.minutes .mc-accent { background: var(--c-minutes); }
+  .module-card.notice  .mc-accent { background: var(--c-notice); }
+  .module-card.utility .mc-accent { background: var(--wg9); }
+  .mc-body { padding: 20px 20px 16px; }
+  .mc-icon { font-size: 20px; margin-bottom: 10px; display: block; }
+  .mc-title { font-size: 14px; font-weight: 700; color: var(--wg41); letter-spacing: 0.05em; margin-bottom: 4px; }
+  .mc-desc { font-size: 11px; color: var(--wg9); line-height: 1.65; margin-bottom: 14px; }
+  .mc-link { font-size: 11px; letter-spacing: 0.1em; color: var(--wg11); display: flex; align-items: center; gap: 5px; transition: gap 0.18s; }
+  .module-card:hover .mc-link { gap: 9px; }
+  .mc-link::after { content: '→'; }
+
+  /* ── TIMELINE ── */
+  .timeline { margin-bottom: 48px; }
+
+  .tl-item {
+    display: flex; gap: 0; position: relative;
+    text-decoration: none; color: var(--wg41);
+  }
+  .tl-item + .tl-item { margin-top: 1px; }
+
+  /* 左側日期+類型欄 */
+  .tl-left {
+    width: 100px; flex-shrink: 0;
+    padding: 14px 16px 14px 0;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  /* 時間軸上的圓點 */
+  .tl-left::after {
+    content: '';
+    position: absolute;
+    right: -4px; top: 20px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--wg9);
+    border: 1px solid var(--wg1);
+  }
+  .tl-item.finance .tl-left::after { background: var(--c-finance); }
+  .tl-item.minutes .tl-left::after { background: var(--c-minutes); }
+  .tl-item.minutes .tl-left::after { background: var(--c-minutes); }
+  .tl-item.notice  .tl-left::after { background: var(--c-notice); }
+
+  .tl-date { font-size: 11px; color: var(--wg9); letter-spacing: 0.04em; }
+  .tl-type {
+    font-size: 9px; letter-spacing: 0.1em; padding: 1px 6px; border-radius: 1px; border: 1px solid;
+  }
+  .tl-item.finance .tl-type { color: var(--c-finance); border-color: rgba(43,74,107,0.3); background: rgba(43,74,107,0.06); }
+  .tl-item.minutes .tl-type { color: var(--c-minutes); border-color: rgba(60,56,53,0.25); background: rgba(60,56,53,0.05); }
+  .tl-item.minutes .tl-type { color: var(--c-minutes); border-color: rgba(60,56,53,0.25); background: rgba(60,56,53,0.05); }
+  .tl-item.notice  .tl-type { color: var(--c-notice);  border-color: rgba(107,58,31,0.3);  background: rgba(107,58,31,0.06); }
+
+  /* 右側內容欄 */
+  .tl-right {
+    flex: 1; padding: 14px 0 14px 20px;
+    background: var(--white); border: 1px solid var(--line); border-left: none;
+    transition: background 0.18s;
+  }
+  .tl-item:hover .tl-right { background: #F2F0EC; }
+  .tl-title { font-size: 13.5px; font-weight: 500; color: var(--wg41); margin-bottom: 2px; }
+  .tl-desc { font-size: 11.5px; color: var(--wg9); }
+
+  /* 時間軸第一項頂部圓角、最後項底部圓角 */
+  .tl-item:first-child .tl-right { border-radius: 0 var(--radius) 0 0; }
+  .tl-item:last-child  .tl-right { border-radius: 0 0 var(--radius) 0; }
+
+  @media(max-width:500px) {
+    .tl-left { width: 76px; padding-right: 12px; }
+    .tl-date { font-size: 10px; }
+    .tl-right { padding-left: 14px; }
+  }
+
+  /* ── INFO STRIP ── */
+  .info-strip {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px 24px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 48px;
+  }
+  @media(max-width:520px) { .info-strip { grid-template-columns: 1fr; } }
+  .info-item { padding: 0 20px; border-left: 1px solid var(--line); }
+  .info-item:first-child { padding-left: 0; border-left: none; }
+  @media(max-width:520px) {
+    .info-item { padding: 14px 0; border-left: none; border-top: 1px solid var(--line); }
+    .info-item:first-child { padding-top: 0; border-top: none; }
+  }
+  .info-label { font-size: 10px; letter-spacing: 0.16em; color: var(--wg9); margin-bottom: 4px; }
+  .info-value { font-size: 13.5px; color: var(--wg41); font-weight: 500; line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--line); padding-top: 20px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+  .footer-left { font-size: 11px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
+  .footer-right { font-size: 10px; color: rgba(137,132,128,0.6); letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">TAIPEI · DA'AN DISTRICT</div>
+    <h1>閱大安</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · RESIDENT PORTAL</div>
+    <div class="header-rule"></div>
+    <div class="header-desc">住戶資訊服務平台</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ── 服務入口 ── -->
+  <div class="sec-label">SERVICES &nbsp;·&nbsp; 服務項目</div>
+
+  <div class="module-grid">
+
+    <a href="./notice/" class="module-card notice">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📋</span>
+        <div class="mc-title">社區公告</div>
+        <div class="mc-desc">施工通知、設備停用、規約公告。</div>
+        <div class="mc-link">查看公告</div>
+      </div>
+    </a>
+
+    <a href="./minutes/" class="module-card minutes">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📝</span>
+        <div class="mc-title">會議紀錄</div>
+        <div class="mc-desc">管委會與區權會歷次會議決議與紀錄。</div>
+        <div class="mc-link">查看紀錄</div>
+      </div>
+    </a>
+
+    <a href="./finance/" class="module-card finance">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📊</span>
+        <div class="mc-title">財務月報</div>
+        <div class="mc-desc">每月收支損益、資產負債、全年分析。</div>
+        <div class="mc-link">查看報表</div>
+      </div>
+    </a>
+
+    <a href="./utility/" class="module-card utility">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">⚡</span>
+        <div class="mc-title">水電帳單</div>
+        <div class="mc-desc">大公電與公水歷年帳單與用量趨勢。</div>
+        <div class="mc-link">查看明細</div>
+      </div>
+    </a>
+
+    <a href="./welcome/" class="module-card utility">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">🏠</span>
+        <div class="mc-title">新住戶須知</div>
+        <div class="mc-desc">管理費、門禁、垃圾分類、設施使用、裝潢申請。</div>
+        <div class="mc-link">閱讀須知</div>
+      </div>
+    </a>
+
+    <a href="./regulations/" class="module-card utility">
+      <div class="mc-accent"></div>
+      <div class="mc-body">
+        <span class="mc-icon">📜</span>
+        <div class="mc-title">規約辦法</div>
+        <div class="mc-desc">社區規約、各項管理辦法、垃圾分類回收指引。</div>
+        <div class="mc-link">查看規約</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── 最新動態 ── -->
+  <div class="sec-label">UPDATES &nbsp;·&nbsp; 最新動態</div>
+
+      <div class="timeline">
+
+    <a href="./finance/2026-02.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/03/19</span>
+        <span class="tl-type">財務月報</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">2026年2月財務月報</div>
+        <div class="tl-desc">本期損益 +15,326 元</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-03-16-區權會徵求.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/03/16</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">第五屆第一次區分所有權人會議：徵求提案與管理委員參選</div>
+        <div class="tl-desc">會議時間：2026年5月16日（六）13:00</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-03-13-交誼廳包場.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/03/13</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">交誼廳包場公告</div>
+        <div class="tl-desc">3月13日（五）10:00–12:00，一樓交誼廳</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-03-09-保養通知.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/03/09</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">115年3月公共設施例行保養時程</div>
+        <div class="tl-desc">機電 03/10・電梯 03/17・園藝 03/30</div>
+      </div>
+    </a>
+
+    <a href="./minutes/minutes-4-8.html" class="tl-item minutes">
+      <div class="tl-left">
+        <span class="tl-date">2026/03/09</span>
+        <span class="tl-type">會議紀錄</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">第四屆第八次管理委員會議紀錄</div>
+        <div class="tl-desc">8 項議案・外牆清洗、區權會籌備、節能減稅</div>
+      </div>
+    </a>
+
+    <a href="./finance/2026-01.html" class="tl-item finance">
+      <div class="tl-left">
+        <span class="tl-date">2026/02/15</span>
+        <span class="tl-type">財務月報</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">2026年1月財務月報</div>
+        <div class="tl-desc">本期損益 +93,286 元（含環保獎勵金 9 萬）</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-01-31-深夜聲響.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/01/31</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">近期深夜聲響說明與預防配合事項</div>
+        <div class="tl-desc">說明1/30深夜聲響成因及住戶配合事項</div>
+      </div>
+    </a>
+
+    <a href="./finance/2025-annual.html" class="tl-item finance">
+      <div class="tl-left">
+        <span class="tl-date">2026/01/30</span>
+        <span class="tl-type">財務月報</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">2025年全年財務深度分析</div>
+        <div class="tl-desc">全年損益 +44,570・季度分析・區權會準備</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-01-30-保養通知.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/01/30</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">115年2月公共設施例行保養時程</div>
+        <div class="tl-desc">機電 02/10・電梯 02/12</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-01-26-寵物電梯規範.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/01/26</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">重申寵物搭乘電梯之安全規範與禮儀</div>
+        <div class="tl-desc">飼養動物管理辦法第13條重申</div>
+      </div>
+    </a>
+
+    <a href="./notice/2026-01-02-保養通知.html" class="tl-item notice">
+      <div class="tl-left">
+        <span class="tl-date">2026/01/02</span>
+        <span class="tl-type">社區公告</span>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">115年1月公共設施例行保養時程</div>
+        <div class="tl-desc">機電 01/13・電梯 01/14</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── 聯絡資訊 ── -->
+  <div class="sec-label">CONTACT &nbsp;·&nbsp; 聯絡資訊</div>
+
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-label">社區地址</div>
+      <div class="info-value">台北市大安區<br>羅斯福路二段 85 號</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">管理中心電話</div>
+      <div class="info-value">(02) 2367-7065</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">行動電話</div>
+      <div class="info-value">0989-648-285</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      閱大安管理委員會<br>
+      本平台資訊僅供本社區住戶參考使用
+    </div>
+    <div class="footer-right">CULTURAL CITY COMMUNITY</div>
+  </div>
+
+</div>
+</body>
+</html>

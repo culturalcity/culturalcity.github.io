@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安・RF閱覽室包場公告</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+:root{
+  --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+  --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--c-event:#1F5C38;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:15px;line-height:1.8;min-height:100vh;}
+.header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+.header-inner{max-width:680px;margin:0 auto;position:relative;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+.back::before{content:'←';}.back:hover{color:var(--wg1);}
+.header h1{font-size:20px;font-weight:700;letter-spacing:.04em;line-height:1.4;margin-bottom:4px;}
+.header-meta{font-size:11px;color:var(--wg9);letter-spacing:.08em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.type-pill{font-size:10px;padding:2px 9px;border-radius:1px;border:1px solid;}
+.pill-event{color:var(--c-event);border-color:rgba(31,92,56,.3);background:rgba(31,92,56,.06);}
+.lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
+.lang-bar-inner{max-width:680px;margin:0 auto;display:flex;}
+.lang-btn{padding:10px 18px;font-size:12px;font-family:'Noto Sans TC','Noto Sans JP',sans-serif;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.lang-btn:hover{color:rgba(234,231,225,0.8);}.lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+.main{max-width:680px;margin:0 auto;padding:36px 40px 64px;}
+@media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:28px 20px 48px;}}
+.lang-block{display:none;}.lang-block.active{display:block;}
+.sec{margin-bottom:28px;}
+.sec-label{font-size:10px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+.info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+.info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+.info-row:last-child{border-bottom:none;}
+.info-label{font-size:11px;letter-spacing:.08em;color:var(--wg9);width:70px;flex-shrink:0;padding-top:2px;}
+.info-value{font-size:14px;color:var(--wg41);font-weight:500;}
+.note{background:rgba(60,56,53,0.05);border-left:3px solid var(--wg11);padding:12px 16px;font-size:13px;color:var(--wg11);line-height:1.8;margin-top:20px;}
+.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--wg9);letter-spacing:.06em;}
+</style>
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.lang-block').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el=>{el.style.display=el.dataset.langText===lang?'':'none';});
+  const typeMap={zh:'節日活動',en:'Event',ja:'イベント'};
+  if(typeMap[lang]) document.getElementById('type-label').textContent=typeMap[lang];
+}
+</script>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <a href="../" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:6px;margin-right:16px;transition:color .18s" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">← 社區主頁</a>
+    <a href="../notice/" class="back">社區公告</a>
+    <h1>
+      <span data-lang-text="zh">RF 閱覽室包場公告</span>
+      <span data-lang-text="en" style="display:none">RF Reading Room – Private Event Notice</span>
+      <span data-lang-text="ja" style="display:none">RF 閲覧室　プライベートイベントのお知らせ</span>
+    </h1>
+    <div class="header-meta">
+      <span class="type-pill pill-event" id="type-label">節日活動</span>
+      <span>2025/07/17</span>
+      <span>閱大安管理委員會</span>
+    </div>
+  </div>
+</div>
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>
+<div class="main">
+
+  <!-- 中文 -->
+  <div class="lang-block active" data-lang="zh">
+    <div class="sec">
+      <div class="sec-label">包場資訊</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">時間</span><span class="info-value">114年7月19日（星期六）18:00–22:00</span></div>
+        <div class="info-row"><span class="info-label">地點</span><span class="info-value">RF 閱覽室</span></div>
+        <div class="info-row"><span class="info-label">租借者</span><span class="info-value">7F-7</span></div>
+      </div>
+    </div>
+    <div class="note">以上時段因有包場活動，暫不開放一般使用；歡迎各位鄰居於其他時段使用。造成不便敬請見諒！</div>
+  </div>
+
+  <!-- English -->
+  <div class="lang-block" data-lang="en">
+    <div class="sec">
+      <div class="sec-label">Event Details</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">Date</span><span class="info-value">2025/07/19 (Saturday)</span></div>
+        <div class="info-row"><span class="info-label">Time</span><span class="info-value">18:00–22:00</span></div>
+        <div class="info-row"><span class="info-label">Venue</span><span class="info-value">RF Reading Room</span></div>
+        <div class="info-row"><span class="info-label">User</span><span class="info-value">7F-7</span></div>
+      </div>
+    </div>
+    <div class="note">The RF Reading Room will be reserved for a private event during the above period and will not be open for general use. Residents are welcome to use the space at other times. We apologize for any inconvenience.</div>
+  </div>
+
+  <!-- 日本語 -->
+  <div class="lang-block" data-lang="ja">
+    <div class="sec">
+      <div class="sec-label">イベント詳細</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">日付</span><span class="info-value">2025年7月19日（土曜日）</span></div>
+        <div class="info-row"><span class="info-label">時間</span><span class="info-value">18:00–22:00</span></div>
+        <div class="info-row"><span class="info-label">場所</span><span class="info-value">RF 閲覧室</span></div>
+        <div class="info-row"><span class="info-label">利用者</span><span class="info-value">7F-7</span></div>
+      </div>
+    </div>
+    <div class="note">上記の時間帯はRF閲覧室がプライベートイベントのため貸切となります。その他の時間帯のご利用を歓迎いたします。ご不便をおかけして申し訳ございません。</div>
+  </div>
+
+  <div class="footer">閱大安管理委員會・如有疑問請洽管理中心</div>
+</div>
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.lang-block').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el=>{el.style.display=el.dataset.langText===lang?'':'none';});
+  const typeMap={zh:'節日活動',en:'Event',ja:'イベント'};
+  if(typeMap[lang]) document.getElementById('type-label').textContent=typeMap[lang];
+}
+</script>
+</body>
+</html>

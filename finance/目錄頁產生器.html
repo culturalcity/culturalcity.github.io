@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安・目錄頁產生器</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+  :root {
+    --ink:#1a1814;--ink2:#3d3a34;--ink3:#7a7670;
+    --paper:#f8f5f0;--paper2:#ede9e2;
+    --gold:#b8860b;--gold2:#d4a017;
+    --green:#1a6b3c;--red:#c0392b;--blue:#1a4a6b;
+    --border:rgba(26,24,20,0.12);--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;min-height:100vh;}
+
+  .header{background:var(--ink);color:#f8f5f0;padding:24px 32px;border-bottom:3px solid var(--gold);}
+  .header h1{font-size:20px;font-weight:700;letter-spacing:0.05em;}
+  .header p{font-size:11px;color:rgba(248,245,240,0.45);margin-top:4px;}
+
+  .main{max-width:800px;margin:0 auto;padding:28px 20px 60px;}
+
+  .step{background:white;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
+  .step-header{background:var(--paper2);padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+  .step-title{font-size:14px;font-weight:500;color:var(--ink2);}
+  .step-body{padding:16px 18px;}
+
+  .field-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+  .field-row:last-child{margin-bottom:0;}
+  label{font-size:12px;color:var(--ink3);min-width:90px;}
+  input,select{border:1px solid var(--border);border-radius:4px;padding:7px 10px;font-size:13px;font-family:'Noto Sans TC',sans-serif;background:var(--paper);color:var(--ink);transition:border-color .15s;}
+  input:focus,select:focus{outline:none;border-color:var(--gold);background:white;}
+  input[type=text]{width:200px;}
+  select{width:120px;}
+
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;font-size:13px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .2s;border:none;letter-spacing:0.03em;}
+  .btn-primary{background:var(--ink);color:white;}
+  .btn-primary:hover{background:var(--ink2);}
+  .btn-gold{background:var(--gold);color:white;}
+  .btn-gold:hover{background:var(--gold2);}
+  .btn-outline{background:transparent;color:var(--ink2);border:1px solid var(--border);}
+  .btn-outline:hover{background:var(--paper2);}
+  .btn-red{background:var(--red);color:white;}
+  .btn-red:hover{opacity:0.85;}
+
+  /* Report list in editor */
+  #report-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px;}
+  .report-item{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--border);border-radius:4px;padding:8px 12px;flex-wrap:wrap;}
+  .report-item .ri-month{font-size:15px;font-weight:700;min-width:44px;color:var(--ink);}
+  .report-item .ri-meta{flex:1;font-size:12px;color:var(--ink3);}
+  .report-item .ri-badge{font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .badge-new{background:rgba(26,107,60,.12);color:var(--green);border:1px solid rgba(26,107,60,.2);}
+  .badge-gold{background:rgba(184,134,11,.1);color:var(--gold);border:1px solid rgba(184,134,11,.2);}
+  .report-item .ri-del{margin-left:auto;cursor:pointer;color:var(--ink3);font-size:18px;line-height:1;transition:color .15s;background:none;border:none;padding:0 4px;}
+  .report-item .ri-del:hover{color:var(--red);}
+  .report-item.is-latest{border-left:3px solid var(--gold);}
+
+  /* Add form */
+  .add-form{background:rgba(184,134,11,0.05);border:1px dashed rgba(184,134,11,0.3);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;}
+  .add-form .form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+  .add-form .form-group{display:flex;flex-direction:column;gap:4px;}
+  .add-form label{font-size:11px;color:var(--ink3);min-width:unset;}
+  .add-form input,.add-form select{width:auto;}
+
+  /* Preview */
+  #preview-area{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:16px;font-size:12px;color:var(--ink3);display:none;}
+  #preview-area.visible{display:block;}
+
+  /* Download */
+  .download-box{background:rgba(26,107,60,0.07);border:1px solid rgba(26,107,60,0.2);border-radius:var(--radius);padding:16px 18px;margin-top:16px;display:none;}
+  .download-box.visible{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .download-box .dl-text{flex:1;font-size:13px;color:var(--ink2);line-height:1.8;}
+  .download-box strong{color:var(--green);}
+
+  .divider{height:1px;background:var(--border);margin:16px 0;}
+
+  .info-box{background:rgba(26,74,107,0.06);border:1px solid rgba(26,74,107,0.15);border-radius:var(--radius);padding:12px 14px;font-size:12.5px;color:var(--ink2);line-height:1.9;margin-bottom:20px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>閱大安・目錄頁產生器</h1>
+  <p>每次新增月份報表後，用這個工具更新 index.html，不需要手動編輯程式碼</p>
+</div>
+
+<div class="main">
+
+  <div class="info-box">
+    📋 <strong>使用流程：</strong>
+    每個月上傳新的財務報表後，在下方「新增本月報表」填入資訊 → 點「加入清單」→ 點「產生並下載 index.html」→ 將下載的檔案上傳到 GitHub 覆蓋舊的 index.html，完成！
+  </div>
+
+  <!-- STEP 1: 社區設定 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">社區基本設定（只需設定一次）</div>
+    </div>
+    <div class="step-body">
+      <div class="field-row">
+        <label>社區名稱</label>
+        <input type="text" id="s-name" value="閱大安" style="width:140px">
+      </div>
+      <div class="field-row">
+        <label>GitHub 帳號</label>
+        <input type="text" id="s-github" value="culturalcity" style="width:160px">
+      </div>
+      <div class="field-row">
+        <label>Repository 名稱</label>
+        <input type="text" id="s-repo" value="finance" style="width:160px">
+      </div>
+      <div class="field-row">
+        <label>公告說明文字</label>
+        <input type="text" id="s-notice" value="本頁為閱大安社區每月財務報表公告。點擊各月份連結即可查閱完整報告。如有疑問請洽管委會。" style="width:440px">
+      </div>
+      <div class="field-row">
+        <label>頁尾文字</label>
+        <input type="text" id="s-footer" value="閱大安管理委員會 · 財務資料僅供本社區住戶參考" style="width:360px">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: 管理報表清單 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">管理報表清單（每個月在這裡新增）</div>
+    </div>
+    <div class="step-body">
+
+      <!-- Add form -->
+      <div class="add-form">
+        <div style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:10px">➕ 新增月份報表</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>年份</label>
+            <select id="add-year">
+              <option>2026</option><option>2025</option><option>2027</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>月份</label>
+            <select id="add-month">
+              <option value="01">1月</option><option value="02">2月</option>
+              <option value="03">3月</option><option value="04">4月</option>
+              <option value="05">5月</option><option value="06">6月</option>
+              <option value="07">7月</option><option value="08">8月</option>
+              <option value="09">9月</option><option value="10">10月</option>
+              <option value="11">11月</option><option value="12">12月</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>發布日期</label>
+            <input type="text" id="add-publish" placeholder="例：2026/04/15" style="width:130px">
+          </div>
+          <div class="form-group">
+            <label>標籤（選填）</label>
+<input type="text" id="add-tag" placeholder="例：含特別說明（可空白）" style="width:180px">
+          </div>
+          <div class="form-group">
+            <label>有原始 PDF？</label>
+            <select id="add-haspdf" style="width:80px">
+              <option value="1">有</option>
+              <option value="0">無</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="btn btn-gold" onclick="addReport()">加入清單</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--ink3);margin-bottom:8px">目前清單（最上方為最新一期，會自動標示「最新」標籤）：</div>
+      <div id="report-list">
+        <!-- populated by JS -->
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+        <button class="btn btn-outline" onclick="clearAll()" style="font-size:12px;padding:7px 14px;">清空全部</button>
+        <button class="btn btn-outline" onclick="loadDefault()" style="font-size:12px;padding:7px 14px;">重設為已發布月份（清單跑掉時使用）</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 3: Generate -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">產生並下載 index.html</div>
+    </div>
+    <div class="step-body">
+      <button class="btn btn-primary" onclick="generate()" style="font-size:14px;padding:12px 28px;">⬇ 產生並下載 index.html</button>
+
+      <div class="download-box" id="dl-box">
+        <div class="dl-text">
+          <strong>✓ index.html 已下載！</strong><br>
+          接下來：到 GitHub → <code style="background:var(--paper2);padding:1px 5px;border-radius:3px">culturalcity / finance</code> → Add file → Upload files → 把這個 index.html 拖進去上傳 → Commit changes
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── State ──
+let reports = [];
+
+// ── Load default (閱大安 existing data) ──
+function loadDefault() {
+  reports = [
+    { year:'2026', month:'02', publish:'2026/03/19', tag:'含遞延付款說明', hasPdf:true, pdfUrl:'https://drive.google.com/file/d/1_f0wz6LXSNTgyIjpU3LH-rYCNRH8A_ia/view?usp=sharing' },
+    { year:'2026', month:'01', publish:'2026/02/15', tag:'首期報告', hasPdf:true, pdfUrl:'https://drive.google.com/file/d/1aMCDwmeTqkt_lvEp7PjhR67OS_2XITbe/view?usp=sharing' },
+  ];
+  renderList();
+}
+
+// ── Add report ──
+function addReport() {
+  const year    = document.getElementById('add-year').value;
+  const month   = document.getElementById('add-month').value;
+  const publish = document.getElementById('add-publish').value;
+  const tag     = document.getElementById('add-tag').value;
+  const hasPdf  = document.getElementById('add-haspdf').value === '1';
+
+  // Check duplicate
+  if (reports.find(r => r.year===year && r.month===month)) {
+    alert(`${year}年${parseInt(month)}月已在清單中！`);
+    return;
+  }
+
+  reports.unshift({ year, month, publish, tag, hasPdf });
+  // Sort descending
+  reports.sort((a,b) => (b.year+b.month).localeCompare(a.year+a.month));
+  renderList();
+  document.getElementById('add-publish').value = '';
+}
+
+// ── Render list ──
+function renderList() {
+  const el = document.getElementById('report-list');
+  if (reports.length === 0) {
+    el.innerHTML = '<div style="color:var(--ink3);font-size:12px;padding:8px 0">尚未新增任何月份。請使用上方表單新增。</div>';
+    return;
+  }
+  el.innerHTML = reports.map((r, i) => {
+    const isLatest = i === 0;
+    const tagLabel = r.tag || '';
+    const filename = `${r.year}-${r.month}.html`;
+    const period = `${r.year}-${r.month}-01 ～ ${r.year}-${r.month}-${lastDay(r.year, r.month)}`;
+    const pdfNote = r.hasPdf ? '<span class="ri-badge" style="background:rgba(60,56,53,0.08);color:#696460;border:1px solid rgba(60,56,53,0.2)">含 PDF</span>' : '';
+    return `
+      <div class="report-item ${isLatest?'is-latest':''}">
+        <div class="ri-month">${parseInt(r.month)}月</div>
+        <div class="ri-meta">
+          <strong style="color:var(--ink);font-size:13px">${r.year}年${parseInt(r.month)}月財務月報</strong>
+          &nbsp;·&nbsp; ${period}
+          ${r.publish ? `&nbsp;·&nbsp; 發布：${r.publish}` : ''}
+          <br><span style="font-size:10px;color:var(--ink3)">檔名：${filename}</span>
+        </div>
+        ${isLatest ? '<span class="ri-badge badge-new">最新</span>' : ''}
+        ${tagLabel ? `<span class="ri-badge badge-gold">${tagLabel}</span>` : ''}
+        ${pdfNote}
+        <button class="ri-del" onclick="removeReport(${i})" title="移除">×</button>
+      </div>`;
+  }).join('');
+}
+
+function removeReport(i) {
+  reports.splice(i, 1);
+  renderList();
+}
+
+function clearAll() {
+  if (reports.length > 0 && !confirm('確定清空全部清單？')) return;
+  reports = [];
+  renderList();
+}
+
+function lastDay(year, month) {
+  return new Date(parseInt(year), parseInt(month), 0).getDate();
+}
+
+// ── Generate index.html ──
+function generate() {
+  if (reports.length === 0) { alert('請先新增至少一個月份！'); return; }
+
+  const name    = document.getElementById('s-name').value || '社區';
+  const github  = document.getElementById('s-github').value || '';
+  const repo    = document.getElementById('s-repo').value || '';
+  const notice  = document.getElementById('s-notice').value || '';
+  const footer  = document.getElementById('s-footer').value || '';
+
+  // Group by year
+  const byYear = {};
+  reports.forEach(r => {
+    if (!byYear[r.year]) byYear[r.year] = [];
+    byYear[r.year].push(r);
+  });
+
+  const yearSections = Object.keys(byYear).sort((a,b)=>b-a).map(year => {
+    const cards = byYear[year].map((r, globalIdx) => {
+      const isLatest = reports.indexOf(r) === 0;
+      const filename = `${r.year}-${r.month}.html`;
+      const period = `${r.year}-${r.month}-01 ～ ${r.year}-${r.month}-${lastDay(r.year, r.month)}`;
+      const tagLabel = r.tag || '';
+      const publishStr = r.publish ? ` ・ 發布：${r.publish}` : '';
+      return `
+    <a href="${filename}" class="report-card${isLatest?' latest':''}">
+      <div class="card-month">${parseInt(r.month)}月</div>
+      <div class="card-meta">
+        <div class="card-title">${r.year}年${parseInt(r.month)}月財務月報</div>
+        <div class="card-period">${period}${publishStr}</div>
+      </div>
+      <div class="card-badges">
+        ${isLatest ? '<span class="badge badge-new">最新</span>' : ''}
+        ${tagLabel ? `<span class="badge badge-gold">${tagLabel}</span>` : ''}
+      </div>
+      <div class="card-arrow">›</div>
+    </a>`;
+    }).join('\n');
+
+    return `
+  <!-- ══ ${year} 年 ══ -->
+  <div class="year-label">${year} 年度</div>
+  <div class="report-list">
+${cards}
+  </div>`;
+  }).join('\n');
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${name}・財務月報總覽</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+  :root {
+    --ink:#1a1814;--ink2:#3d3a34;--ink3:#7a7670;
+    --paper:#f8f5f0;--paper2:#ede9e2;
+    --gold:#b8860b;--gold2:#d4a017;
+    --border:rgba(26,24,20,0.12);
+    --green:#1a6b3c;--blue:#1a4a6b;--radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.7;}
+  .header{background:var(--ink);color:#f8f5f0;padding:36px 32px 28px;border-bottom:3px solid var(--gold);position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;top:0;right:0;bottom:0;width:200px;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(184,134,11,0.07) 6px,rgba(184,134,11,0.07) 7px);}
+  .header h1{font-size:22px;font-weight:700;letter-spacing:0.06em;margin-bottom:4px;}
+  .header p{font-size:12px;color:rgba(248,245,240,0.45);letter-spacing:0.1em;}
+  .header-badge{display:inline-block;margin-top:12px;background:rgba(184,134,11,0.2);border:1px solid rgba(184,134,11,0.4);color:var(--gold2);font-size:11px;padding:3px 10px;border-radius:10px;letter-spacing:0.06em;}
+  .main{max-width:680px;margin:0 auto;padding:32px 20px 60px;}
+  .notice{background:rgba(184,134,11,0.07);border:1px solid rgba(184,134,11,0.22);border-radius:var(--radius);padding:12px 16px;font-size:12.5px;color:var(--ink2);margin-bottom:28px;line-height:1.8;}
+  .year-label{font-size:11px;font-weight:700;letter-spacing:0.2em;color:var(--gold);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .year-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .report-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+  .report-card{display:flex;align-items:center;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--ink);transition:all 0.18s;position:relative;overflow:hidden;}
+  .report-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background 0.18s;}
+  .report-card:hover{border-color:rgba(184,134,11,0.4);background:rgba(184,134,11,0.03);transform:translateX(2px);}
+  .report-card:hover::before{background:var(--gold);}
+  .report-card.latest::before{background:var(--gold);}
+  .report-card.latest{border-color:rgba(184,134,11,0.3);}
+  .card-month{font-size:20px;font-weight:700;color:var(--ink);min-width:60px;letter-spacing:-0.01em;}
+  .card-meta{flex:1;padding:0 14px;}
+  .card-title{font-size:13.5px;font-weight:500;color:var(--ink2);margin-bottom:2px;}
+  .card-period{font-size:11px;color:var(--ink3);}
+  .card-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+  .badge{font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .badge-new{background:rgba(26,107,60,0.12);color:var(--green);border:1px solid rgba(26,107,60,0.2);}
+  .badge-gold{background:rgba(184,134,11,0.1);color:var(--gold);border:1px solid rgba(184,134,11,0.2);}
+  .card-arrow{font-size:16px;color:var(--ink3);margin-left:8px;transition:transform 0.18s,color 0.18s;}
+  .pdf-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;letter-spacing:0.06em;color:#898480;text-decoration:none;padding:2px 7px;border:1px solid rgba(60,56,53,0.18);border-radius:2px;background:transparent;transition:all .18s;white-space:nowrap;margin-top:4px;}
+  .pdf-link:hover{color:#3C3835;border-color:#696460;background:#F0EDE8;}
+  .report-card:hover .card-arrow{transform:translateX(4px);color:var(--gold);}
+  .footer{text-align:center;font-size:11px;color:var(--ink3);padding-top:20px;border-top:1px solid var(--border);line-height:1.9;}
+  @media(max-width:480px){.header{padding:28px 20px 22px;}.header h1{font-size:18px;}.card-month{font-size:17px;min-width:48px;}.card-title{font-size:13px;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>${name}・財務月報</h1>
+  <p>${name.toUpperCase()} COMMUNITY · MONTHLY FINANCIAL REPORT</p>
+  <div class="header-badge">住戶公告專區</div>
+</div>
+<div class="main">
+  <div class="notice">📋 ${notice}</div>
+${yearSections}
+  <div class="footer">${footer}<br>如發現資料有誤請聯繫管委會財務委員</div>
+</div>
+</body>
+</html>`;
+
+  // Download
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'index.html';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  document.getElementById('dl-box').classList.add('visible');
+}
+
+// ── Init ──
+loadDefault();
+</script>
+</body>
+</html>
