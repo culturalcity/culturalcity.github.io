@@ -157,6 +157,17 @@
   /* 時間軸第一項頂部圓角、最後項底部圓角 */
   .tl-item:first-child .tl-right { border-radius: 0 var(--radius) 0 0; }
   .tl-item:last-child  .tl-right { border-radius: 0 0 var(--radius) 0; }
+  .tl-item.tl-hidden { display: none; }
+  .tl-item.tl-last-visible .tl-right { border-radius: 0 0 var(--radius) 0; }
+  .tl-more-btn {
+    display: block; width: 100%; margin: 1px 0 0;
+    padding: 11px 16px; border: none; cursor: pointer;
+    font-family: inherit; font-size: 13px; letter-spacing: 0.04em;
+    color: var(--wg9); background: #F2F0EC;
+    border-radius: 0 0 var(--radius) var(--radius);
+    transition: background 0.15s;
+  }
+  .tl-more-btn:hover { background: #E8E5E0; color: var(--wg3); }
 
   @media(max-width:500px) {
     .tl-left { width: 76px; padding-right: 12px; }
@@ -459,5 +470,47 @@
   </div>
 
 </div>
+<script>
+(function () {
+  var LIMIT = 10;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.tl-item'));
+  if (items.length <= LIMIT) return;
+
+  // 隱藏第 11 筆之後的項目
+  for (var i = LIMIT; i < items.length; i++) {
+    items[i].classList.add('tl-hidden');
+  }
+  // 讓第 10 筆顯示底部圓角
+  items[LIMIT - 1].classList.add('tl-last-visible');
+
+  // 建立「顯示更多」按鈕
+  var hidden = items.length - LIMIT;
+  var btn = document.createElement('button');
+  btn.className = 'tl-more-btn';
+  btn.textContent = '顯示更多（還有 ' + hidden + ' 筆）▾';
+  document.querySelector('.timeline').appendChild(btn);
+
+  btn.addEventListener('click', function () {
+    var expanded = btn.dataset.expanded === '1';
+    if (!expanded) {
+      // 展開
+      for (var i = LIMIT; i < items.length; i++) {
+        items[i].classList.remove('tl-hidden');
+      }
+      items[LIMIT - 1].classList.remove('tl-last-visible');
+      btn.textContent = '收起 ▴';
+      btn.dataset.expanded = '1';
+    } else {
+      // 收起
+      for (var i = LIMIT; i < items.length; i++) {
+        items[i].classList.add('tl-hidden');
+      }
+      items[LIMIT - 1].classList.add('tl-last-visible');
+      btn.textContent = '顯示更多（還有 ' + hidden + ' 筆）▾';
+      btn.dataset.expanded = '0';
+    }
+  });
+}());
+</script>
 </body>
 </html>
