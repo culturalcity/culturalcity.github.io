@@ -8,6 +8,7 @@
 
 <title>閱大安 2025年1月 財務月報</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 :root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--ink:#3C3835;--ink2:#696460;--ink3:#898480;--paper:#EAE7E1;--paper2:#F0EDE8;--gold:#898480;--red:#8C1F1F;--green:#1F5C38;--blue:#2B4A6B;--border:rgba(60,56,53,0.12);--radius:2px;}
@@ -68,6 +69,14 @@ tr.tot td{font-weight:600;color:var(--ink);background:rgba(105,100,96,.04);}
 .ch{position:relative;height:210px;}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;font-size:12px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--ink2);}
 .btn:hover{background:var(--paper2);}
+
+  /* MONTH NAV */
+  .month-nav{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);border-top:1px solid rgba(234,231,225,0.1);padding:10px 48px;}
+  .month-nav a,.month-nav span{font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:5px 0;transition:color .18s;}
+  .month-nav a:hover{color:var(--wg1);}
+  .month-nav .disabled{opacity:0.3;cursor:default;pointer-events:none;}
+  .month-nav .center{font-size:12px;font-weight:700;color:rgba(234,231,225,0.6);letter-spacing:.12em;}
+  @media(max-width:600px){.month-nav{padding:10px 20px;}}
 </style>
 </head>
 <body>
@@ -87,6 +96,13 @@ tr.tot td{font-weight:600;color:var(--ink);background:rgba(105,100,96,.04);}
       發布日期：2025/03/28
     </div>
   </div>
+</div>
+
+<!-- Month Navigation -->
+<div class="month-nav no-print">
+  <span class="disabled">← 上個月</span>
+  <span class="center">2025 年 1 月</span>
+  <a href="2025-02.html">2025年2月 →</a>
 </div>
 <div class="tabs no-print">
   <div class="tab active" onclick="sw('overview')">📊 總覽</div>
@@ -236,13 +252,12 @@ tr.tot td{font-weight:600;color:var(--ink);background:rgba(105,100,96,.04);}
       <p>• 維修基金累計：<strong>420,000 元</strong></p>
     </div>
   </div>
-  <div class="no-print" style="margin-top:16px">
-    <button class="btn" onclick="window.print()">🖨 列印 / 儲存 PDF</button>
-  </div>
 </div>
 
 </div>
 <script>
+Chart.unregister(ChartDataLabels);
+const pieLabel={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Noto Sans TC',size:10},boxWidth:10}},datalabels:{color:'#fff',font:{family:'Noto Sans TC',size:10,weight:'600'},formatter:(val,ctx)=>{const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);const pct=(val/total*100);return pct>=4?pct.toFixed(1)+'%':'';},anchor:'center',align:'center',textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)'}}};
 function sw(name){
   const names=['overview','mom','bs','summary'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
@@ -258,9 +273,9 @@ const FONT='Noto Sans TC';
 const tickCb=v=>(v/10000).toFixed(0)+'萬';
 function drawOverview(){
   dc('pie-income');
-  charts['pie-income']=new Chart(document.getElementById('pie-income'),{type:'doughnut',data:{labels:['管理費收入','平面車位清潔費','充電樁收入','機車清潔費','利息收入','公設清潔費收入','臨停清潔費收入','磁扣收入','影印收入','電梯保護費收入','B1梯廳保護費收入'],datasets:[{data:[377419,39200,1650,1400,1914,1000,900,1800,215,9000,4000],backgroundColor:[rgba(26,74,107,.75),rgba(184,134,11,.7),rgba(26,107,60,.7),rgba(100,60,180,.6),rgba(192,57,43,.6),rgba(122,118,112,.6),rgba(200,100,50,.6),rgba(50,150,200,.6),rgba(150,200,50,.6),rgba(200,50,150,.5),rgba(100,200,150,.5)],borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}}}}}); 
+  charts['pie-income']=new Chart(document.getElementById('pie-income'),{type:'doughnut',plugins:[ChartDataLabels],data:{labels:['管理費收入','平面車位清潔費','充電樁收入','機車清潔費','利息收入','公設清潔費收入','臨停清潔費收入','磁扣收入','影印收入','電梯保護費收入','B1梯廳保護費收入'],datasets:[{data:[377419,39200,1650,1400,1914,1000,900,1800,215,9000,4000],backgroundColor:[rgba(26,74,107,.75),rgba(184,134,11,.7),rgba(26,107,60,.7),rgba(100,60,180,.6),rgba(192,57,43,.6),rgba(122,118,112,.6),rgba(200,100,50,.6),rgba(50,150,200,.6),rgba(150,200,50,.6),rgba(200,50,150,.5),rgba(100,200,150,.5)],borderWidth:1}]},options:pieLabel}); 
   dc('pie-expense');
-  charts['pie-expense']=new Chart(document.getElementById('pie-expense'),{type:'doughnut',data:{labels:['保全服務費','管理服務費','電梯維護費','垃圾清運費','機電保養費','園藝維護費','公共水費','電信費','清潔用品','文具用品','郵電費','雜項支出','手續費','保險費','AED租費','修繕費','維修基金提撥'],datasets:[{data:[189000,116000,12870,7875,9325,7500,606,644,191,46,44,250,545,6350,15120,9500,60000],backgroundColor:[rgba(192,57,43,.75),rgba(192,57,43,.6),rgba(184,134,11,.7),rgba(26,107,60,.6),rgba(26,74,107,.6),rgba(100,60,180,.5),rgba(200,100,50,.5),rgba(122,118,112,.5),rgba(26,74,107,.4),rgba(150,150,150,.4),rgba(200,150,100,.4),rgba(100,200,150,.4),rgba(50,150,200,.4),rgba(200,50,150,.4),rgba(180,180,50,.4),rgba(50,180,180,.4),rgba(180,50,180,.4)],borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}}}}}); 
+  charts['pie-expense']=new Chart(document.getElementById('pie-expense'),{type:'doughnut',plugins:[ChartDataLabels],data:{labels:['保全服務費','管理服務費','電梯維護費','垃圾清運費','機電保養費','園藝維護費','公共水費','電信費','清潔用品','文具用品','郵電費','雜項支出','手續費','保險費','AED租費','修繕費','維修基金提撥'],datasets:[{data:[189000,116000,12870,7875,9325,7500,606,644,191,46,44,250,545,6350,15120,9500,60000],backgroundColor:[rgba(192,57,43,.75),rgba(192,57,43,.6),rgba(184,134,11,.7),rgba(26,107,60,.6),rgba(26,74,107,.6),rgba(100,60,180,.5),rgba(200,100,50,.5),rgba(122,118,112,.5),rgba(26,74,107,.4),rgba(150,150,150,.4),rgba(200,150,100,.4),rgba(100,200,150,.4),rgba(50,150,200,.4),rgba(200,50,150,.4),rgba(180,180,50,.4),rgba(50,180,180,.4),rgba(180,50,180,.4)],borderWidth:1}]},options:pieLabel}); 
   dc('bar-3period');
   charts['bar-3period']=new Chart(document.getElementById('bar-3period'),{type:'bar',data:{labels:['—','2025/01本月'],datasets:[{label:'收入',data:[0,438498],backgroundColor:['rgba(26,74,107,.45)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},{label:'支出',data:[0,428276],backgroundColor:['rgba(192,57,43,.35)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},{label:'盈虧',data:[0,10222],backgroundColor:['rgba(26,107,60,.35)','rgba(26,107,60,.8)'],borderColor:'rgba(26,107,60,1)',borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}}); 
 }
