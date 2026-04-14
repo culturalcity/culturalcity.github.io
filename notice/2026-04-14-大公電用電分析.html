@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<title>閱大安・社區大公電用電異常通知</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+:root{
+  --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+  --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+  --c-work:#8C4800;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:15px;line-height:1.8;min-height:100vh;}
+.header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+.header-inner{max-width:760px;margin:0 auto;position:relative;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:6px;margin-right:16px;transition:color .18s;}
+.back::before{content:'←';}
+.back:hover{color:var(--wg1);}
+.header h1{font-size:20px;font-weight:700;letter-spacing:.04em;line-height:1.4;margin-bottom:4px;}
+.header-meta{font-size:11px;color:var(--wg9);letter-spacing:.08em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.type-pill{font-size:10px;padding:2px 9px;border-radius:1px;border:1px solid;color:var(--c-work);border-color:rgba(140,72,0,.3);background:rgba(140,72,0,.06);}
+.lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
+.lang-bar-inner{max-width:760px;margin:0 auto;display:flex;gap:0;}
+.lang-btn{padding:10px 18px;font-size:12px;font-family:'Noto Sans TC','Noto Sans JP',sans-serif;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.lang-btn:hover{color:rgba(234,231,225,0.8);}
+.lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+.main{max-width:760px;margin:0 auto;padding:36px 40px 64px;}
+@media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:28px 20px 48px;}}
+.lang-block{display:none;}.lang-block.active{display:block;}
+.body-text{font-size:14px;color:var(--wg41);line-height:1.9;}
+.body-text p{margin-bottom:1em;}
+.body-text p:last-child{margin-bottom:0;}
+.sec{margin-bottom:28px;}
+.sec-label{font-size:10px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+.info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
+.info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+.info-row:last-child{border-bottom:none;}
+.info-label{font-size:11px;letter-spacing:.08em;color:var(--wg9);width:80px;flex-shrink:0;padding-top:2px;}
+.info-value{font-size:14px;color:var(--wg41);font-weight:500;}
+.note{background:rgba(60,56,53,0.05);border-left:3px solid var(--wg11);padding:12px 16px;font-size:13px;color:var(--wg11);line-height:1.8;margin-top:4px;}
+.note.alert{border-left-color:#8C1F1F;background:rgba(140,31,31,0.04);color:#5A1010;}
+.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--wg9);letter-spacing:.06em;}
+/* 圖表區塊 */
+.chart-section{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;margin-bottom:16px;}
+.chart-title{font-size:13px;font-weight:500;margin-bottom:2px;color:var(--wg41);}
+.chart-sub{font-size:11px;color:var(--wg9);margin-bottom:12px;}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+@media(max-width:520px){.cards{grid-template-columns:1fr;}}
+.card{background:var(--wg1);border-radius:4px;padding:14px 16px;}
+.card.alert-card{background:#FAECE7;}
+.card-label{font-size:11px;color:var(--wg9);margin-bottom:4px;}
+.card.alert-card .card-label{color:#712B13;}
+.card-value{font-size:22px;font-weight:500;}
+.card.alert-card .card-value{color:#712B13;}
+.legend{display:flex;gap:14px;margin-bottom:10px;font-size:11px;color:var(--wg9);align-items:center;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:4px;}
+.legend-line{width:22px;height:2px;background:#185FA5;display:inline-block;}
+.legend-dash{width:20px;height:0;border-top:2px dashed #888780;display:inline-block;}
+.legend-dot{width:9px;height:9px;border-radius:50%;background:#C45A30;display:inline-block;}
+.legend-box{width:12px;height:12px;border-radius:2px;display:inline-block;}
+.legend-sq{width:12px;height:12px;background:#FAECE7;border:0.5px solid #C45A30;display:inline-block;}
+.chart-wrap{position:relative;width:100%;}
+.divider{border:none;border-top:1px solid var(--line);margin:20px 0;}
+.data-source{font-size:10px;color:var(--wg9);margin-top:10px;letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="back" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">社區主頁</a>
+    <a href="../notice/" class="back" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">社區公告</a>
+    <h1>
+      <span data-lang-text="zh">社區大公電用電異常通知</span>
+      <span data-lang-text="en" style="display:none">Notice: Abnormal Common-Area Electricity Consumption</span>
+      <span data-lang-text="ja" style="display:none">共用部電気使用量の異常に関するお知らせ</span>
+    </h1>
+    <div class="header-meta">
+      <span class="type-pill" id="type-label">設備保養</span>
+      <span>2026/04/14</span>
+      <span>閱大安管理委員會</span>
+    </div>
+  </div>
+</div>
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>
+<div class="main">
+
+  <!-- 中文 -->
+  <div class="lang-block active" data-lang="zh">
+    <div class="sec">
+      <div class="sec-label">事件說明</div>
+      <div class="body-text">
+        <p>管理委員會於監測台電用電資料時，發現本社區大公電（公共設施用電）自 <strong>4月7日起出現明顯跳升</strong>，至4月13日單日用電量已達 <strong>378 度</strong>，較三月日均基線 213 度高出約 <strong>78%</strong>。</p>
+        <p>經初步了解，此波用電增加與近期氣溫升高、<strong>公共空調系統使用頻率上升</strong>有關。由於大公電費用由全體住戶共同分攤，委員會特此呼籲各位住戶留意公共區域節約用電，共同降低分攤負擔。</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">資料摘要</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">資料來源</span><span class="info-value">台電 APP</span></div>
+        <div class="info-row"><span class="info-label">資料區間</span><span class="info-value">2025年4月20日 — 2026年4月13日</span></div>
+        <div class="info-row"><span class="info-label">三月日均</span><span class="info-value">213 度（基線）</span></div>
+        <div class="info-row"><span class="info-label">上週日均</span><span class="info-value">278 度（較基線 +30%）</span></div>
+        <div class="info-row"><span class="info-label">最高單日</span><span class="info-value">378 度（4月13日，較基線 +78%）</span></div>
+      </div>
+    </div>
+    <div class="note">請於離開公共區域時隨手關閉不必要的照明與空調設備。節約用電不僅有助降低每戶分攤費用，也是社區環境永續的重要一環。感謝各位住戶的配合。</div>
+
+    <!-- 圖表（共用，置於中文區塊內，語言切換僅切換文字說明） -->
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">用電分析圖表</div>
+
+      <div class="chart-section">
+        <p class="chart-title">日線　近31天（2026/3/14–4/13）</p>
+        <p class="chart-sub">三月穩定於 213 度基線，4月7日起急速跳升</p>
+        <div class="cards">
+          <div class="card">
+            <div class="card-label">三月日均基線</div>
+            <div class="card-value">213 度</div>
+          </div>
+          <div class="card alert-card">
+            <div class="card-label">上週日均</div>
+            <div class="card-value">278 度</div>
+          </div>
+          <div class="card alert-card">
+            <div class="card-label">最高單日（4/13）</div>
+            <div class="card-value">379 度</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>日用電</span>
+          <span class="legend-item"><span class="legend-dash"></span>三月均值 213度</span>
+          <span class="legend-item"><span class="legend-dot"></span>異常高點</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="dailyChart" role="img" aria-label="近31天日線圖"></canvas>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="chart-section">
+        <p class="chart-title">週線　2025年4月 — 2026年4月（週平均）</p>
+        <p class="chart-sub">不足7天之週次以實際天數計算</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>夏季（6–9月）</span>
+          <span class="legend-item"><span class="legend-dot"></span>本週（4/6–13）</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="weeklyChart" role="img" aria-label="週線圖"></canvas>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="chart-section">
+        <p class="chart-title">月線　2025年4月 — 2026年4月（月平均）</p>
+        <p class="chart-sub">2026年4月為截至4月13日之13天平均</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6–9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>其他月份</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="monthlyChart" role="img" aria-label="月線圖"></canvas>
+        </div>
+      </div>
+
+      <p class="data-source">資料來源：台電 APP，2025/04/20 — 2026/04/13</p>
+    </div>
+
+    <div class="footer">閱大安管理委員會・如有疑問請洽管理中心</div>
+  </div>
+
+  <!-- English -->
+  <div class="lang-block" data-lang="en">
+    <div class="sec">
+      <div class="sec-label">Notice</div>
+      <div class="body-text">
+        <p>The Management Committee has identified a <strong>significant rise in common-area electricity consumption</strong> beginning on April 7, 2026. On April 13, daily usage reached <strong>378 kWh</strong>, approximately <strong>78% above</strong> the March daily average baseline of 213 kWh.</p>
+        <p>Based on initial findings, the increase is linked to rising temperatures and <strong>higher usage of the shared air-conditioning system</strong>. As common-area electricity costs are shared among all residents, the Committee encourages everyone to be mindful of energy use in shared spaces.</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">Data Summary</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">Source</span><span class="info-value">Taiwan Power Company App</span></div>
+        <div class="info-row"><span class="info-label">Period</span><span class="info-value">April 20, 2025 — April 13, 2026</span></div>
+        <div class="info-row"><span class="info-label">March Avg</span><span class="info-value">213 kWh/day (baseline)</span></div>
+        <div class="info-row"><span class="info-label">Last Week Avg</span><span class="info-value">278 kWh/day (+30% vs baseline)</span></div>
+        <div class="info-row"><span class="info-label">Peak Single Day</span><span class="info-value">378 kWh (April 13, +78% vs baseline)</span></div>
+      </div>
+    </div>
+    <div class="note">Please remember to turn off unnecessary lighting and air-conditioning when leaving shared areas. Conserving energy helps reduce shared costs for all residents and supports the community's sustainability goals. Thank you for your cooperation.</div>
+
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">Usage Charts</div>
+      <div class="chart-section">
+        <p class="chart-title">Daily — Last 31 Days (2026/3/14–4/13)</p>
+        <p class="chart-sub">Stable around 213 kWh through March; sharp rise from April 7</p>
+        <div class="cards">
+          <div class="card"><div class="card-label">March Daily Avg</div><div class="card-value">213 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">Last Week Daily Avg</div><div class="card-value">278 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">Peak Day (4/13)</div><div class="card-value">379 kWh</div></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>Daily usage</span>
+          <span class="legend-item"><span class="legend-dash"></span>March avg 213 kWh</span>
+          <span class="legend-item"><span class="legend-dot"></span>Anomaly</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="dailyChartEn"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">Weekly — Apr 2025 to Apr 2026 (weekly average)</p>
+        <p class="chart-sub">Partial weeks calculated from actual days</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>Summer (Jun–Sep)</span>
+          <span class="legend-item"><span class="legend-dot"></span>This week (4/6–13)</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="weeklyChartEn"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">Monthly — Apr 2025 to Apr 2026 (monthly average)</p>
+        <p class="chart-sub">April 2026: 13-day average as of April 13</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>Summer (Jun–Sep)</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>Other months</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartEn"></canvas></div>
+      </div>
+      <p class="data-source">Source: Taiwan Power Company App, 2025/04/20 — 2026/04/13</p>
+    </div>
+    <div class="footer">Cultural City Community Management Committee · Please contact the Management Center with any questions</div>
+  </div>
+
+  <!-- 日本語 -->
+  <div class="lang-block" data-lang="ja">
+    <div class="sec">
+      <div class="sec-label">お知らせ内容</div>
+      <div class="body-text">
+        <p>管理委員会は台湾電力アプリの使用量データを監視する中で、<strong>4月7日から共用部の電気使用量が急激に上昇</strong>していることを確認しました。4月13日の一日の使用量は <strong>378kWh</strong> に達し、3月の一日平均基準値 213kWh を約 <strong>78%</strong> 上回りました。</p>
+        <p>初期調査の結果、この使用量増加は気温の上昇に伴う<strong>共用空調システムの稼働頻度の増加</strong>が主な要因であることが分かりました。共用部の電気料金は全住居で按分負担されるため、委員会では共用スペースでの節電にご協力いただくよう住民の皆様にお願い申し上げます。</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">データ概要</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">データ出典</span><span class="info-value">台湾電力アプリ</span></div>
+        <div class="info-row"><span class="info-label">対象期間</span><span class="info-value">2025年4月20日 — 2026年4月13日</span></div>
+        <div class="info-row"><span class="info-label">3月日平均</span><span class="info-value">213 kWh（基準値）</span></div>
+        <div class="info-row"><span class="info-label">先週日平均</span><span class="info-value">278 kWh（基準値比 +30%）</span></div>
+        <div class="info-row"><span class="info-label">最大一日</span><span class="info-value">378 kWh（4月13日、基準値比 +78%）</span></div>
+      </div>
+    </div>
+    <div class="note">共用エリアをご利用後は、不要な照明や空調の電源をお切りいただきますようお願いいたします。節電は各住居の按分負担の軽減につながり、コミュニティの持続可能な環境づくりにも貢献します。ご協力ありがとうございます。</div>
+
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">使用量グラフ</div>
+      <div class="chart-section">
+        <p class="chart-title">日別　直近31日（2026/3/14–4/13）</p>
+        <p class="chart-sub">3月は213kWhの基準値で安定、4月7日から急上昇</p>
+        <div class="cards">
+          <div class="card"><div class="card-label">3月日平均基準値</div><div class="card-value">213 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">先週日平均</div><div class="card-value">278 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">最大一日（4/13）</div><div class="card-value">379 kWh</div></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>日使用量</span>
+          <span class="legend-item"><span class="legend-dash"></span>3月平均 213kWh</span>
+          <span class="legend-item"><span class="legend-dot"></span>異常高値</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="dailyChartJa"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">週別　2025年4月 — 2026年4月（週平均）</p>
+        <p class="chart-sub">7日未満の週は実日数で算出</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>夏季（6〜9月）</span>
+          <span class="legend-item"><span class="legend-dot"></span>今週（4/6–13）</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="weeklyChartJa"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">月別　2025年4月 — 2026年4月（月平均）</p>
+        <p class="chart-sub">2026年4月は4月13日時点の13日間平均</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6〜9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>その他の月</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartJa"></canvas></div>
+      </div>
+      <p class="data-source">データ出典：台湾電力アプリ、2025/04/20 — 2026/04/13</p>
+    </div>
+    <div class="footer">閱大安（文化城市コミュニティ）管理委員会・ご不明な点は管理センターまでお問い合わせください</div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── 語言切換 ──
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.lang-block').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el=>{
+    el.style.display = el.dataset.langText===lang ? '' : 'none';
+  });
+  const typeMap={zh:'設備保養',en:'Facility Maintenance',ja:'設備保守'};
+  if(typeMap[lang]) document.getElementById('type-label').textContent=typeMap[lang];
+}
+
+// ── 圖表資料 ──
+const gridColor='rgba(0,0,0,0.06)';
+const labelColor='#5F5E5A';
+const summerFill='rgba(250,236,231,0.85)';
+
+const recent=[{"d":"2026-03-14","k":215.51},{"d":"2026-03-15","k":213.33},{"d":"2026-03-16","k":239.67},{"d":"2026-03-17","k":217.67},{"d":"2026-03-18","k":216.02},{"d":"2026-03-19","k":207.07},{"d":"2026-03-20","k":211.29},{"d":"2026-03-21","k":203.14},{"d":"2026-03-22","k":216.04},{"d":"2026-03-23","k":210.67},{"d":"2026-03-24","k":214.21},{"d":"2026-03-25","k":214.17},{"d":"2026-03-26","k":205.96},{"d":"2026-03-27","k":207.86},{"d":"2026-03-28","k":205.17},{"d":"2026-03-29","k":213.8},{"d":"2026-03-30","k":221.68},{"d":"2026-03-31","k":196.35},{"d":"2026-04-01","k":203.66},{"d":"2026-04-02","k":200.69},{"d":"2026-04-03","k":213.87},{"d":"2026-04-04","k":199.58},{"d":"2026-04-05","k":205.25},{"d":"2026-04-06","k":214.9},{"d":"2026-04-07","k":289.72},{"d":"2026-04-08","k":330.7},{"d":"2026-04-09","k":230.86},{"d":"2026-04-10","k":240.18},{"d":"2026-04-11","k":255.98},{"d":"2026-04-12","k":293.99},{"d":"2026-04-13","k":378.63}];
+const dLabels=recent.map(r=>r.d.slice(5).replace('-','/'));
+const dVals=recent.map(r=>r.k);
+
+const weekly=[
+  {l:'4/20',v:218.7,s:false,cur:false},{l:'4/21–27',v:243.2,s:false,cur:false},{l:'4/28–5/4',v:265.6,s:false,cur:false},{l:'5/5–11',v:244.7,s:false,cur:false},{l:'5/12–18',v:280.4,s:false,cur:false},{l:'5/19–25',v:300.8,s:false,cur:false},{l:'5/26–6/1',v:272.2,s:false,cur:false},{l:'6/2–8',v:311.2,s:true,cur:false},{l:'6/9–15',v:344.3,s:true,cur:false},{l:'6/16–22',v:372.5,s:true,cur:false},{l:'6/23–29',v:352.7,s:true,cur:false},{l:'6/30–7/6',v:380.4,s:true,cur:false},{l:'7/7–13',v:296.3,s:true,cur:false},{l:'7/14–20',v:331.8,s:true,cur:false},{l:'7/21–27',v:309.3,s:true,cur:false},{l:'7/28–8/3',v:301.5,s:true,cur:false},{l:'8/4–10',v:309.4,s:true,cur:false},{l:'8/11–17',v:329.9,s:true,cur:false},{l:'8/18–24',v:298.3,s:true,cur:false},{l:'8/25–31',v:330.9,s:true,cur:false},{l:'9/1–7',v:322.7,s:true,cur:false},{l:'9/8–14',v:324.7,s:true,cur:false},{l:'9/15–21',v:347.7,s:true,cur:false},{l:'9/22–28',v:339.5,s:true,cur:false},{l:'9/29–10/5',v:313.6,s:false,cur:false},{l:'10/6–12',v:321.0,s:false,cur:false},{l:'10/13–19',v:340.3,s:false,cur:false},{l:'10/20–26',v:256.2,s:false,cur:false},{l:'10/27–11/2',v:238.6,s:false,cur:false},{l:'11/3–9',v:249.7,s:false,cur:false},{l:'11/10–16',v:247.6,s:false,cur:false},{l:'11/17–23',v:231.1,s:false,cur:false},{l:'11/24–30',v:218.1,s:false,cur:false},{l:'12/1–7',v:216.6,s:false,cur:false},{l:'12/8–14',v:218.6,s:false,cur:false},{l:'12/15–21',v:208.4,s:false,cur:false},{l:'12/22–28',v:217.6,s:false,cur:false},{l:'12/29–1/4',v:237.1,s:false,cur:false},{l:'1/5–11',v:230.3,s:false,cur:false},{l:'1/12–18',v:225.5,s:false,cur:false},{l:'1/19–25',v:229.0,s:false,cur:false},{l:'1/26–2/1',v:218.0,s:false,cur:false},{l:'2/2–8',v:209.8,s:false,cur:false},{l:'2/9–15',v:221.4,s:false,cur:false},{l:'2/16–22',v:201.9,s:false,cur:false},{l:'2/23–3/1',v:220.6,s:false,cur:false},{l:'3/2–8',v:220.3,s:false,cur:false},{l:'3/9–15',v:221.4,s:false,cur:false},{l:'3/16–22',v:215.8,s:false,cur:false},{l:'3/23–29',v:210.3,s:false,cur:false},{l:'3/30–4/5',v:205.9,s:false,cur:false},{l:'4/6–13',v:298.0,s:false,cur:true},
+];
+
+const monthly=[{l:'25/4月',v:250.5,s:false},{l:'5月',v:271.6,s:false},{l:'6月',v:343.7,s:true},{l:'7月',v:325.1,s:true},{l:'8月',v:315.6,s:true},{l:'9月',v:332.1,s:true},{l:'10月',v:296.3,s:false},{l:'11月',v:236.9,s:false},{l:'12月',v:215.9,s:false},{l:'26/1月',v:228.7,s:false},{l:'2月',v:213.6,s:false},{l:'3月',v:216.5,s:false},{l:'4月*',v:250.6,s:false}];
+
+// 夏季背景 Plugin（週線）
+const wBgPlugin={
+  id:'wBg',
+  beforeDraw(chart){
+    const {ctx,chartArea,scales}=chart;
+    if(!chartArea)return;
+    const si=weekly.findIndex(w=>w.s);
+    const ei=weekly.map(w=>w.s).lastIndexOf(true);
+    ctx.save();ctx.fillStyle=summerFill;
+    ctx.fillRect(scales.x.getPixelForValue(si),chartArea.top,scales.x.getPixelForValue(ei)-scales.x.getPixelForValue(si),chartArea.height);
+    ctx.restore();
+  }
+};
+const wMilestones={0:1,6:1,7:1,11:1,16:1,20:1,24:1,28:1,33:1,37:1,41:1,46:1,51:1,52:1};
+
+// 夏季背景 Plugin（月線）
+const mBgPlugin={
+  id:'mBg',
+  beforeDraw(chart){
+    const {ctx,chartArea,scales}=chart;
+    if(!chartArea)return;
+    ctx.save();ctx.fillStyle=summerFill;
+    ctx.fillRect(scales.x.getPixelForValue(2),chartArea.top,scales.x.getPixelForValue(5)-scales.x.getPixelForValue(2),chartArea.height);
+    ctx.restore();
+  }
+};
+
+// 建立圖表 helper
+function makeDailyChart(id){
+  return new Chart(document.getElementById(id),{
+    type:'line',
+    data:{
+      labels:dLabels,
+      datasets:[
+        {data:dVals,borderWidth:2,segment:{borderColor:ctx=>ctx.p1.parsed.y>260?'#C45A30':'#185FA5'},pointRadius:dVals.map(v=>v>260?4:2),pointBackgroundColor:dVals.map(v=>v>260?'#C45A30':'#185FA5'),pointBorderColor:'transparent',backgroundColor:'rgba(55,138,221,0.07)',fill:true,tension:0.3},
+        {data:Array(recent.length).fill(213),borderColor:'#888780',borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' 度'}}},scales:{x:{ticks:{color:labelColor,font:{size:11},maxRotation:45,autoSkip:false,callback:(v,i)=>['03/14','03/21','03/28','04/01','04/07','04/08','04/13'].includes(dLabels[i])?dLabels[i]:''},grid:{color:gridColor}},y:{min:150,ticks:{color:labelColor,callback:v=>v+' 度',font:{size:11}},grid:{color:gridColor}}}}
+  });
+}
+
+function makeWeeklyChart(id){
+  return new Chart(document.getElementById(id),{
+    type:'line',
+    data:{labels:weekly.map(w=>w.l),datasets:[{data:weekly.map(w=>w.v),borderColor:'#185FA5',backgroundColor:'rgba(55,138,221,0.06)',borderWidth:1.5,pointRadius:weekly.map(w=>w.cur?6:2),pointBackgroundColor:weekly.map(w=>w.cur?'#C45A30':'#185FA5'),pointBorderColor:'transparent',fill:true,tension:0.3}]},
+    plugins:[wBgPlugin],
+    options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' 度/週均'}}},scales:{x:{ticks:{color:labelColor,font:{size:10},maxRotation:45,callback:(v,i)=>wMilestones[i]?weekly[i].l:''},grid:{color:gridColor}},y:{min:150,ticks:{color:labelColor,callback:v=>v+' 度',font:{size:10}},grid:{color:gridColor}}}}
+  });
+}
+
+function makeMonthlyChart(id){
+  return new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels:monthly.map(m=>m.l),datasets:[{data:monthly.map(m=>m.v),backgroundColor:monthly.map(m=>m.s?'#C45A30':'#B4B2A9'),borderRadius:3,borderSkipped:false}]},
+    plugins:[mBgPlugin],
+    options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' 度/月均'+(ctx.dataIndex===12?' (13天)':'')}}},scales:{x:{ticks:{color:labelColor,font:{size:11}},grid:{display:false}},y:{min:150,ticks:{color:labelColor,callback:v=>v+' 度',font:{size:10}},grid:{color:gridColor}}}}
+  });
+}
+
+// 初始建立所有語言圖表
+makeDailyChart('dailyChart');
+makeWeeklyChart('weeklyChart');
+makeMonthlyChart('monthlyChart');
+makeDailyChart('dailyChartEn');
+makeWeeklyChart('weeklyChartEn');
+makeMonthlyChart('monthlyChartEn');
+makeDailyChart('dailyChartJa');
+makeWeeklyChart('weeklyChartJa');
+makeMonthlyChart('monthlyChartJa');
+</script>
+</body>
+</html>
