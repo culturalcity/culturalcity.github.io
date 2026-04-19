@@ -142,7 +142,7 @@ tbody td:first-child{text-align:center;font-weight:500;color:var(--wg41);}
   </div>
 
   <!-- 參考表 -->
-  <div class="sec-label">完整參考表（13°C — 40°C，每 1 度）</div>
+  <div class="sec-label">參考表（27°C 以下為固定基準線；27°C 以上每 1 度）</div>
   <div class="tbl-wrap">
     <table>
       <thead>
@@ -254,26 +254,31 @@ new Chart(document.getElementById('chart'), {
 
 // 表格
 const tbody = document.getElementById('tbody');
-for (let t=13; t<=40; t++) {
+
+// 單列代表 < 27°C 基準線
+const baseRow = document.createElement('tr');
+baseRow.innerHTML =
+  '<td>＜ 27°C</td>'+
+  '<td class="t-pred">190.0 度<span class="badge">基準線</span></td>'+
+  '<td class="t-warn ok">209.0 度</td>';
+tbody.appendChild(baseRow);
+
+// 分隔列
+const sep = document.createElement('tr');
+sep.className='sep';
+sep.innerHTML='<td colspan="3">▲ 27°C 以下固定基準線　　▼ 27°C 以上依回歸值</td>';
+tbody.appendChild(sep);
+
+// 27°C 以上逐度展開
+for (let t=27; t<=40; t++) {
   const pa = predAdj(t), tg = warn(t);
-  const isBase = t < THR;
   const isSummerT = t >= 28;
-  const isHL = t >= 33 && t <= 34;
-
-  if (t === THR) {
-    const sep = document.createElement('tr');
-    sep.className='sep';
-    sep.innerHTML='<td colspan="3">▲ 27°C 以下不應開空調　　▼ 27°C 以上依回歸值</td>';
-    tbody.appendChild(sep);
-  }
-
   const tr = document.createElement('tr');
-  if (isHL) tr.className='highlight';
-  else if (isSummerT) tr.className='summer';
+  if (isSummerT) tr.className='summer';
   tr.innerHTML =
     '<td>'+t+'°C</td>'+
-    '<td class="t-pred">'+pa.toFixed(1)+' 度'+(isBase?'<span class="badge">基準線</span>':'')+'</td>'+
-    '<td class="t-warn'+(isBase?' ok':'')+'">'+tg.toFixed(1)+' 度</td>';
+    '<td class="t-pred">'+pa.toFixed(1)+' 度</td>'+
+    '<td class="t-warn">'+tg.toFixed(1)+' 度</td>';
   tbody.appendChild(tr);
 }
 
