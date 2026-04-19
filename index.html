@@ -29,7 +29,7 @@
     font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
     background: var(--wg1);
     color: var(--wg41);
-    font-size: 15px;
+    font-size:16px;
     line-height: 1.7;
     min-height: 100vh;
   }
@@ -52,23 +52,23 @@
     pointer-events: none;
   }
   .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
-  .header-eyebrow { font-size: 11px; letter-spacing: 0.25em; color: var(--wg9); margin-bottom: 12px; }
-  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 0.12em; color: var(--white); margin-bottom: 6px; line-height: 1.2; }
-  .header-sub { font-size: 12px; color: var(--wg9); letter-spacing: 0.18em; }
+  .header-eyebrow { font-size:13px; letter-spacing: 0.25em; color: var(--wg9); margin-bottom: 12px; }
+  .header h1 { font-size:32px; font-weight: 700; letter-spacing: 0.12em; color: var(--white); margin-bottom: 6px; line-height: 1.2; }
+  .header-sub { font-size:14px; color: var(--wg9); letter-spacing: 0.18em; }
   .header-rule { width: 36px; height: 1px; background: var(--wg9); margin: 20px 0; }
-  .header-desc { font-size: 13px; color: rgba(234,231,225,0.55); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }
+  .header-desc { font-size:15px; color: rgba(234,231,225,0.55); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }
 
   /* ── MAIN ── */
   .main { max-width: 760px; margin: 0 auto; padding: 48px 40px 72px; }
   @media(max-width:600px) {
     .header { padding: 36px 24px 30px; }
     .main { padding: 32px 20px 56px; }
-    .header h1 { font-size: 24px; }
+    .header h1 { font-size:24px; }
   }
 
   /* ── SECTION LABEL ── */
   .sec-label {
-    font-size: 10px; letter-spacing: 0.28em; color: var(--wg9);
+    font-size:12px; letter-spacing: 0.28em; color: var(--wg9);
     margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
     display: flex; align-items: center; gap: 10px;
   }
@@ -96,10 +96,10 @@
   .module-card.notice  .mc-accent { background: var(--c-notice); }
   .module-card.utility .mc-accent { background: var(--wg9); }
   .mc-body { padding: 20px 20px 16px; }
-  .mc-icon { font-size: 20px; margin-bottom: 10px; display: block; }
-  .mc-title { font-size: 14px; font-weight: 700; color: var(--wg41); letter-spacing: 0.05em; margin-bottom: 4px; }
-  .mc-desc { font-size: 11px; color: var(--wg9); line-height: 1.65; margin-bottom: 14px; }
-  .mc-link { font-size: 11px; letter-spacing: 0.1em; color: var(--wg11); display: flex; align-items: center; gap: 5px; transition: gap 0.18s; }
+  .mc-icon { font-size:20px; margin-bottom: 10px; display: block; }
+  .mc-title { font-size:16px; font-weight: 700; color: var(--wg41); letter-spacing: 0.05em; margin-bottom: 4px; }
+  .mc-desc { font-size:13px; color: var(--wg9); line-height: 1.65; margin-bottom: 14px; }
+  .mc-link { font-size:13px; letter-spacing: 0.1em; color: var(--wg11); display: flex; align-items: center; gap: 5px; transition: gap 0.18s; }
   .module-card:hover .mc-link { gap: 9px; }
   .mc-link::after { content: '→'; }
 
@@ -135,9 +135,9 @@
   .tl-item.minutes .tl-left::after { background: var(--c-minutes); }
   .tl-item.notice  .tl-left::after { background: var(--c-notice); }
 
-  .tl-date { font-size: 11px; color: var(--wg9); letter-spacing: 0.04em; }
+  .tl-date { font-size:13px; color: var(--wg9); letter-spacing: 0.04em; }
   .tl-type {
-    font-size: 9px; letter-spacing: 0.1em; padding: 1px 6px; border-radius: 1px; border: 1px solid;
+    font-size:11px; letter-spacing: 0.1em; padding: 1px 6px; border-radius: 1px; border: 1px solid;
   }
   .tl-item.finance .tl-type { color: var(--c-finance); border-color: rgba(43,74,107,0.3); background: rgba(43,74,107,0.06); }
   .tl-item.minutes .tl-type { color: var(--c-minutes); border-color: rgba(60,56,53,0.25); background: rgba(60,56,53,0.05); }
@@ -151,8 +151,8 @@
     transition: background 0.18s;
   }
   .tl-item:hover .tl-right { background: #F2F0EC; }
-  .tl-title { font-size: 13.5px; font-weight: 500; color: var(--wg41); margin-bottom: 2px; }
-  .tl-desc { font-size: 11.5px; color: var(--wg9); }
+  .tl-title { font-size:15px; font-weight: 500; color: var(--wg41); margin-bottom: 2px; }
+  .tl-desc { font-size:13px; color: var(--wg9); }
 
   /* 時間軸第一項頂部圓角、最後項底部圓角 */
   .tl-item:first-child .tl-right { border-radius: 0 var(--radius) 0 0; }
@@ -162,7 +162,7 @@
   .tl-more-btn {
     display: block; width: 100%; margin: 1px 0 0;
     padding: 11px 16px; border: none; cursor: pointer;
-    font-family: inherit; font-size: 13px; letter-spacing: 0.04em;
+    font-family: inherit; font-size:15px; letter-spacing: 0.04em;
     color: var(--wg9); background: #F2F0EC;
     border-radius: 0 0 var(--radius) var(--radius);
     transition: background 0.15s;
@@ -171,7 +171,7 @@
 
   @media(max-width:500px) {
     .tl-left { width: 76px; padding-right: 12px; }
-    .tl-date { font-size: 10px; }
+    .tl-date { font-size:12px; }
     .tl-right { padding-left: 14px; }
   }
 
@@ -189,16 +189,16 @@
     .info-item { padding: 14px 0; border-left: none; border-top: 1px solid var(--line); }
     .info-item:first-child { padding-top: 0; border-top: none; }
   }
-  .info-label { font-size: 10px; letter-spacing: 0.16em; color: var(--wg9); margin-bottom: 4px; }
-  .info-value { font-size: 13.5px; color: var(--wg41); font-weight: 500; line-height: 1.5; }
+  .info-label { font-size:12px; letter-spacing: 0.16em; color: var(--wg9); margin-bottom: 4px; }
+  .info-value { font-size:15px; color: var(--wg41); font-weight: 500; line-height: 1.5; }
 
   /* ── FOOTER ── */
   .footer {
     border-top: 1px solid var(--line); padding-top: 20px;
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
   }
-  .footer-left { font-size: 11px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
-  .footer-right { font-size: 10px; color: rgba(137,132,128,0.6); letter-spacing: 0.08em; }
+  .footer-left { font-size:13px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
+  .footer-right { font-size:12px; color: rgba(137,132,128,0.6); letter-spacing: 0.08em; }
 </style>
 </head>
 <body>
@@ -286,6 +286,8 @@
   <div class="sec-label">UPDATES &nbsp;·&nbsp; 最新動態</div>
 
       <div class="timeline">
+
+
 
     <a href="./notice/2026-04-16-電梯門板烤漆.html" class="tl-item notice">
       <div class="tl-left">

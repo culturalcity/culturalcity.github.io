@@ -15,48 +15,48 @@
   --c-work:#8C4800;--c-equip:#8C1F1F;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:15px;line-height:1.8;min-height:100vh;}
+body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:16px;line-height:1.8;min-height:100vh;}
 .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
 .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
 .header-inner{max-width:680px;margin:0 auto;position:relative;}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
 .back::before{content:'←';}
 .back:hover{color:var(--wg1);}
 .header h1{font-size:20px;font-weight:700;letter-spacing:.04em;line-height:1.4;margin-bottom:4px;}
-.header-meta{font-size:11px;color:var(--wg9);letter-spacing:.08em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
-.type-pill{font-size:10px;padding:2px 9px;border-radius:1px;border:1px solid;}
+.header-meta{font-size:13px;color:var(--wg9);letter-spacing:.08em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.type-pill{font-size:12px;padding:2px 9px;border-radius:1px;border:1px solid;}
 .pill-equip{color:var(--c-equip);border-color:rgba(140,31,31,.3);background:rgba(140,31,31,.06);}
 .lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
 .lang-bar-inner{max-width:680px;margin:0 auto;display:flex;}
-.lang-btn{padding:10px 18px;font-size:12px;font-family:'Noto Sans TC','Noto Sans JP',sans-serif;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.lang-btn{padding:10px 18px;font-size:14px;font-family:'Noto Sans TC','Noto Sans JP',sans-serif;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
 .lang-btn:hover{color:rgba(234,231,225,0.8);}
 .lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
 .main{max-width:680px;margin:0 auto;padding:36px 40px 64px;}
 @media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:28px 20px 48px;}}
 .lang-block{display:none;}.lang-block.active{display:block;}
-.body-text{font-size:14px;color:var(--wg41);line-height:1.9;}
+.body-text{font-size:16px;color:var(--wg41);line-height:1.9;}
 .body-text p{margin-bottom:1em;}
 .body-text p:last-child{margin-bottom:0;}
 .sec{margin-bottom:28px;}
-.sec-label{font-size:10px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sec-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
 .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
-.sched-table{width:100%;border-collapse:collapse;font-size:13px;}
-.sched-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.06em;}
+.sched-table{width:100%;border-collapse:collapse;font-size:15px;}
+.sched-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:13px;letter-spacing:.06em;}
 .sched-table td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle;background:var(--white);}
 .sched-table td:first-child{font-weight:700;color:var(--wg41);white-space:nowrap;width:140px;}
 .sched-table tr:last-child td{border-bottom:none;}
-.impact-table{width:100%;border-collapse:collapse;font-size:13px;}
-.impact-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.06em;}
+.impact-table{width:100%;border-collapse:collapse;font-size:15px;}
+.impact-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:13px;letter-spacing:.06em;}
 .impact-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
 .impact-table td:first-child{font-weight:700;color:var(--wg41);white-space:nowrap;width:120px;}
 .impact-table tr:last-child td{border-bottom:none;}
 .ul-clean{list-style:none;padding:0;margin:4px 0;}
-.ul-clean li{padding:6px 0 6px 16px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--wg11);position:relative;}
+.ul-clean li{padding:6px 0 6px 16px;border-bottom:1px solid var(--line);font-size:15px;color:var(--wg11);position:relative;}
 .ul-clean li::before{content:'·';position:absolute;left:0;color:var(--wg9);}
 .ul-clean li:last-child{border-bottom:none;}
-.note{background:rgba(60,56,53,0.05);border-left:3px solid var(--wg11);padding:12px 16px;font-size:13px;color:var(--wg11);line-height:1.8;margin-top:4px;}
-.apology{background:rgba(140,31,31,0.04);border-left:3px solid var(--c-equip);padding:12px 16px;font-size:13px;color:var(--wg11);line-height:1.8;margin-bottom:20px;}
-.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--wg9);letter-spacing:.06em;}
+.note{background:rgba(60,56,53,0.05);border-left:3px solid var(--wg11);padding:12px 16px;font-size:15px;color:var(--wg11);line-height:1.8;margin-top:4px;}
+.apology{background:rgba(140,31,31,0.04);border-left:3px solid var(--c-equip);padding:12px 16px;font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:20px;}
+.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:13px;color:var(--wg9);letter-spacing:.06em;}
 </style>
 <script>
 function setLang(lang){
@@ -73,7 +73,7 @@ function setLang(lang){
 <body>
 <div class="header">
   <div class="header-inner">
-    <a href="../" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:6px;margin-right:16px;transition:color .18s" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">← 社區主頁</a>
+    <a href="../" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:6px;margin-right:16px;transition:color .18s" onmouseover="this.style.color='var(--wg1)'" onmouseout="this.style.color='var(--wg9)'">← 社區主頁</a>
     <a href="../notice/" class="back">社區公告</a>
     <h1>
       <span data-lang-text="zh">電梯正式門片更換工程暨電梯暫停服務通知</span>
@@ -123,12 +123,12 @@ function setLang(lang){
         <thead><tr><th>電梯類型</th><th>施工內容</th><th>影響說明</th></tr></thead>
         <tbody>
           <tr>
-            <td>客梯<br><span style="font-size:11px;font-weight:400;color:var(--wg9)">影響較小</span></td>
+            <td>客梯<br><span style="font-size:13px;font-weight:400;color:var(--wg9)">影響較小</span></td>
             <td>僅更換電梯「內部」的門片</td>
             <td>暫停服務時間較短</td>
           </tr>
           <tr>
-            <td>貨梯<br><span style="font-size:11px;font-weight:400;color:var(--c-equip)">影響較大</span></td>
+            <td>貨梯<br><span style="font-size:13px;font-weight:400;color:var(--c-equip)">影響較大</span></td>
             <td>需更換每一層樓的「外部」梯廳門片</td>
             <td>暫停服務時間較長，將嚴重影響住戶前往 B1 環保室、地下停車場的通行，並且無法進行大型傢俱、家電或貨物的運送。</td>
           </tr>
@@ -172,12 +172,12 @@ function setLang(lang){
         <thead><tr><th>Elevator Type</th><th>Scope of Work</th><th>Impact</th></tr></thead>
         <tbody>
           <tr>
-            <td>Passenger Lift<br><span style="font-size:11px;font-weight:400;color:var(--wg9)">Minor impact</span></td>
+            <td>Passenger Lift<br><span style="font-size:13px;font-weight:400;color:var(--wg9)">Minor impact</span></td>
             <td>Replacement of interior door panels only</td>
             <td>Shorter service suspension period</td>
           </tr>
           <tr>
-            <td>Freight Lift<br><span style="font-size:11px;font-weight:400;color:var(--c-equip)">Significant impact</span></td>
+            <td>Freight Lift<br><span style="font-size:13px;font-weight:400;color:var(--c-equip)">Significant impact</span></td>
             <td>Replacement of exterior lobby door panels on every floor</td>
             <td>Longer service suspension. Access to B1 recycling room and underground parking will be significantly disrupted. Large furniture, appliances, or cargo cannot be transported during this period.</td>
           </tr>
@@ -221,12 +221,12 @@ function setLang(lang){
         <thead><tr><th>種別</th><th>工事内容</th><th>影響</th></tr></thead>
         <tbody>
           <tr>
-            <td>旅客用<br><span style="font-size:11px;font-weight:400;color:var(--wg9)">影響小</span></td>
+            <td>旅客用<br><span style="font-size:13px;font-weight:400;color:var(--wg9)">影響小</span></td>
             <td>エレベーター「内部」扉パネルのみ交換</td>
             <td>運転停止時間は比較的短い</td>
           </tr>
           <tr>
-            <td>荷物用<br><span style="font-size:11px;font-weight:400;color:var(--c-equip)">影響大</span></td>
+            <td>荷物用<br><span style="font-size:13px;font-weight:400;color:var(--c-equip)">影響大</span></td>
             <td>各階の「外部」エレベーターホール扉パネルを交換</td>
             <td>運転停止時間が長く、B1資源回収室・地下駐車場へのアクセスに大きな支障が生じます。また、大型家具・家電・荷物の搬送も行えません。</td>
           </tr>

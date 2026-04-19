@@ -26,10 +26,10 @@
     --border:rgba(60,56,53,0.12);--radius:2px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;}
   @media print{
     .no-print{display:none!important;}
-    body{background:white;font-size:12px;}
+    body{background:white;font-size:14px;}
     .panel,.kpi-card{break-inside:avoid;}
     canvas{max-height:200px!important;}
   }
@@ -41,20 +41,20 @@
     pointer-events:none;}
   .header-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   .back-nav{display:flex;gap:16px;margin-bottom:14px;}
-  .back-nav a{display:inline-flex;align-items:center;gap:4px;font-size:11px;letter-spacing:.08em;color:var(--wg9);text-decoration:none;transition:color .18s;}
+  .back-nav a{display:inline-flex;align-items:center;gap:4px;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-decoration:none;transition:color .18s;}
   .back-nav a::before{content:'←';}
   .back-nav a:hover{color:var(--wg1);}
   .header h1{font-size:24px;font-weight:700;letter-spacing:0.06em;}
-  .header .period{font-size:12px;color:rgba(248,245,240,0.5);letter-spacing:0.12em;margin-top:3px;}
-  .header-right{text-align:right;font-size:11px;color:rgba(248,245,240,0.5);}
-  .header-right strong{color:var(--wg1);font-size:13px;display:block;}
+  .header .period{font-size:14px;color:rgba(248,245,240,0.5);letter-spacing:0.12em;margin-top:3px;}
+  .header-right{text-align:right;font-size:13px;color:rgba(248,245,240,0.5);}
+  .header-right strong{color:var(--wg1);font-size:15px;display:block;}
   .tabs{display:flex;background:var(--ink2);padding:0 40px;overflow-x:auto;}
-  .tab{padding:11px 18px;font-size:13px;color:rgba(248,245,240,0.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
+  .tab{padding:11px 18px;font-size:15px;color:rgba(248,245,240,0.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
   .tab:hover{color:rgba(248,245,240,0.8);}
   .tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
   .main{max-width:1060px;margin:0 auto;padding:28px 20px 60px;}
   .tab-content{display:none;}.tab-content.active{display:block;}
-  .sl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--wg11);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .sl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--wg11);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
   .sl::after{content:'';flex:1;height:1px;background:var(--border);}
   .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
   @media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
@@ -62,10 +62,10 @@
   .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
   .kpi-card.g::before{background:var(--green);}.kpi-card.r::before{background:var(--red);}
   .kpi-card.gd::before{background:var(--wg9);}.kpi-card.b::before{background:var(--blue);}
-  .kpi-title{font-size:10px;color:var(--ink3);letter-spacing:.05em;margin-bottom:8px;}
+  .kpi-title{font-size:12px;color:var(--ink3);letter-spacing:.05em;margin-bottom:8px;}
   .kpi-val{font-size:22px;font-weight:700;color:var(--ink);}
   .kpi-val.pos{color:var(--green);}.kpi-val.neg{color:var(--red);}
-  .badge{display:inline-flex;align-items:center;gap:2px;font-size:10px;padding:2px 6px;border-radius:10px;margin-top:6px;}
+  .badge{display:inline-flex;align-items:center;gap:2px;font-size:12px;padding:2px 6px;border-radius:10px;margin-top:6px;}
   .badge.up{background:rgba(26,107,60,.1);color:var(--green);}
   .badge.dn{background:rgba(192,57,43,.1);color:var(--red);}
   .badge.nt{background:rgba(184,134,11,.1);color:var(--gold);}
@@ -73,12 +73,12 @@
   @media(max-width:700px){.grid2{grid-template-columns:1fr;}}
   .panel{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
   .panel.mb{margin-bottom:18px;}
-  .ph{padding:11px 16px;background:var(--paper2);border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:space-between;}
-  .tag{font-size:9px;background:var(--wg11);color:var(--wg1);padding:2px 7px;border-radius:10px;}
+  .ph{padding:11px 16px;background:var(--paper2);border-bottom:1px solid var(--border);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:space-between;}
+  .tag{font-size:11px;background:var(--wg11);color:var(--wg1);padding:2px 7px;border-radius:10px;}
   .tag.b{background:var(--blue);}.tag.g{background:var(--green);}
   .pb{padding:14px 16px;}
-  table{width:100%;border-collapse:collapse;font-size:12px;}
-  th{text-align:left;padding:6px 9px;background:var(--paper2);color:var(--ink3);font-weight:500;font-size:10px;letter-spacing:.04em;border-bottom:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{text-align:left;padding:6px 9px;background:var(--paper2);color:var(--ink3);font-weight:500;font-size:12px;letter-spacing:.04em;border-bottom:1px solid var(--border);}
   th:not(:first-child){text-align:right;}
   td{padding:7px 9px;border-bottom:1px solid rgba(26,24,20,.05);color:var(--ink2);}
   td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;}
@@ -87,25 +87,25 @@
   .dp{color:var(--green);}.dn2{color:var(--red);}.dz{color:var(--ink3);}
   .sumbox{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:22px 26px;margin-bottom:22px;position:relative;overflow:hidden;}
   .sumbox::before{content:'財務摘要';position:absolute;top:12px;right:16px;font-size:44px;color:rgba(255,255,255,.04);font-weight:700;pointer-events:none;}
-  .sumbox h3{font-size:13px;color:var(--wg1);margin-bottom:12px;letter-spacing:.06em;}
-  .si{display:flex;gap:9px;margin-bottom:9px;font-size:12.5px;line-height:1.7;color:rgba(248,245,240,.85);}
-  .si .bul{color:var(--wg1);font-size:15px;flex-shrink:0;}
-  .alert{background:rgba(192,57,43,.15);border-left:2px solid var(--red);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:12px;margin-top:12px;}
-  .ok{background:rgba(31,92,56,.12);border-left:2px solid var(--green);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:12px;margin-top:8px;}
+  .sumbox h3{font-size:15px;color:var(--wg1);margin-bottom:12px;letter-spacing:.06em;}
+  .si{display:flex;gap:9px;margin-bottom:9px;font-size:14px;line-height:1.7;color:rgba(248,245,240,.85);}
+  .si .bul{color:var(--wg1);font-size:16px;flex-shrink:0;}
+  .alert{background:rgba(192,57,43,.15);border-left:2px solid var(--red);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:14px;margin-top:12px;}
+  .ok{background:rgba(31,92,56,.12);border-left:2px solid var(--green);color:rgba(248,245,240,.9);padding:9px 13px;border-radius:2px;font-size:14px;margin-top:8px;}
   .ch{position:relative;height:210px;}
   .ch-sm{position:relative;height:170px;}
 
   /* MONTH NAV */
   .month-nav{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);border-top:1px solid rgba(234,231,225,0.1);padding:10px 48px;}
-  .month-nav a,.month-nav span{font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:5px 0;transition:color .18s;}
+  .month-nav a,.month-nav span{font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:5px 0;transition:color .18s;}
   .month-nav a:hover{color:var(--wg1);}
   .month-nav .disabled{opacity:0.3;cursor:default;pointer-events:none;}
-  .month-nav .center{font-size:12px;font-weight:700;color:rgba(234,231,225,0.6);letter-spacing:.12em;}
+  .month-nav .center{font-size:14px;font-weight:700;color:rgba(234,231,225,0.6);letter-spacing:.12em;}
   @media(max-width:600px){.month-nav{padding:10px 20px;}}
 
   .btn-pdf {
     display:inline-flex;align-items:center;gap:6px;
-    padding:9px 18px;font-size:12px;
+    padding:9px 18px;font-size:14px;
     font-family:'Noto Sans TC',sans-serif;
     border-radius:var(--radius);cursor:pointer;transition:all .2s;
     border:1px solid var(--wg11);
@@ -113,10 +113,10 @@
     text-decoration:none;letter-spacing:0.04em;
   }
   .btn-pdf:hover{background:var(--wg11);color:var(--wg1);}
-  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;font-size:12px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--ink2);}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;font-size:14px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--ink2);}
   .btn:hover{background:var(--paper2);}
   /* first-period notice */
-  .first-notice{background:rgba(60,56,53,0.05);border:1px solid rgba(60,56,53,0.15);border-radius:var(--radius);padding:11px 15px;font-size:12px;color:var(--ink2);margin-bottom:20px;line-height:1.8;}
+  .first-notice{background:rgba(60,56,53,0.05);border:1px solid rgba(60,56,53,0.15);border-radius:var(--radius);padding:11px 15px;font-size:14px;color:var(--ink2);margin-bottom:20px;line-height:1.8;}
 </style>
 </head>
 <body>
@@ -287,7 +287,7 @@
 
   <div class="sl">說明</div>
   <div class="panel mb">
-    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+    <div class="pb" style="font-size:14px;line-height:2;color:var(--ink2)">
       <p>• <strong>收入成長主因</strong>：1月收到2025臺北市氣候行動獎獎金 90,000 元（一次性），為主要拉升因素。扣除此項後，核心收入（管理費＋車位＋充電公用線路基金）與上月幾乎持平。</p>
       <p>• <strong>充電椿電費消失</strong>：12月有充電椿電費收入 7,950 元，1月無此項，屬正常月份差異。</p>
       <p>• <strong>支出下降主因</strong>：12月有空調年度保養 51,000 元、保險費 11,030 元等年度/季度性費用，1月無此類費用，故支出明顯下降。</p>
@@ -378,7 +378,7 @@
 
   <div class="sl">說明</div>
   <div class="panel mb">
-    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+    <div class="pb" style="font-size:14px;line-height:2;color:var(--ink2)">
       <p>• <strong>收入同比成長</strong>：主要來自2025臺北市氣候行動獎獎金 90,000 元（去年1月無此收入），屬一次性收入，不代表結構性改善。</p>
       <p>• <strong>物業管理服務費年度調漲</strong>：116,000 → 126,000 元（+8.6%），為今年起每月新基準。</p>
       <p>• <strong>垃圾清運費調漲</strong>：7,875 → 9,450 元（+20%），為2025年4月起費率調整後的基準，受台北市焚化費率影響。</p>
@@ -461,7 +461,7 @@
   </div>
 
   <div class="panel mb">
-    <div class="pb" style="font-size:12.5px;line-height:2;color:var(--ink2)">
+    <div class="pb" style="font-size:14px;line-height:2;color:var(--ink2)">
       <p>• <strong>定期存款增加</strong>：1月新增 55 萬定存（3,050,000 → 3,600,000），財務儲備持續累積。</p>
       <p>• <strong>負債大幅下降</strong>：12月流動負債 202,823 元，1月降至 432,056 元——注意此處1月反而偏高，主因為預收款項 304,856 元（住戶預繳下期管理費），屬正常預收，非應付費用，財務風險低。</p>
       <p>• <strong>維修基金累計達 114 萬</strong>：較去年同期（42 萬）大幅增加，中長期修繕準備持續改善。</p>
@@ -526,7 +526,7 @@
 
   <div class="panel mb" style="margin-top:4px">
     <div class="ph">重大項目說明</div>
-    <div class="pb" style="font-size:12px;line-height:1.9;color:var(--ink2)">
+    <div class="pb" style="font-size:14px;line-height:1.9;color:var(--ink2)">
       <p>① 盈餘大幅成長（+812%）：主要來自一次性2025臺北市氣候行動獎獎金 9 萬元，非結構性改善</p>
       <p>② 管理服務費年度調漲：每月新增 10,000 元，後續月份均須反映</p>
       <p>③ 垃圾清運費政策性調漲：2025年4月起 9,450 元，已為新基準</p>
@@ -537,14 +537,14 @@
 
   <div class="sl" style="margin-top:20px">精簡版</div>
   <div class="panel mb">
-    <div class="pb" style="font-size:14px;line-height:2.2;color:var(--ink2)">
+    <div class="pb" style="font-size:16px;line-height:2.2;color:var(--ink2)">
       <p>📅 <strong>2026年1月・閱大安 財務摘要</strong></p>
       <p>• 本月收入：<strong>514,166 元</strong>（管理費 377,419 / 車位清潔費 39,200 / 回饋金 90,000 / 其他 7,547）</p>
       <p>• 本月支出：<strong>420,880 元</strong>（保全 189,000 / 管理服務費 126,000 / 電梯 12,870 / 其他 93,010）</p>
       <p>• 本月盈餘：<strong style="color:var(--green)">+93,286 元</strong></p>
       <p>• 帳戶現金及存款餘額：<strong>6,332,060 元</strong></p>
       <p>• 維修基金累計：<strong>1,140,000 元</strong></p>
-      <p style="font-size:12px;color:var(--ink3);margin-top:8px">＊本月收入含2025臺北市氣候行動獎獎金 90,000 元，為非常規收入項目。</p>
+      <p style="font-size:14px;color:var(--ink3);margin-top:8px">＊本月收入含2025臺北市氣候行動獎獎金 90,000 元，為非常規收入項目。</p>
     </div>
   </div>
 

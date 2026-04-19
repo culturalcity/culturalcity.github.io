@@ -11,90 +11,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 :root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--dp:#1F5C38;--warn:#8C5A00;--blue:#2B4A6B;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:14px;line-height:1.8;min-height:100vh;}
+body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:16px;line-height:1.8;min-height:100vh;}
 .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 0;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
 .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
 .header-inner{max-width:900px;margin:0 auto;position:relative;}
 .header-nav{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--wg9);text-decoration:none;letter-spacing:.08em;transition:color .18s;}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--wg9);text-decoration:none;letter-spacing:.08em;transition:color .18s;}
 .back-link:hover{color:var(--wg1);}.back-link::before{content:'←';}
-.finance-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(234,231,225,0.7);text-decoration:none;border:1px solid rgba(234,231,225,0.2);border-radius:1px;padding:4px 10px;letter-spacing:.06em;transition:all .18s;}
+.finance-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(234,231,225,0.7);text-decoration:none;border:1px solid rgba(234,231,225,0.2);border-radius:1px;padding:4px 10px;letter-spacing:.06em;transition:all .18s;}
 .finance-link:hover{background:rgba(234,231,225,0.08);color:var(--wg1);}
-.eyebrow{font-size:10px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
+.eyebrow{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
 .header h1{font-size:22px;font-weight:700;letter-spacing:.06em;margin-bottom:6px;}
-.header-sub{font-size:11px;color:var(--wg9);letter-spacing:.14em;margin-bottom:20px;}
+.header-sub{font-size:13px;color:var(--wg9);letter-spacing:.14em;margin-bottom:20px;}
 .header-rule{width:28px;height:1px;background:var(--wg9);margin-bottom:16px;}
 .meta-grid{display:grid;grid-template-columns:repeat(4,auto);gap:0;width:fit-content;border:1px solid rgba(234,231,225,0.12);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;}
 .meta-cell{padding:8px 16px;border-right:1px solid rgba(234,231,225,0.1);border-bottom:1px solid rgba(234,231,225,0.08);}
 .meta-cell:nth-child(4n){border-right:none;}
 .meta-cell:nth-last-child(-n+4){border-bottom:none;}
-.meta-label{font-size:9px;letter-spacing:.16em;color:var(--wg9);margin-bottom:3px;}
-.meta-val{font-size:12px;color:var(--wg1);font-weight:500;}
+.meta-label{font-size:11px;letter-spacing:.16em;color:var(--wg9);margin-bottom:3px;}
+.meta-val{font-size:14px;color:var(--wg1);font-weight:500;}
 .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
-.tab-btn{padding:11px 22px;font-size:12px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;letter-spacing:.08em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.tab-btn{padding:11px 22px;font-size:14px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;letter-spacing:.08em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
 .tab-btn:hover{color:rgba(234,231,225,0.8);}.tab-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
 .main{max-width:900px;margin:0 auto;padding:32px 40px 72px;}
-@media(max-width:640px){.header{padding:24px 20px 0;}.meta-grid{grid-template-columns:1fr 1fr;}.main{padding:20px 16px 56px;}.tab-btn{padding:10px 14px;font-size:11px;}}
+@media(max-width:640px){.header{padding:24px 20px 0;}.meta-grid{grid-template-columns:1fr 1fr;}.main{padding:20px 16px 56px;}.tab-btn{padding:10px 14px;font-size:13px;}}
 .tab-content{display:none;}.tab-content.active{display:block;}
-.notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:13.5px;margin-bottom:24px;}
+.notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
 .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}.notice-table tr:last-child{border-bottom:none;}
-.notice-table th{background:rgba(60,56,53,0.04);padding:10px 16px;font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--wg9);text-align:left;width:90px;vertical-align:top;border-right:1px solid rgba(60,56,53,0.06);}
+.notice-table th{background:rgba(60,56,53,0.04);padding:10px 16px;font-weight:500;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-align:left;width:90px;vertical-align:top;border-right:1px solid rgba(60,56,53,0.06);}
 .notice-table td{padding:10px 16px;color:var(--wg11);vertical-align:top;line-height:1.75;}
 .notice-agenda{list-style:none;padding:0;}
-.notice-agenda li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(60,56,53,0.05);font-size:13px;color:var(--wg11);}
+.notice-agenda li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11);}
 .notice-agenda li:last-child{border-bottom:none;}
-.na-num{font-size:10px;color:var(--wg9);flex-shrink:0;padding-top:3px;min-width:60px;}
+.na-num{font-size:12px;color:var(--wg9);flex-shrink:0;padding-top:3px;min-width:60px;}
 .toc{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;}
-.toc-title{font-size:10px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+.toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
 .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
-.toc-item{font-size:12px;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;}
+.toc-item{font-size:14px;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;}
 .toc-item:hover{color:var(--wg41);}
 .toc-dot{width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0;}
 .toc-dot.blue{background:var(--blue);}.toc-dot.green{background:var(--dp);}.toc-dot.warn{background:var(--warn);}
 .section{margin-bottom:32px;}
 .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--line);}
-.section-roman{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px;}
-.section-title{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
-.open-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--wg9);}
+.section-roman{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px;}
+.section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+.open-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:15px;color:var(--wg9);}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
 @media(max-width:500px){.stats-grid{grid-template-columns:1fr;}}
 .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
-.stat-label{font-size:10px;color:var(--wg9);margin-bottom:3px;}.stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
-.stat-sub{font-size:10px;color:var(--wg9);margin-top:2px;}.stat-val.pos{color:var(--dp);}
+.stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}.stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
+.stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}.stat-val.pos{color:var(--dp);}
 .finance-banner{background:var(--wg41);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .finance-banner-text{color:var(--wg1);}
-.finance-banner-title{font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:3px;}
-.finance-banner-sub{font-size:11px;color:var(--wg9);}
-.finance-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(234,231,225,0.1);border:1px solid rgba(234,231,225,0.25);color:var(--wg1);font-size:11px;padding:7px 14px;border-radius:1px;text-decoration:none;letter-spacing:.06em;transition:all .18s;white-space:nowrap;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;}
+.finance-banner-title{font-size:14px;font-weight:600;letter-spacing:.04em;margin-bottom:3px;}
+.finance-banner-sub{font-size:13px;color:var(--wg9);}
+.finance-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(234,231,225,0.1);border:1px solid rgba(234,231,225,0.25);color:var(--wg1);font-size:13px;padding:7px 14px;border-radius:1px;text-decoration:none;letter-spacing:.06em;transition:all .18s;white-space:nowrap;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;}
 .finance-btn:hover{background:rgba(234,231,225,0.18);}
 .work-log{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
 .log-row{display:flex;gap:0;border-bottom:1px solid rgba(60,56,53,0.06);}.log-row:last-child{border-bottom:none;}
-.log-date{width:52px;flex-shrink:0;padding:8px 10px;font-size:11px;font-weight:500;color:var(--wg9);background:rgba(60,56,53,0.03);border-right:1px solid rgba(60,56,53,0.06);line-height:1.5;text-align:center;}
-.log-content{flex:1;padding:8px 14px;font-size:13px;color:var(--wg11);line-height:1.65;}
+.log-date{width:52px;flex-shrink:0;padding:8px 10px;font-size:13px;font-weight:500;color:var(--wg9);background:rgba(60,56,53,0.03);border-right:1px solid rgba(60,56,53,0.06);line-height:1.5;text-align:center;}
+.log-content{flex:1;padding:8px 14px;font-size:15px;color:var(--wg11);line-height:1.65;}
 .agenda-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;position:relative;}
 .agenda-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);}
 .agenda-item.resolved::before{background:var(--dp);}.agenda-item.pending::before{background:var(--warn);}
 .agenda-header{display:flex;align-items:baseline;gap:10px;padding:11px 16px 10px 18px;border-bottom:1px solid rgba(60,56,53,0.07);}
-.agenda-num{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
-.agenda-title{font-size:13px;font-weight:600;color:var(--wg41);flex:1;}
-.agenda-badge{font-size:10px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
+.agenda-num{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
+.agenda-title{font-size:15px;font-weight:600;color:var(--wg41);flex:1;}
+.agenda-badge{font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
 .badge-resolved{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
 .badge-pending{color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06);}
 .badge-closed{color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04);}
 .badge-eval{color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.05);}
 .agenda-body{padding:14px 16px 14px 18px;}
-.agenda-section-label{font-size:10px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
+.agenda-section-label{font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
 .agenda-section-label:first-child{margin-top:0;}
-.agenda-discussion{font-size:13px;color:var(--wg11);line-height:1.8;margin-bottom:4px;}
+.agenda-discussion{font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:4px;}
 .agenda-discussion ul{padding-left:1.4em;margin-top:4px;}.agenda-discussion li{margin-bottom:4px;}
-.agenda-resolution{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15);border-radius:var(--radius);padding:10px 13px;font-size:13px;color:var(--wg41);line-height:1.8;margin-top:10px;}
-.agenda-resolution-label{font-size:9px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
+.agenda-resolution{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15);border-radius:var(--radius);padding:10px 13px;font-size:15px;color:var(--wg41);line-height:1.8;margin-top:10px;}
+.agenda-resolution-label{font-size:11px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
 .agenda-resolution ul{padding-left:1.4em;margin-top:4px;}.agenda-resolution li{margin-bottom:4px;}
 .sign-area{display:flex;justify-content:flex-end;margin-top:32px;}
 .sign-block{text-align:center;border-top:1px solid var(--wg11);padding-top:8px;min-width:120px;}
-.sign-label{font-size:11px;color:var(--wg9);letter-spacing:.08em;}
-.sign-name{font-size:13px;font-weight:500;color:var(--wg41);margin-top:4px;}
-.doc-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:32px;font-size:11px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+.sign-name{font-size:15px;font-weight:500;color:var(--wg41);margin-top:4px;}
+.doc-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:32px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 @media print{body{background:white;}.header{background:#3C3835 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.tabs,.toc,.back-link,.finance-link{display:none;}.tab-content{display:block !important;}#tab-notice{display:none !important;}.agenda-item,.work-log{break-inside:avoid;}.finance-banner{background:#3C3835 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 </style>
 <script>
@@ -184,7 +184,7 @@ function switchTab(tab){
 
   <div class="section" id="section-property">
     <div class="section-head"><span class="section-roman">貳</span><span class="section-title">物業公司報告</span></div>
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況（115年2月9日）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況（115年2月9日）</div>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">住戶入住率　<span style="font-weight:400;color:var(--wg9)">共 90 戶</span></div>
@@ -202,7 +202,7 @@ function switchTab(tab){
         <div class="stat-sub">無欠繳戶數</div>
       </div>
     </div>
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區財務狀況（114年12月）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區財務狀況（114年12月）</div>
     <div class="finance-banner">
       <div class="finance-banner-text">
         <div class="finance-banner-title">本月財務詳情請見月財報</div>
@@ -210,7 +210,7 @@ function switchTab(tab){
       </div>
       <a href="../finance/2025-12.html" class="finance-btn">→ 閱覽 114年12月財報</a>
     </div>
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin:20px 0 8px">工作報告（115年1月13日 — 2月5日）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin:20px 0 8px">工作報告（115年1月13日 — 2月5日）</div>
     <div class="work-log">
       <div class="log-row"><div class="log-date">1/13</div><div class="log-content">太古華電執行本月保養維護作業及發電機無載測試</div></div>
       <div class="log-row"><div class="log-date">1/14</div><div class="log-content">三菱電梯執行本月例行保養維護作業</div></div>
@@ -222,7 +222,7 @@ function switchTab(tab){
       <div class="log-row"><div class="log-date">2/5</div><div class="log-content">公告115年2月公共設施例行保養時程（機電2/10・電梯2/12）</div></div>
     </div>
 
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin:16px 0 8px">財務摘要（115年12月）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin:16px 0 8px">財務摘要（115年12月）</div>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">現金總資產</div>

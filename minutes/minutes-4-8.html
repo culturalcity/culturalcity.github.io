@@ -18,7 +18,7 @@
 body{
   font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
   background:var(--wg1);color:var(--wg41);
-  font-size:14px;line-height:1.8;min-height:100vh;
+  font-size:16px;line-height:1.8;min-height:100vh;
 }
 
 /* ── HEADER ── */
@@ -42,21 +42,21 @@ body{
 }
 .back-link{
   display:inline-flex;align-items:center;gap:5px;
-  font-size:11px;color:var(--wg9);text-decoration:none;
+  font-size:13px;color:var(--wg9);text-decoration:none;
   letter-spacing:.08em;transition:color .18s;
 }
 .back-link:hover{color:var(--wg1);}
 .back-link::before{content:'←';}
 .finance-link{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;color:rgba(234,231,225,0.7);text-decoration:none;
+  font-size:13px;color:rgba(234,231,225,0.7);text-decoration:none;
   border:1px solid rgba(234,231,225,0.2);border-radius:1px;
   padding:4px 10px;letter-spacing:.06em;transition:all .18s;
 }
 .finance-link:hover{background:rgba(234,231,225,0.08);color:var(--wg1);}
-.eyebrow{font-size:10px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
+.eyebrow{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
 .header h1{font-size:22px;font-weight:700;letter-spacing:.06em;margin-bottom:6px;}
-.header-sub{font-size:11px;color:var(--wg9);letter-spacing:.14em;margin-bottom:20px;}
+.header-sub{font-size:13px;color:var(--wg9);letter-spacing:.14em;margin-bottom:20px;}
 .header-rule{width:28px;height:1px;background:var(--wg9);margin-bottom:16px;}
 .meta-grid{
   display:grid;grid-template-columns:repeat(4,auto);
@@ -67,13 +67,13 @@ body{
 .meta-cell{padding:8px 16px;border-right:1px solid rgba(234,231,225,0.1);border-bottom:1px solid rgba(234,231,225,0.08);}
 .meta-cell:nth-child(4n){border-right:none;}
 .meta-cell:nth-last-child(-n+4){border-bottom:none;}
-.meta-label{font-size:9px;letter-spacing:.16em;color:var(--wg9);margin-bottom:3px;}
-.meta-val{font-size:12px;color:var(--wg1);font-weight:500;}
+.meta-label{font-size:11px;letter-spacing:.16em;color:var(--wg9);margin-bottom:3px;}
+.meta-val{font-size:14px;color:var(--wg1);font-weight:500;}
 
 /* ── TABS ── */
 .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
 .tab-btn{
-  padding:11px 22px;font-size:12px;
+  padding:11px 22px;font-size:14px;
   font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
   letter-spacing:.08em;color:rgba(234,231,225,0.45);
   background:transparent;border:none;border-bottom:2px solid transparent;
@@ -88,19 +88,19 @@ body{
   .header{padding:24px 20px 0;}
   .meta-grid{grid-template-columns:1fr 1fr;}
   .main{padding:20px 16px 56px;}
-  .tab-btn{padding:10px 14px;font-size:11px;}
+  .tab-btn{padding:10px 14px;font-size:13px;}
 }
 
 .tab-content{display:none;}
 .tab-content.active{display:block;}
 
 /* ── NOTICE TABLE ── */
-.notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:13.5px;margin-bottom:24px;}
+.notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
 .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}
 .notice-table tr:last-child{border-bottom:none;}
 .notice-table th{
   background:rgba(60,56,53,0.04);padding:10px 16px;
-  font-weight:500;font-size:11px;letter-spacing:.08em;
+  font-weight:500;font-size:13px;letter-spacing:.08em;
   color:var(--wg9);text-align:left;width:90px;vertical-align:top;
   border-right:1px solid rgba(60,56,53,0.06);
 }
@@ -108,20 +108,20 @@ body{
 .notice-agenda{list-style:none;padding:0;display:flex;flex-direction:column;gap:0;}
 .notice-agenda li{
   display:flex;gap:10px;padding:6px 0;
-  border-bottom:1px solid rgba(60,56,53,0.05);font-size:13px;color:var(--wg11);
+  border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11);
 }
 .notice-agenda li:last-child{border-bottom:none;}
-.na-num{font-size:10px;color:var(--wg9);letter-spacing:.04em;flex-shrink:0;padding-top:3px;min-width:52px;}
+.na-num{font-size:12px;color:var(--wg9);letter-spacing:.04em;flex-shrink:0;padding-top:3px;min-width:52px;}
 
 /* ── TOC ── */
 .toc{
   background:var(--white);border:1px solid var(--line);
   border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;
 }
-.toc-title{font-size:10px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+.toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
 .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
 .toc-item{
-  font-size:12px;color:var(--wg9);text-decoration:none;
+  font-size:14px;color:var(--wg9);text-decoration:none;
   display:inline-flex;align-items:center;gap:4px;transition:color .15s;
 }
 .toc-item:hover{color:var(--wg41);}
@@ -138,25 +138,25 @@ body{
   border-bottom:1px solid var(--line);
 }
 .section-roman{
-  font-size:10px;font-weight:700;letter-spacing:.16em;
+  font-size:12px;font-weight:700;letter-spacing:.16em;
   color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px;
 }
-.section-title{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+.section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
 
 /* ── OPEN CARD ── */
 .open-card{
   background:var(--white);border:1px solid var(--line);
   border-radius:var(--radius);padding:14px 16px;
-  font-size:13px;color:var(--wg9);
+  font-size:15px;color:var(--wg9);
 }
 
 /* ── STATS GRID ── */
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
 @media(max-width:500px){.stats-grid{grid-template-columns:1fr;}}
 .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
-.stat-label{font-size:10px;color:var(--wg9);margin-bottom:3px;}
+.stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}
 .stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
-.stat-sub{font-size:10px;color:var(--wg9);margin-top:2px;}
+.stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}
 .stat-val.pos{color:var(--dp);}
 
 /* ── FINANCE BANNER ── */
@@ -167,12 +167,12 @@ body{
   flex-wrap:wrap;gap:12px;
 }
 .finance-banner-text{color:var(--wg1);}
-.finance-banner-title{font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:3px;}
-.finance-banner-sub{font-size:11px;color:var(--wg9);}
+.finance-banner-title{font-size:14px;font-weight:600;letter-spacing:.04em;margin-bottom:3px;}
+.finance-banner-sub{font-size:13px;color:var(--wg9);}
 .finance-btn{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(234,231,225,0.1);border:1px solid rgba(234,231,225,0.25);
-  color:var(--wg1);font-size:11px;padding:7px 14px;
+  color:var(--wg1);font-size:13px;padding:7px 14px;
   border-radius:1px;text-decoration:none;letter-spacing:.06em;
   transition:all .18s;white-space:nowrap;
   font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
@@ -188,12 +188,12 @@ body{
 .log-row:last-child{border-bottom:none;}
 .log-date{
   width:52px;flex-shrink:0;padding:8px 10px;
-  font-size:11px;font-weight:500;color:var(--wg9);
+  font-size:13px;font-weight:500;color:var(--wg9);
   background:rgba(60,56,53,0.03);letter-spacing:.02em;
   border-right:1px solid rgba(60,56,53,0.06);
   line-height:1.5;text-align:center;
 }
-.log-content{flex:1;padding:8px 14px;font-size:13px;color:var(--wg11);line-height:1.65;}
+.log-content{flex:1;padding:8px 14px;font-size:15px;color:var(--wg11);line-height:1.65;}
 
 /* ── AGENDA ITEM ── */
 .agenda-item{
@@ -212,32 +212,32 @@ body{
   padding:11px 16px 10px 18px;
   border-bottom:1px solid rgba(60,56,53,0.07);
 }
-.agenda-num{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
-.agenda-title{font-size:13px;font-weight:600;color:var(--wg41);flex:1;}
-.agenda-badge{font-size:10px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
+.agenda-num{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
+.agenda-title{font-size:15px;font-weight:600;color:var(--wg41);flex:1;}
+.agenda-badge{font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
 .badge-resolved{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
 .badge-pending{color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06);}
 .badge-closed{color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04);}
 .badge-eval{color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.05);}
 .agenda-body{padding:14px 16px 14px 18px;}
-.agenda-section-label{font-size:10px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
+.agenda-section-label{font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
 .agenda-section-label:first-child{margin-top:0;}
-.agenda-discussion{font-size:13px;color:var(--wg11);line-height:1.8;margin-bottom:4px;}
+.agenda-discussion{font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:4px;}
 .agenda-discussion ul{padding-left:1.4em;margin-top:4px;}
 .agenda-discussion li{margin-bottom:4px;}
 .agenda-resolution{
   background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15);
   border-radius:var(--radius);padding:10px 13px;
-  font-size:13px;color:var(--wg41);line-height:1.8;margin-top:10px;
+  font-size:15px;color:var(--wg41);line-height:1.8;margin-top:10px;
 }
-.agenda-resolution-label{font-size:9px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
+.agenda-resolution-label{font-size:11px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
 .agenda-resolution ul{padding-left:1.4em;margin-top:4px;}
 .agenda-resolution li{margin-bottom:4px;}
 
 /* ── TABLE ── */
-.data-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:10px;}
+.data-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px;}
 .data-table thead tr{background:rgba(60,56,53,0.04);}
-.data-table th{text-align:left;padding:7px 12px;color:var(--wg9);font-size:10px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
+.data-table th{text-align:left;padding:7px 12px;color:var(--wg9);font-size:12px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
 .data-table td{padding:7px 12px;border-bottom:1px solid rgba(60,56,53,0.05);}
 .data-table tbody tr:last-child td{border-bottom:none;}
 .data-table .text-right{text-align:right;}
@@ -246,11 +246,11 @@ body{
 /* ── SIGN & FOOTER ── */
 .sign-area{display:flex;justify-content:flex-end;margin-top:32px;}
 .sign-block{text-align:center;border-top:1px solid var(--wg11);padding-top:8px;min-width:120px;}
-.sign-label{font-size:11px;color:var(--wg9);letter-spacing:.08em;}
-.sign-name{font-size:13px;font-weight:500;color:var(--wg41);margin-top:4px;}
+.sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+.sign-name{font-size:15px;font-weight:500;color:var(--wg41);margin-top:4px;}
 .doc-footer{
   border-top:1px solid var(--line);padding-top:16px;margin-top:32px;
-  font-size:11px;color:var(--wg9);
+  font-size:13px;color:var(--wg9);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;
 }
 
@@ -398,7 +398,7 @@ function switchTab(tab){
       <span class="section-title">物業公司報告</span>
     </div>
 
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況（115年3月9日）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況（115年3月9日）</div>
     <div class="stats-grid" style="margin-bottom:20px">
       <div class="stat-card">
         <div class="stat-label">住戶入住率　<span style="font-weight:400;color:var(--wg9)">共 90 戶</span></div>
@@ -417,7 +417,7 @@ function switchTab(tab){
       </div>
     </div>
 
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區財務狀況（115年1月）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區財務狀況（115年1月）</div>
     <div class="finance-banner">
       <div class="finance-banner-text">
         <div class="finance-banner-title">本月財務詳情請見月財報</div>
@@ -443,7 +443,7 @@ function switchTab(tab){
       </div>
     </div>
 
-    <div style="font-size:10px;letter-spacing:.18em;color:var(--wg9);margin:20px 0 8px">工作報告（115年2月6日 — 3月5日）</div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin:20px 0 8px">工作報告（115年2月6日 — 3月5日）</div>
     <div class="work-log">
       <div class="log-row"><div class="log-date">2/6</div><div class="log-content">主委至狀元吉第社區與會，商討外牆施工鄰損狀況</div></div>
       <div class="log-row"><div class="log-date">2/6</div><div class="log-content">弱電廠商銓越侯老闆前來處理監視系統 UPS 放電問題</div></div>
@@ -606,7 +606,7 @@ function switchTab(tab){
             </tbody>
           </table>
         </div>
-        <div class="agenda-discussion" style="font-size:12.5px;color:var(--wg9)">
+        <div class="agenda-discussion" style="font-size:14px;color:var(--wg9)">
           補充：有廠商反映社區現有壁虎（固定孔）太小，需重新打孔。
           另有住戶分享使用洗窗機器人經驗，管委會可評估購置供住戶租借。
           以上清洗範圍皆不含陽台內及 R 樓內部。

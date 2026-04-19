@@ -16,20 +16,20 @@
   --c-rule:#3C3835;--c-event:#1F5C38;--c-safety:#5C3A1F;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:15px;line-height:1.7;}
+body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:16px;line-height:1.7;}
 .header{background:var(--wg41);color:var(--wg1);padding:40px 40px 32px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
 .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
 .header-inner{max-width:760px;margin:0 auto;position:relative;}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:18px;transition:color .18s;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:18px;transition:color .18s;}
 .back-link::before{content:'←';}
 .back-link:hover{color:var(--wg1);}
-.eyebrow{font-size:10px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+.eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
 .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
-.header-sub{font-size:11px;color:var(--wg9);letter-spacing:.16em;}
+.header-sub{font-size:13px;color:var(--wg9);letter-spacing:.16em;}
 .main{max-width:760px;margin:0 auto;padding:36px 40px 64px;}
 @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}}
 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);}
-.filter-btn{padding:5px 14px;font-size:11px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
+.filter-btn{padding:5px 14px;font-size:13px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
 .filter-btn:hover{border-color:var(--wg11);color:var(--wg41);}
 .filter-btn.active{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
 .filter-btn[data-filter="meeting"].active{background:var(--c-meeting);border-color:var(--c-meeting);}
@@ -38,7 +38,7 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .filter-btn[data-filter="rule"].active{background:var(--c-rule);border-color:var(--c-rule);}
 .filter-btn[data-filter="event"].active{background:var(--c-event);border-color:var(--c-event);}
 .filter-btn[data-filter="safety"].active{background:var(--c-safety);border-color:var(--c-safety);}
-.year-label{font-size:10px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;margin-top:28px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+.year-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;margin-top:28px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
 .year-label:first-child{margin-top:0;}
 .year-label::after{content:'';flex:1;height:1px;background:var(--line);}
 .notice-list{display:flex;flex-direction:column;gap:1px;margin-bottom:4px;}
@@ -56,19 +56,19 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .notice-card.event   .type-stripe{background:var(--c-event);}
 .notice-card.safety  .type-stripe{background:var(--c-safety);}
 .card-inner{flex:1;padding:13px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-.type-pill{font-size:10px;letter-spacing:.05em;padding:2px 9px;border-radius:1px;border:1px solid;white-space:nowrap;flex-shrink:0;}
+.type-pill{font-size:12px;letter-spacing:.05em;padding:2px 9px;border-radius:1px;border:1px solid;white-space:nowrap;flex-shrink:0;}
 .notice-card.meeting .type-pill{color:var(--c-meeting);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.06);}
 .notice-card.work    .type-pill{color:var(--c-work);border-color:rgba(140,72,0,0.3);background:rgba(140,72,0,0.06);}
 .notice-card.equip   .type-pill{color:var(--c-equip);border-color:rgba(140,31,31,0.3);background:rgba(140,31,31,0.06);}
 .notice-card.rule    .type-pill{color:var(--c-rule);border-color:rgba(60,56,53,0.3);background:rgba(60,56,53,0.06);}
 .notice-card.event   .type-pill{color:var(--c-event);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
 .notice-card.safety  .type-pill{color:var(--c-safety);border-color:rgba(92,58,31,0.3);background:rgba(92,58,31,0.06);}
-.card-title{font-size:14px;font-weight:500;flex:1;min-width:160px;color:var(--wg41);}
-.card-date{font-size:11px;color:var(--wg9);letter-spacing:.05em;white-space:nowrap;}
-.card-arrow{display:flex;align-items:center;padding:0 16px;font-size:14px;color:var(--wg9);transition:transform .18s;}
+.card-title{font-size:16px;font-weight:500;flex:1;min-width:160px;color:var(--wg41);}
+.card-date{font-size:13px;color:var(--wg9);letter-spacing:.05em;white-space:nowrap;}
+.card-arrow{display:flex;align-items:center;padding:0 16px;font-size:16px;color:var(--wg9);transition:transform .18s;}
 .notice-card:hover .card-arrow{transform:translateX(2px);}
-.empty{text-align:center;padding:40px;color:var(--wg9);font-size:13px;letter-spacing:.06em;}
-.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:11px;color:var(--wg9);letter-spacing:.06em;line-height:1.9;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.empty{text-align:center;padding:40px;color:var(--wg9);font-size:15px;letter-spacing:.06em;}
+.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:13px;color:var(--wg9);letter-spacing:.06em;line-height:1.9;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 </style>
 </head>
 <body>

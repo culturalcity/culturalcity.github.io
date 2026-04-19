@@ -16,31 +16,31 @@
     --dp:#1F5C38;--dn:#8C1F1F;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:14px;line-height:1.6;min-height:100vh;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:16px;line-height:1.6;min-height:100vh;}
 
   .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
   .header-inner{max-width:1000px;margin:0 auto;position:relative;}
-  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
   .back-link:hover{color:var(--wg1);}
   .back-link::before{content:'←';}
-  .header-eyebrow{font-size:10px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+  .header-eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
   .header h1{font-size:22px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
-  .header-sub{font-size:11px;color:var(--wg9);letter-spacing:.14em;}
+  .header-sub{font-size:13px;color:var(--wg9);letter-spacing:.14em;}
 
   .main{max-width:1000px;margin:0 auto;padding:32px 24px 64px;}
 
   /* TABS */
   .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
-  .tab{padding:10px 22px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;}
+  .tab{padding:10px 22px;font-size:15px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;}
   .tab:hover{color:var(--wg41);}
   .tab.active{color:var(--wg41);border-bottom-color:var(--wg41);font-weight:500;}
   .tab-content{display:none;}.tab-content.active{display:block;}
 
   /* UPLOAD ROW */
-  .upload-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--wg9);}
+  .upload-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--wg9);}
   .upload-row strong{color:var(--wg41);}
-  .upload-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;font-size:11px;letter-spacing:.06em;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .18s;text-decoration:none;}
+  .upload-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;font-size:13px;letter-spacing:.06em;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .18s;text-decoration:none;}
   .upload-btn:hover{background:var(--wg11);color:var(--wg1);}
 
   /* KPI ROW */
@@ -48,14 +48,14 @@
   @media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
   .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 12px;position:relative;}
   .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
-  .kpi-label{font-size:10px;color:var(--wg9);letter-spacing:.06em;margin-bottom:7px;}
+  .kpi-label{font-size:12px;color:var(--wg9);letter-spacing:.06em;margin-bottom:7px;}
   .kpi-val{font-size:20px;font-weight:700;color:var(--wg41);}
-  .kpi-sub{font-size:10px;margin-top:5px;}
+  .kpi-sub{font-size:12px;margin-top:5px;}
   .dp{color:var(--dp);}.dn{color:var(--dn);}
 
   /* CHART */
   .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
-  .panel-hd{padding:11px 18px;border-bottom:1px solid var(--line);font-size:12px;font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:.04em;}
+  .panel-hd{padding:11px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:.04em;}
   .panel-bd{padding:16px 18px;}
   .chart-wrap{position:relative;height:220px;}
   .chart-wrap-sm{position:relative;height:170px;}
@@ -64,8 +64,8 @@
 
   /* TABLE */
   .tbl-wrap{overflow-x:auto;}
-  table{width:100%;border-collapse:collapse;font-size:11.5px;}
-  th{text-align:left;padding:7px 10px;background:var(--wg1);color:var(--wg9);font-weight:500;font-size:10px;letter-spacing:.06em;border-bottom:1px solid var(--line);white-space:nowrap;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:7px 10px;background:var(--wg1);color:var(--wg9);font-weight:500;font-size:12px;letter-spacing:.06em;border-bottom:1px solid var(--line);white-space:nowrap;}
   th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
   td{padding:7px 10px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);white-space:nowrap;}
   td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
@@ -75,7 +75,7 @@
   .dn{color:var(--dn);font-weight:500;}
 
   /* NOTICE */
-  .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:11px 15px;font-size:12px;color:var(--wg9);line-height:1.8;margin-bottom:20px;}
+  .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:11px 15px;font-size:14px;color:var(--wg9);line-height:1.8;margin-bottom:20px;}
 
   @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:18px;}}
 
@@ -86,9 +86,9 @@
   .drive-body{flex:1;padding:12px 16px;display:flex;align-items:center;gap:12px;}
   .drive-icon{font-size:16px;flex-shrink:0;opacity:0.65;}
   .drive-text{flex:1;display:flex;flex-direction:column;gap:2px;}
-  .drive-text strong{font-size:13px;font-weight:500;color:var(--wg41);letter-spacing:.02em;}
-  .drive-text span{font-size:10px;color:var(--wg9);letter-spacing:.08em;}
-  .drive-cta{font-size:11px;color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
+  .drive-text strong{font-size:15px;font-weight:500;color:var(--wg41);letter-spacing:.02em;}
+  .drive-text span{font-size:12px;color:var(--wg9);letter-spacing:.08em;}
+  .drive-cta{font-size:13px;color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
   .drive-link:hover .drive-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
 </style>
 </head>
@@ -137,11 +137,11 @@
 
     <div class="chart-grid">
       <div class="chart-panel">
-        <div class="panel-hd">電費趨勢（元）<span style="font-size:10px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-hd">電費趨勢（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
         <div class="panel-bd"><div class="chart-wrap"><canvas id="elec-fee-chart"></canvas></div></div>
       </div>
       <div class="chart-panel">
-        <div class="panel-hd">用電度數趨勢（度）<span style="font-size:10px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-hd">用電度數趨勢（度）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
         <div class="panel-bd"><div class="chart-wrap"><canvas id="elec-kwh-chart"></canvas></div></div>
       </div>
     </div>
@@ -646,11 +646,11 @@
 
     <div class="chart-grid">
       <div class="chart-panel">
-        <div class="panel-hd">水費趨勢（元）<span style="font-size:10px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-hd">水費趨勢（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
         <div class="panel-bd"><div class="chart-wrap"><canvas id="water-fee-chart"></canvas></div></div>
       </div>
       <div class="chart-panel">
-        <div class="panel-hd">用水量趨勢（度）<span style="font-size:10px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-hd">用水量趨勢（度）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
         <div class="panel-bd"><div class="chart-wrap"><canvas id="water-ton-chart"></canvas></div></div>
       </div>
     </div>
@@ -933,7 +933,7 @@ function kpiHtml(label, val, diff, unit, inverse){
   const sign = diff>0?'+':'';
   const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}</span>`:'';
   return `<div class="kpi"><div class="kpi-label">${label}</div>
-    <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:13px;font-weight:400;margin-left:3px">${unit}</span></div>
+    <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:15px;font-weight:400;margin-left:3px">${unit}</span></div>
     <div class="kpi-sub">${diffStr?'同比 '+diffStr:''}</div></div>`;
 }
 
