@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-<title>閱大安・水電帳單明細</title>
+<title>閱大安・水電用量分析</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
@@ -90,19 +90,57 @@
   .drive-text span{font-size:12px;color:var(--wg9);letter-spacing:.08em;}
   .drive-cta{font-size:13px;color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
   .drive-link:hover .drive-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+
+  /* TOOL CARDS */
+  .tool-section{margin-bottom:28px;}
+  .tool-section-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:600px){.tool-grid{grid-template-columns:1fr;}}
+  .tool-card{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
+  .tool-card:hover{background:#F2F0EC;border-color:var(--wg11);}
+  .tool-accent{width:3px;flex-shrink:0;background:#185FA5;}
+  .tool-accent.target{background:var(--dp);}
+  .tool-body{flex:1;padding:14px 16px;}
+  .tool-body strong{display:block;font-size:15px;font-weight:500;letter-spacing:.02em;margin-bottom:3px;}
+  .tool-body span{font-size:12px;color:var(--wg9);letter-spacing:.06em;line-height:1.6;}
+  .tool-cta{font-size:13px;color:var(--wg9);padding:0 14px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
+  .tool-card:hover .tool-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
 </style>
 </head>
 <body>
 <div class="header">
   <div class="header-inner">
     <a href="../index.html" class="back-link">返回社區主頁</a>
-    <div class="header-eyebrow">UTILITY BILLS</div>
-    <h1>水電帳單</h1>
+    <div class="header-eyebrow">UTILITY &amp; ELECTRICITY ANALYSIS</div>
+    <h1>水電用量分析</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
   </div>
 </div>
 
 <div class="main">
+
+  <!-- 分析工具 -->
+  <div class="tool-section">
+    <div class="tool-section-label">即時分析工具</div>
+    <div class="tool-grid">
+      <a href="./electricity-trend.html" class="tool-card">
+        <div class="tool-accent"></div>
+        <div class="tool-body">
+          <strong>用電量與氣溫時序圖</strong>
+          <span>大公電每日用電與台北氣溫對照<br>含近 7 天、近 30 天、完整記錄三個尺度</span>
+        </div>
+        <span class="tool-cta">開啟 →</span>
+      </a>
+      <a href="./electricity-target.html" class="tool-card">
+        <div class="tool-accent target"></div>
+        <div class="tool-body">
+          <strong>用電目標速查表</strong>
+          <span>輸入氣溫即查回歸基準值與警戒線<br>含散佈圖與完整參考表（13—40°C）</span>
+        </div>
+        <span class="tool-cta">開啟 →</span>
+      </a>
+    </div>
+  </div>
 
   <div class="tabs">
     <div class="tab active" onclick="sw('elec')">大公電帳單</div>
@@ -160,6 +198,16 @@
               </tr>
             </thead>
             <tbody id="elec-tbody">
+<tr class="latest">
+      <td>115（2026）</td><td>3-4月</td><td>03/11-04/09</td>
+      <td>6,640</td>
+      <td class="dn">240</td>
+      <td class="dn">+3.8%</td>
+      <td>33</td>
+      <td>33,842</td>
+      <td class="dn">915</td>
+      <td class="dn">+2.8%</td>
+    </tr>
 <tr class="latest">
       <td>115（2026）</td><td>2-3月</td><td>02/06-03/10</td>
       <td>7,120</td>
@@ -891,7 +939,7 @@ const ELEC_PERIODS = ["01-02", "02-03", "03-04", "04-05", "05-06", "06-07", "07-
 const ELEC_PERIOD_LABELS = ["1-2\u6708", "2-3\u6708", "3-4\u6708", "4-5\u6708", "5-6\u6708", "6-7\u6708", "7-8\u6708", "8-9\u6708", "9-10\u6708", "10-11\u6708", "11-12\u6708", "12-1\u6708"];
 const WATER_PERIODS = ["01", "03", "05", "07", "09", "11"];
 const WATER_PERIOD_LABELS = ["1\u6708", "3\u6708", "5\u6708", "7\u6708", "9\u6708", "11\u6708"];
-const ELEC_DATASETS = [{"label": "111年（2022）", "data": [null, null, null, null, null, 53043, 56375, 62474, 52798, 42856, 41312, 42470], "kwh": [null, null, null, null, null, 11640, 13120, 15520, 12320, 10760, 10120, 10600], "backgroundColor": "rgba(60,56,53,0.5)"}, {"label": "112年（2023）", "data": [36014, 35206, 36424, 38640, 41109, 47552, 50225, 49682, 45257, 39191, 34999, 40074], "kwh": [9360, 9640, 9640, 9680, 10040, 10760, 11680, 11680, 10360, 9880, 8360, 10200], "backgroundColor": "rgba(137,132,128,0.5)"}, {"label": "113年（2024）", "data": [31366, 32580, 31104, 34476, 32457, 38876, 41586, 40096, 39812, 37046, 33842, 34909], "kwh": [8280, 8720, 7760, 8080, 6920, 8040, 8840, 8400, 8840, 7560, 6640, 6920], "backgroundColor": "rgba(105,100,96,0.65)"}, {"label": "114年（2025）", "data": [39788, 31707, 32927, 37196, 42589, 55197, 52142, 49249, 54827, 38111, 33384, 35671], "kwh": [8200, 6080, 6400, 7520, 8520, 10840, 10080, 9360, 11200, 7760, 6520, 7120], "backgroundColor": "rgba(60,56,53,0.75)"}, {"label": "115年（2026）", "data": [29725, 35671, null, null, null, null, null, null, null, null, null, null], "kwh": [5560, 7120, null, null, null, null, null, null, null, null, null, null], "backgroundColor": "rgba(43,74,107,0.85)"}];
+const ELEC_DATASETS = [{"label": "111年（2022）", "data": [null, null, null, null, null, 53043, 56375, 62474, 52798, 42856, 41312, 42470], "kwh": [null, null, null, null, null, 11640, 13120, 15520, 12320, 10760, 10120, 10600], "backgroundColor": "rgba(60,56,53,0.5)"}, {"label": "112年（2023）", "data": [36014, 35206, 36424, 38640, 41109, 47552, 50225, 49682, 45257, 39191, 34999, 40074], "kwh": [9360, 9640, 9640, 9680, 10040, 10760, 11680, 11680, 10360, 9880, 8360, 10200], "backgroundColor": "rgba(137,132,128,0.5)"}, {"label": "113年（2024）", "data": [31366, 32580, 31104, 34476, 32457, 38876, 41586, 40096, 39812, 37046, 33842, 34909], "kwh": [8280, 8720, 7760, 8080, 6920, 8040, 8840, 8400, 8840, 7560, 6640, 6920], "backgroundColor": "rgba(105,100,96,0.65)"}, {"label": "114年（2025）", "data": [39788, 31707, 32927, 37196, 42589, 55197, 52142, 49249, 54827, 38111, 33384, 35671], "kwh": [8200, 6080, 6400, 7520, 8520, 10840, 10080, 9360, 11200, 7760, 6520, 7120], "backgroundColor": "rgba(60,56,53,0.75)"}, {"label": "115年（2026）", "data": [29725, 35671, 33842, null, null, null, null, null, null, null, null, null], "kwh": [5560, 7120, 6640, null, null, null, null, null, null, null, null, null], "backgroundColor": "rgba(43,74,107,0.85)"}];
 const WATER_DATASETS = [{"label": "111年（2022）", "data": [null, null, null, 656, 1575, 4336], "tonnes": [null, null, null, 38, 114, 312], "backgroundColor": "rgba(60,56,53,0.5)"}, {"label": "112年（2023）", "data": [2432, 1636, 1368, 1262, 1428, 2083], "tonnes": [174, 119, 97, 87, 102, 151], "backgroundColor": "rgba(137,132,128,0.5)"}, {"label": "113年（2024）", "data": [1072, 1133, 1059, 1341, 877, 682], "tonnes": [73, 78, 72, 95, 57, 41], "backgroundColor": "rgba(105,100,96,0.65)"}, {"label": "114年（2025）", "data": [606, 706, 682, 638, 1785, 2136], "tonnes": [34, 43, 41, 37, 126, 155], "backgroundColor": "rgba(60,56,53,0.75)"}, {"label": "115年（2026）", "data": [2065, 3969, null, null, null, null], "tonnes": [150, 286, null, null, null, null], "backgroundColor": "rgba(43,74,107,0.85)"}];
 
 
@@ -912,7 +960,7 @@ const tc2=v=>v?Math.round(v).toLocaleString('zh-TW'):'';
 
 // ── Latest data KPI ──
 function latestElecKpi(){
-  // 115年 01-02 is the latest
+  // 115年 03-04 is the latest
   const latest = ELEC_DATASETS[ELEC_DATASETS.length-1];
   const prev   = ELEC_DATASETS[ELEC_DATASETS.length-2];
   const latestFees = latest.data.filter(v=>v);
