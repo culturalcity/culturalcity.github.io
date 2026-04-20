@@ -221,9 +221,9 @@ function calcStatus(cp,dp){
 
 // ══════════════════════════════════════════════════
 // 用電目標速查：≥27°C 用子集回歸，<27°C 用基準線190度
-// 回歸方程式（≥27°C子集）：用電 = -82.53 + 11.89 × 最高氣溫
+// 回歸方程式（≥27°C子集）：用電 = -90.80 + 12.16 × 最高氣溫
 // ══════════════════════════════════════════════════
-var AC_THR=27, AC_BASE=190, AC_A=-82.53, AC_B=11.89;
+var AC_THR=27, AC_BASE=190, AC_A=-90.80, AC_B=12.16;
 function calcETarget(tmax){
   if(tmax===null) return null;
   return tmax < AC_THR ? AC_BASE : AC_A + AC_B * tmax;
