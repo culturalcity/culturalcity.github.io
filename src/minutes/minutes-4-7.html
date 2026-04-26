@@ -1,0 +1,324 @@
+---
+layout: minutes.njk
+permalink: /minutes/minutes-4-7.html
+title: 第四屆第七次管委會議紀錄
+extraStyles: |
+  .notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
+  .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}
+  .notice-table tr:last-child{border-bottom:none;}
+  .notice-table th{background:rgba(60,56,53,0.04);padding:10px 16px;font-weight:500;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-align:left;width:90px;vertical-align:top;border-right:1px solid rgba(60,56,53,0.06);}
+  .notice-table td{padding:10px 16px;color:var(--wg11);vertical-align:top;line-height:1.75;}
+  .notice-agenda{list-style:none;padding:0;}
+  .notice-agenda li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11);}
+  .notice-agenda li:last-child{border-bottom:none;}
+  .na-num{font-size:12px;color:var(--wg9);flex-shrink:0;padding-top:3px;min-width:60px;}
+  .toc{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;}
+  .toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+  .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
+  .toc-item{font-size:14px;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;}
+  .toc-item:hover{color:var(--wg41);}
+  .toc-dot{width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0;}
+  .toc-dot.blue{background:var(--blue);}
+  .toc-dot.green{background:var(--dp);}
+  .toc-dot.warn{background:var(--warn);}
+  .section{margin-bottom:32px;}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .section-roman{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px;}
+  .section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+  .open-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:15px;color:var(--wg9);}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
+  .stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}
+  .stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
+  .stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}
+  .stat-val.pos{color:var(--dp);}
+  .finance-banner{background:var(--wg41);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .finance-banner-text{color:var(--wg1);}
+  .finance-banner-title{font-size:14px;font-weight:600;letter-spacing:.04em;margin-bottom:3px;}
+  .finance-banner-sub{font-size:13px;color:var(--wg9);}
+  .finance-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(234,231,225,0.1);border:1px solid rgba(234,231,225,0.25);color:var(--wg1);font-size:13px;padding:7px 14px;border-radius:1px;text-decoration:none;letter-spacing:.06em;transition:all .18s;white-space:nowrap;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;}
+  .finance-btn:hover{background:rgba(234,231,225,0.18);}
+  .work-log{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .log-row{display:flex;gap:0;border-bottom:1px solid rgba(60,56,53,0.06);}
+  .log-row:last-child{border-bottom:none;}
+  .log-date{width:52px;flex-shrink:0;padding:8px 10px;font-size:13px;font-weight:500;color:var(--wg9);background:rgba(60,56,53,0.03);border-right:1px solid rgba(60,56,53,0.06);line-height:1.5;text-align:center;}
+  .log-content{flex:1;padding:8px 14px;font-size:15px;color:var(--wg11);line-height:1.65;}
+  .agenda-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;position:relative;}
+  .agenda-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);}
+  .agenda-item.resolved::before{background:var(--dp);}
+  .agenda-item.pending::before{background:var(--warn);}
+  .agenda-header{display:flex;align-items:baseline;gap:10px;padding:11px 16px 10px 18px;border-bottom:1px solid rgba(60,56,53,0.07);}
+  .agenda-num{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
+  .agenda-title{font-size:15px;font-weight:600;color:var(--wg41);flex:1;}
+  .agenda-badge{font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
+  .badge-resolved{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
+  .badge-pending{color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06);}
+  .badge-closed{color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04);}
+  .badge-eval{color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.05);}
+  .agenda-body{padding:14px 16px 14px 18px;}
+  .agenda-section-label{font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
+  .agenda-section-label:first-child{margin-top:0;}
+  .agenda-discussion{font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:4px;}
+  .agenda-discussion ul{padding-left:1.4em;margin-top:4px;}
+  .agenda-discussion li{margin-bottom:4px;}
+  .agenda-resolution{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15);border-radius:var(--radius);padding:10px 13px;font-size:15px;color:var(--wg41);line-height:1.8;margin-top:10px;}
+  .agenda-resolution-label{font-size:11px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
+  .agenda-resolution ul{padding-left:1.4em;margin-top:4px;}
+  .agenda-resolution li{margin-bottom:4px;}
+  .sign-area{display:flex;justify-content:flex-end;margin-top:32px;}
+  .sign-block{text-align:center;border-top:1px solid var(--wg11);padding-top:8px;min-width:120px;}
+  .sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+  .sign-name{font-size:15px;font-weight:500;color:var(--wg41);margin-top:4px;}
+  .doc-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:32px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  .tabs,.toc,.back-link,.finance-link{display:none;}
+  #tab-notice{display:none !important;}
+  .agenda-item,.work-log{break-inside:avoid;}
+  .finance-banner{background:#3C3835 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-nav">
+      <a href="../index.html" class="back-link no-print">返回社區首頁</a>
+      <a href="../minutes/" class="back-link no-print">返回會議紀錄</a>
+    </div>
+    <div class="eyebrow">MEETING MINUTES · 管理委員會議紀錄</div>
+    <h1>第四屆第七次管委會議</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="header-rule"></div>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-label">日期</div><div class="meta-val">115年2月9日（星期一）</div></div>
+      <div class="meta-cell"><div class="meta-label">時間</div><div class="meta-val">20:03 — 22:00</div></div>
+      <div class="meta-cell"><div class="meta-label">地點</div><div class="meta-val">一樓管委會使用空間</div></div>
+      <div class="meta-cell"><div class="meta-label">出席／應到</div><div class="meta-val">5 位 ／ 5 位</div></div>
+      <div class="meta-cell"><div class="meta-label">召集人／主席</div><div class="meta-val">主任委員 許文泰</div></div>
+      <div class="meta-cell"><div class="meta-label">記錄</div><div class="meta-val">主任委員 許文泰</div></div>
+      <div class="meta-cell" style="grid-column:span 2"><div class="meta-label">列席</div><div class="meta-val">敦寶建設、福一建設</div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="notice" onclick="switchTab('notice')">📋 開會通知單</button>
+      <button class="tab-btn" data-tab="minutes" onclick="switchTab('minutes')">📝 會議紀錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<div id="tab-notice" class="tab-content active">
+  <table class="notice-table">
+    <tr><th>受文者</th><td>第四屆全體管理委員暨全體住戶</td></tr>
+    <tr><th>會議時間</th><td>115年2月9日（星期一）下午20:00</td></tr>
+    <tr><th>地點</th><td>一樓管委會使用空間</td></tr>
+    <tr><th>會議主席</th><td>主任委員 許文泰</td></tr>
+    <tr><th>記錄</th><td>主任委員 許文泰</td></tr>
+    <tr><th>出席人員</th><td>第四屆管理委員會委員</td></tr>
+    <tr><th>列席人員</th><td>歡迎住戶列席旁聽</td></tr>
+    <tr><th>會議程序</th><td>
+      <ul class="notice-agenda">
+        <li><span class="na-num">壹</span><span>主席宣布開會</span></li>
+        <li><span class="na-num">貳</span><span>物業公司報告（財務報告、工作報告）</span></li>
+        <li><span class="na-num">參・議案一</span><span>電梯保護拆除相關議題──時程、鈦金門板安裝與貨梯保護毯</span></li>
+        <li><span class="na-num">參・議案二</span><span>R2水塔頂樓排水口積水與漏水問題</span></li>
+        <li><span class="na-num">參・議案三</span><span>B4電梯旁牆面底部滲水問題</span></li>
+        <li><span class="na-num">參・議案四</span><span>地下室車道口公有反光鏡安全問題</span></li>
+        <li><span class="na-num">參・議案五</span><span>建築物公共安全檢查案</span></li>
+        <li><span class="na-num">參・議案六</span><span>電梯鍍鈦板瑕疵處理案</span></li>
+        <li><span class="na-num">肆・臨時動議一</span><span>公設地區石材地面晶化保養案</span></li>
+        <li><span class="na-num">陸</span><span>散會</span></li>
+      </ul>
+    </td></tr>
+  </table>
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第四屆第七次管理委員會議通知單</span>
+    <span>中華民國115年2月5日</span>
+  </div>
+</div>
+
+<div id="tab-minutes" class="tab-content">
+  <div class="toc no-print">
+    <div class="toc-title">本次議程</div>
+    <div class="toc-items">
+      <a href="#section-property" class="toc-item"><span class="toc-dot blue"></span>物業報告</a>
+      <a href="#agenda-1" class="toc-item"><span class="toc-dot green"></span>議案一・電梯面板結案</a>
+      <a href="#agenda-2" class="toc-item"><span class="toc-dot warn"></span>議案二・水塔漏水</a>
+      <a href="#agenda-3" class="toc-item"><span class="toc-dot warn"></span>議案三・B4滲水</a>
+      <a href="#agenda-4" class="toc-item"><span class="toc-dot green"></span>議案四・反光鏡</a>
+      <a href="#agenda-5" class="toc-item"><span class="toc-dot warn"></span>議案五・公安檢查</a>
+      <a href="#agenda-6" class="toc-item"><span class="toc-dot warn"></span>議案六・鍍鈦板瑕疵</a>
+      <a href="#motion-1" class="toc-item"><span class="toc-dot blue"></span>臨時動議一・石材晶化</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-roman">壹</span><span class="section-title">主席宣布開會</span></div>
+    <div class="open-card">應到委員 5 位，實到 5 位；20 時 03 分達法定人數，主席宣布開會。</div>
+  </div>
+
+  <div class="section" id="section-property">
+    <div class="section-head"><span class="section-roman">貳</span><span class="section-title">物業公司報告</span></div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況（115年2月9日）</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">住戶入住率　<span style="font-weight:400;color:var(--wg9)">共 90 戶</span></div>
+        <div class="stat-val pos">98.9%</div>
+        <div class="stat-sub">自住 75・承租 14・空戶 1</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">機車位使用率　<span style="font-weight:400;color:var(--wg9)">共 56 位</span></div>
+        <div class="stat-val">23.2%</div>
+        <div class="stat-sub">出租 13・空置 43</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">管理費收繳率</div>
+        <div class="stat-val pos">100%</div>
+        <div class="stat-sub">無欠繳戶數</div>
+      </div>
+    </div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區財務狀況（114年12月）</div>
+    <div class="finance-banner">
+      <div class="finance-banner-text">
+        <div class="finance-banner-title">本月財務詳情請見月財報</div>
+        <div class="finance-banner-sub">含收支明細、資產配置、定存異動及未來支出預告</div>
+      </div>
+      <a href="../finance/2025-12.html" class="finance-btn">→ 閱覽 114年12月財報</a>
+    </div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin:20px 0 8px">工作報告（115年1月13日 — 2月5日）</div>
+    <div class="work-log">
+      <div class="log-row"><div class="log-date">1/13</div><div class="log-content">太古華電執行本月保養維護作業及發電機無載測試</div></div>
+      <div class="log-row"><div class="log-date">1/14</div><div class="log-content">三菱電梯執行本月例行保養維護作業</div></div>
+      <div class="log-row"><div class="log-date">1/15</div><div class="log-content">發放本月管理費通知單，公告1月份公共設施保養時程</div></div>
+      <div class="log-row"><div class="log-date">1/21</div><div class="log-content">公告2025年全年財務分析報告至住戶群組</div></div>
+      <div class="log-row"><div class="log-date">1/26</div><div class="log-content">公告重申寵物搭乘電梯安全規範與禮儀（飼養動物管理辦法第13條）</div></div>
+      <div class="log-row"><div class="log-date">1/30</div><div class="log-content">公告115年1月財務月報至住戶群組</div></div>
+      <div class="log-row"><div class="log-date">1/31</div><div class="log-content">公告1/30深夜聲響成因說明及住戶配合事項</div></div>
+      <div class="log-row"><div class="log-date">2/5</div><div class="log-content">公告115年2月公共設施例行保養時程（機電2/10・電梯2/12）</div></div>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin:16px 0 8px">財務摘要（115年12月）</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">現金總資產</div>
+        <div class="stat-val">596 萬</div>
+        <div class="stat-sub">含活存與定存（$5,963,317）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">本月現金淨流入</div>
+        <div class="stat-val pos">+3.2 萬</div>
+        <div class="stat-sub">年底雙月保全費屬正常調節</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">定存合計</div>
+        <div class="stat-val">475 萬</div>
+        <div class="stat-sub">管理費 170萬・公基 305萬</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-roman">參</span><span class="section-title">議題討論</span></div>
+
+    <div class="agenda-item resolved" id="agenda-1">
+      <div class="agenda-header"><span class="agenda-num">議案一</span><span class="agenda-title">電梯保護拆除相關議題──貨梯鍍鈦面板刮傷處理</span><span class="agenda-badge badge-closed">✓ 結案</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">
+          貨梯內部裝潢保護毯拆除與地板鋪設完成後，近期因住戶廠商搬運床墊，導致貨梯鍍鈦面板產生淺層刮傷。物業第一時間調閱電梯監視器試圖向搬運廠商究責，但因刮傷程度需現場肉眼近距離觀察，現有監視器畫質無法明確舉證，致究責與索賠難以成立。針對是否進行「電梯面板貼膜」進行評估，初估費用約4至5萬元，但考量預算成本且多數委員傾向保留原鍍鈦面板金屬質感，不傾向施作。
+        </div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>管委會決議不進行電梯面板貼膜工程，接受現有外觀與正常使用下之耗損風險。<strong>本案結案。</strong></div>
+      </div>
+    </div>
+
+    <div class="agenda-item pending" id="agenda-2">
+      <div class="agenda-header"><span class="agenda-num">議案二</span><span class="agenda-title">R2水塔頂樓排水口積水與漏水問題</span><span class="agenda-badge badge-pending">持續追蹤</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">負責修繕的廠商信盛工程已回覆確認排程，預計於02/12正式進場，著手進行防水修繕工程。</div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>本案僅作進度更新。待信盛工程施作完畢後，視後續實際改善狀況再行評估結案。</div>
+      </div>
+    </div>
+
+    <div class="agenda-item pending" id="agenda-3">
+      <div class="agenda-header"><span class="agenda-num">議案三</span><span class="agenda-title">B4電梯旁牆面底部滲水問題</span><span class="agenda-badge badge-pending">持續追蹤</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">確認與議案二同屬信盛工程之修繕範圍，預計於02/12與議案二同步派員至現場進行B4滲水點的實地勘查與後續修繕施作。</div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>與議案二同步列管，待信盛工程完成勘查與修繕作業後，依後續實際改善狀況再行評估結案。</div>
+      </div>
+    </div>
+
+    <div class="agenda-item resolved" id="agenda-4">
+      <div class="agenda-header"><span class="agenda-num">議案四</span><span class="agenda-title">地下室車道口公有反光鏡安全問題</span><span class="agenda-badge badge-resolved">✓ 決議通過</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">
+          車道口市府凸鏡桿基座採「加勁板」設計且螺帽突出，易導致車輛輪胎受損。經會勘，市府認定該巷弄行人動線規劃於對側，本側非主要通行空間，故不另作特殊防護變更。各方案評估：
+          <ul>
+            <li>不移設至社區退縮地（私有地）：避免產權混淆與長期維護責任爭議</li>
+            <li>不固定於本社區建築外牆（鋁包板）：鋁包板無法承受受風拉力，恐破壞防水層</li>
+            <li>不改為埋入式立柱：下方為水溝薄板無法深埋</li>
+            <li>最終方案：經現場光學反射角度測試，確認將凸鏡桿於原水溝蓋範圍內「向左平移15公分」</li>
+          </ul>
+        </div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>
+          <ul>
+            <li>採行「維持市有地產權，原址左移15公分」方案。</li>
+            <li>預計時程：配合市府年度預算審查作業流程，預計於2026年4月後進場施工。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="agenda-item pending" id="agenda-5">
+      <div class="agenda-header"><span class="agenda-num">議案五</span><span class="agenda-title">建築物公共安全檢查案</span><span class="agenda-badge badge-pending">持續追蹤</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">前次會議已決議委任「大台北建築物公共安全檢查公司」執行，報價已定案（14,390元含稅）。經主委詢問實際安檢排程，總幹事回覆尚未與該公司確認確切之檢查日期。</div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>責成總幹事盡速與大台北建築物公共安全檢查公司確認並回報確切之安檢日程。本案待安檢與申報作業完成後方可結案。</div>
+      </div>
+    </div>
+
+    <div class="agenda-item pending" id="agenda-6">
+      <div class="agenda-header"><span class="agenda-num">議案六</span><span class="agenda-title">電梯鍍鈦板瑕疵處理案</span><span class="agenda-badge badge-pending">持續追蹤</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">針對三年前公設點交時列管之電梯鍍鈦門板瑕疵，為評估信創營造所提出的3至5萬補貼是否合理，已向三菱電梯查詢金屬外觀件報價。因三菱少有單賣外觀件，目前需等待其內部「技檢」程序完成後方能提供正式報價。</div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>
+          <ul>
+            <li>採「明顯瑕疵修復」與「微小瑕疵爭取補貼代金」雙軌處理。</li>
+            <li>待取得三菱電梯正式報價後，以此為基準與信創營造重啟協商，爭取合理之補貼金額。本案持續列管追蹤。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-roman">肆</span><span class="section-title">臨時動議</span></div>
+
+    <div class="agenda-item" id="motion-1">
+      <div class="agenda-header"><span class="agenda-num">臨時動議一</span><span class="agenda-title">公設地區石材地面晶化保養案</span><span class="agenda-badge badge-eval">待報價</span></div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">討論重點</div>
+        <div class="agenda-discussion">大樓公設區域之石材地面晶化保養已屆滿兩年未進行。主委提議今年度應安排例行性保養，以維護公設環境品質與石材壽命。與會委員一致認同並同意今年度需安排施作。</div>
+        <div class="agenda-resolution"><div class="agenda-resolution-label">決議</div>
+          <ul>
+            <li>同意推動本年度石材地面晶化保養作業。</li>
+            <li>責成總幹事聯繫前次施作廠商「鼎峰石材行」進行查勘與報價，待取得正式報價單後再提報管委會進行預算審查與後續排程。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-roman">陸</span><span class="section-title">散會</span></div>
+    <div class="open-card">所有議題討論完畢，<strong>22 時 00 分</strong>主席宣布散會。</div>
+  </div>
+
+  <div class="sign-area">
+    <div class="sign-block"><div class="sign-label">主任委員</div><div class="sign-name">許文泰</div></div>
+  </div>
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第四屆第七次會議・115年2月9日</span>
+    <span>本紀錄經主任委員簽署後正式生效</span>
+  </div>
+</div>
+</div>

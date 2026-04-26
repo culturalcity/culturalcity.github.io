@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱大安 每日水電公告 Demo</title>
+<style>
+  :root {
+    --wg1:#EAE7E1; --wg9:#898480; --wg11:#696460; --wg41:#3C3835;
+    --white:#F7F5F2; --line:rgba(60,56,53,0.12); --radius:2px;
+    --green:#3B7A57; --orange:#C47C1C; --red:#B03A2E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "微軟正黑體", "Microsoft JhengHei", sans-serif;
+    background: #d8d4ce; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+
+  /* ── LINE 卡片版 ── */
+  .card {
+    background: var(--white); border-radius: 12px;
+    width: 360px; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    font-size: 13px; color: var(--wg41);
+  }
+  .card-header {
+    background: var(--wg41); color: var(--white);
+    padding: 14px 16px 10px;
+  }
+  .card-header .label { font-size: 10px; opacity: .65; letter-spacing: .08em; }
+  .card-header .title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+  .card-header .date  { font-size: 11px; opacity: .55; margin-top: 3px; }
+
+  .card-body { padding: 14px 16px; }
+
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 7px 0; border-bottom: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: none; }
+  .row .k { color: var(--wg11); font-size: 12px; }
+  .row .v { font-weight: 600; font-size: 14px; }
+  .row .v.good  { color: var(--green); }
+  .row .v.warn  { color: var(--orange); }
+  .row .v.over  { color: var(--red); }
+  .row .sub { font-size: 11px; color: var(--wg9); margin-top: 1px; }
+
+  .section-title {
+    font-size: 10px; color: var(--wg9); letter-spacing: .08em;
+    margin: 10px 0 4px; text-transform: uppercase;
+  }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  }
+  .badge.good { background: #d4edda; color: var(--green); }
+  .badge.warn { background: #fdebd0; color: var(--orange); }
+  .badge.over { background: #fadbd8; color: var(--red); }
+
+  .meter-bg {
+    background: var(--wg1); border-radius: 4px; height: 6px;
+    margin: 6px 0 2px; overflow: hidden;
+  }
+  .meter-fill { height: 100%; border-radius: 4px; background: var(--green); }
+  .meter-fill.warn { background: var(--orange); }
+  .meter-fill.over { background: var(--red); }
+
+  .card-footer {
+    background: var(--wg1); padding: 8px 16px;
+    font-size: 10px; color: var(--wg9); text-align: center;
+  }
+
+  /* ── 說明標籤 ── */
+  .demo-label {
+    text-align: center; margin-bottom: 12px;
+    font-size: 12px; color: #666;
+    background: #fff3cd; padding: 6px 12px; border-radius: 6px;
+  }
+  .note {
+    margin-top: 16px; font-size: 11px; color: #888;
+    text-align: center; max-width: 360px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="demo-label">⚠️ 示範檔 — 數值為假設值，非真實資料</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="label">閱大安社區・每日公告</div>
+      <div class="title">水電使用狀況</div>
+      <div class="date">2026年4月20日（週一）</div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- 用電區塊 -->
+      <div class="section-title">⚡ 用電</div>
+
+      <div class="row">
+        <div>
+          <div class="k">昨日用電量</div>
+        </div>
+        <div style="text-align:right">
+          <div class="v good">210.0 度</div>
+          <div class="sub">目標 267.9・警戒 294.7</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k">氣溫（最高 / 最低）</div>
+        <div class="v">29.5°C / 22.1°C</div>
+      </div>
+
+      <div class="row">
+        <div class="k">目標達成</div>
+        <div>
+          <span class="badge good">✓ 優於目標</span>
+          <div class="sub" style="text-align:right;margin-top:3px">低於目標 57.9 度</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k">本月累計</div>
+        <div class="v">1,850.0 度</div>
+      </div>
+
+      <!-- 用水區塊（假設值） -->
+      <div class="section-title" style="margin-top:12px">💧 用水</div>
+
+      <div class="row">
+        <div class="k">昨日用水量</div>
+        <div class="v">42.0 度</div>
+      </div>
+
+      <div class="row">
+        <div class="k">本月累計</div>
+        <div class="v">380.0 度</div>
+      </div>
+
+    </div><!-- /card-body -->
+
+    <div class="card-footer">
+      由 Claude Cowork 自動產生・閱大安管委會
+    </div>
+  </div>
+
+  <p class="note">
+    ▲ 此為 Claude Cowork 自動化示範輸出。<br>
+    正式流程中，氣溫從 CODIS 自動取得，<br>
+    用電 / 用水量從台電・自來水處自動取得後填入。
+  </p>
+</div>
+
+</body>
+</html>

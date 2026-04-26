@@ -1,0 +1,525 @@
+---
+layout: base.njk
+permalink: /welcome/index.html
+title: 新住戶須知
+extraStyles: |
+  :root{
+    --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+    --blue:#2B4A6B;--dp:#1F5C38;--warn:#8C5A00;
+  }
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:17px;line-height:1.8;min-height:100vh;}
+  /* ── HEADER ── */
+  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 32px;position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+  .header-inner{max-width:760px;margin:0 auto;position:relative;}
+  .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .back{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+  .back::before{content:'←';}.back:hover{color:var(--wg1);}
+  .eyebrow{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
+  .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;}
+  .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.14em;}
+  /* ── LANG SWITCHER ── */
+  .lang-switcher{display:flex;gap:6px;flex-shrink:0;margin-top:4px;}
+  .lang-btn{padding:4px 10px;font-size:12px;letter-spacing:.06em;border:1px solid rgba(234,231,225,0.25);background:transparent;color:rgba(234,231,225,0.5);cursor:pointer;border-radius:1px;transition:all .18s;font-family:inherit;}
+  .lang-btn:hover{color:var(--wg1);border-color:rgba(234,231,225,0.6);}
+  .lang-btn.active{color:var(--wg1);border-color:var(--wg1);background:rgba(234,231,225,0.1);}
+  /* ── MAIN ── */
+  .main{max-width:760px;margin:0 auto;padding:36px 40px 72px;}
+  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 56px;}.header h1{font-size:20px;}}
+  /* ── SECTION LABEL ── */
+  .sec-label{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+  /* ── INTRO BANNER ── */
+  .intro{background:var(--wg41);border-radius:var(--radius);padding:20px 24px;margin-bottom:40px;color:var(--wg1);}
+  .intro-title{font-size:17px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;}
+  .intro-text{font-size:15px;color:rgba(234,231,225,0.7);line-height:1.85;}
+  /* ── CARD GRID ── */
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px;}
+  @media(max-width:560px){.card-grid{grid-template-columns:1fr;}}
+  .info-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative;overflow:hidden;}
+  .info-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--wg11);}
+  .info-card.blue::before{background:var(--blue);}
+  .info-card.green::before{background:var(--dp);}
+  .info-card.warn::before{background:var(--warn);}
+  .card-icon{font-size:18px;margin-bottom:10px;display:block;}
+  .card-title{font-size:15px;font-weight:700;color:var(--wg41);margin-bottom:8px;letter-spacing:.03em;}
+  .card-body{font-size:14px;color:var(--wg11);line-height:1.85;}
+  .card-body strong{color:var(--wg41);}
+  .card-body .amount{font-size:17px;font-weight:700;color:var(--blue);display:block;margin:4px 0 2px;}
+  .card-body .note{font-size:13px;color:var(--wg9);margin-top:4px;}
+  .card-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;letter-spacing:.06em;color:var(--blue);text-decoration:none;margin-top:10px;transition:gap .15s;}
+  .card-link:hover{gap:8px;}
+  .card-link::after{content:'→';}
+  /* ── DETAIL LIST ── */
+  .detail-block{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;}
+  .detail-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s;}
+  .detail-head:hover{background:#F2F0EC;}
+  .detail-head-left{display:flex;align-items:center;gap:10px;}
+  .detail-icon{font-size:17px;}
+  .detail-title{font-size:15px;font-weight:600;color:var(--wg41);}
+  .detail-chevron{font-size:14px;color:var(--wg9);transition:transform .2s;}
+  .detail-block.open .detail-chevron{transform:rotate(90deg);}
+  .detail-body{display:none;padding:4px 16px 16px;border-top:1px solid var(--line);}
+  .detail-block.open .detail-body{display:block;}
+  .detail-body p{font-size:15px;color:var(--wg11);line-height:1.85;margin-bottom:8px;}
+  .detail-body p:last-child{margin-bottom:0;}
+  .detail-body ul{padding-left:1.4em;margin:6px 0;}
+  .detail-body li{font-size:15px;color:var(--wg11);line-height:1.85;margin-bottom:4px;}
+  .detail-body strong{color:var(--wg41);}
+  .detail-body .ref-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--blue);text-decoration:none;letter-spacing:.04em;margin-top:8px;transition:gap .15s;}
+  .detail-body .ref-link:hover{gap:8px;}
+  .detail-body .ref-link::after{content:'→';}
+  .detail-body .highlight{background:rgba(43,74,107,0.06);border-left:3px solid var(--blue);padding:8px 12px;font-size:14px;color:var(--wg41);margin:8px 0;border-radius:0 var(--radius) var(--radius) 0;}
+  .detail-body .warn-box{background:rgba(140,90,0,0.05);border-left:3px solid var(--warn);padding:8px 12px;font-size:14px;color:var(--wg41);margin:8px 0;border-radius:0 var(--radius) var(--radius) 0;}
+  /* ── TODO LIST ── */
+  .todo-list{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;}
+  .todo-item{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;}
+  .todo-num{font-size:13px;font-weight:700;color:var(--white);background:var(--wg41);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .todo-content{flex:1;}
+  .todo-title{font-size:15px;font-weight:600;color:var(--wg41);margin-bottom:2px;}
+  .todo-desc{font-size:14px;color:var(--wg9);line-height:1.7;}
+  /* ── CONTACT ── */
+  .contact-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;}
+  @media(max-width:500px){.contact-strip{grid-template-columns:1fr;}}
+  .contact-cell{background:var(--white);padding:14px 16px;}
+  .contact-label{font-size:12px;letter-spacing:.12em;color:var(--wg9);margin-bottom:4px;}
+  .contact-val{font-size:17px;font-weight:600;color:var(--wg41);}
+  .footer{border-top:1px solid var(--line);padding-top:18px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  /* ── LANG CONTENT ── */
+  .lang-content{display:none;}
+  .lang-content.active{display:block;}
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="back">返回社區主頁</a>
+    <div class="header-top">
+      <div>
+        <div class="eyebrow">WELCOME GUIDE</div>
+        <h1 id="header-title">新住戶須知</h1>
+        <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+        <button class="lang-btn" id="btn-ja" onclick="setLang('ja')">日本語</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════
+     中文
+══════════════════════════════════════════════ -->
+<div class="lang-content active" id="content-zh">
+
+  <div class="intro">
+    <div class="intro-title">搬進來之前，請先看這裡</div>
+    <div class="intro-text">這份須知整理了入住閱大安最常需要了解的事項，涵蓋管理費繳納、門禁磁扣、垃圾分類、公共設施使用等。建議在搬入前完整閱讀一遍，有疑問歡迎直接洽詢管理中心。</div>
+  </div>
+
+  <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; 馬上要知道</div>
+  <div class="card-grid">
+    <div class="info-card blue">
+      <span class="card-icon">💳</span>
+      <div class="card-title">管理費</div>
+      <div class="card-body">
+        <span class="amount">每坪 $150／月</span>
+        汽車停車位 $800／月・機車位 $200／年<br>
+        <span class="note">每月20日前繳清。透過智生活 APP 以信用卡、超商或 ATM 繳納。</span>
+      </div>
+      <a href="../regulations/regulations-管理費收繳辦法.html" class="card-link">管理費收繳辦法</a>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">🔑</span>
+      <div class="card-title">門禁磁扣</div>
+      <div class="card-body">
+        磁扣可開啟前後大門、電梯、信箱及地下室各層。每個磁扣有唯一編碼，<strong>不得私自複製</strong>。<br>
+        <span class="note">遺失請立即通知管理中心註銷，以防他人冒用。</span>
+      </div>
+      <a href="../regulations/regulations-門禁管理辦法.html" class="card-link">門禁管理辦法</a>
+    </div>
+    <div class="info-card green">
+      <span class="card-icon">🗑️</span>
+      <div class="card-title">垃圾投放</div>
+      <div class="card-body">
+        一般垃圾與廚餘投入 <strong>B1環保室冷藏室一般垃圾口</strong>。廢紙→環保室紙類回收箱；廢紙箱攤平放 <strong>B1電表箱走道紙箱區</strong>；1號PET與2號HDPE塑膠容器→環保室塑膠類回收箱。<br>
+        <span class="note">本社區無須使用專用垃圾袋。詳細分類請參閱回收指引。</span>
+      </div>
+      <a href="../regulations/regulations-垃圾分類回收指引.html" class="card-link">垃圾分類回收指引</a>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">📱</span>
+      <div class="card-title">智生活 APP</div>
+      <div class="card-body">
+        社區主要通訊與服務平台。用於繳納管理費、接收公告、申請設施使用等。可於 Google Play 或 App Store 搜尋「智生活」下載。<br>
+        <span class="note">請於入住後向管理中心索取帳號開通說明。社區 LINE 群組亦請洽管理中心協助邀請加入。</span>
+      </div>
+    </div>
+    <div class="info-card warn">
+      <span class="card-icon">🐾</span>
+      <div class="card-title">飼養寵物</div>
+      <div class="card-body">
+        攜帶寵物進出公共空間時，應以外出籠、推車或牽繩控管。搭乘電梯如遇其他住戶已在搭乘或等候，應禮讓先行，改搭下一趟。<br>
+        <span class="note">部分犬種依法禁止飼養，請參閱辦法確認。</span>
+      </div>
+      <a href="../regulations/regulations-飼養動物管理辦法.html" class="card-link">飼養動物管理辦法</a>
+    </div>
+    <div class="info-card blue">
+      <span class="card-icon">🏋️</span>
+      <div class="card-title">公共設施</div>
+      <div class="card-body">
+        <strong>健身房</strong>（2樓）：06:00–24:00，使用前請通知管理中心開燈。著運動服裝、運動鞋入場。<br>
+        <strong>交誼廳</strong>（1樓）、<strong>頂樓空間</strong>：可申請包場，每次2小時 $1,000，押金 $3,000，須提前3日登記。
+      </div>
+      <a href="../regulations/regulations-特定公共空間管理辦法.html" class="card-link">特定公共空間管理辦法</a>
+    </div>
+  </div>
+
+  <div class="sec-label">CHECKLIST &nbsp;·&nbsp; 入住辦理清單</div>
+  <div class="todo-list">
+    <div class="todo-item"><div class="todo-num">1</div><div class="todo-content"><div class="todo-title">至管理中心完成入住登記</div><div class="todo-desc">確認戶別資料、領取或補辦門禁磁扣、索取智生活 APP 帳號開通說明。</div></div></div>
+    <div class="todo-item"><div class="todo-num">2</div><div class="todo-content"><div class="todo-title">設定管理費繳納方式</div><div class="todo-desc">開通智生活 APP，設定每月自動繳費或記得在每月 20 日前完成繳納。</div></div></div>
+    <div class="todo-item"><div class="todo-num">3</div><div class="todo-content"><div class="todo-title">飼養寵物者：熟悉公共空間行為規範</div><div class="todo-desc">寵物進出公共空間須以外出籠、推車或牽繩控管；搭乘電梯如遇其他住戶應禮讓改搭下一趟；禁止攜帶寵物進入頂樓空間。詳見飼養動物管理辦法第十三條。</div></div></div>
+    <div class="todo-item"><div class="todo-num">4</div><div class="todo-content"><div class="todo-title">有裝潢需求者：申請裝潢施工許可</div><div class="todo-desc">須於開工7日前向管理中心提出申請，繳交裝潢保證金 $50,000 及預繳清潔費，並備妥施工圖樣、切結書等文件。</div></div></div>
+    <div class="todo-item"><div class="todo-num">5</div><div class="todo-content"><div class="todo-title">有機車停車需求者：申請機車位</div><div class="todo-desc">機車位以抽籤方式分配，每年度開放登記，有需求請向管理中心詢問目前空位及候補狀況。</div></div></div>
+  </div>
+
+  <div class="sec-label">DETAILS &nbsp;·&nbsp; 進一步了解</div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">停車場使用規則</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>地下室停車場限高 <strong>2.1 公尺</strong>，車輛進出須持有效門禁憑證。停車場僅供停放車輛，管理單位僅負善良管理人責任，住戶應自行投保車險，發生事故、毀損、失竊不得向管委會求償。</p>
+      <p>電動車充電樁設置於 B1–B4，採度數計費，另有每個充電樁每月 $50 公用線路維護費。B3/B4 已採時間電價，建議於離峰時間（夜間）充電可節省費用。</p>
+      <p><strong>訪客停車</strong>有兩種方式：（1）訪客可付費使用公設無障礙車位，費率為 $60／小時；（2）住戶如有空置車位，可事先提供訪客的車型、顏色、車牌號碼予管理中心，由管理中心協助手動開關車庫門。</p>
+      <a href="../regulations/regulations-停車空間管理辦法.html" class="ref-link">停車空間管理辦法</a>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">裝潢施工申請流程</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>所有裝潢施工均需在開工前完成申請，未申請不得進場。</p>
+      <div class="highlight">開工7日前須備妥：施工申請單、切結書、施工圖樣、承包商證件。<br>繳交費用：裝潢保證金 $50,000＋預繳清潔費 $12,000（120天）＋電梯保護費 $9,000，合計 $71,000。</div>
+      <p>施工時間：週一至週五 08:00–17:30，週六須提前申請，週日及國定假日一律禁止。</p>
+      <p>所有工班人員及材料一律由地下室貨梯進出，嚴禁使用客梯搬運材料。</p>
+      <div class="warn-box">裝修期限上限為 120 天（日曆天，週日及國定假日不計）。超過後清潔費由每日 $100 調升為每日 $200。</div>
+      <a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">裝潢修繕施工管理辦法</a>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">陽台、外牆與建物使用限制</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>外牆顏色、樣式依規約不得擅自變更，不得設置廣告物、違規鐵鋁窗或其他突出外牆面之設施。</p>
+      <p>有12歲以下兒童居住者，得依規定設置防墜設施，材質與顏色須符合管委會規定。</p>
+      <p>室內隔間若有調整，須採輕隔間方式施作，不得私自拆除、穿鑿主結構或埋設管線。</p>
+      <a href="../regulations/regulations-社區規約.html" class="ref-link">社區規約</a>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">管委會是什麼？如何參與社區事務？</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>管理委員會（管委會）由區分所有權人選出，任期一年，負責社區日常管理與重大事項決策。委員職務為無給職。</p>
+      <p>管委會每月召開一次例會，歡迎住戶列席旁聽，如有意願請洽管理中心。每次會議的開會通知與會議紀錄均會公告於社區網站。</p>
+      <p>社區最高決策機構為<strong>區分所有權人會議</strong>（區權會），每年召開一次，重大事項須經區權會決議。每位區分所有權人均有提案與投票權。</p>
+      <a href="../minutes/" class="ref-link">查看歷次會議紀錄</a>
+    </div>
+  </div>
+
+  <div class="sec-label">CONTACT &nbsp;·&nbsp; 聯絡管理中心</div>
+  <div class="contact-strip">
+    <div class="contact-cell"><div class="contact-label">社區地址</div><div class="contact-val">台北市大安區<br>羅斯福路二段 85 號</div></div>
+    <div class="contact-cell"><div class="contact-label">管理中心電話</div><div class="contact-val">(02) 2367-7065</div></div>
+    <div class="contact-cell"><div class="contact-label">行動電話</div><div class="contact-val">0989-648-285</div></div>
+  </div>
+  <div class="footer">
+    <span>閱大安管理委員會・本頁資訊僅供本社區住戶參考使用</span>
+    <span>如有疑問請洽管理中心</span>
+  </div>
+
+</div><!-- /content-zh -->
+
+
+<!-- ══════════════════════════════════════════════
+     English
+══════════════════════════════════════════════ -->
+<div class="lang-content" id="content-en">
+
+  <div class="intro">
+    <div class="intro-title">Please read this before moving in</div>
+    <div class="intro-text">This guide covers the essential information for new residents of Cultural City Community, including management fees, access cards, waste disposal, and facility usage. We recommend reading through it before your move-in date. Please contact the Management Center if you have any questions.</div>
+  </div>
+
+  <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; What You Need to Know</div>
+  <div class="card-grid">
+    <div class="info-card blue">
+      <span class="card-icon">💳</span>
+      <div class="card-title">Management Fee</div>
+      <div class="card-body">
+        <span class="amount">NT$150 per ping / month</span>
+        Car parking: NT$800/month · Motorcycle: NT$200/year<br>
+        <span class="note">Due by the 20th of each month. Pay via the Zhishenghuo App by credit card, convenience store, or ATM.</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">🔑</span>
+      <div class="card-title">Access Card (Magnetic Fob)</div>
+      <div class="card-body">
+        Your fob unlocks the front/rear entrance, elevator, mailbox, and all basement levels. Each fob has a unique code and <strong>must not be duplicated</strong>.<br>
+        <span class="note">Report lost fobs to the Management Center immediately to prevent unauthorized access.</span>
+      </div>
+    </div>
+    <div class="info-card green">
+      <span class="card-icon">🗑️</span>
+      <div class="card-title">Waste Disposal</div>
+      <div class="card-body">
+        General waste &amp; food scraps: <strong>B1 Eco Room refrigerated bin</strong>. Paper: paper recycling bin in Eco Room. Flattened cardboard boxes: <strong>B1 meter room corridor</strong>. PET (#1) &amp; HDPE (#2) plastic containers: plastic recycling bin in Eco Room.<br>
+        <span class="note">No special garbage bags required. See the recycling guide for full details.</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">📱</span>
+      <div class="card-title">Zhishenghuo App</div>
+      <div class="card-body">
+        The community's main platform for paying fees, receiving announcements, and booking facilities. Search "智生活" on Google Play or the App Store.<br>
+        <span class="note">Contact the Management Center after moving in to activate your account. Ask to be added to the community LINE group as well.</span>
+      </div>
+    </div>
+    <div class="info-card warn">
+      <span class="card-icon">🐾</span>
+      <div class="card-title">Pets</div>
+      <div class="card-body">
+        Pets must be in a carrier, stroller, or on a leash when in common areas. If another resident is already in or waiting for the elevator, please wait for the next one.<br>
+        <span class="note">Some dog breeds are prohibited by law. Please check the pet management regulations.</span>
+      </div>
+    </div>
+    <div class="info-card blue">
+      <span class="card-icon">🏋️</span>
+      <div class="card-title">Shared Facilities</div>
+      <div class="card-body">
+        <strong>Gym</strong> (2F): 06:00–24:00. Notify Management Center to turn on lights before use. Sports attire and shoes required.<br>
+        <strong>Lounge</strong> (1F) &amp; <strong>Rooftop</strong>: Available for exclusive booking. NT$1,000 for 2 hrs, NT$3,000 deposit. Book 3 days in advance.
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">CHECKLIST &nbsp;·&nbsp; Move-in To-Do List</div>
+  <div class="todo-list">
+    <div class="todo-item"><div class="todo-num">1</div><div class="todo-content"><div class="todo-title">Register at the Management Center</div><div class="todo-desc">Confirm your unit information, receive or replace your access fob, and get instructions for activating the Zhishenghuo App account.</div></div></div>
+    <div class="todo-item"><div class="todo-num">2</div><div class="todo-content"><div class="todo-title">Set up your management fee payment</div><div class="todo-desc">Activate the Zhishenghuo App and set up automatic monthly payment, or remember to pay before the 20th of each month.</div></div></div>
+    <div class="todo-item"><div class="todo-num">3</div><div class="todo-content"><div class="todo-title">Pet owners: review public area conduct rules</div><div class="todo-desc">Pets must be in a carrier, stroller, or on a leash in common areas. Yield the elevator if other residents are present. Pets are not allowed on the rooftop. See Article 13 of the Pet Management Regulations.</div></div></div>
+    <div class="todo-item"><div class="todo-num">4</div><div class="todo-content"><div class="todo-title">Renovation work: apply for a construction permit</div><div class="todo-desc">Apply at least 7 days before start date. Required: NT$50,000 deposit, prepaid cleaning fee, construction drawings, contractor documents.</div></div></div>
+    <div class="todo-item"><div class="todo-num">5</div><div class="todo-content"><div class="todo-title">Need a motorcycle space? Apply at the Management Center</div><div class="todo-desc">Motorcycle spaces are allocated by lottery each year. Ask the Management Center about current availability or the waitlist.</div></div></div>
+  </div>
+
+  <div class="sec-label">DETAILS &nbsp;·&nbsp; Learn More</div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">Parking Regulations</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>The basement parking garage has a <strong>height limit of 2.1 meters</strong>. Access requires a valid fob or registration. The management assumes general custodial responsibility only — residents must carry their own vehicle insurance. The HOA is not liable for accidents, damage, or theft.</p>
+      <p>EV charging stations are available on B1–B4, billed by kilowatt-hour plus a NT$50/month shared line maintenance fee per charger. B3/B4 use time-of-use pricing — overnight charging is more economical.</p>
+      <p><strong>Visitor parking:</strong> (1) Visitors may use the accessible parking space on 1F at NT$60/hour. (2) If you have a vacant parking space, provide your visitor's vehicle make, color, and plate number to the Management Center, who will manually open the garage gate (the gate uses eTag recognition and cannot be accessed by unregistered vehicles).</p>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">Renovation Application Process</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>All renovation work must be approved before commencing. Work without approval is not permitted.</p>
+      <div class="highlight">At least 7 days before start: Submit application form, undertaking letter, construction drawings, and contractor ID.<br>Fees: NT$50,000 deposit + NT$12,000 prepaid cleaning fee (120 days) + NT$9,000 elevator protection fee = NT$71,000 total.</div>
+      <p>Work hours: Monday–Friday 08:00–17:30. Saturdays require advance approval. Sundays and public holidays are prohibited.</p>
+      <p>All workers and materials must use the basement service elevator. Passenger elevators are strictly prohibited for material transport.</p>
+      <div class="warn-box">Maximum renovation period is 120 calendar days (Sundays and public holidays excluded). After 120 days, the daily cleaning fee increases from NT$100 to NT$200.</div>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">Balcony, Exterior Wall & Structural Restrictions</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>The building's exterior appearance is governed by community regulations. Residents may not alter exterior colors, install advertisements, non-compliant window grilles, or any protruding fixtures.</p>
+      <p>Households with children under 12 may install fall-prevention barriers on balconies, subject to HOA-approved specifications.</p>
+      <p>Interior partition changes must use lightweight partition systems. Modifying load-bearing structures, drilling, or installing pipes without approval is strictly prohibited.</p>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">What is the HOA? How to participate?</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>The Homeowners' Association (HOA) committee is elected by unit owners and serves a one-year term. All committee positions are voluntary and unpaid.</p>
+      <p>The committee holds a monthly meeting. Residents are welcome to attend as observers — please contact the Management Center if interested. Meeting notices and minutes are posted on the community website.</p>
+      <p>The highest governing body is the <strong>Owners' General Meeting</strong>, held annually. Major decisions (such as regulation changes or large expenditures) require a vote. All unit owners have the right to propose motions and vote.</p>
+      <a href="../minutes/" class="ref-link">View meeting minutes</a>
+    </div>
+  </div>
+
+  <div class="sec-label">CONTACT &nbsp;·&nbsp; Management Center</div>
+  <div class="contact-strip">
+    <div class="contact-cell"><div class="contact-label">ADDRESS</div><div class="contact-val">No. 85, Sec. 2,<br>Roosevelt Rd., Da'an Dist., Taipei</div></div>
+    <div class="contact-cell"><div class="contact-label">PHONE</div><div class="contact-val">(02) 2367-7065</div></div>
+    <div class="contact-cell"><div class="contact-label">MOBILE</div><div class="contact-val">0989-648-285</div></div>
+  </div>
+  <div class="footer">
+    <span>Cultural City Community HOA · For residents only</span>
+    <span>Contact the Management Center for assistance</span>
+  </div>
+
+</div><!-- /content-en -->
+
+
+<!-- ══════════════════════════════════════════════
+     日本語
+══════════════════════════════════════════════ -->
+<div class="lang-content" id="content-ja">
+
+  <div class="intro">
+    <div class="intro-title">入居前に必ずお読みください</div>
+    <div class="intro-text">このガイドは、閱大安コミュニティへの新入居者が知っておくべき重要事項をまとめたものです。管理費の支払い、アクセスカード、ゴミの分別、共用施設の利用方法などを網羅しています。入居前にご一読ください。ご不明な点はマネジメントセンターまでお問い合わせください。</div>
+  </div>
+
+  <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; まず知っておくこと</div>
+  <div class="card-grid">
+    <div class="info-card blue">
+      <span class="card-icon">💳</span>
+      <div class="card-title">管理費</div>
+      <div class="card-body">
+        <span class="amount">NT$150 / 坪 / 月</span>
+        駐車場（車）：NT$800/月・バイク：NT$200/年<br>
+        <span class="note">毎月20日までに支払い。智生活アプリよりクレジットカード、コンビニ、ATMにて支払い可能。</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">🔑</span>
+      <div class="card-title">アクセスカード（磁気フォブ）</div>
+      <div class="card-body">
+        カードで正面・裏口、エレベーター、郵便受け、地下各フロアへの入室が可能です。各カードは固有のコードを持ち、<strong>複製は禁止</strong>されています。<br>
+        <span class="note">紛失した場合は直ちにマネジメントセンターに連絡し、無効化してください。</span>
+      </div>
+    </div>
+    <div class="info-card green">
+      <span class="card-icon">🗑️</span>
+      <div class="card-title">ゴミの出し方</div>
+      <div class="card-body">
+        一般ゴミ・生ゴミ：<strong>B1エコルーム冷蔵ゴミ口</strong>へ。古紙：エコルーム紙類回収箱へ。ダンボール（折り畳んで）：<strong>B1電気メーター室通路の段ボール置き場</strong>へ。PET（#1）・HDPE（#2）プラスチック容器：エコルームプラスチック回収箱へ。<br>
+        <span class="note">専用ゴミ袋は不要です。詳細な分別方法は分別ガイドをご覧ください。</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">📱</span>
+      <div class="card-title">智生活アプリ</div>
+      <div class="card-body">
+        管理費の支払い、お知らせの受信、施設予約などに使用するコミュニティの主要プラットフォームです。Google Play または App Store で「智生活」と検索してダウンロードしてください。<br>
+        <span class="note">入居後、マネジメントセンターにてアカウント開設方法をご確認ください。コミュニティLINEグループへの招待もマネジメントセンターにご依頼ください。</span>
+      </div>
+    </div>
+    <div class="info-card warn">
+      <span class="card-icon">🐾</span>
+      <div class="card-title">ペット</div>
+      <div class="card-body">
+        共用スペースでのペット同伴時は、キャリーバッグ、ペットカート、またはリードを使用してください。エレベーターに他の住民がいる場合や待っている場合は、次のエレベーターをご利用ください。<br>
+        <span class="note">法律で飼育が禁止されている犬種があります。ペット管理規定をご確認ください。</span>
+      </div>
+    </div>
+    <div class="info-card blue">
+      <span class="card-icon">🏋️</span>
+      <div class="card-title">共用施設</div>
+      <div class="card-body">
+        <strong>フィットネスルーム</strong>（2F）：06:00–24:00。使用前にマネジメントセンターに照明オンを依頼。スポーツウェア・運動靴必須。<br>
+        <strong>ラウンジ</strong>（1F）・<strong>屋上スペース</strong>：貸し切り予約可。2時間NT$1,000、保証金NT$3,000。3日前までに予約。
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label">CHECKLIST &nbsp;·&nbsp; 入居時の手続きリスト</div>
+  <div class="todo-list">
+    <div class="todo-item"><div class="todo-num">1</div><div class="todo-content"><div class="todo-title">マネジメントセンターで入居登録を行う</div><div class="todo-desc">部屋番号の確認、アクセスカードの受け取りまたは再発行、智生活アプリのアカウント開設手順の取得。</div></div></div>
+    <div class="todo-item"><div class="todo-num">2</div><div class="todo-content"><div class="todo-title">管理費の支払い方法を設定する</div><div class="todo-desc">智生活アプリを開設し、毎月の自動支払いを設定するか、毎月20日までに支払いを完了してください。</div></div></div>
+    <div class="todo-item"><div class="todo-num">3</div><div class="todo-content"><div class="todo-title">ペット飼育者：共用スペースでのルールを確認する</div><div class="todo-desc">共用スペースではキャリーバッグ・ペットカート・リードを使用。エレベーターは他の住民に譲る。屋上へのペット同伴は禁止。ペット管理規定第13条を参照。</div></div></div>
+    <div class="todo-item"><div class="todo-num">4</div><div class="todo-content"><div class="todo-title">リノベーションをお考えの方：施工許可申請を行う</div><div class="todo-desc">着工7日前までにマネジメントセンターへ申請。保証金NT$50,000、前払い清掃費、施工図面、請負業者の書類が必要です。</div></div></div>
+    <div class="todo-item"><div class="todo-num">5</div><div class="todo-content"><div class="todo-title">バイク駐車スペースが必要な方：申請する</div><div class="todo-desc">バイクスペースは年1回の抽選で割り当てられます。空き状況やキャンセル待ちについてはマネジメントセンターにお問い合わせください。</div></div></div>
+  </div>
+
+  <div class="sec-label">DETAILS &nbsp;·&nbsp; 詳細情報</div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">駐車場利用規則</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>地下駐車場の<strong>高さ制限は2.1メートル</strong>です。入出庫には有効なアクセス認証が必要です。管理組合は善良な管理者としての責任を負うのみで、事故・損傷・盗難に対する賠償責任は負いません。住民は自身で車両保険に加入してください。</p>
+      <p>EVチャージャーはB1〜B4に設置されており、使用量（kWh）単位での課金に加え、共用線路の維持費として月額NT$50がかかります。B3・B4は時間帯別料金制のため、夜間充電が経済的です。</p>
+      <p><strong>来客用駐車</strong>は2通りの方法があります：（1）1階の身障者用駐車スペースをNT$60/時間で利用可能。（2）空いている駐車スペースがある場合、来客の車種・色・ナンバープレートをマネジメントセンターに事前連絡すれば、センターが車庫ゲートを手動で開閉します（ゲートはeTagで管理されており、未登録車両は自動入場できません）。</p>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">リノベーション申請の流れ</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>すべてのリノベーション工事は着工前に許可申請が必要です。申請なしでの工事は認められません。</p>
+      <div class="highlight">着工7日前までに提出が必要なもの：申請書、誓約書、施工図面、請負業者の身分証明書類。<br>費用：保証金NT$50,000＋前払い清掃費NT$12,000（120日分）＋エレベーター養生費NT$9,000、合計NT$71,000。</div>
+      <p>工事可能時間：月〜金 08:00〜17:30。土曜日は事前申請が必要。日曜・祝日は全面禁止。</p>
+      <p>作業員および資材はすべて地下のサービスエレベーターを使用してください。旅客エレベーターでの資材搬入は厳禁です。</p>
+      <div class="warn-box">リノベーション期間の上限は120日（日曜・祝日を除く）。120日超過後は、日額清掃費がNT$100からNT$200に引き上げられます。</div>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">バルコニー・外壁・建物の使用制限</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>建物の外観は管理規約によって定められており、外壁の色や様式を無断で変更すること、広告物・規格外の面格子・外壁から突出する設備の設置は禁止されています。</p>
+      <p>12歳未満の子どもがいる家庭は、管理委員会の規定に従った仕様で転落防止設備を設置することができます。</p>
+      <p>室内の間仕切りを変更する場合は、軽量間仕切り工法を使用してください。主要構造の無断撤去・穴あけ・配管の埋設は厳禁です。</p>
+    </div>
+  </div>
+  <div class="detail-block">
+    <div class="detail-head" onclick="toggleDetail(this)">
+      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">管理組合とは？コミュニティへの参加方法</span></div>
+      <span class="detail-chevron">›</span>
+    </div>
+    <div class="detail-body">
+      <p>管理委員会は区分所有者による選挙で選出され、任期は1年です。日常的な管理業務と重要事項の決定を担います。委員の役職はすべてボランティアです。</p>
+      <p>管理委員会は月1回の定例会議を開催しています。住民はオブザーバーとして傍聴歓迎です。ご希望の方はマネジメントセンターまでご連絡ください。会議通知と議事録はコミュニティウェブサイトで公開されます。</p>
+      <p>コミュニティの最高意思決定機関は<strong>区分所有者総会</strong>で、年1回開催されます。規約変更や大規模工事などの重要事項は総会での決議が必要です。すべての区分所有者に議案提出権と投票権があります。</p>
+      <a href="../minutes/" class="ref-link">過去の議事録を見る</a>
+    </div>
+  </div>
+
+  <div class="sec-label">CONTACT &nbsp;·&nbsp; マネジメントセンター</div>
+  <div class="contact-strip">
+    <div class="contact-cell"><div class="contact-label">住所</div><div class="contact-val">台北市大安区<br>羅斯福路二段85号</div></div>
+    <div class="contact-cell"><div class="contact-label">電話</div><div class="contact-val">(02) 2367-7065</div></div>
+    <div class="contact-cell"><div class="contact-label">携帯電話</div><div class="contact-val">0989-648-285</div></div>
+  </div>
+  <div class="footer">
+    <span>閱大安管理委員会・本ページは当コミュニティ居住者専用です</span>
+    <span>ご不明な点はマネジメントセンターまで</span>
+  </div>
+
+</div><!-- /content-ja -->
+
+</div><!-- /main -->

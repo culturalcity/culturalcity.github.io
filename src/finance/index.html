@@ -1,0 +1,217 @@
+---
+layout: base.njk
+permalink: /finance/index.html
+title: 財務月報總覽
+extraStyles: |
+  :root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--ink:#3C3835;--ink2:#696460;--ink3:#898480;--paper:#EAE7E1;--paper2:#F0EDE8;--border:rgba(60,56,53,0.12);--radius:2px;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:17px;line-height:1.7;}
+  .header{background:var(--ink);color:#f8f5f0;padding:36px 32px 28px;border-bottom:3px solid var(--wg11);position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+  .header h1{font-size:24px;font-weight:700;letter-spacing:.06em;margin-bottom:4px;}
+  .header p{font-size:14px;color:rgba(248,245,240,0.45);letter-spacing:.1em;}
+  .header-badge{display:inline-block;margin-top:12px;background:rgba(234,231,225,.12);border:1px solid rgba(234,231,225,.25);color:var(--wg1);font-size:13px;padding:3px 10px;border-radius:10px;letter-spacing:.06em;}
+  .main{max-width:680px;margin:0 auto;padding:32px 20px 60px;}
+  .notice{background:rgba(105,100,96,.06);border:1px solid rgba(105,100,96,.18);border-radius:var(--radius);padding:12px 16px;font-size:14px;color:var(--ink2);margin-bottom:28px;line-height:1.8;}
+  .year-label{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--wg11);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .year-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .report-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+  .report-card{display:flex;align-items:center;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--ink);transition:all .18s;position:relative;overflow:hidden;}
+  .report-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background .18s;}
+  .report-card:hover{border-color:var(--wg11);background:#F2F0EC;transform:translateX(2px);}
+  .report-card:hover::before{background:var(--wg11);}
+  .report-card.latest::before{background:var(--wg41);}
+  .report-card.latest{border-color:rgba(60,56,53,.35);}
+  .card-month{font-size:20px;font-weight:700;color:var(--ink);min-width:60px;letter-spacing:-.01em;}
+  .card-meta{flex:1;padding:0 14px;}
+  .card-title{font-size:15px;font-weight:500;color:var(--ink2);margin-bottom:2px;}
+  .card-period{font-size:13px;color:var(--ink3);}
+  .card-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+  .badge{font-size:12px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .badge-new{background:rgba(60,56,53,.1);color:var(--wg41);border:1px solid rgba(60,56,53,.25);}
+  .badge-pos{background:rgba(31,92,56,.1);color:#1F5C38;border:1px solid rgba(31,92,56,.25);}
+  .badge-neg{background:rgba(140,31,31,.1);color:#8C1F1F;border:1px solid rgba(140,31,31,.25);}
+  .badge-nt{background:rgba(105,100,96,.1);color:var(--wg11);border:1px solid rgba(105,100,96,.3);}
+  .card-arrow{font-size:17px;color:var(--ink3);margin-left:8px;transition:transform .18s,color .18s;}
+  .report-card:hover .card-arrow{transform:translateX(4px);color:var(--wg11);}
+  .pdf-link{cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:12px;letter-spacing:.06em;color:var(--wg9);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;transition:all .18s;white-space:nowrap;margin-top:5px;}
+  .pdf-link:hover{color:var(--wg41);border-color:var(--wg11);background:var(--paper2);}
+  .analysis-card{display:flex;align-items:center;background:var(--wg41);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--wg1);margin-bottom:28px;transition:opacity .18s;}
+  .analysis-card:hover{opacity:.88;}
+  .ac-icon{font-size:20px;margin-right:14px;flex-shrink:0;}
+  .ac-title{font-size:17px;font-weight:700;margin-bottom:2px;}
+  .ac-sub{font-size:13px;color:var(--wg9);}
+  .ac-arrow{margin-left:auto;font-size:18px;color:var(--wg9);padding-left:12px;}
+  .footer{text-align:center;font-size:13px;color:var(--ink3);padding-top:20px;border-top:1px solid var(--border);line-height:1.9;}
+  @media(max-width:480px){.header{padding:28px 20px 22px;}.header h1{font-size:18px;}.card-month{font-size:17px;min-width:48px;}.card-title{font-size:15px;}}
+---
+<div class="header">
+  <div style="max-width:680px;margin:0 auto;position:relative;">
+    <a href="../index.html" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;" onmouseover="this.style.color='#F7F5F2'" onmouseout="this.style.color='var(--wg9)'">← 返回社區主頁</a>
+    <div class="header-eyebrow" style="font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;">MONTHLY FINANCIAL REPORT</div>
+    <h1>財務月報</h1>
+    <p>CULTURAL CITY COMMUNITY · 閱大安管理委員會</p>
+    <div class="header-badge">住戶公告專區</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="notice">
+    📋 本頁為閱大安社區每月財務月報公告。點擊月份卡片查閱完整分析報告，包含損益分析、資產負債、環比說明。如有疑問請洽管委會。
+  </div>
+
+  <div style="margin-bottom:24px">
+    <a href="../utility/" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg11);font-size:14px;letter-spacing:.04em;transition:all .18s" onmouseover="this.style.background='#F2F0EC'" onmouseout="this.style.background='var(--white)'">
+      ⚡ 大公電・公水帳單明細 →
+    </a>
+  </div>
+
+  <div class="year-label">2026 年度</div>
+  <div class="report-list">
+    <a href="2026-02.html" class="report-card latest">
+      <div class="card-month">02月</div>
+      <div class="card-meta">
+        <div class="card-title">2026年2月財務月報</div>
+        <div class="card-period">2026-02-01 ～ 2026-02-28 ・ 發布：2026/03/19</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1_f0wz6LXSNTgyIjpU3LH-rYCNRH8A_ia/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2026-01.html" class="report-card">
+      <div class="card-month">01月</div>
+      <div class="card-meta">
+        <div class="card-title">2026年1月財務月報</div>
+        <div class="card-period">2026-01-01 ～ 2026-01-31 ・ 發布：2026/02/15</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1aMCDwmeTqkt_lvEp7PjhR67OS_2XITbe/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+  </div>
+
+  <a href="2025-annual.html" class="analysis-card">
+    <span class="ac-icon">📊</span>
+    <div>
+      <div class="ac-title">2025 全年財務深度分析報告</div>
+      <div class="ac-sub">全年損益 +44,570・季度分析・費用結構・充電樁代收代付說明・區權會準備</div>
+    </div>
+    <span class="ac-arrow">›</span>
+  </a>
+
+  <div class="year-label">2025 年度</div>
+  <div class="report-list">
+    <a href="2025-12.html" class="report-card">
+      <div class="card-month">12月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年12月財務月報</div>
+        <div class="card-period">2025-12-01 ～ 2025-12-31 ・ 發布：2026/01/30</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1u0OXyRSak3yoiIvJSiD6glQBd8Ue1EAt/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-11.html" class="report-card">
+      <div class="card-month">11月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年11月財務月報</div>
+        <div class="card-period">2025-11-01 ～ 2025-11-30 ・ 發布：2025/12/29</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1FZwnKX0U6hspZR3sNg0ikaPq3Zp4LTRh/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-10.html" class="report-card">
+      <div class="card-month">10月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年10月財務月報</div>
+        <div class="card-period">2025-10-01 ～ 2025-10-31 ・ 發布：2025/11/18</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1lNsNdwHhGhehk0st5KOVa4oPTR7vmfCI/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-09.html" class="report-card">
+      <div class="card-month">09月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年9月財務月報</div>
+        <div class="card-period">2025-09-01 ～ 2025-09-30 ・ 發布：2025/10/14</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1w8uQren_1X1FgDyvxV4m0o4laSdORCg1/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-08.html" class="report-card">
+      <div class="card-month">08月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年8月財務月報</div>
+        <div class="card-period">2025-08-01 ～ 2025-08-31 ・ 發布：2025/09/14</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1LyqUMblqcMOi-hTSsnbb_2k6nrBsTRlu/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-07.html" class="report-card">
+      <div class="card-month">07月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年7月財務月報</div>
+        <div class="card-period">2025-07-01 ～ 2025-07-31 ・ 發布：2025/08/14</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/11mtsOi00MihbhjixRSlSKgg8WL-MWAw-/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-06.html" class="report-card">
+      <div class="card-month">06月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年6月財務月報</div>
+        <div class="card-period">2025-06-01 ～ 2025-06-30 ・ 發布：2025/07/21</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1Clm7rjm8PLYmpzgIZSb5GcEXwvZ6QQ_I/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-05.html" class="report-card">
+      <div class="card-month">05月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年5月財務月報</div>
+        <div class="card-period">2025-05-01 ～ 2025-05-31 ・ 發布：2025/06/09</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1xoINUjecJ9LW7Vaz2Mg34N-XyH_epjiy/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-04.html" class="report-card">
+      <div class="card-month">04月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年4月財務月報</div>
+        <div class="card-period">2025-04-01 ～ 2025-04-30 ・ 發布：2025/05/13</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1YphpdNGTb1at5iDuxm4mW6W9g68jKmmt/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-03.html" class="report-card">
+      <div class="card-month">03月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年3月財務月報</div>
+        <div class="card-period">2025-03-01 ～ 2025-03-31 ・ 發布：2025/04/18</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1d5dfd7rcRFEemggv6DBLhBVAAxoYTSIx/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-02.html" class="report-card">
+      <div class="card-month">02月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年2月財務月報</div>
+        <div class="card-period">2025-02-01 ～ 2025-02-28 ・ 發布：2025/03/28</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1vwt29KFevLLM39Uu9Q0vtUREgZDKqqPD/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+    <a href="2025-01.html" class="report-card">
+      <div class="card-month">01月</div>
+      <div class="card-meta">
+        <div class="card-title">2025年1月財務月報</div>
+        <div class="card-period">2025-01-01 ～ 2025-01-31 ・ 發布：2025/03/28</div>
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1hVa8cKi2CgNElCZv7Ra5AKnEpIHTHMmy/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+      </div>
+      <div class="card-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    閱大安管理委員會 · 財務資料僅供本社區住戶參考<br>
+    如發現資料有誤請聯繫管委會財務委員
+  </div>
+
+</div>

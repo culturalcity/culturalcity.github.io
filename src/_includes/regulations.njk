@@ -1,0 +1,18 @@
+---
+layout: base.njk
+extraHead: '<link rel="stylesheet" href="/regulations.css">'
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/regulations/" class="back">社區規約與管理辦法</a>
+    {% if eyebrow %}<div class="eyebrow">{{ eyebrow }}</div>{% endif %}
+    <h1>{{ title }}</h1>
+    <div class="header-meta">
+      {% if version %}<span class="meta-pill">{{ version }}</span>{% endif %}
+      {% if lastUpdated %}<span class="meta-pill">最後更新 {{ lastUpdated }}</span>{% endif %}
+    </div>
+  </div>
+</div>
+<div class="main">
+{{ content | safe }}
+</div>

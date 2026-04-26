@@ -1,0 +1,393 @@
+---
+layout: minutes.njk
+permalink: /minutes/minutes-4-agm-1.html
+title: 第四屆第一次區分所有權人會議紀錄
+extraStyles: |
+  /* ── HEADER ── */ .header{ background:var(--wg41);color:var(--wg1); padding:36px 40px 0; border-bottom:2px solid var(--wg11); position:relative;overflow:hidden; }
+  /* ── TABS ── */ .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
+  /* ── MAIN ── */ .main{max-width:900px;margin:0 auto;padding:32px 40px 72px;}
+  /* ── NOTICE TABLE ── */ .notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
+  .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}
+  .notice-table tr:last-child{border-bottom:none;}
+  .notice-table th{ background:rgba(60,56,53,0.04);padding:10px 16px; font-weight:500;font-size:13px;letter-spacing:.08em; color:var(--wg9);text-align:left;width:90px;vertical-align:top; border-right:1px solid rgba(60,56,53,0.06); }
+  .notice-table td{padding:10px 16px;color:var(--wg11);vertical-align:top;line-height:1.75;}
+  .notice-agenda{list-style:none;padding:0;display:flex;flex-direction:column;gap:0;}
+  .notice-agenda li{ display:flex;gap:10px;padding:6px 0; border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11); }
+  .notice-agenda li:last-child{border-bottom:none;}
+  .na-num{font-size:12px;color:var(--wg9);letter-spacing:.04em;flex-shrink:0;padding-top:3px;min-width:52px;}
+  /* ── TOC ── */ .toc{ background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 18px;margin-bottom:24px; }
+  .toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+  .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
+  .toc-item{ font-size:14px;color:var(--wg9);text-decoration:none; display:inline-flex;align-items:center;gap:4px;transition:color .15s; }
+  .toc-item:hover{color:var(--wg41);}
+  .toc-dot{width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0;}
+  .toc-dot.blue{background:var(--blue);}
+  .toc-dot.green{background:var(--dp);}
+  .toc-dot.warn{background:var(--warn);}
+  /* ── SECTION ── */ .section{margin-bottom:32px;}
+  .section-head{ display:flex;align-items:center;gap:10px; margin-bottom:16px;padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .section-roman{ font-size:12px;font-weight:700;letter-spacing:.16em; color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px; }
+  .section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+  /* ── OPEN CARD ── */ .open-card{ background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 16px; font-size:15px;color:var(--wg9); }
+  /* ── STATS GRID ── */ .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
+  .stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}
+  .stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
+  .stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}
+  .stat-val.pos{color:var(--dp);}
+  /* ── DATA TABLE ── */ .data-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:16px;}
+  .data-table thead tr{background:rgba(60,56,53,0.04);}
+  .data-table th{text-align:left;padding:7px 12px;color:var(--wg9);font-size:12px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
+  .data-table td{padding:7px 12px;border-bottom:1px solid rgba(60,56,53,0.05);color:var(--wg11);}
+  .data-table tbody tr:last-child td{border-bottom:none;}
+  .data-table .text-right{text-align:right;}
+  .data-table .row-highlight{background:rgba(43,74,107,0.04);font-weight:500;color:var(--wg41);}
+  /* ── ELECTION TABLE ── */ .election-table{width:100%;border-collapse:collapse;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;}
+  .election-table th{background:rgba(60,56,53,0.04);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left;}
+  .election-table td{padding:9px 14px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);vertical-align:top;}
+  .election-table tbody tr:last-child td{border-bottom:none;}
+  .election-table .winner{background:rgba(31,92,56,0.04);}
+  .vote-badge{display:inline-block;font-size:13px;font-weight:700;color:var(--wg41);background:rgba(60,56,53,0.08);border-radius:1px;padding:1px 7px;letter-spacing:.04em;}
+  .role-badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;white-space:nowrap;}
+  .role-chair{color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.06);}
+  .role-vice{color:var(--wg11);border-color:rgba(105,100,96,0.3);background:rgba(105,100,96,0.06);}
+  .role-finance{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
+  .role-supervise{color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06);}
+  .role-general{color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04);}
+  .role-alt{color:var(--wg9);border-color:var(--line);background:transparent;}
+  /* ── INFO BLOCK ── */ .info-block{ background:var(--white);border:1px solid var(--line); border-left:3px solid var(--wg11); border-radius:0 var(--radius) var(--radius) 0; padding:12px 16px;font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:12px; }
+  .info-block.blue{border-left-color:var(--blue);}
+  .info-block.warn{border-left-color:var(--warn);}
+  .info-block strong{color:var(--wg41);}
+  /* ── WORK TABLE ── */ .work-table{width:100%;border-collapse:collapse;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;}
+  .work-table th{background:rgba(60,56,53,0.04);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left;}
+  .work-table td{padding:9px 14px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);vertical-align:top;line-height:1.7;}
+  .work-table td:first-child{width:160px;color:var(--wg41);font-weight:500;white-space:nowrap;}
+  .work-table tbody tr:last-child td{border-bottom:none;}
+  /* ── SIGN & FOOTER ── */ .sign-row{display:flex;justify-content:flex-end;gap:60px;margin-top:32px;}
+  .sign-block{text-align:center;}
+  .sign-line{border-top:1px solid var(--wg11);padding-top:6px;min-width:110px;margin-bottom:4px;}
+  .sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+  .sign-name{font-size:14px;color:var(--wg41);margin-top:2px;}
+  .doc-footer{ border-top:1px solid var(--line);padding-top:16px;margin-top:32px; font-size:13px;color:var(--wg9); display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px; }
+  /* ── PRINT ── */ @media print{ body{background:white;}
+  .tabs,.toc,.back-link{display:none;}
+  #tab-notice{display:none !important;}
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-nav">
+      <a href="../index.html" class="back-link no-print">返回社區首頁</a>
+      <a href="../minutes/" class="back-link no-print">返回會議紀錄</a>
+    </div>
+    <div class="eyebrow">MEETING MINUTES · 區分所有權人會議紀錄</div>
+    <h1>第四屆第一次區分所有權人會議</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="header-rule"></div>
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <div class="meta-label">日期</div>
+        <div class="meta-val">114年5月17日（星期六）</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">時間</div>
+        <div class="meta-val">14:00 — 15:40</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">地點</div>
+        <div class="meta-val">2樓管委會使用空間</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">出席／應到</div>
+        <div class="meta-val">51 人 ／ 90 人</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">召集人／主席</div>
+        <div class="meta-val">第三屆主委 江忠亮</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">記錄</div>
+        <div class="meta-val">社區主任 李隆煥</div>
+      </div>
+      <div class="meta-cell" style="grid-column:span 2">
+        <div class="meta-label">列席</div>
+        <div class="meta-val">潤泰公寓大廈管理維護股份有限公司 鄒治平部長、楊莉莉部長、陳柏蓉課長</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="notice" onclick="switchTab('notice')">📋 開會通知單</button>
+      <button class="tab-btn" data-tab="minutes" onclick="switchTab('minutes')">📝 會議紀錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════ 開會通知單 ══════════ -->
+<div id="tab-notice" class="tab-content active">
+  <table class="notice-table">
+    <tr><th>受文者</th><td>全體區分所有權人</td></tr>
+    <tr><th>會議時間</th><td>114年5月17日（星期六）下午14時00分</td></tr>
+    <tr><th>地點</th><td>閱大安2樓管委會使用空間</td></tr>
+    <tr><th>召集人</th><td>第三屆主任委員 江忠亮</td></tr>
+    <tr><th>記錄</th><td>社區主任 李隆煥</td></tr>
+    <tr>
+      <th>會議程序</th>
+      <td>
+        <ul class="notice-agenda">
+          <li><span class="na-num">壹</span><span>主席宣布開會</span></li>
+          <li><span class="na-num">貳</span><span>主席報告</span></li>
+          <li><span class="na-num">參</span><span>年度工作報告</span></li>
+          <li><span class="na-num">肆</span><span>財務年度報告</span></li>
+          <li><span class="na-num">伍</span><span>討論事項及決議</span></li>
+          <li><span class="na-num">陸</span><span>管理委員選任</span></li>
+          <li><span class="na-num">柒</span><span>臨時動議</span></li>
+          <li><span class="na-num">捌</span><span>散會</span></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第四屆第一次區分所有權人會議通知單</span>
+    <span>中華民國114年5月</span>
+  </div>
+</div>
+
+<!-- ══════════ 會議紀錄 ══════════ -->
+<div id="tab-minutes" class="tab-content">
+
+  <!-- TOC -->
+  <div class="toc no-print">
+    <div class="toc-title">本次議程</div>
+    <div class="toc-items">
+      <a href="#section-open" class="toc-item"><span class="toc-dot"></span>出席狀況</a>
+      <a href="#section-report" class="toc-item"><span class="toc-dot blue"></span>主席報告</a>
+      <a href="#section-work" class="toc-item"><span class="toc-dot blue"></span>年度工作報告</a>
+      <a href="#section-finance" class="toc-item"><span class="toc-dot blue"></span>財務年度報告</a>
+      <a href="#section-discussion" class="toc-item"><span class="toc-dot"></span>討論事項</a>
+      <a href="#section-election" class="toc-item"><span class="toc-dot green"></span>管理委員選任</a>
+      <a href="#section-motion" class="toc-item"><span class="toc-dot"></span>臨時動議</a>
+    </div>
+  </div>
+
+  <!-- ══ 壹、開會 ══ -->
+  <div class="section" id="section-open">
+    <div class="section-head">
+      <span class="section-roman">壹</span>
+      <span class="section-title">主席宣布開會・出席狀況確認</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">出席區分所有權人數</div>
+        <div class="stat-val pos">51 人</div>
+        <div class="stat-sub">占全體 56.67%（含代理出席）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">出席區分所有權比例</div>
+        <div class="stat-val pos">61.54%</div>
+        <div class="stat-sub">1,548.34 坪 ／ 全體 2,515.84 坪</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">開議門檻</div>
+        <div class="stat-val pos">符合</div>
+        <div class="stat-sub">人數與比例均達半數以上</div>
+      </div>
+    </div>
+    <div class="open-card">
+      本次出席區分所有權人（含代理出席）計 51 人，應出席總計 90 人，出席區分所有權比例 1,548.34 坪，合於本公寓大廈規約規定之開議額數，主席宣布開會。
+    </div>
+  </div>
+
+  <!-- ══ 貳、主席報告 ══ -->
+  <div class="section" id="section-report">
+    <div class="section-head">
+      <span class="section-roman">貳</span>
+      <span class="section-title">主席報告</span>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第三屆管理委員會（2024/7/1 成立）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <thead>
+        <tr><th>職務</th><th>姓名</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-highlight"><td>主任委員</td><td>江忠亮</td></tr>
+        <tr><td>副主任委員</td><td>許文泰</td></tr>
+        <tr><td>財務委員</td><td>張美媛</td></tr>
+        <tr><td>監察委員</td><td>范家瑋</td></tr>
+        <tr><td>一般委員</td><td>蔡倩玟</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">管理中心成員</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;">
+      <tbody>
+        <tr><td>社區主任</td><td>李隆煥</td></tr>
+        <tr><td>日班禮賓</td><td>林宗德</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 參、年度工作報告 ══ -->
+  <div class="section" id="section-work">
+    <div class="section-head">
+      <span class="section-roman">參</span>
+      <span class="section-title">年度工作報告</span>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">社區概況</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <thead>
+        <tr><th>項目</th><th class="text-right">總數</th><th class="text-right">使用中</th><th class="text-right">空置</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>戶數</td><td class="text-right">90 戶</td><td class="text-right">71 戶</td><td class="text-right">3 戶</td><td style="color:var(--wg9);font-size:14px">承租 17 戶・裝潢 1 戶</td></tr>
+        <tr><td>汽車位</td><td class="text-right">49 位</td><td class="text-right">20 位</td><td class="text-right">29 位</td><td></td></tr>
+        <tr><td>機車位</td><td class="text-right">56 位</td><td class="text-right">18 位</td><td class="text-right">38 位</td><td style="color:var(--wg9);font-size:14px">出租 18 位</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">本屆已完成工程與重要事項</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>梯廳磁磚修繕</td><td>5F 與 6F 牆面部分修繕</td></tr>
+        <tr><td>參加節能省碳比賽</td><td>達成既定目標</td></tr>
+        <tr><td>防颱準備（凱米）</td><td>凱米颱風來襲應變；貨梯因進水故障，完成電梯修繕</td></tr>
+        <tr><td>清洗連續壁內排水孔</td><td>B1F ～ B4F 全面清洗</td></tr>
+        <tr><td>防颱準備（山陀兒）</td><td>山陀兒颱風來襲應變</td></tr>
+        <tr><td>榮獲減碳零標竿獎</td><td>社區代表出席獲獎典禮</td></tr>
+        <tr><td>防颱準備（康芮）</td><td>康芮颱風侵襲應變</td></tr>
+        <tr><td>更換物管公司</td><td>改由潤泰物業接手管理</td></tr>
+        <tr><td>消安申報</td><td>委託太古機電公司辦理；完成缺失改善；消防檢查定於 5/22</td></tr>
+        <tr><td>簽訂大門保養契約</td><td>委託美德亞公司</td></tr>
+        <tr><td>大樓外牆修繕</td><td>15 樓層陽台外牆修繕</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 肆、財務年度報告 ══ -->
+  <div class="section" id="section-finance">
+    <div class="section-head">
+      <span class="section-roman">肆</span>
+      <span class="section-title">財務年度報告</span>
+    </div>
+    <div class="info-block blue">
+      詳如附件一（財務年度報告書）。完整財務月報資料請見財務月報專區。
+    </div>
+  </div>
+
+  <!-- ══ 伍、討論事項 ══ -->
+  <div class="section" id="section-discussion">
+    <div class="section-head">
+      <span class="section-roman">伍</span>
+      <span class="section-title">討論事項及決議</span>
+    </div>
+    <div class="open-card">本次會議無討論議題。</div>
+  </div>
+
+  <!-- ══ 陸、管理委員選任 ══ -->
+  <div class="section" id="section-election">
+    <div class="section-head">
+      <span class="section-roman">陸</span>
+      <span class="section-title">第四屆管理委員選任</span>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">選舉規則依據（規約第十二條）</div>
+    <div class="info-block" style="margin-bottom:16px;">
+      <strong>第一項第一款：</strong>主任委員、副主任委員、監察委員及財務委員，由具區分所有權人身分或其配偶或直系血親之住戶任之，一般委員由住戶任之。<br>
+      <strong>第二項第一款：</strong>採無記名複記法選舉，以獲得較多票數者為當選人。
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">委託代理說明</div>
+    <div class="info-block" style="margin-bottom:8px;">
+      <strong>85號05樓－0</strong>　潘以如女士委託有行為能力之住戶 郭易芹小姐出席，並以規約第十二條第一項第一款資格擔任委員候選人。
+    </div>
+    <div class="info-block" style="margin-bottom:16px;">
+      <strong>83號01樓－8</strong>　許承基先生委託有行為能力之直系血親 許奕偉先生出席，並以規約第十二條第一項第一款資格擔任委員候選人。
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">選舉結果（當選委員共 5 名）</div>
+    <table class="election-table">
+      <thead>
+        <tr><th>戶別</th><th>姓名</th><th style="text-align:right">得票數</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr class="winner"><td>85號08樓－0</td><td>許文泰</td><td style="text-align:right"><span class="vote-badge">8 票</span></td><td></td></tr>
+        <tr class="winner"><td>85號03樓－6</td><td>張美媛</td><td style="text-align:right"><span class="vote-badge">9 票</span></td><td></td></tr>
+        <tr class="winner"><td>85號11樓－7</td><td>范家瑋</td><td style="text-align:right"><span class="vote-badge">9 票</span></td><td></td></tr>
+        <tr class="winner"><td>83號01樓－8</td><td>許奕偉</td><td style="text-align:right"><span class="vote-badge">8 票</span></td><td>直系血親資格</td></tr>
+        <tr class="winner"><td>85號05樓－0</td><td>郭易芹</td><td style="text-align:right"><span class="vote-badge">10 票</span></td><td>住戶資格</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:16px">候補委員（共 2 名）</div>
+    <table class="election-table" style="margin-bottom:16px;">
+      <thead>
+        <tr><th>戶別</th><th>姓名</th><th style="text-align:right">得票數</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>85號06樓－51</td><td>潘以文</td><td style="text-align:right"><span class="vote-badge">2 票</span></td></tr>
+        <tr><td>85號11樓－02</td><td>江維欣／江維倫</td><td style="text-align:right"><span class="vote-badge">2 票</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-block warn" style="margin-bottom:20px;">
+      <strong>選票說明：</strong>本次投票總數為 52 張，實際出席人數為 51 人，多出 1 張。查明係 85號04樓－0 區權人已依法委託主委代為出席並投票，惟其家人亦於現場領票投票。依《公寓大廈管理條例》第 27 條第 3 項規定，應以原委託主委之選票為有效票，家人所投選票為無效票。該無效票所支持對象為現任主委，不影響本次選舉結果。
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第四屆委員職務推選結果</div>
+    <table class="election-table">
+      <thead>
+        <tr><th>職務</th><th>戶別</th><th>姓名</th><th>資格</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="role-badge role-chair">主任委員</span></td><td>85號08樓－0</td><td>許文泰</td><td>區分所有權人</td></tr>
+        <tr><td><span class="role-badge role-vice">副主任委員</span></td><td>85號03樓－6</td><td>張美媛</td><td>區分所有權人</td></tr>
+        <tr><td><span class="role-badge role-supervise">監察委員</span></td><td>83號01樓－8</td><td>許奕偉</td><td>直系血親</td></tr>
+        <tr><td><span class="role-badge role-finance">財務委員</span></td><td>85號11樓－7</td><td>范家瑋</td><td>區分所有權人</td></tr>
+        <tr><td><span class="role-badge role-general">一般委員</span></td><td>85號05樓－0</td><td>郭易芹</td><td>住戶</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 柒、臨時動議 ══ -->
+  <div class="section" id="section-motion">
+    <div class="section-head">
+      <span class="section-roman">柒</span>
+      <span class="section-title">臨時動議及決議</span>
+    </div>
+    <div class="open-card">本次會議無臨時動議。</div>
+  </div>
+
+  <!-- ══ 散會 ══ -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-roman">捌</span>
+      <span class="section-title">散會</span>
+    </div>
+    <div class="open-card">下午 15 時 40 分散會。</div>
+  </div>
+
+  <div class="sign-row">
+    <div class="sign-block">
+      <div class="sign-line"></div>
+      <div class="sign-label">主席</div>
+      <div class="sign-name">江忠亮</div>
+    </div>
+    <div class="sign-block">
+      <div class="sign-line"></div>
+      <div class="sign-label">記錄</div>
+      <div class="sign-name">李隆煥</div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第四屆第一次區分所有權人會議紀錄</span>
+    <span>中華民國114年5月17日</span>
+  </div>
+
+</div><!-- /tab-minutes -->
+</div><!-- /main -->

@@ -5,10 +5,10 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/global.css">
 
 <title>閱大安・目錄頁產生器</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
   :root {
     --ink:#1a1814;--ink2:#3d3a34;--ink3:#7a7670;
     --paper:#f8f5f0;--paper2:#ede9e2;
@@ -16,8 +16,7 @@
     --green:#1a6b3c;--red:#c0392b;--blue:#1a4a6b;
     --border:rgba(26,24,20,0.12);--radius:6px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;min-height:100vh;}
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.75;min-height:100vh;}
 
   .header{background:var(--ink);color:#f8f5f0;padding:24px 32px;border-bottom:3px solid var(--gold);}
   .header h1{font-size:20px;font-weight:700;letter-spacing:0.05em;}
@@ -345,7 +344,6 @@ ${cards}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${name}・財務月報總覽</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
   :root {
     --ink:#1a1814;--ink2:#3d3a34;--ink3:#7a7670;
     --paper:#f8f5f0;--paper2:#ede9e2;
@@ -353,11 +351,10 @@ ${cards}
     --border:rgba(26,24,20,0.12);
     --green:#1a6b3c;--blue:#1a4a6b;--radius:6px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.7;}
   .header{background:var(--ink);color:#f8f5f0;padding:36px 32px 28px;border-bottom:3px solid var(--gold);position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;top:0;right:0;bottom:0;width:200px;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(184,134,11,0.07) 6px,rgba(184,134,11,0.07) 7px);}
-  .header h1{font-size:22px;font-weight:700;letter-spacing:0.06em;margin-bottom:4px;}
+  .header h1{font-size:24px;font-weight:700;letter-spacing:0.06em;margin-bottom:4px;}
   .header p{font-size:12px;color:rgba(248,245,240,0.45);letter-spacing:0.1em;}
   .header-badge{display:inline-block;margin-top:12px;background:rgba(184,134,11,0.2);border:1px solid rgba(184,134,11,0.4);color:var(--gold2);font-size:11px;padding:3px 10px;border-radius:10px;letter-spacing:0.06em;}
   .main{max-width:680px;margin:0 auto;padding:32px 20px 60px;}
@@ -379,7 +376,7 @@ ${cards}
   .badge{font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
   .badge-new{background:rgba(26,107,60,0.12);color:var(--green);border:1px solid rgba(26,107,60,0.2);}
   .badge-gold{background:rgba(184,134,11,0.1);color:var(--gold);border:1px solid rgba(184,134,11,0.2);}
-  .card-arrow{font-size:16px;color:var(--ink3);margin-left:8px;transition:transform 0.18s,color 0.18s;}
+  .card-arrow{font-size:17px;color:var(--ink3);margin-left:8px;transition:transform 0.18s,color 0.18s;}
   .pdf-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;letter-spacing:0.06em;color:#898480;text-decoration:none;padding:2px 7px;border:1px solid rgba(60,56,53,0.18);border-radius:2px;background:transparent;transition:all .18s;white-space:nowrap;margin-top:4px;}
   .pdf-link:hover{color:#3C3835;border-color:#696460;background:#F0EDE8;}
   .report-card:hover .card-arrow{transform:translateX(4px);color:var(--gold);}

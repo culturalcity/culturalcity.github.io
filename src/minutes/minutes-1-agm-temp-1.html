@@ -1,0 +1,287 @@
+---
+layout: minutes.njk
+permalink: /minutes/minutes-1-agm-temp-1.html
+title: 第一屆第一次臨時區分所有權人會議紀錄
+extraStyles: |
+  .notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
+  .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}
+  .notice-table tr:last-child{border-bottom:none;}
+  .notice-table th{background:rgba(60,56,53,0.04);padding:10px 16px;font-weight:500;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-align:left;width:90px;vertical-align:top;border-right:1px solid rgba(60,56,53,0.06);}
+  .notice-table td{padding:10px 16px;color:var(--wg11);vertical-align:top;line-height:1.75;}
+  .notice-agenda{list-style:none;padding:0;display:flex;flex-direction:column;gap:0;}
+  .notice-agenda li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11);}
+  .notice-agenda li:last-child{border-bottom:none;}
+  .na-num{font-size:12px;color:var(--wg9);letter-spacing:.04em;flex-shrink:0;padding-top:3px;min-width:52px;}
+  .toc{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;}
+  .toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+  .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
+  .toc-item{font-size:14px;color:var(--wg9);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;}
+  .toc-item:hover{color:var(--wg41);}
+  .toc-dot{width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0;}
+  .toc-dot.blue{background:var(--blue);}
+  .toc-dot.green{background:var(--dp);}
+  .section{margin-bottom:32px;}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .section-roman{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px;}
+  .section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+  .open-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:15px;color:var(--wg9);}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
+  .stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}
+  .stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
+  .stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}
+  .stat-val.pos{color:var(--dp);}
+  .info-block{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:12px;}
+  .info-block.blue{border-left-color:var(--blue);}
+  .info-block strong{color:var(--wg41);}
+  .agenda-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;position:relative;}
+  .agenda-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--dp);}
+  .agenda-header{display:flex;align-items:baseline;gap:10px;padding:11px 16px 10px 18px;border-bottom:1px solid rgba(60,56,53,0.07);}
+  .agenda-num{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0;}
+  .agenda-title{font-size:15px;font-weight:600;color:var(--wg41);flex:1;}
+  .agenda-badge{font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0;}
+  .badge-resolved{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
+  .agenda-body{padding:14px 16px 14px 18px;}
+  .agenda-section-label{font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px;}
+  .agenda-section-label:first-child{margin-top:0;}
+  .agenda-discussion{font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:8px;}
+  .agenda-resolution{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15);border-radius:var(--radius);padding:10px 13px;font-size:15px;color:var(--wg41);line-height:1.8;margin-top:10px;}
+  .agenda-resolution-label{font-size:11px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600;}
+  .vote-result{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0;}
+  .vote-cell{text-align:center;padding:10px 8px;border-radius:var(--radius);border:1px solid var(--line);}
+  .vote-cell.agree{background:rgba(31,92,56,0.05);border-color:rgba(31,92,56,0.2);}
+  .vote-cell.disagree{background:rgba(140,31,31,0.05);border-color:rgba(140,31,31,0.2);}
+  .vote-cell-label{font-size:12px;letter-spacing:.08em;color:var(--wg9);margin-bottom:4px;}
+  .vote-cell-val{font-size:18px;font-weight:700;}
+  .vote-cell.agree .vote-cell-val{color:var(--dp);}
+  .vote-cell.disagree .vote-cell-val{color:var(--dn);}
+  .vote-cell-pct{font-size:13px;color:var(--wg9);margin-top:2px;}
+  .amend-wrap{overflow-x:auto;margin:10px 0 4px;}
+  .amend-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .amend-table th{background:rgba(60,56,53,0.04);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left;width:50%;}
+  .amend-table td{padding:10px 14px;color:var(--wg11);vertical-align:top;line-height:1.8;width:50%;}
+  .amend-table td:first-child{border-right:1px solid var(--line);color:var(--wg9);}
+  .amend-table td u{text-decoration:underline;color:var(--wg41);}
+  .sign-row{display:flex;justify-content:flex-end;gap:60px;margin-top:32px;}
+  .sign-block{text-align:center;}
+  .sign-line{border-top:1px solid var(--wg11);padding-top:6px;min-width:110px;margin-bottom:4px;}
+  .sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+  .sign-name{font-size:14px;color:var(--wg41);margin-top:2px;}
+  .doc-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:32px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  .tabs,.toc,.back-link{display:none;}
+  #tab-notice{display:none !important;}
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-nav">
+      <a href="../index.html" class="back-link no-print">返回社區首頁</a>
+      <a href="../minutes/" class="back-link no-print">返回會議紀錄</a>
+    </div>
+    <div class="eyebrow">MEETING MINUTES · 區分所有權人會議紀錄</div>
+    <h1>第一屆第一次臨時區分所有權人會議</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="header-rule"></div>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-label">日期</div><div class="meta-val">111年9月17日（星期六）</div></div>
+      <div class="meta-cell"><div class="meta-label">時間</div><div class="meta-val">14:00 — 16:00</div></div>
+      <div class="meta-cell"><div class="meta-label">地點</div><div class="meta-val">閱大安 2F 管委會使用空間</div></div>
+      <div class="meta-cell"><div class="meta-label">出席／應到</div><div class="meta-val">71 人 ／ 76 人</div></div>
+      <div class="meta-cell"><div class="meta-label">召集人／主席</div><div class="meta-val">第一屆主委 潘以文</div></div>
+      <div class="meta-cell"><div class="meta-label">記錄</div><div class="meta-val">社區主任 楊欣儒</div></div>
+      <div class="meta-cell" style="grid-column:span 2"><div class="meta-label">列席</div><div class="meta-val">新美齊公寓大廈管理維護股份有限公司 曾處長、賴經理、左課長、高專員</div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="notice" onclick="switchTab('notice')">📋 開會通知單</button>
+      <button class="tab-btn" data-tab="minutes" onclick="switchTab('minutes')">📝 會議紀錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════ 開會通知單 ══════════ -->
+<div id="tab-notice" class="tab-content active">
+  <table class="notice-table">
+    <tr><th>受文者</th><td>全體區分所有權人</td></tr>
+    <tr><th>會議時間</th><td>111年9月17日（星期六）下午14時00分</td></tr>
+    <tr><th>地點</th><td>閱大安 2F 管委會使用空間</td></tr>
+    <tr><th>召集人</th><td>第一屆主任委員 潘以文</td></tr>
+    <tr><th>記錄</th><td>社區主任 楊欣儒</td></tr>
+    <tr>
+      <th>會議程序</th>
+      <td>
+        <ul class="notice-agenda">
+          <li><span class="na-num">壹</span><span>主席宣布開會・主席報告</span></li>
+          <li><span class="na-num">貳・議案一</span><span>委託第三方專業廠商協助辦理公設點交</span></li>
+          <li><span class="na-num">貳・議案二</span><span>訂定管理委員會經費可動用額度</span></li>
+          <li><span class="na-num">貳・議案三</span><span>新增規約：社區共用部分及約定專用部分禁止吸菸</span></li>
+          <li><span class="na-num">參</span><span>臨時動議</span></li>
+          <li><span class="na-num">肆</span><span>散會</span></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第一屆第一次臨時區分所有權人會議通知單</span>
+    <span>中華民國111年9月</span>
+  </div>
+</div>
+
+<!-- ══════════ 會議紀錄 ══════════ -->
+<div id="tab-minutes" class="tab-content">
+
+  <div class="toc no-print">
+    <div class="toc-title">本次議程</div>
+    <div class="toc-items">
+      <a href="#section-open" class="toc-item"><span class="toc-dot"></span>出席狀況</a>
+      <a href="#section-report" class="toc-item"><span class="toc-dot blue"></span>主席報告</a>
+      <a href="#agenda-1" class="toc-item"><span class="toc-dot green"></span>議案一・公設點交</a>
+      <a href="#agenda-2" class="toc-item"><span class="toc-dot green"></span>議案二・可動用額度</a>
+      <a href="#agenda-3" class="toc-item"><span class="toc-dot green"></span>議案三・禁菸規約</a>
+    </div>
+  </div>
+
+  <!-- ══ 壹、開會 ══ -->
+  <div class="section" id="section-open">
+    <div class="section-head"><span class="section-roman">壹</span><span class="section-title">主席宣布開會・出席狀況確認</span></div>
+    <div class="info-block blue" style="margin-bottom:16px;">
+      <strong>出席人數計算說明：</strong>原區分所有權人數總計 90 人，區分所有權總計 2,515.94 坪。依《公寓大廈管理條例》第 27 條第 2 項規定，因敦寶建設股份有限公司所有專有部分個數超過全部總合五分之一，共 14 人、295.41 坪不列入計算，調整後應出席人數為 76 人，總計 2,220.53 坪。
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">出席區分所有權人數</div><div class="stat-val pos">71 人</div><div class="stat-sub">占調整後全體 93.42%</div></div>
+      <div class="stat-card"><div class="stat-label">出席區分所有權比例</div><div class="stat-val pos">94.09%</div><div class="stat-sub">2,089.19 坪 ／ 2,220.53 坪</div></div>
+      <div class="stat-card"><div class="stat-label">開議門檻</div><div class="stat-val pos">符合</div><div class="stat-sub">三分之二以上出席</div></div>
+    </div>
+    <div class="open-card">出席區分所有權人計 71 人，達開議額數，主席宣布開會。</div>
+  </div>
+
+  <!-- ══ 貳、主席報告 ══ -->
+  <div class="section" id="section-report">
+    <div class="section-head"><span class="section-roman">貳</span><span class="section-title">主席報告</span></div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第一屆管理委員會（2022/6/24 成立）</div>
+    <table style="width:100%;border-collapse:collapse;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;">
+      <tbody>
+        <tr style="border-bottom:1px solid rgba(60,56,53,0.06);"><td style="padding:8px 14px;font-weight:500;color:var(--wg41);width:130px;">主任委員</td><td style="padding:8px 14px;color:var(--wg11);">潘以文</td></tr>
+        <tr style="border-bottom:1px solid rgba(60,56,53,0.06);"><td style="padding:8px 14px;font-weight:500;color:var(--wg41);">財務委員</td><td style="padding:8px 14px;color:var(--wg11);">許文泰</td></tr>
+        <tr style="border-bottom:1px solid rgba(60,56,53,0.06);"><td style="padding:8px 14px;font-weight:500;color:var(--wg41);">監察委員</td><td style="padding:8px 14px;color:var(--wg11);">許奕偉</td></tr>
+        <tr style="border-bottom:1px solid rgba(60,56,53,0.06);"><td style="padding:8px 14px;font-weight:500;color:var(--wg41);">副主任委員</td><td style="padding:8px 14px;color:var(--wg11);">黃振吉（敦寶建設）</td></tr>
+        <tr style="border-bottom:1px solid rgba(60,56,53,0.06);"><td style="padding:8px 14px;font-weight:500;color:var(--wg41);">一般委員</td><td style="padding:8px 14px;color:var(--wg11);">連為誠（福一建設）</td></tr>
+        <tr><td style="padding:8px 14px;font-weight:500;color:var(--wg41);">總幹事</td><td style="padding:8px 14px;color:var(--wg11);">楊欣儒</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">管委會事務報告重點</div>
+    <div class="info-block" style="margin-bottom:8px;">已制訂主要管理辦法：門禁管理辦法、停車空間管理辦法、飼養動物管理辦法、社區垃圾管理辦法、特定公共空間管理辦法、社區資源垃圾分類指引。</div>
+    <div class="info-block" style="margin-bottom:8px;">管委會已正式經台北市政府核備成立，並取得國稅局統編與管理費利息免稅同意書。已於永豐銀行開立管理費與管理基金兩帳戶，並申設市話與手機門號各一。</div>
+    <div class="info-block" style="margin-bottom:16px;">建設公司管理費已部分撥交管委會運用；管理費（部分）將自 112 年元月份開始向住戶收繳；建設公司同意支付 2022/12/31 以前之物業費用。</div>
+  </div>
+
+  <!-- ══ 參、討論事項 ══ -->
+  <div class="section">
+    <div class="section-head"><span class="section-roman">參</span><span class="section-title">討論事項及決議</span></div>
+
+    <!-- 議案一 -->
+    <div class="agenda-item" id="agenda-1">
+      <div class="agenda-header">
+        <span class="agenda-num">議案一</span>
+        <span class="agenda-title">委託第三方專業廠商協助辦理公設點交</span>
+        <span class="agenda-badge badge-resolved">通過（70票同意）</span>
+      </div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">說明</div>
+        <div class="agenda-discussion">公設點交為第一屆管委會最重要任務之一。管委會已完成部分文件圖說（竣工圖說、管線圖說、廠商資料與檢驗報告）與公共設施（1F 管委會使用空間、2F 管委會使用空間、頂樓內外公共設施、1F 外植栽與相關設施）之點交。依《公寓大廈管理條例》第 57 條規定，管委會成立後應確認水電、機械、消防設施及各類管線功能正常無誤後辦理點交。<br><br>管委會已詢價四家廠商（太古華電、國霖、真禾、嘉鼎），考量專業實力、以往業績、業界口碑及費用，擬委託<strong>太古華電公司</strong>擔任第三方公設點交協助廠商（履勘前導會議、依初勘報告逐條履勘、照相存證、履勘後缺失報告檢討會議）。</div>
+        <div class="agenda-section-label">表決結果</div>
+        <div class="vote-result">
+          <div class="vote-cell agree"><div class="vote-cell-label">同意</div><div class="vote-cell-val">70 票</div><div class="vote-cell-pct">超過出席人數四分之三</div></div>
+          <div class="vote-cell disagree"><div class="vote-cell-label">不同意</div><div class="vote-cell-val">1 票</div><div class="vote-cell-pct"></div></div>
+        </div>
+        <div class="agenda-resolution">
+          <div class="agenda-resolution-label">決　議</div>
+          通過。採用管委會方案，由太古華電擔任第三方公設點交協助廠商。另主委徵詢現場住戶意見，贊成安排<strong>平日</strong>進行履勘之住戶人數較多。
+        </div>
+      </div>
+    </div>
+
+    <!-- 議案二 -->
+    <div class="agenda-item" id="agenda-2">
+      <div class="agenda-header">
+        <span class="agenda-num">議案二</span>
+        <span class="agenda-title">訂定管理委員會經費可動用額度</span>
+        <span class="agenda-badge badge-resolved">通過（67票同意）</span>
+      </div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">說明</div>
+        <div class="agenda-discussion">管委會之管理費經費可動用額度尚未經區權人大會正式授權。管委會建議額度如下：總幹事 3,000 元以下；主委 10,000 元以下；管委會 30 萬元以下；超過 30 萬元須經區權會大會通過方可動用。</div>
+        <div class="agenda-section-label">表決結果</div>
+        <div class="vote-result">
+          <div class="vote-cell agree"><div class="vote-cell-label">同意</div><div class="vote-cell-val">67 票</div><div class="vote-cell-pct">超過出席人數四分之三</div></div>
+          <div class="vote-cell disagree"><div class="vote-cell-label">不同意</div><div class="vote-cell-val">4 票</div><div class="vote-cell-pct"></div></div>
+        </div>
+        <div class="agenda-resolution">
+          <div class="agenda-resolution-label">決　議</div>
+          通過。本社區管理費與管理基金之可動用額度權限如下：<br>
+          總幹事 3,000 元以下 ／ 主委 10,000 元以下 ／ 管委會 30 萬元以下 ／ 30 萬元以上須經區權會大會決議。
+        </div>
+      </div>
+    </div>
+
+    <!-- 議案三 -->
+    <div class="agenda-item" id="agenda-3">
+      <div class="agenda-header">
+        <span class="agenda-num">議案三</span>
+        <span class="agenda-title">新增規約：社區共用部分及約定專用部分全面禁止吸菸</span>
+        <span class="agenda-badge badge-resolved">通過（70票同意）</span>
+      </div>
+      <div class="agenda-body">
+        <div class="agenda-section-label">說明</div>
+        <div class="agenda-discussion">為杜絕二手菸、推動無菸健康社區，保障住戶健康，管委會提議於規約第廿二條「住戶應遵守之事項」中增列第十款。</div>
+        <div class="agenda-section-label">規約修訂內容</div>
+        <div class="amend-wrap">
+          <table class="amend-table">
+            <thead><tr><th>新增條款（規約第廿二條第十款）</th><th>說明</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>共用部分及約定專用部分（包括但不限於大廳、梯廳、樓梯間、走道、公用廁所、管委會使用空間、樓頂平台、一樓花圃、三樓露台、停車空間、機電室等室內外空間）<u>全面禁止吸菸</u>。</td>
+                <td>新增條款，原規約第廿二條增列第十款。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="agenda-section-label">表決結果</div>
+        <div class="vote-result">
+          <div class="vote-cell agree"><div class="vote-cell-label">同意</div><div class="vote-cell-val">70 票</div><div class="vote-cell-pct">超過出席人數四分之三</div></div>
+          <div class="vote-cell disagree"><div class="vote-cell-label">不同意</div><div class="vote-cell-val">1 票</div><div class="vote-cell-pct"></div></div>
+        </div>
+        <div class="agenda-resolution">
+          <div class="agenda-resolution-label">決　議</div>
+          通過。規約第廿二條「住戶應遵守之事項」增列第十款，社區共用部分及約定專用部分全面禁止吸菸。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 肆、臨時動議 ══ -->
+  <div class="section">
+    <div class="section-head"><span class="section-roman">肆</span><span class="section-title">臨時動議及決議</span></div>
+    <div class="open-card">本次會議無臨時動議。</div>
+  </div>
+
+  <!-- ══ 散會 ══ -->
+  <div class="section">
+    <div class="section-head"><span class="section-roman">伍</span><span class="section-title">散會</span></div>
+    <div class="open-card">下午 16 時 00 分散會。</div>
+  </div>
+
+  <div class="sign-row">
+    <div class="sign-block"><div class="sign-line"></div><div class="sign-label">主席</div><div class="sign-name">潘以文</div></div>
+    <div class="sign-block"><div class="sign-line"></div><div class="sign-label">記錄</div><div class="sign-name">楊欣儒</div></div>
+  </div>
+
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第一屆第一次臨時區分所有權人會議紀錄</span>
+    <span>中華民國111年9月17日</span>
+  </div>
+
+</div><!-- /tab-minutes -->
+</div><!-- /main -->

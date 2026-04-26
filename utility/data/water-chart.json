@@ -1,0 +1,36 @@
+{
+  "periods": ["01","03","05","07","09","11"],
+  "periodLabels": ["1月","3月","5月","7月","9月","11月"],
+  "datasets": [
+    {
+      "label": "111年（2022）",
+      "data": [null,null,null,656,1575,4336],
+      "tonnes": [null,null,null,38,114,312],
+      "backgroundColor": "rgba(60,56,53,0.5)"
+    },
+    {
+      "label": "112年（2023）",
+      "data": [2432,1636,1368,1262,1428,2083],
+      "tonnes": [174,119,97,87,102,151],
+      "backgroundColor": "rgba(137,132,128,0.5)"
+    },
+    {
+      "label": "113年（2024）",
+      "data": [1072,1133,1059,1341,877,682],
+      "tonnes": [73,78,72,95,57,41],
+      "backgroundColor": "rgba(105,100,96,0.65)"
+    },
+    {
+      "label": "114年（2025）",
+      "data": [606,706,682,638,1785,2136],
+      "tonnes": [34,43,41,37,126,155],
+      "backgroundColor": "rgba(60,56,53,0.75)"
+    },
+    {
+      "label": "115年（2026）",
+      "data": [2065,3969,null,null,null,null],
+      "tonnes": [150,286,null,null,null,null],
+      "backgroundColor": "rgba(43,74,107,0.85)"
+    }
+  ]
+}

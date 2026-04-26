@@ -14,3 +14,10 @@
 
 # Windows 縮圖快取
 Thumbs.db
+
+# Node.js 與 11ty
+node_modules/
+_site/
+
+# Claude Code 內部資料
+.claude/

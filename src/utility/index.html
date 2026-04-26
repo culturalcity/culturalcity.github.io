@@ -1,0 +1,1055 @@
+---
+layout: base.njk
+permalink: /utility/index.html
+title: 水電用量分析
+extraHead: |
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+extraStyles: |
+  :root{
+      --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+      --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+      --dp:#1F5C38;--dn:#8C1F1F;
+    }
+    body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:17px;line-height:1.75;min-height:100vh;}
+    .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
+    .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+    .header-inner{max-width:1000px;margin:0 auto;position:relative;}
+    .back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+    .back-link:hover{color:var(--wg1);}
+    .back-link::before{content:'←';}
+    .header-eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+    .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
+    .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.14em;}
+    .main{max-width:1000px;margin:0 auto;padding:32px 24px 64px;}
+    /* TABS */
+    .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
+    .tab{padding:10px 22px;font-size:16px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;background:none;}
+    .tab:hover{color:var(--wg41);}
+    .tab.active{color:var(--wg41);border-bottom-color:var(--wg41);font-weight:500;}
+    .tab-content{display:none;}.tab-content.active{display:block;}
+    /* UPLOAD ROW */
+    .upload-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--wg9);}
+    .upload-row strong{color:var(--wg41);}
+    .upload-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;font-size:13px;letter-spacing:.06em;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .18s;text-decoration:none;}
+    .upload-btn:hover{background:var(--wg11);color:var(--wg1);}
+    /* KPI ROW */
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+    @media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
+    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 12px;position:relative;}
+    .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .kpi-label{font-size:13px;color:var(--wg9);letter-spacing:.06em;margin-bottom:7px;}
+    .kpi-val{font-size:22px;font-weight:700;color:var(--wg41);}
+    .kpi-sub{font-size:13px;margin-top:5px;}
+    .dp{color:var(--dp);}.dn{color:var(--dn);}
+    /* CHART */
+    .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
+    .panel-hd{padding:11px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:.04em;}
+    .panel-bd{padding:16px 18px;}
+    .chart-wrap{position:relative;height:220px;}
+    .chart-wrap-sm{position:relative;height:170px;}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+    @media(max-width:700px){.chart-grid{grid-template-columns:1fr;}}
+    /* TABLE */
+    .tbl-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:14px;}
+    th{text-align:left;padding:8px 10px;background:var(--wg1);color:var(--wg9);font-weight:500;font-size:13px;letter-spacing:.06em;border-bottom:1px solid var(--line);white-space:nowrap;}
+    th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
+    td{padding:8px 10px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);white-space:nowrap;}
+    td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
+    tr:last-child td{border-bottom:none;}
+    tr.latest td{font-weight:500;color:var(--wg41);background:rgba(60,56,53,0.03);}
+    .dp{color:var(--dp);font-weight:500;}
+    .dn{color:var(--dn);font-weight:500;}
+    /* NOTICE */
+    .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:15px;color:var(--wg9);line-height:1.85;margin-bottom:20px;}
+    @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
+    /* DRIVE LINK */
+    .drive-link{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
+    .drive-link:hover{background:#F2F0EC;border-color:var(--wg11);}
+    .drive-accent{width:3px;flex-shrink:0;background:var(--wg11);}
+    .drive-body{flex:1;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+    .drive-icon{font-size:17px;flex-shrink:0;opacity:0.65;}
+    .drive-text{flex:1;display:flex;flex-direction:column;gap:2px;}
+    .drive-text strong{font-size:15px;font-weight:500;color:var(--wg41);letter-spacing:.02em;}
+    .drive-text span{font-size:12px;color:var(--wg9);letter-spacing:.08em;}
+    .drive-cta{font-size:13px;color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
+    .drive-link:hover .drive-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+    /* TOOL CARDS */
+    .tool-section{margin-bottom:28px;}
+    .tool-section-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+    .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:600px){.tool-grid{grid-template-columns:1fr;}}
+    .tool-card{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
+    .tool-card:hover{background:#F2F0EC;border-color:var(--wg11);}
+    .tool-accent{width:3px;flex-shrink:0;background:#185FA5;}
+    .tool-accent.target{background:var(--dp);}
+    .tool-body{flex:1;padding:14px 16px;}
+    .tool-body strong{display:block;font-size:15px;font-weight:500;letter-spacing:.02em;margin-bottom:3px;}
+    .tool-body span{font-size:12px;color:var(--wg9);letter-spacing:.06em;line-height:1.75;}
+    .tool-cta{font-size:13px;color:var(--wg9);padding:0 14px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
+    .tool-card:hover .tool-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">UTILITY &amp; ELECTRICITY ANALYSIS</div>
+    <h1>水電用量分析</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 分析工具 -->
+  <div class="tool-section">
+    <div class="tool-section-label">用電基準查詢</div>
+    <div class="tool-grid">
+      <a href="./electricity-target.html" class="tool-card">
+        <div class="tool-accent target"></div>
+        <div class="tool-body">
+          <strong>用電目標速查表</strong>
+          <span>輸入氣溫即查回歸基準值與警戒線<br>含散佈圖與完整參考表（10—40°C）</span>
+        </div>
+        <span class="tool-cta">開啟 →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" role="tab" aria-selected="true" aria-controls="tab-elec" onclick="sw('elec')">大公電帳單</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-water" onclick="sw('water')">公水帳單</button>
+  </div>
+
+  <!-- ══ 大公電 ══ -->
+  <div id="tab-elec" class="tab-content active" role="tabpanel">
+
+    <div class="notice-box">
+      📌 <strong>大公電</strong>為社區公共設施用電，費用由各住戶依比例直接分攤繳納，<strong>不經過管理費帳戶</strong>，管委會基於管理職責進行監控與記錄。此處的用電明細與財報中的「公共電費」科目性質不同——財報公共電費係指電信室電費及 B1～B4 充電樁電費（由管理費代墊後向充電用戶收回）。大公電每月出帳一次，帳期以台電帳單上的「使用期間」為準。
+    </div>
+
+    <div class="bill-section">
+      <a href="https://drive.google.com/drive/folders/181K6Hkc-umoRiH9MqENCUyPvr1R2tfP1?usp=sharing"
+         target="_blank" class="drive-link">
+        <div class="drive-accent"></div>
+        <div class="drive-body">
+          <span class="drive-icon">📁</span>
+          <span class="drive-text">
+            <strong>大公電帳單資料夾</strong>
+            <span>GOOGLE DRIVE</span>
+          </span>
+        </div>
+        <span class="drive-cta">開啟 ↗</span>
+      </a>
+    </div>
+
+    <div class="kpi-row" id="elec-kpi">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-panel">
+        <div class="panel-hd">電費趨勢（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="elec-fee-chart"></canvas></div></div>
+      </div>
+      <div class="chart-panel">
+        <div class="panel-hd">用電度數趨勢（度）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="elec-kwh-chart"></canvas></div></div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="panel-hd">歷史明細表</div>
+      <div class="panel-bd">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>年度</th><th>帳期</th><th>使用期間</th>
+                <th>度數（度）</th><th>同比差</th><th>同比%</th>
+                <th>契約容量（瓩）</th>
+                <th>電費（元）</th><th>同比差</th><th>同比%</th>
+              </tr>
+            </thead>
+            <tbody id="elec-tbody">
+<tr class="latest">
+      <td>115（2026）</td><td>3-4月</td><td>03/11-04/09</td>
+      <td>6,640</td>
+      <td class="dn">240</td>
+      <td class="dn">+3.8%</td>
+      <td>33</td>
+      <td>33,842</td>
+      <td class="dn">915</td>
+      <td class="dn">+2.8%</td>
+    </tr>
+<tr class="latest">
+      <td>115（2026）</td><td>2-3月</td><td>02/06-03/10</td>
+      <td>7,120</td>
+      <td class="dn">1,040</td>
+      <td class="dn">+17.1%</td>
+      <td>30</td>
+      <td>35,671</td>
+      <td class="dn">3,964</td>
+      <td class="dn">+12.5%</td>
+    </tr>
+<tr class="latest">
+      <td>115（2026）</td><td>1-2月</td><td>01/12-02/05</td>
+      <td>5,560</td>
+      <td class="dp">-2,640</td>
+      <td class="dp">-32.2%</td>
+      <td>33</td>
+      <td>29,725</td>
+      <td class="dp">-10,063</td>
+      <td class="dp">-25.3%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>12-1月</td><td>12/11-01/11</td>
+      <td>7,120</td>
+      <td class="dn">200</td>
+      <td class="dn">+2.9%</td>
+      <td>34</td>
+      <td>35,671</td>
+      <td class="dn">762</td>
+      <td class="dn">+2.2%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>11-12月</td><td>11/12-12/10</td>
+      <td>6,520</td>
+      <td class="dp">-120</td>
+      <td class="dp">-1.8%</td>
+      <td>37</td>
+      <td>33,384</td>
+      <td class="dp">-458</td>
+      <td class="dp">-1.4%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>10-11月</td><td>10/14-11/11</td>
+      <td>7,760</td>
+      <td class="dn">200</td>
+      <td class="dn">+2.6%</td>
+      <td>40</td>
+      <td>38,111</td>
+      <td class="dn">1,065</td>
+      <td class="dn">+2.9%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>9-10月</td><td>09/10-10/13</td>
+      <td>11,200</td>
+      <td class="dn">2,360</td>
+      <td class="dn">+26.7%</td>
+      <td>48</td>
+      <td>54,827</td>
+      <td class="dn">15,015</td>
+      <td class="dn">+37.7%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>8-9月</td><td>08/12-09/09</td>
+      <td>9,360</td>
+      <td class="dn">960</td>
+      <td class="dn">+11.4%</td>
+      <td>45</td>
+      <td>49,249</td>
+      <td class="dn">9,153</td>
+      <td class="dn">+22.8%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>7-8月</td><td>07/10-08/11</td>
+      <td>10,080</td>
+      <td class="dn">1,240</td>
+      <td class="dn">+14.0%</td>
+      <td>44</td>
+      <td>52,142</td>
+      <td class="dn">10,556</td>
+      <td class="dn">+25.4%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>6-7月</td><td>06/10-07/09</td>
+      <td>10,840</td>
+      <td class="dn">2,800</td>
+      <td class="dn">+34.8%</td>
+      <td>37</td>
+      <td>55,197</td>
+      <td class="dn">16,321</td>
+      <td class="dn">+42.0%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>5-6月</td><td>05/12-06/09</td>
+      <td>8,520</td>
+      <td class="dn">1,600</td>
+      <td class="dn">+23.1%</td>
+      <td>34</td>
+      <td>42,589</td>
+      <td class="dn">10,132</td>
+      <td class="dn">+31.2%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>4-5月</td><td>04/11-05/11</td>
+      <td>7,520</td>
+      <td class="dp">-560</td>
+      <td class="dp">-6.9%</td>
+      <td>35</td>
+      <td>37,196</td>
+      <td class="dn">2,720</td>
+      <td class="dn">+7.9%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>3-4月</td><td>03/12-04/10</td>
+      <td>6,400</td>
+      <td class="dp">-1,360</td>
+      <td class="dp">-17.5%</td>
+      <td>34</td>
+      <td>32,927</td>
+      <td class="dn">1,823</td>
+      <td class="dn">+5.9%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>2-3月</td><td>02/11-03/11</td>
+      <td>6,080</td>
+      <td class="dp">-2,640</td>
+      <td class="dp">-30.3%</td>
+      <td>38</td>
+      <td>31,707</td>
+      <td class="dp">-873</td>
+      <td class="dp">-2.7%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>1-2月</td><td>01/10-02/10</td>
+      <td>8,200</td>
+      <td class="dp">-80</td>
+      <td class="dp">-1.0%</td>
+      <td>35</td>
+      <td>39,788</td>
+      <td class="dn">8,422</td>
+      <td class="dn">+26.9%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>12-1月</td><td>12/07-01/09</td>
+      <td>6,920</td>
+      <td class="dp">-3,280</td>
+      <td class="dp">-32.2%</td>
+      <td>34</td>
+      <td>34,909</td>
+      <td class="dp">-5,165</td>
+      <td class="dp">-12.9%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>11-12月</td><td>11/13-12/11</td>
+      <td>6,640</td>
+      <td class="dp">-1,720</td>
+      <td class="dp">-20.6%</td>
+      <td>35</td>
+      <td>33,842</td>
+      <td class="dp">-1,157</td>
+      <td class="dp">-3.3%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>10-11月</td><td>10/14-11/12</td>
+      <td>7,560</td>
+      <td class="dp">-2,320</td>
+      <td class="dp">-23.5%</td>
+      <td>38</td>
+      <td>37,046</td>
+      <td class="dp">-2,145</td>
+      <td class="dp">-5.5%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>9-10月</td><td>09/12-10/13</td>
+      <td>8,840</td>
+      <td class="dp">-1,520</td>
+      <td class="dp">-14.7%</td>
+      <td>39</td>
+      <td>39,812</td>
+      <td class="dp">-5,445</td>
+      <td class="dp">-12.0%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>8-9月</td><td>08/13-09/11</td>
+      <td>8,400</td>
+      <td class="dp">-3,280</td>
+      <td class="dp">-28.1%</td>
+      <td>48</td>
+      <td>40,096</td>
+      <td class="dp">-9,586</td>
+      <td class="dp">-19.3%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>7-8月</td><td>07/11-08/12</td>
+      <td>8,840</td>
+      <td class="dp">-2,840</td>
+      <td class="dp">-24.3%</td>
+      <td>37</td>
+      <td>41,586</td>
+      <td class="dp">-8,639</td>
+      <td class="dp">-17.2%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>6-7月</td><td>06/12-07/10</td>
+      <td>8,040</td>
+      <td class="dp">-2,720</td>
+      <td class="dp">-25.3%</td>
+      <td>41</td>
+      <td>38,876</td>
+      <td class="dp">-8,676</td>
+      <td class="dp">-18.2%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>5-6月</td><td>05/14-06/11</td>
+      <td>6,920</td>
+      <td class="dp">-3,120</td>
+      <td class="dp">-31.1%</td>
+      <td>40</td>
+      <td>32,457</td>
+      <td class="dp">-8,652</td>
+      <td class="dp">-21.0%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>4-5月</td><td>04/11-05/13</td>
+      <td>8,080</td>
+      <td class="dp">-1,600</td>
+      <td class="dp">-16.5%</td>
+      <td>37</td>
+      <td>34,476</td>
+      <td class="dp">-4,164</td>
+      <td class="dp">-10.8%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>3-4月</td><td>03/12-04/10</td>
+      <td>7,760</td>
+      <td class="dp">-1,880</td>
+      <td class="dp">-19.5%</td>
+      <td>40</td>
+      <td>31,104</td>
+      <td class="dp">-5,320</td>
+      <td class="dp">-14.6%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>2-3月</td><td>02/07-03/11</td>
+      <td>8,720</td>
+      <td class="dp">-920</td>
+      <td class="dp">-9.5%</td>
+      <td>38</td>
+      <td>32,580</td>
+      <td class="dp">-2,626</td>
+      <td class="dp">-7.5%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>1-2月</td><td>01/10-02/06</td>
+      <td>8,280</td>
+      <td class="dp">-1,080</td>
+      <td class="dp">-11.5%</td>
+      <td>38</td>
+      <td>31,366</td>
+      <td class="dp">-4,648</td>
+      <td class="dp">-12.9%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>12-1月</td><td>12/07-01/09</td>
+      <td>10,200</td>
+      <td class="dp">-400</td>
+      <td class="dp">-3.8%</td>
+      <td>40</td>
+      <td>40,074</td>
+      <td class="dp">-2,396</td>
+      <td class="dp">-5.6%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>11-12月</td><td>11/07-12/06</td>
+      <td>8,360</td>
+      <td class="dp">-1,760</td>
+      <td class="dp">-17.4%</td>
+      <td>40</td>
+      <td>34,999</td>
+      <td class="dp">-6,313</td>
+      <td class="dp">-15.3%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>10-11月</td><td>10/06-11/06</td>
+      <td>9,880</td>
+      <td class="dp">-880</td>
+      <td class="dp">-8.2%</td>
+      <td>40</td>
+      <td>39,191</td>
+      <td class="dp">-3,665</td>
+      <td class="dp">-8.6%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>9-10月</td><td>09/07-10/05</td>
+      <td>10,360</td>
+      <td class="dp">-1,960</td>
+      <td class="dp">-15.9%</td>
+      <td>39</td>
+      <td>45,257</td>
+      <td class="dp">-7,541</td>
+      <td class="dp">-14.3%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>8-9月</td><td>08/07-09/06</td>
+      <td>11,680</td>
+      <td class="dp">-3,840</td>
+      <td class="dp">-24.7%</td>
+      <td>46</td>
+      <td>49,682</td>
+      <td class="dp">-12,792</td>
+      <td class="dp">-20.5%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>7-8月</td><td>07/07-08/06</td>
+      <td>11,680</td>
+      <td class="dp">-1,440</td>
+      <td class="dp">-11.0%</td>
+      <td>51</td>
+      <td>50,225</td>
+      <td class="dp">-6,150</td>
+      <td class="dp">-10.9%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>6-7月</td><td>06/07-07/06</td>
+      <td>10,760</td>
+      <td class="dp">-880</td>
+      <td class="dp">-7.6%</td>
+      <td>51</td>
+      <td>47,552</td>
+      <td class="dp">-5,491</td>
+      <td class="dp">-10.4%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>5-6月</td><td>05/10-06/06</td>
+      <td>10,040</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>40</td>
+      <td>41,109</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>4-5月</td><td>04/12-05/09</td>
+      <td>9,680</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>35</td>
+      <td>38,640</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>3-4月</td><td>03/13-04/11</td>
+      <td>9,640</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>38</td>
+      <td>36,424</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>2-3月</td><td>02/10-03/12</td>
+      <td>9,640</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>42</td>
+      <td>35,206</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>1-2月</td><td>01/09-02/09</td>
+      <td>9,360</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>40</td>
+      <td>36,014</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>12-1月</td><td>12/07-01/08</td>
+      <td>10,600</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>36</td>
+      <td>42,470</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>11-12月</td><td>11/07-12/06</td>
+      <td>10,120</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>42</td>
+      <td>41,312</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>10-11月</td><td>10/07-11/06</td>
+      <td>10,760</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>45</td>
+      <td>42,856</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>9-10月</td><td>09/07-10/06</td>
+      <td>12,320</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>60</td>
+      <td>52,798</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>8-9月</td><td>08/05-09/06</td>
+      <td>15,520</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>50</td>
+      <td>62,474</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>7-8月</td><td>07/07-08/04</td>
+      <td>13,120</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>48</td>
+      <td>56,375</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>6-7月</td><td>06/08-07/06</td>
+      <td>11,640</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>53</td>
+      <td>53,043</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 公水 ══ -->
+  <div id="tab-water" class="tab-content" role="tabpanel">
+
+    <div class="notice-box">
+      📌 公水帳單約每兩個月發出一次，計費期間請以「使用期間」為準。115年（2026年）第一期用水量較去年同期大幅增加，建議確認是否有漏水或新增用水設備。
+    </div>
+
+    <div class="bill-section">
+      <a href="https://drive.google.com/drive/folders/1FRNXiODFhCBetJzgHYl4zcyVqmFvpGjJ?usp=sharing"
+         target="_blank" class="drive-link">
+        <div class="drive-accent"></div>
+        <div class="drive-body">
+          <span class="drive-icon">📁</span>
+          <span class="drive-text">
+            <strong>公水帳單資料夾</strong>
+            <span>GOOGLE DRIVE</span>
+          </span>
+        </div>
+        <span class="drive-cta">開啟 ↗</span>
+      </a>
+    </div>
+
+    <div class="kpi-row" id="water-kpi">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-panel">
+        <div class="panel-hd">水費趨勢（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="water-fee-chart"></canvas></div></div>
+      </div>
+      <div class="chart-panel">
+        <div class="panel-hd">用水量趨勢（度）<span style="font-size:12px;color:var(--wg9);font-weight:400">歷年同期比較</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="water-ton-chart"></canvas></div></div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="panel-hd">歷史明細表</div>
+      <div class="panel-bd">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>年度</th><th>帳期</th><th>使用期間</th>
+                <th>用水量（度）</th><th>同比差</th><th>同比%</th>
+                <th>水費（元）</th><th>同比差</th><th>同比%</th>
+              </tr>
+            </thead>
+            <tbody id="water-tbody">
+<tr class="latest">
+      <td>115（2026）</td><td>3月</td><td>12/25-03/04</td>
+      <td>286</td>
+      <td class="dn">243</td>
+      <td class="dn">+565.1%</td>
+      <td>3,969</td>
+      <td class="dn">3,263</td>
+      <td class="dn">+462.2%</td>
+    </tr>
+<tr class="latest">
+      <td>115（2026）</td><td>1月</td><td>10/29-12/24</td>
+      <td>150</td>
+      <td class="dn">116</td>
+      <td class="dn">+341.2%</td>
+      <td>2,065</td>
+      <td class="dn">1,459</td>
+      <td class="dn">+240.8%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>11月</td><td>08/27-10/28</td>
+      <td>155</td>
+      <td class="dn">114</td>
+      <td class="dn">+278.0%</td>
+      <td>2,136</td>
+      <td class="dn">1,454</td>
+      <td class="dn">+213.2%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>9月</td><td>06/27-08/26</td>
+      <td>126</td>
+      <td class="dn">69</td>
+      <td class="dn">+121.1%</td>
+      <td>1,785</td>
+      <td class="dn">908</td>
+      <td class="dn">+103.5%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>7月</td><td>04/30-06/26</td>
+      <td>37</td>
+      <td class="dp">-58</td>
+      <td class="dp">-61.1%</td>
+      <td>638</td>
+      <td class="dp">-703</td>
+      <td class="dp">-52.4%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>5月</td><td>03/04-04/29</td>
+      <td>41</td>
+      <td class="dp">-31</td>
+      <td class="dp">-43.1%</td>
+      <td>682</td>
+      <td class="dp">-377</td>
+      <td class="dp">-35.6%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>3月</td><td>12/25-03/03</td>
+      <td>43</td>
+      <td class="dp">-35</td>
+      <td class="dp">-44.9%</td>
+      <td>706</td>
+      <td class="dp">-427</td>
+      <td class="dp">-37.7%</td>
+    </tr>
+<tr>
+      <td>114（2025）</td><td>1月</td><td>10/29-12/24</td>
+      <td>34</td>
+      <td class="dp">-39</td>
+      <td class="dp">-53.4%</td>
+      <td>606</td>
+      <td class="dp">-466</td>
+      <td class="dp">-43.5%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>11月</td><td>08/27-10/28</td>
+      <td>41</td>
+      <td class="dp">-110</td>
+      <td class="dp">-72.8%</td>
+      <td>682</td>
+      <td class="dp">-1,401</td>
+      <td class="dp">-67.3%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>9月</td><td>06/27-08/26</td>
+      <td>57</td>
+      <td class="dp">-45</td>
+      <td class="dp">-44.1%</td>
+      <td>877</td>
+      <td class="dp">-551</td>
+      <td class="dp">-38.6%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>7月</td><td>04/27-06/26</td>
+      <td>95</td>
+      <td class="dn">8</td>
+      <td class="dn">+9.2%</td>
+      <td>1,341</td>
+      <td class="dn">79</td>
+      <td class="dn">+6.3%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>5月</td><td>02/28-04/26</td>
+      <td>72</td>
+      <td class="dp">-25</td>
+      <td class="dp">-25.8%</td>
+      <td>1,059</td>
+      <td class="dp">-309</td>
+      <td class="dp">-22.6%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>3月</td><td>12/23-02/27</td>
+      <td>78</td>
+      <td class="dp">-41</td>
+      <td class="dp">-34.5%</td>
+      <td>1,133</td>
+      <td class="dp">-503</td>
+      <td class="dp">-30.7%</td>
+    </tr>
+<tr>
+      <td>113（2024）</td><td>1月</td><td>10/26-12/22</td>
+      <td>73</td>
+      <td class="dp">-101</td>
+      <td class="dp">-58.0%</td>
+      <td>1,072</td>
+      <td class="dp">-1,360</td>
+      <td class="dp">-55.9%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>11月</td><td>08/25-10/25</td>
+      <td>151</td>
+      <td class="dp">-161</td>
+      <td class="dp">-51.6%</td>
+      <td>2,083</td>
+      <td class="dp">-2,253</td>
+      <td class="dp">-52.0%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>9月</td><td>06/28-08/24</td>
+      <td>102</td>
+      <td class="dp">-12</td>
+      <td class="dp">-10.5%</td>
+      <td>1,428</td>
+      <td class="dp">-147</td>
+      <td class="dp">-9.3%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>7月</td><td>05/03-06/27</td>
+      <td>87</td>
+      <td class="dn">49</td>
+      <td class="dn">+128.9%</td>
+      <td>1,262</td>
+      <td class="dn">606</td>
+      <td class="dn">+92.4%</td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>5月</td><td>03/03-05/02</td>
+      <td>97</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>1,368</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>3月</td><td>12/24-03/02</td>
+      <td>119</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>1,636</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>112（2023）</td><td>1月</td><td>10/26-12/23</td>
+      <td>174</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>2,432</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>11月</td><td>08/25-10/25</td>
+      <td>312</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>4,336</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>9月</td><td>06/28-08/24</td>
+      <td>114</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>1,575</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+<tr>
+      <td>111（2022）</td><td>7月</td><td>04/29-06/27</td>
+      <td>38</td>
+      <td class="">—</td>
+      <td class=""></td>
+      <td>656</td>
+      <td class="">—</td>
+      <td class=""></td>
+    </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+
+// Chart data loaded from external JSON files
+let ELEC_PERIOD_LABELS = [], ELEC_DATASETS = [];
+let WATER_PERIOD_LABELS = [], WATER_DATASETS = [];
+
+Promise.all([
+  fetch('./data/elec-chart.json').then(r=>r.json()),
+  fetch('./data/water-chart.json').then(r=>r.json())
+]).then(([elec, water]) => {
+  ELEC_PERIOD_LABELS = elec.periodLabels;
+  ELEC_DATASETS = elec.datasets;
+  WATER_PERIOD_LABELS = water.periodLabels;
+  WATER_DATASETS = water.datasets;
+  initElec();
+  initWater();
+});
+
+
+
+function sw(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    const isActive = ['elec','water'][i]===name;
+    t.classList.toggle('active', isActive);
+    t.setAttribute('aria-selected', isActive);
+  });
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='elec') initElec();
+  if(name==='water') initWater();
+}
+
+const charts={};
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+const FONT='Noto Sans TC';
+const tc=v=>v?'$'+Math.round(v).toLocaleString('zh-TW'):'';
+const tc2=v=>v?Math.round(v).toLocaleString('zh-TW'):'';
+
+// ── Latest data KPI ──
+function latestElecKpi(){
+  // 115年 03-04 is the latest
+  const latest = ELEC_DATASETS[ELEC_DATASETS.length-1];
+  const prev   = ELEC_DATASETS[ELEC_DATASETS.length-2];
+  const latestFees = latest.data.filter(v=>v);
+  const prevFees   = prev ? prev.data.filter(v=>v) : [];
+  const lastFee = latestFees[latestFees.length-1];
+  const lastPrevFee = prevFees[prevFees.length-1];
+  const lastKwh = latest.kwh.filter(v=>v)[latest.kwh.filter(v=>v).length-1];
+  const lastPrevKwh = prev ? prev.kwh.filter(v=>v)[prev.kwh.filter(v=>v).length-1] : null;
+  const feeDiff = lastPrevFee ? lastFee - lastPrevFee : null;
+  const kwhDiff = lastPrevKwh ? lastKwh - lastPrevKwh : null;
+  const totalFee = latestFees.reduce((a,b)=>a+(b||0),0);
+  const totalKwh = latest.kwh.filter(v=>v).reduce((a,b)=>a+(b||0),0);
+  return {lastFee, feeDiff, lastKwh, kwhDiff, totalFee, totalKwh};
+}
+
+function kpiHtml(label, val, diff, unit, inverse){
+  const cls = diff===null?'':diff>0?(inverse?'dn':'dp'):(inverse?'dp':'dn');
+  const sign = diff>0?'+':'';
+  const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}</span>`:'';
+  return `<div class="kpi"><div class="kpi-label">${label}</div>
+    <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:15px;font-weight:400;margin-left:3px">${unit}</span></div>
+    <div class="kpi-sub">${diffStr?'同比 '+diffStr:''}</div></div>`;
+}
+
+function initElec(){
+  dc('elec-fee-chart'); dc('elec-kwh-chart');
+  // Charts
+  const opts = (yLabel) => ({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+    scales:{y:{ticks:{font:{family:FONT,size:10},callback:v=>v?v.toLocaleString():''}}}
+  });
+  charts['elec-fee-chart']=new Chart(document.getElementById('elec-fee-chart'),{
+    type:'bar',
+    data:{labels:ELEC_PERIOD_LABELS,
+      datasets:ELEC_DATASETS.map(d=>({label:d.label,data:d.data,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+    options:opts('電費（元）')
+  });
+  charts['elec-kwh-chart']=new Chart(document.getElementById('elec-kwh-chart'),{
+    type:'bar',
+    data:{labels:ELEC_PERIOD_LABELS,
+      datasets:ELEC_DATASETS.map(d=>({label:d.label,data:d.kwh,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+    options:opts('度數（度）')
+  });
+  // KPI
+  const k = latestElecKpi();
+  document.getElementById('elec-kpi').innerHTML =
+    kpiHtml('最新帳單電費', k.lastFee, k.feeDiff, '元', true) +
+    kpiHtml('最新帳單度數', k.lastKwh, k.kwhDiff, '度', true) +
+    kpiHtml('115年累計電費', k.totalFee, null, '元', true) +
+    kpiHtml('115年累計度數', k.totalKwh, null, '度', true);
+  // Highlight latest row
+  document.querySelectorAll('#elec-tbody tr').forEach(tr=>{
+    if(tr.cells[0] && tr.cells[0].textContent.includes('115')) tr.classList.add('latest');
+  });
+}
+
+function latestWaterKpi(){
+  const latest = WATER_DATASETS[WATER_DATASETS.length-1];
+  const prev   = WATER_DATASETS[WATER_DATASETS.length-2];
+  const latestFees = latest.data.filter(v=>v);
+  const prevFees   = prev ? prev.data.filter(v=>v) : [];
+  const lastFee    = latestFees[latestFees.length-1];
+  const lastPrevFee= prevFees[prevFees.length-1];
+  const lastTon    = latest.tonnes.filter(v=>v)[latest.tonnes.filter(v=>v).length-1];
+  const lastPrevTon= prev ? prev.tonnes.filter(v=>v)[prev.tonnes.filter(v=>v).length-1] : null;
+  const feeDiff = lastPrevFee ? lastFee - lastPrevFee : null;
+  const tonDiff = lastPrevTon ? lastTon - lastPrevTon : null;
+  const totalFee = latestFees.reduce((a,b)=>a+(b||0),0);
+  const totalTon = latest.tonnes.filter(v=>v).reduce((a,b)=>a+(b||0),0);
+  return {lastFee, feeDiff, lastTon, tonDiff, totalFee, totalTon};
+}
+
+function initWater(){
+  dc('water-fee-chart'); dc('water-ton-chart');
+  const opts = () => ({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+    scales:{y:{ticks:{font:{family:FONT,size:10},callback:v=>v?v.toLocaleString():''}}}
+  });
+  charts['water-fee-chart']=new Chart(document.getElementById('water-fee-chart'),{
+    type:'bar',
+    data:{labels:WATER_PERIOD_LABELS,
+      datasets:WATER_DATASETS.map(d=>({label:d.label,data:d.data,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+    options:opts()
+  });
+  charts['water-ton-chart']=new Chart(document.getElementById('water-ton-chart'),{
+    type:'bar',
+    data:{labels:WATER_PERIOD_LABELS,
+      datasets:WATER_DATASETS.map(d=>({label:d.label,data:d.tonnes,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+    options:opts()
+  });
+  // KPI
+  const k = latestWaterKpi();
+  document.getElementById('water-kpi').innerHTML =
+    kpiHtml('最新帳單水費', k.lastFee, k.feeDiff, '元', true) +
+    kpiHtml('最新帳單用水量', k.lastTon, k.tonDiff, '度', true) +
+    kpiHtml('115年累計水費', k.totalFee, null, '元', true) +
+    kpiHtml('115年累計用水量', k.totalTon, null, '度', true);
+  document.querySelectorAll('#water-tbody tr').forEach(tr=>{
+    if(tr.cells[0] && tr.cells[0].textContent.includes('115')) tr.classList.add('latest');
+  });
+}
+
+// Init is called by Promise.all above after JSON data loads
+</script>

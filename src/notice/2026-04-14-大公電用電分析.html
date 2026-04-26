@@ -1,0 +1,251 @@
+---
+layout: notice.njk
+permalink: /notice/2026-04-14-大公電用電分析.html
+title: 社區大公電用電異常通知
+titleZh: 社區大公電用電異常通知
+titleEn: 'Notice: Abnormal Common-Area Electricity Consumption'
+titleJa: 共用部電気使用量の異常に関するお知らせ
+displayDate: 2026/04/14
+typeZh: 設備保養
+typeEn: Facility Maintenance
+typeJa: 設備保守
+pillType: work
+extraStyles: |
+  .body-text{font-size:17px;color:var(--wg41);line-height:1.9;}
+  .body-text p{margin-bottom:1em;}
+  .body-text p:last-child{margin-bottom:0;}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
+  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-row:last-child{border-bottom:none;}
+  .info-label{font-size:13px;letter-spacing:.08em;color:var(--wg9);width:80px;flex-shrink:0;padding-top:2px;}
+  .info-value{font-size:17px;color:var(--wg41);font-weight:500;}
+  .note.alert{border-left-color:#8C1F1F;background:rgba(140,31,31,0.04);color:#5A1010;}
+  /* 圖表區塊 */ .chart-section{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;margin-bottom:16px;}
+  .chart-title{font-size:15px;font-weight:500;margin-bottom:2px;color:var(--wg41);}
+  .chart-sub{font-size:13px;color:var(--wg9);margin-bottom:12px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+  .card{background:var(--wg1);border-radius:4px;padding:14px 16px;}
+  .card.alert-card{background:#FAECE7;}
+  .card-label{font-size:13px;color:var(--wg9);margin-bottom:4px;}
+  .card.alert-card .card-label{color:#712B13;}
+  .card-value{font-size:22px;font-weight:500;}
+  .card.alert-card .card-value{color:#712B13;}
+  .legend{display:flex;gap:14px;margin-bottom:10px;font-size:13px;color:var(--wg9);align-items:center;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:4px;}
+  .legend-line{width:22px;height:2px;background:#185FA5;display:inline-block;}
+  .legend-dash{width:20px;height:0;border-top:2px dashed #888780;display:inline-block;}
+  .legend-dot{width:9px;height:9px;border-radius:50%;background:#C45A30;display:inline-block;}
+  .legend-box{width:12px;height:12px;border-radius:2px;display:inline-block;}
+  .legend-sq{width:12px;height:12px;background:#FAECE7;border:0.5px solid #C45A30;display:inline-block;}
+  .chart-wrap{position:relative;width:100%;}
+  .divider{border:none;border-top:1px solid var(--line);margin:20px 0;}
+  .data-source{font-size:12px;color:var(--wg9);margin-top:10px;letter-spacing:.04em;}
+---
+<div class="lang-block active" data-lang="zh">
+<div class="sec">
+      <div class="sec-label">事件說明</div>
+      <div class="body-text">
+        <p>管理委員會於監測台電用電資料時，發現本社區大公電（公共設施用電）自 <strong>4月7日起出現明顯跳升</strong>，至4月13日單日用電量已達 <strong>378 度</strong>，較三月日均基線 213 度高出約 <strong>78%</strong>。</p>
+        <p>經初步了解，此波用電增加與近期氣溫升高、<strong>公共空調系統使用頻率上升</strong>有關。由於大公電費用由全體住戶共同分攤，委員會特此呼籲各位住戶留意公共區域節約用電，共同降低分攤負擔。</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">資料摘要</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">資料來源</span><span class="info-value">台電 APP</span></div>
+        <div class="info-row"><span class="info-label">資料區間</span><span class="info-value">2025年4月20日 — 2026年4月13日</span></div>
+        <div class="info-row"><span class="info-label">三月日均</span><span class="info-value">213 度（基線）</span></div>
+        <div class="info-row"><span class="info-label">上週日均</span><span class="info-value">278 度（較基線 +30%）</span></div>
+        <div class="info-row"><span class="info-label">最高單日</span><span class="info-value">378 度（4月13日，較基線 +78%）</span></div>
+      </div>
+    </div>
+    <div class="note">請於離開公共區域時隨手關閉不必要的照明與空調設備。節約用電不僅有助降低每戶分攤費用，也是社區環境永續的重要一環。感謝各位住戶的配合。</div>
+
+    <!-- 圖表（共用，置於中文區塊內，語言切換僅切換文字說明） -->
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">用電分析圖表</div>
+
+      <div class="chart-section">
+        <p class="chart-title">日線　近31天（2026/3/14–4/13）</p>
+        <p class="chart-sub">三月穩定於 213 度基線，4月7日起急速跳升</p>
+        <div class="cards">
+          <div class="card">
+            <div class="card-label">三月日均基線</div>
+            <div class="card-value">213 度</div>
+          </div>
+          <div class="card alert-card">
+            <div class="card-label">上週日均</div>
+            <div class="card-value">278 度</div>
+          </div>
+          <div class="card alert-card">
+            <div class="card-label">最高單日（4/13）</div>
+            <div class="card-value">379 度</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>日用電</span>
+          <span class="legend-item"><span class="legend-dash"></span>三月均值 213度</span>
+          <span class="legend-item"><span class="legend-dot"></span>異常高點</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="dailyChart" role="img" aria-label="近31天日線圖"></canvas>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="chart-section">
+        <p class="chart-title">週線　2025年4月 — 2026年4月（週平均）</p>
+        <p class="chart-sub">不足7天之週次以實際天數計算</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>夏季（6–9月）</span>
+          <span class="legend-item"><span class="legend-dot"></span>本週（4/6–13）</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="weeklyChart" role="img" aria-label="週線圖"></canvas>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="chart-section">
+        <p class="chart-title">月線　2025年4月 — 2026年4月（月平均）</p>
+        <p class="chart-sub">2026年4月為截至4月13日之13天平均</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6–9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>其他月份</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="monthlyChart" role="img" aria-label="月線圖"></canvas>
+        </div>
+      </div>
+
+      <p class="data-source">資料來源：台電 APP，2025/04/20 — 2026/04/13</p>
+    </div>
+
+    <div class="footer">閱大安管理委員會・如有疑問請洽管理中心</div>
+</div>
+
+<div class="lang-block" data-lang="en">
+<div class="sec">
+      <div class="sec-label">Notice</div>
+      <div class="body-text">
+        <p>The Management Committee has identified a <strong>significant rise in common-area electricity consumption</strong> beginning on April 7, 2026. On April 13, daily usage reached <strong>378 kWh</strong>, approximately <strong>78% above</strong> the March daily average baseline of 213 kWh.</p>
+        <p>Based on initial findings, the increase is linked to rising temperatures and <strong>higher usage of the shared air-conditioning system</strong>. As common-area electricity costs are shared among all residents, the Committee encourages everyone to be mindful of energy use in shared spaces.</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">Data Summary</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">Source</span><span class="info-value">Taiwan Power Company App</span></div>
+        <div class="info-row"><span class="info-label">Period</span><span class="info-value">April 20, 2025 — April 13, 2026</span></div>
+        <div class="info-row"><span class="info-label">March Avg</span><span class="info-value">213 kWh/day (baseline)</span></div>
+        <div class="info-row"><span class="info-label">Last Week Avg</span><span class="info-value">278 kWh/day (+30% vs baseline)</span></div>
+        <div class="info-row"><span class="info-label">Peak Single Day</span><span class="info-value">378 kWh (April 13, +78% vs baseline)</span></div>
+      </div>
+    </div>
+    <div class="note">Please remember to turn off unnecessary lighting and air-conditioning when leaving shared areas. Conserving energy helps reduce shared costs for all residents and supports the community's sustainability goals. Thank you for your cooperation.</div>
+
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">Usage Charts</div>
+      <div class="chart-section">
+        <p class="chart-title">Daily — Last 31 Days (2026/3/14–4/13)</p>
+        <p class="chart-sub">Stable around 213 kWh through March; sharp rise from April 7</p>
+        <div class="cards">
+          <div class="card"><div class="card-label">March Daily Avg</div><div class="card-value">213 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">Last Week Daily Avg</div><div class="card-value">278 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">Peak Day (4/13)</div><div class="card-value">379 kWh</div></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>Daily usage</span>
+          <span class="legend-item"><span class="legend-dash"></span>March avg 213 kWh</span>
+          <span class="legend-item"><span class="legend-dot"></span>Anomaly</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="dailyChartEn"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">Weekly — Apr 2025 to Apr 2026 (weekly average)</p>
+        <p class="chart-sub">Partial weeks calculated from actual days</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>Summer (Jun–Sep)</span>
+          <span class="legend-item"><span class="legend-dot"></span>This week (4/6–13)</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="weeklyChartEn"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">Monthly — Apr 2025 to Apr 2026 (monthly average)</p>
+        <p class="chart-sub">April 2026: 13-day average as of April 13</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>Summer (Jun–Sep)</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>Other months</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartEn"></canvas></div>
+      </div>
+      <p class="data-source">Source: Taiwan Power Company App, 2025/04/20 — 2026/04/13</p>
+    </div>
+    <div class="footer">Cultural City Community Management Committee · Please contact the Management Center with any questions</div>
+</div>
+
+<div class="lang-block" data-lang="ja">
+<div class="sec">
+      <div class="sec-label">お知らせ内容</div>
+      <div class="body-text">
+        <p>管理委員会は台湾電力アプリの使用量データを監視する中で、<strong>4月7日から共用部の電気使用量が急激に上昇</strong>していることを確認しました。4月13日の一日の使用量は <strong>378kWh</strong> に達し、3月の一日平均基準値 213kWh を約 <strong>78%</strong> 上回りました。</p>
+        <p>初期調査の結果、この使用量増加は気温の上昇に伴う<strong>共用空調システムの稼働頻度の増加</strong>が主な要因であることが分かりました。共用部の電気料金は全住居で按分負担されるため、委員会では共用スペースでの節電にご協力いただくよう住民の皆様にお願い申し上げます。</p>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-label">データ概要</div>
+      <div class="info-box">
+        <div class="info-row"><span class="info-label">データ出典</span><span class="info-value">台湾電力アプリ</span></div>
+        <div class="info-row"><span class="info-label">対象期間</span><span class="info-value">2025年4月20日 — 2026年4月13日</span></div>
+        <div class="info-row"><span class="info-label">3月日平均</span><span class="info-value">213 kWh（基準値）</span></div>
+        <div class="info-row"><span class="info-label">先週日平均</span><span class="info-value">278 kWh（基準値比 +30%）</span></div>
+        <div class="info-row"><span class="info-label">最大一日</span><span class="info-value">378 kWh（4月13日、基準値比 +78%）</span></div>
+      </div>
+    </div>
+    <div class="note">共用エリアをご利用後は、不要な照明や空調の電源をお切りいただきますようお願いいたします。節電は各住居の按分負担の軽減につながり、コミュニティの持続可能な環境づくりにも貢献します。ご協力ありがとうございます。</div>
+
+    <div class="sec" style="margin-top:24px;">
+      <div class="sec-label">使用量グラフ</div>
+      <div class="chart-section">
+        <p class="chart-title">日別　直近31日（2026/3/14–4/13）</p>
+        <p class="chart-sub">3月は213kWhの基準値で安定、4月7日から急上昇</p>
+        <div class="cards">
+          <div class="card"><div class="card-label">3月日平均基準値</div><div class="card-value">213 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">先週日平均</div><div class="card-value">278 kWh</div></div>
+          <div class="card alert-card"><div class="card-label">最大一日（4/13）</div><div class="card-value">379 kWh</div></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-line"></span>日使用量</span>
+          <span class="legend-item"><span class="legend-dash"></span>3月平均 213kWh</span>
+          <span class="legend-item"><span class="legend-dot"></span>異常高値</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="dailyChartJa"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">週別　2025年4月 — 2026年4月（週平均）</p>
+        <p class="chart-sub">7日未満の週は実日数で算出</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-sq"></span>夏季（6〜9月）</span>
+          <span class="legend-item"><span class="legend-dot"></span>今週（4/6–13）</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="weeklyChartJa"></canvas></div>
+      </div>
+      <div class="divider"></div>
+      <div class="chart-section">
+        <p class="chart-title">月別　2025年4月 — 2026年4月（月平均）</p>
+        <p class="chart-sub">2026年4月は4月13日時点の13日間平均</p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6〜9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>その他の月</span>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartJa"></canvas></div>
+      </div>
+      <p class="data-source">データ出典：台湾電力アプリ、2025/04/20 — 2026/04/13</p>
+    </div>
+    <div class="footer">閱大安（文化城市コミュニティ）管理委員会・ご不明な点は管理センターまでお問い合わせください</div>
+</div>
