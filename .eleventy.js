@@ -66,6 +66,9 @@ module.exports = function(eleventyConfig) {
   // 把資料 JSON 檔也複製過去
   eleventyConfig.addPassthroughCopy("utility/data");
 
+  // 圖片：src/images/* → _site/images/*（網址為 /images/檔名）
+  eleventyConfig.addPassthroughCopy({ "src/images": "images" });
+
   // ── 自訂 collection：把公告依年份分組（最新在前） ──
   eleventyConfig.addCollection("noticeByYear", function(collectionApi) {
     const notices = collectionApi.getFilteredByTag("notice").reverse();
