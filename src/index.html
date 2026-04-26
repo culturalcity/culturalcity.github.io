@@ -260,185 +260,26 @@ extraStyles: |
   <div class="sec-label">UPDATES &nbsp;·&nbsp; 最新動態</div>
 
       <div class="timeline">
-
-
-
-    <a href="./minutes/minutes-4-9.html" class="tl-item minutes">
+{% for item in collections.recentUpdates -%}
+{%- set url = item.url -%}
+{%- if "/notice/" in url %}{% set cat = "notice" %}{% set catLabel = "社區公告" %}{% set displayDate = item.data.displayDate %}{% set title = item.data.titleZh or item.data.title -%}
+{%- elif "/finance/" in url %}{% set cat = "finance" %}{% set catLabel = "財務月報" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
+{%- elif "/minutes/" in url %}{% set cat = "minutes" %}{% set catLabel = "會議紀錄" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
+{%- else %}{% set cat = "other" %}{% set catLabel = "更新" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
+{%- endif %}
+    <a href=".{{ url }}" class="tl-item {{ cat }}">
       <div class="tl-left">
-        <span class="tl-date">2026/04/19</span>
-        <span class="tl-type">會議紀錄</span>
+        <span class="tl-date">{{ displayDate }}</span>
+        <span class="tl-type">{{ catLabel }}</span>
       </div>
       <div class="tl-right">
-        <div class="tl-title">第四屆第九次管理委員會議紀錄</div>
-        <div class="tl-desc">14 項議案・外牆清洗暫緩、電梯包板修復、感應燈管更換、夏日節能柔性宣導</div>
+        <div class="tl-title">{{ title }}</div>
+{%- if item.data.summary %}
+        <div class="tl-desc">{{ item.data.summary }}</div>
+{%- endif %}
       </div>
     </a>
-
-    <a href="./notice/2026-04-16-電梯門板烤漆.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/04/16</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">電梯門板刮傷修復烤漆施工通知</div>
-        <div class="tl-desc">04/16–18・3、5、8、9、11、12、13、14樓門板・施工期間注意漆味</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-04-14-大公電用電分析.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/04/14</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">社區大公電用電異常通知</div>
-        <div class="tl-desc">4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均值 +78%）</div>
-      </div>
-    </a>
-
-    <a href="./minutes/minutes-4-9.html" class="tl-item minutes">
-      <div class="tl-left">
-        <span class="tl-date">2026/04/07</span>
-        <span class="tl-type">開會通知</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">第四屆第九次管理委員會議</div>
-        <div class="tl-desc">14 項議案・外牆清洗、電梯修繕、第五屆區權會籌備</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-04-04-水塔清洗.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/04/04</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">水塔清洗停水通知與注意事項</div>
-        <div class="tl-desc">04/07（二）09:00–17:00，頂樓及地下室水池全日清洗</div>
-      </div>
-    </a>
-
-    <a href="./finance/2026-02.html" class="tl-item finance">
-      <div class="tl-left">
-        <span class="tl-date">2026/03/19</span>
-        <span class="tl-type">財務月報</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">2026年2月財務月報</div>
-        <div class="tl-desc">本期損益 +15,326 元</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-03-16-區權會徵求.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/03/16</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">第五屆第一次區分所有權人會議：徵求提案與管理委員參選</div>
-        <div class="tl-desc">會議時間：2026年5月16日（六）13:00</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-03-13-交誼廳包場.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/03/13</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">交誼廳包場公告</div>
-        <div class="tl-desc">3月13日（五）10:00–12:00，一樓交誼廳</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-03-09-保養通知.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/03/09</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">115年3月公共設施例行保養時程</div>
-        <div class="tl-desc">機電 03/10・電梯 03/17・園藝 03/30</div>
-      </div>
-    </a>
-
-    <a href="./minutes/minutes-4-8.html" class="tl-item minutes">
-      <div class="tl-left">
-        <span class="tl-date">2026/03/09</span>
-        <span class="tl-type">會議紀錄</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">第四屆第八次管理委員會議紀錄</div>
-        <div class="tl-desc">8 項議案・外牆清洗、區權會籌備、節能減稅</div>
-      </div>
-    </a>
-
-    <a href="./finance/2026-01.html" class="tl-item finance">
-      <div class="tl-left">
-        <span class="tl-date">2026/02/15</span>
-        <span class="tl-type">財務月報</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">2026年1月財務月報</div>
-        <div class="tl-desc">本期損益 +93,286 元（含環保獎勵金 9 萬）</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-01-31-深夜聲響.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/01/31</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">近期深夜聲響說明與預防配合事項</div>
-        <div class="tl-desc">說明1/30深夜聲響成因及住戶配合事項</div>
-      </div>
-    </a>
-
-    <a href="./finance/2025-annual.html" class="tl-item finance">
-      <div class="tl-left">
-        <span class="tl-date">2026/01/30</span>
-        <span class="tl-type">財務月報</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">2025年全年財務深度分析</div>
-        <div class="tl-desc">全年損益 +44,570・季度分析・區權會準備</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-01-30-保養通知.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/01/30</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">115年2月公共設施例行保養時程</div>
-        <div class="tl-desc">機電 02/10・電梯 02/12</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-01-26-寵物電梯規範.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/01/26</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">重申寵物搭乘電梯之安全規範與禮儀</div>
-        <div class="tl-desc">飼養動物管理辦法第13條重申</div>
-      </div>
-    </a>
-
-    <a href="./notice/2026-01-02-保養通知.html" class="tl-item notice">
-      <div class="tl-left">
-        <span class="tl-date">2026/01/02</span>
-        <span class="tl-type">社區公告</span>
-      </div>
-      <div class="tl-right">
-        <div class="tl-title">115年1月公共設施例行保養時程</div>
-        <div class="tl-desc">機電 01/13・電梯 01/14</div>
-      </div>
-    </a>
-
+{% endfor %}
   </div>
 
   <!-- ── 聯絡資訊 ── -->

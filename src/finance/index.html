@@ -2,6 +2,7 @@
 layout: base.njk
 permalink: /finance/index.html
 title: 財務月報總覽
+eleventyExcludeFromCollections: true
 extraStyles: |
   :root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--ink:#3C3835;--ink2:#696460;--ink3:#898480;--paper:#EAE7E1;--paper2:#F0EDE8;--border:rgba(60,56,53,0.12);--radius:2px;}
   body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:17px;line-height:1.7;}
@@ -60,154 +61,43 @@ extraStyles: |
     📋 本頁為閱大安社區每月財務月報公告。點擊月份卡片查閱完整分析報告，包含損益分析、資產負債、環比說明。如有疑問請洽管委會。
   </div>
 
-  <div style="margin-bottom:24px">
-    <a href="../utility/" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg11);font-size:14px;letter-spacing:.04em;transition:all .18s" onmouseover="this.style.background='#F2F0EC'" onmouseout="this.style.background='var(--white)'">
-      ⚡ 大公電・公水帳單明細 →
-    </a>
-  </div>
-
-  <div class="year-label">2026 年度</div>
+{# 從 collections.financeByYear 自動產生 #}
+{%- for group in collections.financeByYear %}
+  <div class="year-label">{{ group.year }} 年度</div>
   <div class="report-list">
-    <a href="2026-02.html" class="report-card latest">
-      <div class="card-month">02月</div>
-      <div class="card-meta">
-        <div class="card-title">2026年2月財務月報</div>
-        <div class="card-period">2026-02-01 ～ 2026-02-28 ・ 發布：2026/03/19</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1_f0wz6LXSNTgyIjpU3LH-rYCNRH8A_ia/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2026-01.html" class="report-card">
-      <div class="card-month">01月</div>
-      <div class="card-meta">
-        <div class="card-title">2026年1月財務月報</div>
-        <div class="card-period">2026-01-01 ～ 2026-01-31 ・ 發布：2026/02/15</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1aMCDwmeTqkt_lvEp7PjhR67OS_2XITbe/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
+{%- for item in group.items %}
+{%- set isAnnual = "annual" in (item.data.permalink or "") -%}
+{%- if isAnnual %}
   </div>
-
-  <a href="2025-annual.html" class="analysis-card">
+  <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="analysis-card">
     <span class="ac-icon">📊</span>
     <div>
-      <div class="ac-title">2025 全年財務深度分析報告</div>
-      <div class="ac-sub">全年損益 +44,570・季度分析・費用結構・充電樁代收代付說明・區權會準備</div>
+      <div class="ac-title">{{ item.data.title }}</div>
+{%- if item.data.summary %}
+      <div class="ac-sub">{{ item.data.summary }}</div>
+{%- endif %}
     </div>
     <span class="ac-arrow">›</span>
   </a>
-
-  <div class="year-label">2025 年度</div>
   <div class="report-list">
-    <a href="2025-12.html" class="report-card">
-      <div class="card-month">12月</div>
+{%- else -%}
+{%- set isFirstYear = (group.year == collections.financeByYear[0].year) %}
+    <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="report-card{% if loop.first and isFirstYear %} latest{% endif %}">
+      <div class="card-month">{{ item.date | monthOnly }}月</div>
       <div class="card-meta">
-        <div class="card-title">2025年12月財務月報</div>
-        <div class="card-period">2025-12-01 ～ 2025-12-31 ・ 發布：2026/01/30</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1u0OXyRSak3yoiIvJSiD6glQBd8Ue1EAt/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
+        <div class="card-title">{{ item.data.title | replace(' 財務月報', '財務月報') }}</div>
+        <div class="card-period">{{ item.date | dateYM }}-01 ～ {{ item.date | dateYMD | replace('/', '-') }}{% if item.data.publishDate %} ・ 發布：{{ item.data.publishDate }}{% endif %}</div>
+{%- if item.data.pdfUrl %}
+              <span class="pdf-link" onclick="event.stopPropagation();window.open('{{ item.data.pdfUrl }}','_blank')">↓ 原始財報 PDF</span>
+{%- endif %}
       </div>
       <div class="card-arrow">›</div>
     </a>
-    <a href="2025-11.html" class="report-card">
-      <div class="card-month">11月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年11月財務月報</div>
-        <div class="card-period">2025-11-01 ～ 2025-11-30 ・ 發布：2025/12/29</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1FZwnKX0U6hspZR3sNg0ikaPq3Zp4LTRh/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-10.html" class="report-card">
-      <div class="card-month">10月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年10月財務月報</div>
-        <div class="card-period">2025-10-01 ～ 2025-10-31 ・ 發布：2025/11/18</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1lNsNdwHhGhehk0st5KOVa4oPTR7vmfCI/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-09.html" class="report-card">
-      <div class="card-month">09月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年9月財務月報</div>
-        <div class="card-period">2025-09-01 ～ 2025-09-30 ・ 發布：2025/10/14</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1w8uQren_1X1FgDyvxV4m0o4laSdORCg1/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-08.html" class="report-card">
-      <div class="card-month">08月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年8月財務月報</div>
-        <div class="card-period">2025-08-01 ～ 2025-08-31 ・ 發布：2025/09/14</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1LyqUMblqcMOi-hTSsnbb_2k6nrBsTRlu/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-07.html" class="report-card">
-      <div class="card-month">07月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年7月財務月報</div>
-        <div class="card-period">2025-07-01 ～ 2025-07-31 ・ 發布：2025/08/14</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/11mtsOi00MihbhjixRSlSKgg8WL-MWAw-/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-06.html" class="report-card">
-      <div class="card-month">06月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年6月財務月報</div>
-        <div class="card-period">2025-06-01 ～ 2025-06-30 ・ 發布：2025/07/21</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1Clm7rjm8PLYmpzgIZSb5GcEXwvZ6QQ_I/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-05.html" class="report-card">
-      <div class="card-month">05月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年5月財務月報</div>
-        <div class="card-period">2025-05-01 ～ 2025-05-31 ・ 發布：2025/06/09</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1xoINUjecJ9LW7Vaz2Mg34N-XyH_epjiy/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-04.html" class="report-card">
-      <div class="card-month">04月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年4月財務月報</div>
-        <div class="card-period">2025-04-01 ～ 2025-04-30 ・ 發布：2025/05/13</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1YphpdNGTb1at5iDuxm4mW6W9g68jKmmt/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-03.html" class="report-card">
-      <div class="card-month">03月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年3月財務月報</div>
-        <div class="card-period">2025-03-01 ～ 2025-03-31 ・ 發布：2025/04/18</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1d5dfd7rcRFEemggv6DBLhBVAAxoYTSIx/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-02.html" class="report-card">
-      <div class="card-month">02月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年2月財務月報</div>
-        <div class="card-period">2025-02-01 ～ 2025-02-28 ・ 發布：2025/03/28</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1vwt29KFevLLM39Uu9Q0vtUREgZDKqqPD/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
-    <a href="2025-01.html" class="report-card">
-      <div class="card-month">01月</div>
-      <div class="card-meta">
-        <div class="card-title">2025年1月財務月報</div>
-        <div class="card-period">2025-01-01 ～ 2025-01-31 ・ 發布：2025/03/28</div>
-              <span class="pdf-link" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1hVa8cKi2CgNElCZv7Ra5AKnEpIHTHMmy/view?usp=sharing','_blank')">↓ 原始財報 PDF</span>
-      </div>
-      <div class="card-arrow">›</div>
-    </a>
+{%- endif -%}
+{%- endfor %}
   </div>
+{%- endfor %}
+
 
   <div class="footer">
     閱大安管理委員會 · 財務資料僅供本社區住戶參考<br>

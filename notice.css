@@ -6,6 +6,7 @@
   --c-event: #1F5C38;
   --c-meeting: #2B4A6B;
   --c-safety: #8C1F1F;
+  --c-equip: #8C1F1F;
 }
 
 body {
@@ -50,6 +51,7 @@ body {
 .pill-event { color: var(--c-event); border-color: rgba(31,92,56,.3); background: rgba(31,92,56,.06); }
 .pill-meeting { color: var(--c-meeting); border-color: rgba(43,74,107,.3); background: rgba(43,74,107,.06); }
 .pill-safety { color: var(--c-safety); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
+.pill-equip { color: var(--c-equip); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
 
 /* ── 語言切換器 ── */
 .lang-bar {

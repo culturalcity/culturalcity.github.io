@@ -2,6 +2,7 @@
 layout: base.njk
 permalink: /notice/index.html
 title: 社區公告
+eleventyExcludeFromCollections: true
 extraStyles: |
   :root{
     --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
@@ -17,10 +18,10 @@ extraStyles: |
   .back-link::before{content:'←';}
   .back-link:hover{color:var(--wg1);}
   .eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
-  .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
-  .header-sub{font-size:13px;color:var(--wg9);letter-spacing:.16em;}
+  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;}
+  .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.16em;}
   .main{max-width:760px;margin:0 auto;padding:36px 40px 64px;}
-  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}}
+  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:22px;}}
   .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);}
   .filter-btn{padding:5px 14px;font-size:13px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
   .filter-btn:hover{border-color:var(--wg11);color:var(--wg41);}
@@ -81,83 +82,44 @@ extraStyles: |
     <button class="filter-btn"        data-filter="safety"  onclick="filter('safety')">安全警示</button>
     <button class="filter-btn"        data-filter="event"   onclick="filter('event')">節日活動</button>
   </div>
-  <div id="container"></div>
+  <div id="container">
+{% for group in collections.noticeByYear %}
+    <div class="year-label">{{ group.year }}</div>
+    <div class="notice-list">
+{% for item in group.items %}
+      <a href="{{ item.data.permalink | replace('/notice/', '') }}" class="notice-card {{ item.data.pillType }}">
+        <div class="type-stripe"></div>
+        <div class="card-inner">
+          <span class="type-pill">{{ item.data.typeZh }}</span>
+          <span class="card-title">{{ item.data.titleZh or item.data.title }}</span>
+          <span class="card-date">{{ item.data.displayDate }}</span>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+{% endfor %}
+    </div>
+{% endfor %}
+  </div>
   <div class="footer">
     <span>閱大安管理委員會</span>
     <span>如有疑問請洽管理中心</span>
   </div>
 </div>
 <script>
-const NOTICES = [
-  // ── 2026 ──
-  {type:'equip',   title:'電梯門板刮傷修復烤漆施工通知',                          date:'2026/04/16', file:'2026-04-16-電梯門板烤漆.html'},
-  {type:'work',    title:'社區大公電用電異常通知',                                date:'2026/04/14', file:'2026-04-14-大公電用電分析.html'},
-  {type:'work',    title:'水塔清洗停水通知與注意事項',                            date:'2026/04/04', file:'2026-04-04-水塔清洗.html'},
-  {type:'meeting', title:'第五屆第一次區分所有權人會議：徵求提案與管理委員參選', date:'2026/03/16', file:'2026-03-16-區權會徵求.html'},
-  {type:'event',   title:'交誼廳包場公告',                                        date:'2026/03/13', file:'2026-03-13-交誼廳包場.html'},
-  {type:'work',    title:'115年3月公共設施例行保養時程',                          date:'2026/03/09', file:'2026-03-09-保養通知.html'},
-  {type:'rule',    title:'近期深夜聲響說明與預防配合事項',                        date:'2026/01/31', file:'2026-01-31-深夜聲響.html'},
-  {type:'work',    title:'115年2月公共設施例行保養時程',                          date:'2026/01/30', file:'2026-01-30-保養通知.html'},
-  {type:'rule',    title:'重申寵物搭乘電梯之安全規範與禮儀',                      date:'2026/01/26', file:'2026-01-26-寵物電梯規範.html'},
-  {type:'work',    title:'115年1月公共設施例行保養時程',                          date:'2026/01/02', file:'2026-01-02-保養通知.html'},
-  // ── 2025 ──
-  {type:'event',   title:'跨年夜注意事項',                                        date:'2025/12/30', file:'2025-12-30-跨年注意事項.html'},
-  {type:'work',    title:'114年12月公共設施例行保養時程',                         date:'2025/12/01', file:'2025-12-01-保養通知.html'},
-  {type:'rule',    title:'機車位私人物品清理暨停車場環境維護通知',                date:'2025/12/01', file:'2025-12-01-機車位清理.html'},
-  {type:'equip',   title:'1F 交誼廳戶外鐵門報修通知',                            date:'2025/11/29', file:'2025-11-29-交誼廳鐵門報修.html'},
-  {type:'equip',   title:'電梯正式門片更換工程暨電梯暫停服務通知',               date:'2025/11/18', file:'2025-11-18-電梯門片更換.html'},
-  {type:'meeting', title:'115年度物業評選暨廠商簡報會議',                        date:'2025/11/12', file:'2025-11-12-物業評選.html'},
-  {type:'work',    title:'114年11月公共設施例行保養時程',                         date:'2025/11/01', file:'2025-11-01-保養通知.html'},
-  {type:'safety',  title:'頂樓花園發現蜂窩',                                     date:'2025/10/30', file:'2025-10-30-頂樓蜂窩.html'},
-  {type:'work',    title:'114年10月公共設施例行保養時程',                         date:'2025/10/02', file:'2025-10-02-保養通知.html'},
-  {type:'rule',    title:'窗邊陽台物品安全維護公告',                              date:'2025/09/03', file:'2025-09-03-陽台安全.html'},
-  {type:'work',    title:'114年9月公共設施例行保養時程',                          date:'2025/08/29', file:'2025-08-29-保養通知.html'},
-  {type:'event',   title:'114年度中元普渡活動',                                   date:'2025/08/29', file:'2025-08-29-中元普渡.html'},
-  {type:'event',   title:'交誼廳包場公告',                                        date:'2025/08/14', file:'2025-08-14-交誼廳包場.html'},
-  {type:'equip',   title:'圍牆裂縫修繕工程公告',                                  date:'2025/08/05', file:'2025-08-05-圍牆裂縫修繕.html'},
-  {type:'work',    title:'114年8月公共設施例行保養時程',                          date:'2025/07/31', file:'2025-07-31-保養通知.html'},
-  {type:'event',   title:'RF 閱覽室包場公告',                                    date:'2025/07/17', file:'2025-07-17-RF閱覽室包場.html'},
-  {type:'safety',  title:'社區防颱準備【第一號】公告（丹娜絲颱風海上警報）',     date:'2025/07/05', file:'2025-07-05-防颱準備第一號.html'},
-];
-
-const LABEL = {
-  meeting: '會議通知',
-  work:    '設備保養',
-  equip:   '工程通知',
-  rule:    '規約規範',
-  event:   '節日活動',
-  safety:  '安全警示',
-};
-
-let cur = 'all';
-
+// 純 client-side 篩選：show/hide 既有卡片，不重新渲染
 function filter(t) {
-  cur = t;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === t));
-  render();
+  document.querySelectorAll('.notice-card').forEach(card => {
+    const match = (t === 'all') || card.classList.contains(t);
+    card.style.display = match ? '' : 'none';
+  });
+  // 隱藏整組無資料的年份標題
+  document.querySelectorAll('.year-label').forEach(yearLabel => {
+    const list = yearLabel.nextElementSibling;
+    if (!list) return;
+    const visibleCards = [...list.querySelectorAll('.notice-card')].filter(c => c.style.display !== 'none');
+    yearLabel.style.display = visibleCards.length ? '' : 'none';
+    list.style.display = visibleCards.length ? '' : 'none';
+  });
 }
-
-function render() {
-  const list = cur === 'all' ? NOTICES : NOTICES.filter(n => n.type === cur);
-  const el = document.getElementById('container');
-  if (!list.length) { el.innerHTML = '<div class="empty">目前沒有此類型的公告</div>'; return; }
-  const byYear = {};
-  list.forEach(n => { const y = n.date.split('/')[0]; (byYear[y] = byYear[y] || []).push(n); });
-  el.innerHTML = Object.keys(byYear).sort((a, b) => b - a).map(year => `
-    <div class="year-label">${year}</div>
-    <div class="notice-list">
-      ${byYear[year].map(n => `
-        <a href="${n.file}" class="notice-card ${n.type}">
-          <div class="type-stripe"></div>
-          <div class="card-inner">
-            <span class="type-pill">${LABEL[n.type] || n.type}</span>
-            <span class="card-title">${n.title}</span>
-            <span class="card-date">${n.date}</span>
-          </div>
-          <div class="card-arrow">›</div>
-        </a>`).join('')}
-    </div>`).join('');
-}
-
-render();
 </script>
