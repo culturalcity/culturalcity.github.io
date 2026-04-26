@@ -19,6 +19,7 @@
   "homepage": "https://github.com/culturalcity/culturalcity.github.io#readme",
   "description": "",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.5"
+    "@11ty/eleventy": "^3.1.5",
+    "xlsx": "^0.18.5"
   }
 }
