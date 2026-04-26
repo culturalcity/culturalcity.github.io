@@ -78,10 +78,12 @@ extraStyles: |
   .sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
   .sign-name{font-size:15px;font-weight:500;color:var(--wg41);margin-top:4px;}
   .doc-footer{border-top:1px solid var(--line);padding-top:16px;margin-top:32px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
-  .tabs,.toc,.back-link,.finance-link{display:none;}
-  #tab-notice{display:none !important;}
-  .agenda-item,.work-log{break-inside:avoid;}
-  .finance-banner{background:#3C3835 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @media print{
+    .tabs,.toc,.back-link,.finance-link{display:none;}
+    #tab-notice{display:none !important;}
+    .agenda-item,.work-log{break-inside:avoid;}
+    .finance-banner{background:#3C3835 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
 noticeDate: 2025/11/18
 agendaCount: 15 項議案
 ---
