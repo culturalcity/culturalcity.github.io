@@ -21,3 +21,7 @@ _site/
 
 # Claude Code 內部資料
 .claude/
+
+# 環境變數（含 API 金鑰，禁止上傳）
+.env
+.env.local
