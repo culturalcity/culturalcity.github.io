@@ -25,3 +25,10 @@ _site/
 # 環境變數（含 API 金鑰，禁止上傳）
 .env
 .env.local
+
+# Claude 工作筆記
+CLAUDE.md
+
+# 原始素材（不上線、不公開）
+raw/
+RAW/
