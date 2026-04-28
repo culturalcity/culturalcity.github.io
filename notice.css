@@ -53,6 +53,14 @@ body {
 .pill-safety { color: var(--c-safety); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
 .pill-equip { color: var(--c-equip); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
 
+/* 深色 header 上的 pill 覆寫：用淺色版色相，避免暗紅/暗綠融進深底 */
+.header .pill-work    { color: #D49060; background: rgba(212,144,96,.12); border-color: rgba(212,144,96,.4); }
+.header .pill-rule    { color: #C8C3BD; background: rgba(255,255,255,.08);  border-color: rgba(255,255,255,.22); }
+.header .pill-event   { color: #7BB893; background: rgba(123,184,147,.12); border-color: rgba(123,184,147,.4); }
+.header .pill-meeting { color: #94B5D6; background: rgba(148,181,214,.12); border-color: rgba(148,181,214,.4); }
+.header .pill-safety  { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
+.header .pill-equip   { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
+
 /* ── 語言切換器 ── */
 .lang-bar {
   background: var(--wg41); border-top: 1px solid rgba(234,231,225,0.1);

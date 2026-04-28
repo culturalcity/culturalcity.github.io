@@ -260,10 +260,10 @@ extraStyles: |
   <div class="sec-label">UPDATES &nbsp;·&nbsp; 最新動態</div>
 
       <div class="timeline">
-{% for item in collections.recentUpdates -%}
+{% for item in collections.recentUpdates | sortByPublishDate -%}
 {%- set url = item.url -%}
 {%- if "/notice/" in url %}{% set cat = "notice" %}{% set catLabel = "社區公告" %}{% set displayDate = item.data.displayDate %}{% set title = item.data.titleZh or item.data.title -%}
-{%- elif "/finance/" in url %}{% set cat = "finance" %}{% set catLabel = "財務月報" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
+{%- elif "/finance/" in url %}{% set cat = "finance" %}{% set catLabel = "財務月報" %}{% set displayDate = item.data.publishDate or (item.date | dateYMD) %}{% set title = item.data.title -%}
 {%- elif "/minutes/" in url %}{% set cat = "minutes" %}{% set catLabel = "會議紀錄" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
 {%- else %}{% set cat = "other" %}{% set catLabel = "更新" %}{% set displayDate = item.date | dateYMD %}{% set title = item.data.title -%}
 {%- endif %}

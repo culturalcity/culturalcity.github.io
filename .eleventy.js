@@ -7,6 +7,18 @@ module.exports = function(eleventyConfig) {
     return String(s || "").split(sep);
   });
 
+  // ── 按發布日排序（用於最新動態時間軸）──
+  // 優先取 frontmatter 的 publishDate，否則 fallback 到 item.date。
+  // 必須在 template 階段排序：在 addCollection 階段排序時，11ty 在
+  // incremental rebuild 後會以 item.date 重新排，覆蓋我們的順序。
+  eleventyConfig.addFilter("sortByPublishDate", function(items) {
+    const effDate = (i) => {
+      const pd = i.data && i.data.publishDate;
+      return pd ? new Date(String(pd).replace(/\//g, '-')) : i.date;
+    };
+    return [...items].sort((a, b) => effDate(b) - effDate(a));
+  });
+
   // ── 日期格式化：YYYY-MM ──
   eleventyConfig.addFilter("dateYM", function(d) {
     if (!d) return "";
@@ -111,8 +123,10 @@ module.exports = function(eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
-  // ── 統一最新動態：合併 notice + finance + minutes，按日期排序 ──
+  // ── 統一最新動態：合併 notice + finance + minutes，按發布日排序 ──
   // 不複製 item（會觸發 templateContent 早期存取錯誤），類別從 URL 推斷
+  // 排序語意是「對住戶公開的時間」：優先用 frontmatter 的 publishDate，
+  // 否則 fallback 到 item.date（公告檔名日 / 會議開會日）
   eleventyConfig.addCollection("recentUpdates", function(collectionApi) {
     const tags = ["notice", "finance", "minutes"];
     const all = [];
