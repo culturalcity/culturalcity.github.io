@@ -1,10 +1,11 @@
 ---
 layout: finance.njk
 permalink: /finance/2026-03.html
-title: 2026年3月 財務月報（草稿）
+title: 2026年3月 財務月報
 date: 2026-03-31
-draft: true
-eleventyExcludeFromCollections: true
+publishDate: 2026/04/28
+summary: '本期損益 +3,589 元'
+pdfUrl: 'https://drive.google.com/file/d/14_OLprhOCllA4llnKR5c2WuSXCi7gTTJ/view?usp=sharing'
 extraStyles: |
   /* PRINT */ @media print{ .no-print{display:none!important;}
   .page-break{page-break-before:always;}
@@ -37,7 +38,7 @@ extraStyles: |
     <div class="header-right">
       <strong>2026 年 3 月</strong>
       繁體中文 ／ 新台幣 NTD<br>
-      發布日期：2026/04/13
+      發布日期：2026/04/28
     </div>
   </div>
 </div>
@@ -438,8 +439,8 @@ extraStyles: |
     <div class="panel">
       <div class="ph">重大項目說明</div>
       <div class="pb" style="font-size:13px;line-height:1.9;color:var(--ink2)">
-        <p>① 盈餘環比 -57.1%：園藝費 7,500、公共水費 3,969、修繕費 +4,600 週期費用集中</p>
-        <p>② 盈餘同比 -75.7%：管理服務費 +10,000、垃圾費 +2,625 等結構性費用上漲所致</p>
+        <p>① 盈餘環比 -76.6%：園藝費 7,500、公共水費 3,969、修繕費 +4,600 週期費用集中</p>
+        <p>② 盈餘同比 -86.8%：管理服務費 +10,000、垃圾費 +2,625 等結構性費用上漲所致</p>
         <p>③ 現金減少屬正常：2 月遞延款項 3 月付清，帳面現金回歸真實水位</p>
         <p>④ 維修基金：累計已達 126 萬，比去年同期增加 133%</p>
       </div>
@@ -508,7 +509,7 @@ function drawOverview(){
     type:'doughnut',
     plugins:[ChartDataLabels],
     data:{labels:['管理費收入','車位清潔費','充電樁收入','充電樁電費','機車清潔費','利息收入','公設清潔費','臨停清潔費'],
-      datasets:[{data:[377419,39200,1650,2482,3400,4320,4000,410],
+      datasets:[{data:[377419,39200,1650,2482,3400,4320,1000,410],
         backgroundColor:['rgba(26,74,107,.85)','rgba(184,134,11,.85)','rgba(26,107,60,.85)','rgba(192,57,43,.75)','rgba(122,118,112,.75)','rgba(100,60,180,.75)','rgba(200,100,50,.75)','rgba(50,150,100,.75)'],borderWidth:1}]},
     options:pieLabel
   });
