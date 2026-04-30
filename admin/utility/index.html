@@ -690,23 +690,18 @@ function genCard(){
       subInfo='<div style="font-size:22px;color:'+stColor+';margin-bottom:12px;line-height:1.6;font-weight:500">↳ '+diffStr+'</div>';
     }
 
-    // 氣溫對應 mini-table（最高 / 預期 / 警戒，因果鏈一覽）
-    // 三行收緊以對齊水區 chip 高度（~110px）
+    // 氣溫對應 mini-table（最高 / 預期 兩行；警戒由狀態 badge 傳達）
     var chipHtml='';
     if(eTarget!==null){
-      var rowStyle='display:flex;align-items:baseline;justify-content:space-between;gap:14px;line-height:1.3;';
-      chipHtml='<div style="display:inline-flex;flex-direction:column;background:'+chipBg+';border:1px solid '+chipBd+';padding:8px 16px;border-radius:2px;margin-bottom:2px;min-width:220px">'
+      var rowStyle='display:flex;align-items:baseline;justify-content:space-between;gap:14px;line-height:1.5;';
+      chipHtml='<div style="display:inline-flex;flex-direction:column;background:'+chipBg+';border:1px solid '+chipBd+';padding:14px 20px;border-radius:2px;margin-bottom:2px;min-width:220px">'
         +'<div style="'+rowStyle+'font-size:17px;color:#898480">'
           +'<span>🌡 最高</span>'
           +'<strong style="color:#3C3835;font-weight:600;font-size:20px">'+(tmax!==null?tmax+'°C':'—')+'</strong>'
         +'</div>'
-        +'<div style="'+rowStyle+'font-size:17px;color:'+chipFg+';margin-top:2px;border-top:1px solid '+chipBd+';padding-top:3px">'
+        +'<div style="'+rowStyle+'font-size:17px;color:'+chipFg+';margin-top:6px;border-top:1px solid '+chipBd+';padding-top:7px">'
           +'<span style="font-weight:600;letter-spacing:.05em">💡 預期</span>'
           +'<strong style="color:'+chipFg+';font-weight:700;font-size:26px">'+eTarget.toFixed(0)+' 度</strong>'
-        +'</div>'
-        +'<div style="'+rowStyle+'font-size:17px;color:#898480;margin-top:2px">'
-          +'<span>⚠ 警戒</span>'
-          +'<strong style="color:#8C5A00;font-weight:600;font-size:20px">'+eWarn.toFixed(0)+' 度</strong>'
         +'</div>'
       +'</div>';
     }
