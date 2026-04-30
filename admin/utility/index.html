@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>閱大安每日水電公告</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+:root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--dp:#1F5C38;--dn:#8C1F1F;--blue:#2B4A6B;--warn:#8C5A00;--yellow:#FFF9D9;--ts-xs:13px;--ts-sm:15px;--ts-base:17px;--ts-md:19px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:var(--ts-base);line-height:1.65;min-height:100vh;}
+
+/* ── Header ────────────────────────────────────── */
+.hd{background:var(--wg41);color:var(--wg1);padding:18px 26px 14px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
+.hd::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px);pointer-events:none;}
+.hi{max-width:1600px;margin:0 auto;position:relative;}
+.hle{font-size:11px;letter-spacing:.28em;color:var(--wg9);margin-bottom:3px;}
+.hlh{font-size:21px;font-weight:700;letter-spacing:.06em;}
+
+/* ── 全域容器 ──────────────────────────────────── */
+.app{max-width:1600px;margin:0 auto;padding:14px 18px 60px;}
+
+/* ── 共用 ──────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:var(--ts-sm);font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .15s;border:1px solid var(--line);background:transparent;color:var(--wg11);line-height:1.4;}
+.btn:hover{background:var(--wg1);border-color:var(--wg11);}
+.btn-save{background:var(--dp);color:var(--white);border-color:var(--dp);font-weight:600;font-size:var(--ts-base);padding:9px 18px;line-height:1.4;}
+.btn-save:hover{background:#174A2C;}
+.btn-save:disabled{opacity:0.45;cursor:not-allowed;}
+.btn-sm{padding:6px 11px;font-size:var(--ts-xs);}
+.btn-png{background:var(--wg41);color:var(--white);border-color:var(--wg41);font-weight:600;font-size:var(--ts-base);padding:9px 18px;line-height:1.4;}
+.btn-png:hover{background:var(--wg11);}
+.btn-danger{color:var(--dn);border-color:rgba(140,31,31,0.25);}
+.btn-danger:hover{background:rgba(140,31,31,0.05);border-color:var(--dn);}
+
+.pending-bar{background:#FFF9D9;border:1px solid rgba(140,90,0,0.4);padding:9px 14px;font-size:var(--ts-sm);color:#8C5A00;display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:2px;margin-bottom:12px;}
+
+/* 雲端同步狀態 */
+.sync-state{font-size:var(--ts-xs);color:var(--wg9);display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:2px;border:1px solid var(--line);background:var(--wg1);white-space:nowrap;}
+.sync-state::before{content:'●';font-size:9px;}
+.sync-state.loading{color:var(--wg11);}
+.sync-state.saving{color:var(--warn);}
+.sync-state.saved{color:var(--dp);background:rgba(31,92,56,0.05);border-color:rgba(31,92,56,0.2);}
+.sync-state.offline,.sync-state.error{color:var(--dn);background:rgba(140,31,31,0.05);border-color:rgba(140,31,31,0.25);}
+
+/* ── 主版型左右並排 ───────────────────────────── */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 670px;gap:14px;align-items:start;}
+@media(max-width:1100px){.main{grid-template-columns:1fr;}}
+
+.pane{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.pane-head{padding:10px 16px;background:#F0EDE8;border-bottom:1px solid var(--line);font-size:var(--ts-sm);font-weight:600;color:var(--wg11);letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.pane-title{display:flex;align-items:center;gap:8px;}
+.pane-title-text{font-size:var(--ts-base);font-weight:700;color:var(--wg41);}
+.pf{width:100%;height:calc(100vh - 180px);min-height:600px;border:none;background:white;display:block;}
+
+/* 預覽卡片動作 */
+.preview-head-actions{display:flex;align-items:center;gap:14px;}
+
+/* 資料表 toolbar，兩段 */
+.dt-toolbar{padding:10px 14px;background:#F8F6F2;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+.dt-toolbar-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.dt-toolbar select{padding:6px 10px;font-size:var(--ts-sm);border:1px solid var(--line);border-radius:1px;background:var(--white);}
+.dt-toolbar .ms-arrow{padding:5px 10px;font-size:var(--ts-sm);border:1px solid var(--line);background:var(--white);cursor:pointer;border-radius:1px;color:var(--wg11);}
+.dt-toolbar .ms-arrow:hover{background:var(--wg1);}
+.dt-toolbar .dt-spacer{flex:1;}
+.dt-toolbar label.chk{font-size:var(--ts-sm);color:var(--wg11);display:flex;align-items:center;gap:5px;cursor:pointer;}
+.dt-toolbar input[type=checkbox]{width:15px;height:15px;cursor:pointer;}
+.dt-aux-label{font-size:var(--ts-xs);color:var(--wg9);letter-spacing:.05em;}
+.dt-aux-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:8px;}
+
+/* 歷史表格本體 */
+.htbl-wrap{max-height:calc(100vh - 240px);overflow:auto;}
+.htbl{width:100%;border-collapse:collapse;font-size:var(--ts-base);}
+.htbl thead th{position:sticky;top:0;background:#F0EDE8;color:var(--wg11);font-weight:600;padding:9px 8px;text-align:left;border-bottom:2px solid var(--wg11);font-size:var(--ts-sm);letter-spacing:.04em;z-index:1;}
+.htbl tbody td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:middle;}
+.htbl tbody tr:hover{background:rgba(60,56,53,0.03);}
+.htbl tbody tr.pending td{background:var(--yellow)!important;}
+.htbl tbody tr.is-selected td{background:rgba(31,92,56,0.08);font-weight:500;}
+.htbl tbody tr.is-selected td:first-child{box-shadow:inset 3px 0 0 var(--dp);}
+.htbl input[type=number]{padding:6px 8px;font-size:var(--ts-sm);width:88px;background:var(--white);text-align:right;border:1px solid var(--line);border-radius:1px;font-family:inherit;}
+.htbl input[type=number]:focus{outline:none;border-color:var(--wg11);background:#FFFEF7;}
+.htbl input[type=number].is-empty{background:rgba(140,31,31,0.04);border-color:rgba(140,31,31,0.18);}
+.htbl input.note-input{padding:6px 10px;font-size:var(--ts-sm);width:100%;min-width:160px;background:var(--white);text-align:left;border:1px solid var(--line);border-radius:1px;font-family:inherit;color:var(--wg41);}
+.htbl input.note-input:focus{outline:none;border-color:var(--wg11);background:#FFFEF7;}
+.htbl input.note-input::placeholder{color:#B5B0AB;}
+.htbl input[type=checkbox]{cursor:pointer;width:18px;height:18px;}
+.htbl .day-cell{cursor:pointer;user-select:none;font-weight:700;color:var(--wg41);font-size:var(--ts-base);padding:3px 0;display:inline-block;}
+.htbl .day-cell:hover{color:var(--dp);}
+
+/* Excel 匯入比對 modal */
+.diff-modal{position:fixed;inset:0;background:rgba(60,56,53,0.6);display:flex;align-items:center;justify-content:center;z-index:1000;}
+.diff-box{background:var(--white);max-width:780px;width:90%;max-height:80vh;display:flex;flex-direction:column;border-radius:2px;}
+.diff-head{padding:14px 18px;border-bottom:1px solid var(--line);background:#F0EDE8;display:flex;justify-content:space-between;align-items:center;}
+.diff-body{flex:1;overflow:auto;padding:14px 18px;}
+.diff-foot{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px;background:#F8F6F2;}
+.diff-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.diff-summary .cell{padding:10px;background:var(--wg1);border-radius:2px;text-align:center;}
+.diff-summary .cell .num{font-size:24px;font-weight:700;color:var(--wg41);}
+.diff-summary .cell .lbl{font-size:11px;color:var(--wg9);}
+.diff-summary .cell.add .num{color:var(--dp);}
+.diff-summary .cell.upd .num{color:var(--warn);}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hi">
+    <div class="hle">DAILY UTILITY REPORT</div>
+    <div class="hlh">閱大安・每日水電公告</div>
+  </div>
+</div>
+
+<div class="app">
+
+  <div id="pending-bar" style="display:none"></div>
+
+  <!-- ── 主版型左右並排 ───────────────────────────── -->
+  <div class="main">
+    <!-- 左：資料表 -->
+    <div class="pane">
+      <div class="dt-toolbar">
+        <div class="dt-toolbar-row">
+          <button class="ms-arrow" onclick="histPrevMonth()">◀</button>
+          <select id="hist-month" onchange="renderHistTable()"></select>
+          <button class="ms-arrow" onclick="histNextMonth()">▶</button>
+          <label class="chk"><input type="checkbox" id="hist-only-missing" onchange="renderHistTable()">只看缺資料</label>
+          <span id="sync-state" class="sync-state loading">●  載入中…</span>
+          <div class="dt-spacer"></div>
+          <button class="btn btn-save" id="btn-commit" onclick="commitPending()" disabled>💾 儲存</button>
+        </div>
+        <div class="dt-aux-row">
+          <span class="dt-aux-label">資料：</span>
+          <button class="btn btn-sm" onclick="exportXLSX()">📥 匯出 Excel</button>
+          <button class="btn btn-sm" onclick="document.getElementById('imp-xlsx').click()">📤 匯入 Excel</button>
+          <input type="file" id="imp-xlsx" accept=".xlsx,.xls" style="display:none" onchange="importXLSX(event)">
+          <button class="btn btn-sm" onclick="exportJSON()">JSON 匯出</button>
+          <button class="btn btn-sm" onclick="document.getElementById('imp-json').click()">JSON 匯入</button>
+          <input type="file" id="imp-json" accept=".json" style="display:none" onchange="importJSON(event)">
+          <div class="dt-spacer"></div>
+          <button class="btn btn-sm btn-danger" onclick="clearUserData()">🗑 清除自填</button>
+        </div>
+      </div>
+      <div class="htbl-wrap" id="htbl-wrap"></div>
+    </div>
+
+    <!-- 右：公告預覽 -->
+    <div class="pane">
+      <div class="pane-head">
+        <div class="pane-title">
+          <span class="pane-title-text">📱 公告預覽</span>
+        </div>
+        <button class="btn btn-png" onclick="dlPNG()" id="btn-png">📥 下載</button>
+      </div>
+      <iframe id="pf-card" class="pf"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<div id="diff-modal" style="display:none"></div>
+
+<script>
+// ────────────────────────────────────────────────────────────────────
+// 內建歷史資料
+// ────────────────────────────────────────────────────────────────────
+var SEED_W={start:'2022-02-01',end:'2026-04-29',values:[0,0,0,0,0,0,0,0,0,0,1.33,0.32,0.37,0.1,1.22,0.34,0.29,0.24,0.4,0,0.18,0.19,0.2,1.09,0.48,0.27,0.63,0.14,0.24,0.4,0.46,0.71,0.44,0.25,0.43,1.13,0.85,0.43,0.4,0.58,1.1,1.11,0.46,0.43,0.49,0.46,0.82,0.23,0.51,0.68,3.32,0.38,0.24,0.48,0.11,1.5,0.17,0.16,0.73,1.08,0.51,0.11,1.85,1.14,0.44,0.35,1.52,2.11,0.49,2.2,1.71,0.81,0.75,1.1,0.73,0.3,0.54,0.44,0.51,1.48,0.98,1.09,0.37,0.64,0.55,0.59,0.55,0.56,0.46,0.38,0.38,0.39,0.38,3.32,0.69,0.94,0.39,2.02,0.43,0.39,0.28,0.29,0.33,0.58,0.59,1.34,0.82,0.86,0.69,0.62,0.38,0.62,0.5,0.36,0.48,0.66,0.36,0.28,0.45,0.51,0.36,0.51,0.5,0.49,0.35,0.46,1.4,0.33,0.4,0.42,0.37,0.24,0.45,0.86,0.73,1.21,1.27,1.23,0.48,0.51,0.54,0.8,0.53,0.5,0.36,0.31,0.53,0.47,0.7,0.44,0.7,0.43,0.32,0.5,0.47,0.41,0.45,0.47,0.39,0.25,0.51,0.48,0.36,0.46,0.74,3.36,1.96,0.61,3.78,4.42,3.06,2.45,2.52,1.87,2.67,2.02,2.41,2.4,2.26,2.25,2.02,2.46,2.37,2.37,2.63,3.64,3.03,2.69,2.83,2.91,2.98,2.97,3.16,3.06,2.84,2.97,3.05,3.47,3.2,3.05,2.99,2.85,3.04,3.04,2.79,3.06,3,3.05,2.83,3.01,3.09,2.87,3.04,2.86,3,2.82,3.15,3.09,3.08,3.01,2.87,2.88,2.8,3.02,3.02,2.99,7.82,10.68,2.94,2.9,2.88,3.24,2.98,3.03,2.98,2.93,2.72,3.06,3.29,3.32,2.99,3.02,3.08,2.93,2.99,3.17,2.78,3.22,16.27,16.93,5.13,5.11,5.31,3.95,3.01,3.1,3,0,0,0,0,0,3.11,4.16,3.99,3.23,3.41,3,3.03,2.04,1.89,1.38,1.92,2.45,2.93,2.96,3.05,3,2.81,3.04,2.97,2.83,3.05,2.95,3.3,2.82,2.95,2.92,2.8,2.98,3.03,2.78,2.9,3.19,3.13,2.9,3,2.9,2.83,2.88,2.91,2.94,2.98,2.99,3.11,2.99,2.7,2.94,2.31,1.97,2.05,2.87,2.77,2.03,1.72,1.72,1.54,1.62,1.84,10.8,2.66,2.41,2.5,2.27,2.47,2.46,2.41,2.22,2.4,2.56,2.28,2.4,2.34,2.26,1.92,2.23,2.39,2.39,2.17,2.14,2.21,2.28,2.4,2.39,2.43,2.47,2.47,1.41,1.44,1.63,1.51,1.57,1.64,1.56,1.58,1.66,1.45,1.45,1.57,1.58,1.55,1.44,1.56,1.52,1.52,1.59,1.72,1.66,1.5,1.49,1.76,1.62,1.56,1.65,1.57,1.43,1.49,1.5,1.55,1.56,1.56,1.56,1.56,1.47,1.63,1.57,1.48,1.6,1.63,1.46,1.41,1.56,1.62,1.48,1.54,1.48,1.52,1.43,1.63,1.66,1.48,1.64,1.67,1.65,1.53,2.09,1.7,1.56,1.67,1.59,1.62,1.47,1.66,1.52,1.43,1.68,1.62,1.46,1.44,1.82,1.79,1.52,1.57,1.66,1.53,1.4,1.54,1.49,1.38,1.48,1.59,1.62,1.37,1.71,1.75,1.59,1.83,1.71,1.61,1.54,1.59,1.72,1.57,1.67,1.6,1.52,1.41,1.55,1.77,1.44,1.56,1.63,1.54,1.37,1.46,1.54,1.42,1.55,1.59,1.6,1.42,1.56,1.56,1.48,0.01,0,0,0,1.59,1.51,1.5,1.63,1.71,1.62,1.38,1.55,1.55,1.58,1.72,1.62,1.54,1.4,1.6,1.47,1.54,1.51,1.62,1.59,1.37,1.87,1.79,1.39,1.25,1.52,1.7,1.43,1.56,1.63,1.77,1.54,1.64,1.51,1.36,1.62,1.62,1.84,1.46,1.53,1.58,1.34,1.6,1.55,1.55,1.43,1.62,1.53,1.44,1.62,1.55,1.45,1.57,1.66,1.55,1.46,1.6,1.58,1.46,1.54,1.66,1.54,2.3,1.71,1.56,1.43,1.75,1.6,1.53,1.4,1.74,1.79,1.58,1.44,1.59,1.53,1.47,1.57,1.58,1.8,1.83,1.65,1.59,1.35,1.58,1.58,1.6,0.02,0,0,0,0,1.58,1.75,1.52,1.56,1.66,1.4,1.69,1.7,1.64,1.53,1.59,1.7,1.4,1.84,1.9,1.81,1.56,4.33,1.6,1.48,1.67,2.09,1.64,1.66,5.82,1.75,1.48,1.91,1.63,2.11,1.59,2.14,1.87,1.42,1.73,1.72,1.58,1.59,2.29,1.63,1.4,1.77,1.63,1.56,0.33,1.14,0.25,0.99,1.39,0.46,1.26,0.44,1.76,1.17,1.01,1.13,0.3,1.28,0.26,1.3,0.53,0.98,1.3,2.38,1.18,1.1,1.19,1.19,19.22,23.43,18.47,1.23,1.17,2.22,1.14,1.04,1.22,1.35,1.33,1.37,1.36,1.47,1,1.35,1.32,1.09,1.56,1.25,1.2,1.01,1.28,1.41,1.01,1.36,1.31,1.32,0.99,1.39,1.31,1.18,1.3,1.33,1.2,0.98,1.36,1.22,1.12,1.21,1.46,1.16,0.98,1.28,1.29,1.02,1.24,1.17,1.25,0.98,1.57,1.21,1.07,1.33,1.31,1.3,1.15,1.14,1.36,1.36,1.05,1.23,1.27,0.96,1.38,1.17,1.38,1.08,1.24,1.25,0.94,1.14,1.17,1.08,1.16,1.28,1.18,0.98,1.3,1.25,1.03,1.17,1.21,1.14,0.98,1.25,1.27,1.09,1.24,1.28,1.11,0.94,1.35,1.28,1.15,1.28,1.16,1.15,1.04,1.32,1.16,0.99,1.22,1.1,1.32,1.22,1.18,1.29,1.14,1.32,1.16,1.02,1.06,0.95,1.13,1.29,1.25,1.23,1.27,1.01,1.21,1.24,1.08,1.34,1.18,1.12,1.07,1.2,1.22,0.96,1.23,1.45,1.48,1.05,1.3,1.45,1.3,1.36,1.19,1.13,1,1.37,1.29,1.23,1.18,1.19,1.11,1,1.25,1.15,1.11,1.34,1.2,1.16,1.01,1.28,1.53,1.07,0.99,1.23,1.11,1.17,1.35,1.3,1.03,1.19,1.17,1.23,1.08,1.19,1.22,1.09,1.15,1.42,1.27,1.03,1.34,1.22,1.04,1.22,1.33,1.23,1.02,1.53,1.15,1.17,1.18,1.11,1.08,0.97,1.15,1.97,1.23,1.28,2.49,1.19,1.08,1.51,1.36,1.08,1.38,1.26,0.96,1.35,1.21,1.24,1.04,1.19,1.22,1.1,0.94,1.16,1.18,1.08,1.16,1.07,1,0.97,1.2,1.12,1.14,1.17,3.23,1.02,1.01,1.25,1.16,1.1,1.67,1.11,1.04,0.98,1.15,1.25,1.03,1.22,1.13,1.36,1.03,1.19,1.14,1.18,1.09,1.15,1.11,1.04,6.45,9.24,9.17,6.07,1.06,1.07,1.02,1.02,1.14,1.14,1.24,1.21,1.21,1.04,1.13,1.17,1.1,1.08,1.15,1.07,0.94,1.29,1.12,1.28,1.21,1.27,0.97,0.99,1.29,1.13,1.13,1.12,1.96,1.07,0.97,1.16,0.4,0.52,0.43,0.5,0.61,0.33,0.54,1.02,1.16,0.56,0.27,0.32,0.26,1.11,0.49,0.26,0.37,0.37,0.45,0.46,0.51,0.35,0.58,0.42,0.54,0.4,0.26,0.41,0.49,0.43,0.35,0.36,0.41,0.28,0.49,0.49,0.41,0.47,0.6,0.54,0.26,0.45,1.11,0.32,0.53,0.55,0.29,0.29,0.54,0.43,0.32,0.44,0.45,0.36,0.3,0.4,0.35,0.67,0.46,0.48,0.31,0.27,0.49,0.38,2.42,4.46,5.14,2.69,0.34,0.51,0.54,0.4,0.3,0.51,0.32,0.33,0.52,0.35,0.43,0.45,0.57,0.46,0.3,0.55,0.41,0.42,0.64,0.37,0.34,0.32,0.52,0.46,0.38,0.42,0.6,0.29,0.3,0.41,0.42,0.48,1.15,0.56,0.36,0.43,0.4,0.52,0.35,0.47,0.47,0.35,0.31,0.8,1.11,0.84,0.74,0.35,0.36,0.28,0.43,2.84,2.55,0.67,0.46,0.27,0.56,0.63,0.43,0.41,0.44,0.47,0.35,0.4,0.56,0.39,0.35,1.57,1.02,0.5,1.68,0.53,0.51,0.23,0.65,0.43,0.35,0.29,0.45,0.48,0.43,0.48,0.65,0.35,0.37,0.57,0.49,0.31,0.37,0.57,0.76,0.24,0.62,0.45,0.3,0.85,0.65,0.34,0.25,0.4,1.15,0.44,1.17,1.82,4.77,0.21,0.4,0.68,0.29,0.4,0.53,0.45,0.99,0.38,0.23,0.18,0.24,0.39,0.53,0.21,0.45,0.43,0.46,0.4,1.22,0.37,0.25,0.38,0.4,0.25,0.38,0.38,0.43,0.25,0.39,1.4,0.26,0.38,3.39,1.28,0.24,0.28,0.35,0.27,0.41,0.4,0.85,1.25,0.31,0.53,0.4,0.32,0.66,0.75,0.37,0.42,0.34,0.51,0.39,0.82,0.64,2.12,0.72,0.3,0.4,0.36,0.37,0.35,0.28,0.36,0.33,0.38,0.39,0.42,0.27,1.47,1.85,0.81,0.26,1.41,0.28,0.45,0.42,0.25,0.78,0.56,0.46,0.33,0.24,0.5,0.52,0.45,0.4,0.59,1.17,0.26,2.98,3.78,1.64,2.27,0.55,0.82,0.97,0.32,0.88,0.98,0.56,0.48,0.54,0.34,0.51,1.25,0.92,0.6,0.49,0.48,0.24,0.24,1.26,1.22,0.77,0.54,0.77,0.61,0.25,0.52,0.53,0.55,0.56,0.52,0.25,0.21,0.54,0.53,0.81,0.64,0.41,1.42,0.42,0.46,1.55,0.32,0.4,1.57,0.56,0.25,0.64,1.31,0.53,0.42,0.68,0.81,0.31,0.88,0.5,0.49,0.49,0.46,0.46,0.28,0.44,0.87,1.11,0.64,0.48,0.27,0.24,0.47,0.48,1.7,0.55,1.11,0.33,0.55,0.94,1.35,2.56,2.36,2.61,3.98,2.48,2.37,2.37,2.17,2.39,2.23,2.39,2.23,2.43,2.33,2.34,2.46,2.4,2.15,2.33,2.33,2.33,2.43,2.34,2.35,2.33,2.26,2.38,2.71,2.31,2.45,2.48,2.19,2.33,2.46,2.21,2.44,2.48,2.46,2.29,2.15,2.39,2.47,2.28,2.61,2.4,2.22,2.23,2.42,2.54,2.3,2.56,2.54,2.55,2.27,2.6,2.31,2.52,2.46,2.27,2.36,2.24,2.57,2.6,2.44,2.33,2.51,2.22,2.49,2.53,2.63,2.29,2.54,2.64,2.56,2.25,2.5,2.46,2.52,2.47,2.52,2.34,2.3,2.44,2.43,2.3,2.51,2.41,2.41,2.21,2.41,2.47,2.28,2.49,2.36,2.2,2.56,2.51,2.54,2.46,2.49,2.66,2.32,2.32,2.98,3.12,2.6,2.53,2.5,2.31,2.24,2.56,2.47,2.39,2.68,2.24,2.47,2.41,2.61,2.46,2.57,2.59,2.49,2.35,2.26,2.78,2.56,2.46,2.33,2.48,2.43,2.3,2.52,4.41,2.43,2.38,0.71,0,0,0.78,2.47,2.55,2.29,2.43,2.36,2.37,2.58,2.54,2.97,2.58,3.81,2.31,2.77,2.58,3.72,2.76,2.55,3.24,2.58,2.93,2.75,2.39,2.54,2.51,2.5,2.32,2.34,2.56,2.27,3.19,2.4,2.5,2.4,2.26,2.43,2.32,4.06,2.54,2.41,2.32,2.61,3.06,2.51,2.31,2.6,2.52,2.33,2.45,2.72,2.8,4.57,6.02,4.32,4.78,4.23,4.87,4.42,4.3,1.35,3.56,4.46,4.5,4.95,4.54,4.83,4.44,4.44,6,4.6,4.32,4.79,4.89,4.31,4.53,4.32,4.56,4.38,5.03,4.44,4.6,5.05,4.43,4.73,4.5,4.4,4.4,4.45,4.59,1.43,0,4.8,5.04,5,4.52,4.63,4.42,4.66,4.8,4.61,5.24,7.01,7.06,7.13,7.22,7.62,6.51,4.49,1.99,1.16,2.66,2.35,3.93,2.63,1.78,0.14,0.38,0.23,0.13,1.17,0.43,1.09,0.14,0.34,0.07,0.42,1.87,0.33,0.41,0.17,0.38,0.4,0.13,0.27,0.36,0.16,0.34,1.13,0.13,0.26,0.93,0.5,0.33,0.22,1.13,0.31,0.07,0.46,1.04,0.39,0.38,0.41,0.11,0.12,0.37,0.38,0.2]};
+
+var SEED_E={start:'2025-04-20',end:'2026-04-29',values:[218.68,274.96,254.52,249.61,229.44,228.01,211.01,254.89,268.88,278.17,287.28,282.19,251.62,237.6,253.19,263.9,249.04,236.5,251.75,270.17,217.94,223.36,217.78,234.68,320.78,315.78,275.66,356.57,241.46,262.94,330.66,348.72,336.18,314.18,269.07,243.84,260.9,275.53,283.76,259.28,259.43,274.79,291.98,333.2,308.06,285.57,323.34,291.88,299.16,337.16,314.05,344.89,375.23,344.89,335.67,357.04,338.44,390.01,377.07,373.72,408.12,386.37,327.59,344.77,344.57,373.35,378.06,376.25,352.89,326.02,317.46,353.37,371.7,414.48,410.43,398.12,345.15,369.22,349.05,377.72,284.77,288.41,252.28,256.67,265.04,338.88,363.88,315.2,326.73,318.36,369.14,290.11,287.13,299.19,352.86,326.32,294.04,269.9,335.83,284.54,288.76,331.96,302.28,300.8,283.04,319.39,292.18,284.56,280.94,296.09,293.71,386.55,331.5,296.66,334.24,344.54,351.84,330.35,353.54,297.79,290.28,296.17,285.12,305.56,312.97,287.7,310.3,329.9,338.62,319.49,398.2,318.06,320.71,291.66,336.78,293.22,323.28,310.23,341.9,378.88,274.43,327.93,341,303.83,353.1,339.07,287.66,320.3,326.74,340.41,373.05,339.02,344,365.9,344.83,370.57,336.26,310.56,332.55,345.76,376.71,303.8,334.08,286.82,307.49,298.12,308.7,363.56,296.64,309.38,323.98,342.01,340.85,333.4,291.68,305.62,299.82,369.66,334.5,312.52,352.58,368.68,344.08,283.41,265.83,256.54,250.24,247.82,259.86,229.37,218.84,236.97,230.98,251.97,250.69,248.5,232.36,249.98,210.54,227.2,257.71,262.2,257.05,283.39,266.2,261.01,279.62,219.06,224.44,234.3,248.74,244.75,235.12,238.42,209.57,218.82,233.99,236.93,231.05,227.24,218.94,217.16,188.56,223.76,219.72,230.88,229.18,221,216.53,218.5,189.62,210.17,217.31,214.08,218.53,219,217.9,223.19,220.22,182.56,202.93,203,208.08,219.98,222.72,219.54,217.61,217.18,221.02,209.72,220.16,209.76,227.68,250.61,192.94,222.38,213.69,269.97,262.5,247.56,219.62,181.42,244.6,238.63,223.01,243.55,261.24,271.2,244.44,220.79,203.71,220.48,214.65,203.25,215.34,217.63,227.92,267.14,252.54,211.6,211,218.48,214.52,225.4,210.59,214.44,218.72,223.63,228.81,219.06,195.35,196.37,207.08,209.57,212.35,219.12,221.4,219.63,223.92,223.4,222.84,219.18,186.37,210.18,200.35,194.79,209.62,214.35,197.86,219.96,245.2,218.5,216.31,217.19,207.73,219.22,232.74,211.33,211.28,215.74,216.82,228.76,225.44,228.97,227.58,237.36,191.18,236.22,215.51,213.33,239.67,217.67,216.02,207.07,211.29,203.14,216.04,210.67,214.21,214.17,205.96,207.86,205.17,213.8,221.68,196.35,203.66,200.69,213.87,199.58,205.25,214.9,289.72,330.7,230.86,240.18,255.98,293.99,378.63,540.38,383.56,199.95,193.18,188.54,183.5,184.46,193.73,201.82,211.5,188.56,191.59,191.66,189.66,198.89,201.64]};
+
+// SEED_T：每日最高氣溫（℃），466920 臺北站，CODiS。
+// 部署當下的快照（fallback 用）。實際運作時，開頁會 fetch /utility/data/daily-temp.json，
+// 比 SEED_T 新的日期會用 fetch 來的資料覆蓋（見下方 _dailyTempMap 與 getValue 邏輯）。
+// JSON 由 GitHub Actions 每天台北 06:00 自動抓昨日 CODiS 資料 commit + push 更新。
+var SEED_T={start:'2022-02-01',end:'2026-04-29',values:[19.1,20.6,17.4,15.6,14.7,16,22.4,18,18,19.9,25.4,19.6,21,16.6,19.5,19.5,19.1,18.1,17.8,12.9,15.3,16,14.7,14.7,20,23.6,21.5,27.8,28.6,21.7,25.8,27.1,22.7,20.8,17.9,20.9,26.4,25.9,27.4,29,29.8,28.5,29.4,30,29.6,24.1,28.2,28.4,26.4,22,17.8,21.9,29.2,27.6,18.4,17.7,24.6,28.6,24.5,17.6,16,17.2,22,26.8,27.7,23.3,25.2,29.1,30.8,31.1,31.9,31.8,24.3,21.1,21.7,19.8,21.7,18.9,22.5,26.5,31.7,30.7,31.5,31.2,34.1,30.6,30.6,31.9,22.4,20.5,17,22,25.1,27.2,27.9,28.7,28.8,27.4,30.9,28.1,31.4,29.2,23.3,21.2,18.8,23.3,27.5,27.1,26.6,24.4,23.6,26.1,24.5,23.7,28,23.7,29.8,33.6,33.2,29.4,33.4,34.6,33.9,33.9,35.8,33.2,25.6,23.1,29.3,31,32.3,26.2,34.9,35.2,28.3,29.8,31.7,35.1,34.6,34.5,33.6,35.2,35.6,34.8,33.6,34.8,34.3,33.6,33.5,33.6,33.1,30.5,32.5,34,34.1,34.6,35.1,35.3,35.3,36.2,36.9,34.9,35,35.4,36,37.8,36.8,36.1,34.9,35.1,37.5,37.8,38.3,37.9,37.2,34.6,35.9,35.4,35.2,34,35,36.2,29,34.2,34.5,34.3,36.7,35,36.2,35.5,35,34.7,35.1,36.4,34.8,34.5,34.6,34.2,33.4,34.3,34.9,36.3,37.2,36.5,36.4,35.2,35.7,36.5,33.3,34.8,35.6,35.3,30.5,29.2,29.1,30,33.9,29.3,29.5,31.5,31,30.6,26.8,28.8,28.2,31,33.1,32.7,32.2,32.2,32.8,29,30.4,30,30.2,26,26,32.7,32.6,34.1,34.8,33.5,33.9,34.8,35.1,34.9,29.2,27.1,26.3,24.7,25.6,22.2,22,24.1,24.9,25.2,25.3,26.4,25.2,20.2,22.7,24.2,27.3,29.3,24.2,24.8,24,27.4,28.7,27.2,23.8,23.7,23.4,22.3,24.2,25.6,23.5,21.5,23.5,24.6,23.6,29.7,30,29.2,29.9,27.3,26.4,30.1,24.2,28.1,28.2,27.9,26.4,25.8,29.9,24.7,21.2,24.4,23.6,28.4,31.3,30.7,24.1,18.8,20.4,24.8,23.2,21.2,19.1,21,19.9,19.6,20.8,18.4,17.3,16.6,15.4,19.3,20.8,18,12.1,18.7,23.2,18.4,19.7,15.9,15.9,15.8,19,17.8,18.7,17.4,17.8,16.8,22,20.4,17.7,17.9,22.2,18.9,20.3,24.8,24.3,23.2,22.8,25.9,28.2,28,20.9,13.3,16.9,15,19.7,18.1,20,23.7,20.1,17.2,14.2,19.2,15.7,11.4,17.5,18.5,24,22.8,18.7,19.9,18.9,21.1,20.9,21.8,21.9,22.9,20.1,23.1,27.3,28.1,16.2,13.6,18.5,24.1,26.8,22.7,16.3,16,18.7,21.3,20.4,15.2,14.2,20.8,27.2,23.2,18.6,20.5,20.8,21.8,24.1,26,26.5,25.6,26.7,28,28.1,16,22.9,26.4,25.4,26.1,19.5,23,26.9,29.5,32,32.6,25.5,23.6,18.5,18.8,19.6,23.5,20.9,20.2,19.9,25,27.8,28.2,29.4,26.4,23,19.6,23.5,27.8,29.1,29.6,30.8,31.5,25.3,31.8,31.4,33.1,32.1,23.9,22.7,22.3,25.8,22.5,22,19.5,25.2,31.1,31.2,22.4,25.6,30.9,34.1,32.5,34.7,34.8,30.3,21.1,22.3,26.6,27.6,28.2,23.4,25.3,30.5,31.4,34,34.9,27,25.6,30.9,35,22.8,26.2,30,32.9,32,33.1,33.8,31,30.1,29,34.3,33.8,32,33.3,34,34,33.9,32.1,30.8,28.4,29.1,32.4,31.4,27.8,31.7,30.4,34.3,34.3,36.2,35.3,33.7,34.2,34.2,34.4,34.7,34.4,34.1,36,35.2,32.3,33.8,34.8,36.4,36.6,36.8,37.4,37.9,35.6,36.1,36,34.6,35,35.4,35.8,34.6,35.7,35.3,35.3,35.2,35.9,34.9,34.6,35.1,34.7,32,31,30.8,34.2,34.1,32.9,30.8,30.9,30.6,33.2,33.3,37.6,36.8,34.3,36.9,35.4,33.4,33.9,34.8,35.5,37.2,30.9,33.9,33.9,34.2,33.1,34,36.1,35.3,33.9,33.7,34.6,35,35.4,35,33.4,32.6,33.5,31.8,29.1,30.1,33.4,32.3,29.6,28.7,32.3,32.5,33.1,33.9,34.6,34.2,34,34.7,32.6,34.3,34.7,33.5,33.8,34.1,34.2,35.5,33.5,33.7,32.2,33.3,32.2,32,31.6,28.4,26.5,27.4,29.5,29.4,31.1,27.5,27.2,26.4,26.8,28.9,28.3,26,27.6,28.1,27.9,31.2,32.8,28.6,22.9,25.4,29.4,31.1,30,30.6,25.7,23.7,23.9,27.4,26.8,28.5,31.8,31.3,31.8,32.2,32.8,24.9,30.2,31.9,30.3,24.5,22.4,19.1,20,23.3,26.2,20.7,20.8,23.5,24.2,26.4,27.9,28.1,21.5,21.7,20.8,24.1,25.4,26.5,22.2,18.5,20.2,20.8,20.6,19.8,19.7,23.4,26.8,27.8,29.6,30.2,25.4,22.9,29.7,28.5,23.2,15.2,23.3,20.3,17,14.2,13.5,16.9,15.6,16.8,23.6,24,20.6,20.4,24.3,23.9,18.5,24.1,18.3,17.9,22.5,22.8,18.4,21.5,20.6,18.3,18.4,21.9,23.6,25.9,19.7,19.5,24.6,25.7,25.3,23.9,17.6,15.2,10.1,11.9,12.6,14.8,14.5,14.9,24.6,21.6,25.5,29.6,22.5,24.2,23.5,18.4,17.4,18.8,15.4,13.1,16.1,21.6,23.2,24.5,26.7,27.7,16.7,23.4,27.6,30.4,29.9,29.2,24,17.4,18.8,15.8,14,15.1,23.5,26.4,15.4,12.6,16.4,23.5,30.8,27.6,14.7,16.9,15.8,19.1,19.9,23.6,22,24.5,20.6,24.5,28.2,19.6,18.6,20.1,24.1,27.6,30.4,31.9,30.9,25.2,23,31.4,27.6,28.4,28.4,28.1,33,33.3,30.5,21.9,25.3,25.2,24.1,19.8,22.9,28.5,29.4,29.1,29.1,33.8,31.6,30.9,27.4,29.7,32.1,30.8,28.7,29.9,25.7,27.6,27.7,29.2,31.4,35.2,33.4,27.8,23.3,26,33,31.6,32,29.6,28.7,26.5,32.1,31.3,33.6,22.9,23,28.1,25.7,29.3,30.5,32,27.9,28.6,27.5,26.6,27.8,30.4,31.7,32.5,26.8,26.2,33.5,32.9,32,25.3,26,27,27,24.5,29.9,31.8,31,33.6,35.6,34.9,36.1,33.8,35.7,33.4,34,32.3,33.6,34.8,35.8,35.8,36.2,35.5,35.5,34.5,35,35.6,35,36.2,36,35.5,34.8,35.8,36.1,35.6,35.6,35.2,35.4,34.8,35.3,36.2,35.8,35.2,36,35.4,36,35.7,36.3,36.3,35.4,36.6,33.7,29.8,29.4,29.4,31.6,34.3,34.1,33.1,34,35.8,36.8,37.6,36.8,35.9,33.9,35,33.2,35.6,33.7,35.3,36,36,33.3,30.7,32.9,31.8,32.5,33,34.2,35.5,36.4,34.3,33.8,33.8,33.6,36.7,35,34.2,35.1,35.7,36.6,37,33.6,35.1,35.8,36.1,34,33.4,34.2,33.6,35.8,34.6,33.7,30.8,35.2,34.8,34.4,32.4,32.8,33.8,29.4,29.3,31.1,31.4,31.8,29.9,31.8,30.6,30.8,30.5,32.5,29.7,25.6,28,31.3,33.5,30.6,25.1,25,25.8,26.5,28.3,31.9,33.1,32.4,29.5,31.2,33.8,32.8,25.3,28.3,28.6,24,23.6,30.4,31.6,32.1,26.1,25,25.4,27.9,28.4,24,26.8,27.8,24.3,22,21.7,23.4,26.3,25.5,25.3,25,27.8,30.6,30.6,27.6,24.4,22.6,20.5,22.2,21,20.8,22.8,22.7,28.7,22.9,20.5,20.9,20.3,22.2,26.6,28.2,25.3,23.7,22.2,24.1,21,18,20.3,21.3,23.4,19,19.2,15.2,15,16.4,19.6,16.8,14.2,17.8,17.7,15.4,19,18.5,22.4,19.4,19,16.1,19,19.7,19.3,17.7,19.3,17.5,19.8,23,19.4,18.4,17.3,16.5,12.9,14,18,19.5,24.4,17.9,16.7,15.7,20.5,16.8,20.6,22.2,23.2,19.7,23.5,20,18.7,13.4,16.8,17.9,22.6,22.1,24.6,18.1,16.4,15.8,18.3,16.7,16.1,10.8,13.1,20.4,25.5,22.5,17.1,19.7,27.2,20.4,20.4,16.9,17.5,22.1,18,18.1,16.4,13.8,22.6,20.7,21.4,26.5,28.2,29.4,27,26.6,18.7,17.4,16.5,16.5,19.9,25.3,28.7,30.6,23.6,21.2,19.3,15.5,14.3,16.7,17.1,20.7,24.5,26.7,27.2,30.1,29.9,31.3,33.9,26.4,16,14.6,16,14.8,19,23.6,26.5,21.4,21.1,26.5,27.9,29.9,22.8,31.1,31.1,20.5,29.8,26.7,30.6,31,30.4,33.8,29.4,32.2,34.9,29.6,23.6,23.2,21.1,31,25.5,27.6,31,28.6,30.2,31.3,27.7,31.7,30.1,25.6,31.7,33.1,27.3,24.3,26.6,31.6,32.8,33.6,33.7,32.6,32.8,31.7,33,33.7,33.7,34.7,30,22.2,22.2,29.1,27.7,24.5,27.3,32.8,33.7,35.5,30.7,24.6,25.3,32.2,33.4,32.6,33.8,36.1,36,30.5,30.7,34.8,37.2,35.5,32.7,35.4,34.7,35.4,32.8,34.6,36.3,36,35.5,34.1,34.8,34.8,35.8,35.3,35.4,36.1,35.6,35.9,34.2,33.4,29.8,34.7,27,28.1,29.4,33.1,34.7,32.3,36.9,35.7,35,34.4,30.4,31.3,29.2,31.6,34,32.3,29.3,34.1,32.6,31.8,32.3,35.9,36,33.9,34.7,35.6,35.2,34,34.7,34.8,35.4,35.3,33.3,34.9,34.2,32.6,34.3,34.6,33.7,34.9,34.3,34,35.8,35.7,36.4,35.8,36.2,35.2,35,33.6,35.3,35,35.9,34.6,32.6,32.7,34,34.6,35.6,35.1,34.6,34.7,34.5,35.1,34.5,33.9,34.8,35.6,35.4,35.1,35.3,34.5,35.7,34.2,33.6,31.7,30,34.8,33.8,30.2,34.5,35.5,34,35,34.2,34.5,35.4,36.5,35.5,34.3,34,33.5,32.2,34,35.2,35.3,35.5,35.2,34,34.7,33.5,34,28.4,25.4,23.2,23.4,25.1,24.2,26,24.5,23,22.1,25.1,29.1,25.9,24.4,22.5,22.4,23.8,25.9,27,30.1,29,30.1,24.3,24.2,29.3,26,24.2,25.8,27.7,26.5,21.1,17.4,20,21.1,22.4,27.1,28.6,22.7,21.7,23.6,20.9,26.4,28.4,26.3,25.9,21.6,20.6,19.9,22.2,26,22.2,21,25,23.3,21.5,20.8,17.3,22.4,25.3,24.5,21.6,24.5,24.9,21.1,21.2,26.9,24.4,19.9,15,18.7,18.7,23.2,20.7,18,17,14.4,17.5,23.2,20.8,14.8,14,15.3,17.6,19.7,17.6,18.4,20.8,23.5,24.9,21.8,23.1,21.9,22.3,17.7,14,13.2,18.7,19.5,23.5,23.5,18.6,17.5,21.3,24.7,18.5,16.2,16.9,19,25.3,26.6,22.1,18.2,12.8,17.2,23.3,20.5,21.2,26.9,28.3,29,25.3,17.9,16.2,21.7,20.4,25.9,27.8,29.4,25.6,20.6,24.5,26.8,21.2,27.8,26.7,19.5,18.4,22.6,20.3,16.9,19.4,17.2,14.6,20.1,19.8,18.6,22.3,26.4,27,26.7,29,21.4,23.1,22.3,26.9,28.5,27.5,26.2,24,20.9,23.4,22.3,29.6,30,24.3,27.2,26.5,21.5,26.7,26.3,23.6,24.5,30.8,33.2,32.1,33.3,32.4,33.6,31.5,27.9,29.5,26.9,28.4,31.8,29.3,32,31.6,20.9,21.4,29.6,30.8,30.7,31.5]};
+
+// ────────────────────────────────────────────────────────────────────
+// 共用工具（西元年份）
+// ────────────────────────────────────────────────────────────────────
+var WD=['日','一','二','三','四','五','六'];
+var histMonthYM=null;
+
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function isoMinus(s,n){var d=new Date(s+'T00:00:00');d.setDate(d.getDate()-n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function parseISO(s){var p=s.split('-');return {y:+p[0],m:+p[1],d:+p[2]};}
+function isoToDate(s){var o=parseISO(s);return new Date(o.y,o.m-1,o.d);}
+function dateToISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function fmtDate(s){if(!s)return'';var o=parseISO(s);return o.y+'年'+o.m+'月'+o.d+'日（星期'+WD[new Date(o.y,o.m-1,o.d).getDay()]+'）';}
+function fmtDateShort(s){if(!s)return'';var o=parseISO(s);return o.y+'年'+o.m+'月'+o.d+'日';}
+function fmtYM(yr,mo){return yr+'年'+mo+'月';}
+function daysInMonth(yr,mo){return new Date(yr,mo,0).getDate();}
+function monthYM(yr,mo){return yr+'-'+String(mo).padStart(2,'0');}
+
+function dayProgressOfReport(repISO){
+  var o=parseISO(repISO);
+  var dim=daysInMonth(o.y,o.m);
+  var pct=o.d/dim*100;
+  return {refYr:o.y,refMo:o.m,refDay:o.d,daysInMonth:dim,pct:pct};
+}
+
+// ────────────────────────────────────────────────────────────────────
+// 資料層：雲端 Cloudflare KV（透過既有 Worker），localStorage 做離線備份
+// ────────────────────────────────────────────────────────────────────
+var STORE_KEY='yda_utility_v3';
+var API_URL='/admin/utility/api/data';
+var _cache=null;            // in-memory cache，所有 getStore/setStore 經此處
+var _lastSyncedAt=null;     // 最後一次成功同步的時間戳
+
+function emptyStore(){return {water:{},electric:{},temperature:{},cleanDay:{},note:{}};}
+
+function normalizeStore(s){
+  s=s||{};
+  ['water','electric','temperature','cleanDay','note'].forEach(function(k){s[k]=s[k]||{};});
+  return s;
+}
+
+function loadLocalCache(){
+  try{var raw=localStorage.getItem(STORE_KEY);return raw?normalizeStore(JSON.parse(raw)):emptyStore();}
+  catch(e){return emptyStore();}
+}
+function writeLocalCache(s){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(s));}catch(e){}
+}
+
+// 來自 /utility/data/daily-temp.json 的最新氣溫（每日由 GitHub Actions 自動更新）
+var _dailyTempMap=null;  // {'YYYY-MM-DD': tmax}
+async function loadDailyTempJson(){
+  try{
+    var res=await fetch('/utility/data/daily-temp.json',{cache:'no-store'});
+    if(!res.ok)return;
+    var arr=await res.json();
+    var m={};
+    arr.forEach(function(r){if(r&&r.d&&Number.isFinite(r.tmax))m[r.d]=r.tmax;});
+    _dailyTempMap=m;
+  }catch(e){console.warn('daily-temp.json 載入失敗：',e.message);}
+}
+
+// 從雲端 KV 載入；失敗則 fallback 到本機 localStorage
+async function loadFromServer(){
+  setSyncState('loading','從雲端載入中…');
+  try{
+    var res=await fetch(API_URL,{credentials:'same-origin',cache:'no-store'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    var data=await res.json();
+    _cache=normalizeStore(data);
+    writeLocalCache(_cache);
+    _lastSyncedAt=new Date();
+    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    return _cache;
+  }catch(e){
+    console.warn('雲端載入失敗，使用本機備份：',e.message);
+    _cache=loadLocalCache();
+    setSyncState('offline','離線模式 · 雲端讀取失敗');
+    return _cache;
+  }
+}
+
+async function saveToServer(){
+  if(!_cache)return false;
+  setSyncState('saving','儲存到雲端中…');
+  try{
+    var res=await fetch(API_URL,{
+      method:'POST',credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(_cache)
+    });
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    _lastSyncedAt=new Date();
+    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    return true;
+  }catch(e){
+    console.warn('雲端儲存失敗：',e.message);
+    setSyncState('error','雲端同步失敗 · 本機已存');
+    return false;
+  }
+}
+
+async function deleteOnServer(){
+  setSyncState('saving','清除雲端資料…');
+  try{
+    var res=await fetch(API_URL,{method:'DELETE',credentials:'same-origin'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    _lastSyncedAt=new Date();
+    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    return true;
+  }catch(e){
+    setSyncState('error','雲端清除失敗 · 本機已清');
+    return false;
+  }
+}
+
+// 同步讀寫（呼叫者後續若需要同步雲端，要自己 await saveToServer()）
+function getStore(){if(!_cache)_cache=loadLocalCache();return _cache;}
+function setStore(s){_cache=normalizeStore(s);writeLocalCache(_cache);}
+
+// 顯示同步狀態
+function setSyncState(state,text){
+  var el=document.getElementById('sync-state');
+  if(!el)return;
+  el.className='sync-state '+state;
+  el.textContent=text;
+}
+function fmtTime(d){return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');}
+
+var pending=emptyStore();
+function hasPending(){return ['water','electric','temperature','cleanDay','note'].some(function(k){return Object.keys(pending[k]).length>0;});}
+function pendingCount(){return ['water','electric','temperature','cleanDay','note'].reduce(function(a,k){return a+Object.keys(pending[k]).length;},0);}
+
+function getSeedValue(seed,dateISO){
+  var startD=isoToDate(seed.start);var endD=isoToDate(seed.end);var targetD=isoToDate(dateISO);
+  if(targetD<startD||targetD>endD)return null;
+  var offset=Math.round((targetD-startD)/86400000);
+  var v=seed.values[offset];return v===undefined?null:v;
+}
+
+function getValue(type,dateISO){
+  if(pending[type]&&pending[type][dateISO]!==undefined)return pending[type][dateISO];
+  var s=getStore();
+  if(s[type]&&s[type][dateISO]!==undefined)return s[type][dateISO];
+  if(type==='water')return getSeedValue(SEED_W,dateISO);
+  if(type==='electric')return getSeedValue(SEED_E,dateISO);
+  if(type==='temperature'){
+    // 優先讀 runtime fetch 的 daily-temp.json（含最新天）；fallback 到內嵌 SEED_T 快照
+    if(_dailyTempMap&&_dailyTempMap[dateISO]!==undefined)return _dailyTempMap[dateISO];
+    return getSeedValue(SEED_T,dateISO);
+  }
+  return null;
+}
+
+function getSource(type,dateISO){
+  if(pending[type]&&pending[type][dateISO]!==undefined)return 'pending';
+  var s=getStore();
+  if(s[type]&&s[type][dateISO]!==undefined)return 'user';
+  if(type==='water'&&getSeedValue(SEED_W,dateISO)!==null)return 'seed';
+  if(type==='electric'&&getSeedValue(SEED_E,dateISO)!==null)return 'seed';
+  if(type==='temperature'){
+    if(_dailyTempMap&&_dailyTempMap[dateISO]!==undefined)return 'live';
+    if(getSeedValue(SEED_T,dateISO)!==null)return 'seed';
+  }
+  return 'empty';
+}
+
+function stageChange(type,dateISO,val){
+  if(val===null||val===undefined||val===''){delete pending[type][dateISO];}
+  else if(type==='note'){pending[type][dateISO]=String(val);}
+  else{pending[type][dateISO]=typeof val==='boolean'?val:Number(val);}
+  if(pending[type][dateISO]!==undefined){
+    var s=getStore();
+    var committed=s[type]&&s[type][dateISO]!==undefined?s[type][dateISO]:null;
+    var seed=type==='water'?getSeedValue(SEED_W,dateISO)
+            :type==='electric'?getSeedValue(SEED_E,dateISO)
+            :type==='temperature'?getSeedValue(SEED_T,dateISO):null;
+    var ref=committed!==null?committed:seed;
+    if(ref!==null&&ref===pending[type][dateISO])delete pending[type][dateISO];
+  }
+  updatePendingBar();
+}
+
+async function commitPending(){
+  if(!hasPending())return;
+  var n=pendingCount();
+  if(!confirm('確定要儲存 '+n+' 筆變更到雲端嗎？\n（會立即同步到所有人共用的儲存空間）'))return;
+  var s=getStore();
+  ['water','electric','temperature','cleanDay','note'].forEach(function(k){
+    s[k]=s[k]||{};Object.keys(pending[k]).forEach(function(d){s[k][d]=pending[k][d];});
+  });
+  setStore(s);pending=emptyStore();updatePendingBar();render();renderHistTable();
+  await saveToServer();
+}
+
+function discardPending(){
+  if(!hasPending())return;
+  if(!confirm('確定要放棄 '+pendingCount()+' 筆未儲存的變更嗎？'))return;
+  pending=emptyStore();updatePendingBar();render();renderHistTable();
+}
+
+function updatePendingBar(){
+  var bar=document.getElementById('pending-bar');
+  var btnSave=document.getElementById('btn-commit');
+  if(hasPending()){
+    bar.style.display='';
+    bar.className='pending-bar';
+    bar.innerHTML='<div>📝 有 <strong>'+pendingCount()+'</strong> 筆未儲存的變更</div>'
+      +'<div style="display:flex;gap:6px"><button class="btn btn-sm btn-save" onclick="commitPending()">💾 儲存</button>'
+      +'<button class="btn btn-sm" onclick="discardPending()">✕ 放棄</button></div>';
+    btnSave.disabled=false;
+    btnSave.textContent='💾 儲存 ('+pendingCount()+')';
+  }else{
+    bar.style.display='none';
+    btnSave.disabled=true;
+    btnSave.textContent='💾 儲存';
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// 月份範圍計算
+// ────────────────────────────────────────────────────────────────────
+function sumRange(type,startISO,endISO){
+  var sd=isoToDate(startISO),ed=isoToDate(endISO);
+  var sum=0,count=0,missing=0;
+  for(var d=new Date(sd);d<=ed;d.setDate(d.getDate()+1)){
+    var iso=dateToISO(d);var v=getValue(type,iso);
+    if(v===null||v===undefined)missing++;else{sum+=v;count++;}
+  }
+  return {sum:sum,count:count,missing:missing};
+}
+function getMonthlyTotal(type,yr,mo){
+  var startISO=monthYM(yr,mo)+'-01';
+  var endISO=monthYM(yr,mo)+'-'+String(daysInMonth(yr,mo)).padStart(2,'0');
+  return sumRange(type,startISO,endISO);
+}
+function getCumulativeTo(type,yr,mo,day){
+  var startISO=monthYM(yr,mo)+'-01';
+  var endISO=monthYM(yr,mo)+'-'+String(day).padStart(2,'0');
+  return sumRange(type,startISO,endISO);
+}
+function earliestDataDay(type,yr,mo){
+  var seed=type==='water'?SEED_W:type==='electric'?SEED_E:type==='temperature'?SEED_T:null;
+  if(!seed)return 0;
+  var seedStart=isoToDate(seed.start);
+  var monthStart=new Date(yr,mo-1,1);
+  if(seedStart<=monthStart)return 1;
+  if(seedStart.getFullYear()===yr&&seedStart.getMonth()+1===mo)return seedStart.getDate();
+  return 0;
+}
+
+function calcMetrics(type,repISO){
+  var dp=dayProgressOfReport(repISO);
+  var refYr=dp.refYr,refMo=dp.refMo,refDay=dp.refDay,dim=dp.daysInMonth;
+  // 本月實際累計（給「本月累計」大數字顯示用，以 refDay 為準）
+  var cumActualR=getCumulativeTo(type,refYr,refMo,refDay);
+  var cum=cumActualR.sum;
+  var projected=refDay>0?cum/refDay*dim:null;
+
+  // 上月
+  var lastYr=refMo===1?refYr-1:refYr, lastMo=refMo===1?12:refMo-1;
+  var lastDim=daysInMonth(lastYr,lastMo);
+  // 去年同月
+  var yoyYr=refYr-1, yoyMo=refMo;
+  var yoyDim=daysInMonth(yoyYr,yoyMo);
+
+  var lastEarliest=earliestDataDay(type,lastYr,lastMo);
+  var yoyEarliest=earliestDataDay(type,yoyYr,yoyMo);
+
+  // 嘗試算 yoy 是否完整
+  var yoyHasData=yoyEarliest===1;
+  // 三方共同天數：如果 yoy 有資料，三邊取最小；否則只看本月跟上月
+  var commonDays=yoyHasData?Math.min(refDay,lastDim,yoyDim):Math.min(refDay,lastDim);
+  var trimDays=refDay-commonDays;
+
+  // 本月、上月、去年同月，都用 commonDays 對齊
+  var curR=getCumulativeTo(type,refYr,refMo,commonDays);
+  var lastR=getCumulativeTo(type,lastYr,lastMo,commonDays);
+  var yoyR=getCumulativeTo(type,yoyYr,yoyMo,commonDays);
+
+  var lastFull=getMonthlyTotal(type,lastYr,lastMo);
+  var yoyFull=getMonthlyTotal(type,yoyYr,yoyMo);
+
+  var momReady=lastEarliest===1&&lastR.missing===0&&lastR.count===commonDays
+    &&curR.missing===0&&curR.count===commonDays;
+  var yoyReady=yoyEarliest===1&&yoyR.missing===0&&yoyR.count===commonDays
+    &&curR.missing===0&&curR.count===commonDays;
+
+  return {
+    cum:cum,refDay:refDay,dim:dim,projected:projected,refYr:refYr,refMo:refMo,
+    // 對齊期間
+    commonDays:commonDays,
+    trimmed:trimDays>0,
+    trimDays:trimDays,
+    // 本月、上月、去年同月（commonDays 內的累計）
+    curForCompare:curR.sum,
+    lastMonthSamePeriod:lastR.sum,lastMonthFull:lastFull.sum,
+    lastMonthMeta:{yr:lastYr,mo:lastMo,sameDay:commonDays,dim:lastDim,earliest:lastEarliest},
+    momReady:momReady,
+    momPct:momReady&&lastR.sum>0?(curR.sum-lastR.sum)/lastR.sum*100:null,
+    yoyMonthSamePeriod:yoyR.sum,yoyMonthFull:yoyFull.sum,
+    yoyMeta:{yr:yoyYr,mo:yoyMo,sameDay:commonDays,dim:yoyDim,earliest:yoyEarliest},
+    yoyReady:yoyReady,
+    yoyPct:yoyReady&&yoyR.sum>0?(curR.sum-yoyR.sum)/yoyR.sum*100:null
+  };
+}
+
+function fmtNum(n,decimals){
+  if(n===null||n===undefined||isNaN(n))return '—';
+  decimals=decimals===undefined?(n>=100?0:n>=10?1:2):decimals;
+  return Number(n).toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+}
+function pctArrow(p){if(p===null||p===undefined)return '→';if(p>3)return '↑';if(p<-3)return '↓';return '→';}
+function pctColor(p){if(p===null)return '#696460';if(p>3)return '#8C1F1F';if(p<-3)return '#1F5C38';return '#696460';}
+
+// ────────────────────────────────────────────────────────────────────
+// 用電目標迴歸（單一全段模型，凍結於 2025-04-20 ~ 2026-04-19 共 365 天）
+//   目標 = max( A + B × tmax, FLOOR )
+//   交叉點約 16.6°C；警戒 = 目標 × 1.1
+// ────────────────────────────────────────────────────────────────────
+var AC_A=72.99, AC_B=7.07, AC_FLOOR=190;
+function calcETarget(tmax){if(tmax===null||tmax===undefined)return null;return Math.max(AC_A+AC_B*tmax, AC_FLOOR);}
+function calcEWarn(tmax){var t=calcETarget(tmax);return t===null?null:t*1.1;}
+function calcEStatus(eYd,tmax){
+  if(eYd===null||tmax===null)return null;
+  var target=calcETarget(tmax),warn=calcEWarn(tmax);
+  if(eYd<=target)return{s:'good',label:'低於預期',detail:'預期 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度'};
+  if(eYd<=warn)return{s:'warn',label:'接近警戒',detail:'預期 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度'};
+  return{s:'over',label:'超出警戒',detail:'目標 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度，實際 '+eYd+' 度'};
+}
+function calcWStatus(wYd,isClean){
+  if(wYd===null)return null;
+  var max=isClean?0.5:0.2;
+  if(wYd<=max)return{s:'good',label:'用水正常',detail:(isClean?'清潔日':'非清潔日')+' ≤'+max+' 度'};
+  return{s:'over',label:'用水偏高',detail:(isClean?'清潔日':'非清潔日')+' >'+max+' 度，請確認原因'};
+}
+
+// ────────────────────────────────────────────────────────────────────
+// 報告日（內部變數，不在 UI 上顯示輸入框）
+// ────────────────────────────────────────────────────────────────────
+var currentReportDate = isoMinus(todayISO(),1); // 預設昨天
+
+function setReportTo(iso){
+  if(currentReportDate===iso)return;
+  currentReportDate=iso;
+  // 同步該日期所在月份
+  var ym=iso.slice(0,7);
+  if(histMonthYM!==ym){
+    histMonthYM=ym;
+    var sel=document.getElementById('hist-month');
+    if(sel)sel.value=ym;
+    renderHistTable();
+  }else{
+    updateRowHighlight();
+  }
+  render();
+}
+
+function updateRowHighlight(){
+  document.querySelectorAll('.htbl tbody tr').forEach(function(tr){
+    tr.classList.toggle('is-selected', tr.getAttribute('data-date')===currentReportDate);
+  });
+}
+
+// ────────────────────────────────────────────────────────────────────
+// 渲染
+// ────────────────────────────────────────────────────────────────────
+function render(){
+  refreshPreviews();
+}
+
+function refreshPreviews(){
+  document.getElementById('pf-card').srcdoc=genCard();
+}
+
+function sc(s){return {good:'#1F5C38',warn:'#8C5A00',over:'#8C1F1F',ok:'#696460'}[s]||'#696460';}
+function sb(s){return {good:'rgba(31,92,56,0.09)',warn:'rgba(140,90,0,0.09)',over:'rgba(140,31,31,0.09)',ok:'rgba(60,56,53,0.05)'}[s]||'rgba(60,56,53,0.05)';}
+function si(s){return {good:'✓',warn:'⚠',over:'✗',ok:'·'}[s]||'';}
+
+function getDailyForCard(){
+  var rep=currentReportDate;
+  return {
+    rep:rep,
+    eYd:getValue('electric',rep),
+    wYd:getValue('water',rep),
+    tmax:getValue('temperature',rep),
+    isClean:!!(pending.cleanDay[rep]!==undefined?pending.cleanDay[rep]:(getStore().cleanDay||{})[rep])
+  };
+}
+
+// 三條對比 bar 一組：本月、上月、去年同月
+function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit,
+                          momPct,yoyPct,momReady,yoyReady,momNa,yoyNa){
+  var values=[curVal];
+  if(momReady)values.push(lastVal);
+  if(yoyReady)values.push(yoyVal);
+  var max=values.length>0?Math.max.apply(null,values):1;
+  if(max<=0)max=1;
+
+  function bar(label,val,ready,naReason,pct,pctTitle){
+    if(!ready||val===null||val===undefined){
+      return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">'
+        +'<div style="font-size:12px;color:#898480;width:108px;flex-shrink:0">'+label+'</div>'
+        +'<div style="flex:1;position:relative;height:10px;background:rgba(60,56,53,0.05);border-radius:2px"></div>'
+        +'<div style="font-size:11px;color:#898480;min-width:140px">資料不足'+(naReason?'（'+naReason+'）':'')+'</div>'
+        +'</div>';
+    }
+    var w=val/max*100;
+    var isCur=pct===null;
+    var color=isCur?'#3C3835':pctColor(pct);
+    var opacity=isCur?'1':'0.85';
+    var bg=isCur?'#3C3835':color;
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">'
+      +'<div style="font-size:12px;color:#898480;width:108px;flex-shrink:0">'+label+'</div>'
+      +'<div style="flex:1;position:relative;height:10px;background:rgba(60,56,53,0.07);border-radius:2px">'
+      +'<div style="position:absolute;left:0;top:0;height:100%;width:'+w+'%;background:'+bg+';border-radius:2px;opacity:'+opacity+'"></div>'
+      +'</div>'
+      +'<div style="font-size:12px;color:'+(isCur?'#3C3835':'#696460')+';min-width:140px;font-weight:'+(isCur?'600':'500')+'">'
+      +fmtNum(val)+' '+unit
+      +(pct!==null?' <span style="color:'+color+';font-weight:600;margin-left:4px">'+pctArrow(pct)+' '+(pct>0?'+':'')+pct.toFixed(1)+'%</span>':'')
+      +'</div>'
+      +'</div>';
+  }
+
+  return ''
+    +bar(curLabel,curVal,true,null,null,null)
+    +bar(lastLabel,lastVal,momReady,momNa,momPct,'環比')
+    +bar(yoyLabel,yoyVal,yoyReady,yoyNa,yoyPct,'同比');
+}
+
+// ── Line 卡片 ──
+function genCard(){
+  var d=getDailyForCard();
+  var rep=d.rep, eYd=d.eYd, wYd=d.wYd, tmax=d.tmax, isClean=d.isClean;
+  var dp=dayProgressOfReport(rep);
+  var noteRaw=getValue('note',rep);var note=noteRaw?String(noteRaw).trim():'';
+  var eM=calcMetrics('electric',rep);
+  var wM=calcMetrics('water',rep);
+  var eACSt=calcEStatus(eYd,tmax);
+  var eTarget=calcETarget(tmax),eWarn=calcEWarn(tmax);
+  var wFixSt=calcWStatus(wYd,isClean);
+  var stoneTex="repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(60,56,53,0.03) 120px,rgba(60,56,53,0.03) 121px)";
+
+  // 共用：本月/上月/去年三條 bar
+  function makeBars(type,yd,m,unit){
+    var curLabel='本月 1—'+m.commonDays+'天';
+    var lastLabel='上月 1—'+m.commonDays+'天';
+    var yoyLabel='去年同月 1—'+m.commonDays+'天';
+    var yoyNa=m.yoyMeta.earliest===0?'無內建資料':(m.yoyReady?null:'同期資料未完整');
+    var trimNote=m.trimmed?'本月 '+m.refDay+' 號超出對比月份天數，比較裁切到 '+m.commonDays+' 號':null;
+    return {
+      bars: comparisonGroup3(m.curForCompare,m.lastMonthSamePeriod,m.yoyMonthSamePeriod,
+        curLabel,lastLabel,yoyLabel,unit,
+        m.momPct,m.yoyPct,m.momReady,m.yoyReady,null,yoyNa),
+      trimNote: trimNote
+    };
+  }
+
+  // 大公電區塊（含 Option B 目標 chip）
+  function elecBlock(){
+    if(eYd===null||eYd===undefined)return '';
+    var stColor=eACSt?sc(eACSt.s):'#696460';
+    var bars=makeBars('electric',eYd,eM,'度');
+
+    // 目標 chip 顏色（跟狀態同色系）
+    var chipFg=stColor, chipBg='rgba(31,92,56,0.1)', chipBd='rgba(31,92,56,0.25)';
+    if(eACSt&&eACSt.s==='warn'){chipBg='rgba(140,90,0,0.08)';chipBd='rgba(140,90,0,0.25)';}
+    else if(eACSt&&eACSt.s==='over'){chipBg='rgba(140,31,31,0.08)';chipBd='rgba(140,31,31,0.25)';}
+
+    // 大數字顏色（接近警戒 / 超標時略帶狀態色）
+    var actualColor=eACSt&&eACSt.s==='over'?'#8C1F1F':eACSt&&eACSt.s==='warn'?'#8C5A00':'#3C3835';
+
+    // 副資訊：縮成單一結論行（氣溫/預期/警戒已合進右側 chip）
+    var subInfo='';
+    if(tmax!==null&&tmax!==undefined&&eTarget!==null){
+      var diffStr=eYd<=eTarget?'低於預期 '+(eTarget-eYd).toFixed(1)+' 度':'高於預期 '+(eYd-eTarget).toFixed(1)+' 度';
+      subInfo='<div style="font-size:12px;color:'+stColor+';margin-bottom:8px;line-height:1.7;font-weight:500">↳ '+diffStr+'</div>';
+    }
+
+    // 氣溫對應 mini-table（最高 / 預期 / 警戒，因果鏈一覽）
+    var chipHtml='';
+    if(eTarget!==null){
+      var rowStyle='display:flex;align-items:baseline;justify-content:space-between;gap:10px;line-height:1.5;';
+      chipHtml='<div style="display:inline-flex;flex-direction:column;background:'+chipBg+';border:1px solid '+chipBd+';padding:8px 12px;border-radius:2px;margin-bottom:2px;min-width:148px">'
+        +'<div style="'+rowStyle+'font-size:11px;color:#898480">'
+          +'<span>🌡 最高</span>'
+          +'<strong style="color:#3C3835;font-weight:600;font-size:12px">'+(tmax!==null?tmax+'°C':'—')+'</strong>'
+        +'</div>'
+        +'<div style="'+rowStyle+'font-size:11px;color:'+chipFg+';margin-top:3px;border-top:1px solid '+chipBd+';padding-top:4px">'
+          +'<span style="font-weight:600;letter-spacing:.05em">💡 預期</span>'
+          +'<strong style="color:'+chipFg+';font-weight:700;font-size:15px">'+eTarget.toFixed(0)+' 度</strong>'
+        +'</div>'
+        +'<div style="'+rowStyle+'font-size:11px;color:#898480;margin-top:3px">'
+          +'<span>⚠ 警戒</span>'
+          +'<strong style="color:#8C5A00;font-weight:600;font-size:12px">'+eWarn.toFixed(0)+' 度</strong>'
+        +'</div>'
+      +'</div>';
+    }
+
+    return '<div style="background:#F7F5F2;border-radius:2px;padding:14px 18px;margin-bottom:10px;border:1px solid rgba(60,56,53,0.1)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<div style="font-size:14px;letter-spacing:.1em;color:#3C3835;font-weight:600">⚡ 大公電用量</div>'
+      +(eACSt?'<div style="font-size:14px;font-weight:700;color:'+stColor+'">'+si(eACSt.s)+' '+eACSt.label+'</div>':'')
+      +'</div>'
+      // 大數字 + 氣溫對應 chip（方案 1：mini-table）
+      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:18px;margin-bottom:8px">'
+        +'<div style="display:flex;align-items:baseline;gap:8px">'
+          +'<div style="font-size:48px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+eYd+'</div>'
+          +'<div style="font-size:16px;color:#898480;font-weight:400">度</div>'
+        +'</div>'
+        +chipHtml
+      +'</div>'
+      +subInfo
+      +(eM.projected!==null
+        ?'<div style="display:flex;justify-content:flex-end;padding:8px 0 4px;border-top:1px solid rgba(60,56,53,0.08);margin-top:6px"><div style="font-size:11px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(eM.projected)+'</strong> 度</div></div>'
+        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:6px;padding-top:6px"></div>')
+      +bars.bars
+      +(bars.trimNote?'<div style="font-size:10px;color:#898480;margin-top:6px;line-height:1.5">* '+bars.trimNote+'</div>':'')
+      +'</div>';
+  }
+
+  // 公水區塊（與電力同款 chip mini-table）
+  function waterBlock(){
+    if(wYd===null||wYd===undefined)return '';
+    var stColor=wFixSt?sc(wFixSt.s):'#696460';
+    var bars=makeBars('water',wYd,wM,'度');
+    var actualColor=wFixSt&&wFixSt.s==='over'?'#8C1F1F':'#3C3835';
+
+    // 上限規則 chip 顏色（依狀態：good=綠、over=紅）
+    var wChipFg=stColor, wChipBg='rgba(31,92,56,0.1)', wChipBd='rgba(31,92,56,0.25)';
+    if(wFixSt&&wFixSt.s==='over'){wChipBg='rgba(140,31,31,0.08)';wChipBd='rgba(140,31,31,0.25)';wChipFg='#8C1F1F';}
+    else if(wFixSt&&wFixSt.s==='good'){wChipFg='#1F5C38';}
+
+    // 今日類型對應的正常上限（單一門檻）
+    var normalMax=isClean?0.5:0.2;
+
+    // 用水上限 chip mini-table（類型 / 正常上限）
+    var wChipHtml='';
+    if(wFixSt){
+      var rs='display:flex;align-items:baseline;justify-content:space-between;gap:10px;line-height:1.5;';
+      wChipHtml='<div style="display:inline-flex;flex-direction:column;background:'+wChipBg+';border:1px solid '+wChipBd+';padding:8px 12px;border-radius:2px;margin-bottom:2px;min-width:148px">'
+        +'<div style="'+rs+'font-size:11px;color:#898480">'
+          +'<span>📋 類型</span>'
+          +'<strong style="color:#3C3835;font-weight:600;font-size:12px">'+(isClean?'清潔日':'非清潔日')+'</strong>'
+        +'</div>'
+        +'<div style="'+rs+'font-size:11px;color:'+wChipFg+';margin-top:3px;border-top:1px solid '+wChipBd+';padding-top:4px">'
+          +'<span style="font-weight:600;letter-spacing:.05em">💧 上限</span>'
+          +'<strong style="color:'+wChipFg+';font-weight:700;font-size:15px">≤'+normalMax+' 度</strong>'
+        +'</div>'
+      +'</div>';
+    }
+
+    return '<div style="background:#F0F2F5;border-radius:2px;padding:14px 18px;margin-bottom:10px;border:1px solid rgba(60,56,53,0.1)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<div style="font-size:14px;letter-spacing:.1em;color:#3C3835;font-weight:600">💧 公水用量</div>'
+      +(wFixSt?'<div style="font-size:14px;font-weight:700;color:'+stColor+'">'+si(wFixSt.s)+' '+wFixSt.label+'</div>':'')
+      +'</div>'
+      // 大數字 + 上限 chip（方案 1）
+      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:18px;margin-bottom:8px">'
+        +'<div style="display:flex;align-items:baseline;gap:8px">'
+          +'<div style="font-size:48px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+wYd+'</div>'
+          +'<div style="font-size:16px;color:#898480;font-weight:400">度</div>'
+        +'</div>'
+        +wChipHtml
+      +'</div>'
+      +(wM.projected!==null
+        ?'<div style="display:flex;justify-content:flex-end;padding:8px 0 4px;border-top:1px solid rgba(60,56,53,0.08);margin-top:6px"><div style="font-size:11px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(wM.projected)+'</strong> 度</div></div>'
+        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:6px;padding-top:6px"></div>')
+      +bars.bars
+      +(bars.trimNote?'<div style="font-size:10px;color:#898480;margin-top:6px;line-height:1.5">* '+bars.trimNote+'</div>':'')
+      +'</div>';
+  }
+
+  return '<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=560"><meta name="color-scheme" content="light"><title>Line 截圖卡片</title>'
+    +'<style>@import url(\'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap\');*{box-sizing:border-box;margin:0;padding:0;}'
+    +'html{background:#EAE7E1;color-scheme:light;}'
+    +'body{font-family:\'Noto Sans TC\',\'Microsoft JhengHei\',sans-serif;background:#EAE7E1 !important;color:#3C3835;margin:0;}'
+    +'</style></head><body style="background:#EAE7E1">'
+    +'<div style="width:560px;margin:0 auto">'
+    +'<div style="background:#3C3835;padding:18px 22px 14px;border-bottom:2px solid #696460;position:relative;overflow:hidden">'
+    +'<div style="position:absolute;inset:0;background:'+stoneTex+';pointer-events:none"></div>'
+    +'<div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between">'
+    +'<div>'
+    +'<div style="font-size:10px;letter-spacing:.28em;color:#898480;margin-bottom:5px">DAILY UTILITY REPORT</div>'
+    +'<div style="font-size:24px;font-weight:700;color:#EAE7E1;letter-spacing:.08em">閱大安</div>'
+    +'<div style="font-size:15px;color:#A09B96;letter-spacing:.14em;margin-top:5px;font-weight:500">每日水電公告</div>'
+    +'</div>'
+    +'<div style="text-align:right">'
+    +'<div style="font-size:11px;color:#898480;margin-bottom:5px">報告日期</div>'
+    +'<div style="font-size:16px;color:#EAE7E1;font-weight:500;line-height:1.5">'+fmtDateShort(rep)+'</div>'
+    +'<div style="font-size:13px;color:#898480;margin-top:4px">第 '+dp.refDay+'/'+dp.daysInMonth+' 天</div>'
+    +'</div></div></div>'
+    +'<div style="padding:14px 20px 16px">'
+    +elecBlock()
+    +waterBlock()
+    +(note?'<div style="background:rgba(140,90,0,0.07);border:1px solid rgba(140,90,0,0.2);border-radius:2px;padding:10px 14px;font-size:13px;color:#8C5A00;line-height:1.8;margin-bottom:10px">📝 '+note.replace(/\n/g,'<br>')+'</div>':'')
+    +'<div style="display:flex;justify-content:flex-end;padding-top:10px;border-top:1px solid rgba(60,56,53,0.12)">'
+    +'<div style="font-size:10px;color:#898480">閱大安管理委員會</div>'
+    +'</div>'
+    +'</div></div></body></html>';
+}
+
+
+// ────────────────────────────────────────────────────────────────────
+// 歷史資料表
+// ────────────────────────────────────────────────────────────────────
+function listAvailableMonths(){
+  var months={};
+  var today=todayISO();
+  var start=isoToDate(SEED_W.start);
+  var end=isoToDate(today);
+  for(var d=new Date(start);d<=end;){
+    months[monthYM(d.getFullYear(),d.getMonth()+1)]=true;
+    d.setMonth(d.getMonth()+1);
+  }
+  return Object.keys(months).sort().reverse();
+}
+function populateMonthSelect(){
+  var sel=document.getElementById('hist-month');
+  var months=listAvailableMonths();
+  sel.innerHTML=months.map(function(m){var p=m.split('-');return '<option value="'+m+'">'+p[0]+'年'+(+p[1])+'月</option>';}).join('');
+  if(!histMonthYM){histMonthYM=todayISO().slice(0,7);}
+  sel.value=histMonthYM;
+}
+function histPrevMonth(){
+  var s=document.getElementById('hist-month');
+  if(s.selectedIndex<s.options.length-1){s.selectedIndex++;histMonthYM=s.value;renderHistTable();}
+}
+function histNextMonth(){
+  var s=document.getElementById('hist-month');
+  if(s.selectedIndex>0){s.selectedIndex--;histMonthYM=s.value;renderHistTable();}
+}
+
+function renderHistTable(){
+  var sel=document.getElementById('hist-month');
+  histMonthYM=sel.value;
+  var p=histMonthYM.split('-');
+  var yr=+p[0], mo=+p[1];
+  var dim=daysInMonth(yr,mo);
+  var onlyMissing=document.getElementById('hist-only-missing').checked;
+  var selectedRep=currentReportDate;
+  var today=todayISO();
+
+  var rows='<table class="htbl"><thead><tr>'
+    +'<th style="width:48px">日</th><th style="width:34px">週</th>'
+    +'<th style="width:112px">⚡ 電 (度)</th><th style="width:112px">💧 水 (度)</th><th style="width:124px">🌡 高溫 (°C)</th>'
+    +'<th style="width:56px">清潔</th>'
+    +'<th>📝 備註</th>'
+    +'</tr></thead><tbody>';
+
+  for(var day=1;day<=dim;day++){
+    var iso=monthYM(yr,mo)+'-'+String(day).padStart(2,'0');
+    var eVal=getValue('electric',iso);
+    var wVal=getValue('water',iso);
+    var tVal=getValue('temperature',iso);
+    var noteVal=getValue('note',iso)||'';
+    var sE=getSource('electric',iso), sW=getSource('water',iso), sT=getSource('temperature',iso);
+    var clean=!!(pending.cleanDay[iso]!==undefined?pending.cleanDay[iso]:(getStore().cleanDay||{})[iso]);
+    var noteIsPending=pending.note&&pending.note[iso]!==undefined;
+    var hasMissing=(eVal===null||eVal===undefined)||(wVal===null||wVal===undefined);
+    var hasPendingFlag=(sE==='pending'||sW==='pending'||sT==='pending'||noteIsPending);
+    if(onlyMissing&&!hasMissing)continue;
+
+    var rowClass='';
+    if(hasPendingFlag)rowClass+=' pending';
+    if(iso===selectedRep)rowClass+=' is-selected';
+    var weekday=WD[isoToDate(iso).getDay()];
+    var dayCellClass='day-cell'+(iso===today?' is-today':'');
+
+    var eEmpty=(eVal===null||eVal===undefined);
+    var wEmpty=(wVal===null||wVal===undefined);
+    var tEmpty=(tVal===null||tVal===undefined);
+    var noteEsc=String(noteVal).replace(/"/g,'&quot;').replace(/'/g,"&#39;");
+
+    rows+='<tr class="'+rowClass+'" data-date="'+iso+'">'
+      +'<td><span class="'+dayCellClass+'" onclick="setReportTo(\''+iso+'\')" title="設為報告日">'+iso.slice(8)+'</span></td>'
+      +'<td style="color:var(--wg9);font-size:12px">'+weekday+'</td>'
+      +'<td><input type="number" step="0.01" '+(eEmpty?'class="is-empty"':'')+' value="'+(eEmpty?'':eVal)+'" oninput="histCellChange(\''+iso+'\',\'electric\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
+      +'<td><input type="number" step="0.01" '+(wEmpty?'class="is-empty"':'')+' value="'+(wEmpty?'':wVal)+'" oninput="histCellChange(\''+iso+'\',\'water\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
+      +'<td><input type="number" step="0.1" '+(tEmpty?'class="is-empty"':'')+' value="'+(tEmpty?'':tVal)+'" oninput="histCellChange(\''+iso+'\',\'temperature\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
+      +'<td style="text-align:center"><input type="checkbox" '+(clean?'checked':'')+' onchange="histCellChange(\''+iso+'\',\'cleanDay\',this.checked)"></td>'
+      +'<td><input type="text" class="note-input" value="'+noteEsc+'" oninput="histCellChange(\''+iso+'\',\'note\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
+      +'</tr>';
+  }
+  rows+='</tbody></table>';
+  document.getElementById('htbl-wrap').innerHTML=rows;
+}
+
+function histCellChange(iso,type,val){
+  if(type==='cleanDay'){
+    pending.cleanDay[iso]=!!val;
+    var s=getStore();
+    var existing=s.cleanDay&&s.cleanDay[iso];
+    if(!!val===!!existing)delete pending.cleanDay[iso];
+  }else if(type==='note'){
+    var s2=getStore();
+    var existingNote=(s2.note||{})[iso]||'';
+    if(val===existingNote){
+      delete pending.note[iso];
+    }else{
+      pending.note[iso]=String(val);
+    }
+  }else{
+    var v=val===''?null:parseFloat(val);
+    if(val!==''&&isNaN(v))return;
+    stageChange(type,iso,v);
+  }
+  updatePendingBar();
+  if(iso===currentReportDate)render();
+}
+
+// ────────────────────────────────────────────────────────────────────
+// PNG 下載
+// ────────────────────────────────────────────────────────────────────
+function dlPNG(){
+  var btn=document.getElementById('btn-png');
+  var origTxt=btn.textContent;
+  btn.textContent='⏳ 下載中';btn.disabled=true;
+  var rep=currentReportDate;
+  var short=fmtDateShort(rep);
+  var fname='閱大安_'+short+'_每日水電公告.png';
+
+  function finish(blob){
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;a.download=fname;document.body.appendChild(a);a.click();document.body.removeChild(a);
+    URL.revokeObjectURL(url);btn.textContent=origTxt;btn.disabled=false;
+  }
+  function fail(err){console.error(err);btn.textContent=origTxt;btn.disabled=false;alert('PNG 產生失敗：'+(err&&err.message||err));}
+
+  var html=genCard();
+  var parser=new DOMParser();
+  var doc=parser.parseFromString(html,'text/html');
+  var wrap=document.createElement('div');
+  wrap.style.cssText=['position:fixed','left:-9999px','top:0','width:560px','background:#EAE7E1','color:#3C3835','font-family:Noto Sans TC,Microsoft JhengHei,sans-serif','z-index:-1','overflow:visible'].join(';');
+  Array.from(doc.body.childNodes).forEach(function(n){wrap.appendChild(document.importNode(n,true));});
+  document.body.appendChild(wrap);
+  setTimeout(function(){
+    html2canvas(wrap,{scale:2,width:560,height:wrap.scrollHeight,windowWidth:560,useCORS:true,backgroundColor:'#EAE7E1'}).then(function(canvas){
+      canvas.toBlob(function(blob){document.body.removeChild(wrap);finish(blob);},'image/png');
+    }).catch(function(err){document.body.removeChild(wrap);fail(err);});
+  },800);
+}
+
+// ────────────────────────────────────────────────────────────────────
+// JSON / Excel 匯入匯出
+// ────────────────────────────────────────────────────────────────────
+function exportJSON(){
+  var s=getStore();
+  var data={version:3,exportedAt:new Date().toISOString(),userData:s};
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='閱大安_每日水電公告_資料庫_'+todayISO()+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+function importJSON(evt){
+  var file=evt.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=async function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      var u=data.userData||data;
+      if(!confirm('將匯入並合併資料：\n  水 '+Object.keys(u.water||{}).length+' 筆\n  電 '+Object.keys(u.electric||{}).length+' 筆\n  氣溫 '+Object.keys(u.temperature||{}).length+' 筆\n\n雲端共用資料中相同日期會被覆蓋。確認嗎？'))return;
+      var cur=getStore();
+      ['water','electric','temperature','cleanDay','note'].forEach(function(k){
+        cur[k]=cur[k]||{};
+        if(u[k]){Object.keys(u[k]).forEach(function(d){cur[k][d]=u[k][d];});}
+      });
+      setStore(cur);
+      render();renderHistTable();
+      var ok=await saveToServer();
+      alert(ok?'匯入並同步到雲端完成':'匯入完成，但雲端同步失敗（本機已存）');
+    }catch(err){alert('匯入失敗：'+err.message);}
+  };
+  reader.readAsText(file);evt.target.value='';
+}
+
+function buildAllRows(){
+  var start=isoToDate(SEED_W.start);
+  var end=isoToDate(todayISO());
+  var rows=[];
+  for(var d=new Date(start);d<=end;d.setDate(d.getDate()+1)){
+    var iso=dateToISO(d);
+    var s=getStore();
+    var noteV=getValue('note',iso)||'';
+    rows.push({
+      '日期':iso,
+      '星期':WD[d.getDay()],
+      '用電度數(度)':getValue('electric',iso),
+      '用水度數(度)':getValue('water',iso),
+      '最高氣溫(°C)':getValue('temperature',iso),
+      '清潔日':((s.cleanDay||{})[iso])?'是':'',
+      '備註':noteV
+    });
+  }
+  return rows;
+}
+
+function exportXLSX(){
+  if(!window.XLSX){alert('Excel 函式庫尚未載入，請稍候再試');return;}
+  var rows=buildAllRows();
+  var ws=XLSX.utils.json_to_sheet(rows,{header:['日期','星期','用電度數(度)','用水度數(度)','最高氣溫(°C)','清潔日','備註']});
+  ws['!cols']=[{wch:12},{wch:6},{wch:14},{wch:14},{wch:14},{wch:9},{wch:30}];
+  var wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'每日水電氣溫');
+  XLSX.writeFile(wb,'閱大安_每日水電公告_資料庫_'+todayISO()+'.xlsx');
+}
+
+function importXLSX(evt){
+  var file=evt.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=new Uint8Array(e.target.result);
+      var wb=XLSX.read(data,{type:'array',cellDates:false});
+      var ws=wb.Sheets[wb.SheetNames[0]];
+      var rows=XLSX.utils.sheet_to_json(ws,{defval:null,raw:true});
+      analyzeXLSXImport(rows);
+    }catch(err){alert('Excel 解析失敗：'+err.message);}
+  };
+  reader.readAsArrayBuffer(file);evt.target.value='';
+}
+
+function normalizeExcelDate(v){
+  if(v==null)return null;
+  if(typeof v==='string'){var m=v.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);if(m)return m[1]+'-'+String(+m[2]).padStart(2,'0')+'-'+String(+m[3]).padStart(2,'0');}
+  if(typeof v==='number'){var d=new Date(Date.UTC(1899,11,30)+v*86400000);return d.toISOString().slice(0,10);}
+  if(v instanceof Date){return dateToISO(v);}
+  return null;
+}
+
+function analyzeXLSXImport(rows){
+  var fields=[
+    {key:'electric',aliases:['用電度數(度)','用電度數','電','大公電','電度','用電']},
+    {key:'water',aliases:['用水度數(度)','用水度數','水','公水','水度','用水']},
+    {key:'temperature',aliases:['最高氣溫(°C)','最高氣溫','氣溫','tmax','溫度']},
+    {key:'cleanDay',aliases:['清潔日','清潔','打掃']},
+    {key:'note',aliases:['備註','註記','memo','note']}
+  ];
+  if(!rows.length){alert('Excel 沒有資料列');return;}
+  var keys=Object.keys(rows[0]);
+  function findKey(aliases){for(var i=0;i<keys.length;i++){var k=keys[i].trim();for(var j=0;j<aliases.length;j++){if(k===aliases[j]||k.indexOf(aliases[j])>=0)return keys[i];}}return null;}
+  var dateKey=null;
+  for(var i=0;i<keys.length;i++){var k=keys[i].trim();if(k==='日期'||k.toLowerCase()==='date'){dateKey=keys[i];break;}}
+  if(!dateKey){alert('找不到「日期」欄');return;}
+  var fieldKeys={};fields.forEach(function(f){fieldKeys[f.key]=findKey(f.aliases);});
+
+  var diff={add:[],upd:[],same:[],invalid:[]};
+  rows.forEach(function(row){
+    var rawDate=row[dateKey];
+    var iso=normalizeExcelDate(rawDate);
+    if(!iso){diff.invalid.push({raw:rawDate});return;}
+    var rec={date:iso,changes:[]};
+    fields.forEach(function(f){
+      var k=fieldKeys[f.key];if(!k)return;
+      var raw=row[k];var newVal;
+      if(f.key==='cleanDay'){
+        if(raw===null||raw===''||raw===undefined)newVal=null;
+        else if(typeof raw==='boolean')newVal=raw;
+        else newVal=(/^(是|y|yes|1|true|✓)$/i.test(String(raw).trim()));
+      }else if(f.key==='note'){
+        if(raw===null||raw===undefined)newVal=null;
+        else{var ss=String(raw).trim();newVal=ss===''?null:ss;}
+      }else{
+        if(raw===null||raw===''||raw===undefined)newVal=null;
+        else{var n=parseFloat(raw);newVal=isNaN(n)?null:n;}
+      }
+      if(newVal===null)return;
+      var existing=getValue(f.key,iso);
+      if(f.key==='cleanDay'){var sa=getStore();existing=(sa.cleanDay||{})[iso];if(!!newVal!==!!existing){rec.changes.push({type:f.key,old:!!existing,new:newVal});}}
+      else if(f.key==='note'){var sb=getStore();existing=(sb.note||{})[iso]||'';if(String(newVal)!==String(existing)){rec.changes.push({type:f.key,old:existing||null,new:newVal});}}
+      else{
+        if(existing===null||existing===undefined){rec.changes.push({type:f.key,old:null,new:newVal});}
+        else if(Math.abs(existing-newVal)>0.001){rec.changes.push({type:f.key,old:existing,new:newVal});}
+      }
+    });
+    if(!rec.changes.length){diff.same.push(rec);return;}
+    var hasNew=rec.changes.some(function(c){return c.old===null||c.old===undefined;});
+    var hasUpd=rec.changes.some(function(c){return c.old!==null&&c.old!==undefined;});
+    if(hasNew&&!hasUpd)diff.add.push(rec);
+    else diff.upd.push(rec);
+  });
+  showImportDiff(diff);
+}
+
+function showImportDiff(diff){
+  var typeLabel={electric:'電',water:'水',temperature:'氣溫',cleanDay:'清潔',note:'備註'};
+  function fmtVal(t,v){if(v===null)return '—';if(t==='cleanDay')return v?'是':'否';if(t==='note')return '"'+v+'"';return v;}
+  var rowsHTML='';
+  function block(title,arr,color){
+    if(!arr.length)return '';
+    var inner=arr.slice(0,50).map(function(r){
+      var ch=r.changes.map(function(c){return typeLabel[c.type]+': '+fmtVal(c.type,c.old)+' → <strong>'+fmtVal(c.type,c.new)+'</strong>';}).join('；');
+      return '<tr><td style="padding:5px 10px">'+r.date+'</td><td style="padding:5px 10px">'+ch+'</td></tr>';
+    }).join('');
+    return '<div style="margin-bottom:14px"><div style="font-size:12px;font-weight:600;color:'+color+';margin-bottom:5px">'+title+'（共 '+arr.length+' 筆，僅顯示前 50）</div>'
+      +'<table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--line)"><tbody>'+inner+'</tbody></table></div>';
+  }
+  rowsHTML+=block('🆕 新增',diff.add,'var(--dp)');
+  rowsHTML+=block('✏️ 修改',diff.upd,'var(--warn)');
+  if(diff.invalid.length){rowsHTML+='<div style="margin-bottom:14px"><div style="font-size:12px;font-weight:600;color:var(--dn);margin-bottom:5px">⚠ 無法解析的列（共 '+diff.invalid.length+'）</div></div>';}
+
+  var html='<div class="diff-modal" onclick="if(event.target===this)closeDiffModal()">'
+    +'<div class="diff-box">'
+    +'<div class="diff-head"><div style="font-size:14px;font-weight:600">Excel 匯入 — 變更比對</div><button class="btn-sm btn" onclick="closeDiffModal()">關閉</button></div>'
+    +'<div class="diff-body">'
+    +'<div class="diff-summary">'
+    +'<div class="cell add"><div class="num">'+diff.add.length+'</div><div class="lbl">將新增（日期數）</div></div>'
+    +'<div class="cell upd"><div class="num">'+diff.upd.length+'</div><div class="lbl">將修改（日期數）</div></div>'
+    +'<div class="cell"><div class="num">'+diff.same.length+'</div><div class="lbl">無變動（將忽略）</div></div>'
+    +'</div>'+rowsHTML+'</div>'
+    +'<div class="diff-foot"><button class="btn" onclick="closeDiffModal()">取消</button>'
+    +'<button class="btn btn-save" onclick="applyImport()">確認匯入 '+(diff.add.length+diff.upd.length)+' 筆</button>'
+    +'</div></div></div>';
+  document.getElementById('diff-modal').style.display='';
+  document.getElementById('diff-modal').innerHTML=html;
+  window._pendingDiff=diff;
+}
+
+function closeDiffModal(){document.getElementById('diff-modal').style.display='none';document.getElementById('diff-modal').innerHTML='';window._pendingDiff=null;}
+
+async function applyImport(){
+  var diff=window._pendingDiff;if(!diff)return;
+  var s=getStore();
+  diff.add.concat(diff.upd).forEach(function(r){
+    r.changes.forEach(function(c){
+      s[c.type]=s[c.type]||{};s[c.type][r.date]=c.new;
+    });
+  });
+  setStore(s);closeDiffModal();
+  render();renderHistTable();
+  var ok=await saveToServer();
+  alert(ok?'已匯入並同步到雲端 '+(diff.add.length+diff.upd.length)+' 筆':'已匯入 '+(diff.add.length+diff.upd.length)+' 筆，但雲端同步失敗（本機已存）');
+}
+
+async function clearUserData(){
+  if(!confirm('確定要清除所有自填的水電/氣溫資料嗎？\n（內建 4 年歷史不會被清除；雲端共用資料也會清除——所有人都會看不到）'))return;
+  localStorage.removeItem(STORE_KEY);
+  _cache=emptyStore();
+  pending=emptyStore();
+  updatePendingBar();render();renderHistTable();
+  var ok=await deleteOnServer();
+  alert(ok?'已清除（雲端與本機都清乾淨）':'本機已清除，但雲端清除失敗，請稍後再試');
+}
+
+// ────────────────────────────────────────────────────────────────────
+// 初始化：先從雲端載入共用資料，再 render
+// ────────────────────────────────────────────────────────────────────
+(async function(){
+  populateMonthSelect();
+  histMonthYM=currentReportDate.slice(0,7);
+  document.getElementById('hist-month').value=histMonthYM;
+  // 先以本機快取 render（快），同時去雲端 + daily-temp.json 拉最新資料
+  renderHistTable();
+  render();
+  await Promise.all([loadFromServer(),loadDailyTempJson()]);
+  // 載入回來後再 render 一次（雲端比本機新或 JSON 有新天時，畫面會更新）
+  renderHistTable();
+  render();
+})();
+</script>
+</body>
+</html>

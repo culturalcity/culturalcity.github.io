@@ -78,6 +78,10 @@ module.exports = function(eleventyConfig) {
   // 把資料 JSON 檔也複製過去
   eleventyConfig.addPassthroughCopy("utility/data");
 
+  // 管理員工具頁（每日水電公告產生器）：原樣複製，不過 11ty 模板
+  // 線上路徑為 /admin/utility/，由 Cloudflare Worker 加 Basic Auth 保護
+  eleventyConfig.addPassthroughCopy("admin");
+
   // 圖片：src/images/* → _site/images/*（網址為 /images/檔名）
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
 
@@ -116,11 +120,41 @@ module.exports = function(eleventyConfig) {
     return byCat;
   });
 
-  // ── 自訂 collection：第四屆管委會會議（minutes-4-N，排除 agm）──
-  eleventyConfig.addCollection("term4Board", function(collectionApi) {
-    return collectionApi.getFilteredByTag("minutes")
-      .filter(n => /\/minutes-4-\d+\.html$/.test(n.data.permalink || ''))
+  // ── 自訂 collection：各屆管委會會議（minutes-N-K，排除 agm）──
+  const makeTermCollection = (term) => (collectionApi) =>
+    collectionApi.getFilteredByTag("minutes")
+      .filter(n => new RegExp(`/minutes-${term}-\\d+\\.html$`).test(n.data.permalink || ''))
       .sort((a, b) => b.date - a.date);
+  eleventyConfig.addCollection("term1Board", makeTermCollection(1));
+  eleventyConfig.addCollection("term2Board", makeTermCollection(2));
+  eleventyConfig.addCollection("term3Board", makeTermCollection(3));
+  eleventyConfig.addCollection("term4Board", makeTermCollection(4));
+
+  // ── 給單篇管委會議紀錄頁的 prev/next 導航 ──
+  // 從 currentUrl 解出屆/次，到對應的 termNBoard collection 找前後一次。
+  // eleventyComputed 在 collections 完成前執行所以拿不到 — 必須當 filter 用。
+  eleventyConfig.addFilter("getMinutesPager", function(allCollections, currentUrl) {
+    const m = (currentUrl || '').match(/\/minutes\/minutes-(\d+)-(\d+)\.html$/);
+    if (!m) return null;
+    const term = parseInt(m[1]);
+    const seq = parseInt(m[2]);
+    // 把所有屆合併成一條時間線，跨屆連續
+    const all = [];
+    for (const t of [1, 2, 3, 4]) {
+      const coll = (allCollections && allCollections[`term${t}Board`]) || [];
+      coll.forEach(item => {
+        const mm = (item.url || '').match(/-(\d+)\.html$/);
+        if (mm) all.push({ item, term: t, seq: parseInt(mm[1]) });
+      });
+    }
+    all.sort((a, b) => a.term - b.term || a.seq - b.seq);
+    const idx = all.findIndex(x => x.term === term && x.seq === seq);
+    if (idx < 0) return null;
+    return {
+      term, seq,
+      prev: idx > 0 ? all[idx - 1].item : null,  // 上一次（較早，可能跨屆）
+      next: idx < all.length - 1 ? all[idx + 1].item : null,  // 下一次（較晚，可能跨屆）
+    };
   });
 
   // ── 統一最新動態：合併 notice + finance + minutes，按發布日排序 ──

@@ -4,9 +4,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # 每天 22:00 UTC = 台北時間隔日 06:00
+    # CODiS 拿「昨天」settled 完整資料；凌晨後跑都 OK，不會漏半夜尾巴
+    - cron: '0 22 * * *'
 
 permissions:
-  contents: read
+  contents: write   # 排程時 fetch-temp 需要 push 更新
   pages: write
   id-token: write
 
@@ -28,6 +32,24 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # 排程或手動觸發時，先抓昨日氣溫（push 觸發時跳過）
+      - name: Fetch daily temperature (CODiS)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: node scripts/fetch-temp.js
+
+      - name: Commit data update if changed
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if ! git diff --quiet utility/data/daily-temp.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add utility/data/daily-temp.json
+            git commit -m "data: 每日氣溫更新（CODiS 自動）"
+            git push
+          else
+            echo "No new temperature data, skipping commit"
+          fi
 
       - name: Build with 11ty
         run: npx @11ty/eleventy
