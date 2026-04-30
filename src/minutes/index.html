@@ -140,7 +140,7 @@ extraScripts: |
             <div class="mc-seq">{{ seqMatch }}</div>
             <div class="mc-info">
               <div class="mc-title">{{ item.data.title | replace('管委會議紀錄', '管理委員會議') }}</div>
-              <div class="mc-date">開會日期：{{ item.date | rocDate }}{% if item.data.noticeDate %}　・　通知發出：{{ item.data.noticeDate | strToRoc }}{% endif %}</div>
+              <div class="mc-date">開會日期：{{ item.date | rocDate }}{% if item.data.noticeDate %}・通知發出：{{ item.data.noticeDate | strToRoc }}{% endif %}</div>
             </div>
 {%- if item.data.agendaCount %}
             <span class="mc-badge">{{ item.data.agendaCount }}</span>
@@ -153,47 +153,43 @@ extraScripts: |
     </div>
   </div>
 
-  <!-- 第三屆（預設收合） -->
+{# 第一/二/三屆 — 自動從 collections 產生 #}
+{%- for termInfo in [
+  { num: 3, label: "第三屆管理委員會", period: "2024/07 ～ 2025/06", coll: collections.term3Board },
+  { num: 2, label: "第二屆管理委員會", period: "2023/07 ～ 2024/06", coll: collections.term2Board },
+  { num: 1, label: "第一屆管理委員會", period: "2022/06 ～ 2023/06", coll: collections.term1Board }
+] %}
   <div class="term-block">
     <button class="term-toggle" onclick="toggleTerm(this)">
-      <span class="term-label-text">第三屆管理委員會　2024/07 ～ 2025/06</span>
+      <span class="term-label-text">{{ termInfo.label }}　{{ termInfo.period }}</span>
       <span style="display:flex;align-items:center;gap:10px">
-        <span class="term-count">待上傳</span>
+        <span class="term-count">{{ termInfo.coll | length }} 次會議</span>
         <span class="term-chevron">›</span>
       </span>
     </button>
     <div class="term-body">
-      <div class="placeholder">第三屆會議紀錄整理中，敬請期待。</div>
+      <div class="meeting-list">
+{%- for item in termInfo.coll %}
+{%- set seqMatch = item.data.permalink | replace('/minutes/minutes-' + (termInfo.num | string) + '-', '') | replace('.html', '') %}
+        <a href="{{ item.data.permalink | replace('/minutes/', '') }}" class="mc">
+          <div class="mc-stripe"></div>
+          <div class="mc-body">
+            <div class="mc-seq">{{ seqMatch }}</div>
+            <div class="mc-info">
+              <div class="mc-title">{{ item.data.title | replace('管委會議紀錄', '管理委員會議') }}</div>
+              <div class="mc-date">開會日期：{{ item.date | rocDate }}{% if item.data.noticeDate %}・通知發出：{{ item.data.noticeDate | strToRoc }}{% endif %}</div>
+            </div>
+{%- if item.data.agendaCount %}
+            <span class="mc-badge">{{ item.data.agendaCount }}</span>
+{%- endif %}
+          </div>
+          <div class="mc-arrow">›</div>
+        </a>
+{%- endfor %}
+      </div>
     </div>
   </div>
-
-  <!-- 第二屆（預設收合） -->
-  <div class="term-block">
-    <button class="term-toggle" onclick="toggleTerm(this)">
-      <span class="term-label-text">第二屆管理委員會　2023/07 ～ 2024/06</span>
-      <span style="display:flex;align-items:center;gap:10px">
-        <span class="term-count">待上傳</span>
-        <span class="term-chevron">›</span>
-      </span>
-    </button>
-    <div class="term-body">
-      <div class="placeholder">第二屆會議紀錄整理中，敬請期待。</div>
-    </div>
-  </div>
-
-  <!-- 第一屆（預設收合） -->
-  <div class="term-block">
-    <button class="term-toggle" onclick="toggleTerm(this)">
-      <span class="term-label-text">第一屆管理委員會　2022/07 ～ 2023/06</span>
-      <span style="display:flex;align-items:center;gap:10px">
-        <span class="term-count">待上傳</span>
-        <span class="term-chevron">›</span>
-      </span>
-    </button>
-    <div class="term-body">
-      <div class="placeholder">第一屆會議紀錄整理中，敬請期待。</div>
-    </div>
-  </div>
+{%- endfor %}
 
   <div class="footer">
     <span>閱大安管理委員會</span>

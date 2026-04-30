@@ -6,5 +6,30 @@ extraScripts: |
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
   }
+  // 把 .m-nav 搬到 .header 之後（取代之前的 flex order hack）
+  (function relocateNav(){
+    var nav = document.querySelector('.m-nav');
+    var header = document.querySelector('.header');
+    if (nav && header && header.nextSibling !== nav) {
+      header.parentNode.insertBefore(nav, header.nextSibling);
+    }
+  })();
 ---
+
+{%- set boardNav = collections | getMinutesPager(page.url) %}
+{%- if boardNav %}
+<nav class="m-nav no-print">
+{%- if boardNav.prev %}
+  <a href="{{ boardNav.prev.url }}" class="m-nav-prev">← {{ boardNav.prev.data.title | replace('管委會議紀錄', '') }}</a>
+{%- else %}
+  <span></span>
+{%- endif %}
+{%- if boardNav.next %}
+  <a href="{{ boardNav.next.url }}" class="m-nav-next">{{ boardNav.next.data.title | replace('管委會議紀錄', '') }} →</a>
+{%- else %}
+  <span></span>
+{%- endif %}
+</nav>
+{%- endif %}
+
 {{ content | safe }}
