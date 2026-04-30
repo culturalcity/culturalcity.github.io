@@ -612,10 +612,10 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
 
   function bar(label,val,ready,naReason,pct,pctTitle){
     if(!ready||val===null||val===undefined){
-      return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'
-        +'<div style="font-size:15px;color:#898480;width:138px;flex-shrink:0">'+label+'</div>'
-        +'<div style="flex:1;position:relative;height:12px;background:rgba(60,56,53,0.05);border-radius:2px"></div>'
-        +'<div style="font-size:14px;color:#898480;min-width:170px">資料不足'+(naReason?'（'+naReason+'）':'')+'</div>'
+      return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">'
+        +'<div style="font-size:19px;color:#898480;width:168px;flex-shrink:0">'+label+'</div>'
+        +'<div style="flex:1;position:relative;height:14px;background:rgba(60,56,53,0.05);border-radius:2px"></div>'
+        +'<div style="font-size:18px;color:#898480;min-width:200px">資料不足'+(naReason?'（'+naReason+'）':'')+'</div>'
         +'</div>';
     }
     var w=val/max*100;
@@ -623,12 +623,12 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
     var color=isCur?'#3C3835':pctColor(pct);
     var opacity=isCur?'1':'0.85';
     var bg=isCur?'#3C3835':color;
-    return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'
-      +'<div style="font-size:15px;color:#898480;width:138px;flex-shrink:0">'+label+'</div>'
-      +'<div style="flex:1;position:relative;height:12px;background:rgba(60,56,53,0.07);border-radius:2px">'
+    return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">'
+      +'<div style="font-size:19px;color:#898480;width:168px;flex-shrink:0">'+label+'</div>'
+      +'<div style="flex:1;position:relative;height:14px;background:rgba(60,56,53,0.07);border-radius:2px">'
       +'<div style="position:absolute;left:0;top:0;height:100%;width:'+w+'%;background:'+bg+';border-radius:2px;opacity:'+opacity+'"></div>'
       +'</div>'
-      +'<div style="font-size:15px;color:'+(isCur?'#3C3835':'#696460')+';min-width:170px;font-weight:'+(isCur?'600':'500')+'">'
+      +'<div style="font-size:19px;color:'+(isCur?'#3C3835':'#696460')+';min-width:200px;font-weight:'+(isCur?'600':'500')+'">'
       +fmtNum(val)+' '+unit
       +(pct!==null?' <span style="color:'+color+';font-weight:600;margin-left:4px">'+pctArrow(pct)+' '+(pct>0?'+':'')+pct.toFixed(1)+'%</span>':'')
       +'</div>'
@@ -687,48 +687,48 @@ function genCard(){
     var subInfo='';
     if(tmax!==null&&tmax!==undefined&&eTarget!==null){
       var diffStr=eYd<=eTarget?'低於預期 '+(eTarget-eYd).toFixed(1)+' 度':'高於預期 '+(eYd-eTarget).toFixed(1)+' 度';
-      subInfo='<div style="font-size:16px;color:'+stColor+';margin-bottom:10px;line-height:1.7;font-weight:500">↳ '+diffStr+'</div>';
+      subInfo='<div style="font-size:22px;color:'+stColor+';margin-bottom:12px;line-height:1.6;font-weight:500">↳ '+diffStr+'</div>';
     }
 
     // 氣溫對應 mini-table（最高 / 預期 / 警戒，因果鏈一覽）
     var chipHtml='';
     if(eTarget!==null){
-      var rowStyle='display:flex;align-items:baseline;justify-content:space-between;gap:12px;line-height:1.5;';
-      chipHtml='<div style="display:inline-flex;flex-direction:column;background:'+chipBg+';border:1px solid '+chipBd+';padding:11px 16px;border-radius:2px;margin-bottom:2px;min-width:178px">'
-        +'<div style="'+rowStyle+'font-size:14px;color:#898480">'
+      var rowStyle='display:flex;align-items:baseline;justify-content:space-between;gap:14px;line-height:1.5;';
+      chipHtml='<div style="display:inline-flex;flex-direction:column;background:'+chipBg+';border:1px solid '+chipBd+';padding:14px 20px;border-radius:2px;margin-bottom:2px;min-width:220px">'
+        +'<div style="'+rowStyle+'font-size:17px;color:#898480">'
           +'<span>🌡 最高</span>'
-          +'<strong style="color:#3C3835;font-weight:600;font-size:16px">'+(tmax!==null?tmax+'°C':'—')+'</strong>'
+          +'<strong style="color:#3C3835;font-weight:600;font-size:20px">'+(tmax!==null?tmax+'°C':'—')+'</strong>'
         +'</div>'
-        +'<div style="'+rowStyle+'font-size:14px;color:'+chipFg+';margin-top:4px;border-top:1px solid '+chipBd+';padding-top:5px">'
+        +'<div style="'+rowStyle+'font-size:17px;color:'+chipFg+';margin-top:6px;border-top:1px solid '+chipBd+';padding-top:7px">'
           +'<span style="font-weight:600;letter-spacing:.05em">💡 預期</span>'
-          +'<strong style="color:'+chipFg+';font-weight:700;font-size:20px">'+eTarget.toFixed(0)+' 度</strong>'
+          +'<strong style="color:'+chipFg+';font-weight:700;font-size:26px">'+eTarget.toFixed(0)+' 度</strong>'
         +'</div>'
-        +'<div style="'+rowStyle+'font-size:14px;color:#898480;margin-top:4px">'
+        +'<div style="'+rowStyle+'font-size:17px;color:#898480;margin-top:6px">'
           +'<span>⚠ 警戒</span>'
-          +'<strong style="color:#8C5A00;font-weight:600;font-size:16px">'+eWarn.toFixed(0)+' 度</strong>'
+          +'<strong style="color:#8C5A00;font-weight:600;font-size:20px">'+eWarn.toFixed(0)+' 度</strong>'
         +'</div>'
       +'</div>';
     }
 
-    return '<div style="background:#F7F5F2;border-radius:2px;padding:18px 22px;margin-bottom:12px;border:1px solid rgba(60,56,53,0.1)">'
-      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
-      +'<div style="font-size:18px;letter-spacing:.1em;color:#3C3835;font-weight:600">⚡ 大公電用量</div>'
-      +(eACSt?'<div style="font-size:18px;font-weight:700;color:'+stColor+'">'+si(eACSt.s)+' '+eACSt.label+'</div>':'')
+    return '<div style="background:#F7F5F2;border-radius:2px;padding:22px 26px;margin-bottom:14px;border:1px solid rgba(60,56,53,0.1)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">'
+      +'<div style="font-size:24px;letter-spacing:.08em;color:#3C3835;font-weight:600">⚡ 大公電用量</div>'
+      +(eACSt?'<div style="font-size:24px;font-weight:700;color:'+stColor+'">'+si(eACSt.s)+' '+eACSt.label+'</div>':'')
       +'</div>'
       // 大數字 + 氣溫對應 chip（方案 1：mini-table）
-      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:22px;margin-bottom:10px">'
-        +'<div style="display:flex;align-items:baseline;gap:10px">'
-          +'<div style="font-size:60px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+eYd+'</div>'
-          +'<div style="font-size:21px;color:#898480;font-weight:400">度</div>'
+      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:26px;margin-bottom:14px">'
+        +'<div style="display:flex;align-items:baseline;gap:12px">'
+          +'<div style="font-size:76px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+eYd+'</div>'
+          +'<div style="font-size:26px;color:#898480;font-weight:400">度</div>'
         +'</div>'
         +chipHtml
       +'</div>'
       +subInfo
       +(eM.projected!==null
-        ?'<div style="display:flex;justify-content:flex-end;padding:10px 0 4px;border-top:1px solid rgba(60,56,53,0.08);margin-top:8px"><div style="font-size:15px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(eM.projected)+'</strong> 度</div></div>'
-        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:8px;padding-top:8px"></div>')
+        ?'<div style="display:flex;justify-content:flex-end;padding:12px 0 6px;border-top:1px solid rgba(60,56,53,0.08);margin-top:10px"><div style="font-size:19px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(eM.projected)+'</strong> 度</div></div>'
+        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:10px;padding-top:10px"></div>')
       +bars.bars
-      +(bars.trimNote?'<div style="font-size:13px;color:#898480;margin-top:8px;line-height:1.5">* '+bars.trimNote+'</div>':'')
+      +(bars.trimNote?'<div style="font-size:16px;color:#898480;margin-top:10px;line-height:1.5">* '+bars.trimNote+'</div>':'')
       +'</div>';
   }
 
@@ -750,37 +750,37 @@ function genCard(){
     // 用水上限 chip mini-table（類型 / 正常上限）
     var wChipHtml='';
     if(wFixSt){
-      var rs='display:flex;align-items:baseline;justify-content:space-between;gap:12px;line-height:1.5;';
-      wChipHtml='<div style="display:inline-flex;flex-direction:column;background:'+wChipBg+';border:1px solid '+wChipBd+';padding:11px 16px;border-radius:2px;margin-bottom:2px;min-width:178px">'
-        +'<div style="'+rs+'font-size:14px;color:#898480">'
+      var rs='display:flex;align-items:baseline;justify-content:space-between;gap:14px;line-height:1.5;';
+      wChipHtml='<div style="display:inline-flex;flex-direction:column;background:'+wChipBg+';border:1px solid '+wChipBd+';padding:14px 20px;border-radius:2px;margin-bottom:2px;min-width:220px">'
+        +'<div style="'+rs+'font-size:17px;color:#898480">'
           +'<span>📋 類型</span>'
-          +'<strong style="color:#3C3835;font-weight:600;font-size:16px">'+(isClean?'清潔日':'非清潔日')+'</strong>'
+          +'<strong style="color:#3C3835;font-weight:600;font-size:20px">'+(isClean?'清潔日':'非清潔日')+'</strong>'
         +'</div>'
-        +'<div style="'+rs+'font-size:14px;color:'+wChipFg+';margin-top:4px;border-top:1px solid '+wChipBd+';padding-top:5px">'
+        +'<div style="'+rs+'font-size:17px;color:'+wChipFg+';margin-top:6px;border-top:1px solid '+wChipBd+';padding-top:7px">'
           +'<span style="font-weight:600;letter-spacing:.05em">💧 上限</span>'
-          +'<strong style="color:'+wChipFg+';font-weight:700;font-size:20px">≤'+normalMax+' 度</strong>'
+          +'<strong style="color:'+wChipFg+';font-weight:700;font-size:26px">≤'+normalMax+' 度</strong>'
         +'</div>'
       +'</div>';
     }
 
-    return '<div style="background:#F0F2F5;border-radius:2px;padding:18px 22px;margin-bottom:12px;border:1px solid rgba(60,56,53,0.1)">'
-      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
-      +'<div style="font-size:18px;letter-spacing:.1em;color:#3C3835;font-weight:600">💧 公水用量</div>'
-      +(wFixSt?'<div style="font-size:18px;font-weight:700;color:'+stColor+'">'+si(wFixSt.s)+' '+wFixSt.label+'</div>':'')
+    return '<div style="background:#F0F2F5;border-radius:2px;padding:22px 26px;margin-bottom:14px;border:1px solid rgba(60,56,53,0.1)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">'
+      +'<div style="font-size:24px;letter-spacing:.08em;color:#3C3835;font-weight:600">💧 公水用量</div>'
+      +(wFixSt?'<div style="font-size:24px;font-weight:700;color:'+stColor+'">'+si(wFixSt.s)+' '+wFixSt.label+'</div>':'')
       +'</div>'
       // 大數字 + 上限 chip（方案 1）
-      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:22px;margin-bottom:10px">'
-        +'<div style="display:flex;align-items:baseline;gap:10px">'
-          +'<div style="font-size:60px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+wYd+'</div>'
-          +'<div style="font-size:21px;color:#898480;font-weight:400">度</div>'
+      +'<div style="display:flex;align-items:flex-end;justify-content:center;gap:26px;margin-bottom:14px">'
+        +'<div style="display:flex;align-items:baseline;gap:12px">'
+          +'<div style="font-size:76px;font-weight:700;color:'+actualColor+';letter-spacing:-.02em;line-height:1">'+wYd+'</div>'
+          +'<div style="font-size:26px;color:#898480;font-weight:400">度</div>'
         +'</div>'
         +wChipHtml
       +'</div>'
       +(wM.projected!==null
-        ?'<div style="display:flex;justify-content:flex-end;padding:10px 0 4px;border-top:1px solid rgba(60,56,53,0.08);margin-top:8px"><div style="font-size:15px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(wM.projected)+'</strong> 度</div></div>'
-        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:8px;padding-top:8px"></div>')
+        ?'<div style="display:flex;justify-content:flex-end;padding:12px 0 6px;border-top:1px solid rgba(60,56,53,0.08);margin-top:10px"><div style="font-size:19px;color:#898480">預估月底 <strong style="color:#3C3835">'+fmtNum(wM.projected)+'</strong> 度</div></div>'
+        :'<div style="border-top:1px solid rgba(60,56,53,0.08);margin-top:10px;padding-top:10px"></div>')
       +bars.bars
-      +(bars.trimNote?'<div style="font-size:13px;color:#898480;margin-top:8px;line-height:1.5">* '+bars.trimNote+'</div>':'')
+      +(bars.trimNote?'<div style="font-size:16px;color:#898480;margin-top:10px;line-height:1.5">* '+bars.trimNote+'</div>':'')
       +'</div>';
   }
 
@@ -790,25 +790,25 @@ function genCard(){
     +'body{font-family:\'Noto Sans TC\',\'Microsoft JhengHei\',sans-serif;background:#EAE7E1 !important;color:#3C3835;margin:0;}'
     +'</style></head><body style="background:#EAE7E1">'
     +'<div style="width:640px;margin:0 auto">'
-    +'<div style="background:#3C3835;padding:22px 26px 18px;border-bottom:2px solid #696460;position:relative;overflow:hidden">'
+    +'<div style="background:#3C3835;padding:26px 30px 22px;border-bottom:2px solid #696460;position:relative;overflow:hidden">'
     +'<div style="position:absolute;inset:0;background:'+stoneTex+';pointer-events:none"></div>'
     +'<div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between">'
     +'<div>'
-    +'<div style="font-size:13px;letter-spacing:.28em;color:#898480;margin-bottom:6px">DAILY UTILITY REPORT</div>'
-    +'<div style="font-size:32px;font-weight:700;color:#EAE7E1;letter-spacing:.08em">閱大安</div>'
-    +'<div style="font-size:20px;color:#A09B96;letter-spacing:.14em;margin-top:6px;font-weight:500">每日水電公告</div>'
+    +'<div style="font-size:15px;letter-spacing:.28em;color:#898480;margin-bottom:7px">DAILY UTILITY REPORT</div>'
+    +'<div style="font-size:42px;font-weight:700;color:#EAE7E1;letter-spacing:.08em">閱大安</div>'
+    +'<div style="font-size:22px;color:#A09B96;letter-spacing:.14em;margin-top:7px;font-weight:500">每日水電公告</div>'
     +'</div>'
     +'<div style="text-align:right">'
-    +'<div style="font-size:14px;color:#898480;margin-bottom:6px">報告日期</div>'
-    +'<div style="font-size:21px;color:#EAE7E1;font-weight:500;line-height:1.5">'+fmtDateShort(rep)+'</div>'
-    +'<div style="font-size:17px;color:#898480;margin-top:5px">第 '+dp.refDay+'/'+dp.daysInMonth+' 天</div>'
+    +'<div style="font-size:16px;color:#898480;margin-bottom:7px">報告日期</div>'
+    +'<div style="font-size:24px;color:#EAE7E1;font-weight:500;line-height:1.5">'+fmtDateShort(rep)+'</div>'
+    +'<div style="font-size:19px;color:#898480;margin-top:6px">第 '+dp.refDay+'/'+dp.daysInMonth+' 天</div>'
     +'</div></div></div>'
-    +'<div style="padding:18px 24px 20px">'
+    +'<div style="padding:22px 28px 24px">'
     +elecBlock()
     +waterBlock()
-    +(note?'<div style="background:rgba(140,90,0,0.07);border:1px solid rgba(140,90,0,0.2);border-radius:2px;padding:13px 18px;font-size:17px;color:#8C5A00;line-height:1.8;margin-bottom:12px">📝 '+note.replace(/\n/g,'<br>')+'</div>':'')
-    +'<div style="display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid rgba(60,56,53,0.12)">'
-    +'<div style="font-size:13px;color:#898480">閱大安管理委員會</div>'
+    +(note?'<div style="background:rgba(140,90,0,0.07);border:1px solid rgba(140,90,0,0.2);border-radius:2px;padding:16px 22px;font-size:22px;color:#8C5A00;line-height:1.7;margin-bottom:14px">📝 '+note.replace(/\n/g,'<br>')+'</div>':'')
+    +'<div style="display:flex;justify-content:flex-end;padding-top:14px;border-top:1px solid rgba(60,56,53,0.12)">'
+    +'<div style="font-size:16px;color:#898480">閱大安管理委員會</div>'
     +'</div>'
     +'</div></div></body></html>';
 }
