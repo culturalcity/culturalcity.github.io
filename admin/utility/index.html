@@ -101,6 +101,43 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .diff-summary .cell .lbl{font-size:11px;color:var(--wg9);}
 .diff-summary .cell.add .num{color:var(--dp);}
 .diff-summary .cell.upd .num{color:var(--warn);}
+
+/* ── 手機版（max-width 768px） ──────────────────── */
+@media (max-width:768px){
+  :root{--ts-xs:15px;--ts-sm:17px;--ts-base:19px;--ts-md:21px;}
+  body{line-height:1.6;}
+  /* Header 緊湊 */
+  .hd{padding:14px 16px 10px;}
+  .hlh{font-size:19px;}
+  .hle{font-size:11px;}
+  /* App padding 縮小，把更多空間讓給內容 */
+  .app{padding:10px 8px 40px;}
+  /* Toolbar：兩段都加大 tap 區 */
+  .dt-toolbar{padding:12px;gap:10px;}
+  .dt-toolbar-row{gap:8px;}
+  .dt-toolbar select,.dt-toolbar .ms-arrow{padding:10px 14px;font-size:var(--ts-base);}
+  .dt-toolbar label.chk{font-size:var(--ts-base);}
+  .dt-toolbar input[type=checkbox]{width:20px;height:20px;}
+  .btn{padding:10px 14px;font-size:var(--ts-base);}
+  .btn-sm{padding:8px 12px;font-size:var(--ts-sm);}
+  .btn-save,.btn-png{padding:12px 20px;font-size:var(--ts-md);}
+  /* 同步指示燈 */
+  .sync-state{padding:6px 10px;font-size:var(--ts-sm);}
+  /* 資料表：大幅放大 */
+  .htbl thead th{padding:12px 8px;font-size:var(--ts-sm);}
+  .htbl tbody td{padding:11px 8px;}
+  .htbl input[type=number]{width:110px;padding:10px;font-size:var(--ts-base);}
+  .htbl input.note-input{padding:10px 12px;font-size:var(--ts-base);min-width:200px;}
+  .htbl input[type=checkbox]{width:24px;height:24px;}
+  .htbl .day-cell{font-size:var(--ts-md);padding:4px 0;}
+  /* 公告預覽 iframe：手機螢幕全部高度的 75%（避免太矮看不清） */
+  .pf{height:75vh;min-height:480px;}
+  /* pane 標題/動作放大 */
+  .pane-head{padding:12px 16px;}
+  .pane-title-text{font-size:var(--ts-md);}
+  /* pending bar 放大 */
+  .pending-bar{padding:11px 14px;font-size:var(--ts-base);}
+}
 </style>
 </head>
 <body>
