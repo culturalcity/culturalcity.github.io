@@ -7,24 +7,18 @@
 <title>閱大安每日水電公告</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/global.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 :root{--wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;--white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--dp:#1F5C38;--dn:#8C1F1F;--blue:#2B4A6B;--warn:#8C5A00;--yellow:#FFF9D9;--ts-xs:13px;--ts-sm:15px;--ts-base:17px;--ts-md:19px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:var(--ts-base);line-height:1.65;min-height:100vh;}
 
-/* ── Header ────────────────────────────────────── */
-.hd{background:var(--wg41);color:var(--wg1);padding:18px 26px 14px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
-.hd::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px);pointer-events:none;}
-.hi{max-width:1600px;margin:0 auto;position:relative;}
-.hle{font-size:11px;letter-spacing:.28em;color:var(--wg9);margin-bottom:3px;}
-.hlh{font-size:21px;font-weight:700;letter-spacing:.06em;}
-.hsb{font-size:13px;color:var(--wg9);letter-spacing:.14em;margin-top:4px;}
-.hbn{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:10px;font-size:12px;letter-spacing:.06em;}
-.hbn a{display:inline-flex;align-items:center;gap:5px;color:var(--wg9);text-decoration:none;transition:color .18s;}
-.hbn a:hover{color:var(--wg1);}
-.hbn a::before{content:'←';}
-.hbn .sep{color:var(--wg11);opacity:0.5;}
+/* ── Header（沿用 global.css 的 .header/.header-inner/.header-eyebrow/h1/.header-sub） ── */
+.header-inner{max-width:1600px;}  /* admin 比公開頁面寬，給資料表+預覽用 */
+.back-links{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.back-links .back-link{margin-bottom:0;}  /* 換到 wrapper 控制間距 */
+.back-links .sep{color:var(--wg11);opacity:0.5;font-size:14px;}
 
 /* ── 全域容器 ──────────────────────────────────── */
 .app{max-width:1600px;margin:0 auto;padding:14px 18px 60px;}
@@ -148,16 +142,16 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 </head>
 <body>
 
-<div class="hd">
-  <div class="hi">
-    <div class="hbn">
-      <a href="/">返回社區主頁</a>
+<div class="header">
+  <div class="header-inner">
+    <div class="back-links">
+      <a href="/" class="back-link">返回社區主頁</a>
       <span class="sep">·</span>
-      <a href="/utility/">返回水電用量分析</a>
+      <a href="/utility/" class="back-link">返回水電用量分析</a>
     </div>
-    <div class="hle">DAILY UTILITY REPORT</div>
-    <div class="hlh">閱大安・每日水電公告</div>
-    <div class="hsb">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="header-eyebrow">DAILY UTILITY REPORT</div>
+    <h1>閱大安・每日水電公告</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
   </div>
 </div>
 
