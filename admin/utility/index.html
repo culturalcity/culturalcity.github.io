@@ -20,6 +20,11 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .hle{font-size:11px;letter-spacing:.28em;color:var(--wg9);margin-bottom:3px;}
 .hlh{font-size:21px;font-weight:700;letter-spacing:.06em;}
 .hsb{font-size:13px;color:var(--wg9);letter-spacing:.14em;margin-top:4px;}
+.hbn{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:10px;font-size:12px;letter-spacing:.06em;}
+.hbn a{display:inline-flex;align-items:center;gap:5px;color:var(--wg9);text-decoration:none;transition:color .18s;}
+.hbn a:hover{color:var(--wg1);}
+.hbn a::before{content:'←';}
+.hbn .sep{color:var(--wg11);opacity:0.5;}
 
 /* ── 全域容器 ──────────────────────────────────── */
 .app{max-width:1600px;margin:0 auto;padding:14px 18px 60px;}
@@ -145,6 +150,11 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 
 <div class="hd">
   <div class="hi">
+    <div class="hbn">
+      <a href="/">返回社區主頁</a>
+      <span class="sep">·</span>
+      <a href="/utility/">返回水電用量分析</a>
+    </div>
     <div class="hle">DAILY UTILITY REPORT</div>
     <div class="hlh">閱大安・每日水電公告</div>
     <div class="hsb">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
