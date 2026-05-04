@@ -28,6 +28,8 @@
 const CONFIG = {
   // 降雨歷史 JSON（GitHub raw，公開，不需 auth）
   RAIN_HISTORY_URL: 'https://raw.githubusercontent.com/culturalcity/culturalcity.github.io/main/utility/data/daily-rain.json',
+  // 氣溫歷史（用於預報 vs 實際的 backfill）
+  TEMP_HISTORY_URL: 'https://raw.githubusercontent.com/culturalcity/culturalcity.github.io/main/utility/data/daily-temp.json',
 
   // CWA 鄉鎮天氣預報（臺北市未來 1 週 12 小時彙總）
   // 文件：https://opendata.cwa.gov.tw/dataset/forecast/F-D0047-063
@@ -64,7 +66,12 @@ function runDaily() {
     // 2. 跑今天的判斷
     const result = decide(today, true);
     log_('runDaily', formatDate_(today), result);
-    // 3. 該澆就建事件
+    // 3. 把今日 forecast snapshot 寫到 Google Sheet（預報精度日誌）
+    if (result.forecast) {
+      try { logForecastSnapshot_(today, result.forecast); }
+      catch (e) { console.warn('forecast log 失敗：', e.message); /* 不阻斷主流程 */ }
+    }
+    // 4. 該澆就建事件
     if (result.action === 'water') {
       createWateringEvent_(today, result);
     }
@@ -113,6 +120,15 @@ function testMonthlySummary() {
   monthlySummary();
 }
 
+/** 手動測試 forecast 日誌：抓今日預報、寫進 Sheet、backfill 之前列 */
+function testForecastLog() {
+  const today = todayTaipei();
+  const forecast = fetchForecast_();
+  logForecastSnapshot_(today, forecast);
+  const ss = getOrCreateForecastSheet_();
+  console.log('日誌試算表 URL：', ss.getUrl());
+}
+
 /** 手動測試完成追蹤：log 昨天的澆水事件狀態 */
 function testCheckYesterday() {
   return checkYesterdayCompletion_(todayTaipei());
@@ -154,33 +170,36 @@ function decide(today, useForecast) {
   const past3 = sumPastRain_(histMap, today, 3);
   const past5 = sumPastRain_(histMap, today, 5);
 
-  // Rule 1: 雨後跳過
-  if (r1 >= CONFIG.RAIN_YESTERDAY_SKIP) {
-    return { action: 'skip', reason: `昨日降雨 ${r1.toFixed(1)} mm（≥ ${CONFIG.RAIN_YESTERDAY_SKIP}）`, past3, past5 };
-  }
-  if (past3 >= CONFIG.RAIN_PAST_3D_SKIP) {
-    return { action: 'skip', reason: `過去 3 日累積雨量 ${past3.toFixed(1)} mm（≥ ${CONFIG.RAIN_PAST_3D_SKIP}）`, past3, past5 };
-  }
-
-  // 取預報（如不需要或失敗，走 fallback）
+  // 預報先抓（讓 forecast 在所有 return path 都可用，方便 logging）
   let forecast = null;
   if (useForecast) {
     try {
       forecast = fetchForecast_();
     } catch (e) {
       console.warn('預報抓取失敗：', e.message);
-      // Fallback：保守原則「植物不會放假」——歷史顯著乾燥就提醒
-      if (past3 < CONFIG.RAIN_PAST_3D_DRY) {
-        return {
-          action: 'water',
-          kind: 'fallback-dry',
-          title: '💧 今日建議澆水（預報資料缺，依歷史判斷）',
-          color: 'yellow',
-          past3, past5, forecast: null,
-        };
-      }
-      return { action: 'skip', reason: '預報資料缺，歷史不顯著乾燥', past3, past5 };
+      // forecast 留 null，後面規則會自動走 fallback
     }
+  }
+
+  // Rule 1: 雨後跳過
+  if (r1 >= CONFIG.RAIN_YESTERDAY_SKIP) {
+    return { action: 'skip', reason: `昨日降雨 ${r1.toFixed(1)} mm（≥ ${CONFIG.RAIN_YESTERDAY_SKIP}）`, past3, past5, forecast };
+  }
+  if (past3 >= CONFIG.RAIN_PAST_3D_SKIP) {
+    return { action: 'skip', reason: `過去 3 日累積雨量 ${past3.toFixed(1)} mm（≥ ${CONFIG.RAIN_PAST_3D_SKIP}）`, past3, past5, forecast };
+  }
+
+  // 預報失敗 fallback：保守原則「植物不會放假」——歷史顯著乾燥就提醒
+  if (useForecast && !forecast) {
+    if (past3 < CONFIG.RAIN_PAST_3D_DRY) {
+      return {
+        action: 'water', kind: 'fallback-dry',
+        title: '💧 今日建議澆水（預報資料缺，依歷史判斷）',
+        color: 'yellow',
+        past3, past5, forecast: null,
+      };
+    }
+    return { action: 'skip', reason: '預報資料缺，歷史不顯著乾燥', past3, past5, forecast: null };
   }
 
   // Rule 2: 雨前跳過
@@ -232,6 +251,18 @@ function fetchRainHistory_() {
   const arr = JSON.parse(res.getContentText());
   const map = {};
   for (const r of arr) map[r.d] = r.rain;
+  return map;
+}
+
+/** 取氣溫歷史，回傳 Map<dateKey, {tmax, tmin}> */
+function fetchTempHistory_() {
+  const res = UrlFetchApp.fetch(CONFIG.TEMP_HISTORY_URL, { muteHttpExceptions: true });
+  if (res.getResponseCode() !== 200) {
+    throw new Error(`氣溫歷史 HTTP ${res.getResponseCode()}`);
+  }
+  const arr = JSON.parse(res.getContentText());
+  const map = {};
+  for (const r of arr) map[r.d] = { tmax: r.tmax, tmin: r.tmin };
   return map;
 }
 
@@ -297,6 +328,98 @@ function pickDaySlot_(timeArr, dateKey) {
   }
   // fallback：任何 StartTime 在該日的第一個 slot
   return timeArr.find(t => formatDate_(new Date(t.StartTime)) === dateKey) || null;
+}
+
+// ================== 預報精度日誌 ==================
+//
+// 每天清晨 5 點寫入今日 forecast snapshot 到 Google Sheet，並 backfill
+// 之前所有列的「實際值」（從 daily-rain.json / daily-temp.json）。
+// 跑滿 1-2 個月後可以分析 CWA 預報的校準曲線（PoP 70% 實際下雨多少 % 等）。
+//
+// Sheet 結構：
+//   date | popToday | popTomorrow | tempToday | actualRainToday | actualTmaxToday | recordedAt
+//
+// Sheet ID 第一次跑時自動建立，存進 Script Property `FORECAST_SHEET_ID`，
+// Sheet 本身放在 culturalcity85 的 My Drive 根目錄。
+
+/** 取（或第一次建）forecast 日誌試算表 */
+function getOrCreateForecastSheet_() {
+  const props = PropertiesService.getScriptProperties();
+  const existingId = props.getProperty('FORECAST_SHEET_ID');
+  if (existingId) {
+    try { return SpreadsheetApp.openById(existingId); }
+    catch (e) { console.warn('FORECAST_SHEET_ID 失效，重新建立'); }
+  }
+  const ss = SpreadsheetApp.create('閱大安澆水提醒・預報精度日誌');
+  const sheet = ss.getActiveSheet();
+  sheet.setName('Forecast Log');
+  const headers = ['date', 'popToday', 'popTomorrow', 'tempToday',
+                   'actualRainToday', 'actualTmaxToday', 'recordedAt'];
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight('bold');
+  sheet.setFrozenRows(1);
+  props.setProperty('FORECAST_SHEET_ID', ss.getId());
+  console.log('建立預報精度日誌 Sheet：', ss.getUrl());
+  return ss;
+}
+
+/** 寫今日 snapshot + backfill 之前所有列的實際值 */
+function logForecastSnapshot_(today, forecast) {
+  const ss = getOrCreateForecastSheet_();
+  const sheet = ss.getSheets()[0];
+  const todayKey = formatDate_(today);
+
+  // 1. backfill 既有列的 actual 欄位
+  backfillActuals_(sheet);
+
+  // 2. 看今天是否已寫過（runDaily 不該重複，但 dryRunToday 可能多次）
+  const data = sheet.getDataRange().getValues();
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0] === todayKey) {
+      console.log('forecast log: 今日已記錄，skip 新增');
+      return;
+    }
+  }
+
+  // 3. append 新列
+  sheet.appendRow([
+    todayKey,
+    forecast.popToday,
+    forecast.popTomorrow,
+    forecast.tempToday,
+    '', '',          // actualRainToday / actualTmaxToday 留空，之後 backfill
+    new Date(),
+  ]);
+  console.log(`forecast log: ${todayKey} 寫入完成`);
+}
+
+/** 對 sheet 裡每一列檢查 actual 欄位，若可從 history 取得就回填 */
+function backfillActuals_(sheet) {
+  const data = sheet.getDataRange().getValues();
+  if (data.length < 2) return;
+
+  // 先抓 history（一次抓一份就好）
+  let rainMap, tempMap;
+  try { rainMap = fetchRainHistory_(); }
+  catch (e) { console.warn('backfill: 抓 rain 失敗', e.message); return; }
+  try { tempMap = fetchTempHistory_(); }
+  catch (e) { console.warn('backfill: 抓 temp 失敗', e.message); return; }
+
+  let updated = 0;
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    const dateKey = row[0];
+    // actualRainToday（注意：0 是有效值，不是 falsy）
+    if (row[4] === '' && rainMap[dateKey] != null) {
+      sheet.getRange(i + 1, 5).setValue(rainMap[dateKey]);
+      updated++;
+    }
+    // actualTmaxToday
+    if (row[5] === '' && tempMap[dateKey] && tempMap[dateKey].tmax != null) {
+      sheet.getRange(i + 1, 6).setValue(tempMap[dateKey].tmax);
+      updated++;
+    }
+  }
+  if (updated > 0) console.log(`forecast log: backfilled ${updated} cells`);
 }
 
 // ================== 完成追蹤 / 月統計 ==================

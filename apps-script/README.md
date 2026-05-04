@@ -56,6 +56,7 @@
 | `runDaily()` | 正式版：跑今天 + 該澆就建事件（trigger 跑的就是這個） |
 | `testCheckYesterday()` | 印昨天澆水事件的完成狀態（依顏色判斷） |
 | `testMonthlySummary()` | 立刻寄上個月的月報 mail（測試用） |
+| `testForecastLog()` | 立刻寫一筆 forecast snapshot 到 Sheet + backfill 既有列；印 Sheet URL |
 
 ## 總幹事的工作流程
 
@@ -70,6 +71,34 @@
 - 🟦 藍色：連日少雨，一般建議澆
 - 🟨 黃色：預報資料缺，依歷史判斷建議澆
 - ⬜ 灰色：總幹事手動標記「已澆」
+
+## 預報精度日誌（Forecast Log）
+
+每天清晨 5 點 `runDaily` 跑完澆水判斷後，會把今日的 CWA 預報快照寫進
+一個 Google Sheet「閱大安澆水提醒・預報精度日誌」（首次跑時自動建立在
+culturalcity85 的 My Drive 根目錄）。
+
+每一列：
+
+```
+date | popToday | popTomorrow | tempToday | actualRainToday | actualTmaxToday | recordedAt
+```
+
+`actualRainToday / actualTmaxToday` 在當天還是空的；隔天清晨腳本會自動
+從 `daily-rain.json / daily-temp.json` backfill。跑滿 1-2 個月後可以分析：
+
+- CWA 預報 PoP 70% 的日子，實際下雨比例多少？
+- PoP 30% 的日子卻下雨的「surprise rain」有多少？
+- 預報 tmax 跟實際 tmax 的平均誤差幾度？
+
+這就是預報的「校準曲線（calibration curve）」。有了它才能合理調整
+70% / 80% 等閾值。
+
+要找這個 Sheet：登入 culturalcity85 → Google Drive → 搜尋「預報精度日誌」。
+Sheet ID 同時也存在 Apps Script 的 Script Property `FORECAST_SHEET_ID`。
+
+如果想一次性 reset（譬如想換新表）：刪掉 Script Property `FORECAST_SHEET_ID`，
+下次跑 `testForecastLog()` 會重新建一張。
 
 ## 怎麼修改閾值
 
