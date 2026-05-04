@@ -21,7 +21,7 @@
 3. 把 `watering-reminder.gs` 整個檔案貼進 `Code.gs`（取代預設內容），存檔
 4. 左側齒輪 ⚙ Project Settings → Script properties → Add property：
    - `CWA_API_KEY` = 你的 CWA OpenData 金鑰（在 [opendata.cwa.gov.tw](https://opendata.cwa.gov.tw) 申請；本社區的 key 也存在 repo 根目錄 `.env`）
-   - `NOTIFY_EMAIL` = `wentaihsu@gmail.com`（出錯時收 mail，可改成接手者自己的信箱）
+   - `NOTIFY_EMAIL` = `culturalcity85@gmail.com`（出錯通知 / 月報。寄到社區共用信箱本身，主委交接時不用換；登入 culturalcity85 就能看到所有歷史月報）
 5. 左側 ⏰ Triggers → Add Trigger 兩個：
    - **每日澆水判斷**
      - Function: `runDaily`

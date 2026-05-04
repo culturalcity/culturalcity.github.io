@@ -8,7 +8,7 @@
  * 設定步驟：
  *   1) Apps Script Editor → ⚙ Project Settings → Script Properties → 加入：
  *        CWA_API_KEY = <你的 CWA OpenData 金鑰>
- *        NOTIFY_EMAIL = wentaihsu@gmail.com   (選填，錯誤通知收件人)
+ *        NOTIFY_EMAIL = culturalcity85@gmail.com   (錯誤通知 / 月報；用社區共用帳號方便交接)
  *   2) Apps Script Editor → ⏰ Triggers → Add Trigger:
  *        Function: runDaily
  *        Event source: Time-driven
