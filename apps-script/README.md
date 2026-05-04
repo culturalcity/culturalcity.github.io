@@ -18,11 +18,19 @@
 
 1. 用 culturalcity85@gmail.com 登入 Google
 2. 開 [script.google.com](https://script.google.com) → New project → 取名「閱大安澆水提醒」
-3. 把 `watering-reminder.gs` 整個檔案貼進 `Code.gs`（取代預設內容），存檔
+3. 把 `watering-reminder.gs` 整個檔案貼進 `Code.gs`（取代預設內容）
+   - **務必按 `Ctrl + S` 存檔**——不存檔的話編輯器頂部不會出現「▶ 執行」按鈕和 function 下拉選單，後續步驟會卡住
+   - 存檔成功後，標題旁的「尚未儲存變更」字樣會消失
 4. 左側齒輪 ⚙ Project Settings → Script properties → Add property：
    - `CWA_API_KEY` = 你的 CWA OpenData 金鑰（在 [opendata.cwa.gov.tw](https://opendata.cwa.gov.tw) 申請；本社區的 key 也存在 repo 根目錄 `.env`）
    - `NOTIFY_EMAIL` = `culturalcity85@gmail.com`（出錯通知 / 月報。寄到社區共用信箱本身，主委交接時不用換；登入 culturalcity85 就能看到所有歷史月報）
-5. 左側 ⏰ Triggers → Add Trigger 兩個：
+5. **第一次跑 function 走完授權流程**——直接設 trigger 會卡在授權，先跑一次無副作用的 function 把授權通過：
+   - 編輯器頂部下拉選 `dryRunToday`，按 ▶ 執行
+   - Google 會跳「Google 尚未驗證這個應用程式」黃色警告（**這是正常的，因為這支 script 沒送 Google 審核**）
+   - 點左下角小字 **「進階」** → 出現「前往閱大安澆水提醒（不安全）」 → 點它
+   - 列出 Calendar / UrlFetch / Gmail 權限 → 按 **「允許」**
+   - 跑完下方「執行紀錄」應該會印 `[dryRunToday] ... → SKIP/WATER ...`
+6. 左側 ⏰ Triggers → Add Trigger 兩個：
    - **每日澆水判斷**
      - Function: `runDaily`
      - Event source: Time-driven
@@ -34,7 +42,7 @@
      - Type: Month timer
      - Day of month: `1`
      - Time of day: `7am to 8am`
-6. 第一次執行任何 function（例如 `dryRunToday`）時 Google 會跳授權視窗，要求 Calendar / UrlFetch / Gmail 權限——同意
+   - ⚠ **如果儲存 trigger 時跳「指令碼授權失敗。請檢查您的彈出式視窗攔截器」紅字**：是瀏覽器擋了彈窗。Chrome 網址列右側會有 ⛔ icon，點它 → 「一律允許 script.google.com 顯示彈出式視窗」→ F5 重整頁面 → 再儲存。或直接用無痕視窗開 Apps Script 重設。
 
 ## 測試怎麼跑
 
