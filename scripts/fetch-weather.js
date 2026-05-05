@@ -176,7 +176,7 @@ function writeJson(p, arr) {
           }
         }
       }
-      console.log(`✓ temp +${mtA} ⟳${mtU}, rain +${mrA} ⟳${mrU}（API 回 ${recs.length} 天）`);
+      console.log(`✓ temp +${mtA} ⟳${mtU}, rain +${mrA} ⟳${mrU}（API 回 ${recs.length} 天：${recs.map(r => r.d).join(',')}）`);
     } catch (e) {
       console.log(`✗ ${e.message}`);
       if (months.length === 1) process.exit(1);
