@@ -5,9 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # 每天 22:00 UTC = 台北時間隔日 06:00
-    # CODiS 拿「昨天」settled 完整資料；凌晨後跑都 OK，不會漏半夜尾巴
-    - cron: '0 22 * * *'
+    # 每天 01:00 UTC = 台北時間 09:00
+    # CODiS 「日 Max/Min」aggregate batch 約在台北 07:00~09:00 之間才完成；
+    # 06:00 跑會抓到「日期有但 tmax/tmin 是 null」的不完整資料而靜默跳過。
+    # 09:00 已實證 settle 完畢（事故日期 2026-05-04）。
+    - cron: '0 1 * * *'
 
 permissions:
   contents: write   # 排程時 fetch-weather 需要 push 更新
