@@ -250,11 +250,11 @@ var API_URL='/admin/utility/api/data';
 var _cache=null;            // in-memory cache，所有 getStore/setStore 經此處
 var _lastSyncedAt=null;     // 最後一次成功同步的時間戳
 
-function emptyStore(){return {water:{},electric:{},temperature:{},cleanDay:{},note:{}};}
+function emptyStore(){return {water:{},electric:{},temperature:{},cleanDay:{},irrigationDay:{},note:{}};}
 
 function normalizeStore(s){
   s=s||{};
-  ['water','electric','temperature','cleanDay','note'].forEach(function(k){s[k]=s[k]||{};});
+  ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){s[k]=s[k]||{};});
   return s;
 }
 
@@ -347,8 +347,8 @@ function setSyncState(state,text){
 function fmtTime(d){return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');}
 
 var pending=emptyStore();
-function hasPending(){return ['water','electric','temperature','cleanDay','note'].some(function(k){return Object.keys(pending[k]).length>0;});}
-function pendingCount(){return ['water','electric','temperature','cleanDay','note'].reduce(function(a,k){return a+Object.keys(pending[k]).length;},0);}
+function hasPending(){return ['water','electric','temperature','cleanDay','irrigationDay','note'].some(function(k){return Object.keys(pending[k]).length>0;});}
+function pendingCount(){return ['water','electric','temperature','cleanDay','irrigationDay','note'].reduce(function(a,k){return a+Object.keys(pending[k]).length;},0);}
 
 function getSeedValue(seed,dateISO){
   var startD=isoToDate(seed.start);var endD=isoToDate(seed.end);var targetD=isoToDate(dateISO);
@@ -405,7 +405,7 @@ async function commitPending(){
   var n=pendingCount();
   if(!confirm('確定要儲存 '+n+' 筆變更到雲端嗎？\n（會立即同步到所有人共用的儲存空間）'))return;
   var s=getStore();
-  ['water','electric','temperature','cleanDay','note'].forEach(function(k){
+  ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){
     s[k]=s[k]||{};Object.keys(pending[k]).forEach(function(d){s[k][d]=pending[k][d];});
   });
   setStore(s);pending=emptyStore();updatePendingBar();render();renderHistTable();
@@ -547,11 +547,22 @@ function calcEStatus(eYd,tmax){
   if(eYd<=warn)return{s:'warn',label:'接近警戒',detail:'預期 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度'};
   return{s:'over',label:'超出警戒',detail:'目標 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度，實際 '+eYd+' 度'};
 }
-function calcWStatus(wYd,isClean){
+// 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌日 +1.0（兩者獨立、可疊加）
+function dayTypeLabel(isClean,isIrrigation){
+  if(isClean&&isIrrigation)return'清潔+澆灌日';
+  if(isClean)return'清潔日';
+  if(isIrrigation)return'澆灌日';
+  return'一般日';
+}
+function dayTypeMax(isClean,isIrrigation){
+  return 0.2+(isClean?0.3:0)+(isIrrigation?1.0:0);
+}
+function calcWStatus(wYd,isClean,isIrrigation){
   if(wYd===null)return null;
-  var max=isClean?0.5:0.2;
-  if(wYd<=max)return{s:'good',label:'用水正常',detail:(isClean?'清潔日':'非清潔日')+' ≤'+max+' 度'};
-  return{s:'over',label:'用水偏高',detail:(isClean?'清潔日':'非清潔日')+' >'+max+' 度，請確認原因'};
+  var max=dayTypeMax(isClean,isIrrigation);
+  var label=dayTypeLabel(isClean,isIrrigation);
+  if(wYd<=max)return{s:'good',label:'用水正常',detail:label+' ≤'+max+' 度'};
+  return{s:'over',label:'用水偏高',detail:label+' >'+max+' 度，請確認原因'};
 }
 
 // ────────────────────────────────────────────────────────────────────
@@ -603,7 +614,8 @@ function getDailyForCard(){
     eYd:getValue('electric',rep),
     wYd:getValue('water',rep),
     tmax:getValue('temperature',rep),
-    isClean:!!(pending.cleanDay[rep]!==undefined?pending.cleanDay[rep]:(getStore().cleanDay||{})[rep])
+    isClean:!!(pending.cleanDay[rep]!==undefined?pending.cleanDay[rep]:(getStore().cleanDay||{})[rep]),
+    isIrrigation:!!(pending.irrigationDay[rep]!==undefined?pending.irrigationDay[rep]:(getStore().irrigationDay||{})[rep])
   };
 }
 
@@ -650,14 +662,14 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
 // ── Line 卡片 ──
 function genCard(){
   var d=getDailyForCard();
-  var rep=d.rep, eYd=d.eYd, wYd=d.wYd, tmax=d.tmax, isClean=d.isClean;
+  var rep=d.rep, eYd=d.eYd, wYd=d.wYd, tmax=d.tmax, isClean=d.isClean, isIrrigation=d.isIrrigation;
   var dp=dayProgressOfReport(rep);
   var noteRaw=getValue('note',rep);var note=noteRaw?String(noteRaw).trim():'';
   var eM=calcMetrics('electric',rep);
   var wM=calcMetrics('water',rep);
   var eACSt=calcEStatus(eYd,tmax);
   var eTarget=calcETarget(tmax),eWarn=calcEWarn(tmax);
-  var wFixSt=calcWStatus(wYd,isClean);
+  var wFixSt=calcWStatus(wYd,isClean,isIrrigation);
   var stoneTex="repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(60,56,53,0.03) 120px,rgba(60,56,53,0.03) 121px)";
 
   // 共用：本月/上月/去年三條 bar
@@ -746,8 +758,9 @@ function genCard(){
     if(wFixSt&&wFixSt.s==='over'){wChipBg='rgba(140,31,31,0.08)';wChipBd='rgba(140,31,31,0.25)';wChipFg='#8C1F1F';}
     else if(wFixSt&&wFixSt.s==='good'){wChipFg='#1F5C38';}
 
-    // 今日類型對應的正常上限（單一門檻）
-    var normalMax=isClean?0.5:0.2;
+    // 今日類型對應的正常上限（基底 0.2 + 清潔 +0.3 + 澆灌 +1.0）
+    var normalMax=dayTypeMax(isClean,isIrrigation);
+    var typeText=dayTypeLabel(isClean,isIrrigation);
 
     // 用水上限 chip mini-table（類型 / 正常上限）
     var wChipHtml='';
@@ -756,7 +769,7 @@ function genCard(){
       wChipHtml='<div style="display:inline-flex;flex-direction:column;background:'+wChipBg+';border:1px solid '+wChipBd+';padding:14px 20px;border-radius:2px;margin-bottom:2px;min-width:220px">'
         +'<div style="'+rs+'font-size:17px;color:#898480">'
           +'<span>📋 類型</span>'
-          +'<strong style="color:#3C3835;font-weight:600;font-size:20px">'+(isClean?'清潔日':'非清潔日')+'</strong>'
+          +'<strong style="color:#3C3835;font-weight:600;font-size:20px">'+typeText+'</strong>'
         +'</div>'
         +'<div style="'+rs+'font-size:17px;color:'+wChipFg+';margin-top:6px;border-top:1px solid '+wChipBd+';padding-top:7px">'
           +'<span style="font-weight:600;letter-spacing:.05em">💧 上限</span>'
@@ -786,11 +799,24 @@ function genCard(){
       +'</div>';
   }
 
-  return '<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=640"><meta name="color-scheme" content="light"><title>Line 截圖卡片</title>'
+  // 警告：下面 iframe 用的所有 ht-ml/he-ad/bo-dy tag 字面都被故意拆成兩段
+  //    （譬如 '</bo' + 'dy>'）。VSCode Live Server 用 regex 找 close-body 注入
+  //    reload script，會錯誤匹配到這個 JS 字串裡的字面，提前 close 我們的
+  //    inline script tag，整個 admin SPA 壞掉（事故日 2026-05-06）。
+  //    本檔案內 ONLY 真正用來開關文件結構的 tag（line 2/3/142/143/末尾）才能
+  //    出現完整字面；JS 字串內全部要拆。連這段 comment 都不能用完整字面，
+  //    所以用全形「-」拆開。請勿合併回去！
+  // 常數重用，避免每行都拆得很醜：
+  var TG_DOC = '<' + '!DOCTYPE html>';
+  var TG_HTML_OPEN = '<' + 'html lang="zh-TW">';
+  var TG_HEAD_OPEN = '<' + 'head>';
+  var TG_HEAD_CLOSE = '</' + 'head>';
+  var TG_BODY_OPEN = '<' + 'body style="background:#EAE7E1">';
+  return TG_DOC + TG_HTML_OPEN + TG_HEAD_OPEN + '<meta charset="UTF-8"><meta name="viewport" content="width=640"><meta name="color-scheme" content="light"><title>Line 截圖卡片</title>'
     +'<style>@import url(\'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap\');*{box-sizing:border-box;margin:0;padding:0;}'
     +'html{background:#EAE7E1;color-scheme:light;}'
     +'body{font-family:\'Noto Sans TC\',\'Microsoft JhengHei\',sans-serif;background:#EAE7E1 !important;color:#3C3835;margin:0;}'
-    +'</style></head><body style="background:#EAE7E1">'
+    +'</style>' + TG_HEAD_CLOSE + TG_BODY_OPEN
     +'<div style="width:640px;margin:0 auto">'
     +'<div style="background:#3C3835;padding:26px 30px 22px;border-bottom:2px solid #696460;position:relative;overflow:hidden">'
     +'<div style="position:absolute;inset:0;background:'+stoneTex+';pointer-events:none"></div>'
@@ -812,7 +838,7 @@ function genCard(){
     +'<div style="display:flex;justify-content:flex-end;padding-top:14px;border-top:1px solid rgba(60,56,53,0.12)">'
     +'<div style="font-size:16px;color:#898480">閱大安管理委員會</div>'
     +'</div>'
-    +'</div></div></body></html>';
+    +'</div></div>' + ('</' + 'body>') + ('</' + 'html>');
 }
 
 
@@ -860,6 +886,7 @@ function renderHistTable(){
     +'<th style="width:48px">日</th><th style="width:34px">週</th>'
     +'<th style="width:112px">⚡ 電 (度)</th><th style="width:112px">💧 水 (度)</th><th style="width:124px">🌡 高溫 (°C)</th>'
     +'<th style="width:56px">清潔</th>'
+    +'<th style="width:56px">澆灌</th>'
     +'<th>📝 備註</th>'
     +'</tr></thead><tbody>';
 
@@ -871,6 +898,7 @@ function renderHistTable(){
     var noteVal=getValue('note',iso)||'';
     var sE=getSource('electric',iso), sW=getSource('water',iso), sT=getSource('temperature',iso);
     var clean=!!(pending.cleanDay[iso]!==undefined?pending.cleanDay[iso]:(getStore().cleanDay||{})[iso]);
+    var irrigation=!!(pending.irrigationDay[iso]!==undefined?pending.irrigationDay[iso]:(getStore().irrigationDay||{})[iso]);
     var noteIsPending=pending.note&&pending.note[iso]!==undefined;
     var hasMissing=(eVal===null||eVal===undefined)||(wVal===null||wVal===undefined);
     var hasPendingFlag=(sE==='pending'||sW==='pending'||sT==='pending'||noteIsPending);
@@ -894,6 +922,7 @@ function renderHistTable(){
       +'<td><input type="number" step="0.01" '+(wEmpty?'class="is-empty"':'')+' value="'+(wEmpty?'':wVal)+'" oninput="histCellChange(\''+iso+'\',\'water\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'<td><input type="number" step="0.1" '+(tEmpty?'class="is-empty"':'')+' value="'+(tEmpty?'':tVal)+'" oninput="histCellChange(\''+iso+'\',\'temperature\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'<td style="text-align:center"><input type="checkbox" '+(clean?'checked':'')+' onchange="histCellChange(\''+iso+'\',\'cleanDay\',this.checked)"></td>'
+      +'<td style="text-align:center"><input type="checkbox" '+(irrigation?'checked':'')+' onchange="histCellChange(\''+iso+'\',\'irrigationDay\',this.checked)"></td>'
       +'<td><input type="text" class="note-input" value="'+noteEsc+'" oninput="histCellChange(\''+iso+'\',\'note\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'</tr>';
   }
@@ -907,6 +936,11 @@ function histCellChange(iso,type,val){
     var s=getStore();
     var existing=s.cleanDay&&s.cleanDay[iso];
     if(!!val===!!existing)delete pending.cleanDay[iso];
+  }else if(type==='irrigationDay'){
+    pending.irrigationDay[iso]=!!val;
+    var si=getStore();
+    var existingI=si.irrigationDay&&si.irrigationDay[iso];
+    if(!!val===!!existingI)delete pending.irrigationDay[iso];
   }else if(type==='note'){
     var s2=getStore();
     var existingNote=(s2.note||{})[iso]||'';
@@ -978,7 +1012,7 @@ function importJSON(evt){
       var u=data.userData||data;
       if(!confirm('將匯入並合併資料：\n  水 '+Object.keys(u.water||{}).length+' 筆\n  電 '+Object.keys(u.electric||{}).length+' 筆\n  氣溫 '+Object.keys(u.temperature||{}).length+' 筆\n\n雲端共用資料中相同日期會被覆蓋。確認嗎？'))return;
       var cur=getStore();
-      ['water','electric','temperature','cleanDay','note'].forEach(function(k){
+      ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){
         cur[k]=cur[k]||{};
         if(u[k]){Object.keys(u[k]).forEach(function(d){cur[k][d]=u[k][d];});}
       });
@@ -1006,6 +1040,7 @@ function buildAllRows(){
       '用水度數(度)':getValue('water',iso),
       '最高氣溫(°C)':getValue('temperature',iso),
       '清潔日':((s.cleanDay||{})[iso])?'是':'',
+      '澆灌日':((s.irrigationDay||{})[iso])?'是':'',
       '備註':noteV
     });
   }
@@ -1015,8 +1050,8 @@ function buildAllRows(){
 function exportXLSX(){
   if(!window.XLSX){alert('Excel 函式庫尚未載入，請稍候再試');return;}
   var rows=buildAllRows();
-  var ws=XLSX.utils.json_to_sheet(rows,{header:['日期','星期','用電度數(度)','用水度數(度)','最高氣溫(°C)','清潔日','備註']});
-  ws['!cols']=[{wch:12},{wch:6},{wch:14},{wch:14},{wch:14},{wch:9},{wch:30}];
+  var ws=XLSX.utils.json_to_sheet(rows,{header:['日期','星期','用電度數(度)','用水度數(度)','最高氣溫(°C)','清潔日','澆灌日','備註']});
+  ws['!cols']=[{wch:12},{wch:6},{wch:14},{wch:14},{wch:14},{wch:9},{wch:9},{wch:30}];
   var wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'每日水電氣溫');
   XLSX.writeFile(wb,'閱大安_每日水電公告_資料庫_'+todayISO()+'.xlsx');
@@ -1051,6 +1086,7 @@ function analyzeXLSXImport(rows){
     {key:'water',aliases:['用水度數(度)','用水度數','水','公水','水度','用水']},
     {key:'temperature',aliases:['最高氣溫(°C)','最高氣溫','氣溫','tmax','溫度']},
     {key:'cleanDay',aliases:['清潔日','清潔','打掃']},
+    {key:'irrigationDay',aliases:['澆灌日','澆灌','澆水','澆']},
     {key:'note',aliases:['備註','註記','memo','note']}
   ];
   if(!rows.length){alert('Excel 沒有資料列');return;}
@@ -1070,7 +1106,7 @@ function analyzeXLSXImport(rows){
     fields.forEach(function(f){
       var k=fieldKeys[f.key];if(!k)return;
       var raw=row[k];var newVal;
-      if(f.key==='cleanDay'){
+      if(f.key==='cleanDay'||f.key==='irrigationDay'){
         if(raw===null||raw===''||raw===undefined)newVal=null;
         else if(typeof raw==='boolean')newVal=raw;
         else newVal=(/^(是|y|yes|1|true|✓)$/i.test(String(raw).trim()));
@@ -1083,7 +1119,7 @@ function analyzeXLSXImport(rows){
       }
       if(newVal===null)return;
       var existing=getValue(f.key,iso);
-      if(f.key==='cleanDay'){var sa=getStore();existing=(sa.cleanDay||{})[iso];if(!!newVal!==!!existing){rec.changes.push({type:f.key,old:!!existing,new:newVal});}}
+      if(f.key==='cleanDay'||f.key==='irrigationDay'){var sa=getStore();existing=(sa[f.key]||{})[iso];if(!!newVal!==!!existing){rec.changes.push({type:f.key,old:!!existing,new:newVal});}}
       else if(f.key==='note'){var sb=getStore();existing=(sb.note||{})[iso]||'';if(String(newVal)!==String(existing)){rec.changes.push({type:f.key,old:existing||null,new:newVal});}}
       else{
         if(existing===null||existing===undefined){rec.changes.push({type:f.key,old:null,new:newVal});}
@@ -1100,8 +1136,8 @@ function analyzeXLSXImport(rows){
 }
 
 function showImportDiff(diff){
-  var typeLabel={electric:'電',water:'水',temperature:'氣溫',cleanDay:'清潔',note:'備註'};
-  function fmtVal(t,v){if(v===null)return '—';if(t==='cleanDay')return v?'是':'否';if(t==='note')return '"'+v+'"';return v;}
+  var typeLabel={electric:'電',water:'水',temperature:'氣溫',cleanDay:'清潔',irrigationDay:'澆灌',note:'備註'};
+  function fmtVal(t,v){if(v===null)return '—';if(t==='cleanDay'||t==='irrigationDay')return v?'是':'否';if(t==='note')return '"'+v+'"';return v;}
   var rowsHTML='';
   function block(title,arr,color){
     if(!arr.length)return '';
