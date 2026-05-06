@@ -252,11 +252,19 @@ var API_URL='/admin/utility/api/data';
 var _cache=null;            // in-memory cache，所有 getStore/setStore 經此處
 var _lastSyncedAt=null;     // 最後一次成功同步的時間戳
 
-function emptyStore(){return {water:{},electric:{},temperature:{},cleanDay:{},irrigationDay:{},note:{}};}
+function emptyStore(){return {water:{},electric:{},temperature:{},cleanDay:{},irrigationMin:{},note:{}};}
 
 function normalizeStore(s){
   s=s||{};
-  ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){s[k]=s[k]||{};});
+  ['water','electric','temperature','cleanDay','irrigationMin','note'].forEach(function(k){s[k]=s[k]||{};});
+  // 一次性 migration：把舊版 boolean irrigationDay 轉成 irrigationMin 5 分鐘
+  // （boolean 版上線於 2026-05-06 上午、改成分鐘版同日；理論上沒實際資料但保險起見）
+  if(s.irrigationDay&&typeof s.irrigationDay==='object'){
+    Object.keys(s.irrigationDay).forEach(function(d){
+      if(s.irrigationDay[d]&&s.irrigationMin[d]===undefined){s.irrigationMin[d]=5;}
+    });
+    delete s.irrigationDay;
+  }
   return s;
 }
 
@@ -349,8 +357,8 @@ function setSyncState(state,text){
 function fmtTime(d){return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');}
 
 var pending=emptyStore();
-function hasPending(){return ['water','electric','temperature','cleanDay','irrigationDay','note'].some(function(k){return Object.keys(pending[k]).length>0;});}
-function pendingCount(){return ['water','electric','temperature','cleanDay','irrigationDay','note'].reduce(function(a,k){return a+Object.keys(pending[k]).length;},0);}
+function hasPending(){return ['water','electric','temperature','cleanDay','irrigationMin','note'].some(function(k){return Object.keys(pending[k]).length>0;});}
+function pendingCount(){return ['water','electric','temperature','cleanDay','irrigationMin','note'].reduce(function(a,k){return a+Object.keys(pending[k]).length;},0);}
 
 function getSeedValue(seed,dateISO){
   var startD=isoToDate(seed.start);var endD=isoToDate(seed.end);var targetD=isoToDate(dateISO);
@@ -407,7 +415,7 @@ async function commitPending(){
   var n=pendingCount();
   if(!confirm('確定要儲存 '+n+' 筆變更到雲端嗎？\n（會立即同步到所有人共用的儲存空間）'))return;
   var s=getStore();
-  ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){
+  ['water','electric','temperature','cleanDay','irrigationMin','note'].forEach(function(k){
     s[k]=s[k]||{};Object.keys(pending[k]).forEach(function(d){s[k][d]=pending[k][d];});
   });
   setStore(s);pending=emptyStore();updatePendingBar();render();renderHistTable();
@@ -549,20 +557,22 @@ function calcEStatus(eYd,tmax){
   if(eYd<=warn)return{s:'warn',label:'接近警戒',detail:'預期 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度'};
   return{s:'over',label:'超出警戒',detail:'目標 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度，實際 '+eYd+' 度'};
 }
-// 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌日 +1.0（兩者獨立、可疊加）
-function dayTypeLabel(isClean,isIrrigation){
-  if(isClean&&isIrrigation)return'清潔+澆灌日';
+// 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌每分鐘 +0.2（0~15 分）
+function normIrrigMin(m){var n=Number(m)||0;if(n<0)n=0;if(n>15)n=15;return Math.round(n);}
+function dayTypeLabel(isClean,irrigMin){
+  var m=normIrrigMin(irrigMin);
+  if(isClean&&m>0)return'清潔+澆灌'+m+'分';
   if(isClean)return'清潔日';
-  if(isIrrigation)return'澆灌日';
+  if(m>0)return'澆灌'+m+'分';
   return'一般日';
 }
-function dayTypeMax(isClean,isIrrigation){
-  return 0.2+(isClean?0.3:0)+(isIrrigation?1.0:0);
+function dayTypeMax(isClean,irrigMin){
+  return Math.round((0.2+(isClean?0.3:0)+normIrrigMin(irrigMin)*0.2)*10)/10;
 }
-function calcWStatus(wYd,isClean,isIrrigation){
+function calcWStatus(wYd,isClean,irrigMin){
   if(wYd===null)return null;
-  var max=dayTypeMax(isClean,isIrrigation);
-  var label=dayTypeLabel(isClean,isIrrigation);
+  var max=dayTypeMax(isClean,irrigMin);
+  var label=dayTypeLabel(isClean,irrigMin);
   if(wYd<=max)return{s:'good',label:'用水正常',detail:label+' ≤'+max+' 度'};
   return{s:'over',label:'用水偏高',detail:label+' >'+max+' 度，請確認原因'};
 }
@@ -617,7 +627,7 @@ function getDailyForCard(){
     wYd:getValue('water',rep),
     tmax:getValue('temperature',rep),
     isClean:!!(pending.cleanDay[rep]!==undefined?pending.cleanDay[rep]:(getStore().cleanDay||{})[rep]),
-    isIrrigation:!!(pending.irrigationDay[rep]!==undefined?pending.irrigationDay[rep]:(getStore().irrigationDay||{})[rep])
+    irrigMin:normIrrigMin(pending.irrigationMin[rep]!==undefined?pending.irrigationMin[rep]:(getStore().irrigationMin||{})[rep])
   };
 }
 
@@ -664,14 +674,14 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
 // ── Line 卡片 ──
 function genCard(){
   var d=getDailyForCard();
-  var rep=d.rep, eYd=d.eYd, wYd=d.wYd, tmax=d.tmax, isClean=d.isClean, isIrrigation=d.isIrrigation;
+  var rep=d.rep, eYd=d.eYd, wYd=d.wYd, tmax=d.tmax, isClean=d.isClean, irrigMin=d.irrigMin;
   var dp=dayProgressOfReport(rep);
   var noteRaw=getValue('note',rep);var note=noteRaw?String(noteRaw).trim():'';
   var eM=calcMetrics('electric',rep);
   var wM=calcMetrics('water',rep);
   var eACSt=calcEStatus(eYd,tmax);
   var eTarget=calcETarget(tmax),eWarn=calcEWarn(tmax);
-  var wFixSt=calcWStatus(wYd,isClean,isIrrigation);
+  var wFixSt=calcWStatus(wYd,isClean,irrigMin);
   var stoneTex="repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(60,56,53,0.03) 120px,rgba(60,56,53,0.03) 121px)";
 
   // 共用：本月/上月/去年三條 bar
@@ -760,9 +770,9 @@ function genCard(){
     if(wFixSt&&wFixSt.s==='over'){wChipBg='rgba(140,31,31,0.08)';wChipBd='rgba(140,31,31,0.25)';wChipFg='#8C1F1F';}
     else if(wFixSt&&wFixSt.s==='good'){wChipFg='#1F5C38';}
 
-    // 今日類型對應的正常上限（基底 0.2 + 清潔 +0.3 + 澆灌 +1.0）
-    var normalMax=dayTypeMax(isClean,isIrrigation);
-    var typeText=dayTypeLabel(isClean,isIrrigation);
+    // 今日類型對應的正常上限（基底 0.2 + 清潔 +0.3 + 澆灌每分鐘 +0.2）
+    var normalMax=dayTypeMax(isClean,irrigMin);
+    var typeText=dayTypeLabel(isClean,irrigMin);
 
     // 用水上限 chip mini-table（類型 / 正常上限）
     var wChipHtml='';
@@ -888,7 +898,7 @@ function renderHistTable(){
     +'<th style="width:48px">日</th><th style="width:34px">週</th>'
     +'<th style="width:112px">⚡ 電 (度)</th><th style="width:112px">💧 水 (度)</th><th style="width:124px">🌡 高溫 (°C)</th>'
     +'<th style="width:56px">清潔</th>'
-    +'<th style="width:56px">澆灌</th>'
+    +'<th style="width:74px">澆灌(分)</th>'
     +'<th>📝 備註</th>'
     +'</tr></thead><tbody>';
 
@@ -900,7 +910,9 @@ function renderHistTable(){
     var noteVal=getValue('note',iso)||'';
     var sE=getSource('electric',iso), sW=getSource('water',iso), sT=getSource('temperature',iso);
     var clean=!!(pending.cleanDay[iso]!==undefined?pending.cleanDay[iso]:(getStore().cleanDay||{})[iso]);
-    var irrigation=!!(pending.irrigationDay[iso]!==undefined?pending.irrigationDay[iso]:(getStore().irrigationDay||{})[iso]);
+    var irrigMinRaw=(pending.irrigationMin[iso]!==undefined?pending.irrigationMin[iso]:(getStore().irrigationMin||{})[iso]);
+    var irrigMinVal=normIrrigMin(irrigMinRaw);
+    var irrigEmpty=(irrigMinRaw===undefined||irrigMinRaw===null||irrigMinRaw===''||irrigMinVal===0);
     var noteIsPending=pending.note&&pending.note[iso]!==undefined;
     var hasMissing=(eVal===null||eVal===undefined)||(wVal===null||wVal===undefined);
     var hasPendingFlag=(sE==='pending'||sW==='pending'||sT==='pending'||noteIsPending);
@@ -924,7 +936,7 @@ function renderHistTable(){
       +'<td><input type="number" step="0.01" '+(wEmpty?'class="is-empty"':'')+' value="'+(wEmpty?'':wVal)+'" oninput="histCellChange(\''+iso+'\',\'water\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'<td><input type="number" step="0.1" '+(tEmpty?'class="is-empty"':'')+' value="'+(tEmpty?'':tVal)+'" oninput="histCellChange(\''+iso+'\',\'temperature\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'<td style="text-align:center"><input type="checkbox" '+(clean?'checked':'')+' onchange="histCellChange(\''+iso+'\',\'cleanDay\',this.checked)"></td>'
-      +'<td style="text-align:center"><input type="checkbox" '+(irrigation?'checked':'')+' onchange="histCellChange(\''+iso+'\',\'irrigationDay\',this.checked)"></td>'
+      +'<td><input type="number" min="0" max="15" step="1" '+(irrigEmpty?'class="is-empty"':'')+' value="'+(irrigEmpty?'':irrigMinVal)+'" oninput="histCellChange(\''+iso+'\',\'irrigationMin\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'<td><input type="text" class="note-input" value="'+noteEsc+'" oninput="histCellChange(\''+iso+'\',\'note\',this.value)" onfocus="setReportTo(\''+iso+'\')"></td>'
       +'</tr>';
   }
@@ -938,11 +950,12 @@ function histCellChange(iso,type,val){
     var s=getStore();
     var existing=s.cleanDay&&s.cleanDay[iso];
     if(!!val===!!existing)delete pending.cleanDay[iso];
-  }else if(type==='irrigationDay'){
-    pending.irrigationDay[iso]=!!val;
+  }else if(type==='irrigationMin'){
+    var n=(val===''||val===null||val===undefined)?0:normIrrigMin(val);
+    pending.irrigationMin[iso]=n;
     var si=getStore();
-    var existingI=si.irrigationDay&&si.irrigationDay[iso];
-    if(!!val===!!existingI)delete pending.irrigationDay[iso];
+    var existingI=normIrrigMin((si.irrigationMin||{})[iso]);
+    if(n===existingI)delete pending.irrigationMin[iso];
   }else if(type==='note'){
     var s2=getStore();
     var existingNote=(s2.note||{})[iso]||'';
@@ -1014,7 +1027,7 @@ function importJSON(evt){
       var u=data.userData||data;
       if(!confirm('將匯入並合併資料：\n  水 '+Object.keys(u.water||{}).length+' 筆\n  電 '+Object.keys(u.electric||{}).length+' 筆\n  氣溫 '+Object.keys(u.temperature||{}).length+' 筆\n\n雲端共用資料中相同日期會被覆蓋。確認嗎？'))return;
       var cur=getStore();
-      ['water','electric','temperature','cleanDay','irrigationDay','note'].forEach(function(k){
+      ['water','electric','temperature','cleanDay','irrigationMin','note'].forEach(function(k){
         cur[k]=cur[k]||{};
         if(u[k]){Object.keys(u[k]).forEach(function(d){cur[k][d]=u[k][d];});}
       });
@@ -1042,7 +1055,7 @@ function buildAllRows(){
       '用水度數(度)':getValue('water',iso),
       '最高氣溫(°C)':getValue('temperature',iso),
       '清潔日':((s.cleanDay||{})[iso])?'是':'',
-      '澆灌日':((s.irrigationDay||{})[iso])?'是':'',
+      '澆灌(分)':normIrrigMin((s.irrigationMin||{})[iso])||'',
       '備註':noteV
     });
   }
@@ -1052,8 +1065,8 @@ function buildAllRows(){
 function exportXLSX(){
   if(!window.XLSX){alert('Excel 函式庫尚未載入，請稍候再試');return;}
   var rows=buildAllRows();
-  var ws=XLSX.utils.json_to_sheet(rows,{header:['日期','星期','用電度數(度)','用水度數(度)','最高氣溫(°C)','清潔日','澆灌日','備註']});
-  ws['!cols']=[{wch:12},{wch:6},{wch:14},{wch:14},{wch:14},{wch:9},{wch:9},{wch:30}];
+  var ws=XLSX.utils.json_to_sheet(rows,{header:['日期','星期','用電度數(度)','用水度數(度)','最高氣溫(°C)','清潔日','澆灌(分)','備註']});
+  ws['!cols']=[{wch:12},{wch:6},{wch:14},{wch:14},{wch:14},{wch:9},{wch:11},{wch:30}];
   var wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'每日水電氣溫');
   XLSX.writeFile(wb,'閱大安_每日水電公告_資料庫_'+todayISO()+'.xlsx');
@@ -1088,7 +1101,7 @@ function analyzeXLSXImport(rows){
     {key:'water',aliases:['用水度數(度)','用水度數','水','公水','水度','用水']},
     {key:'temperature',aliases:['最高氣溫(°C)','最高氣溫','氣溫','tmax','溫度']},
     {key:'cleanDay',aliases:['清潔日','清潔','打掃']},
-    {key:'irrigationDay',aliases:['澆灌日','澆灌','澆水','澆']},
+    {key:'irrigationMin',aliases:['澆灌(分)','澆灌分鐘','澆灌分','澆灌','澆水','澆']},
     {key:'note',aliases:['備註','註記','memo','note']}
   ];
   if(!rows.length){alert('Excel 沒有資料列');return;}
@@ -1108,10 +1121,13 @@ function analyzeXLSXImport(rows){
     fields.forEach(function(f){
       var k=fieldKeys[f.key];if(!k)return;
       var raw=row[k];var newVal;
-      if(f.key==='cleanDay'||f.key==='irrigationDay'){
+      if(f.key==='cleanDay'){
         if(raw===null||raw===''||raw===undefined)newVal=null;
         else if(typeof raw==='boolean')newVal=raw;
         else newVal=(/^(是|y|yes|1|true|✓)$/i.test(String(raw).trim()));
+      }else if(f.key==='irrigationMin'){
+        if(raw===null||raw===''||raw===undefined)newVal=null;
+        else{var nm=Number(raw);newVal=isNaN(nm)?null:normIrrigMin(nm);}
       }else if(f.key==='note'){
         if(raw===null||raw===undefined)newVal=null;
         else{var ss=String(raw).trim();newVal=ss===''?null:ss;}
@@ -1121,7 +1137,8 @@ function analyzeXLSXImport(rows){
       }
       if(newVal===null)return;
       var existing=getValue(f.key,iso);
-      if(f.key==='cleanDay'||f.key==='irrigationDay'){var sa=getStore();existing=(sa[f.key]||{})[iso];if(!!newVal!==!!existing){rec.changes.push({type:f.key,old:!!existing,new:newVal});}}
+      if(f.key==='cleanDay'){var sa=getStore();existing=(sa.cleanDay||{})[iso];if(!!newVal!==!!existing){rec.changes.push({type:f.key,old:!!existing,new:newVal});}}
+      else if(f.key==='irrigationMin'){var sm=getStore();existing=normIrrigMin((sm.irrigationMin||{})[iso]);var newM=normIrrigMin(newVal);if(newM!==existing){rec.changes.push({type:f.key,old:existing,new:newM});}}
       else if(f.key==='note'){var sb=getStore();existing=(sb.note||{})[iso]||'';if(String(newVal)!==String(existing)){rec.changes.push({type:f.key,old:existing||null,new:newVal});}}
       else{
         if(existing===null||existing===undefined){rec.changes.push({type:f.key,old:null,new:newVal});}
@@ -1138,8 +1155,8 @@ function analyzeXLSXImport(rows){
 }
 
 function showImportDiff(diff){
-  var typeLabel={electric:'電',water:'水',temperature:'氣溫',cleanDay:'清潔',irrigationDay:'澆灌',note:'備註'};
-  function fmtVal(t,v){if(v===null)return '—';if(t==='cleanDay'||t==='irrigationDay')return v?'是':'否';if(t==='note')return '"'+v+'"';return v;}
+  var typeLabel={electric:'電',water:'水',temperature:'氣溫',cleanDay:'清潔',irrigationMin:'澆灌(分)',note:'備註'};
+  function fmtVal(t,v){if(v===null)return '—';if(t==='cleanDay')return v?'是':'否';if(t==='irrigationMin')return v+' 分';if(t==='note')return '"'+v+'"';return v;}
   var rowsHTML='';
   function block(title,arr,color){
     if(!arr.length)return '';
