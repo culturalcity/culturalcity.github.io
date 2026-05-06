@@ -5,13 +5,15 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # 每天 01:03 UTC = 台北時間 09:03
-    # CODiS 「日 Max/Min」aggregate batch 約在台北 07:00~09:00 之間才完成；
-    # 06:00 跑會抓到「日期有但 tmax/tmin 是 null」的不完整資料而靜默跳過。
-    # 09:00 已實證 settle 完畢（事故日期 2026-05-04）。
-    # 用 :03 而非 :00 錯開 GitHub Actions 整點塞車（事故日期 2026-05-06，
-    # 整點 cron 被 skip）。往前不能挪（CODiS 未 settle），只能小幅往後。
-    - cron: '3 1 * * *'
+    # 每天 22:00 UTC = 台北 06:00
+    # 過去 5 次觀察：實際觸發落在 22:51~23:00 UTC（台北 06:51~07:00），
+    # GitHub Actions schedule 對這 repo 持續 51-60 min 延遲——是常態不是 bug。
+    # CODiS 在那個時段就 settle 完了（4/5 成功率，唯一失敗的 5/4 是 CODiS
+    # 偶發、跟時間無關）。
+    # ⚠️ 不要再隨意改 cron 時間：每次改都會被 GitHub 跳過下一次觸發
+    #    （事故日期 2026-05-05、2026-05-06）。靜默失敗的告警靠 fetch-weather.js
+    #    的「昨日缺值即 exit 1」機制，不靠調 cron。
+    - cron: '0 22 * * *'
 
 permissions:
   contents: write   # 排程時 fetch-weather 需要 push 更新

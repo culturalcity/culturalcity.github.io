@@ -199,6 +199,22 @@ function writeJson(p, arr) {
     writeJson(RAIN_PATH, all);
     console.log(`✅ daily-rain.json：${all.length} 天（${rainBefore} → +${rAdd} ⟳${rUpd}）`);
   }
+
+  // 昨日缺值告警：只在「endYM 涵蓋昨天」時檢查（純回填舊月不檢查）。
+  // 之前是「靜默跳過」→ 隔天才被察覺；現在 exit 1 觸發 GitHub Actions
+  // failure email，立刻知道。隔天 cron 跑時會自動補（fetch-weather 抓整月）。
+  if (endYM >= yestYM) {
+    const missing = [];
+    if (!tempMap.has(yestISO)) missing.push('temp');
+    if (!rainMap.has(yestISO)) missing.push('rain');
+    if (missing.length > 0) {
+      console.error(`\n❌ 昨日（${yestISO}）${missing.join(' / ')} 資料缺失`);
+      console.error(`   可能原因：CODiS 暫時故障、回缺值哨兵 (-9.9)、或 settle 還沒完成`);
+      console.error(`   隔天 cron 會自動補（fetch-weather 預設抓整月）`);
+      console.error(`   若連日皆缺，查 https://codis.cwa.gov.tw 是否異常`);
+      process.exit(1);
+    }
+  }
 })().catch(e => {
   console.error('❌ 失敗：', e.message);
   process.exit(1);
