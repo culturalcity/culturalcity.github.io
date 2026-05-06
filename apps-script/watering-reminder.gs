@@ -65,6 +65,8 @@ function runDaily() {
     checkYesterdayCompletion_(today);
     // 2. 跑今天的判斷
     const result = decide(today, true);
+    // 2b. 若該澆水，計算建議澆灌分鐘（注入 result.wateringMin / wateringBreakdown / 改 title）
+    attachWateringAmount_(result);
     log_('runDaily', formatDate_(today), result);
     // 3. 把今日 forecast snapshot 寫到 Google Sheet（預報精度日誌）
     if (result.forecast) {
@@ -524,6 +526,60 @@ function sendMonthlySummary_(monthStart, stats) {
 
 // ================== Calendar 事件 ==================
 
+/**
+ * 計算建議澆水分鐘（保守原則：寧多勿少，cap 15 分）。
+ * 公式：基礎（依規則） + 修正項（依乾旱程度與高溫加成）
+ *   - Rule 4 連日少雨：基礎 5 分
+ *   - Rule 3 高溫無雨：基礎 8 分
+ *   - fallback-dry（預報缺值）：基礎 6 分（保守 +1）
+ *   - past3 < 0.5 mm：+2 分（土壤幾乎完全乾燥）
+ *   - past5 === 0 mm：+1 分（連續 5 日無雨）
+ *   - forecast.tempToday >= 32：+2 分（極端高溫蒸散更猛）
+ * @return {{minutes:number, breakdown:string[]}}
+ */
+function calcWateringMin_(result) {
+  let base = 5;
+  let baseLabel = 'Rule 4 連日少雨';
+  if (result.kind === 'hot-dry') {
+    base = 8;
+    baseLabel = 'Rule 3 高溫無雨';
+  } else if (result.kind === 'fallback-dry') {
+    base = 6;
+    baseLabel = 'fallback（預報缺值）保守';
+  }
+  const parts = [`基礎 ${base} 分（${baseLabel}）`];
+  let total = base;
+
+  if (result.past3 < 0.5) {
+    total += 2;
+    parts.push(`+2 分（過去 3 日 ${result.past3.toFixed(1)} mm < 0.5 mm，土壤完全乾燥）`);
+  }
+  if (result.past5 === 0) {
+    total += 1;
+    parts.push('+1 分（過去 5 日 0 mm，連續無雨）');
+  }
+  if (result.forecast && result.forecast.tempToday != null && result.forecast.tempToday >= 32) {
+    total += 2;
+    parts.push(`+2 分（預報最高溫 ${result.forecast.tempToday}°C ≥ 32，蒸散更猛）`);
+  }
+
+  if (total > 15) {
+    total = 15;
+    parts.push('（cap at 15 分）');
+  }
+  return { minutes: total, breakdown: parts };
+}
+
+/** 把計算結果注入 result，改寫 title 加上分鐘數。SKIP 結果不動。 */
+function attachWateringAmount_(result) {
+  if (!result || result.action !== 'water') return;
+  const calc = calcWateringMin_(result);
+  result.wateringMin = calc.minutes;
+  result.wateringBreakdown = calc.breakdown;
+  // 改寫 title：原本「💧 今日建議澆水（高溫無雨）」→「💧 澆水 8 分鐘（高溫無雨）」
+  result.title = result.title.replace(/^💧\s*今日建議澆水/, `💧 澆水 ${result.wateringMin} 分鐘`);
+}
+
 function createWateringEvent_(today, result) {
   const cal = CalendarApp.getDefaultCalendar();
   const dayStart = new Date(today); dayStart.setHours(0, 0, 0, 0);
@@ -562,7 +618,15 @@ function buildDescription_(result, today) {
   }
   lines.push('');
   lines.push('🚿 建議操作');
-  lines.push('• 全區手動開啟澆灌約 10–15 分鐘');
+  if (result.wateringMin) {
+    lines.push(`• 全區手動開啟澆灌 ${result.wateringMin} 分鐘（保守原則：寧多勿少）`);
+    if (result.wateringBreakdown && result.wateringBreakdown.length) {
+      lines.push('   分解：');
+      result.wateringBreakdown.forEach(p => lines.push(`     · ${p}`));
+    }
+  } else {
+    lines.push('• 全區手動開啟澆灌約 10–15 分鐘');
+  }
   lines.push('• 完成後請將本事件顏色改為「灰色」表示已澆（隔日腳本會偵測）');
   lines.push('');
   lines.push(`📌 由「閱大安水電監督系統」自動建立 ${formatDate_(today)} 05:00`);
