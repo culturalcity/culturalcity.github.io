@@ -5,11 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # 每天 01:00 UTC = 台北時間 09:00
+    # 每天 01:03 UTC = 台北時間 09:03
     # CODiS 「日 Max/Min」aggregate batch 約在台北 07:00~09:00 之間才完成；
     # 06:00 跑會抓到「日期有但 tmax/tmin 是 null」的不完整資料而靜默跳過。
     # 09:00 已實證 settle 完畢（事故日期 2026-05-04）。
-    - cron: '0 1 * * *'
+    # 用 :03 而非 :00 錯開 GitHub Actions 整點塞車（事故日期 2026-05-06，
+    # 整點 cron 被 skip）。往前不能挪（CODiS 未 settle），只能小幅往後。
+    - cron: '3 1 * * *'
 
 permissions:
   contents: write   # 排程時 fetch-weather 需要 push 更新
