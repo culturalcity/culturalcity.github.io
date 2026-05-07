@@ -73,7 +73,10 @@ function runDaily() {
       try { logForecastSnapshot_(today, result.forecast); }
       catch (e) { console.warn('forecast log 失敗：', e.message); /* 不阻斷主流程 */ }
     }
-    // 4. 該澆就建事件
+    // 4. 寄每日 summary email（不論 SKIP 或 WATER 都寄；含規則表、數據、下次預估）
+    try { sendDailySummary_(today, result); }
+    catch (e) { console.warn('daily summary email 失敗：', e.message); /* 不阻斷主流程 */ }
+    // 5. 該澆就建 Calendar 事件
     if (result.action === 'water') {
       createWateringEvent_(today, result);
     }
@@ -578,6 +581,204 @@ function attachWateringAmount_(result) {
   result.wateringBreakdown = calc.breakdown;
   // 改寫 title：原本「💧 今日建議澆水（高溫無雨）」→「💧 澆水 8 分鐘（高溫無雨）」
   result.title = result.title.replace(/^💧\s*今日建議澆水/, `💧 澆水 ${result.wateringMin} 分鐘`);
+}
+
+const WEEKDAY_TC_ = ['日', '一', '二', '三', '四', '五', '六'];
+
+/**
+ * 寄出每日澆水判斷 summary email 給 NOTIFY_EMAIL（社區共用帳號 culturalcity85）。
+ * 不論 SKIP 或 WATER 都寄。Calendar 事件邏輯維持原樣（只在 WATER 日建）。
+ *
+ * 用 GmailApp.sendEmail（不是 MailApp，差異：MailApp 有 quota 限制、寄件人是
+ * 不可控的 noreply；GmailApp 寄件人就是腳本所有者帳號 culturalcity85）。
+ * 因為 Apps Script 部署在 culturalcity85、收件人也是 culturalcity85，本質上
+ * 是「自己寄給自己」，會直接進 Inbox。
+ */
+function sendDailySummary_(today, result) {
+  const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  if (!to) {
+    console.warn('NOTIFY_EMAIL 未設，跳過 daily summary email');
+    return;
+  }
+
+  const dateStr = formatDate_(today);
+  const dateLabel = `${dateStr}（週${WEEKDAY_TC_[today.getDay()]}）`;
+  const isWater = result.action === 'water';
+
+  const subject = isWater
+    ? `閱大安澆水預告：${dateStr} 澆水（建議 ${result.wateringMin} 分鐘）`
+    : `閱大安澆水預告：${dateStr} 不澆水`;
+
+  const lines = [];
+  lines.push('=========================================');
+  lines.push('  閱大安・每日澆水預告');
+  lines.push('=========================================');
+  lines.push('');
+  lines.push(`【今日判斷】${dateLabel}`);
+  lines.push(isWater ? '  ✓ 澆水' : '  ✗ 不澆水');
+  lines.push('');
+
+  // 觸發規則
+  lines.push('【觸發規則】');
+  if (isWater) {
+    if (result.kind === 'hot-dry') {
+      lines.push('  Rule 3 — 高溫無雨');
+      lines.push(`  · 過去 3 日累計 ${result.past3.toFixed(1)} mm < 2 mm 閾值`);
+      if (result.forecast && result.forecast.tempToday != null) {
+        lines.push(`  · 預報最高溫 ${result.forecast.tempToday}°C ≥ 28°C 閾值`);
+      }
+    } else if (result.kind === 'dry-spell') {
+      lines.push('  Rule 4 — 連日少雨');
+      lines.push(`  · 過去 5 日累計 ${result.past5.toFixed(1)} mm < 5 mm 閾值`);
+    } else if (result.kind === 'fallback-dry') {
+      lines.push('  fallback — 預報資料缺，依歷史判斷');
+      lines.push(`  · 過去 3 日累計 ${result.past3.toFixed(1)} mm < 2 mm 閾值`);
+    }
+  } else {
+    lines.push(`  ${result.reason || '中性日（無極端）'}`);
+  }
+  lines.push('');
+
+  // 建議澆水量（只在 WATER 日）
+  if (isWater && result.wateringMin) {
+    lines.push('【建議澆水量】');
+    lines.push(`  ${result.wateringMin} 分鐘（約 ${(result.wateringMin * 0.2).toFixed(1)} 度公水）`);
+    if (result.wateringBreakdown && result.wateringBreakdown.length) {
+      result.wateringBreakdown.forEach(p => lines.push(`  · ${p}`));
+    }
+    lines.push('  ⚠ 保守設計，寧多勿少。實際土壤狀況請目測判斷。');
+    lines.push('');
+  }
+
+  // 降雨數據
+  lines.push('【降雨數據】');
+  lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
+  lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
+  lines.push('');
+
+  // 預報資訊
+  if (result.forecast) {
+    lines.push('【今日預報】');
+    if (result.forecast.tempToday != null)   lines.push(`  最高溫 ........ ${result.forecast.tempToday}°C`);
+    if (result.forecast.popToday != null)    lines.push(`  今日 PoP ..... ${result.forecast.popToday}%`);
+    if (result.forecast.popTomorrow != null) lines.push(`  明日 PoP ..... ${result.forecast.popTomorrow}%`);
+    lines.push('');
+  }
+
+  // 下次澆水預估（只在 SKIP 日）
+  if (!isWater) {
+    let next = null;
+    try { next = simulateNextWaterDay_(today); }
+    catch (e) { console.warn('simulateNextWaterDay_ 失敗：', e.message); }
+    if (next && (next.conditional || next.guaranteed)) {
+      lines.push('【接下來可能 / 必澆水日】');
+      // 情境一：conditional 比 guaranteed 早 → 兩個都列（最早可能 + 最遲必澆）
+      // 情境二：兩個同一天 → 列一個（已是 Rule 4 必澆）
+      // 情境三：只有 conditional → 14 天內 past5 沒掉到 5 以下，只列條件
+      // 情境四：只有 guaranteed → 罕見（past5 直接掉但 past3 還沒掉），列 guaranteed
+      if (next.conditional && next.guaranteed && next.conditional.date !== next.guaranteed.date) {
+        lines.push(`  · ${next.conditional.date}（最早）：Rule 3 候選 — 若當日預報最高溫 ≥ 28°C 則澆`);
+        lines.push(`  · ${next.guaranteed.date}（最遲）：Rule 4 連日少雨必澆 — 不論氣溫`);
+      } else if (next.guaranteed) {
+        lines.push(`  · ${next.guaranteed.date}：Rule 4 連日少雨必澆 — 不論氣溫`);
+      } else if (next.conditional) {
+        lines.push(`  · ${next.conditional.date}：Rule 3 候選 — 若當日預報最高溫 ≥ 28°C 則澆（14 日內無 Rule 4 必澆日）`);
+      }
+      lines.push('  ※ 以上假設明天起都不下雨。實際視天氣而定。');
+      lines.push('');
+    }
+  }
+
+  lines.push('=========================================');
+  lines.push('  完整規則參考（閾值凍結）');
+  lines.push('=========================================');
+  lines.push('');
+  lines.push('Rule 1（雨後跳過）：');
+  lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
+  lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
+  lines.push('Rule 2（雨前跳過）：');
+  lines.push('  · 今日 PoP ≥ 70% → 跳過');
+  lines.push('  · 明日 PoP ≥ 80% → 跳過');
+  lines.push('Rule 3（高溫無雨）：');
+  lines.push('  · 過去 3 日 < 2 mm 且預報最高溫 ≥ 28°C → 澆水');
+  lines.push('Rule 4（連日少雨）：');
+  lines.push('  · 過去 5 日 < 5 mm → 澆水');
+  lines.push('Rule 5（中性日）：上述都不滿足 → 跳過');
+  lines.push('');
+
+  lines.push('=========================================');
+  lines.push('  澆水量公式參考');
+  lines.push('=========================================');
+  lines.push('');
+  lines.push('基礎：Rule 4 為 5 分、Rule 3 為 8 分、fallback-dry 為 6 分');
+  lines.push('+ 2 分 if past3 < 0.5 mm（土壤完全乾燥）');
+  lines.push('+ 1 分 if past5 = 0 mm（連 5 日滴雨未下）');
+  lines.push('+ 2 分 if 預報最高溫 ≥ 32°C（極端高溫）');
+  lines.push('Cap 15 分。');
+  lines.push('');
+
+  lines.push('【資料來源】');
+  lines.push('· 中央氣象署 CODiS 466920 臺北站每日累計雨量');
+  lines.push('· CWA 鄉鎮天氣預報（大安區）');
+  lines.push('');
+
+  lines.push('【備註】');
+  if (isWater) {
+    lines.push('· 本次澆水提醒已建立 culturalcity85 行事曆 06:30 事件。');
+    lines.push('· 完成澆水後請將行事曆事件改為灰色，便於月底統計。');
+  } else {
+    lines.push('· 今日不澆水，未建立行事曆事件。');
+  }
+  lines.push('');
+  lines.push('——');
+  lines.push('本信由 watering-reminder.gs 自動產生');
+  lines.push('每日台北 05:00 觸發、以 culturalcity85 帳號發信');
+
+  GmailApp.sendEmail(to, subject, lines.join('\n'));
+  console.log('每日 summary email 已寄出 →', to);
+}
+
+/**
+ * 預測接下來最早可能澆水的日期（往後推 14 天，假設都不下雨）。
+ * 同時回兩個候選：
+ *   conditional — 最早可能 Rule 3 候選日（要看當日 28°C 才澆）
+ *   guaranteed — 最早 Rule 4 必澆日（不論氣溫）
+ * 一般兩個都有：conditional 是「最早可能」、guaranteed 是「最遲必澆」。
+ * @param {Date} today 台北時區「今天」的 Date
+ * @return {{conditional: ?{date:string,past3:number,past5:number}, guaranteed: ?{date:string,past3:number,past5:number}}}
+ */
+function simulateNextWaterDay_(today) {
+  const histMap = fetchRainHistory_();
+  let conditional = null;
+  let guaranteed = null;
+
+  for (let offset = 1; offset <= 14; offset++) {
+    const futureDay = addDays_(today, offset);
+
+    const r1Date = addDays_(futureDay, -1);
+    const r1 = r1Date.getTime() <= today.getTime() ? (histMap[formatDate_(r1Date)] || 0) : 0;
+    let past3 = 0, past5 = 0;
+    for (let k = 1; k <= 5; k++) {
+      const d = addDays_(futureDay, -k);
+      if (d.getTime() > today.getTime()) continue;
+      const v = histMap[formatDate_(d)] || 0;
+      if (k <= 3) past3 += v;
+      past5 += v;
+    }
+
+    if (r1 >= CONFIG.RAIN_YESTERDAY_SKIP) continue;
+    if (past3 >= CONFIG.RAIN_PAST_3D_SKIP) continue;
+
+    // Rule 1 通過
+    if (!guaranteed && past5 < CONFIG.RAIN_PAST_5D_LIGHT) {
+      guaranteed = { date: formatDate_(futureDay), past3, past5 };
+    }
+    if (!conditional && past3 < CONFIG.RAIN_PAST_3D_DRY) {
+      conditional = { date: formatDate_(futureDay), past3, past5 };
+    }
+    if (conditional && guaranteed) break;
+  }
+  return { conditional, guaranteed };
 }
 
 function createWateringEvent_(today, result) {
