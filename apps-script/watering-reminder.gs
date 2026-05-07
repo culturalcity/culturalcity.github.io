@@ -43,8 +43,8 @@ const CONFIG = {
   RAIN_PAST_5D_LIGHT: 5,     // 過去 5 日累積 < 5 mm 視為連日少雨
 
   // 預報閾值
-  POP_TODAY_SKIP: 70,        // 今日 PoP ≥ 70% 跳過
-  POP_TOMORROW_SKIP: 80,     // 明日 PoP ≥ 80% 跳過（明日大雨，今日省）
+  POP_TODAY_SKIP: 70,        // 今日降雨機率 ≥ 70% 跳過
+  POP_TOMORROW_SKIP: 80,     // 明日降雨機率 ≥ 80% 跳過（明日大雨，今日省）
   HIGH_TEMP: 28,             // 今日預報 max temp ≥ 28°C 視為高溫
 
   // 事件
@@ -210,10 +210,10 @@ function decide(today, useForecast) {
   // Rule 2: 雨前跳過
   if (forecast) {
     if (forecast.popToday >= CONFIG.POP_TODAY_SKIP) {
-      return { action: 'skip', reason: `今日預報有雨（PoP ${forecast.popToday}%）`, past3, past5, forecast };
+      return { action: 'skip', reason: `今日預報有雨（降雨機率 ${forecast.popToday}%）`, past3, past5, forecast };
     }
     if (forecast.popTomorrow >= CONFIG.POP_TOMORROW_SKIP) {
-      return { action: 'skip', reason: `明日預報大雨（PoP ${forecast.popTomorrow}%），今日省`, past3, past5, forecast };
+      return { action: 'skip', reason: `明日預報大雨（降雨機率 ${forecast.popTomorrow}%），今日省`, past3, past5, forecast };
     }
   }
 
@@ -339,7 +339,7 @@ function pickDaySlot_(timeArr, dateKey) {
 //
 // 每天清晨 5 點寫入今日 forecast snapshot 到 Google Sheet，並 backfill
 // 之前所有列的「實際值」（從 daily-rain.json / daily-temp.json）。
-// 跑滿 1-2 個月後可以分析 CWA 預報的校準曲線（PoP 70% 實際下雨多少 % 等）。
+// 跑滿 1-2 個月後可以分析 CWA 預報的校準曲線（降雨機率 70% 實際下雨多少 % 等）。
 //
 // Sheet 結構：
 //   date | popToday | popTomorrow | tempToday | actualRainToday | actualTmaxToday | recordedAt
@@ -660,8 +660,8 @@ function sendDailySummary_(today, result) {
   if (result.forecast) {
     lines.push('【今日預報】');
     if (result.forecast.tempToday != null)   lines.push(`  最高溫 ........ ${result.forecast.tempToday}°C`);
-    if (result.forecast.popToday != null)    lines.push(`  今日 PoP ..... ${result.forecast.popToday}%`);
-    if (result.forecast.popTomorrow != null) lines.push(`  明日 PoP ..... ${result.forecast.popTomorrow}%`);
+    if (result.forecast.popToday != null)    lines.push(`  今日降雨機率 .. ${result.forecast.popToday}%`);
+    if (result.forecast.popTomorrow != null) lines.push(`  明日降雨機率 .. ${result.forecast.popTomorrow}%`);
     lines.push('');
   }
 
@@ -697,8 +697,8 @@ function sendDailySummary_(today, result) {
   lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
   lines.push('Rule 2（雨前跳過）：');
-  lines.push('  · 今日 PoP ≥ 70% → 跳過');
-  lines.push('  · 明日 PoP ≥ 80% → 跳過');
+  lines.push('  · 今日降雨機率 ≥ 70% → 跳過');
+  lines.push('  · 明日降雨機率 ≥ 80% → 跳過');
   lines.push('Rule 3（高溫無雨）：');
   lines.push('  · 過去 3 日 < 2 mm 且預報最高溫 ≥ 28°C → 澆水');
   lines.push('Rule 4（連日少雨）：');
