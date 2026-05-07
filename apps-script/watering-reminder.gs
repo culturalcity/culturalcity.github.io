@@ -8,7 +8,8 @@
  * 設定步驟：
  *   1) Apps Script Editor → ⚙ Project Settings → Script Properties → 加入：
  *        CWA_API_KEY = <你的 CWA OpenData 金鑰>
- *        NOTIFY_EMAIL = culturalcity85@gmail.com   (錯誤通知 / 月報；用社區共用帳號方便交接)
+ *      （NOTIFY_EMAIL 已寫死進 CONFIG，不需設 Script Property；
+ *        若舊版 Property 還在可刪除）
  *   2) Apps Script Editor → ⏰ Triggers → Add Trigger:
  *        Function: runDaily
  *        Event source: Time-driven
@@ -53,6 +54,10 @@ const CONFIG = {
   EVENT_DURATION_MIN: 30,
   REMINDER_BEFORE_MIN: 30,   // 06:00 響鈴
   EVENT_LOCATION: '閱大安社區',
+
+  // 通知收件人（每日 summary / 錯誤通知 / 月報三類信件都寄這裡）
+  // 寫死進 CONFIG，免得每次重貼 code 還要記得到 Script Properties 對齊
+  NOTIFY_EMAIL: 'culturalcity85@gmail.com',
 };
 
 // ================== 主入口 ==================
@@ -490,7 +495,7 @@ function collectMonthStats_(start, end) {
 }
 
 function sendMonthlySummary_(monthStart, stats) {
-  const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  const to = CONFIG.NOTIFY_EMAIL;
   if (!to) {
     console.log('NOTIFY_EMAIL 未設，跳過月統計寄信');
     return;
@@ -595,7 +600,7 @@ const WEEKDAY_TC_ = ['日', '一', '二', '三', '四', '五', '六'];
  * 是「自己寄給自己」，會直接進 Inbox。
  */
 function sendDailySummary_(today, result) {
-  const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  const to = CONFIG.NOTIFY_EMAIL;
   if (!to) {
     console.warn('NOTIFY_EMAIL 未設，跳過 daily summary email');
     return;
@@ -875,7 +880,7 @@ function log_(tag, dateStr, result) {
 
 function notifyError_(subject, err) {
   try {
-    const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+    const to = CONFIG.NOTIFY_EMAIL;
     if (!to) return;
     MailApp.sendEmail({
       to,
