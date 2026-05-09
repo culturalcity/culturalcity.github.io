@@ -191,6 +191,10 @@ function decide(today, useForecast) {
     }
   }
 
+  // 評估順序：Rule 1 → Rule 4 → fallback → Rule 2 → Rule 3 → Rule 5
+  // Rule 4 排在 Rule 2 之前是刻意的：past5 < 5 mm 表示已經連續 5 天明顯缺雨，
+  // 這時即使預報明天大雨（Rule 2b）也不能再賭一天，否則植物可能因預報失準而過旱。
+
   // Rule 1: 雨後跳過
   if (r1 >= CONFIG.RAIN_YESTERDAY_SKIP) {
     return { action: 'skip', reason: `昨日降雨 ${r1.toFixed(1)} mm（≥ ${CONFIG.RAIN_YESTERDAY_SKIP}）`, past3, past5, forecast };
@@ -199,7 +203,17 @@ function decide(today, useForecast) {
     return { action: 'skip', reason: `過去 3 日累積雨量 ${past3.toFixed(1)} mm（≥ ${CONFIG.RAIN_PAST_3D_SKIP}）`, past3, past5, forecast };
   }
 
-  // 預報失敗 fallback：保守原則「植物不會放假」——歷史顯著乾燥就提醒
+  // Rule 4: 連日少雨 → 必澆（不論預報，因為已經乾太久）
+  if (past5 < CONFIG.RAIN_PAST_5D_LIGHT) {
+    return {
+      action: 'water', kind: 'dry-spell',
+      title: '💧 今日建議澆水（連日少雨）',
+      color: 'blue',
+      past3, past5, forecast,
+    };
+  }
+
+  // 預報失敗 fallback：past5 ≥ 5 但 past3 < 2 的灰色地帶（短期乾、長期 OK，沒預報無法判斷）
   if (useForecast && !forecast) {
     if (past3 < CONFIG.RAIN_PAST_3D_DRY) {
       return {
@@ -228,16 +242,6 @@ function decide(today, useForecast) {
       action: 'water', kind: 'hot-dry',
       title: '💧 今日建議澆水（高溫無雨）',
       color: 'orange',
-      past3, past5, forecast,
-    };
-  }
-
-  // Rule 4: 連日少雨 → 一般提醒
-  if (past5 < CONFIG.RAIN_PAST_5D_LIGHT) {
-    return {
-      action: 'water', kind: 'dry-spell',
-      title: '💧 今日建議澆水（連日少雨）',
-      color: 'blue',
       past3, past5, forecast,
     };
   }
@@ -695,20 +699,30 @@ function sendDailySummary_(today, result) {
   }
 
   lines.push('=========================================');
-  lines.push('  完整規則參考（閾值凍結）');
+  lines.push('  完整規則參考（社區自訂啟發式，非援引文獻）');
   lines.push('=========================================');
+  lines.push('');
+  lines.push('評估順序：Rule 1 → Rule 4 → fallback → Rule 2 → Rule 3 → Rule 5');
+  lines.push('（Rule 4 刻意排在 Rule 2 前，避免「連日少雨必澆」被「預報明日有雨」遮蔽）');
   lines.push('');
   lines.push('Rule 1（雨後跳過）：');
   lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
+  lines.push('Rule 4（連日少雨）：');
+  lines.push('  · 過去 5 日 < 5 mm → 澆水（不論氣溫、不論預報）');
+  lines.push('fallback-dry（預報資料缺時的保守觸發）：');
+  lines.push('  · CWA 預報抓取失敗，且過去 3 日 < 2 mm → 短澆 6 分鐘');
+  lines.push('  · （當 past5 < 5 已先觸發 Rule 4 時不會走到這裡）');
   lines.push('Rule 2（雨前跳過）：');
   lines.push('  · 今日降雨機率 ≥ 70% → 跳過');
   lines.push('  · 明日降雨機率 ≥ 80% → 跳過');
   lines.push('Rule 3（高溫無雨）：');
   lines.push('  · 過去 3 日 < 2 mm 且預報最高溫 ≥ 28°C → 澆水');
-  lines.push('Rule 4（連日少雨）：');
-  lines.push('  · 過去 5 日 < 5 mm → 澆水');
   lines.push('Rule 5（中性日）：上述都不滿足 → 跳過');
+  lines.push('');
+  lines.push('⚠ 上述閾值（5 mm / 8 mm / 28°C / 2 mm / 5 mm）為社區內部估值，');
+  lines.push('  尚未對照 FAO-56 或 extension service 的 ET 模型校準。');
+  lines.push('  累積運作資料後可再調整。');
   lines.push('');
 
   lines.push('=========================================');
