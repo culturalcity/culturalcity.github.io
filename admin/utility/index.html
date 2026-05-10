@@ -686,9 +686,9 @@ function genCard(){
 
   // 共用：本月/上月/去年三條 bar
   function makeBars(type,yd,m,unit){
-    var curLabel='本月 1—'+m.commonDays+'天';
-    var lastLabel='上月 1—'+m.commonDays+'天';
-    var yoyLabel='同月 1—'+m.commonDays+'天';
+    var curLabel='本月 1—'+m.commonDays+'日';
+    var lastLabel='上月 1—'+m.commonDays+'日';
+    var yoyLabel='同月 1—'+m.commonDays+'日';
     var yoyNa=m.yoyMeta.earliest===0?'無內建資料':(m.yoyReady?null:'同期資料未完整');
     var trimNote=m.trimmed?'本月 '+m.refDay+' 號超出對比月份天數，比較裁切到 '+m.commonDays+' 號':null;
     return {
