@@ -2,8 +2,13 @@
  * 閱大安・自動澆水提醒（Phase 1 核心）
  *
  * 部署位置：culturalcity85@gmail.com 的 Apps Script
- * 觸發：每天 05:00（台北）跑 runDaily()
- * 輸出：在 culturalcity85 主 Calendar 建一個今天 06:30 的事件
+ * 觸發：每天 08:00–09:00（台北）跑 runDaily()
+ *   為什麼不更早：daily-rain.json 由 GitHub Actions cron 每天台北 ~07:00
+ *   更新（cron 排 06:00 名目、實際 06:51–07:00 觸發）。08:00 之後跑才能
+ *   讀到昨日雨量；若 trigger 設更早（譬如 05:00），past3 / past5 永遠
+ *   少 1 天，會在閾值附近誤判。
+ * 輸出：在 culturalcity85 主 Calendar 建一個今天 09:30 的事件
+ *   （09:30 對齊總幹事 09:00 上班 + 半小時 buffer 看 summary email）
  *
  * 設定步驟：
  *   1) Apps Script Editor → ⚙ Project Settings → Script Properties → 加入：
@@ -14,7 +19,7 @@
  *        Function: runDaily
  *        Event source: Time-driven
  *        Type: Day timer
- *        Time of day: 5am – 6am
+ *        Time of day: 8am – 9am
  *   3) 第一次執行任何 function 時 Google 會要求授權 Calendar / UrlFetch / Gmail；同意。
  *
  * 測試：
@@ -49,10 +54,10 @@ const CONFIG = {
   HIGH_TEMP: 28,             // 今日預報 max temp ≥ 28°C 視為高溫
 
   // 事件
-  EVENT_HOUR: 6,
+  EVENT_HOUR: 9,
   EVENT_MINUTE: 30,
   EVENT_DURATION_MIN: 30,
-  REMINDER_BEFORE_MIN: 30,   // 06:00 響鈴
+  REMINDER_BEFORE_MIN: 30,   // 09:00 響鈴（總幹事剛上班）
   EVENT_LOCATION: '閱大安社區',
 
   // 通知收件人（每日 summary / 錯誤通知 / 月報三類信件都寄這裡）
@@ -62,7 +67,7 @@ const CONFIG = {
 
 // ================== 主入口 ==================
 
-/** 每天 05:00 由 Trigger 自動呼叫 */
+/** 每天 08:00–09:00 由 Trigger 自動呼叫 */
 function runDaily() {
   try {
     const today = todayTaipei();
@@ -751,7 +756,7 @@ function sendDailySummary_(today, result) {
   lines.push('');
   lines.push('——');
   lines.push('本信由 watering-reminder.gs 自動產生');
-  lines.push('每日台北 05:00 觸發、以 culturalcity85 帳號發信');
+  lines.push('每日台北 08:00–09:00 觸發、以 culturalcity85 帳號發信');
 
   GmailApp.sendEmail(to, subject, lines.join('\n'));
   console.log('每日 summary email 已寄出 →', to);
@@ -849,7 +854,7 @@ function buildDescription_(result, today) {
   }
   lines.push('• 完成後請將本事件顏色改為「灰色」表示已澆（隔日腳本會偵測）');
   lines.push('');
-  lines.push(`📌 由「閱大安水電監督系統」自動建立 ${formatDate_(today)} 05:00`);
+  lines.push(`📌 由「閱大安水電監督系統」自動建立 ${formatDate_(today)} 08:00`);
   return lines.join('\n');
 }
 
