@@ -643,7 +643,7 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
   function bar(label,val,ready,naReason,pct,pctTitle){
     if(!ready||val===null||val===undefined){
       return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">'
-        +'<div style="font-size:19px;color:#898480;width:168px;flex-shrink:0">'+label+'</div>'
+        +'<div style="font-size:19px;color:#898480;width:140px;flex-shrink:0">'+label+'</div>'
         +'<div style="flex:1;position:relative;height:14px;background:rgba(60,56,53,0.05);border-radius:2px"></div>'
         +'<div style="font-size:18px;color:#898480;min-width:200px">資料不足'+(naReason?'（'+naReason+'）':'')+'</div>'
         +'</div>';
@@ -654,7 +654,7 @@ function comparisonGroup3(curVal,lastVal,yoyVal,curLabel,lastLabel,yoyLabel,unit
     var opacity=isCur?'1':'0.85';
     var bg=isCur?'#3C3835':color;
     return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">'
-      +'<div style="font-size:19px;color:#898480;width:168px;flex-shrink:0">'+label+'</div>'
+      +'<div style="font-size:19px;color:#898480;width:140px;flex-shrink:0">'+label+'</div>'
       +'<div style="flex:1;position:relative;height:14px;background:rgba(60,56,53,0.07);border-radius:2px">'
       +'<div style="position:absolute;left:0;top:0;height:100%;width:'+w+'%;background:'+bg+';border-radius:2px;opacity:'+opacity+'"></div>'
       +'</div>'
