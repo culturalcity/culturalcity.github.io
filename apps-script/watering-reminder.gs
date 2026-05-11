@@ -562,7 +562,7 @@ function calcWateringMin_(result) {
     baseLabel = 'Rule 3 高溫無雨';
   } else if (result.kind === 'fallback-dry') {
     base = 6;
-    baseLabel = 'fallback（預報缺值）保守';
+    baseLabel = '備援（預報缺值）保守';
   }
   const parts = [`基礎 ${base} 分（${baseLabel}）`];
   let total = base;
@@ -645,7 +645,7 @@ function sendDailySummary_(today, result) {
       lines.push('  Rule 4 — 連日少雨');
       lines.push(`  · 過去 5 日累計 ${result.past5.toFixed(1)} mm < 5 mm 閾值`);
     } else if (result.kind === 'fallback-dry') {
-      lines.push('  fallback — 預報資料缺，依歷史判斷');
+      lines.push('  備援 — 預報資料缺，依歷史判斷');
       lines.push(`  · 過去 3 日累計 ${result.past3.toFixed(1)} mm < 2 mm 閾值`);
     }
   } else {
@@ -715,7 +715,7 @@ function sendDailySummary_(today, result) {
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
   lines.push('Rule 4（連日少雨）：');
   lines.push('  · 過去 5 日 < 5 mm → 澆水（不論氣溫、不論預報）');
-  lines.push('fallback-dry（預報資料缺時的保守觸發）：');
+  lines.push('備援（預報資料缺時的保守觸發）：');
   lines.push('  · CWA 預報抓取失敗，且過去 3 日 < 2 mm → 短澆 6 分鐘');
   lines.push('  · （當 past5 < 5 已先觸發 Rule 4 時不會走到這裡）');
   lines.push('Rule 2（雨前跳過）：');
@@ -734,7 +734,7 @@ function sendDailySummary_(today, result) {
   lines.push('  澆水量公式參考');
   lines.push('=========================================');
   lines.push('');
-  lines.push('基礎：Rule 4 為 5 分、Rule 3 為 8 分、fallback-dry 為 6 分');
+  lines.push('基礎：Rule 4 為 5 分、Rule 3 為 8 分、備援為 6 分');
   lines.push('+ 2 分 if past3 < 0.5 mm（土壤完全乾燥）');
   lines.push('+ 1 分 if past5 = 0 mm（連 5 日滴雨未下）');
   lines.push('+ 2 分 if 預報最高溫 ≥ 32°C（極端高溫）');
