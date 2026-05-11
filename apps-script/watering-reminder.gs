@@ -51,14 +51,21 @@ const CONFIG = {
   //     466920 Past24hr=0 mm（局部雨沒下到中正區）
   // 為什麼 O-A0002-001 不是 O-A0001-001：
   //   · O-A0001-001（自動氣象站）對 466920 只有 Now.Precipitation（10 min），
-  //     沒有 Past6hr 等累積值
+  //     沒有 Past12hr 等累積值
   //   · O-A0002-001（自動雨量站）才有 Past10Min/1hr/3hr/6Hr/12hr/24hr 完整累積
-  // Schema 注意：Past6Hr 大寫 H、Past1hr/3hr/12hr/24hr 小寫 h（CWA 自己的 schema 不統一）
+  // 為什麼用 Past12hr：
+  //   · 我們要看「今天 00:00 到現在累積」對齊日邊界，08:00 跑時最理想是 Past8hr
+  //   · 但 CWA schema 沒給 Past8hr，只有 6/12 兩擋
+  //   · Past6Hr (02:00–08:00) 漏掉 00:00–02:00 那 2 小時，曾失準
+  //   · Past12hr (昨 20:00–今 08:00) 多 cover 昨晚，但無害：
+  //     - 植物視角「過去半天水分」更接近土壤濕度時間尺度
+  //     - 跟 Rule 1（昨日累積 ≥ 5 mm）剛性閾值 partial overlap，但 Rule 0
+  //       更敏感（≥ 0.5）剛好填昨晚中等雨（< 5 mm）的空檔
   CWA_REALTIME_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0002-001',
   CWA_REALTIME_STATION: 'CAAH60',
 
   // 降雨閾值（mm）
-  TODAY_RAIN_SKIP: 0.5,      // 今晨（過去 6 小時）累積雨量 ≥ 0.5 mm 跳過（Rule 0）
+  TODAY_RAIN_SKIP: 0.5,      // 過去 12 小時累積雨量 ≥ 0.5 mm 跳過（Rule 0）
                              // 0.5 是 CWA 雨量計最小觀測單位（傾斗式 0.5 mm/tip），
                              // 校準依據：2026-05-11 case 主委實測 CAAH60=0.5 mm 時頂樓已濕、不需澆
   RAIN_YESTERDAY_SKIP: 5,    // 昨日 ≥ 5 mm 跳過
@@ -225,11 +232,11 @@ function decide(today, useForecast) {
   // Rule 4 排在 Rule 2 之前是刻意的：past5 < 5 mm 表示已經連續 5 天明顯缺雨，
   // 這時即使預報明天大雨（Rule 2b）也不能再賭一天，否則植物可能因預報失準而過旱。
 
-  // Rule 0: 今晨已雨（CWA 即時觀測過去 6 小時累積）
+  // Rule 0: 今晨已雨（CWA 即時觀測過去 12 小時累積）
   if (todayRainSoFar !== null && todayRainSoFar >= CONFIG.TODAY_RAIN_SKIP) {
     return {
       action: 'skip',
-      reason: `今晨過去 6 小時已下雨 ${todayRainSoFar.toFixed(1)} mm（≥ ${CONFIG.TODAY_RAIN_SKIP}）`,
+      reason: `過去 12 小時已下雨 ${todayRainSoFar.toFixed(1)} mm（≥ ${CONFIG.TODAY_RAIN_SKIP}）`,
       past3, past5, forecast, todayRainSoFar,
     };
   }
@@ -371,10 +378,12 @@ function fetchForecast_() {
 }
 
 /**
- * 抓 CWA CAAH60「大安森林」站「過去 6 小時累積雨量」（mm）。
- * 08:00 runDaily 跑時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨。
+ * 抓 CWA CAAH60「大安森林」站「過去 12 小時累積雨量」（mm）。
+ * 08:00 runDaily 跑時 ≈ 昨 20:00 ~ 今 08:00，cover 昨夜到今晨整段，
+ * 比 Past6Hr 多 cover 4 小時（昨晚 20:00–24:00），抓得到深夜小雨。
  *
- * Schema：station.RainfallElement.Past6Hr.Precipitation（注意大寫 H）。
+ * Schema：station.RainfallElement.Past12hr.Precipitation（小寫 h；
+ * 注意 CWA schema 不統一：Past6Hr 是大寫 H、其他都小寫）。
  *
  * Fail-soft 設計：API 失敗、欄位變化、key 沒設都回傳 null（不拋例外），
  * 主流程會跳過 Rule 0 走原來的 Rule 1-5。避免 API 暫掛就漏澆。
@@ -414,19 +423,19 @@ function fetchTodayRainSoFar_() {
     return null;
   }
 
-  // 主要 path：Past6Hr 大寫 H（CWA 目前的 schema）
+  // 主要 path：Past12hr 小寫 h（CWA 目前的 schema）
   let val = null;
-  if (re.Past6Hr && re.Past6Hr.Precipitation != null) {
-    val = parseFloat(re.Past6Hr.Precipitation);
+  if (re.Past12hr && re.Past12hr.Precipitation != null) {
+    val = parseFloat(re.Past12hr.Precipitation);
   }
-  // Schema 變動 fallback：未來 CWA 統一成小寫 h 也能 catch
-  else if (re.Past6hr && re.Past6hr.Precipitation != null) {
-    val = parseFloat(re.Past6hr.Precipitation);
-    console.warn('今晨雨量：CWA schema 統一成小寫 h 了，請更新 code');
+  // Schema 變動 fallback：未來 CWA 改成大寫 H 也能 catch
+  else if (re.Past12Hr && re.Past12Hr.Precipitation != null) {
+    val = parseFloat(re.Past12Hr.Precipitation);
+    console.warn('今晨雨量：CWA schema 改成大寫 H 了，請更新 code');
   }
 
   if (val == null || isNaN(val)) {
-    console.warn('今晨雨量：無法解析 Past6Hr.Precipitation（schema 變了？）');
+    console.warn('今晨雨量：無法解析 Past12hr.Precipitation（schema 變了？）');
     return null;
   }
   // CWA 對 missing data 用 -99 / -99.0 / -990 等負值
@@ -765,7 +774,7 @@ function sendDailySummary_(today, result) {
   // 降雨數據
   lines.push('【降雨數據】');
   if (result.todayRainSoFar != null) {
-    lines.push(`  今晨已雨 ...... ${result.todayRainSoFar.toFixed(1)} mm（過去 6 小時，CAAH60 大安森林站即時）`);
+    lines.push(`  近 12 小時雨量 .. ${result.todayRainSoFar.toFixed(1)} mm（昨 20:00 起算，CAAH60 大安森林站即時）`);
   }
   lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
   lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
@@ -812,9 +821,9 @@ function sendDailySummary_(today, result) {
   lines.push('（Rule 0 排最前：實況雨量訊號最強，優先於歷史/預報。）');
   lines.push('（Rule 4 刻意排在 Rule 2 前，避免「連日少雨必澆」被「預報明日有雨」遮蔽）');
   lines.push('');
-  lines.push('Rule 0（今晨已雨）：');
-  lines.push('  · CWA 自動雨量站 CAAH60 大安森林站「過去 6 小時累積雨量」≥ 0.5 mm → 跳過');
-  lines.push('  · 08:00 runDaily 時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨');
+  lines.push('Rule 0（近 12 小時已雨）：');
+  lines.push('  · CWA 自動雨量站 CAAH60 大安森林站「過去 12 小時累積雨量」≥ 0.5 mm → 跳過');
+  lines.push('  · 08:00 runDaily 時 ≈ 昨 20:00 ~ 今 08:00，cover 昨夜到今晨整段');
   lines.push('Rule 1（雨後跳過）：');
   lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
@@ -942,7 +951,7 @@ function buildDescription_(result, today) {
   const lines = [];
   lines.push('📊 判斷依據');
   if (result.todayRainSoFar != null) {
-    lines.push(`• 今晨已雨（過去 6 小時）：${result.todayRainSoFar.toFixed(1)} mm`);
+    lines.push(`• 近 12 小時雨量（昨 20:00 起算）：${result.todayRainSoFar.toFixed(1)} mm`);
   }
   lines.push(`• 過去 3 日累積降雨：${result.past3.toFixed(1)} mm`);
   lines.push(`• 過去 5 日累積降雨：${result.past5.toFixed(1)} mm`);
