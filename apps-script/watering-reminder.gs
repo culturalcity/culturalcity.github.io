@@ -553,9 +553,10 @@ function backfillActuals_(sheet) {
 
 /**
  * 檢查昨天的澆水事件完成狀態。
- * - 找昨天標題開頭「💧」的事件
- * - 顏色 = GRAY → 標記為已澆
- * - 顏色 ≠ GRAY → 提醒：可能漏澆或忘記標
+ * 三態：
+ * - 顏色 = GRAY（石墨黑） → ✅ 已澆水
+ * - 顏色 = GREEN（綠/Basil）→ 🌧 看完未澆（因雨或現場判斷不需）
+ * - 其他顏色（橘/藍/黃 等原始建立色） → ⚠ 漏標（可能漏澆或忘記改色）
  * - 沒事件 → 昨天本來就不需澆水，沒事
  */
 function checkYesterdayCompletion_(today) {
@@ -570,15 +571,23 @@ function checkYesterdayCompletion_(today) {
     return { hadEvent: false };
   }
   const ev = events[0];
-  const color = ev.getColor(); // String "1"..."11" 或 "0" (default)；GRAY = "8"
+  const color = ev.getColor(); // String "1"..."11" 或 "0" (default)；GRAY="8"、GREEN="10"
   const isDone = color === CalendarApp.EventColor.GRAY;
-  console.log(`[completion] 昨天 ${formatDate_(yesterday)}「${ev.getTitle()}」→ ${isDone ? '✅ 已標完成' : '⚠ 未標完成（可能漏澆或忘記改顏色）'}`);
-  return { hadEvent: true, isDone, event: ev };
+  const isCancelled = color === CalendarApp.EventColor.GREEN;
+  let label = '⚠ 未標完成（可能漏澆或忘記改顏色）';
+  if (isDone) label = '✅ 已標完成（已澆水）';
+  else if (isCancelled) label = '🌧 看完未澆（因雨或現場判斷不需）';
+  console.log(`[completion] 昨天 ${formatDate_(yesterday)}「${ev.getTitle()}」→ ${label}`);
+  return { hadEvent: true, isDone, isCancelled, event: ev };
 }
 
 /**
  * 抓某段日期範圍內的 💧 事件統計。
- * @return {{total, done, missed, byKind:{hot-dry,dry-spell,fallback-dry}}}
+ * 三種事件結束狀態：
+ *   · done       — 顏色 = GRAY（石墨黑）：總幹事標已澆
+ *   · cancelled  — 顏色 = GREEN（綠/Basil）：總幹事看完判斷不需澆（因雨等）
+ *   · missed     — 其他顏色（保留原始建立色）：漏標或漏澆
+ * @return {{total, done, cancelled, missed, byKind, days}}
  */
 function collectMonthStats_(start, end) {
   const cal = CalendarApp.getDefaultCalendar();
@@ -586,6 +595,7 @@ function collectMonthStats_(start, end) {
   const stats = {
     total: events.length,
     done: 0,
+    cancelled: 0,
     missed: 0,
     byKind: { 'hot-dry': 0, 'dry-spell': 0, 'fallback-dry': 0, 'other': 0 },
     days: [],
@@ -593,7 +603,10 @@ function collectMonthStats_(start, end) {
   for (const ev of events) {
     const color = ev.getColor();
     const done = color === CalendarApp.EventColor.GRAY;
-    if (done) stats.done++; else stats.missed++;
+    const cancelled = color === CalendarApp.EventColor.GREEN;
+    if (done) stats.done++;
+    else if (cancelled) stats.cancelled++;
+    else stats.missed++;
 
     const title = ev.getTitle();
     let kind = 'other';
@@ -606,6 +619,7 @@ function collectMonthStats_(start, end) {
       date: formatDate_(ev.getStartTime()),
       title,
       done,
+      cancelled,
     });
   }
   return stats;
@@ -618,32 +632,40 @@ function sendMonthlySummary_(monthStart, stats) {
     return;
   }
   const ym = Utilities.formatDate(monthStart, 'Asia/Taipei', 'yyyy 年 M 月');
+  // 漏標率 = 漏標 / 推薦總數（cancelled 屬於合理結束、不算漏）
   const missRate = stats.total === 0 ? 0 : (stats.missed / stats.total * 100);
+  // 因雨取消率 = cancelled / 推薦總數，太高代表系統建議澆水太頻繁
+  const cancelRate = stats.total === 0 ? 0 : (stats.cancelled / stats.total * 100);
 
   const lines = [];
   lines.push(`📅 ${ym} 澆水提醒月報`);
   lines.push('');
   lines.push(`• 推薦澆水：${stats.total} 天`);
-  lines.push(`  ├─ 高溫無雨（橘）：${stats.byKind['hot-dry']} 天`);
+  lines.push(`  ├─ 高溫無雨（橙橘色）：${stats.byKind['hot-dry']} 天`);
   lines.push(`  ├─ 連日少雨（藍）：${stats.byKind['dry-spell']} 天`);
-  lines.push(`  └─ 預報缺（黃）：${stats.byKind['fallback-dry']} 天`);
-  lines.push(`• 已標完成（灰）：${stats.done} 天`);
-  lines.push(`• 未標完成：${stats.missed} 天（漏標率 ${missRate.toFixed(0)}%）`);
+  lines.push(`  └─ 備援（黃）：${stats.byKind['fallback-dry']} 天`);
+  lines.push(`• 已澆完成（石墨黑）：${stats.done} 天`);
+  lines.push(`• 看完未澆（綠 / Basil）：${stats.cancelled} 天（因雨或現場判斷不需，因雨取消率 ${cancelRate.toFixed(0)}%）`);
+  lines.push(`• 漏標：${stats.missed} 天（漏標率 ${missRate.toFixed(0)}%）`);
   lines.push('');
   lines.push('— 詳細日期 —');
   stats.days.forEach(d => {
-    lines.push(`${d.done ? '✅' : '⚠'} ${d.date}  ${d.title}`);
+    const icon = d.done ? '✅' : (d.cancelled ? '🌧' : '⚠');
+    lines.push(`${icon} ${d.date}  ${d.title}`);
   });
   lines.push('');
   lines.push('— 提醒 —');
   if (missRate >= 30) {
     lines.push(`⚠ 漏標率 ${missRate.toFixed(0)}% 偏高。可能：(1) 總幹事忘記改顏色 (2) 真的有漏澆。建議跟總幹事確認。`);
   }
+  if (cancelRate >= 30) {
+    lines.push(`💡 因雨取消率 ${cancelRate.toFixed(0)}% 偏高，代表系統建議澆水比實際需要頻繁。可考慮調 Rule 3 / Rule 4 閾值。`);
+  }
   lines.push('回顧 / 調整閾值請編輯 Apps Script 的 CONFIG 區塊。');
 
   MailApp.sendEmail({
     to,
-    subject: `[閱大安澆水] ${ym} 月報（推薦 ${stats.total} 天 / 完成 ${stats.done} 天）`,
+    subject: `[閱大安澆水] ${ym} 月報（推薦 ${stats.total} / 澆 ${stats.done} / 雨取消 ${stats.cancelled}）`,
     body: lines.join('\n'),
   });
   console.log('月報寄出 →', to);
@@ -866,7 +888,9 @@ function sendDailySummary_(today, result) {
   if (isWater) {
     const eventTimeLabel = `${String(CONFIG.EVENT_HOUR).padStart(2,'0')}:${String(CONFIG.EVENT_MINUTE).padStart(2,'0')}`;
     lines.push(`· 本次澆水提醒已建立 culturalcity85 行事曆 ${eventTimeLabel} 事件。`);
-    lines.push('· 完成澆水後請將行事曆事件改為「石墨黑」（Graphite，Google Calendar 顏色選單裡的灰色），便於月底統計。');
+    lines.push('· 處理完請依實況改行事曆事件顏色（便於月底統計）：');
+    lines.push('  ‐ 有澆水 → 改「石墨黑」（Graphite，灰色那個）');
+    lines.push('  ‐ 上樓看完判斷不需澆（因雨等）→ 改「綠色」（Basil，羅勒）');
   } else {
     lines.push('· 今日不澆水，未建立行事曆事件。');
   }
@@ -972,7 +996,10 @@ function buildDescription_(result, today) {
   } else {
     lines.push('• 全區手動開啟澆灌約 10–15 分鐘');
   }
-  lines.push('• 完成後請將本事件顏色改為「石墨黑」（Graphite，灰色那個）表示已澆，隔日腳本會偵測');
+  lines.push('• 處理完請依實況改顏色（隔日腳本會依顏色分類統計）：');
+  lines.push('   · 有澆水 → 「石墨黑」（Graphite，灰色那個）');
+  lines.push('   · 上樓看完判斷不需澆（因雨等）→ 「綠色」（Basil，羅勒）');
+  lines.push('   · 都不改 → 月報會列為「漏標」');
   lines.push('');
   lines.push(`📌 由「閱大安水電監督系統」自動建立 ${formatDate_(today)} 08:00`);
   return lines.join('\n');
