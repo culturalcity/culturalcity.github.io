@@ -42,7 +42,15 @@ const CONFIG = {
   CWA_FORECAST_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063',
   CWA_LOCATION: '大安區',
 
+  // CWA 即時觀測（臺北 466920 站，每 10 分鐘更新）
+  // 文件：https://opendata.cwa.gov.tw/dataset/observation/O-A0001-001
+  // 用 station.RainfallElement.Past6hr.Precipitation 抓「過去 6 小時累積雨量」
+  // 08:00 runDaily 跑時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨
+  CWA_REALTIME_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001',
+  CWA_REALTIME_STATION: '466920',
+
   // 降雨閾值（mm）
+  TODAY_RAIN_SKIP: 1,        // 今晨（過去 6 小時）累積雨量 ≥ 1 mm 跳過（Rule 0）
   RAIN_YESTERDAY_SKIP: 5,    // 昨日 ≥ 5 mm 跳過
   RAIN_PAST_3D_SKIP: 8,      // 過去 3 日累積 ≥ 8 mm 跳過（spec 原本 10，調成 8 涵蓋更多潮濕日）
   RAIN_PAST_3D_DRY: 2,       // 過去 3 日累積 < 2 mm 視為乾燥
@@ -185,6 +193,12 @@ function decide(today, useForecast) {
   const past3 = sumPastRain_(histMap, today, 3);
   const past5 = sumPastRain_(histMap, today, 5);
 
+  // 即時雨量先抓（讓 todayRainSoFar 在所有 return path 都可用，方便 logging）
+  let todayRainSoFar = null;
+  if (useForecast) {
+    todayRainSoFar = fetchTodayRainSoFar_();
+  }
+
   // 預報先抓（讓 forecast 在所有 return path 都可用，方便 logging）
   let forecast = null;
   if (useForecast) {
@@ -196,16 +210,26 @@ function decide(today, useForecast) {
     }
   }
 
-  // 評估順序：Rule 1 → Rule 4 → fallback → Rule 2 → Rule 3 → Rule 5
+  // 評估順序：Rule 0 → Rule 1 → Rule 4 → fallback → Rule 2 → Rule 3 → Rule 5
+  // Rule 0 排最前：實況雨量（天然已澆過）的訊號最強，優先於所有歷史/預報。
   // Rule 4 排在 Rule 2 之前是刻意的：past5 < 5 mm 表示已經連續 5 天明顯缺雨，
   // 這時即使預報明天大雨（Rule 2b）也不能再賭一天，否則植物可能因預報失準而過旱。
 
+  // Rule 0: 今晨已雨（CWA 即時觀測過去 6 小時累積）
+  if (todayRainSoFar !== null && todayRainSoFar >= CONFIG.TODAY_RAIN_SKIP) {
+    return {
+      action: 'skip',
+      reason: `今晨過去 6 小時已下雨 ${todayRainSoFar.toFixed(1)} mm（≥ ${CONFIG.TODAY_RAIN_SKIP}）`,
+      past3, past5, forecast, todayRainSoFar,
+    };
+  }
+
   // Rule 1: 雨後跳過
   if (r1 >= CONFIG.RAIN_YESTERDAY_SKIP) {
-    return { action: 'skip', reason: `昨日降雨 ${r1.toFixed(1)} mm（≥ ${CONFIG.RAIN_YESTERDAY_SKIP}）`, past3, past5, forecast };
+    return { action: 'skip', reason: `昨日降雨 ${r1.toFixed(1)} mm（≥ ${CONFIG.RAIN_YESTERDAY_SKIP}）`, past3, past5, forecast, todayRainSoFar };
   }
   if (past3 >= CONFIG.RAIN_PAST_3D_SKIP) {
-    return { action: 'skip', reason: `過去 3 日累積雨量 ${past3.toFixed(1)} mm（≥ ${CONFIG.RAIN_PAST_3D_SKIP}）`, past3, past5, forecast };
+    return { action: 'skip', reason: `過去 3 日累積雨量 ${past3.toFixed(1)} mm（≥ ${CONFIG.RAIN_PAST_3D_SKIP}）`, past3, past5, forecast, todayRainSoFar };
   }
 
   // Rule 4: 連日少雨 → 必澆（不論預報，因為已經乾太久）
@@ -214,7 +238,7 @@ function decide(today, useForecast) {
       action: 'water', kind: 'dry-spell',
       title: '💧 今日建議澆水（連日少雨）',
       color: 'blue',
-      past3, past5, forecast,
+      past3, past5, forecast, todayRainSoFar,
     };
   }
 
@@ -225,19 +249,19 @@ function decide(today, useForecast) {
         action: 'water', kind: 'fallback-dry',
         title: '💧 今日建議澆水（預報資料缺，依歷史判斷）',
         color: 'yellow',
-        past3, past5, forecast: null,
+        past3, past5, forecast: null, todayRainSoFar,
       };
     }
-    return { action: 'skip', reason: '預報資料缺，歷史不顯著乾燥', past3, past5, forecast: null };
+    return { action: 'skip', reason: '預報資料缺，歷史不顯著乾燥', past3, past5, forecast: null, todayRainSoFar };
   }
 
   // Rule 2: 雨前跳過
   if (forecast) {
     if (forecast.popToday >= CONFIG.POP_TODAY_SKIP) {
-      return { action: 'skip', reason: `今日預報有雨（降雨機率 ${forecast.popToday}%）`, past3, past5, forecast };
+      return { action: 'skip', reason: `今日預報有雨（降雨機率 ${forecast.popToday}%）`, past3, past5, forecast, todayRainSoFar };
     }
     if (forecast.popTomorrow >= CONFIG.POP_TOMORROW_SKIP) {
-      return { action: 'skip', reason: `明日預報大雨（降雨機率 ${forecast.popTomorrow}%），今日省`, past3, past5, forecast };
+      return { action: 'skip', reason: `明日預報大雨（降雨機率 ${forecast.popTomorrow}%），今日省`, past3, past5, forecast, todayRainSoFar };
     }
   }
 
@@ -247,7 +271,7 @@ function decide(today, useForecast) {
       action: 'water', kind: 'hot-dry',
       title: '💧 今日建議澆水（高溫無雨）',
       color: 'orange',
-      past3, past5, forecast,
+      past3, past5, forecast, todayRainSoFar,
     };
   }
 
@@ -255,7 +279,7 @@ function decide(today, useForecast) {
   return {
     action: 'skip',
     reason: `中性日（過去 5 日雨 ${past5.toFixed(1)} mm，無極端）`,
-    past3, past5, forecast,
+    past3, past5, forecast, todayRainSoFar,
   };
 }
 
@@ -334,6 +358,70 @@ function fetchForecast_() {
     popToday:  popTodaySlot  ? Number(popTodaySlot.ElementValue[0].ProbabilityOfPrecipitation) : null,
     popTomorrow: popTomSlot  ? Number(popTomSlot.ElementValue[0].ProbabilityOfPrecipitation) : null,
   };
+}
+
+/**
+ * 抓 CWA 即時觀測 466920 站「過去 6 小時累積雨量」（mm）。
+ * 08:00 runDaily 跑時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨。
+ *
+ * Fail-soft 設計：API 失敗、欄位變化、key 沒設都回傳 null（不拋例外），
+ * 主流程會跳過 Rule 0 走原來的 Rule 1-5。避免 API 暫掛就漏澆。
+ *
+ * @return {number|null}  mm，null 表示無法取得（包含 schema 不認識的情況）
+ */
+function fetchTodayRainSoFar_() {
+  const apiKey = PropertiesService.getScriptProperties().getProperty('CWA_API_KEY');
+  if (!apiKey) {
+    console.warn('CWA_API_KEY 未設，跳過今晨雨量 check（Rule 0 不會觸發）');
+    return null;
+  }
+  const url = `${CONFIG.CWA_REALTIME_URL}?Authorization=${encodeURIComponent(apiKey)}`
+    + `&StationId=${encodeURIComponent(CONFIG.CWA_REALTIME_STATION)}&format=JSON`;
+  let json;
+  try {
+    const res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    if (res.getResponseCode() !== 200) {
+      console.warn(`今晨雨量 API HTTP ${res.getResponseCode()}（Rule 0 不會觸發）`);
+      return null;
+    }
+    json = JSON.parse(res.getContentText());
+  } catch (e) {
+    console.warn('今晨雨量 API 例外：', e.message, '（Rule 0 不會觸發）');
+    return null;
+  }
+
+  const station = json && json.records && json.records.Station && json.records.Station[0];
+  if (!station) {
+    console.warn('今晨雨量 API 回應找不到 Station[0]');
+    return null;
+  }
+
+  // 嘗試新版 schema：station.RainfallElement.Past6hr.Precipitation
+  let val = null;
+  const re = station.RainfallElement;
+  if (re && re.Past6hr && re.Past6hr.Precipitation != null) {
+    val = parseFloat(re.Past6hr.Precipitation);
+  }
+
+  // schema fallback：WeatherElement 下找
+  if (val == null && station.WeatherElement) {
+    const we = station.WeatherElement;
+    if (we.Past6hr && we.Past6hr.Precipitation != null) {
+      val = parseFloat(we.Past6hr.Precipitation);
+    } else if (we.Now && we.Now.Precipitation != null) {
+      // 最後 fallback：用 Now（最近 1 小時）。覆蓋面窄但聊勝於無
+      val = parseFloat(we.Now.Precipitation);
+      console.warn('今晨雨量：找不到 Past6hr，用 Now（1hr）fallback，schema 可能變了');
+    }
+  }
+
+  if (val == null || isNaN(val)) {
+    console.warn('今晨雨量：無法解析任何雨量欄位（schema 變了？）');
+    return null;
+  }
+  // CWA 對 missing data 用 -99 / -99.0 / -990 等負值
+  if (val < 0) return 0;
+  return val;
 }
 
 /** 從一連串 12 小時 slot 中挑出「某天的白天 slot」(StartTime 落在該日 06:00-12:00) */
@@ -666,6 +754,9 @@ function sendDailySummary_(today, result) {
 
   // 降雨數據
   lines.push('【降雨數據】');
+  if (result.todayRainSoFar != null) {
+    lines.push(`  今晨已雨 ...... ${result.todayRainSoFar.toFixed(1)} mm（過去 6 小時，466920 站即時）`);
+  }
   lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
   lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
   lines.push('');
@@ -707,9 +798,13 @@ function sendDailySummary_(today, result) {
   lines.push('  完整規則參考（社區自訂啟發式，非援引文獻）');
   lines.push('=========================================');
   lines.push('');
-  lines.push('評估順序：Rule 1 → Rule 4 → fallback → Rule 2 → Rule 3 → Rule 5');
+  lines.push('評估順序：Rule 0 → Rule 1 → Rule 4 → 備援 → Rule 2 → Rule 3 → Rule 5');
+  lines.push('（Rule 0 排最前：實況雨量訊號最強，優先於歷史/預報。）');
   lines.push('（Rule 4 刻意排在 Rule 2 前，避免「連日少雨必澆」被「預報明日有雨」遮蔽）');
   lines.push('');
+  lines.push('Rule 0（今晨已雨）：');
+  lines.push('  · CWA 即時觀測 466920 站「過去 6 小時累積雨量」≥ 1 mm → 跳過');
+  lines.push('  · 08:00 runDaily 時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨');
   lines.push('Rule 1（雨後跳過）：');
   lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
@@ -725,7 +820,7 @@ function sendDailySummary_(today, result) {
   lines.push('  · 過去 3 日 < 2 mm 且預報最高溫 ≥ 28°C → 澆水');
   lines.push('Rule 5（中性日）：上述都不滿足 → 跳過');
   lines.push('');
-  lines.push('⚠ 上述閾值（5 mm / 8 mm / 28°C / 2 mm / 5 mm）為社區內部估值，');
+  lines.push('⚠ 上述閾值（1 mm / 5 mm / 8 mm / 28°C / 2 mm / 5 mm）為社區內部估值，');
   lines.push('  尚未對照 FAO-56 或 extension service 的 ET 模型校準。');
   lines.push('  累積運作資料後可再調整。');
   lines.push('');
@@ -742,7 +837,8 @@ function sendDailySummary_(today, result) {
   lines.push('');
 
   lines.push('【資料來源】');
-  lines.push('· 中央氣象署 CODiS 466920 臺北站每日累計雨量');
+  lines.push('· 中央氣象署 CODiS 466920 臺北站每日累計雨量（歷史，隔日 settle）');
+  lines.push('· CWA 即時觀測 O-A0001-001 466920 臺北站（今晨雨量，10 分鐘更新）');
   lines.push('· CWA 鄉鎮天氣預報（大安區）');
   lines.push('');
 
@@ -835,6 +931,9 @@ function createWateringEvent_(today, result) {
 function buildDescription_(result, today) {
   const lines = [];
   lines.push('📊 判斷依據');
+  if (result.todayRainSoFar != null) {
+    lines.push(`• 今晨已雨（過去 6 小時）：${result.todayRainSoFar.toFixed(1)} mm`);
+  }
   lines.push(`• 過去 3 日累積降雨：${result.past3.toFixed(1)} mm`);
   lines.push(`• 過去 5 日累積降雨：${result.past5.toFixed(1)} mm`);
   if (result.forecast) {
@@ -895,7 +994,8 @@ function log_(tag, dateStr, result) {
   if (result.reason) console.log(`    reason: ${result.reason}`);
   if (result.title)  console.log(`    title : ${result.title}`);
   if (result.forecast) console.log(`    forecast: tempToday=${result.forecast.tempToday}, popToday=${result.forecast.popToday}, popTomorrow=${result.forecast.popTomorrow}`);
-  console.log(`    rain: past3=${result.past3?.toFixed?.(1)} mm, past5=${result.past5?.toFixed?.(1)} mm`);
+  console.log(`    rain: past3=${result.past3?.toFixed?.(1)} mm, past5=${result.past5?.toFixed?.(1)} mm`
+    + (result.todayRainSoFar != null ? `, todayRainSoFar=${result.todayRainSoFar.toFixed(1)} mm` : ''));
 }
 
 function notifyError_(subject, err) {
