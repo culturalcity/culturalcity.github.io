@@ -42,15 +42,25 @@ const CONFIG = {
   CWA_FORECAST_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063',
   CWA_LOCATION: '大安區',
 
-  // CWA 即時觀測（臺北 466920 站，每 10 分鐘更新）
-  // 文件：https://opendata.cwa.gov.tw/dataset/observation/O-A0001-001
-  // 用 station.RainfallElement.Past6hr.Precipitation 抓「過去 6 小時累積雨量」
-  // 08:00 runDaily 跑時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨
-  CWA_REALTIME_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001',
-  CWA_REALTIME_STATION: '466920',
+  // CWA 自動雨量站即時資料（每 10 分鐘更新），用 CAAH60「大安森林」站
+  // 文件：https://opendata.cwa.gov.tw/dataset/observation/O-A0002-001
+  // 為什麼 CAAH60 不是 466920：
+  //   · 466920 在中正區（中央氣象署本部），距大安區 5–6 km
+  //   · CAAH60 在大安森林公園，是大安區地理中心，能 catch 局部對流雨
+  //   · 2026-05-11 case：CAAH60 Past24hr=0.5 mm（catch 到頂樓濕的那場雨），
+  //     466920 Past24hr=0 mm（局部雨沒下到中正區）
+  // 為什麼 O-A0002-001 不是 O-A0001-001：
+  //   · O-A0001-001（自動氣象站）對 466920 只有 Now.Precipitation（10 min），
+  //     沒有 Past6hr 等累積值
+  //   · O-A0002-001（自動雨量站）才有 Past10Min/1hr/3hr/6Hr/12hr/24hr 完整累積
+  // Schema 注意：Past6Hr 大寫 H、Past1hr/3hr/12hr/24hr 小寫 h（CWA 自己的 schema 不統一）
+  CWA_REALTIME_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0002-001',
+  CWA_REALTIME_STATION: 'CAAH60',
 
   // 降雨閾值（mm）
-  TODAY_RAIN_SKIP: 1,        // 今晨（過去 6 小時）累積雨量 ≥ 1 mm 跳過（Rule 0）
+  TODAY_RAIN_SKIP: 0.5,      // 今晨（過去 6 小時）累積雨量 ≥ 0.5 mm 跳過（Rule 0）
+                             // 0.5 是 CWA 雨量計最小觀測單位（傾斗式 0.5 mm/tip），
+                             // 校準依據：2026-05-11 case 主委實測 CAAH60=0.5 mm 時頂樓已濕、不需澆
   RAIN_YESTERDAY_SKIP: 5,    // 昨日 ≥ 5 mm 跳過
   RAIN_PAST_3D_SKIP: 8,      // 過去 3 日累積 ≥ 8 mm 跳過（spec 原本 10，調成 8 涵蓋更多潮濕日）
   RAIN_PAST_3D_DRY: 2,       // 過去 3 日累積 < 2 mm 視為乾燥
@@ -361,8 +371,10 @@ function fetchForecast_() {
 }
 
 /**
- * 抓 CWA 即時觀測 466920 站「過去 6 小時累積雨量」（mm）。
+ * 抓 CWA CAAH60「大安森林」站「過去 6 小時累積雨量」（mm）。
  * 08:00 runDaily 跑時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨。
+ *
+ * Schema：station.RainfallElement.Past6Hr.Precipitation（注意大寫 H）。
  *
  * Fail-soft 設計：API 失敗、欄位變化、key 沒設都回傳 null（不拋例外），
  * 主流程會跳過 Rule 0 走原來的 Rule 1-5。避免 API 暫掛就漏澆。
@@ -396,27 +408,25 @@ function fetchTodayRainSoFar_() {
     return null;
   }
 
-  // 嘗試新版 schema：station.RainfallElement.Past6hr.Precipitation
-  let val = null;
   const re = station.RainfallElement;
-  if (re && re.Past6hr && re.Past6hr.Precipitation != null) {
-    val = parseFloat(re.Past6hr.Precipitation);
+  if (!re) {
+    console.warn('今晨雨量：station 沒有 RainfallElement（dataset 換錯了？）');
+    return null;
   }
 
-  // schema fallback：WeatherElement 下找
-  if (val == null && station.WeatherElement) {
-    const we = station.WeatherElement;
-    if (we.Past6hr && we.Past6hr.Precipitation != null) {
-      val = parseFloat(we.Past6hr.Precipitation);
-    } else if (we.Now && we.Now.Precipitation != null) {
-      // 最後 fallback：用 Now（最近 1 小時）。覆蓋面窄但聊勝於無
-      val = parseFloat(we.Now.Precipitation);
-      console.warn('今晨雨量：找不到 Past6hr，用 Now（1hr）fallback，schema 可能變了');
-    }
+  // 主要 path：Past6Hr 大寫 H（CWA 目前的 schema）
+  let val = null;
+  if (re.Past6Hr && re.Past6Hr.Precipitation != null) {
+    val = parseFloat(re.Past6Hr.Precipitation);
+  }
+  // Schema 變動 fallback：未來 CWA 統一成小寫 h 也能 catch
+  else if (re.Past6hr && re.Past6hr.Precipitation != null) {
+    val = parseFloat(re.Past6hr.Precipitation);
+    console.warn('今晨雨量：CWA schema 統一成小寫 h 了，請更新 code');
   }
 
   if (val == null || isNaN(val)) {
-    console.warn('今晨雨量：無法解析任何雨量欄位（schema 變了？）');
+    console.warn('今晨雨量：無法解析 Past6Hr.Precipitation（schema 變了？）');
     return null;
   }
   // CWA 對 missing data 用 -99 / -99.0 / -990 等負值
@@ -755,7 +765,7 @@ function sendDailySummary_(today, result) {
   // 降雨數據
   lines.push('【降雨數據】');
   if (result.todayRainSoFar != null) {
-    lines.push(`  今晨已雨 ...... ${result.todayRainSoFar.toFixed(1)} mm（過去 6 小時，466920 站即時）`);
+    lines.push(`  今晨已雨 ...... ${result.todayRainSoFar.toFixed(1)} mm（過去 6 小時，CAAH60 大安森林站即時）`);
   }
   lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
   lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
@@ -803,7 +813,7 @@ function sendDailySummary_(today, result) {
   lines.push('（Rule 4 刻意排在 Rule 2 前，避免「連日少雨必澆」被「預報明日有雨」遮蔽）');
   lines.push('');
   lines.push('Rule 0（今晨已雨）：');
-  lines.push('  · CWA 即時觀測 466920 站「過去 6 小時累積雨量」≥ 1 mm → 跳過');
+  lines.push('  · CWA 自動雨量站 CAAH60 大安森林站「過去 6 小時累積雨量」≥ 0.5 mm → 跳過');
   lines.push('  · 08:00 runDaily 時 ≈ 02:00–08:00 累積，覆蓋凌晨/清晨已下的雨');
   lines.push('Rule 1（雨後跳過）：');
   lines.push('  · 昨日降雨 ≥ 5 mm → 跳過');
@@ -820,7 +830,7 @@ function sendDailySummary_(today, result) {
   lines.push('  · 過去 3 日 < 2 mm 且預報最高溫 ≥ 28°C → 澆水');
   lines.push('Rule 5（中性日）：上述都不滿足 → 跳過');
   lines.push('');
-  lines.push('⚠ 上述閾值（1 mm / 5 mm / 8 mm / 28°C / 2 mm / 5 mm）為社區內部估值，');
+  lines.push('⚠ 上述閾值（0.5 mm / 5 mm / 8 mm / 28°C / 2 mm / 5 mm）為社區內部估值，');
   lines.push('  尚未對照 FAO-56 或 extension service 的 ET 模型校準。');
   lines.push('  累積運作資料後可再調整。');
   lines.push('');
@@ -838,7 +848,7 @@ function sendDailySummary_(today, result) {
 
   lines.push('【資料來源】');
   lines.push('· 中央氣象署 CODiS 466920 臺北站每日累計雨量（歷史，隔日 settle）');
-  lines.push('· CWA 即時觀測 O-A0001-001 466920 臺北站（今晨雨量，10 分鐘更新）');
+  lines.push('· CWA 自動雨量站 O-A0002-001 CAAH60 大安森林站（今晨雨量，10 分鐘更新）');
   lines.push('· CWA 鄉鎮天氣預報（大安區）');
   lines.push('');
 
