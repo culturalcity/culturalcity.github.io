@@ -750,7 +750,7 @@ function sendDailySummary_(today, result) {
   if (isWater) {
     const eventTimeLabel = `${String(CONFIG.EVENT_HOUR).padStart(2,'0')}:${String(CONFIG.EVENT_MINUTE).padStart(2,'0')}`;
     lines.push(`· 本次澆水提醒已建立 culturalcity85 行事曆 ${eventTimeLabel} 事件。`);
-    lines.push('· 完成澆水後請將行事曆事件改為「石墨色」（Graphite，Google Calendar 顏色選單裡的灰色），便於月底統計。');
+    lines.push('· 完成澆水後請將行事曆事件改為「石墨黑」（Graphite，Google Calendar 顏色選單裡的灰色），便於月底統計。');
   } else {
     lines.push('· 今日不澆水，未建立行事曆事件。');
   }
@@ -853,7 +853,7 @@ function buildDescription_(result, today) {
   } else {
     lines.push('• 全區手動開啟澆灌約 10–15 分鐘');
   }
-  lines.push('• 完成後請將本事件顏色改為「石墨色」（Graphite，灰色那個）表示已澆，隔日腳本會偵測');
+  lines.push('• 完成後請將本事件顏色改為「石墨黑」（Graphite，灰色那個）表示已澆，隔日腳本會偵測');
   lines.push('');
   lines.push(`📌 由「閱大安水電監督系統」自動建立 ${formatDate_(today)} 08:00`);
   return lines.join('\n');
