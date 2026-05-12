@@ -61,6 +61,49 @@ npx clasp pull
 >
 > ⚠️ OAuth token 存在 `~/.clasprc.json`（user home 目錄，不在 repo），也不會被 commit。
 
+### clasp setup 常見坑（2026-05-12 實戰踩過的）
+
+#### `Insufficient Permission` 一切都 fail
+
+最可能兩個原因：
+
+1. **Apps Script API 沒開**：上 [script.google.com/home/usersettings](https://script.google.com/home/usersettings) 確認「Google Apps Script API」是「**已開啟**」。注意這個設定是 **per-Google-account** 的——必須是用 culturalcity85 登入時去開，不是用個人帳號開。
+2. **OAuth 用錯帳號**：你跑 `clasp login` 時 browser 的 default 帳號是你個人帳號，不小心拿個人帳號授權了。解法：`npx clasp logout` 清掉 → 重做 login flow → 在 OAuth 頁面確認上方頭像是 **culturalcity85**。
+
+#### 多瀏覽器：culturalcity85 在 Chrome、個人帳號在 Brave
+
+主委的真實狀況：個人用 Brave（預設瀏覽器）、culturalcity85 只在 Chrome 登入。`clasp login` 預設會開系統 default browser（Brave），但 OAuth 必須用 culturalcity85（在 Chrome）完成。
+
+兩條路：
+
+**A. 用 `--no-localhost` 手動貼 URL 到 Chrome（推薦）**
+
+```powershell
+npx clasp login --no-localhost
+```
+
+clasp 不開 browser、印一個長 URL 出來。**手動複製那個 URL → 貼到 Chrome 網址列**（已登入 culturalcity85）→ 走完 OAuth 授權。
+
+授權完成後 Google 會 redirect 到 `http://localhost:8888/?iss=...&code=...&scope=...`，**Chrome 顯示「無法連上這個網站 / 拒絕連線」是正常的**（clasp 沒在 localhost 起 server）。重點是：**從 Chrome 網址列複製整個 URL**（從 `http://` 到結尾），貼回 PowerShell prompt → Enter。
+
+⚠️ 貼**整個 URL**，不是只貼 `code=` 那一段。clasp 自己會 parse 出 code。我這次踩過坑：只貼 code 結果 `Missing code in response URL`。
+
+**B. 暫時切換系統 default browser 為 Chrome**
+
+Settings → Apps → Default apps → Web browser → Chrome。然後 `npx clasp login`（不加 `--no-localhost`）就能正常走完。做完再切回 Brave。
+
+#### OAuth code 10 分鐘失效
+
+從 Google 授權完成那一刻起算 10 分鐘。如果在這時間內沒把 URL 貼回 PowerShell，code 會 expired、要重跑 `npx clasp login --no-localhost`。
+
+#### `npx clasp` 在 home 目錄跑會說「could not determine executable」
+
+clasp 是裝在 repo 的 `node_modules`，必須先 `cd` 到 repo 目錄再跑 `npx clasp`。或用 `npx @google/clasp <command>` 直接指定 package（不依賴 cwd）。
+
+#### 第一次 push 後 server 端 file 名字變了
+
+如果你是先在 Apps Script Editor 用預設「程式碼」file 名手動貼過 code，後來才 setup clasp：第一次 `clasp push` 會把 server 端「程式碼」file 刪掉、改建一個跟 local file 同名的 file（譬如 `watering-reminder`）。這是正常的，trigger 綁 function name 不綁 file name，**不會壞**。
+
 ---
 
 ## 部署方式：手動複製貼上（fallback）
