@@ -205,7 +205,19 @@ function testHistoricalCases() {
  * @return {{action:'water'|'skip', kind?:string, title?:string, color?:string, reason?:string, ...}}
  */
 function decide(today, useForecast) {
-  const histMap = fetchRainHistory_();
+  // 降雨歷史 fail-soft：抓不到（GitHub raw CDN 偶發 unreachable 等）就降級為 skip
+  let histMap;
+  try {
+    histMap = fetchRainHistory_();
+  } catch (e) {
+    console.warn('降雨歷史抓取失敗，今日降級為 skip：', e.message);
+    return {
+      action: 'skip',
+      kind: 'history-unavailable',
+      reason: `降雨歷史資料暫時無法取得（${e.message}）。今日無法依規則判斷，請現場目測決定。`,
+      past3: null, past5: null, forecast: null, todayRainSoFar: null,
+    };
+  }
   const r1 = getRainNDaysAgo_(histMap, today, 1);
   const past3 = sumPastRain_(histMap, today, 3);
   const past5 = sumPastRain_(histMap, today, 5);
@@ -302,13 +314,35 @@ function decide(today, useForecast) {
 
 // ================== 取資料 ==================
 
+/**
+ * 通用 retry wrapper。對 GitHub raw 之類偶發 DNS / CDN unreachable 加 1 次重試。
+ * UrlFetchApp.fetch 在 network failure 會直接拋例外（muteHttpExceptions 只 mute HTTP 4xx/5xx）。
+ * @param {string} url
+ * @param {string} label  錯誤訊息用的描述（譬如「降雨歷史」）
+ * @return {string}  response body text
+ * @throws 兩次都失敗才拋
+ */
+function fetchTextWithRetry_(url, label) {
+  let lastErr;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+      const code = res.getResponseCode();
+      if (code === 200) return res.getContentText();
+      lastErr = new Error(`HTTP ${code}`);
+    } catch (e) {
+      lastErr = e; // 通常是 "Address unavailable" / DNS / timeout
+    }
+    console.warn(`${label} 抓取失敗（第 ${attempt} 次）：${lastErr.message}`);
+    if (attempt === 1) Utilities.sleep(2000);
+  }
+  throw new Error(`${label} 抓取失敗（重試後）：${lastErr.message}`);
+}
+
 /** 取降雨歷史，回傳 Map<dateKey, mm> */
 function fetchRainHistory_() {
-  const res = UrlFetchApp.fetch(CONFIG.RAIN_HISTORY_URL, { muteHttpExceptions: true });
-  if (res.getResponseCode() !== 200) {
-    throw new Error(`降雨歷史 HTTP ${res.getResponseCode()}`);
-  }
-  const arr = JSON.parse(res.getContentText());
+  const text = fetchTextWithRetry_(CONFIG.RAIN_HISTORY_URL, '降雨歷史');
+  const arr = JSON.parse(text);
   const map = {};
   for (const r of arr) map[r.d] = r.rain;
   return map;
@@ -316,11 +350,8 @@ function fetchRainHistory_() {
 
 /** 取氣溫歷史，回傳 Map<dateKey, {tmax, tmin}> */
 function fetchTempHistory_() {
-  const res = UrlFetchApp.fetch(CONFIG.TEMP_HISTORY_URL, { muteHttpExceptions: true });
-  if (res.getResponseCode() !== 200) {
-    throw new Error(`氣溫歷史 HTTP ${res.getResponseCode()}`);
-  }
-  const arr = JSON.parse(res.getContentText());
+  const text = fetchTextWithRetry_(CONFIG.TEMP_HISTORY_URL, '氣溫歷史');
+  const arr = JSON.parse(text);
   const map = {};
   for (const r of arr) map[r.d] = { tmax: r.tmax, tmin: r.tmin };
   return map;
@@ -799,8 +830,16 @@ function sendDailySummary_(today, result) {
   if (result.todayRainSoFar != null) {
     lines.push(`  今晨已雨 ...... ${result.todayRainSoFar.toFixed(1)} mm（過去 6 小時，CAAH60 大安森林站即時）`);
   }
-  lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
-  lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
+  if (result.past3 != null) {
+    lines.push(`  過去 3 日累計 ... ${result.past3.toFixed(1)} mm`);
+  } else {
+    lines.push('  過去 3 日累計 ... 暫時無法取得');
+  }
+  if (result.past5 != null) {
+    lines.push(`  過去 5 日累計 ... ${result.past5.toFixed(1)} mm`);
+  } else {
+    lines.push('  過去 5 日累計 ... 暫時無法取得');
+  }
   lines.push('');
 
   // 預報資訊
@@ -1041,8 +1080,10 @@ function log_(tag, dateStr, result) {
   if (result.reason) console.log(`    reason: ${result.reason}`);
   if (result.title)  console.log(`    title : ${result.title}`);
   if (result.forecast) console.log(`    forecast: tempToday=${result.forecast.tempToday}, popToday=${result.forecast.popToday}, popTomorrow=${result.forecast.popTomorrow}`);
-  console.log(`    rain: past3=${result.past3?.toFixed?.(1)} mm, past5=${result.past5?.toFixed?.(1)} mm`
-    + (result.todayRainSoFar != null ? `, todayRainSoFar=${result.todayRainSoFar.toFixed(1)} mm` : ''));
+  if (result.past3 != null || result.past5 != null) {
+    console.log(`    rain: past3=${result.past3?.toFixed?.(1)} mm, past5=${result.past5?.toFixed?.(1)} mm`
+      + (result.todayRainSoFar != null ? `, todayRainSoFar=${result.todayRainSoFar.toFixed(1)} mm` : ''));
+  }
 }
 
 function notifyError_(subject, err) {
