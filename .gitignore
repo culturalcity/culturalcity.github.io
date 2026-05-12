@@ -35,3 +35,11 @@ RAW/
 
 # 實驗用 demo / 草稿（不上線、不公開）
 demo/
+
+# clasp（Google Apps Script CLI）
+# .clasp.json 內含 SCRIPT_ID，雖非 secret 但對 public repo 是 attempt vector
+# 改用 .clasp.json.example 作為範本（commit 進 repo），新主委自行複製為 .clasp.json
+.clasp.json
+# ~/.clasprc.json 是 OAuth refresh token（絕對不能 commit）
+# 該檔放在 user home 目錄、預設不會進 repo，但 future-proof 還是 ignore
+.clasprc.json

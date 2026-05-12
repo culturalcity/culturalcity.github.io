@@ -1,6 +1,6 @@
 # 閱大安・自動澆水提醒（Apps Script）
 
-每天清晨 5 點自動判斷今天該不該澆水，該澆就在 `culturalcity85@gmail.com` 的主 Calendar 建一個 06:30 的事件，給總幹事看。
+每天早上 8–9 點之間自動判斷今天該不該澆水，該澆就在 `culturalcity85@gmail.com` 的主 Calendar 建一個 09:30 的事件，給總幹事看（對齊她 09:00 上班時間）。
 
 > 為什麼有這個工具？社區自動澆灌系統的雨水感測器壞了、原廠商倒閉，短期內用氣象資料模擬「該不該澆」的判斷，等之後找到第三方廠商裝實體感測器再退役。
 
@@ -8,17 +8,70 @@
 
 - **Google 帳號**：`culturalcity85@gmail.com`（社區共用帳號）
 - **Apps Script**：[script.google.com](https://script.google.com) 用 culturalcity85 登入後可看到專案「閱大安澆水提醒」
-- **觸發時機**：每天 05:00–06:00（台北）跑一次 `runDaily()`
+- **觸發時機**：每天 08:00–09:00（台北）跑一次 `runDaily()`
 - **資料來源**：
   - 歷史降雨：`https://raw.githubusercontent.com/culturalcity/culturalcity.github.io/main/utility/data/daily-rain.json`（GitHub Pages 同 repo，每天清晨 06:00 由 `scripts/fetch-weather.js` 自動更新）
+  - **即時雨量（Rule 0）**：CWA OpenData O-A0002-001 自動雨量站「大安森林」CAAH60，過去 6 小時累積
   - 預報：CWA OpenData F-D0047-063（臺北市 / 大安區 / 12 小時降雨機率＋最高溫度）
 - **輸出**：建在 culturalcity85 主 Calendar 的事件，標題以「💧」開頭
 
-## 第一次部署步驟（給接手的人）
+## 部署方式：clasp CLI（推薦）
+
+從本機 repo 用 [`@google/clasp`](https://github.com/google/clasp) 直接 push 到 Apps Script，不用每次手動複製貼上。已在 `package.json` 加 devDep，setup 跑一次就好。
+
+### 一次性 setup
+
+1. **在 culturalcity85 帳號開啟 Apps Script API**：用 culturalcity85 登入後開 [script.google.com/home/usersettings](https://script.google.com/home/usersettings)，把「Google Apps Script API」開到「**已開啟**」
+2. **複製 `.clasp.json.example` 為 `.clasp.json`**：
+   ```powershell
+   Copy-Item .clasp.json.example .clasp.json
+   ```
+3. **編輯 `.clasp.json` 填入 SCRIPT_ID**：從 Apps Script Editor URL 抓（`https://script.google.com/u/0/home/projects/<SCRIPT_ID>/edit`）
+4. **clasp login**：
+   ```powershell
+   npx clasp login --no-localhost
+   ```
+   - 印出一個 URL → 複製到登入了 culturalcity85 的瀏覽器完成 OAuth
+   - 完成後 Google redirect 到 `localhost:8888/?code=...`（會顯示「拒絕連線」是正常的）
+   - **從網址列複製整個 URL** 貼回 PowerShell prompt → Enter
+   - 看到「You are logged in as culturalcity85@gmail.com.」就成功
+5. **驗證**：
+   ```powershell
+   npx clasp list
+   ```
+   應該看到「閱大安澆水提醒」
+
+### 日常開發 / 部署
+
+改完 `watering-reminder.gs` 後：
+
+```powershell
+npx clasp push
+```
+
+一行搞定，server 端 code 立即更新，trigger 不會壞（trigger 綁 function name，不綁 file）。
+
+從 server 拉回本機（譬如別人在 Apps Script Editor 改了東西）：
+
+```powershell
+npx clasp pull
+```
+
+> ⚠️ `.clasp.json` 在 `.gitignore` 內（內含 SCRIPT_ID 對 public repo 算 attempt vector），不會被 commit。每個開發者本機自己留一份。`.clasp.json.example` 是 template，可以 commit。
+>
+> ⚠️ OAuth token 存在 `~/.clasprc.json`（user home 目錄，不在 repo），也不會被 commit。
+
+---
+
+## 部署方式：手動複製貼上（fallback）
+
+如果 clasp 用不起來（譬如要在沒裝 Node 的電腦上臨時修），也能手動複製貼上。
+
+### 第一次部署步驟（給接手的人）
 
 1. 用 culturalcity85@gmail.com 登入 Google
 2. 開 [script.google.com](https://script.google.com) → New project → 取名「閱大安澆水提醒」
-3. 把 `watering-reminder.gs` 整個檔案貼進 `Code.gs`（取代預設內容）
+3. 把 `watering-reminder.gs` 整個檔案貼進預設的 `Code.gs`（取代預設內容），然後在 Editor 把檔名 rename 為 `watering-reminder`
    - **務必按 `Ctrl + S` 存檔**——不存檔的話編輯器頂部不會出現「▶ 執行」按鈕和 function 下拉選單，後續步驟會卡住
    - 存檔成功後，標題旁的「尚未儲存變更」字樣會消失
 4. 左側齒輪 ⚙ Project Settings → Script properties → Add property：
@@ -35,7 +88,7 @@
      - Function: `runDaily`
      - Event source: Time-driven
      - Type: Day timer
-     - Time of day: `5am to 6am`
+     - Time of day: `8am to 9am`
    - **月報統計**
      - Function: `monthlySummary`
      - Event source: Time-driven
@@ -60,17 +113,23 @@
 
 ## 總幹事的工作流程
 
-每天早上 6 點手機響，會看到 culturalcity85 主 Calendar 的「💧 今日建議澆水」事件：
+每天早上 09:00 響鈴（事件 09:30 開始），總幹事看到 culturalcity85 主 Calendar 的「💧 今日建議澆水」事件 → 上樓判斷：
 
-1. 開閥門澆水
-2. 澆完開 Calendar，把事件**顏色改成「灰色 / Graphite」**——隔天清晨腳本會偵測，月報才會算她有澆完
-3. 沒看到事件 = 今天不需澆水（下雨 / 預報雨 / 中性日）
+| 情境 | 動作 | 行事曆顏色 |
+|---|---|---|
+| 有澆水 | 開閥門澆完 | 改「**石墨黑**」（Google Calendar 中文 UI 譯名；Graphite/灰色那個）|
+| 上樓看完不需澆（因雨等）| 不澆 | 改「**羅勒綠**」（Google Calendar 中文 UI 譯名；Basil/綠色那個）|
+| 沒看到事件 | 今天不需澆水 | — |
 
-事件顏色語意：
-- 🟧 橘色：高溫無雨，強烈建議澆
-- 🟦 藍色：連日少雨，一般建議澆
-- 🟨 黃色：預報資料缺，依歷史判斷建議澆
-- ⬜ 灰色：總幹事手動標記「已澆」
+隔天清晨 `checkYesterdayCompletion_` 會依顏色分類，月報統計用：
+- 石墨黑 → 已澆 (`done`)
+- 羅勒綠 → 看完未澆 (`cancelled`)
+- 維持原色（橘 / 藍 / 黃）→ 漏標 (`missed`，月報會警示)
+
+事件**建立時**的顏色（系統自動選）：
+- 🟧 橙橘色（Tangerine）：高溫無雨，強烈建議澆（Rule 3）
+- 🟦 藍色（Blueberry）：連日少雨，一般建議澆（Rule 4）
+- 🟨 黃色（Banana）：預報資料缺，依歷史判斷建議澆（備援）
 
 ## 預報精度日誌（Forecast Log）
 
