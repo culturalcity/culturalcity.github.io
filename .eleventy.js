@@ -74,6 +74,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");
+  eleventyConfig.addPassthroughCopy("robots.txt");
 
   // 把資料 JSON 檔也複製過去
   eleventyConfig.addPassthroughCopy("utility/data");

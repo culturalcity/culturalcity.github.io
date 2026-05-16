@@ -1,0 +1,26 @@
+# 閱大安社區網站 — 住戶限定（受 Cloudflare Worker Basic Auth 保護）
+# 所有爬蟲與 AI 訓練 bot 一律禁止爬取
+User-agent: *
+Disallow: /
+
+# 顯式禁止主要 AI 訓練/檢索 bot（雖然 User-agent: * 已覆蓋，明列防 bad actor）
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
