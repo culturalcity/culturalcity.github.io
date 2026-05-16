@@ -1,0 +1,566 @@
+---
+layout: minutes.njk
+permalink: /minutes/minutes-5-agm-1.html
+title: 第五屆第一次區分所有權人會議紀錄
+date: 2026-05-16
+extraStyles: |
+  /* ── HEADER ── */ .header{ background:var(--wg41);color:var(--wg1); padding:36px 40px 0; border-bottom:2px solid var(--wg11); position:relative;overflow:hidden; }
+  /* ── TABS ── */ .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
+  /* ── MAIN ── */ .main{max-width:900px;margin:0 auto;padding:32px 40px 72px;}
+  /* ── NOTICE TABLE ── */ .notice-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:15px;margin-bottom:24px;}
+  .notice-table tr{border-bottom:1px solid rgba(60,56,53,0.06);}
+  .notice-table tr:last-child{border-bottom:none;}
+  .notice-table th{ background:rgba(60,56,53,0.04);padding:10px 16px; font-weight:500;font-size:13px;letter-spacing:.08em; color:var(--wg9);text-align:left;width:90px;vertical-align:top; border-right:1px solid rgba(60,56,53,0.06); }
+  .notice-table td{padding:10px 16px;color:var(--wg11);vertical-align:top;line-height:1.75;}
+  .notice-agenda{list-style:none;padding:0;display:flex;flex-direction:column;gap:0;}
+  .notice-agenda li{ display:flex;gap:10px;padding:6px 0; border-bottom:1px solid rgba(60,56,53,0.05);font-size:15px;color:var(--wg11); }
+  .notice-agenda li:last-child{border-bottom:none;}
+  .na-num{font-size:12px;color:var(--wg9);letter-spacing:.04em;flex-shrink:0;padding-top:3px;min-width:52px;}
+  /* ── TOC ── */ .toc{ background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 18px;margin-bottom:24px; }
+  .toc-title{font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px;}
+  .toc-items{display:flex;flex-wrap:wrap;gap:5px 14px;}
+  .toc-item{ font-size:14px;color:var(--wg9);text-decoration:none; display:inline-flex;align-items:center;gap:4px;transition:color .15s; }
+  .toc-item:hover{color:var(--wg41);}
+  .toc-dot{width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0;}
+  .toc-dot.blue{background:var(--blue);}
+  .toc-dot.green{background:var(--dp);}
+  .toc-dot.warn{background:var(--warn);}
+  /* ── SECTION ── */ .section{margin-bottom:32px;}
+  .section-head{ display:flex;align-items:center;gap:10px; margin-bottom:16px;padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .section-roman{ font-size:12px;font-weight:700;letter-spacing:.16em; color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px; }
+  .section-title{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41);}
+  /* ── OPEN CARD ── */ .open-card{ background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 16px; font-size:15px;color:var(--wg9); }
+  /* ── STATS GRID ── */ .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px;}
+  .stat-label{font-size:12px;color:var(--wg9);margin-bottom:3px;}
+  .stat-val{font-size:17px;font-weight:700;color:var(--wg41);}
+  .stat-sub{font-size:12px;color:var(--wg9);margin-top:2px;}
+  .stat-val.pos{color:var(--dp);}
+  /* ── DATA TABLE ── */ .data-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:16px;}
+  .data-table thead tr{background:rgba(60,56,53,0.04);}
+  .data-table th{text-align:left;padding:7px 12px;color:var(--wg9);font-size:12px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
+  .data-table td{padding:7px 12px;border-bottom:1px solid rgba(60,56,53,0.05);color:var(--wg11);}
+  .data-table tbody tr:last-child td{border-bottom:none;}
+  .data-table .text-right{text-align:right;}
+  .data-table .row-highlight{background:rgba(43,74,107,0.04);font-weight:500;color:var(--wg41);}
+  /* ── ELECTION TABLE ── */ .election-table{width:100%;border-collapse:collapse;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;}
+  .election-table th{background:rgba(60,56,53,0.04);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left;}
+  .election-table td{padding:9px 14px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);vertical-align:top;}
+  .election-table tbody tr:last-child td{border-bottom:none;}
+  .election-table .winner{background:rgba(31,92,56,0.04);}
+  .vote-badge{display:inline-block;font-size:13px;font-weight:700;color:var(--wg41);background:rgba(60,56,53,0.08);border-radius:1px;padding:1px 7px;letter-spacing:.04em;}
+  .role-badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;white-space:nowrap;}
+  .role-chair{color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.06);}
+  .role-vice{color:var(--wg11);border-color:rgba(105,100,96,0.3);background:rgba(105,100,96,0.06);}
+  .role-finance{color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06);}
+  .role-supervise{color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06);}
+  .role-general{color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04);}
+  .role-alt{color:var(--wg9);border-color:var(--line);background:transparent;}
+  /* ── INFO BLOCK ── */ .info-block{ background:var(--white);border:1px solid var(--line); border-left:3px solid var(--wg11); border-radius:0 var(--radius) var(--radius) 0; padding:12px 16px;font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:12px; }
+  .info-block.blue{border-left-color:var(--blue);}
+  .info-block.warn{border-left-color:var(--warn);}
+  .info-block strong{color:var(--wg41);}
+  /* ── WORK TABLE ── */ .work-table{width:100%;border-collapse:collapse;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;}
+  .work-table th{background:rgba(60,56,53,0.04);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left;}
+  .work-table td{padding:9px 14px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);vertical-align:top;line-height:1.7;}
+  .work-table td:first-child{width:160px;color:var(--wg41);font-weight:500;white-space:nowrap;}
+  .work-table tbody tr:last-child td{border-bottom:none;}
+  /* ── SIGN & FOOTER ── */ .sign-row{display:flex;justify-content:flex-end;gap:60px;margin-top:32px;}
+  .sign-block{text-align:center;}
+  .sign-line{border-top:1px solid var(--wg11);padding-top:6px;min-width:110px;margin-bottom:4px;}
+  .sign-label{font-size:13px;color:var(--wg9);letter-spacing:.08em;}
+  .sign-name{font-size:14px;color:var(--wg41);margin-top:2px;}
+  .doc-footer{ border-top:1px solid var(--line);padding-top:16px;margin-top:32px; font-size:13px;color:var(--wg9); display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px; }
+  /* ── PRINT ── */ @media print{ body{background:white;}
+  .tabs,.toc,.back-link{display:none;}
+  #tab-notice{display:none !important;}
+venue: 2樓管委會使用空間
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-nav">
+      <a href="../index.html" class="back-link no-print">返回社區首頁</a>
+      <a href="../minutes/" class="back-link no-print">返回會議紀錄</a>
+    </div>
+    <div class="eyebrow">MEETING MINUTES・區分所有權人會議紀錄</div>
+    <h1>第五屆第一次區分所有權人會議</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+    <div class="header-rule"></div>
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <div class="meta-label">日期</div>
+        <div class="meta-val">115年5月16日（星期六）</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">時間</div>
+        <div class="meta-val">14:00 — 15:45</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">地點</div>
+        <div class="meta-val">2樓管委會使用空間</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">出席／應到</div>
+        <div class="meta-val">56 人 ／ 90 人</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">召集人／主席</div>
+        <div class="meta-val">第四屆主委 許文泰</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">記錄</div>
+        <div class="meta-val">社區主任 譚安順</div>
+      </div>
+      <div class="meta-cell" style="grid-column:span 2">
+        <div class="meta-label">列席</div>
+        <div class="meta-val">潤泰公寓大廈管理維護股份有限公司 鄒治平部長、楊莉莉部長</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="notice" onclick="switchTab('notice')">📋 開會通知單</button>
+      <button class="tab-btn" data-tab="minutes" onclick="switchTab('minutes')">📝 會議紀錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════ 開會通知單 ══════════ -->
+<div id="tab-notice" class="tab-content active">
+  <table class="notice-table">
+    <tr><th>發文日期</th><td>中華民國115年4月29日</td></tr>
+    <tr><th>發文字號</th><td>閱大安（管）字第 1150429001 號</td></tr>
+    <tr><th>受文者</th><td>閱大安各區分所有權人</td></tr>
+    <tr><th>會議事由</th><td>閱大安第五屆第一次區分所有權人會議</td></tr>
+    <tr><th>會議時間</th><td>115年5月16日（星期六）下午14:00 至 17:00（敬請住戶於 13:00 至 14:00 之間報到）</td></tr>
+    <tr><th>地點</th><td>閱大安社區 2F 管委會使用空間</td></tr>
+    <tr><th>召集人</th><td>閱大安管理委員會主任委員 許文泰</td></tr>
+    <tr><th>會議主席</th><td>主任委員 許文泰</td></tr>
+    <tr><th>議案討論</th><td>無</td></tr>
+    <tr><th>聯絡人員</th><td>社區主任 譚安順（02-2367-7065）</td></tr>
+    <tr>
+      <th>會議程序<br><span style="font-size:11px;color:var(--wg9);font-weight:400">附件一</span></th>
+      <td>
+        <ul class="notice-agenda">
+          <li><span class="na-num">一</span><span>區分所有權人報到（13:00 — 14:00，潤泰物管）</span></li>
+          <li><span class="na-num">二</span><span>主席報告出席戶數並宣佈開會（14:00 — 14:05）</span></li>
+          <li><span class="na-num">三</span><span>主席致詞與會務報告（14:05 — 14:35）</span></li>
+          <li><span class="na-num">四</span><span>年度財務報告（14:40 — 15:00）</span></li>
+          <li><span class="na-num">五</span><span>選舉第五屆管理委員會委員：（一）說明選舉方式（二）投票（三）推舉監票、唱票、計票人員（四）開票（五）主席宣佈當選委員名單（15:00 — 16:40）</span></li>
+          <li><span class="na-num">六</span><span>臨時動議（16:40 — 16:55）</span></li>
+          <li><span class="na-num">七</span><span>主席結論（16:55 — 17:00）</span></li>
+          <li><span class="na-num">八</span><span>散會（17:00）</span></li>
+        </ul>
+        <div style="font-size:12px;color:var(--wg9);margin-top:10px;line-height:1.7">
+          備註：為維護會議秩序，發言前請舉手，經會議主席指定後發言，發言時間請勿超過三分鐘。
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第五屆第一次區分所有權人會議通知單</span>
+    <span>中華民國115年4月29日</span>
+  </div>
+</div>
+
+<!-- ══════════ 會議紀錄 ══════════ -->
+<div id="tab-minutes" class="tab-content">
+
+  <!-- TOC -->
+  <div class="toc no-print">
+    <div class="toc-title">本次議程</div>
+    <div class="toc-items">
+      <a href="#section-open" class="toc-item"><span class="toc-dot"></span>出席狀況</a>
+      <a href="#section-report" class="toc-item"><span class="toc-dot blue"></span>主席致詞與會務報告</a>
+      <a href="#section-finance" class="toc-item"><span class="toc-dot blue"></span>年度財務報告</a>
+      <a href="#section-election" class="toc-item"><span class="toc-dot green"></span>管理委員選舉</a>
+      <a href="#section-motion" class="toc-item"><span class="toc-dot"></span>臨時動議</a>
+      <a href="#section-conclusion" class="toc-item"><span class="toc-dot"></span>主席結論</a>
+    </div>
+  </div>
+
+  <div class="info-block" style="margin-bottom:20px;">
+    📝 <strong>待補項目</strong>：第五屆委員職務推選結果（主任委員、副主任委員、監察委員、財務委員）將於委員會首次會議互推產生後另行公告。其餘議事內容已整理完成。
+  </div>
+
+  <!-- ══ 壹、開會 ══ -->
+  <div class="section" id="section-open">
+    <div class="section-head">
+      <span class="section-roman">壹</span>
+      <span class="section-title">主席宣布開會・出席狀況確認</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">出席區分所有權人數</div>
+        <div class="stat-val pos">56 人</div>
+        <div class="stat-sub">占全體 62.22%（親自 16・代理 40）</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">出席區分所有權比例</div>
+        <div class="stat-val pos">65.8%</div>
+        <div class="stat-sub">全體 2,515.94 坪</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">開議門檻</div>
+        <div class="stat-val pos">符合</div>
+        <div class="stat-sub">人數與區權比均達半數以上</div>
+      </div>
+    </div>
+    <div class="open-card">
+      本次出席區分所有權人（含代理出席）計 56 人，應出席總計 90 人；出席區分所有權比例 65.8%，合於本公寓大廈規約規定之開議額數，主席宣布開會。
+    </div>
+  </div>
+
+  <!-- ══ 貳、主席致詞與會務報告（議程 三）══ -->
+  <div class="section" id="section-report">
+    <div class="section-head">
+      <span class="section-roman">貳</span>
+      <span class="section-title">主席致詞與會務報告</span>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第四屆管理委員會（2025/7/1 成立、2026/6/30 任期結束）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <thead>
+        <tr><th>職務</th><th>姓名</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-highlight"><td>主任委員</td><td>許文泰</td></tr>
+        <tr><td>副主任委員</td><td>張美媛</td></tr>
+        <tr><td>監察委員</td><td>許奕偉</td></tr>
+        <tr><td>財務委員</td><td>范家瑋</td></tr>
+        <tr><td>一般委員</td><td>郭易芹</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:16px">處理事項統計（第四屆任期 2025/07 – 2026/04）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <thead>
+        <tr><th></th><th class="text-right">已結案</th><th class="text-right">未結案</th><th class="text-right">總計</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第三屆延續事項</td><td class="text-right">8</td><td class="text-right">3</td><td class="text-right">11</td></tr>
+        <tr><td>第四屆新事項</td><td class="text-right">24</td><td class="text-right">12</td><td class="text-right">36</td></tr>
+        <tr class="row-highlight"><td>合計</td><td class="text-right"><strong>32</strong></td><td class="text-right"><strong>15</strong></td><td class="text-right"><strong>47</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">行政換約</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>物業續約決定</td>
+          <td>
+            <strong>透明招標流程</strong>：16 家投標 → 4 家簡報 → 1 家議價；最終議價 +3.28%（305,000 → 315,000 元／月），決定與潤泰續約。<br>
+            <strong>入選理由</strong>（非價格因素）：服務延續性與穩定性、財務系統可靠（新都興系統 + 總公司財會支援）、不定期機動人員支援、集團技術備援（潤泰機電可備援太古華電）。
+          </td>
+        </tr>
+        <tr>
+          <td>總幹事人事穩定</td>
+          <td>
+            2025 年連續四任總幹事（13 個月內更迭 4 任）因健康或外部因素離職，社區陷入動盪。<strong>9 月份譚安順總幹事接任</strong>，本會以「至少穩定一年」為原則。目前現任總幹事仍在任，<strong>是社區成立以來在職時間第二長的總幹事</strong>。同步儲備未來總幹事人才。
+          </td>
+        </tr>
+        <tr>
+          <td>社區契約廠商明細</td>
+          <td>
+            本屆所有屆滿合約除大門保養外，均已完成比價或審查續約。<br>
+            主要合約：物業（潤泰 1,512,000/年）、保全（潤泰 2,268,000/年）、電梯保養（三菱 154,440/年，至 2027/11）、機電保養（太古華電 55,200/年，至 2028/01）、垃圾清運（極速環保 126,000/年，至 2027/01）、園藝維護（綠石 52,500/年，每年 7 次）、AED（新光電通 15,120/年）、公共意外責任險（國泰 6,350/年）、商業火險（富邦 4,620/年）。<br>
+            <strong>一樓大門保養（美德亞 28,000/年）合約待續約</strong>。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:20px">修繕維護</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>第四屆修繕明細</td>
+          <td>
+            2025/07 – 2026/04 共 10 個月已入帳修繕 16 筆，合計 <strong>155,528 元</strong>；另有已議定但 5、6 月始入帳項目 3 筆（信盛 B4 電梯旁牆面止漏 45,000、金耀後玻璃門 31,290、太古華電揚水馬達防震軟管 17,440），合計 93,730 元。<br>
+            events-based 全年化推估約 24-28 萬／年，已建模為「不定期修繕雜支」科目納入長期財務模型。
+          </td>
+        </tr>
+        <tr>
+          <td>水之修繕（本屆主軸）</td>
+          <td>
+            智慧水管家警示 → 委員會逐案處理。本屆共 8 起水系統相關事件，<strong>已議定／已支付 98,339 元</strong>：R2 水塔頂樓排水口漏水、R2 上水塔極棒故障（4,599）、B2 水塔定水位閥（25,200，太古 31,500 → 潤泰機電比價）、B4 水塔定水位閥（暫緩，報價偏高）、<strong>B4 電梯旁牆面滲水跨 9 次會議討論</strong>（議定 45,000，信盛保固 1 年觀察至梅雨後）、2F 公廁馬桶水箱（600）、RF 澆灌馬達漏水（5,500）、B4 揚水馬達防震軟管（17,440）。
+          </td>
+        </tr>
+        <tr>
+          <td>貨梯重現</td>
+          <td>
+            裝潢期保護板自 2023/10 第二屆討論「等所有裝潢戶完工才能拆」；本屆 2025/11/04 由 14F-5 工班一併拆除所有保護板。同時三菱新鍍鈦門板抵達更換（2025/09/30）；貨梯石材地板鋪設與瑕疵收尾。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:20px">節能環境</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025 氣候行動獎銀獎</td>
+          <td>
+            從 2024 零碳標竿獎典範獎延續至 <strong>2025 氣候行動獎銀獎</strong>。建構期措施：建築先天條件（公設冷氣 1 級能效、LED、車道防水閘門、玻璃隔熱膜、雨水回收）、設備管理（能源管理系統、電梯三分鐘待機、地下排風分段運轉）、空調溫控 27 度規則、地下室照明 232→87 支（−63%）。<br>
+            <strong>實績</strong>：節電 21.7%（省電費 66,223）、節水 43%（省水費 4,045）、公電契約容量 99→50 kW。<strong>獎金 90,000 元入本年度收入</strong>。
+          </td>
+        </tr>
+        <tr>
+          <td>2024→2025 趨勢觀察</td>
+          <td>
+            2025 全年用電 +4.8%、用水 +6.3%。原因：住戶入住率提升 + 2025 夏季氣溫偏高（用電）；下半年自動澆灌系統無意間被打開造成下半年天天澆水（用水）。
+          </td>
+        </tr>
+        <tr>
+          <td>進行中 5 項計畫</td>
+          <td>
+            ① <strong>每日水電公告</strong>（異常警示 + 住戶節能促進）<br>
+            ② <strong>B1-B4 感應式燈管</strong>全面推廣（微波感應，每日省 10+ 度）<br>
+            ③ <strong>澆灌系統制度化</strong>（CODiS 降雨 + 氣象署預測，Gmail + Google Calendar 提醒澆／不澆）<br>
+            ④ <strong>緊急避難圖設置</strong>（氣候行動獎要求項目，與社區 VI 一致）<br>
+            ⑤ <strong>節能減稅研議</strong>（能效標章 1 級可享 5 年房屋稅減免 5%，全社區 5 年估約 58.6 萬）
+          </td>
+        </tr>
+        <tr>
+          <td>面向未來研究項目</td>
+          <td>
+            4 項待時機成熟再評估：<strong>風電</strong>（市中心低頻噪音與震動疑慮）、<strong>儲能設施</strong>（評估新興技術）、<strong>電梯電力回生系統</strong>（下降時動能回收）、<strong>綠屋頂</strong>（樓地板隔熱、可食地景、社區交流）。<br>
+            2024/06 太陽能評估後因鄰棟遮蔽嚴重、日照時數不足，<strong>不適合導入太陽能光電</strong>。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:20px">消防安全</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>地下室車道反光鏡安全改善</td>
+          <td>
+            市府公有設施，反光鏡底座螺帽突出造成行車／行人安全隱患。研議三個方案排除後採折衷方案：<strong>保留原鏡與固定方式、原址左移 15cm（市府實際移 20cm）</strong>，將底座螺帽移離車輛／行人路徑。跨 4 次會議協調完成。
+          </td>
+        </tr>
+        <tr>
+          <td>電動車消防防災研議</td>
+          <td>
+            研議 2 個方案：<br>
+            <strong>① 防火毯</strong>（每張 58,000 元，6×9m、20kg、需 2 人部署）：委員會研議後認為<strong>實務無法部署</strong>——電動車起火黃金時間短、爆燃風險高，無人能安全部署 20kg 毯子。保管再多張，實際無法成為防護機制。<br>
+            <strong>② 細水霧滅火系統</strong>（日熙防災報價 買斷 140 萬／租賃 36 期 152 萬，不含每車位拉線 7,000 元）：真正能起作用之方案，但代價大。委員會研議未立即導入之理由——（1）住戶緊迫感未到位（台灣尚未發生韓國式電動車延燒整棟之案例）；（2）屬區權會等級支出。<br>
+            <strong>委員會決議</strong>：防火毯實務不可行，不採；細水霧屬區權會等級支出，<strong>保留至未來區權會討論</strong>。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:20px">工程評估</div>
+    <table class="work-table">
+      <thead>
+        <tr><th>事項</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>大樓外牆清洗・住戶意向徵詢</td>
+          <td>
+            <strong>現況</strong>：屋齡 4 年，外觀目前仍屬乾淨；已比價 4 家廠商，價格落在 20-38 萬元之間；若執行屬非經常性支出，需於下年度預算編列；若決議執行，預計可於 2027 農曆年前完工。<br>
+            <strong>委員會 2026/04 第九次會議傾向</strong>：暫緩執行（屋齡 5-6 年時再評估）。<br>
+            <strong>本次區權會徵詢</strong>：非正式表決，僅就「是否該洗」徵詢現場意向，作為第五屆委員會後續評估之方向。若住戶意向偏向贊成執行，由第五屆委員會選定廠商與方案後另行公告。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 參、年度財務報告（議程 四）══ -->
+  <div class="section" id="section-finance">
+    <div class="section-head">
+      <span class="section-roman">參</span>
+      <span class="section-title">年度財務報告</span>
+    </div>
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第一幕｜第四會計年度執行進度（2025/7/1 – 2026/4/30，10 個月實際）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <tbody>
+        <tr><td>累計總收入</td><td class="text-right">442.5 萬元（月均 44.2 萬）</td></tr>
+        <tr><td>累計總支出</td><td class="text-right">436.9 萬元（月均 43.7 萬）</td></tr>
+        <tr class="row-highlight"><td>帳面累計損益</td><td class="text-right" style="color:var(--dp)">+5.5 萬元</td></tr>
+        <tr><td>維修基金提撥（每月 6 萬，已計入支出）</td><td class="text-right">60.0 萬元</td></tr>
+        <tr class="row-highlight"><td>實質累積（帳面 + 維修基金提撥）</td><td class="text-right" style="color:var(--dp)">+65.5 萬元</td></tr>
+        <tr><td>業主權益總計（2026/4/30）</td><td class="text-right">609.6 萬元</td></tr>
+        <tr><td>資產總計（2026/4/30）</td><td class="text-right">637.8 萬元</td></tr>
+        <tr><td>應收帳款期末餘額</td><td class="text-right">0 元（住戶當月繳清，收齊率 100%）</td></tr>
+        <tr><td>氣候行動獎獎金</td><td class="text-right">90,000 元（入年度收入）</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">四個虧損月份原因</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <tbody>
+        <tr><td><strong>2025/08　−66,513 元</strong></td><td>社區維護 42,000 + 修繕 41,299 集中（B2 定水位閥、上水塔極棒、UPS 電池、9F 金屬欄杆等）</td></tr>
+        <tr><td><strong>2025/11　−16,600 元</strong></td><td>社區維護 24,000；雜項偏高</td></tr>
+        <tr><td><strong>2025/12　−27,683 元</strong></td><td>年度保險集中：AED、商業火險、公共意外險</td></tr>
+        <tr><td><strong>2026/04　−16,367 元</strong></td><td>地下停車場燈管更新 17,100 + 消防燈具更新 7,710</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第二幕｜資產分布（2026/4/30，六個戶頭，總資產 637.8 萬）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <thead>
+        <tr><th>戶頭</th><th>類型</th><th>用途</th><th class="text-right">金額（元）</th><th class="text-right">占比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>永豐 #31219</td><td>活儲</td><td>管理費收支主戶</td><td class="text-right">613,718</td><td class="text-right">9.6%</td></tr>
+        <tr><td>永豐 #31202</td><td>活儲</td><td>公共基金</td><td class="text-right">392,980</td><td class="text-right">6.2%</td></tr>
+        <tr><td>永豐 #33932</td><td>活儲</td><td>充電樁公用線路維護專戶</td><td class="text-right">44,505</td><td class="text-right">0.7%</td></tr>
+        <tr><td>零用金</td><td>現金</td><td>日常零星支出</td><td class="text-right">10,000</td><td class="text-right">0.2%</td></tr>
+        <tr><td>在途未入帳</td><td>在途</td><td>智生活信用卡待入帳</td><td class="text-right">16,632</td><td class="text-right">0.3%</td></tr>
+        <tr><td>永豐 #31219</td><td>定存</td><td>一年期定期存款</td><td class="text-right">1,700,000</td><td class="text-right">26.7%</td></tr>
+        <tr><td>永豐 #31202</td><td>定存</td><td>一年期定期存款</td><td class="text-right">3,600,000</td><td class="text-right">56.4%</td></tr>
+        <tr class="row-highlight"><td colspan="3">資產合計</td><td class="text-right"><strong>6,377,835</strong></td><td class="text-right"><strong>100.0%</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第五會計年度預算編列（2026/7/1 – 2027/6/30）</div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <tbody>
+        <tr><td>編列方法</td><td>物業＋保全切月（上半年現價、下半年依續約假設 +3.28%）；其他合約現行價</td></tr>
+        <tr><td>年支出</td><td class="text-right">4,696,792 元</td></tr>
+        <tr><td>結餘（帳面）</td><td class="text-right">+302,300 元</td></tr>
+        <tr><td>維修基金提撥</td><td class="text-right">720,000 元（每月 6 萬累積）</td></tr>
+        <tr><td>實質結餘（扣維修基金提撥）</td><td class="text-right">-417,700 元（接段 4 長期論述起點）</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">第三幕｜46 年長期財務展望（互動模型展示）</div>
+    <div class="info-block blue" style="margin-bottom:12px;">
+      <strong>會議現場演示</strong>：切換至社區內部「<a href="../finance/長期財務模型.html" style="color:var(--blue);text-decoration:underline">長期財務模型</a>」工具，即時演算 46 年資產走勢，住戶可現場提問試算不同方案。
+    </div>
+    <table class="data-table" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;">
+      <tbody>
+        <tr><td>46 年（2026-2072）累積支出</td><td class="text-right">6.68 億元名目</td></tr>
+        <tr><td>結構占比</td><td>經常性支出 86% ／ 不定期修繕雜支 7% ／ 非經常性支出 7%</td></tr>
+        <tr class="row-highlight"><td>主推方案</td><td>5 年週期 × 4.2%（起 180、2062 凍結 750 元）</td></tr>
+        <tr><td>主推方案軌跡</td><td>2027: 180 → 2032: 220 → 2037: 270 → 2042: 330 → 2047: 410 → 2052: 500 → 2057: 610 → 2062: 750（凍結至都更）</td></tr>
+        <tr><td>主推方案結果</td><td>50 年資產 +555 萬，46 年內全程不破產、不跌警戒</td></tr>
+        <tr><td>設計哲學</td><td>「死後不留遺產」— cover 2042 + 2062 兩波大修，之後凍結讓資產自然消耗至都更時點</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-block warn">
+      <strong>本議程僅為意見交流，不正式議決費率調整</strong>。具體費率調整案由新一屆委員會提出，於下次區權會議決。本次會議僅完成住戶意見蒐集與長期模型透明化。
+    </div>
+  </div>
+
+  <!-- ══ 肆、第五屆管理委員選舉（議程 五）══ -->
+  <div class="section" id="section-election">
+    <div class="section-head">
+      <span class="section-roman">肆</span>
+      <span class="section-title">第五屆管理委員選舉</span>
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">選舉規則依據（規約第十二條）</div>
+    <div class="info-block" style="margin-bottom:16px;">
+      <strong>第一項第一款：</strong>主任委員、副主任委員、監察委員及財務委員，由具區分所有權人身分或其配偶或直系血親之住戶任之，一般委員由住戶任之。<br>
+      <strong>第二項第一款：</strong>採無記名複記法選舉，以獲得較多票數者為當選人。
+    </div>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px">選舉結果（當選委員共 5 名）</div>
+    <table class="election-table">
+      <thead>
+        <tr><th>戶別</th><th>姓名</th><th style="text-align:right">得票數</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr class="winner"><td>85號 8樓</td><td>蔡貞貞／許文泰</td><td style="text-align:right"><span class="vote-badge">15 票</span></td><td>連任</td></tr>
+        <tr class="winner"><td>85號 6樓之1</td><td>潘以文</td><td style="text-align:right"><span class="vote-badge">9 票</span></td><td></td></tr>
+        <tr class="winner"><td>85號 7樓之2</td><td>許承基</td><td style="text-align:right"><span class="vote-badge">8 票</span></td><td></td></tr>
+        <tr class="winner"><td>85號 15樓之2</td><td>高浩哲</td><td style="text-align:right"><span class="vote-badge">8 票</span></td><td></td></tr>
+        <tr class="winner"><td>85號 3樓之6</td><td>張美媛／賴思璇</td><td style="text-align:right"><span class="vote-badge">7 票</span></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-size:12px;letter-spacing:.18em;color:var(--wg9);margin-bottom:8px;margin-top:16px">候補委員（共 2 名）</div>
+    <table class="election-table" style="margin-bottom:16px;">
+      <thead>
+        <tr><th>戶別</th><th>姓名</th><th style="text-align:right">得票數</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>85號 14樓</td><td>陳克莊</td><td style="text-align:right"><span class="vote-badge">6 票</span></td></tr>
+        <tr><td>85號 5樓之3</td><td>潘以如</td><td style="text-align:right"><span class="vote-badge">1 票</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-block" style="margin-bottom:16px;">
+      <strong>第五屆委員職務推選結果</strong>：依規約第十二條，主任委員、副主任委員、監察委員、財務委員職務由委員會於首次會議互推產生，結果將另行公告。
+    </div>
+  </div>
+
+  <!-- ══ 伍、臨時動議（議程 六）══ -->
+  <div class="section" id="section-motion">
+    <div class="section-head">
+      <span class="section-roman">伍</span>
+      <span class="section-title">臨時動議及決議</span>
+    </div>
+    <div class="open-card">本次會議無臨時動議。</div>
+  </div>
+
+  <!-- ══ 陸、主席結論（議程 七）══ -->
+  <div class="section" id="section-conclusion">
+    <div class="section-head">
+      <span class="section-roman">陸</span>
+      <span class="section-title">主席結論</span>
+    </div>
+    <div class="open-card">無。</div>
+  </div>
+
+  <!-- ══ 柒、散會（議程 八）══ -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-roman">柒</span>
+      <span class="section-title">散會</span>
+    </div>
+    <div class="open-card">下午 15 時 45 分散會。</div>
+  </div>
+
+  <!-- ══ 附件 ══ -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-roman" style="background:var(--blue)">附件</span>
+      <span class="section-title">會議簡報檔</span>
+    </div>
+    <a href="agm-5-1-deck.html" class="info-block blue" style="display:block;text-decoration:none;color:var(--wg11);">
+      🎞 <strong>第五屆第一次區分所有權人會議簡報</strong><br>
+      包含議程 03 長期財務展望（長期財務模型工具演示）等完整會議內容投影片。
+    </a>
+  </div>
+
+  <div class="sign-row">
+    <div class="sign-block">
+      <div class="sign-line"></div>
+      <div class="sign-label">主席</div>
+      <div class="sign-name">許文泰</div>
+    </div>
+    <div class="sign-block">
+      <div class="sign-line"></div>
+      <div class="sign-label">記錄</div>
+      <div class="sign-name">譚安順</div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span>閱大安管理委員會・第五屆第一次區分所有權人會議紀錄（骨架版本）</span>
+    <span>中華民國115年5月16日</span>
+  </div>
+
+</div><!-- /tab-minutes -->
+</div><!-- /main -->

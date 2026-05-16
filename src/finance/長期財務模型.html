@@ -156,7 +156,7 @@ td{padding:7px 10px;}
     <button class="btn btn-primary" onclick="applyPreset('proposal')">📌 主推方案：5 年週期 × 4.2%（起 180、2062 凍結 750 元）</button>
     <button class="btn" onclick="applyPreset('proposal_uncapped')">↔ 對比：不凍結版（持續調漲至 2072）</button>
   </div>
-  <div style="font-size:12px;color:var(--wg9);margin-bottom:16px">兩段式設計：<strong>2027-2062 每 5 年調漲一次（×4.2%）</strong>累積 sinking fund cover 屋齡 20（2042）跟屋齡 40（2062）兩波大修；<strong>2062 起費率凍結在 750 元</strong>不再調漲，讓累積資金順勢消耗至都更時點。47 年內全程不破產、不跌警戒；50 年資產約 555 萬接近 0，符合「死後不留遺產」設計。<br>按「對比」按鈕可看「若不凍結繼續調漲」的結果——終費率拉到 1,130 元、50 年資產累積到 4,394 萬（over-fund，違反「死後不留遺產」原則）。</div>
+  <div style="font-size:12px;color:var(--wg9);margin-bottom:16px">兩段式設計：<strong>2027-2062 每 5 年調漲一次（×4.2%）</strong>累積 sinking fund cover 屋齡 20（2042）跟屋齡 40（2062）兩波大修；<strong>2062 起費率凍結在 750 元</strong>不再調漲，讓累積資金順勢消耗至都更時點。46 年內全程不破產、不跌警戒；50 年資產約 555 萬接近 0，符合「死後不留遺產」設計。<br>按「對比」按鈕可看「若不凍結繼續調漲」的結果——終費率拉到 1,130 元、50 年資產累積到 4,394 萬（over-fund，違反「死後不留遺產」原則）。</div>
 
   <div class="sl sl-gap">其他變體（情境試算用）</div>
   <div style="font-size:12px;letter-spacing:.12em;color:var(--wg11);margin-bottom:8px">等差調法</div>
@@ -551,7 +551,7 @@ function renderRateDisclaimer(){
       `，之後平均每 <strong>${avgInterval} 年</strong>調整一次，平均調幅 <strong>${avgAdjPct.toFixed(1)}%</strong>。`;
   }
 
-  // 第 47 年終端評估
+  // 第 50 年終端評估
   const finalRow = cf[cf.length-1];
   const finalAmt = Math.round(finalRow.assets/10000).toLocaleString();
   const finalRate = sched[sched.length-1].rate;
@@ -562,7 +562,7 @@ function renderRateDisclaimer(){
   const minAmt = Math.round(minRow.assets/10000).toLocaleString();
   let safetyMsg;
   if(minRow.assets >= safety){
-    safetyMsg = `<span class="dp">✓</span> 47 年內最低資產 ${minAmt} 萬（屋齡 ${minRow.age} 年，${minRow.year}），仍高於 ${(safety/10000).toLocaleString()} 萬警戒線。`;
+    safetyMsg = `<span class="dp">✓</span> 46 年內最低資產 ${minAmt} 萬（屋齡 ${minRow.age} 年，${minRow.year}），仍高於 ${(safety/10000).toLocaleString()} 萬警戒線。`;
   } else {
     const capexNames = (minRow.capexDetail||[]).map(c=>c.name.split('（')[0]).slice(0,3).join('、');
     const capexAmt = minRow.capex>0 ? `${Math.round(minRow.capex/10000).toLocaleString()} 萬` : '';
