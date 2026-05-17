@@ -2,6 +2,12 @@
 // 文件: https://www.11ty.dev/docs/config/
 
 module.exports = function(eleventyConfig) {
+  // ── markdown-it 改成 CJK 友善：解決 **中文「夾全形標點」** 不渲染粗體的問題
+  // 預設 CommonMark flanking rule 在 CJK 字 + 全形標點交界時會判定 ** 開閉失敗
+  const md = require("markdown-it")({ html: true, linkify: true, breaks: false })
+    .use(require("markdown-it-cjk-friendly").default);
+  eleventyConfig.setLibrary("md", md);
+
   // ── split filter（Nunjucks 沒有內建）──
   eleventyConfig.addFilter("split", function(s, sep) {
     return String(s || "").split(sep);
