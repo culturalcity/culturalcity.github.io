@@ -1,0 +1,16 @@
+{
+  "name": "yda-cloud-decrypt",
+  "version": "1.0.0",
+  "description": "閱大安公用事業帳單 PDF 解密與類型辨識服務（Cloud Run）",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mupdf": "^1.27.0"
+  }
+}
