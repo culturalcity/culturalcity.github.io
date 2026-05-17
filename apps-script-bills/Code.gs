@@ -26,14 +26,15 @@ const CONFIG = {
   notifyTo: Session.getActiveUser().getEmail(),
   // Gmail 搜尋條件：含 PDF 附件、未標處理、來自台電/水/中華電信
   searchQuery: 'has:attachment filename:pdf -label:帳單已歸檔 -label:帳單需檢視 ' +
-               '(from:service@taipower.com.tw OR from:service-bill@water.gov.taipei ' +
-               ' OR from:billing_service@cht.com.tw) newer_than:60d',
+               '(from:ebill@ebppsmtp.taipower.com.tw OR from:ebill@water.gov.taipei ' +
+               ' OR from:cht_ebpp@cht.com.tw) newer_than:60d',
 };
 
 /** 主要入口：被 trigger 呼叫，或手動執行做測試。 */
 function processBills() {
   const log = [];
   const successes = [];
+  const skipped = [];
   const errors = [];
 
   const label = getOrCreateLabel(CONFIG.processedLabel);
@@ -44,7 +45,7 @@ function processBills() {
 
   for (const thread of threads) {
     let threadHadError = false;
-    let threadHadSuccess = false;
+    let threadHandled = false; // 有附件被處理（無論新增或 duplicate）
     for (const msg of thread.getMessages()) {
       const atts = msg.getAttachments();
       for (const att of atts) {
@@ -58,42 +59,47 @@ function processBills() {
           }
           const savedTo = saveToDrive(result);
           if (savedTo === 'duplicate') {
+            skipped.push(result.filename);
             log.push(`Skip duplicate: ${result.filename}`);
           } else {
             successes.push(`${result.type}: ${result.filename}`);
-            threadHadSuccess = true;
           }
+          threadHandled = true;
         } catch (e) {
           errors.push(`[${att.getName()}] ${e.toString()}`);
           threadHadError = true;
         }
       }
     }
-    if (threadHadSuccess && !threadHadError) {
-      thread.addLabel(label);
-    } else if (threadHadError) {
+    // 標籤策略：
+    //   有 error → 「帳單需檢視」（thread 下次還會被抓回來重試）
+    //   無 error 但有任何處理（新增或 duplicate）→ 「帳單已歸檔」（下次不再抓）
+    if (threadHadError) {
       thread.addLabel(failLabel);
+    } else if (threadHandled) {
+      thread.addLabel(label);
     }
   }
 
-  if (successes.length > 0 || errors.length > 0) {
-    sendSummary(successes, errors);
+  // 摘要信只在「有任何新動作」時寄：新增、跳過、錯誤都算
+  if (successes.length > 0 || skipped.length > 0 || errors.length > 0) {
+    sendSummary(successes, skipped, errors);
   }
   log.forEach(l => Logger.log(l));
-  return { successes: successes.length, errors: errors.length };
+  return { successes: successes.length, skipped: skipped.length, errors: errors.length };
 }
 
 /** 呼叫 Cloud Run 解密 + 抽資料。 */
 function decryptAndExtract(attachment) {
   const url = CONFIG.decryptUrl;
   if (!url) throw new Error('CLOUD_RUN_URL Script Property 未設定');
+  const secret = PropertiesService.getScriptProperties().getProperty('SHARED_SECRET');
+  if (!secret) throw new Error('SHARED_SECRET Script Property 未設定');
   const b64 = Utilities.base64Encode(attachment.getBytes());
-  // 用 OIDC identity token 認證 Cloud Run（要求 service 設定 Allow only authenticated）
-  const token = ScriptApp.getIdentityToken();
   const response = UrlFetchApp.fetch(url.replace(/\/$/, '') + '/decrypt-bill', {
     method: 'post',
     contentType: 'application/json',
-    headers: token ? { Authorization: 'Bearer ' + token } : {},
+    headers: { 'X-Auth-Secret': secret },
     payload: JSON.stringify({ pdf_b64: b64 }),
     muteHttpExceptions: true,
   });
@@ -140,15 +146,20 @@ function saveToDrive(result) {
   return 'saved';
 }
 
-function sendSummary(successes, errors) {
-  const subject = `[閱大安] 帳單歸檔 ✓${successes.length}` + (errors.length ? ` ⚠${errors.length}` : '');
+function sendSummary(successes, skipped, errors) {
+  const subject = `[閱大安] 帳單歸檔 ✓${successes.length}` +
+    (skipped.length ? ` ⊙${skipped.length}` : '') +
+    (errors.length ? ` ⚠${errors.length}` : '');
   let body = '';
   if (successes.length > 0) {
-    body += '已歸檔：\n' + successes.map(s => '  ✓ ' + s).join('\n') + '\n\n';
+    body += '本次新增歸檔：\n' + successes.map(s => '  ✓ ' + s).join('\n') + '\n\n';
+  }
+  if (skipped.length > 0) {
+    body += 'Drive 已有同名檔、跳過：\n' + skipped.map(s => '  ⊙ ' + s).join('\n') + '\n\n';
   }
   if (errors.length > 0) {
     body += '失敗或需檢視：\n' + errors.map(e => '  ⚠ ' + e).join('\n') + '\n\n';
-    body += '相關信件已加上 "帳單需檢視" 標籤，請至 Gmail 查看。';
+    body += '相關信件已加上「帳單需檢視」標籤，請至 Gmail 查看。';
   }
   GmailApp.sendEmail(CONFIG.notifyTo, subject, body);
 }
@@ -175,4 +186,34 @@ function debugSearch() {
   for (const t of threads) {
     Logger.log('  - ' + t.getFirstMessageSubject() + ' (' + t.getMessages().length + ' msgs)');
   }
+}
+
+/**
+ * 一次性：在 culturalcity85 主 Calendar 建一個提醒事件，
+ * 提示 GCP 免費試用即將到期（試用結束前 7 天）、需手動升級成 pay-as-you-go。
+ * 試用結束日 = 帳號開通日 + 90 天。請改下方 trialEndDate 為你的實際結束日。
+ */
+function addExpiryReminder() {
+  // ⚠ 改成你的試用實際結束日（GCP 帳號開通日 + 90 天）
+  const trialEndDate = new Date('2026-08-16');
+  // 提醒設在試用結束前 7 天
+  const reminderDate = new Date(trialEndDate.getTime() - 7 * 86400000);
+
+  const calendar = CalendarApp.getDefaultCalendar();
+  const title = '⚠️ GCP 免費試用即將到期（7 天後）— 須升級成 pay-as-you-go';
+  const description =
+    '閱大安公用事業帳單自動歸檔（Cloud Run）所在的 GCP 專案 cultural-city-utility 即將結束 90 天免費試用。\n\n' +
+    '若不升級，' + Utilities.formatDate(trialEndDate, 'Asia/Taipei', 'yyyy-MM-dd') + ' 起 Cloud Run 服務會被自動暫停，\n' +
+    '帳單自動歸檔會失效（Apps Script 呼叫 Cloud Run 全部 503 失敗）。\n\n' +
+    '升級步驟：\n' +
+    '1. https://console.cloud.google.com/billing?project=cultural-city-utility\n' +
+    '2. 找「升級／Upgrade」按鈕 → 點 → 確認\n' +
+    '3. 帳號變成 pay-as-you-go 狀態\n\n' +
+    '升級後仍 $0 / 月（Cloud Run 用量在 Always Free 配額內）。';
+
+  const event = calendar.createAllDayEvent(title, reminderDate);
+  event.setDescription(description);
+  event.addEmailReminder(60 * 9); // 9 小時前寄 email（白天看到）
+
+  Logger.log('Calendar event created on ' + Utilities.formatDate(reminderDate, 'Asia/Taipei', 'yyyy-MM-dd'));
 }

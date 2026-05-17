@@ -17,6 +17,20 @@ const app = express();
 app.use(express.json({ limit: '20mb' }));
 
 const PASSWORD = process.env.PDF_PASSWORD || '0989648285';
+const SHARED_SECRET = process.env.SHARED_SECRET || '';
+
+// 共享密鑰中介層：除了 /health 之外都要帶 X-Auth-Secret header
+app.use((req, res, next) => {
+  if (req.path === '/health') return next();
+  if (!SHARED_SECRET) {
+    console.error('SHARED_SECRET env var not set');
+    return res.status(500).json({ error: 'Service misconfigured' });
+  }
+  if (req.header('x-auth-secret') !== SHARED_SECRET) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  next();
+});
 
 const TAIPOWER_METER = {
   '00-81-5173-01-9': '大公電',
@@ -58,15 +72,20 @@ function extractText(pdfBytes) {
 }
 
 // ── 類型偵測 ──
+// 中華電信 / 台電的「繳費通知」與「繳費結果通知」字眼可能在內文 footer 重複出現，
+// 因此偵測只看 PDF 開頭 800 字（標題與抬頭區）以避免誤判。
 function detectType(text) {
-  if (/\d{3}\s*年\s*\d{1,2}\s*月\s*電費通知/.test(text)) return 'taipower-bill';
-  if (/\d{3}\s*年\s*\d{1,2}\s*月\s*繳費憑證/.test(text) && /電子帳單/.test(text)) return 'taipower-receipt';
-  if (/Electricity Bill/.test(text) && !/Payment Receipt/.test(text)) return 'taipower-bill';
-  if (/Payment Receipt/.test(text) && /電子帳單/.test(text)) return 'taipower-receipt';
-  if (/水費電子繳費憑證|Payment Voucher/.test(text)) return 'water-receipt';
-  if (/水費電子通知單|水費電子帳單|Electronic Notice/.test(text)) return 'water-bill';
-  if (/繳費結果通知/.test(text) && /中華電信/.test(text)) return 'telecom-receipt';
-  if (/繳費通知/.test(text) && /中華電信/.test(text)) return 'telecom-bill';
+  const head = text.substring(0, 800);
+  if (/\d{3}\s*年\s*\d{1,2}\s*月\s*電費通知/.test(head)) return 'taipower-bill';
+  if (/\d{3}\s*年\s*\d{1,2}\s*月\s*繳費憑證/.test(head) && /電子帳單/.test(head)) return 'taipower-receipt';
+  if (/Electricity Bill/.test(head) && !/Payment Receipt/.test(head)) return 'taipower-bill';
+  if (/Payment Receipt/.test(head) && /電子帳單/.test(head)) return 'taipower-receipt';
+  if (/水費電子繳費憑證|Payment Voucher/.test(head)) return 'water-receipt';
+  if (/水費電子通知單|水費電子帳單|Electronic Notice/.test(head)) return 'water-bill';
+  if (/中華電信/.test(head)) {
+    if (/繳費結果通知/.test(head)) return 'telecom-receipt';
+    if (/繳費通知/.test(head)) return 'telecom-bill';
+  }
   return 'unknown';
 }
 
@@ -154,7 +173,7 @@ function buildWaterName(type, info) {
   const periodTag = (info.periodStart && info.periodEnd)
     ? `（${rocFullDateToYmd(info.periodStart)}-${rocFullDateToYmd(info.periodEnd)}）`
     : '';
-  const docLabel = type === 'water-receipt' ? '繳費憑證' : '電子帳單';
+  const docLabel = type === 'water-receipt' ? '電子繳費憑證' : '電子帳單';
   return `臺北自來水事業處水費${docLabel} ${yyyy}-${mm}${periodTag}.pdf`;
 }
 
