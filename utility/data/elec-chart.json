@@ -28,8 +28,8 @@
     },
     {
       "label": "115年（2026）",
-      "data": [29725,35671,33842,null,null,null,null,null,null,null,null,null],
-      "kwh":  [5560,7120,6640,null,null,null,null,null,null,null,null,null],
+      "data": [29725,35671,33842,35061,null,null,null,null,null,null,null,null],
+      "kwh":  [5560,7120,6640,6960,null,null,null,null,null,null,null,null],
       "backgroundColor": "rgba(43,74,107,0.85)"
     }
   ]

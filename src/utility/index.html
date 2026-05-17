@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 permalink: /utility/index.html
-title: 水電用量分析
+title: 公共事業
 extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 extraStyles: |
@@ -74,6 +74,20 @@ extraStyles: |
     .drive-text span{font-size:12px;color:var(--wg9);letter-spacing:.08em;}
     .drive-cta{font-size:13px;color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
     .drive-link:hover .drive-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+    /* SECTIONS within tab */
+    .util-section{margin-bottom:36px;}
+    .util-section-hd{font-size:14px;font-weight:600;letter-spacing:.08em;color:var(--wg41);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+    .util-section-hd .util-section-sub{font-size:12px;font-weight:400;color:var(--wg9);letter-spacing:.04em;}
+    /* CHART CONTROLS（時間粒度切換）*/
+    .chart-controls{display:flex;gap:0;margin-bottom:12px;}
+    .chart-controls button{padding:6px 16px;font-size:13px;background:var(--white);border:1px solid var(--line);border-right:0;cursor:pointer;font-family:'Noto Sans TC',sans-serif;color:var(--wg11);letter-spacing:.04em;transition:all .15s;}
+    .chart-controls button:last-child{border-right:1px solid var(--line);}
+    .chart-controls button:hover{background:var(--wg1);}
+    .chart-controls button.active{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
+    /* SCROLLABLE CHART */
+    .chart-scroll{overflow-x:auto;width:100%;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+    .chart-scroll-inner{position:relative;height:280px;}
+    .chart-meta{font-size:12px;color:var(--wg9);margin-top:6px;}
     /* TOOL CARDS */
     .tool-section{margin-bottom:28px;}
     .tool-section-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
@@ -92,36 +106,59 @@ extraStyles: |
 <div class="header">
   <div class="header-inner">
     <a href="../index.html" class="back-link">返回社區主頁</a>
-    <div class="header-eyebrow">UTILITY &amp; ELECTRICITY ANALYSIS</div>
-    <h1>水電用量分析</h1>
+    <div class="header-eyebrow">PUBLIC UTILITIES</div>
+    <h1>公共事業</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
   </div>
 </div>
 
 <div class="main">
 
-  <!-- 分析工具 -->
-  <div class="tool-section">
-    <div class="tool-section-label">用電基準查詢</div>
-    <div class="tool-grid">
-      <a href="./electricity-target.html" class="tool-card">
-        <div class="tool-accent target"></div>
-        <div class="tool-body">
-          <strong>用電目標速查表</strong>
-          <span>輸入氣溫即查回歸基準值與警戒線<br>含散佈圖與完整參考表（10—40°C）</span>
-        </div>
-        <span class="tool-cta">開啟 →</span>
-      </a>
-    </div>
-  </div>
-
   <div class="tabs" role="tablist">
-    <button class="tab active" role="tab" aria-selected="true" aria-controls="tab-elec" onclick="sw('elec')">大公電帳單</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-water" onclick="sw('water')">公水帳單</button>
+    <button class="tab active" role="tab" aria-selected="true" aria-controls="tab-elec" onclick="sw('elec')">電力</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-water" onclick="sw('water')">自來水</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-telecom" onclick="sw('telecom')">電信</button>
   </div>
 
-  <!-- ══ 大公電 ══ -->
+  <!-- ══ 電力 ══ -->
   <div id="tab-elec" class="tab-content active" role="tabpanel">
+
+    <!-- ─ 每日用電 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">
+        每日用電量
+        <span class="util-section-sub">2025-04 起 AMI 智慧電錶 ・ 來源：admin/utility/ 每日記錄</span>
+      </div>
+      <div class="chart-controls" data-target="elec">
+        <button data-grain="day" class="active" onclick="setGrain('elec','day')">日線</button>
+        <button data-grain="week" onclick="setGrain('elec','week')">週線</button>
+        <button data-grain="month" onclick="setGrain('elec','month')">月線</button>
+        <button data-grain="year" onclick="setGrain('elec','year')">年線</button>
+      </div>
+      <div class="chart-scroll">
+        <div class="chart-scroll-inner" id="daily-elec-inner"><canvas id="daily-elec-chart"></canvas></div>
+      </div>
+      <div class="chart-meta">提示：橫軸資料較多時可左右滑動瀏覽。月度／年度為當月／當年實際總和（不受帳單週期影響）。</div>
+    </section>
+
+    <!-- ─ 工具 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">分析工具</div>
+      <div class="tool-grid">
+        <a href="./electricity-target.html" class="tool-card">
+          <div class="tool-accent target"></div>
+          <div class="tool-body">
+            <strong>用電目標速查表</strong>
+            <span>輸入氣溫即查回歸基準值與警戒線（含散佈圖與完整參考表 10—40°C）</span>
+          </div>
+          <span class="tool-cta">開啟 →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─ 帳單歷史 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">大公電帳單歷史</div>
 
     <div class="notice-box">
       📌 <strong>大公電</strong>為社區公共設施用電，費用由各住戶依比例直接分攤繳納，<strong>不經過管理費帳戶</strong>，管委會基於管理職責進行監控與記錄。此處的用電明細與財報中的「公共電費」科目性質不同——財報公共電費係指電信室電費及 B1～B4 充電樁電費（由管理費代墊後向充電用戶收回）。大公電每月出帳一次，帳期以台電帳單上的「使用期間」為準。
@@ -166,11 +203,21 @@ extraStyles: |
               <tr>
                 <th>年度</th><th>帳期</th><th>使用期間</th>
                 <th>度數（度）</th><th>同比差</th><th>同比%</th>
-                <th>契約容量（瓩）</th>
+                <th>經常需量（瓩）</th>
                 <th>電費（元）</th><th>同比差</th><th>同比%</th>
               </tr>
             </thead>
             <tbody id="elec-tbody">
+<tr class="latest">
+      <td>115（2026）</td><td>4-5月</td><td>04/10-05/11</td>
+      <td>6,960</td>
+      <td class="dp">-560</td>
+      <td class="dp">-7.4%</td>
+      <td>38</td>
+      <td>35,061</td>
+      <td class="dp">-2,135</td>
+      <td class="dp">-5.7%</td>
+    </tr>
 <tr class="latest">
       <td>115（2026）</td><td>3-4月</td><td>03/11-04/09</td>
       <td>6,640</td>
@@ -637,10 +684,33 @@ extraStyles: |
         </div>
       </div>
     </div>
+    </section>
   </div>
 
-  <!-- ══ 公水 ══ -->
+  <!-- ══ 自來水 ══ -->
   <div id="tab-water" class="tab-content" role="tabpanel">
+
+    <!-- ─ 每日用水 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">
+        每日公水用量
+        <span class="util-section-sub">2022-02 起累積 4 年資料</span>
+      </div>
+      <div class="chart-controls" data-target="water">
+        <button data-grain="day" class="active" onclick="setGrain('water','day')">日線</button>
+        <button data-grain="week" onclick="setGrain('water','week')">週線</button>
+        <button data-grain="month" onclick="setGrain('water','month')">月線</button>
+        <button data-grain="year" onclick="setGrain('water','year')">年線</button>
+      </div>
+      <div class="chart-scroll">
+        <div class="chart-scroll-inner" id="daily-water-inner"><canvas id="daily-water-chart"></canvas></div>
+      </div>
+      <div class="chart-meta">提示：橫軸資料較多時可左右滑動。2026/04 起公水大幅下降，源於自動澆灌斷開改手動 + Google Calendar 提醒系統。</div>
+    </section>
+
+    <!-- ─ 帳單歷史 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">公水帳單歷史</div>
 
     <div class="notice-box">
       📌 公水帳單約每兩個月發出一次，計費期間請以「使用期間」為準。115年（2026年）第一期用水量較去年同期大幅增加，建議確認是否有漏水或新增用水設備。
@@ -689,6 +759,15 @@ extraStyles: |
               </tr>
             </thead>
             <tbody id="water-tbody">
+<tr class="latest">
+      <td>115（2026）</td><td>5月</td><td>03/05-05/04</td>
+      <td>84</td>
+      <td class="dn">43</td>
+      <td class="dn">+104.9%</td>
+      <td>1,206</td>
+      <td class="dn">524</td>
+      <td class="dn">+76.8%</td>
+    </tr>
 <tr class="latest">
       <td>115（2026）</td><td>3月</td><td>12/25-03/04</td>
       <td>286</td>
@@ -902,6 +981,70 @@ extraStyles: |
         </div>
       </div>
     </div>
+    </section>
+  </div>
+
+  <!-- ══ 電信 ══ -->
+  <div id="tab-telecom" class="tab-content" role="tabpanel">
+
+    <!-- ─ 帳單歷史 ─ -->
+    <section class="util-section">
+      <div class="util-section-hd">電信帳單歷史</div>
+
+    <div class="notice-box">
+      📌 社區公務電信目前由 <strong>中華電信</strong> 提供：市話 (02) 2367-7065 與公務行動門號 0989-648-285，自 2025/10 攜碼至中華電信後合併為同一份電子帳單。攜碼前的遠傳行動帳單未保存，故 114/11 之前無資料；攜碼首期（114/11）行動端含一次性 NP 優惠 -107 元，屬正常。
+    </div>
+
+    <div class="bill-section">
+      <a href="https://drive.google.com/drive/folders/1dfTZB0A8XrFo50SPoPyBfcQmaWGQ6fQM?usp=sharing"
+         target="_blank" class="drive-link">
+        <div class="drive-accent"></div>
+        <div class="drive-body">
+          <span class="drive-icon">📁</span>
+          <span class="drive-text">
+            <strong>中華電信帳單資料夾</strong>
+            <span>GOOGLE DRIVE</span>
+          </span>
+        </div>
+        <span class="drive-cta">開啟 ↗</span>
+      </a>
+    </div>
+
+    <div class="kpi-row" id="telecom-kpi">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-panel">
+        <div class="panel-hd">月帳合計趨勢（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">市話 + 行動</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="telecom-total-chart"></canvas></div></div>
+      </div>
+      <div class="chart-panel">
+        <div class="panel-hd">市話 vs 行動 拆分（元）<span style="font-size:12px;color:var(--wg9);font-weight:400">堆疊長條圖</span></div>
+        <div class="panel-bd"><div class="chart-wrap"><canvas id="telecom-split-chart"></canvas></div></div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="panel-hd">歷史明細表</div>
+      <div class="panel-bd">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>帳單年月</th><th>計費期間</th>
+                <th>市話 (元)</th><th>行動 (元)</th><th>合計 (元)</th>
+                <th>行動上網 (GB)</th><th>備註</th>
+              </tr>
+            </thead>
+            <tbody id="telecom-tbody">
+              <!-- populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </section>
   </div>
 
 </div><!-- /main -->
@@ -911,24 +1054,200 @@ extraStyles: |
 // Chart data loaded from external JSON files
 let ELEC_PERIOD_LABELS = [], ELEC_DATASETS = [];
 let WATER_PERIOD_LABELS = [], WATER_DATASETS = [];
+let TELECOM_LABELS = [], TELECOM_DATASETS = [], TELECOM_ROWS = [];
+let DAILY_ELEC = [], DAILY_WATER = [];
+let GRAIN_ELEC = 'day', GRAIN_WATER = 'day';
 
 Promise.all([
   fetch('./data/elec-chart.json').then(r=>r.json()),
-  fetch('./data/water-chart.json').then(r=>r.json())
-]).then(([elec, water]) => {
+  fetch('./data/water-chart.json').then(r=>r.json()),
+  fetch('./data/telecom-chart.json').then(r=>r.json()),
+  fetch('./data/daily-elec.json').then(r=>r.json()),
+  fetch('./data/daily-water.json').then(r=>r.json())
+]).then(([elec, water, telecom, dailyElec, dailyWater]) => {
   ELEC_PERIOD_LABELS = elec.periodLabels;
   ELEC_DATASETS = elec.datasets;
   WATER_PERIOD_LABELS = water.periodLabels;
   WATER_DATASETS = water.datasets;
+  TELECOM_LABELS = telecom.periodLabels;
+  TELECOM_DATASETS = telecom.datasets;
+  TELECOM_ROWS = telecom.rows;
+  DAILY_ELEC = dailyElec;
+  DAILY_WATER = dailyWater;
   initElec();
   initWater();
+  initDailyElec();
+  initDailyWater();
+  // 支援 URL hash 切換 tab（譬如 /utility/#telecom）
+  const hashName = (location.hash || '').replace('#','');
+  if (['water','telecom'].includes(hashName)) sw(hashName);
+
+  // ── 從 admin/utility KV 拉每日資料，覆蓋靜態 daily-*.json 中較新的天 ──
+  // 全站在 Basic Auth 之後、住戶有同一組密碼，所以 fetch 通過。
+  // 開發環境沒有 Worker → 靜默 fallback 使用靜態資料。
+  mergeKVDaily();
 });
+
+async function mergeKVDaily() {
+  try {
+    const res = await fetch('/admin/utility/api/data', { credentials: 'same-origin', cache: 'no-store' });
+    if (!res.ok) return;
+    const kv = await res.json();
+    if (!kv || typeof kv !== 'object') return;
+    let changed = false;
+    // 用電
+    if (kv.electric && typeof kv.electric === 'object') {
+      const elecMap = new Map(DAILY_ELEC.map(r => [r.d, r]));
+      const tempMap = (kv.temperature && typeof kv.temperature === 'object') ? kv.temperature : {};
+      Object.keys(kv.electric).forEach(d => {
+        const v = parseFloat(kv.electric[d]);
+        if (!isFinite(v)) return;
+        const existing = elecMap.get(d) || { d };
+        existing.k = v;
+        if (tempMap[d] != null) existing.tmax = parseFloat(tempMap[d]);
+        elecMap.set(d, existing);
+        changed = true;
+      });
+      DAILY_ELEC = [...elecMap.values()].sort((a, b) => a.d.localeCompare(b.d));
+    }
+    // 用水
+    if (kv.water && typeof kv.water === 'object') {
+      const waterMap = new Map(DAILY_WATER.map(r => [r.d, r]));
+      Object.keys(kv.water).forEach(d => {
+        const v = parseFloat(kv.water[d]);
+        if (!isFinite(v)) return;
+        waterMap.set(d, { d, w: v });
+        changed = true;
+      });
+      DAILY_WATER = [...waterMap.values()].sort((a, b) => a.d.localeCompare(b.d));
+    }
+    if (changed) {
+      initDailyElec();
+      initDailyWater();
+    }
+  } catch (e) {
+    // 開發環境 / 網路問題 → 留靜態資料即可
+    console.info('KV merge skipped:', e.message);
+  }
+}
+
+// ── 每日資料：依粒度聚合 ──
+// rows: [{d:'2026-04-01', k:218 | w:0.5}, ...], key: 'k' or 'w'
+function aggregateDaily(rows, key, grain) {
+  if (grain === 'day') {
+    return rows.map(r => ({ label: r.d, value: r[key], sub: r.tmax!=null ? r.tmax+'°C' : '' }));
+  }
+  const buckets = {};
+  rows.forEach(r => {
+    if (r[key] == null) return;
+    let bucket;
+    if (grain === 'week') {
+      const d = new Date(r.d + 'T00:00:00');
+      const day = (d.getDay() + 6) % 7;
+      const monday = new Date(d.getTime() - day * 86400000);
+      bucket = monday.toISOString().slice(0,10);
+    } else if (grain === 'month') {
+      bucket = r.d.slice(0,7);
+    } else if (grain === 'year') {
+      bucket = r.d.slice(0,4);
+    }
+    if (!buckets[bucket]) buckets[bucket] = { sum: 0, count: 0 };
+    buckets[bucket].sum += r[key];
+    buckets[bucket].count += 1;
+  });
+  return Object.keys(buckets).sort().map(k => ({
+    label: k,
+    value: buckets[k].sum,
+    sub: buckets[k].count + ' 天'
+  }));
+}
+
+function setGrain(target, grain) {
+  if (target === 'elec') GRAIN_ELEC = grain;
+  else GRAIN_WATER = grain;
+  document.querySelectorAll('.chart-controls[data-target="' + target + '"] button').forEach(b => {
+    b.classList.toggle('active', b.dataset.grain === grain);
+  });
+  if (target === 'elec') initDailyElec();
+  else initDailyWater();
+}
+
+function renderDaily(canvasId, innerId, rows, key, grain, color, unit) {
+  const data = aggregateDaily(rows, key, grain);
+  const widthPerBar = grain === 'day' ? 6 : grain === 'week' ? 14 : grain === 'month' ? 30 : 50;
+  const targetWidth = Math.max(800, data.length * widthPerBar);
+  const inner = document.getElementById(innerId);
+  inner.style.width = targetWidth + 'px';
+  inner.style.height = '280px';
+  dc(canvasId);
+  // 顯式設定 canvas 物理大小（responsive:false 模式）
+  const canvas = document.getElementById(canvasId);
+  canvas.width = targetWidth;
+  canvas.height = 280;
+  canvas.style.width = targetWidth + 'px';
+  canvas.style.height = '280px';
+  charts[canvasId] = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.label),
+      datasets: [{
+        label: '用量（' + unit + '）',
+        data: data.map(d => d.value),
+        backgroundColor: color,
+        borderColor: color,
+        borderWidth: 0,
+        barPercentage: 0.9,
+        categoryPercentage: 0.95
+      }]
+    },
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#3C3835',
+          titleFont: { family: FONT, size: 12, weight: '500' },
+          bodyFont: { family: FONT, size: 13 },
+          padding: 10,
+          cornerRadius: 2,
+          callbacks: {
+            afterLabel: (ctx) => data[ctx.dataIndex].sub ? '（' + data[ctx.dataIndex].sub + '）' : ''
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { font: { family: FONT, size: 10 }, maxRotation: 0, autoSkip: true, autoSkipPadding: 8 }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: FONT, size: 10 }, callback: v => v ? v.toLocaleString() : '' }
+        }
+      }
+    }
+  });
+  // 預設捲動到最右（看最近資料）：用 requestAnimationFrame 等 Chart.js render 完
+  const scroller = inner.parentElement;
+  requestAnimationFrame(() => { scroller.scrollLeft = scroller.scrollWidth; });
+}
+
+function initDailyElec() {
+  if (!DAILY_ELEC.length) return;
+  renderDaily('daily-elec-chart', 'daily-elec-inner', DAILY_ELEC, 'k', GRAIN_ELEC, 'rgba(43,74,107,0.85)', '度');
+}
+
+function initDailyWater() {
+  if (!DAILY_WATER.length) return;
+  renderDaily('daily-water-chart', 'daily-water-inner', DAILY_WATER, 'w', GRAIN_WATER, 'rgba(43,74,107,0.85)', '度');
+}
 
 
 
 function sw(name){
   document.querySelectorAll('.tab').forEach((t,i)=>{
-    const isActive = ['elec','water'][i]===name;
+    const isActive = ['elec','water','telecom'][i]===name;
     t.classList.toggle('active', isActive);
     t.setAttribute('aria-selected', isActive);
   });
@@ -936,6 +1255,7 @@ function sw(name){
   document.getElementById('tab-'+name).classList.add('active');
   if(name==='elec') initElec();
   if(name==='water') initWater();
+  if(name==='telecom') initTelecom();
 }
 
 const charts={};
@@ -1049,6 +1369,83 @@ function initWater(){
   document.querySelectorAll('#water-tbody tr').forEach(tr=>{
     if(tr.cells[0] && tr.cells[0].textContent.includes('115')) tr.classList.add('latest');
   });
+}
+
+// ── 中華電信 ──
+function latestTelecomKpi(){
+  // 最新一筆 = TELECOM_ROWS 最後一筆
+  const rows = TELECOM_ROWS;
+  if (!rows.length) return null;
+  const latest = rows[rows.length-1];
+  const prev = rows.length >= 2 ? rows[rows.length-2] : null;
+  // 115 年累計
+  const ytdRows = rows.filter(r => r.rocYearMonth.startsWith('115/'));
+  const ytdTotal = ytdRows.reduce((a,r)=>a+(r.total||0),0);
+  const ytdMobile = ytdRows.reduce((a,r)=>a+(r.mobile||0),0);
+  const ytdPhone = ytdRows.reduce((a,r)=>a+(r.phone||0),0);
+  return {
+    latest, prev,
+    totalDiff: prev ? latest.total - prev.total : null,
+    mobileDiff: prev ? latest.mobile - prev.mobile : null,
+    ytdTotal, ytdMobile, ytdPhone,
+    ytdMonths: ytdRows.length
+  };
+}
+
+function initTelecom(){
+  dc('telecom-total-chart'); dc('telecom-split-chart');
+  if (!TELECOM_DATASETS.length) return;
+
+  const opts = () => ({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+    scales:{y:{ticks:{font:{family:FONT,size:10},callback:v=>v?v.toLocaleString():''}}}
+  });
+
+  // 合計趨勢：每年一條
+  charts['telecom-total-chart']=new Chart(document.getElementById('telecom-total-chart'),{
+    type:'bar',
+    data:{labels:TELECOM_LABELS,
+      datasets:TELECOM_DATASETS.map(d=>({label:d.label,data:d.total,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+    options:opts()
+  });
+
+  // 拆分：用最新年份的市話/行動做堆疊圖
+  const latestYear = TELECOM_DATASETS[TELECOM_DATASETS.length-1];
+  charts['telecom-split-chart']=new Chart(document.getElementById('telecom-split-chart'),{
+    type:'bar',
+    data:{labels:TELECOM_LABELS,
+      datasets:[
+        {label:'市話 (02) 2367-7065', data:latestYear.phone, backgroundColor:'rgba(105,100,96,0.75)', borderColor:'rgba(105,100,96,0.75)', borderWidth:1, stack:'s1'},
+        {label:'行動 0989-648-285', data:latestYear.mobile, backgroundColor:'rgba(43,74,107,0.85)', borderColor:'rgba(43,74,107,0.85)', borderWidth:1, stack:'s1'}
+      ]},
+    options:{...opts(), scales:{x:{stacked:true,ticks:{font:{family:FONT,size:10}}},y:{stacked:true,ticks:{font:{family:FONT,size:10}}}}}
+  });
+
+  // KPI
+  const k = latestTelecomKpi();
+  if (k) {
+    document.getElementById('telecom-kpi').innerHTML =
+      kpiHtml('最新帳單合計', k.latest.total, k.totalDiff, '元', true) +
+      kpiHtml('最新帳單市話', k.latest.phone, null, '元', true) +
+      kpiHtml('最新帳單行動', k.latest.mobile, k.mobileDiff, '元', true) +
+      kpiHtml('115 年累計', k.ytdTotal, null, '元 ／ '+k.ytdMonths+' 個月', true);
+  }
+
+  // 表格
+  const tbody = document.getElementById('telecom-tbody');
+  tbody.innerHTML = TELECOM_ROWS.slice().reverse().map(r => {
+    const cls = r.rocYearMonth.startsWith('115/') ? ' class="latest"' : '';
+    return `<tr${cls}>
+      <td>${r.rocYearMonth}</td>
+      <td>${r.period}</td>
+      <td>${r.phone.toLocaleString()}</td>
+      <td>${r.mobile.toLocaleString()}</td>
+      <td>${r.total.toLocaleString()}</td>
+      <td>${r.dataGB!=null ? r.dataGB.toFixed(3) : '—'}</td>
+      <td style="white-space:normal;font-size:13px;color:var(--wg9)">${r.note||''}</td>
+    </tr>`;
+  }).join('');
 }
 
 // Init is called by Promise.all above after JSON data loads

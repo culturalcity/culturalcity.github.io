@@ -28,8 +28,8 @@
     },
     {
       "label": "115年（2026）",
-      "data": [2065,3969,null,null,null,null],
-      "tonnes": [150,286,null,null,null,null],
+      "data": [2065,3969,1206,null,null,null],
+      "tonnes": [150,286,84,null,null,null],
       "backgroundColor": "rgba(43,74,107,0.85)"
     }
   ]
