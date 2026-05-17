@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
+<title>區分所有權人會議・簽到操作說明（物業參考）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wg1:#EAE7E1; --white:#F7F5F2;
+  --wg9:#898480; --wg11:#696460; --wg41:#3C3835;
+  --line:rgba(60,56,53,.12); --radius:2px;
+  --dp:#1F5C38; --dn:#8C1F1F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--wg1);color:var(--wg41);
+  font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  font-size:16px;line-height:1.85}
+
+.header{background:var(--wg41);color:var(--wg1);padding:36px 32px 28px;
+  position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,.03) 120px,rgba(234,231,225,.03) 121px),
+    repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,.02) 60px,rgba(234,231,225,.02) 61px);
+  pointer-events:none}
+.header-inner{max-width:720px;margin:0 auto;position:relative}
+.eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:10px}
+.header h1{font-size:24px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
+.header-sub{font-size:13px;color:rgba(234,231,225,.55);letter-spacing:.1em}
+
+.main{max-width:720px;margin:0 auto;padding:32px 24px 60px}
+
+h2{font-size:17px;font-weight:700;letter-spacing:.08em;color:var(--wg41);
+  margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h2:first-of-type{margin-top:0}
+
+p{margin-bottom:14px}
+ol,ul{margin:0 0 16px 1.4em}
+ol li,ul li{margin-bottom:8px}
+
+strong{color:var(--wg41);font-weight:700}
+.tag{display:inline-block;background:var(--white);border:1px solid var(--line);
+  padding:1px 8px;border-radius:1px;font-size:13px;color:var(--wg11);
+  font-weight:500;letter-spacing:.04em;margin:0 2px}
+.path{display:inline-block;background:var(--white);border:1px solid var(--line);
+  padding:2px 8px;border-radius:1px;font-size:14px;color:var(--wg41);
+  font-family:'Noto Sans TC','Consolas',monospace;letter-spacing:.02em}
+.note{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);
+  border-radius:1px;padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.8}
+.note.warn{border-left-color:var(--dn);background:rgba(140,31,31,.04)}
+.note.ok{border-left-color:var(--dp);background:rgba(31,92,56,.04)}
+.note .title{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--wg11);margin-bottom:6px}
+.note.warn .title{color:var(--dn)}
+.note.ok .title{color:var(--dp)}
+
+.qa{background:var(--white);border:1px solid var(--line);border-radius:1px;
+  padding:14px 18px;margin-bottom:10px}
+.qa .q{font-weight:700;color:var(--wg41);margin-bottom:6px}
+.qa .q::before{content:'Q. ';color:var(--wg9);font-weight:500}
+.qa .a{color:var(--wg41);font-size:15px;line-height:1.8}
+.qa .a::before{content:'A. ';color:var(--wg9)}
+
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--wg9);text-align:center;line-height:1.9}
+
+@media print{
+  html,body{background:white}
+  .header{background:white;color:var(--wg41);border-bottom:2px solid var(--wg41);padding:20px 24px}
+  .header::before{display:none}
+  .header-sub,.eyebrow{color:var(--wg11)}
+  .main{padding-top:20px}
+  h2{break-after:avoid}
+  .qa,.note{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">CULTURAL CITY · STAFF GUIDE</div>
+    <h1>區分所有權人會議・簽到操作說明</h1>
+    <div class="header-sub">給物業同仁參考 · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+<h2>您的任務</h2>
+<p>協助處理會議當天的<strong>住戶簽到</strong>部分。簽到完成後將工作檔交給主委，由主委接續議題投票、委員選舉等後續流程。</p>
+
+<h2>開始前</h2>
+<ol>
+  <li>確認筆電已連上社區 <strong>Google Drive</strong>，且 Drive Desktop 同步中</li>
+  <li>在共用資料夾打開 <span class="path">agm-tools.html</span>（雙擊即可，會在瀏覽器中開啟）</li>
+  <li>頁面上方有 6 個分頁：<span class="tag">① 設定</span> <span class="tag">② 名冊維護</span> <span class="tag">③ 簽到</span> <span class="tag">④ 議題投票</span> <span class="tag">⑤ 管理委員選舉</span> <span class="tag">⑥ 會議紀錄</span></li>
+</ol>
+
+<div class="note warn">
+  <div class="title">⚠ 重要</div>
+  您只需要操作 <strong>③ 簽到</strong> 分頁。其他分頁由主委處理，<strong>請勿點選或修改</strong>。
+</div>
+
+<h2>簽到操作步驟</h2>
+<ol>
+  <li>點上方第三個分頁 <span class="tag">③ 簽到</span></li>
+  <li>對照桌上的紙本簽到簿，逐戶找到對應的住戶卡片，點一下卡片完成簽到</li>
+  <li>區分所有權人本人到場 → 點該戶卡片上的<strong>「本人」</strong></li>
+  <li>委託他人代理 → 點<strong>「委託」</strong>，並依紙本填寫代理人姓名</li>
+  <li>右側狀態欄會即時顯示<strong>「已簽到比例」</strong>與<strong>「是否達法定門檻」</strong>，僅供參考，不需處理</li>
+</ol>
+
+<h2>簽到完成後（重要！）</h2>
+<ol>
+  <li>切到 <span class="tag">⑥ 會議紀錄</span> 分頁</li>
+  <li>點右上角的<strong>「儲存」</strong>按鈕 → 選<strong>「儲存工作檔」</strong></li>
+  <li>瀏覽器會跳出存檔對話框，將檔案存到：
+    <br><span class="path">[共用 Drive 資料夾]/AGM-工作檔/</span>
+    <br>檔名建議：<span class="path">agm-民國XX-MMDD-簽到完成.json</span>
+  </li>
+  <li>等 Drive Desktop 完成同步（看右下角同步圖示變綠）</li>
+  <li>通知主委：「<strong>簽到資料已上傳</strong>，可以接續議題」（LINE 或口頭皆可）</li>
+</ol>
+
+<div class="note ok">
+  <div class="title">✓ 完成</div>
+  您的工作到此結束。後續主委會在他自己的筆電上開啟同一個工作檔，繼續議題投票與唱票流程。
+</div>
+
+<h2>常見狀況</h2>
+
+<div class="qa">
+  <div class="q">不小心關掉瀏覽器了，剛才的簽到資料還在嗎？</div>
+  <div class="a">在。重新打開 <span class="path">agm-tools.html</span> 即可，瀏覽器會自動還原（暫存於本機）。</div>
+</div>
+
+<div class="qa">
+  <div class="q">某戶簽錯了想取消？</div>
+  <div class="a">在簽到分頁再點一次該戶卡片，會切換狀態。或點右上角<strong>「↻ 重置簽到」</strong>全部清空（會跳確認框）。</div>
+</div>
+
+<div class="qa">
+  <div class="q">名冊上找不到某戶住戶？</div>
+  <div class="a">請主委確認。若需新增或修改名冊，由主委於 <span class="tag">② 名冊維護</span> 處理。<strong>請勿擅自修改名冊。</strong></div>
+</div>
+
+<div class="qa">
+  <div class="q">顯示「未達法定門檻」我該怎麼辦？</div>
+  <div class="a">不用做任何事。這只是即時統計資訊，主委會在現場依規約決定（如延後召開）。</div>
+</div>
+
+<div class="qa">
+  <div class="q">Drive 同步好像卡住，主委還沒收到檔案？</div>
+  <div class="a">檢查右下角 Drive Desktop 圖示是否在轉圈圈。如同步異常，可改用 LINE 直接傳檔給主委。</div>
+</div>
+
+<h2>隱私提醒</h2>
+<p>本工具完全在您的瀏覽器中執行，<strong>不會將任何資料傳送至網路</strong>。所有住戶資料僅存在本機瀏覽器與共用 Google Drive 中。請勿截圖或拍照分享內容。</p>
+
+<div class="footer">
+  有任何問題請洽：管理委員會主任委員<br>
+  閱大安管理委員會 · 區分所有權人會議工作站
+</div>
+
+</div>
+</body>
+</html>
