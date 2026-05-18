@@ -125,6 +125,14 @@ function parseWater(text) {
     out.periodStart = periodM[1];
     out.periodEnd = periodM[2];
   }
+
+  // 圖表用金額／度數
+  // 度數：「本期用水度數：\n286」或「總用水度數：\n286」
+  const tonM = text.match(/(?:本期用水度數|總用水度數)[：:]?\s*\n?\s*(\d+)/);
+  if (tonM) out.tonnes = parseInt(tonM[1]);
+  // 金額：找第一個 $N,NNN 格式（票面總額），避免抓到「1」「19」這類戶號
+  const feeM = text.match(/\$(\d{1,3}(?:,\d{3})*|\d+)/);
+  if (feeM) out.fee = parseInt(feeM[1].replace(/,/g, ''));
   return out;
 }
 
@@ -151,6 +159,28 @@ function parseTelecom(text) {
     out.periodEnd = `${rocY}/${pad(m2)}/${pad(lastDay)}`;
     out.periodEstimated = true;
   }
+
+  // 圖表用金額（市話/行動拆分 + 合計 + 行動上網用量）
+  // Bill page 3：「23677065\n513\n」(戶號之後是該戶含稅金額)
+  // Receipt page：「23677065\n23677065\n23677065\n$974」(僅總額、無拆分)
+  // 用 \b 避免抓到 receipt 的第二個 23677065
+  const phoneM = text.match(/23677065\s+(\d{1,4})\b(?!\d)/);
+  if (phoneM) out.phone = parseInt(phoneM[1]);
+  const mobileM = text.match(/0989648285\s+(\d{1,4})\b(?!\d)/);
+  if (mobileM) out.mobile = parseInt(mobileM[1]);
+
+  // 合計：先試 bill 的拆分加總；不行就用 receipt 的 $N,NNN 票面金額
+  if (out.phone != null && out.mobile != null) {
+    out.total = out.phone + out.mobile;
+  } else {
+    const totalM = text.match(/\$(\d{1,3}(?:,\d{3})*|\d+)/);
+    if (totalM) out.total = parseInt(totalM[1].replace(/,/g, ''));
+  }
+
+  // 行動上網使用量：mupdf 可能把標籤跟值分在不同 token、允許之間有 whitespace/\n
+  const dataM = text.match(/行動上網使用量約\s*([\d.]+)\s*G\s*B/);
+  if (dataM) out.dataGB = parseFloat(dataM[1]);
+
   return out;
 }
 
@@ -187,10 +217,127 @@ function buildTelecomName(type, info) {
   return `中華電信台北營運處${docLabel} ${yyyy}-${mm}${periodTag}.pdf`;
 }
 
+// ── GitHub API：把 chart JSON 更新並 commit 上 main branch ──
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+const GITHUB_OWNER = process.env.GITHUB_OWNER || 'culturalcity';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'culturalcity.github.io';
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
+
+async function ghGetFile(filePath) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}?ref=${GITHUB_BRANCH}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' }
+  });
+  if (!res.ok) throw new Error(`GitHub GET ${filePath}: ${res.status} ${await res.text()}`);
+  const data = await res.json();
+  const content = Buffer.from(data.content, 'base64').toString('utf8');
+  return { content, sha: data.sha };
+}
+
+async function ghPutFile(filePath, content, sha, message) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' },
+    body: JSON.stringify({
+      message, sha, branch: GITHUB_BRANCH,
+      content: Buffer.from(content, 'utf8').toString('base64'),
+    })
+  });
+  if (!res.ok) throw new Error(`GitHub PUT ${filePath}: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+/** 自來水 chart 更新（雙月 1/3/5/7/9/11，slot 由 period.indexOf(月份字串) 決定）。 */
+async function updateWaterChart(info) {
+  if (info.fee == null || info.tonnes == null) return { skipped: '無金額/度數' };
+  const adYear = parseInt(info.rocYearMonth.split('/')[0]) + 1911;
+  const monthStr = info.rocYearMonth.split('/')[1];
+  const { content, sha } = await ghGetFile('utility/data/water-chart.json');
+  const chart = JSON.parse(content);
+  const slot = chart.periods.indexOf(monthStr);
+  if (slot < 0) return { skipped: `月份 ${monthStr} 不在水費雙月排程內` };
+  let ds = chart.datasets.find(d => d.label.includes(`（${adYear}）`));
+  if (!ds) {
+    ds = {
+      label: `${adYear - 1911}年（${adYear}）`,
+      data: new Array(chart.periods.length).fill(null),
+      tonnes: new Array(chart.periods.length).fill(null),
+      backgroundColor: 'rgba(105,100,96,0.65)'
+    };
+    chart.datasets.push(ds);
+  }
+  if (ds.data[slot] === info.fee && ds.tonnes[slot] === info.tonnes) {
+    return { unchanged: true };
+  }
+  ds.data[slot] = info.fee;
+  ds.tonnes[slot] = info.tonnes;
+  const msg = `data: 自來水 ${adYear}-${monthStr} 自動更新（${info.tonnes} 度 / ${info.fee.toLocaleString()} 元）`;
+  await ghPutFile('utility/data/water-chart.json', JSON.stringify(chart, null, 2) + '\n', sha, msg);
+  return { updated: true, slot, fee: info.fee, tonnes: info.tonnes };
+}
+
+/** 中華電信 chart 更新（月制 1-12，slot = month - 1）。同時更新 datasets + rows。 */
+async function updateTelecomChart(info) {
+  if (info.total == null) return { skipped: '無合計金額' };
+  const adYear = parseInt(info.rocYearMonth.split('/')[0]) + 1911;
+  const month = parseInt(info.rocYearMonth.split('/')[1]);
+  const slot = month - 1;
+  const { content, sha } = await ghGetFile('utility/data/telecom-chart.json');
+  const chart = JSON.parse(content);
+  let ds = chart.datasets.find(d => d.label.includes(`（${adYear}）`));
+  if (!ds) {
+    ds = {
+      label: `${adYear - 1911}年（${adYear}）`,
+      phone: new Array(12).fill(null),
+      mobile: new Array(12).fill(null),
+      total: new Array(12).fill(null),
+      backgroundColor: 'rgba(105,100,96,0.65)'
+    };
+    chart.datasets.push(ds);
+  }
+
+  let changed = false;
+  if (info.phone != null && ds.phone[slot] !== info.phone) { ds.phone[slot] = info.phone; changed = true; }
+  if (info.mobile != null && ds.mobile[slot] !== info.mobile) { ds.mobile[slot] = info.mobile; changed = true; }
+  if (ds.total[slot] !== info.total) { ds.total[slot] = info.total; changed = true; }
+
+  // rows array：用 rocYearMonth 為 key 找；找到則覆寫、找不到則 insert + sort
+  if (!chart.rows) chart.rows = [];
+  const rocYM = info.rocYearMonth;
+  // rowEntry 只放有實際抓到值的欄位，避免 null 蓋掉既有正確資料
+  // 譬如 receipt 抓不到 phone/mobile，但 bill 已寫好；receipt 不該把它清空
+  const rowEntry = { rocYearMonth: rocYM };
+  if (info.periodStart && info.periodEnd) rowEntry.period = `${info.periodStart}-${info.periodEnd}`;
+  if (info.phone != null) rowEntry.phone = info.phone;
+  if (info.mobile != null) rowEntry.mobile = info.mobile;
+  if (info.total != null) rowEntry.total = info.total;
+  if (info.dataGB != null) rowEntry.dataGB = info.dataGB;
+
+  const ri = chart.rows.findIndex(r => r.rocYearMonth === rocYM);
+  if (ri >= 0) {
+    // 保留既有額外欄位（note、現存的 phone/mobile）：既有 spread 在前、新值只蓋有抓到的欄位
+    const merged = { ...chart.rows[ri], ...rowEntry };
+    if (JSON.stringify(chart.rows[ri]) !== JSON.stringify(merged)) {
+      chart.rows[ri] = merged;
+      changed = true;
+    }
+  } else {
+    chart.rows.push(rowEntry);
+    chart.rows.sort((a, b) => a.rocYearMonth.localeCompare(b.rocYearMonth));
+    changed = true;
+  }
+
+  if (!changed) return { unchanged: true };
+  const msg = `data: 中華電信 ${adYear}-${String(month).padStart(2,'0')} 自動更新（合計 ${info.total.toLocaleString()} 元）`;
+  await ghPutFile('utility/data/telecom-chart.json', JSON.stringify(chart, null, 2) + '\n', sha, msg);
+  return { updated: true, slot, total: info.total };
+}
+
 // ── HTTP endpoints ──
 app.get('/health', (_req, res) => res.send('ok'));
 
-app.post('/decrypt-bill', (req, res) => {
+app.post('/decrypt-bill', async (req, res) => {
   try {
     if (!req.body || !req.body.pdf_b64) {
       return res.status(400).json({ error: 'Missing pdf_b64' });
@@ -234,12 +381,29 @@ app.post('/decrypt-bill', (req, res) => {
       outputBytes = pdfBytes;
     }
 
+    // 嘗試更新 public 圖表 JSON（GitHub commit）
+    // 自來水 + 中華電信 才寫；台電不在 public utility 頁範圍
+    let chartUpdate = null;
+    if (GITHUB_TOKEN) {
+      try {
+        if (type === 'water-bill' || type === 'water-receipt') {
+          chartUpdate = await updateWaterChart(info);
+        } else if (type === 'telecom-bill' || type === 'telecom-receipt') {
+          chartUpdate = await updateTelecomChart(info);
+        }
+      } catch (e) {
+        chartUpdate = { error: e.message };
+        console.error('Chart update failed:', e);
+      }
+    }
+
     res.json({
       type,
       filename,
       folder,
       extracted: info,
       wasEncrypted: encrypted,
+      chartUpdate,
       decryptedPdf_b64: outputBytes.toString('base64')
     });
   } catch (e) {

@@ -66,7 +66,7 @@
       "phone": [
         746,
         624,
-        23677065,
+        463,
         475,
         513,
         null,
@@ -145,10 +145,10 @@
     {
       "rocYearMonth": "115/03",
       "period": "115/02/01-115/02/28",
-      "phone": 23677065,
-      "mobile": null,
+      "phone": 463,
+      "mobile": 499,
       "total": 962,
-      "dataGB": null
+      "dataGB": 0.356
     },
     {
       "rocYearMonth": "115/04",
@@ -156,7 +156,7 @@
       "phone": 475,
       "mobile": 499,
       "total": 974,
-      "dataGB": null
+      "dataGB": 0.342
     },
     {
       "rocYearMonth": "115/05",
@@ -164,7 +164,7 @@
       "phone": 513,
       "mobile": 499,
       "total": 1012,
-      "dataGB": null
+      "dataGB": 0.068
     }
   ]
 }

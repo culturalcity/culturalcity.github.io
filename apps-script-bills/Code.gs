@@ -58,11 +58,12 @@ function processBills() {
             continue;
           }
           const savedTo = saveToDrive(result);
+          const chartTag = formatChartTag(result.chartUpdate);
           if (savedTo === 'duplicate') {
-            skipped.push(result.filename);
-            log.push(`Skip duplicate: ${result.filename}`);
+            skipped.push(result.filename + chartTag);
+            log.push(`Skip duplicate: ${result.filename}${chartTag}`);
           } else {
-            successes.push(`${result.type}: ${result.filename}`);
+            successes.push(`${result.type}: ${result.filename}${chartTag}`);
           }
           threadHandled = true;
         } catch (e) {
@@ -166,6 +167,16 @@ function sendSummary(successes, skipped, errors) {
 
 function getOrCreateLabel(name) {
   return GmailApp.getUserLabelByName(name) || GmailApp.createLabel(name);
+}
+
+/** 把 Cloud Run 回傳的 chartUpdate 結果格式化成短註記附在檔名旁。 */
+function formatChartTag(cu) {
+  if (!cu) return '';
+  if (cu.error) return ` [⚠圖表更新失敗: ${cu.error}]`;
+  if (cu.skipped) return ` [圖表跳過: ${cu.skipped}]`;
+  if (cu.unchanged) return ' [圖表已最新]';
+  if (cu.updated) return ' [📈圖表已 commit]';
+  return '';
 }
 
 /** 一次性：裝上每小時 trigger。 */
