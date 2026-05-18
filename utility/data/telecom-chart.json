@@ -1,29 +1,170 @@
 {
   "_comment": "中華電信月帳單。市話 (02)2367-7065 + 行動 0989-648-285，2025-10 起合併單。先前遠傳行動帳單已散失不補。",
-  "periodLabels": ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+  "periodLabels": [
+    "1月",
+    "2月",
+    "3月",
+    "4月",
+    "5月",
+    "6月",
+    "7月",
+    "8月",
+    "9月",
+    "10月",
+    "11月",
+    "12月"
+  ],
   "datasets": [
     {
       "label": "114年（2025）",
-      "phone":  [null,null,null,null,null,null,null,null,null,null,525,478],
-      "mobile": [null,null,null,null,null,null,null,null,null,null,355,499],
-      "total":  [null,null,null,null,null,null,null,null,null,null,880,977],
+      "phone": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        525,
+        478
+      ],
+      "mobile": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        355,
+        499
+      ],
+      "total": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        880,
+        977
+      ],
       "backgroundColor": "rgba(60,56,53,0.75)"
     },
     {
       "label": "115年（2026）",
-      "phone":  [746,624,463,475,513,null,null,null,null,null,null,null],
-      "mobile": [499,499,499,499,499,null,null,null,null,null,null,null],
-      "total":  [1245,1123,962,974,1012,null,null,null,null,null,null,null],
+      "phone": [
+        746,
+        624,
+        463,
+        475,
+        23677065,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "mobile": [
+        499,
+        499,
+        499,
+        499,
+        989648285,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "total": [
+        1245,
+        1123,
+        962,
+        974,
+        115,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "backgroundColor": "rgba(43,74,107,0.85)"
     }
   ],
   "rows": [
-    { "rocYearMonth": "114/11", "period": "114/10/01-114/10/31", "phone": 525, "mobile": 355, "total": 880, "dataGB": 0.369, "note": "中華電信首期帳單；行動含攜碼優惠 -107" },
-    { "rocYearMonth": "114/12", "period": "114/11/01-114/11/30", "phone": 478, "mobile": 499, "total": 977, "dataGB": 0.142 },
-    { "rocYearMonth": "115/01", "period": "114/12/01-114/12/31", "phone": 746, "mobile": 499, "total": 1245, "dataGB": 0.089 },
-    { "rocYearMonth": "115/02", "period": "115/01/01-115/01/31", "phone": 624, "mobile": 499, "total": 1123, "dataGB": 0.037 },
-    { "rocYearMonth": "115/03", "period": "115/02/01-115/02/28", "phone": 463, "mobile": 499, "total": 962, "dataGB": 0.356 },
-    { "rocYearMonth": "115/04", "period": "115/03/01-115/03/31", "phone": 475, "mobile": 499, "total": 974, "dataGB": 0.342 },
-    { "rocYearMonth": "115/05", "period": "115/04/01-115/04/30", "phone": 513, "mobile": 499, "total": 1012, "dataGB": 0.068 }
+    {
+      "rocYearMonth": "114/11",
+      "period": "114/10/01-114/10/31",
+      "phone": 525,
+      "mobile": 355,
+      "total": 880,
+      "dataGB": 0.369,
+      "note": "中華電信首期帳單；行動含攜碼優惠 -107"
+    },
+    {
+      "rocYearMonth": "114/12",
+      "period": "114/11/01-114/11/30",
+      "phone": 478,
+      "mobile": 499,
+      "total": 977,
+      "dataGB": 0.142
+    },
+    {
+      "rocYearMonth": "115/01",
+      "period": "114/12/01-114/12/31",
+      "phone": 746,
+      "mobile": 499,
+      "total": 1245,
+      "dataGB": 0.089
+    },
+    {
+      "rocYearMonth": "115/02",
+      "period": "115/01/01-115/01/31",
+      "phone": 624,
+      "mobile": 499,
+      "total": 1123,
+      "dataGB": 0.037
+    },
+    {
+      "rocYearMonth": "115/03",
+      "period": "115/02/01-115/02/28",
+      "phone": 463,
+      "mobile": 499,
+      "total": 962,
+      "dataGB": 0.356
+    },
+    {
+      "rocYearMonth": "115/04",
+      "period": "115/03/01-115/03/31",
+      "phone": 475,
+      "mobile": 499,
+      "total": 974,
+      "dataGB": 0.342
+    },
+    {
+      "rocYearMonth": "115/05",
+      "period": "115/04/01-115/04/30",
+      "phone": 23677065,
+      "mobile": 989648285,
+      "total": 115,
+      "dataGB": null
+    }
   ]
 }
