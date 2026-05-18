@@ -1266,10 +1266,10 @@ const tc2=v=>v?Math.round(v).toLocaleString('zh-TW'):'';
 
 // ── Latest data KPI ──
 // 同比 = 同 slot index 對上一年的同帳期（雙月制：115/5月 vs 114/5月）
+// 累計同比 = 0..lastSlot 加總 vs 上一年同樣 slice 加總（截至同期）
 function latestElecKpi(){
   const latest = ELEC_DATASETS[ELEC_DATASETS.length-1];
   const prev   = ELEC_DATASETS[ELEC_DATASETS.length-2];
-  // 找 115 年最後一個有資料的 slot（保留 index 才能跨年對齊）
   let lastSlot = -1;
   for (let i = latest.data.length - 1; i >= 0; i--) {
     if (latest.data[i] != null) { lastSlot = i; break; }
@@ -1280,9 +1280,14 @@ function latestElecKpi(){
   const lastPrevKwh = (prev && lastSlot >= 0) ? prev.kwh[lastSlot] : null;
   const feeDiff = lastPrevFee != null ? lastFee - lastPrevFee : null;
   const kwhDiff = lastPrevKwh != null ? lastKwh - lastPrevKwh : null;
-  const totalFee = latest.data.reduce((a,b)=>a+(b||0),0);
-  const totalKwh = latest.kwh.reduce((a,b)=>a+(b||0),0);
-  return {lastFee, feeDiff, lastKwh, kwhDiff, totalFee, totalKwh};
+  const sum = arr => arr.reduce((a,b)=>a+(b||0),0);
+  const totalFee = sum(latest.data.slice(0, lastSlot+1));
+  const totalKwh = sum(latest.kwh.slice(0, lastSlot+1));
+  const prevTotalFee = prev ? sum(prev.data.slice(0, lastSlot+1)) : 0;
+  const prevTotalKwh = prev ? sum(prev.kwh.slice(0, lastSlot+1)) : 0;
+  const totalFeeDiff = prevTotalFee > 0 ? totalFee - prevTotalFee : null;
+  const totalKwhDiff = prevTotalKwh > 0 ? totalKwh - prevTotalKwh : null;
+  return {lastFee, feeDiff, lastKwh, kwhDiff, totalFee, totalKwh, totalFeeDiff, totalKwhDiff};
 }
 
 function kpiHtml(label, val, diff, unit, inverse, compareLabel){
@@ -1320,8 +1325,8 @@ function initElec(){
   document.getElementById('elec-kpi').innerHTML =
     kpiHtml('最新帳單電費', k.lastFee, k.feeDiff, '元', true) +
     kpiHtml('最新帳單度數', k.lastKwh, k.kwhDiff, '度', true) +
-    kpiHtml('115年累計電費', k.totalFee, null, '元', true) +
-    kpiHtml('115年累計度數', k.totalKwh, null, '度', true);
+    kpiHtml('115年截至同期累計電費', k.totalFee, k.totalFeeDiff, '元', true) +
+    kpiHtml('115年截至同期累計度數', k.totalKwh, k.totalKwhDiff, '度', true);
   // Highlight latest row
   document.querySelectorAll('#elec-tbody tr').forEach(tr=>{
     if(tr.cells[0] && tr.cells[0].textContent.includes('115')) tr.classList.add('latest');
@@ -1341,9 +1346,14 @@ function latestWaterKpi(){
   const lastPrevTon = (prev && lastSlot >= 0) ? prev.tonnes[lastSlot] : null;
   const feeDiff = lastPrevFee != null ? lastFee - lastPrevFee : null;
   const tonDiff = lastPrevTon != null ? lastTon - lastPrevTon : null;
-  const totalFee = latest.data.reduce((a,b)=>a+(b||0),0);
-  const totalTon = latest.tonnes.reduce((a,b)=>a+(b||0),0);
-  return {lastFee, feeDiff, lastTon, tonDiff, totalFee, totalTon};
+  const sum = arr => arr.reduce((a,b)=>a+(b||0),0);
+  const totalFee = sum(latest.data.slice(0, lastSlot+1));
+  const totalTon = sum(latest.tonnes.slice(0, lastSlot+1));
+  const prevTotalFee = prev ? sum(prev.data.slice(0, lastSlot+1)) : 0;
+  const prevTotalTon = prev ? sum(prev.tonnes.slice(0, lastSlot+1)) : 0;
+  const totalFeeDiff = prevTotalFee > 0 ? totalFee - prevTotalFee : null;
+  const totalTonDiff = prevTotalTon > 0 ? totalTon - prevTotalTon : null;
+  return {lastFee, feeDiff, lastTon, tonDiff, totalFee, totalTon, totalFeeDiff, totalTonDiff};
 }
 
 function initWater(){
@@ -1370,8 +1380,8 @@ function initWater(){
   document.getElementById('water-kpi').innerHTML =
     kpiHtml('最新帳單水費', k.lastFee, k.feeDiff, '元', true) +
     kpiHtml('最新帳單用水量', k.lastTon, k.tonDiff, '度', true) +
-    kpiHtml('115年累計水費', k.totalFee, null, '元', true) +
-    kpiHtml('115年累計用水量', k.totalTon, null, '度', true);
+    kpiHtml('115年截至同期累計水費', k.totalFee, k.totalFeeDiff, '元', true) +
+    kpiHtml('115年截至同期累計用水量', k.totalTon, k.totalTonDiff, '度', true);
   document.querySelectorAll('#water-tbody tr').forEach(tr=>{
     if(tr.cells[0] && tr.cells[0].textContent.includes('115')) tr.classList.add('latest');
   });
@@ -1379,7 +1389,6 @@ function initWater(){
 
 // ── 中華電信 ──
 function latestTelecomKpi(){
-  // 最新一筆 = TELECOM_ROWS 最後一筆
   const rows = TELECOM_ROWS;
   if (!rows.length) return null;
   const latest = rows[rows.length-1];
@@ -1389,12 +1398,19 @@ function latestTelecomKpi(){
   const ytdTotal = ytdRows.reduce((a,r)=>a+(r.total||0),0);
   const ytdMobile = ytdRows.reduce((a,r)=>a+(r.mobile||0),0);
   const ytdPhone = ytdRows.reduce((a,r)=>a+(r.phone||0),0);
+  // 截至同期累計同比：114 年同月或更早的 row 加總
+  const maxMonth = ytdRows.reduce((m,r) => Math.max(m, parseInt(r.rocYearMonth.split('/')[1])), 0);
+  const prevYtdRows = rows.filter(r =>
+    r.rocYearMonth.startsWith('114/') && parseInt(r.rocYearMonth.split('/')[1]) <= maxMonth
+  );
+  const prevYtdTotal = prevYtdRows.reduce((a,r)=>a+(r.total||0),0);
   return {
     latest, prev,
     totalDiff: prev ? latest.total - prev.total : null,
     mobileDiff: prev ? latest.mobile - prev.mobile : null,
     ytdTotal, ytdMobile, ytdPhone,
-    ytdMonths: ytdRows.length
+    ytdMonths: ytdRows.length,
+    ytdTotalDiff: prevYtdTotal > 0 ? ytdTotal - prevYtdTotal : null
   };
 }
 
@@ -1435,7 +1451,7 @@ function initTelecom(){
       kpiHtml('最新帳單合計', k.latest.total, k.totalDiff, '元', true, '環比') +
       kpiHtml('最新帳單市話', k.latest.phone, null, '元', true) +
       kpiHtml('最新帳單行動', k.latest.mobile, k.mobileDiff, '元', true, '環比') +
-      kpiHtml('115 年累計', k.ytdTotal, null, '元 ／ '+k.ytdMonths+' 個月', true);
+      kpiHtml('115 年截至同期累計', k.ytdTotal, k.ytdTotalDiff, '元 ／ '+k.ytdMonths+' 個月', true);
   }
 
   // 表格
