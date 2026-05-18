@@ -1434,14 +1434,15 @@ function initTelecom(){
 
   // 表格
   const tbody = document.getElementById('telecom-tbody');
+  const fmt = v => (v == null ? '—' : v.toLocaleString());
   tbody.innerHTML = TELECOM_ROWS.slice().reverse().map(r => {
     const cls = r.rocYearMonth.startsWith('115/') ? ' class="latest"' : '';
     return `<tr${cls}>
       <td>${r.rocYearMonth}</td>
-      <td>${r.period}</td>
-      <td>${r.phone.toLocaleString()}</td>
-      <td>${r.mobile.toLocaleString()}</td>
-      <td>${r.total.toLocaleString()}</td>
+      <td>${r.period || '—'}</td>
+      <td>${fmt(r.phone)}</td>
+      <td>${fmt(r.mobile)}</td>
+      <td>${fmt(r.total)}</td>
       <td>${r.dataGB!=null ? r.dataGB.toFixed(3) : '—'}</td>
       <td style="white-space:normal;font-size:13px;color:var(--wg9)">${r.note||''}</td>
     </tr>`;
