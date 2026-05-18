@@ -1265,30 +1265,34 @@ const tc=v=>v?'$'+Math.round(v).toLocaleString('zh-TW'):'';
 const tc2=v=>v?Math.round(v).toLocaleString('zh-TW'):'';
 
 // ── Latest data KPI ──
+// 同比 = 同 slot index 對上一年的同帳期（雙月制：115/5月 vs 114/5月）
 function latestElecKpi(){
-  // 115年 03-04 is the latest
   const latest = ELEC_DATASETS[ELEC_DATASETS.length-1];
   const prev   = ELEC_DATASETS[ELEC_DATASETS.length-2];
-  const latestFees = latest.data.filter(v=>v);
-  const prevFees   = prev ? prev.data.filter(v=>v) : [];
-  const lastFee = latestFees[latestFees.length-1];
-  const lastPrevFee = prevFees[prevFees.length-1];
-  const lastKwh = latest.kwh.filter(v=>v)[latest.kwh.filter(v=>v).length-1];
-  const lastPrevKwh = prev ? prev.kwh.filter(v=>v)[prev.kwh.filter(v=>v).length-1] : null;
-  const feeDiff = lastPrevFee ? lastFee - lastPrevFee : null;
-  const kwhDiff = lastPrevKwh ? lastKwh - lastPrevKwh : null;
-  const totalFee = latestFees.reduce((a,b)=>a+(b||0),0);
-  const totalKwh = latest.kwh.filter(v=>v).reduce((a,b)=>a+(b||0),0);
+  // 找 115 年最後一個有資料的 slot（保留 index 才能跨年對齊）
+  let lastSlot = -1;
+  for (let i = latest.data.length - 1; i >= 0; i--) {
+    if (latest.data[i] != null) { lastSlot = i; break; }
+  }
+  const lastFee = lastSlot >= 0 ? latest.data[lastSlot] : null;
+  const lastKwh = lastSlot >= 0 ? latest.kwh[lastSlot] : null;
+  const lastPrevFee = (prev && lastSlot >= 0) ? prev.data[lastSlot] : null;
+  const lastPrevKwh = (prev && lastSlot >= 0) ? prev.kwh[lastSlot] : null;
+  const feeDiff = lastPrevFee != null ? lastFee - lastPrevFee : null;
+  const kwhDiff = lastPrevKwh != null ? lastKwh - lastPrevKwh : null;
+  const totalFee = latest.data.reduce((a,b)=>a+(b||0),0);
+  const totalKwh = latest.kwh.reduce((a,b)=>a+(b||0),0);
   return {lastFee, feeDiff, lastKwh, kwhDiff, totalFee, totalKwh};
 }
 
-function kpiHtml(label, val, diff, unit, inverse){
+function kpiHtml(label, val, diff, unit, inverse, compareLabel){
   const cls = diff===null?'':diff>0?(inverse?'dn':'dp'):(inverse?'dp':'dn');
   const sign = diff>0?'+':'';
   const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}</span>`:'';
+  const lbl = compareLabel || '同比';
   return `<div class="kpi"><div class="kpi-label">${label}</div>
     <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:15px;font-weight:400;margin-left:3px">${unit}</span></div>
-    <div class="kpi-sub">${diffStr?'同比 '+diffStr:''}</div></div>`;
+    <div class="kpi-sub">${diffStr?lbl+' '+diffStr:''}</div></div>`;
 }
 
 function initElec(){
@@ -1327,16 +1331,18 @@ function initElec(){
 function latestWaterKpi(){
   const latest = WATER_DATASETS[WATER_DATASETS.length-1];
   const prev   = WATER_DATASETS[WATER_DATASETS.length-2];
-  const latestFees = latest.data.filter(v=>v);
-  const prevFees   = prev ? prev.data.filter(v=>v) : [];
-  const lastFee    = latestFees[latestFees.length-1];
-  const lastPrevFee= prevFees[prevFees.length-1];
-  const lastTon    = latest.tonnes.filter(v=>v)[latest.tonnes.filter(v=>v).length-1];
-  const lastPrevTon= prev ? prev.tonnes.filter(v=>v)[prev.tonnes.filter(v=>v).length-1] : null;
-  const feeDiff = lastPrevFee ? lastFee - lastPrevFee : null;
-  const tonDiff = lastPrevTon ? lastTon - lastPrevTon : null;
-  const totalFee = latestFees.reduce((a,b)=>a+(b||0),0);
-  const totalTon = latest.tonnes.filter(v=>v).reduce((a,b)=>a+(b||0),0);
+  let lastSlot = -1;
+  for (let i = latest.data.length - 1; i >= 0; i--) {
+    if (latest.data[i] != null) { lastSlot = i; break; }
+  }
+  const lastFee = lastSlot >= 0 ? latest.data[lastSlot] : null;
+  const lastTon = lastSlot >= 0 ? latest.tonnes[lastSlot] : null;
+  const lastPrevFee = (prev && lastSlot >= 0) ? prev.data[lastSlot] : null;
+  const lastPrevTon = (prev && lastSlot >= 0) ? prev.tonnes[lastSlot] : null;
+  const feeDiff = lastPrevFee != null ? lastFee - lastPrevFee : null;
+  const tonDiff = lastPrevTon != null ? lastTon - lastPrevTon : null;
+  const totalFee = latest.data.reduce((a,b)=>a+(b||0),0);
+  const totalTon = latest.tonnes.reduce((a,b)=>a+(b||0),0);
   return {lastFee, feeDiff, lastTon, tonDiff, totalFee, totalTon};
 }
 
@@ -1426,9 +1432,9 @@ function initTelecom(){
   const k = latestTelecomKpi();
   if (k) {
     document.getElementById('telecom-kpi').innerHTML =
-      kpiHtml('最新帳單合計', k.latest.total, k.totalDiff, '元', true) +
+      kpiHtml('最新帳單合計', k.latest.total, k.totalDiff, '元', true, '環比') +
       kpiHtml('最新帳單市話', k.latest.phone, null, '元', true) +
-      kpiHtml('最新帳單行動', k.latest.mobile, k.mobileDiff, '元', true) +
+      kpiHtml('最新帳單行動', k.latest.mobile, k.mobileDiff, '元', true, '環比') +
       kpiHtml('115 年累計', k.ytdTotal, null, '元 ／ '+k.ytdMonths+' 個月', true);
   }
 

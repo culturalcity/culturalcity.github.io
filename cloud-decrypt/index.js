@@ -8,7 +8,9 @@
 // GET /health → "ok"
 //
 // 環境變數：
-//   PDF_PASSWORD  台電加密 PDF 的解密密碼（社區公務行動門號）。預設沿用既有密碼。
+//   PDF_PASSWORD     台電加密 PDF 的解密密碼（社區公務行動門號）。預設沿用既有密碼。
+//   GEMINI_API_KEY   Google AI Studio API key。若設定，mupdf 抽不到文字（影像型 PDF）時
+//                    會 fallback 用 Gemini vision 解析。未設定則只用 mupdf。
 
 import express from 'express';
 import * as mupdf from 'mupdf';
@@ -18,6 +20,8 @@ app.use(express.json({ limit: '20mb' }));
 
 const PASSWORD = process.env.PDF_PASSWORD || '0989648285';
 const SHARED_SECRET = process.env.SHARED_SECRET || '';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
 // 共享密鑰中介層：除了 /health 之外都要帶 X-Auth-Secret header
 app.use((req, res, next) => {
@@ -148,16 +152,7 @@ function parseTelecom(text) {
     out.periodStart = periodM[1];
     out.periodEnd = periodM[2];
   } else if (out.rocYearMonth) {
-    // 推估：帳單月份的前一個月
-    const [rY, rM] = out.rocYearMonth.split('/').map(Number);
-    let y = rY + 1911;
-    let m2 = rM - 1;
-    if (m2 === 0) { m2 = 12; y -= 1; }
-    const lastDay = new Date(y, m2, 0).getDate();
-    const rocY = y - 1911;
-    out.periodStart = `${rocY}/${pad(m2)}/01`;
-    out.periodEnd = `${rocY}/${pad(m2)}/${pad(lastDay)}`;
-    out.periodEstimated = true;
+    Object.assign(out, estimateTelecomPeriod(out.rocYearMonth));
   }
 
   // 圖表用金額（市話/行動拆分 + 合計 + 行動上網用量）
@@ -182,6 +177,77 @@ function parseTelecom(text) {
   if (dataM) out.dataGB = parseFloat(dataM[1]);
 
   return out;
+}
+
+/** 中華電信 period 推估：帳單月份對應前一個自然月 1 日~月底。
+ *  mupdf 規律：parseTelecom 內已做；Gemini 路徑也需要這個，因此抽出共用。 */
+function estimateTelecomPeriod(rocYearMonth) {
+  const [rY, rM] = rocYearMonth.split('/').map(Number);
+  let y = rY + 1911;
+  let m2 = rM - 1;
+  if (m2 === 0) { m2 = 12; y -= 1; }
+  const lastDay = new Date(y, m2, 0).getDate();
+  const rocY = y - 1911;
+  return {
+    periodStart: `${rocY}/${pad(m2)}/01`,
+    periodEnd: `${rocY}/${pad(m2)}/${pad(lastDay)}`,
+    periodEstimated: true,
+  };
+}
+
+// ── Gemini fallback：mupdf 抽不到文字（影像型 PDF）時用 vision 解析 ──
+async function extractWithGemini(pdfBytes) {
+  if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY 未設定');
+
+  const prompt = `這是一份台灣公用事業帳單 PDF（台電電費、台北自來水、或中華電信）。請從中萃取結構化資料，回傳純 JSON（不要 markdown、不要說明文字）。
+
+回傳格式：
+{
+  "type": 字串，須為下列之一：
+     "taipower-bill"     台電電費通知
+     "taipower-receipt"  台電繳費憑證
+     "water-bill"        台北自來水電子帳單／通知單
+     "water-receipt"     台北自來水電子繳費憑證
+     "telecom-bill"      中華電信繳費通知
+     "telecom-receipt"   中華電信繳費結果通知
+     "unknown"           其他
+  "rocYearMonth": "民國年/月 譬如 115/05",
+  "periodStart": "民國日期 譬如 115/04/01（無則 null）",
+  "periodEnd":   "民國日期 譬如 115/04/30（無則 null）",
+  "meter":   "台電電號 XX-XX-XXXX-XX-X 格式（非台電帳單填 null）",
+  "fee":     自來水帳單金額（純整數，無逗號；非自來水填 null）,
+  "tonnes":  自來水用水度數（純整數；非自來水填 null）,
+  "phone":   中華電信市話 (02)2367-7065 該月含稅費用（純整數；非中華電信或無拆分填 null）,
+  "mobile":  中華電信行動 0989-648-285 該月含稅費用（純整數；非中華電信或無拆分填 null）,
+  "total":   中華電信合計金額（純整數；非中華電信填 null）,
+  "dataGB":  中華電信行動上網用量（小數 GB；無則 null）
+}
+
+規則：
+- 民國年 = 西元年 - 1911
+- 不確定或不存在的欄位填 null，禁止編造數字
+- 金額純整數，移除逗號與貨幣符號
+- 「繳費通知」與「繳費結果通知」是不同 type，仔細辨識`;
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{
+        parts: [
+          { inline_data: { mime_type: 'application/pdf', data: pdfBytes.toString('base64') } },
+          { text: prompt },
+        ],
+      }],
+      generationConfig: { responseMimeType: 'application/json', temperature: 0 },
+    }),
+  });
+  if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).substring(0, 300)}`);
+  const data = await res.json();
+  const jsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!jsonText) throw new Error('Gemini 回傳空 response');
+  return JSON.parse(jsonText);
 }
 
 // ── 命名 ──
@@ -344,42 +410,92 @@ app.post('/decrypt-bill', async (req, res) => {
     }
     const pdfBytes = Buffer.from(req.body.pdf_b64, 'base64');
     const { doc, text, encrypted } = extractText(pdfBytes);
-    const type = detectType(text);
+    let type = detectType(text);
+    let info = null;
+
+    // mupdf 路徑：能抓到 type 就先試本地 regex 解析
+    if (type === 'taipower-bill' || type === 'taipower-receipt') info = parseTaipower(text);
+    else if (type === 'water-bill' || type === 'water-receipt') info = parseWater(text);
+    else if (type === 'telecom-bill' || type === 'telecom-receipt') info = parseTelecom(text);
+
+    // 解密過的 PDF bytes（給 Gemini 與最後輸出共用）
+    let decryptedBytes;
+    if (encrypted) {
+      const buf = doc.saveToBuffer('decrypt=yes,encrypt=none');
+      decryptedBytes = Buffer.from(buf.asUint8Array());
+    } else {
+      decryptedBytes = pdfBytes;
+    }
+
+    // ── Gemini fallback ──
+    // 觸發條件：mupdf 完全失敗、或 mupdf 半死（type 找到但內容欄位缺）。
+    // 後者更常見：中華電信 / 自來水的 PDF 格式偶爾微調，某些 regex 就抓不到，
+    // 但 type/月份 等大方向還是抓得到 → 沒有 fallback 的話會默默漏資料。
+    let geminiUsed = false;
+    const missingTelecomBillFields = type === 'telecom-bill' &&
+      (info?.phone == null || info?.dataGB == null);
+    const missingWaterFields = (type === 'water-bill' || type === 'water-receipt') &&
+      (info?.fee == null || info?.tonnes == null);
+    const needsGemini = !!GEMINI_API_KEY && (
+      type === 'unknown' ||
+      !info?.rocYearMonth ||
+      ((type === 'taipower-bill' || type === 'taipower-receipt') && !info?.meter) ||
+      missingTelecomBillFields ||
+      missingWaterFields
+    );
+    if (needsGemini) {
+      try {
+        const g = await extractWithGemini(decryptedBytes);
+        geminiUsed = true;
+        console.log('Gemini fallback result:', JSON.stringify(g));
+        if (g.type && g.type !== 'unknown' && type === 'unknown') type = g.type;
+        info = info || {};
+        // mupdf 抓到的值優先（信任 text-based）；只補空缺
+        for (const k of ['rocYearMonth', 'periodStart', 'periodEnd', 'meter',
+                          'fee', 'tonnes', 'phone', 'mobile', 'total', 'dataGB']) {
+          if ((info[k] == null || info[k] === '') && g[k] != null && g[k] !== '') {
+            info[k] = typeof g[k] === 'string' ? g[k].trim() : g[k];
+          }
+        }
+        // Gemini 給 phone+mobile 但沒給 total：自動加總
+        if (info.total == null && info.phone != null && info.mobile != null) {
+          info.total = info.phone + info.mobile;
+        }
+        // 中華電信若補出 rocYearMonth 但 period 仍缺 → 推估
+        if ((type === 'telecom-bill' || type === 'telecom-receipt') &&
+            info.rocYearMonth && (!info.periodStart || !info.periodEnd)) {
+          Object.assign(info, estimateTelecomPeriod(info.rocYearMonth));
+        }
+      } catch (e) {
+        console.error('Gemini fallback failed:', e);
+      }
+    }
 
     if (type === 'unknown') {
       return res.status(422).json({
         error: 'Unknown bill type',
-        textPreview: text.substring(0, 500)
+        geminiUsed,
+        textPreview: text.substring(0, 500),
       });
     }
 
-    let info, filename, folder;
+    let filename, folder;
     if (type === 'taipower-bill' || type === 'taipower-receipt') {
-      info = parseTaipower(text);
-      if (!info.meter) return res.status(422).json({ error: '台電帳單無法抓到電號' });
-      if (!info.rocYearMonth) return res.status(422).json({ error: '台電帳單無法抓到帳單月份' });
+      if (!info?.meter) return res.status(422).json({ error: '台電帳單無法抓到電號', geminiUsed });
+      if (!info.rocYearMonth) return res.status(422).json({ error: '台電帳單無法抓到帳單月份', geminiUsed });
       filename = buildTaipowerName(type, info);
       folder = `電號${info.meter} ${TAIPOWER_METER[info.meter]}`;
     } else if (type === 'water-bill' || type === 'water-receipt') {
-      info = parseWater(text);
-      if (!info.rocYearMonth) return res.status(422).json({ error: '自來水帳單無法抓到收費年月' });
+      if (!info?.rocYearMonth) return res.status(422).json({ error: '自來水帳單無法抓到收費年月', geminiUsed });
       filename = buildWaterName(type, info);
       folder = WATER_FOLDER;
     } else if (type === 'telecom-bill' || type === 'telecom-receipt') {
-      info = parseTelecom(text);
-      if (!info.rocYearMonth) return res.status(422).json({ error: '中華電信帳單無法抓到月份' });
+      if (!info?.rocYearMonth) return res.status(422).json({ error: '中華電信帳單無法抓到月份', geminiUsed });
       filename = buildTelecomName(type, info);
       folder = TELECOM_FOLDER;
     }
 
-    // 重新存為解密版（如果原本加密）
-    let outputBytes;
-    if (encrypted) {
-      const buf = doc.saveToBuffer('decrypt=yes,encrypt=none');
-      outputBytes = Buffer.from(buf.asUint8Array());
-    } else {
-      outputBytes = pdfBytes;
-    }
+    const outputBytes = decryptedBytes;
 
     // 嘗試更新 public 圖表 JSON（GitHub commit）
     // 自來水 + 中華電信 才寫；台電不在 public utility 頁範圍
@@ -403,6 +519,7 @@ app.post('/decrypt-bill', async (req, res) => {
       folder,
       extracted: info,
       wasEncrypted: encrypted,
+      geminiUsed,
       chartUpdate,
       decryptedPdf_b64: outputBytes.toString('base64')
     });

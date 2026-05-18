@@ -59,11 +59,12 @@ function processBills() {
           }
           const savedTo = saveToDrive(result);
           const chartTag = formatChartTag(result.chartUpdate);
+          const visionTag = result.geminiUsed ? ' [👁vision]' : '';
           if (savedTo === 'duplicate') {
-            skipped.push(result.filename + chartTag);
-            log.push(`Skip duplicate: ${result.filename}${chartTag}`);
+            skipped.push(result.filename + chartTag + visionTag);
+            log.push(`Skip duplicate: ${result.filename}${chartTag}${visionTag}`);
           } else {
-            successes.push(`${result.type}: ${result.filename}${chartTag}`);
+            successes.push(`${result.type}: ${result.filename}${chartTag}${visionTag}`);
           }
           threadHandled = true;
         } catch (e) {
