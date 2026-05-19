@@ -2,7 +2,7 @@
 //
 // 雙軌設計（呼應臺北市氣候行動獎「高溫警報時關懷獨居長者」要求）：
 //   主軌：CWA W-C0033-005 高溫資訊（黃/橘/紅燈）有發布 → 「必須關懷」
-//   副軌：CWA F-D0047-061 大安區明日 MaxT ≥ 36°C → 「建議關懷」（與 CWA 黃燈門檻一致，
+//   副軌：CWA F-D0047-063 大安區明日 MaxT ≥ 36°C → 「建議關懷」（與 CWA 黃燈門檻一致，
 //        當作「明日很可能會發黃燈」的前置提醒，給總幹事一晚的準備時間）
 // 兩條獨立判斷，可能同日都觸發，由 Apps Script bridge 用標題 + 日期去重。
 //
@@ -22,7 +22,8 @@ const https = require('https');
 
 const CWA_BASE = 'https://opendata.cwa.gov.tw/api/v1/rest/datastore';
 const WARNING_DATASET = 'W-C0033-005';    // 高溫資訊
-const FORECAST_DATASET = 'F-D0047-061';   // 臺北市鄉鎮 3 日預報
+const FORECAST_DATASET = 'F-D0047-063';   // 臺北市鄉鎮 1 週預報（有「最高溫度」element；
+                                          // F-D0047-061 是逐 3 小時，只有「溫度」沒有 MaxT）
 const DISTRICT = '大安區';
 const FORECAST_THRESHOLD_C = 36;          // 副軌門檻：明日 MaxT ≥ 36°C（與 CWA 黃燈門檻一致）
 
@@ -129,7 +130,7 @@ async function checkForecast(apiKey) {
   const json = await get(url);
   const locations = (json.records && json.records.Locations && json.records.Locations[0] && json.records.Locations[0].Location) || [];
   if (locations.length === 0) {
-    throw new Error(`F-D0047-061 找不到 ${DISTRICT} 的資料`);
+    throw new Error(`${FORECAST_DATASET} 找不到 ${DISTRICT} 的資料`);
   }
   const loc = locations[0];
   const elements = loc.WeatherElement || [];
@@ -204,7 +205,7 @@ async function checkForecast(apiKey) {
           `中央氣象署可能於明日早晨發布正式警報；社區提前在前一晚啟動關懷，\n` +
           `讓總幹事能事先安排訪視時段，建議致電獨居長者確認狀況。\n\n` +
           `📌 由 heat-alert 系統自動建立\n` +
-          `資料來源：CWA F-D0047-061`,
+          `資料來源：CWA F-D0047-063`,
         color: 'TANGERINE',
       });
     } else if (fc) {
