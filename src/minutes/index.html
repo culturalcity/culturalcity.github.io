@@ -14,8 +14,12 @@ extraStyles: |
   .header{background:var(--wg41);color:var(--wg1);padding:40px 40px 0;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
   .header-inner{max-width:720px;margin:0 auto;position:relative;}
-  .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:18px;transition:color .18s;}
+  .nav-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px;flex-wrap:wrap;}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;transition:color .18s;}
   .back::before{content:'←';}.back:hover{color:var(--wg1);}
+  .search-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;transition:color .18s;padding:6px 12px;border:1px solid rgba(234,231,225,0.15);border-radius:var(--radius);}
+  .search-link::before{content:'🔍';font-size:12px;}
+  .search-link:hover{color:var(--wg1);border-color:rgba(234,231,225,0.3);background:rgba(234,231,225,0.04);}
   .eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
   .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
   .header-sub{font-size:13px;color:var(--wg9);letter-spacing:.16em;margin-bottom:24px;}
@@ -102,7 +106,10 @@ extraScripts: |
 ---
 <div class="header">
   <div class="header-inner">
-    <a href="../index.html" class="back">返回社區主頁</a>
+    <div class="nav-row">
+      <a href="../index.html" class="back">返回社區主頁</a>
+      <a href="search.html" class="search-link">全文搜尋</a>
+    </div>
     <div class="eyebrow">MINUTES OF MEETING</div>
     <h1>會議紀錄</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
