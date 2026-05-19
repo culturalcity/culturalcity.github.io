@@ -1,0 +1,55 @@
+name: Typhoon Alert (CWA → Google Calendar)
+
+# 每天 06:00 / 12:00 / 18:00 台北：偵測「陸上颱風警報」狀態變化，
+# 進入時建防颱清單事件、解除時建災後巡查清單事件。
+#
+# 為什麼一天 3 次（heat-alert 是 1 次）：颱風警報可能任何時間發布/升級/解除，
+# 3 次能在 4-12 小時內反應；一天 1 次太慢、4 小時 1 次太敏感（GitHub Actions
+# 也常延遲 51-60 min，多次反而誤差累積）。
+#
+# state file（utility/data/typhoon-state.json）會被自動 commit + push 回 repo，
+# 沿用 fetch-weather 的模式。
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # UTC 22:00 = 台北 06:00
+    - cron: '0 4 * * *'    # UTC 04:00 = 台北 12:00
+    - cron: '0 10 * * *'   # UTC 10:00 = 台北 18:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: typhoon-alert
+  cancel-in-progress: false
+
+jobs:
+  check-and-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Run typhoon alert check
+        env:
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          APPS_SCRIPT_WEBHOOK_URL: ${{ secrets.APPS_SCRIPT_WEBHOOK_URL }}
+          APPS_SCRIPT_SHARED_SECRET: ${{ secrets.APPS_SCRIPT_SHARED_SECRET }}
+        run: node scripts/check-typhoon-alert.js
+
+      - name: Commit state file if changed
+        run: |
+          git add utility/data/typhoon-state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "typhoon-state.json 無變化，略過 commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "data: typhoon-state 自動更新"
+            git push
+          fi
