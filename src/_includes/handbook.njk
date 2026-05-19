@@ -1,0 +1,250 @@
+---
+layout: base.njk
+extraStyles: |
+  /* ── handbook 專用版型 ── */
+  /* header 對齊 hb-wrap 寬度，標題靠左與 sidebar 對齊 */
+  .header .header-inner { max-width: 1180px; padding: 0 32px; }
+  @media (max-width: 900px) {
+    .header .header-inner { padding: 0 20px; }
+  }
+
+  .hb-wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px;
+    display: grid; grid-template-columns: 260px 1fr; gap: 48px;
+    align-items: start; }
+  /* 外殼當 grid item（含 border），不做 sticky，讓 grid 把高度撐滿 */
+  .hb-toc { border-right: 1px solid var(--line); height: 100%; }
+  /* 內層 sticky：捲到深處仍保留可見，回到頂端也能正常出現 */
+  .hb-toc-inner { position: sticky; top: 20px;
+    max-height: calc(100vh - 40px); overflow-y: auto;
+    padding: 18px 18px 18px 4px;
+    font-size: 14px; line-height: 1.7; }
+  .hb-toc-inner h2 { font-size: 12px; letter-spacing: 0.2em; color: var(--wg9);
+    text-transform: uppercase; font-weight: 600; margin: 0 0 12px 14px; }
+  .hb-toc-inner ol { list-style: none; padding: 0; margin: 0; }
+  .hb-toc-inner .lv1 > a { display: block; padding: 6px 14px; color: var(--wg41);
+    text-decoration: none; font-weight: 600; border-left: 2px solid transparent; }
+  .hb-toc-inner .lv1 > a:hover { color: var(--dp); background: rgba(60,56,53,0.04); }
+  .hb-toc-inner .lv1 > a.active { border-left-color: var(--dp); color: var(--dp);
+    background: rgba(31,92,56,0.06); }
+  .hb-toc-inner .lv2 { list-style: none; margin: 2px 0 6px 14px; padding: 0; }
+  .hb-toc-inner .lv2 a { display: block; padding: 3px 12px; color: var(--wg11);
+    text-decoration: none; font-size: 13px; border-left: 1px solid var(--line); }
+  .hb-toc-inner .lv2 a:hover { color: var(--dp); border-left-color: var(--dp); }
+  .hb-toc-inner .lv2 a.active { color: var(--dp); border-left-color: var(--dp);
+    background: rgba(31,92,56,0.04); }
+
+  .hb-main { max-width: 760px; min-width: 0; }
+  .hb-main h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
+    margin: 48px 0 18px; padding: 14px 0 12px; border-top: 2px solid var(--wg41);
+    color: var(--wg41); scroll-margin-top: 16px; }
+  .hb-main h1:first-child { margin-top: 0; }
+  .hb-main h2 { font-size: 19px; font-weight: 700; letter-spacing: 0.04em;
+    margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+    color: var(--wg41); scroll-margin-top: 16px; }
+  .hb-main h3 { font-size: 16px; font-weight: 700; letter-spacing: 0.02em;
+    margin: 26px 0 10px; color: var(--wg41); scroll-margin-top: 16px; }
+  .hb-main h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px;
+    color: var(--wg11); }
+  .hb-main p { margin: 0 0 14px; }
+  .hb-main ul, .hb-main ol { margin: 0 0 16px 1.5em; }
+  .hb-main li { margin-bottom: 6px; }
+  .hb-main li > ul, .hb-main li > ol { margin-top: 6px; margin-bottom: 6px; }
+  .hb-main strong { color: var(--wg41); font-weight: 700; }
+  .hb-main a { color: var(--dp); text-decoration: underline;
+    text-decoration-color: rgba(31,92,56,0.3); text-underline-offset: 2px; }
+  .hb-main a:hover { text-decoration-color: var(--dp); }
+  .hb-main code { background: var(--white); border: 1px solid var(--line);
+    border-radius: 1px; padding: 1px 6px; font-size: 14px;
+    font-family: 'Noto Sans TC', 'Consolas', monospace; color: var(--wg41); }
+  .hb-main pre { background: var(--white); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 14px 18px; overflow-x: auto;
+    font-size: 13px; line-height: 1.7; margin: 0 0 16px; }
+  .hb-main pre code { background: none; border: 0; padding: 0; font-size: 13px; }
+  .hb-main blockquote { border-left: 3px solid var(--wg9); padding: 6px 18px;
+    margin: 0 0 16px; color: var(--wg11); background: rgba(60,56,53,0.03); }
+  .hb-main blockquote p:last-child { margin-bottom: 0; }
+  .hb-main hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+
+  /* 表格 */
+  .hb-main table { width: 100%; border-collapse: collapse;
+    margin: 12px 0 20px; font-size: 14px; line-height: 1.6; }
+  .hb-main th, .hb-main td { padding: 8px 12px; border: 1px solid var(--line);
+    text-align: left; vertical-align: top; }
+  .hb-main th { background: rgba(60,56,53,0.05); font-weight: 700;
+    color: var(--wg41); letter-spacing: 0.04em; }
+  .hb-main tr:nth-child(even) td { background: rgba(60,56,53,0.02); }
+
+  /* mermaid 圖樣式 */
+  .mermaid { background: var(--white); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 18px; margin: 0 0 18px;
+    text-align: center; overflow-x: auto; }
+
+  /* 回頂按鈕 */
+  .hb-top { position: fixed; right: 24px; bottom: 24px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--wg41); color: var(--wg1); border: 0;
+    display: none; align-items: center; justify-content: center;
+    font-size: 18px; line-height: 1; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: opacity 0.18s; }
+  .hb-top.show { display: flex; }
+  .hb-top:hover { background: var(--dp); }
+
+  /* 響應式：sidebar 收合 */
+  @media (max-width: 900px) {
+    .hb-wrap { grid-template-columns: 1fr; gap: 0; padding: 20px 20px 60px; }
+    .hb-toc { height: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+    .hb-toc-inner { position: static; max-height: none; padding: 0 0 20px; }
+  }
+
+  /* 列印：隱藏 sidebar 與回頂按鈕 */
+  @media print {
+    .hb-wrap { display: block; max-width: none; padding: 0 24px; }
+    .hb-toc, .hb-top { display: none !important; }
+    .hb-main { max-width: none; }
+    .hb-main h1, .hb-main h2, .hb-main h3 { break-after: avoid; }
+    .hb-main table, .hb-main pre, .hb-main blockquote { break-inside: avoid; }
+  }
+extraScripts: |
+  // 自動產生 TOC：掃描 .hb-main 內的 h1 / h2，把 id 加上去
+  (function () {
+    var main = document.querySelector('.hb-main');
+    var tocList = document.getElementById('hb-toc-list');
+    if (!main || !tocList) return;
+
+    var slug = function (s) {
+      return String(s || '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w一-龥\-]/g, '')
+        .toLowerCase() || 'sec';
+    };
+    var used = {};
+    var heads = main.querySelectorAll('h1, h2');
+    var groups = [];
+    var current = null;
+    heads.forEach(function (h) {
+      var base = slug(h.textContent);
+      var id = base;
+      var n = 1;
+      while (used[id]) { id = base + '-' + (++n); }
+      used[id] = true;
+      h.id = id;
+
+      if (h.tagName === 'H1') {
+        current = { id: id, text: h.textContent, subs: [] };
+        groups.push(current);
+      } else if (h.tagName === 'H2' && current) {
+        current.subs.push({ id: id, text: h.textContent });
+      }
+    });
+
+    var html = '<ol>';
+    groups.forEach(function (g) {
+      html += '<li class="lv1"><a href="#' + g.id + '" data-tid="' + g.id + '">' +
+        g.text + '</a>';
+      if (g.subs.length) {
+        html += '<ol class="lv2">';
+        g.subs.forEach(function (s) {
+          html += '<li><a href="#' + s.id + '" data-tid="' + s.id + '">' +
+            s.text + '</a></li>';
+        });
+        html += '</ol>';
+      }
+      html += '</li>';
+    });
+    html += '</ol>';
+    tocList.innerHTML = html;
+
+    // 滾動高亮：用 IntersectionObserver 追蹤目前可見的 h1/h2
+    var links = {};
+    tocList.querySelectorAll('a[data-tid]').forEach(function (a) {
+      links[a.dataset.tid] = a;
+    });
+    var setActive = function (id) {
+      tocList.querySelectorAll('a.active').forEach(function (a) { a.classList.remove('active'); });
+      if (links[id]) links[id].classList.add('active');
+    };
+    var observer = new IntersectionObserver(function (entries) {
+      var visible = entries.filter(function (e) { return e.isIntersecting; });
+      if (visible.length) {
+        visible.sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+        setActive(visible[0].target.id);
+      }
+    }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+    heads.forEach(function (h) { observer.observe(h); });
+
+    // 回頂按鈕
+    var topBtn = document.getElementById('hb-top');
+    if (topBtn) {
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 600) topBtn.classList.add('show');
+        else topBtn.classList.remove('show');
+      });
+      topBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  })();
+
+  // Mermaid CDN：先把 ```mermaid 程式區塊轉成 <div class="mermaid">，
+  // 載入後關閉 startOnLoad 改用 explicit run，避免 race condition
+  (function () {
+    document.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+      var div = document.createElement('div');
+      div.className = 'mermaid';
+      div.textContent = code.textContent;
+      // 替換整個 <pre>，不只 <code>
+      var pre = code.parentNode;
+      pre.parentNode.replaceChild(div, pre);
+    });
+    if (!document.querySelector('.mermaid')) return;
+
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    s.onload = function () {
+      if (!window.mermaid) return;
+      window.mermaid.initialize({
+        startOnLoad: false,
+        theme: 'neutral',
+        securityLevel: 'loose',
+        fontFamily: "'Noto Sans TC', sans-serif"
+      });
+      // explicit run 比 startOnLoad 可靠：等 DOM ready + 替換完畢才跑
+      window.mermaid.run({ querySelector: '.mermaid' }).catch(function (err) {
+        console.error('Mermaid render error:', err);
+      });
+    };
+    s.onerror = function () { console.error('Mermaid CDN load failed'); };
+    document.head.appendChild(s);
+  })();
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">{{ eyebrow or 'CULTURAL CITY · PROPERTY MANAGER HANDBOOK' }}</div>
+    <h1>{{ title }}</h1>
+    <div class="header-sub">{{ headerSub or '閱大安管理委員會・內部文件' }}</div>
+  </div>
+</div>
+
+<div class="hb-wrap">
+  <nav class="hb-toc" aria-label="章節目錄">
+    <div class="hb-toc-inner">
+      <h2>章節目錄</h2>
+      <div id="hb-toc-list"></div>
+    </div>
+  </nav>
+
+  <main class="hb-main">
+    {% if backLink %}<a href="{{ backLink }}" class="back-link">{{ backText or '返回' }}</a>{% endif %}
+    {{ content | safe }}
+
+    <hr>
+    <div class="footer">
+      <div class="footer-left">閱大安管理委員會・總幹事手冊　最後更新 {{ lastUpdate }}</div>
+      <div class="footer-right">CULTURAL CITY COMMUNITY</div>
+    </div>
+  </main>
+</div>
+
+<button id="hb-top" class="hb-top" aria-label="回到頁面頂端">↑</button>
