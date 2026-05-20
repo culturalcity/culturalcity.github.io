@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
+<title>流出抑制設施・年度自主檢查表（CC-FORM-OSF-001）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wg1:#EAE7E1; --white:#F7F5F2;
+  --wg9:#898480; --wg11:#696460; --wg41:#3C3835;
+  --line:rgba(60,56,53,.12); --radius:2px;
+  --dp:#1F5C38; --dn:#8C1F1F; --warn:#8C5A00;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--wg1);color:var(--wg41);
+  font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  font-size:15px;line-height:1.7}
+
+.toolbar{position:sticky;top:0;z-index:50;background:var(--wg41);color:var(--wg1);
+  padding:10px 18px;display:flex;gap:10px;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(234,231,225,.15)}
+.toolbar .tb-title{font-size:13px;letter-spacing:.06em;color:rgba(234,231,225,.7)}
+.toolbar .tb-actions{display:flex;gap:8px}
+.btn{background:rgba(234,231,225,.08);color:var(--wg1);border:1px solid rgba(234,231,225,.18);
+  padding:6px 12px;border-radius:var(--radius);font-size:13px;font-family:inherit;
+  cursor:pointer;letter-spacing:.04em;transition:all .15s}
+.btn:hover{background:rgba(234,231,225,.18);border-color:rgba(234,231,225,.35)}
+.btn.danger{color:#FFB3B3}
+.sync{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:rgba(234,231,225,.55)}
+.sync .dot{width:6px;height:6px;border-radius:50%;background:var(--dp)}
+.sync.saving .dot{background:var(--warn)}
+
+.header{background:var(--wg41);color:var(--wg1);padding:30px 32px 24px;
+  position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,.03) 120px,rgba(234,231,225,.03) 121px),
+    repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,.02) 60px,rgba(234,231,225,.02) 61px);
+  pointer-events:none}
+.header-inner{max-width:880px;margin:0 auto;position:relative}
+.eyebrow{font-size:12px;letter-spacing:.25em;color:rgba(234,231,225,.55);margin-bottom:8px}
+.header h1{font-family:'Noto Serif TC',serif;font-size:24px;font-weight:700;letter-spacing:.04em;margin-bottom:4px}
+.header-sub{font-size:13px;color:rgba(234,231,225,.55);letter-spacing:.08em}
+.doc-id{position:absolute;right:0;bottom:0;font-size:12px;color:rgba(234,231,225,.4);letter-spacing:.08em}
+
+.meta{background:var(--white);border-bottom:1px solid var(--line);padding:16px 32px}
+.meta-inner{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.meta-field label{display:block;font-size:11px;letter-spacing:.16em;color:var(--wg9);margin-bottom:4px}
+.meta-field input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:4px 0;font-family:inherit;font-size:15px;color:var(--wg41)}
+.meta-field input:focus{outline:none;border-bottom-color:var(--wg11)}
+
+.main{max-width:880px;margin:0 auto;padding:24px 32px 60px}
+
+.note{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);
+  border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.8}
+.note.warn{border-left-color:var(--dn);background:rgba(140,31,31,.04)}
+.note.ok{border-left-color:var(--dp);background:rgba(31,92,56,.04)}
+.note .title{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--wg11);margin-bottom:6px}
+.note.warn .title{color:var(--dn)}
+.note.ok .title{color:var(--dp)}
+
+h2{font-family:'Noto Serif TC',serif;font-size:18px;font-weight:700;letter-spacing:.06em;
+  color:var(--wg41);margin:32px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:10px}
+h2 .h2-tag{font-size:13px;letter-spacing:.12em;color:var(--wg9);font-family:inherit;font-weight:500}
+h2 .h2-count{margin-left:auto;font-size:12px;color:var(--wg9);font-family:inherit;font-weight:400}
+
+.item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;margin-bottom:8px}
+.item-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.item-id{font-size:13px;color:var(--wg9);font-weight:500;flex-shrink:0;min-width:38px}
+.item-text{flex:1;min-width:180px;font-size:15px;color:var(--wg41);line-height:1.7}
+.item-states{display:flex;gap:4px;flex-shrink:0}
+.state{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;color:var(--wg9)}
+.state:hover{background:rgba(60,56,53,.04);border-color:var(--wg11)}
+.state.ok.active{background:var(--dp);border-color:var(--dp);color:var(--white)}
+.state.warn-s.active{background:var(--warn);border-color:var(--warn);color:var(--white)}
+.state.bad.active{background:var(--dn);border-color:var(--dn);color:var(--white)}
+.state.na.active{background:var(--wg9);border-color:var(--wg9);color:var(--white)}
+
+.item-fields{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;padding-top:10px;border-top:1px dashed var(--line)}
+.field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--wg9)}
+.field label{flex-shrink:0;letter-spacing:.06em}
+.field input{background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:2px 4px;font-family:inherit;font-size:14px;color:var(--wg41);width:80px}
+.field input.notes{flex:1;min-width:200px;width:auto}
+.field input:focus{outline:none;border-bottom-color:var(--wg11)}
+
+.summary{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin-top:32px;display:flex;gap:18px;flex-wrap:wrap;justify-content:space-around}
+.summary-cell{text-align:center}
+.summary-num{font-family:'Noto Serif TC',serif;font-size:28px;font-weight:700;line-height:1.1}
+.summary-num.ok{color:var(--dp)}
+.summary-num.warn-s{color:var(--warn)}
+.summary-num.bad{color:var(--dn)}
+.summary-num.na{color:var(--wg9)}
+.summary-num.pending{color:var(--wg11)}
+.summary-label{font-size:11px;letter-spacing:.14em;color:var(--wg9);margin-top:4px}
+
+.sign-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:32px}
+.sign-block{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px}
+.sign-label{font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:8px}
+.sign-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:6px 0;font-family:inherit;font-size:15px;color:var(--wg41)}
+.sign-input:focus{outline:none;border-bottom-color:var(--wg11)}
+
+.doc-footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--wg9);text-align:center;letter-spacing:.06em;line-height:1.8}
+
+@media print{
+  html,body{background:white;font-size:11pt}
+  .toolbar{display:none}
+  .header{background:white;color:var(--wg41);border-bottom:2px solid var(--wg41);padding:16px 20px}
+  .header::before{display:none}
+  .header h1{color:var(--wg41)}
+  .header-sub,.eyebrow,.doc-id{color:var(--wg11)}
+  .main{padding:12px 20px}
+  .item,.note,.summary,.sign-block{break-inside:avoid}
+  h2{break-after:avoid;margin-top:20px}
+  .state{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .meta{padding:8px 20px}
+}
+
+@media(max-width:600px){
+  .header{padding:24px 18px 20px}
+  .meta,.main{padding-left:18px;padding-right:18px}
+  .toolbar{padding:8px 14px;flex-wrap:wrap;gap:6px}
+  .toolbar .tb-title{font-size:12px}
+  .state{width:32px;height:32px}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <span class="tb-title">流出抑制設施・年度自主檢查表</span>
+  <span class="sync" id="sync"><span class="dot"></span><span id="sync-text">已自動儲存</span></span>
+  <div class="tb-actions">
+    <button class="btn" onclick="window.print()">列印 / 存為 PDF</button>
+    <button class="btn danger" onclick="resetAll()">清除選項</button>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">CULTURAL CITY · OUTFLOW SUPPRESSION FACILITY</div>
+    <h1>流出抑制設施・年度自主檢查表</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="doc-id">CC-FORM-OSF-001</div>
+  </div>
+</div>
+
+<div class="meta">
+  <div class="meta-inner">
+    <div class="meta-field"><label>檢查日期</label><input type="date" data-meta="date"></div>
+    <div class="meta-field"><label>檢查人員</label><input type="text" data-meta="inspector" placeholder="姓名／職務"></div>
+    <div class="meta-field"><label>協同人員</label><input type="text" data-meta="assistant" placeholder="姓名／職務"></div>
+    <div class="meta-field"><label>設施位置</label><input type="text" data-meta="location" placeholder="例：B1 雨水池機房"></div>
+    <div class="meta-field"><label>天氣狀況</label><input type="text" data-meta="weather" placeholder="例：晴／陰／雨"></div>
+    <div class="meta-field"><label>上次檢查日期</label><input type="date" data-meta="lastDate"></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="note warn">
+    <div class="title">⚠ 檢查前須知（入池前必讀）</div>
+    入池作業前**務必完成**：<br>
+    1. <strong>關閉進水閘閥</strong>（避免突然下雨水灌入）<br>
+    2. <strong>確認池內通風</strong>（密閉空間可能缺氧／積氣，必要時用鼓風機通風 10 分鐘以上）<br>
+    3. <strong>雙人作業</strong>，地面留一人作監視<br>
+    4. <strong>切斷馬達電源</strong>（控制箱切「OFF」並上鎖）<br>
+    5. 配戴照明設備、防滑鞋、必要時繫安全繩
+  </div>
+
+  <div class="note ok">
+    <div class="title">✓ 法規依據與年度義務</div>
+    《臺北市雨水下水道相關設施與用戶排水設備審查暨查驗及檢查要點》<br>
+    用戶排水設備管理維護由社區自行負責，每年 4 月自主上傳維護文件（含維護設施平面圖、現況照片）至臺北市政府市民服務大平臺。
+  </div>
+
+  <!-- A. 雨水池本體 -->
+  <h2>A. 雨水池本體 <span class="h2-tag">TANK BODY</span> <span class="h2-count">4 項</span></h2>
+  <div data-section="A">
+    <div class="item" data-id="A1" data-text="人孔蓋（檢查口）：無破損、可正常開啟、防滑功能正常"></div>
+    <div class="item" data-id="A2" data-text="池體標示牌：標示「流出抑制設施／雨水池」清晰可辨"></div>
+    <div class="item" data-id="A3" data-text="池內全景（水位）：平時水位低（接近空池）；若長期蓄水代表系統失效"></div>
+    <div class="item" data-id="A4" data-text="池內無大量淤泥、雜物堆積；池壁無滲水裂縫"></div>
+  </div>
+
+  <!-- B. 進水側 -->
+  <h2>B. 進水側 <span class="h2-tag">INLET</span> <span class="h2-count">4 項</span></h2>
+  <div data-section="B">
+    <div class="item" data-id="B1" data-text="雨水池進水口：管口無堵塞、無破損"></div>
+    <div class="item" data-id="B2" data-text="進水前的集水井／沉砂井：可識別位置、無大量沉砂堆積"></div>
+    <div class="item" data-id="B3" data-text="進水閘閥：閥體完整可識別，目前在「開」位置（手把與管路平行）"></div>
+    <div class="item" data-id="B4" data-text="溢流口：可識別位置、無雜物堵塞"></div>
+  </div>
+
+  <!-- C. 排水側 -->
+  <h2>C. 排水側 <span class="h2-tag">OUTLET</span> <span class="h2-count">4 項</span></h2>
+  <div data-section="C">
+    <div class="item" data-id="C1" data-text="池內出水管口：可識別位置、無堵塞"></div>
+    <div class="item" data-id="C2" data-text="沈水馬達出水管：管體完整、無滲漏、固定良好"></div>
+    <div class="item" data-id="C3" data-text="止水閥（逆止閥）：閥體完整；手動閥在「開」位置；逆止閥閥瓣無卡死"></div>
+    <div class="item" data-id="C4" data-text="排放口／接入市政雨水下水道處：可識別位置、無倒灌跡象"></div>
+  </div>
+
+  <!-- D. 控制系統 -->
+  <h2>D. 控制系統 <span class="h2-tag">CONTROL</span> <span class="h2-count">4 項</span></h2>
+  <div data-section="D">
+    <div class="item" data-id="D1" data-text="沈水馬達本體：外觀無變形、電源線完整無破損"></div>
+    <div class="item" data-id="D2" data-text="控制箱：電源燈亮、自動／手動切換鈕在「自動」、運轉指示燈正常"></div>
+    <div class="item" data-id="D3" data-text="配電箱（內部）：無斷路器跳脫、無警示燈亮"></div>
+    <div class="item" data-id="D4" data-text="浮球：可自由上下浮動，未被淤泥或雜物卡住"></div>
+  </div>
+
+  <!-- E. 功能測試 -->
+  <h2>E. 功能測試 <span class="h2-tag">FUNCTIONAL TEST</span> <span class="h2-count">3 項</span></h2>
+  <div data-section="E">
+    <div class="item" data-id="E1" data-text="注水測試：人工灌少量水後水位上升、浮球被頂起、馬達自動啟動"></div>
+    <div class="item" data-id="E2" data-text="馬達運轉：水位下降中，運轉聲響正常（無異音、無震動異常）"></div>
+    <div class="item" data-id="E3" data-text="停止測試：水位降到設定低點時，浮球落下、馬達自動停止"></div>
+  </div>
+
+  <!-- F. 周邊環境與文件 -->
+  <h2>F. 周邊環境與文件 <span class="h2-tag">ENVIRONMENT & DOCS</span> <span class="h2-count">3 項</span></h2>
+  <div data-section="F">
+    <div class="item" data-id="F1" data-text="維護設施平面圖：圖面齊備，存放於 Google Drive 並可調閱"></div>
+    <div class="item" data-id="F2" data-text="保養合約／廠商歸屬：太古華電（機電）或潤泰維護或單獨發包，責任明確"></div>
+    <div class="item" data-id="F3" data-text="本次上傳憑證：完成上傳市政平台後將收據／截圖存檔"></div>
+  </div>
+
+  <!-- 統計 -->
+  <div class="summary" id="summary">
+    <div class="summary-cell"><div class="summary-num ok" id="sum-ok">0</div><div class="summary-label">正常</div></div>
+    <div class="summary-cell"><div class="summary-num warn-s" id="sum-warn">0</div><div class="summary-label">待改善</div></div>
+    <div class="summary-cell"><div class="summary-num bad" id="sum-bad">0</div><div class="summary-label">異常</div></div>
+    <div class="summary-cell"><div class="summary-num na" id="sum-na">0</div><div class="summary-label">不適用</div></div>
+    <div class="summary-cell"><div class="summary-num pending" id="sum-pending">22</div><div class="summary-label">未填</div></div>
+  </div>
+
+  <!-- 簽章 -->
+  <div class="sign-area">
+    <div class="sign-block">
+      <div class="sign-label">檢查人員簽名</div>
+      <input class="sign-input" type="text" data-meta="signInspector">
+    </div>
+    <div class="sign-block">
+      <div class="sign-label">總幹事簽核</div>
+      <input class="sign-input" type="text" data-meta="signManager">
+    </div>
+    <div class="sign-block">
+      <div class="sign-label">主任委員簽核</div>
+      <input class="sign-input" type="text" data-meta="signChair">
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    閱大安管理委員會・流出抑制設施年度自主檢查表（CC-FORM-OSF-001）<br>
+    上傳位置：臺北市政府市民服務大平臺
+  </div>
+</div>
+
+<script>
+var STORAGE_KEY = 'cc-form-osf-001-v1';
+var STATES = [
+  { key: 'ok', label: '○', title: '正常' },
+  { key: 'warn-s', label: '△', title: '待改善' },
+  { key: 'bad', label: '✕', title: '異常' },
+  { key: 'na', label: '—', title: '不適用' }
+];
+
+function initItems() {
+  document.querySelectorAll('.item').forEach(function(item) {
+    var id = item.dataset.id;
+    var text = item.dataset.text;
+    item.innerHTML =
+      '<div class="item-head">' +
+        '<span class="item-id">' + id + '</span>' +
+        '<span class="item-text">' + text + '</span>' +
+        '<div class="item-states">' +
+          STATES.map(function(s) {
+            return '<button class="state ' + s.key + '" data-state="' + s.key + '" title="' + s.title + '">' + s.label + '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>' +
+      '<div class="item-fields">' +
+        '<div class="field"><label>照片編號</label><input type="text" data-field="photo" placeholder="例：A1-01,A1-02"></div>' +
+        '<div class="field"><label>備註</label><input class="notes" type="text" data-field="notes" placeholder="觀察、建議、待追蹤事項"></div>' +
+      '</div>';
+
+    item.querySelectorAll('.state').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var active = btn.classList.contains('active');
+        item.querySelectorAll('.state').forEach(function(b) { b.classList.remove('active'); });
+        if (!active) btn.classList.add('active');
+        save();
+        updateSummary();
+      });
+    });
+
+    item.querySelectorAll('input').forEach(function(inp) {
+      inp.addEventListener('input', save);
+    });
+  });
+}
+
+function collect() {
+  var data = { meta: {}, items: {} };
+  document.querySelectorAll('[data-meta]').forEach(function(inp) {
+    data.meta[inp.dataset.meta] = inp.value;
+  });
+  document.querySelectorAll('.item').forEach(function(item) {
+    var id = item.dataset.id;
+    var active = item.querySelector('.state.active');
+    data.items[id] = {
+      state: active ? active.dataset.state : null,
+      photo: item.querySelector('[data-field=photo]').value,
+      notes: item.querySelector('[data-field=notes]').value
+    };
+  });
+  return data;
+}
+
+function restore() {
+  var raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    var data = JSON.parse(raw);
+    Object.keys(data.meta || {}).forEach(function(k) {
+      var inp = document.querySelector('[data-meta="' + k + '"]');
+      if (inp) inp.value = data.meta[k];
+    });
+    Object.keys(data.items || {}).forEach(function(id) {
+      var item = document.querySelector('.item[data-id="' + id + '"]');
+      if (!item) return;
+      var rec = data.items[id];
+      if (rec.state) {
+        var btn = item.querySelector('.state[data-state="' + rec.state + '"]');
+        if (btn) btn.classList.add('active');
+      }
+      var photo = item.querySelector('[data-field=photo]');
+      var notes = item.querySelector('[data-field=notes]');
+      if (photo) photo.value = rec.photo || '';
+      if (notes) notes.value = rec.notes || '';
+    });
+  } catch (e) {}
+}
+
+var saveTimer = null;
+function save() {
+  document.getElementById('sync').classList.add('saving');
+  document.getElementById('sync-text').textContent = '儲存中...';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collect()));
+    document.getElementById('sync').classList.remove('saving');
+    document.getElementById('sync-text').textContent = '已自動儲存';
+  }, 200);
+}
+
+function updateSummary() {
+  var counts = { ok: 0, 'warn-s': 0, bad: 0, na: 0, pending: 0 };
+  document.querySelectorAll('.item').forEach(function(item) {
+    var active = item.querySelector('.state.active');
+    if (active) counts[active.dataset.state]++;
+    else counts.pending++;
+  });
+  document.getElementById('sum-ok').textContent = counts.ok;
+  document.getElementById('sum-warn').textContent = counts['warn-s'];
+  document.getElementById('sum-bad').textContent = counts.bad;
+  document.getElementById('sum-na').textContent = counts.na;
+  document.getElementById('sum-pending').textContent = counts.pending;
+}
+
+function resetAll() {
+  if (!confirm('確定要清除所有填寫內容？此動作無法復原。')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  document.querySelectorAll('.state.active').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('input').forEach(function(i) { i.value = ''; });
+  updateSummary();
+}
+
+initItems();
+restore();
+updateSummary();
+</script>
+</body>
+</html>
