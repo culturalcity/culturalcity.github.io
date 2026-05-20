@@ -536,6 +536,10 @@ flowchart TD
 
 設計核心：進水（雨）是「隨機暴衝」、出水（馬達抽出）是「定速穩定」，中間靠水位緩衝。市政下水道收到的就不再是瞬間暴雨，而是平緩水流——這就是「**流出抑制**」這個名字的由來。
 
+**物理空間配置（剖面示意）**：
+
+<img src="/images/diagrams/osf-cross-section.svg" alt="流出抑制設施剖面示意圖" style="max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;border:1px solid var(--line);border-radius:2px;padding:8px;">
+
 #### 1.11.3 五個核心零件
 
 | 零件 | 功能 | 檢查重點 |
@@ -578,6 +582,12 @@ flowchart TD
 > 📋 **檢查表工具**：`/admin/inspection-osf.html`（CC-FORM-OSF-001）
 > 22 項分 6 區、手機／平板現場填寫、自動儲存、可列印或存 PDF 上傳。
 > 每年 4 月（或政府延期通知日）開啟使用。
+
+**完整理解圖（拍照部位 + 名詞 + 簡單記法一張看完）**：
+
+<img src="/images/diagrams/osf-system-cheatsheet.webp" alt="流出抑制設施完整系統示意圖（含拍照部位）" style="max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;border:1px solid var(--line);border-radius:2px;padding:8px;">
+
+這張圖可一併上傳市政平台當補充說明（非強制）。
 
 **上傳所需檔案**：
 1. **維護設施平面圖**（top-down 平面圖）—— 從建商交付的原始圖說中找；**不是剖面示意圖**
