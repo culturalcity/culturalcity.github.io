@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
 
 **跟其他文件的關係**：
 
-- 《公寓大廈建築實務・寫給主委》（`/admin/chair-primer/`）：**對內系統地圖**——大樓的七大子系統
+- 《閱大安主委手冊》（`/admin/chair-handbook/`）：主委的整體 reference——工程實務 + 行政法規 + 判斷工具
 - 《主委對外窗口地圖》（本文件）：**對外窗口地圖**——跟政府單位的對接
 - 《總幹事手冊》（`/admin/handbook/`）：執行層 SOP
 
@@ -494,7 +494,7 @@ flowchart TD
 ## B. 與其他文件的關係
 
 - **本文件**（chair-gov-map）：對外窗口地圖
-- **《公寓大廈建築實務・寫給主委》**（`/admin/chair-primer/`）：對內系統地圖
+- **《閱大安主委手冊》**（`/admin/chair-handbook/`）：主委的整體 reference
 - **《總幹事手冊》**（`/admin/handbook/`）：執行 SOP
 
 ## C. 版本歷史
