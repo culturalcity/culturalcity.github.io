@@ -96,10 +96,13 @@ const CONFIG = {
 function runDaily() {
   try {
     const today = todayTaipei();
-    // 1. 先 check 昨天的完成狀態（log 用，不影響今天決策）
-    checkYesterdayCompletion_(today);
-    // 2. 跑今天的判斷
-    const result = decide(today, true);
+    // 1. 先 check 昨天的完成狀態：石墨黑 = 已澆，要讓今天的判斷知道
+    //    （否則 Rule 4 連日少雨會在剛澆完隔天又觸發，建議「再澆 9 分鐘」）
+    const completion = checkYesterdayCompletion_(today);
+    const wateredYesterday = !!(completion.hadEvent && completion.isDone);
+    // 2. 跑今天的判斷（把昨天澆水紀錄傳進去）
+    const result = decide(today, true, wateredYesterday);
+    result.wateredYesterday = wateredYesterday; // 給 summary email 用
     // 2b. 若該澆水，計算建議澆灌分鐘（注入 result.wateringMin / wateringBreakdown / 改 title）
     attachWateringAmount_(result);
     log_('runDaily', formatDate_(today), result);
@@ -202,9 +205,13 @@ function testHistoricalCases() {
 /**
  * @param {Date} today  Date 物件（任何時區皆可，內部統一用台北日期 key）
  * @param {boolean} useForecast  是否抓 CWA 預報（測試模式 false 純看歷史）
+ * @param {boolean} [wateredYesterday=false]  昨天行事曆事件顏色 = 石墨黑（已澆）。
+ *   為 true 時抑制 Rule 4 連日少雨 + fallback-dry（避免剛澆完隔天又觸發）；
+ *   Rule 3 高溫無雨保留（高溫日連澆可接受）。
+ *   simulate() / testHistoricalCases() 預設不傳，當 false。
  * @return {{action:'water'|'skip', kind?:string, title?:string, color?:string, reason?:string, ...}}
  */
-function decide(today, useForecast) {
+function decide(today, useForecast, wateredYesterday) {
   // 降雨歷史 fail-soft：抓不到（GitHub raw CDN 偶發 unreachable 等）就降級為 skip
   let histMap;
   try {
@@ -262,7 +269,9 @@ function decide(today, useForecast) {
   }
 
   // Rule 4: 連日少雨 → 必澆（不論預報，因為已經乾太久）
-  if (past5 < CONFIG.RAIN_PAST_5D_LIGHT) {
+  // 例外：昨天才剛澆過，今天再澆變兩天連澆 + 「土壤完全乾燥」加分項描述錯誤。
+  //      抑制 Rule 4 讓判斷往下走（Rule 3 高溫無雨仍會觸發，這合理：33°C 連澆兩天可接受）
+  if (past5 < CONFIG.RAIN_PAST_5D_LIGHT && !wateredYesterday) {
     return {
       action: 'water', kind: 'dry-spell',
       title: '💧 今日建議澆水（連日少雨）',
@@ -272,8 +281,9 @@ function decide(today, useForecast) {
   }
 
   // 預報失敗 fallback：past5 ≥ 5 但 past3 < 2 的灰色地帶（短期乾、長期 OK，沒預報無法判斷）
+  // 同樣：昨天剛澆就不再走 fallback-dry，免得連澆
   if (useForecast && !forecast) {
-    if (past3 < CONFIG.RAIN_PAST_3D_DRY) {
+    if (past3 < CONFIG.RAIN_PAST_3D_DRY && !wateredYesterday) {
       return {
         action: 'water', kind: 'fallback-dry',
         title: '💧 今日建議澆水（預報資料缺，依歷史判斷）',
@@ -281,7 +291,10 @@ function decide(today, useForecast) {
         past3, past5, forecast: null, todayRainSoFar,
       };
     }
-    return { action: 'skip', reason: '預報資料缺，歷史不顯著乾燥', past3, past5, forecast: null, todayRainSoFar };
+    const reason = wateredYesterday
+      ? '預報資料缺；昨天剛澆過，今日不續澆'
+      : '預報資料缺，歷史不顯著乾燥';
+    return { action: 'skip', reason, past3, past5, forecast: null, todayRainSoFar };
   }
 
   // Rule 2: 雨前跳過
@@ -305,9 +318,13 @@ function decide(today, useForecast) {
   }
 
   // Rule 5: 中性日
+  // 區分兩種「不澆」：真中性 vs Rule 4 被「昨天澆過」抑制掉的情況
+  const skipReason = (wateredYesterday && past5 < CONFIG.RAIN_PAST_5D_LIGHT)
+    ? `昨天剛澆過，今日 Rule 4 連日少雨延後 1 日（過去 5 日 ${past5.toFixed(1)} mm，仍 < ${CONFIG.RAIN_PAST_5D_LIGHT} mm 閾值，但 24h 內已澆）`
+    : `中性日（過去 5 日雨 ${past5.toFixed(1)} mm，無極端）`;
   return {
     action: 'skip',
-    reason: `中性日（過去 5 日雨 ${past5.toFixed(1)} mm，無極端）`,
+    reason: skipReason,
     past3, past5, forecast, todayRainSoFar,
   };
 }
@@ -793,6 +810,14 @@ function sendDailySummary_(today, result) {
   lines.push(isWater ? '  ✓ 澆水' : '  ✗ 不澆水');
   lines.push('');
 
+  // 昨天紀錄（若昨天有澆水則明確標出，讓使用者理解今天為什麼可能不續澆）
+  if (result.wateredYesterday) {
+    lines.push('【昨天紀錄】');
+    lines.push('  ✓ 昨天已澆水（依行事曆事件「石墨黑」顏色判斷）');
+    lines.push('  → Rule 4 連日少雨自動延後 1 日（避免兩天連澆 + 土壤實際不乾）');
+    lines.push('');
+  }
+
   // 觸發規則
   lines.push('【觸發規則】');
   if (isWater) {
@@ -891,6 +916,8 @@ function sendDailySummary_(today, result) {
   lines.push('  · 過去 3 日累計 ≥ 8 mm → 跳過');
   lines.push('Rule 4（連日少雨）：');
   lines.push('  · 過去 5 日 < 5 mm → 澆水（不論氣溫、不論預報）');
+  lines.push('  · 例外：昨天事件已標「石墨黑」(已澆) → 今日 Rule 4 延後 1 日');
+  lines.push('    （Rule 3 高溫無雨仍照常觸發；2026-05-21 新增）');
   lines.push('備援（預報資料缺時的保守觸發）：');
   lines.push('  · CWA 預報抓取失敗，且過去 3 日 < 2 mm → 短澆 6 分鐘');
   lines.push('  · （當 past5 < 5 已先觸發 Rule 4 時不會走到這裡）');
