@@ -45,40 +45,25 @@ function get(url) {
   });
 }
 
-function postJson(url, payload) {
-  return new Promise((resolve, reject) => {
-    const u = new URL(url);
-    const body = JSON.stringify(payload);
-    const req = https.request({
-      hostname: u.hostname,
-      port: 443,
-      path: u.pathname + u.search,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body),
-      },
-    }, res => {
-      let buf = '';
-      res.on('data', c => (buf += c));
-      res.on('end', () => {
-        // Apps Script Web App 對非 2xx 也可能回 200 + error JSON，要看 body
-        try {
-          const parsed = JSON.parse(buf);
-          if (res.statusCode >= 200 && res.statusCode < 300 && parsed.ok) {
-            resolve(parsed);
-          } else {
-            reject(new Error(`Webhook failed (HTTP ${res.statusCode}): ${buf.slice(0, 300)}`));
-          }
-        } catch (e) {
-          reject(new Error(`Webhook returned non-JSON (HTTP ${res.statusCode}): ${buf.slice(0, 300)}`));
-        }
-      });
-    });
-    req.on('error', reject);
-    req.write(body);
-    req.end();
+// Apps Script Web App 永遠回 302 把 client 導到 script.googleusercontent.com/macros/echo，
+// 必須 follow redirect 才會拿到真 JSON。用 Node 22 內建 fetch，預設 redirect:'follow' 即可，
+// POST→302 規範下會自動改成 GET，剛好對應 echo endpoint 的拿法。
+async function postJson(url, payload) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    redirect: 'follow',
   });
+  const buf = await res.text();
+  try {
+    const parsed = JSON.parse(buf);
+    if (res.ok && parsed.ok) return parsed;
+    throw new Error(`Webhook failed (HTTP ${res.status}): ${buf.slice(0, 300)}`);
+  } catch (e) {
+    if (e.message.startsWith('Webhook failed')) throw e;
+    throw new Error(`Webhook returned non-JSON (HTTP ${res.status}): ${buf.slice(0, 300)}`);
+  }
 }
 
 // 台北時區「明天」的 YYYY-MM-DD
@@ -212,7 +197,7 @@ async function checkForecast(apiKey) {
       console.log(`ℹ️  副軌：明日（${fc.date}）大安區預報 ${fc.peakC}°C < ${FORECAST_THRESHOLD_C}°C，不觸發`);
     }
   } catch (e) {
-    console.error('❌ 副軌（F-D0047-061）失敗：', e.message);
+    console.error('❌ 副軌（F-D0047-063）失敗：', e.message);
   }
 
   if (events.length === 0) {

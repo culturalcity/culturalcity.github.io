@@ -1,6 +1,6 @@
 name: Heat Alert (CWA → Google Calendar)
 
-# 每天 17:00 台北：抓 CWA 高溫警報（W-C0033-005）+ 大安區明日預報（F-D0047-061），
+# 每天 17:00 台北：抓 CWA 高溫警報（W-C0033-005）+ 大安區明日預報（F-D0047-063），
 # 觸發條件達標就 POST 到 Apps Script bridge，建立 culturalcity85 Calendar 全天事件。
 #
 # 為什麼獨立 workflow（不併進 deploy.yml）：
