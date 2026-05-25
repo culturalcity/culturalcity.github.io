@@ -1,18 +1,20 @@
 // 高溫關懷自動提醒：每天 17:00 台北跑一次
 //
 // 雙軌設計（呼應臺北市氣候行動獎「高溫警報時關懷獨居長者」要求）：
-//   主軌：CWA W-C0033-005 高溫資訊（黃/橘/紅燈）有發布 → 「必須關懷」
-//   副軌：CWA F-D0047-063 大安區明日 MaxT ≥ 36°C → 「建議關懷」（與 CWA 黃燈門檻一致，
-//        當作「明日很可能會發黃燈」的前置提醒，給總幹事一晚的準備時間）
-// 兩條獨立判斷，可能同日都觸發，由 Apps Script bridge 用標題 + 日期去重。
+//   主軌：CWA W-C0033-005 高溫資訊（OpenData JSON） → 當日已 settled 警報「必須關懷」
+//   副軌：CWA Warning_Content.js + Warning_Taiwan.js → 明日 W29 燈號預測「建議關懷」
+//        副軌資料源是 W29.html 的 source，CWA 17:30 publish 明日預測時已含明日燈號
+//        （F-D0047-063 只給 MaxT 數字、無法區分黃/橙/紅；2026-05-25 換掉）
+// 兩條判斷：若同一個 advisory 同時被主軌 (validTime.startTime=今日) 與副軌
+// (validto.date=明日) 命中，靠不同 title + date 在 Calendar 上呈現為兩件事。
 //
 // 環境變數：
-//   CWA_API_KEY                  CWA OpenData 平台 authkey
+//   CWA_API_KEY                  CWA OpenData 平台 authkey（僅主軌需要）
 //   APPS_SCRIPT_WEBHOOK_URL      Apps Script Web App 部署 URL
 //   APPS_SCRIPT_SHARED_SECRET    雙方共用 token（避免被亂打）
 //
 // 排程：
-//   .github/workflows/deploy.yml 內 cron '0 9 * * *'（UTC 09:00 = 台北 17:00）
+//   .github/workflows/heat-alert.yml 內 cron '0 9 * * *'（UTC 09:00 = 台北 17:00）
 //
 // 手動測試：
 //   node scripts/check-heat-alert.js           # 真打 API、真送 webhook
@@ -21,11 +23,16 @@
 const https = require('https');
 
 const CWA_BASE = 'https://opendata.cwa.gov.tw/api/v1/rest/datastore';
-const WARNING_DATASET = 'W-C0033-005';    // 高溫資訊
-const FORECAST_DATASET = 'F-D0047-063';   // 臺北市鄉鎮 1 週預報（有「最高溫度」element；
-                                          // F-D0047-061 是逐 3 小時，只有「溫度」沒有 MaxT）
-const DISTRICT = '大安區';
-const FORECAST_THRESHOLD_C = 36;          // 副軌門檻：明日 MaxT ≥ 36°C（與 CWA 黃燈門檻一致）
+const WARNING_DATASET = 'W-C0033-005';    // 主軌：高溫資訊（OpenData）
+
+// 副軌：W29 高溫資訊 page 的 JS source（含明日燈號預測，CWA 17:30 publish）
+const CWA_W29_BASE = 'https://www.cwa.gov.tw/Data/js/warn';
+const TAIPEI_COUNTY_CODE = '63';          // CWA 縣市代號：臺北市
+const W29_LEVELS = {
+  '1': { zh: '黃', en: 'Yellow',  color: 'TANGERINE' },
+  '2': { zh: '橙', en: 'Orange',  color: 'TANGERINE' },
+  '3': { zh: '紅', en: 'Red',     color: 'TOMATO'    },
+};
 
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -43,6 +50,30 @@ function get(url) {
       });
     }).on('error', reject);
   });
+}
+
+// 抓純文字（給副軌的 CWA frontend JS 模組用，不是 JSON）
+function getText(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers: { 'User-Agent': 'culturalcity-heat-alert' } }, res => {
+      let buf = '';
+      res.on('data', c => (buf += c));
+      res.on('end', () => {
+        if (res.statusCode !== 200) {
+          return reject(new Error(`HTTP ${res.statusCode}: ${buf.slice(0, 200)}`));
+        }
+        resolve(buf);
+      });
+    }).on('error', reject);
+  });
+}
+
+// 從 `var X = {...};` 形式的 CWA JS 取出 X 物件
+// 用 new Function() 在 sandbox 內 evaluate；CWA 內容都是 literal assignment、無 side effect，
+// 來源是政府網站可信。若日後 CWA 改寫法導致 parse 失敗，會丟出明確 Error。
+function evalJsModule(jsText, varName) {
+  const fn = new Function(jsText + `\nreturn typeof ${varName} !== 'undefined' ? ${varName} : null;`);
+  return fn();
 }
 
 // Apps Script Web App 永遠回 302 把 client 導到 script.googleusercontent.com/macros/echo，
@@ -105,40 +136,69 @@ async function checkWarning(apiKey) {
   return null;
 }
 
-// ---- 副軌：明日預報 ----
-async function checkForecast(apiKey) {
-  const url = `${CWA_BASE}/${FORECAST_DATASET}`
-    + `?Authorization=${encodeURIComponent(apiKey)}`
-    + `&format=JSON`
-    + `&LocationName=${encodeURIComponent(DISTRICT)}`
-    + `&ElementName=${encodeURIComponent('最高溫度')}`;
-  const json = await get(url);
-  const locations = (json.records && json.records.Locations && json.records.Locations[0] && json.records.Locations[0].Location) || [];
-  if (locations.length === 0) {
-    throw new Error(`${FORECAST_DATASET} 找不到 ${DISTRICT} 的資料`);
-  }
-  const loc = locations[0];
-  const elements = loc.WeatherElement || [];
-  const maxT = elements.find(e => (e.ElementName || '').includes('最高溫度'));
-  if (!maxT) throw new Error('找不到「最高溫度」WeatherElement');
+// ---- 副軌：明日燈號預測（CWA W29 Warning_Content.js + Warning_Taiwan.js） ----
+//
+// CWA 在每天 17:30 publish「明日各縣市燈號」資訊，發送給 W29 高溫資訊 page。
+// 結構化資料在 Warning_Taiwan.js（county code → ['W29-N']），N=1 黃 / 2 橙 / 3 紅。
+// 人類可讀全文在 Warning_Content.js（W29.C.content）。我們把兩個都拉。
+//
+// validto 用來判斷這份 advisory 涵蓋的日期：
+//   - validto.date == 明日 → 是「前一日 17:30 發的明日預測」，副軌觸發
+//   - validto.date == 今日 → 是「當日 07:30 發的今日 advisory」，副軌跳過（主軌處理）
+//   - 其他 → 過期或異常，跳過
+async function checkForecast() {
+  // 1. 拉結構化燈號表
+  const taiwanJs = await getText(`${CWA_W29_BASE}/Warning_Taiwan.js`);
+  const WarnTown = evalJsModule(taiwanJs, 'WarnTown');
+  if (!WarnTown) throw new Error('Warning_Taiwan.js 解析失敗（找不到 WarnTown 變數）');
 
-  const tomorrowDate = tomorrowTaipei(); // YYYY-MM-DD
-  const times = maxT.Time || [];
-  // 明日有多筆時段（白天 06-18、夜間 18-06），取明日所有時段裡最高的
-  let peak = null;
-  for (const t of times) {
-    const start = (t.StartTime || '').slice(0, 10);
-    if (start !== tomorrowDate) continue;
-    const valStr = t.ElementValue && t.ElementValue[0] && (t.ElementValue[0].MaxTemperature || t.ElementValue[0].Temperature || t.ElementValue[0].value);
-    const val = Number(valStr);
-    if (!Number.isFinite(val)) continue;
-    if (peak === null || val > peak.value) {
-      peak = { value: val, startTime: t.StartTime, endTime: t.EndTime };
-    }
+  const taipeiEntry = WarnTown[TAIPEI_COUNTY_CODE];
+  if (!taipeiEntry) return null; // 臺北無任何警報
+
+  // T/G/M/N/C 是不同 map layer，但 W29 燈號在所有 layer 應一致；取第一個 W29-N
+  let w29Code = null;
+  for (const key of Object.keys(taipeiEntry)) {
+    const codes = taipeiEntry[key] || [];
+    const found = codes.find(c => typeof c === 'string' && c.startsWith('W29-'));
+    if (found) { w29Code = found; break; }
   }
-  if (peak === null) return null;
-  if (peak.value < FORECAST_THRESHOLD_C) return { hit: false, peakC: peak.value, date: tomorrowDate };
-  return { hit: true, peakC: peak.value, date: tomorrowDate };
+  if (!w29Code) return null; // 臺北有其他警報但無 W29
+
+  const levelNum = w29Code.split('-')[1];
+  const level = W29_LEVELS[levelNum];
+  if (!level) throw new Error(`未知 W29 等級代號：${w29Code}`);
+
+  // 2. 拉文字內容：取 issued/validto/原文
+  const contentJs = await getText(`${CWA_W29_BASE}/Warning_Content.js`);
+  const WarnContent = evalJsModule(contentJs, 'WarnContent');
+  const w29Content = WarnContent && WarnContent.W29 && WarnContent.W29.C;
+  if (!w29Content) throw new Error('Warning_Content.js 找不到 W29.C');
+
+  // validto 格式：'2026/05/26 17:00' → 取日期部分轉成 YYYY-MM-DD
+  const validto = w29Content.validto || '';
+  const validtoDate = validto.slice(0, 10).replace(/\//g, '-');
+  const tomorrowDate = tomorrowTaipei();
+
+  // 若 validto 不是明日，是「今日 advisory」（07:30 publish 的），副軌跳過讓主軌處理
+  if (validtoDate !== tomorrowDate) {
+    return {
+      level,
+      validto,
+      validtoDate,
+      content: w29Content.content || '',
+      isToday: true,
+      date: validtoDate,
+    };
+  }
+
+  return {
+    level,
+    validto,
+    issued: w29Content.issued || '',
+    content: w29Content.content || '',
+    isToday: false,
+    date: tomorrowDate,
+  };
 }
 
 // ---- 主流程 ----
@@ -178,26 +238,29 @@ async function checkForecast(apiKey) {
 
   // 副軌
   try {
-    const fc = await checkForecast(apiKey);
-    if (fc && fc.hit) {
-      console.log(`🌡️  副軌：明日（${fc.date}）大安區預報 ${fc.peakC}°C ≥ ${FORECAST_THRESHOLD_C}°C`);
+    const fc = await checkForecast();
+    if (fc && !fc.isToday) {
+      console.log(`🌡️  副軌：CWA 預測明日（${fc.date}）臺北為 ${fc.level.zh}燈`);
       events.push({
         track: 'forecast',
         date: fc.date,
-        title: `🌡️ 預報高溫・建議關懷獨居長者（明日 ${Math.round(fc.peakC)}°C）`,
+        title: `🌡️ 預報明日臺北${fc.level.zh}燈・建議關懷獨居長者`,
         description:
-          `大安區明日預報最高溫 ${fc.peakC}°C，達中央氣象署高溫資訊黃燈門檻（36°C）。\n` +
-          `中央氣象署可能於明日早晨發布正式警報；社區提前在前一晚啟動關懷，\n` +
-          `讓總幹事能事先安排訪視時段，建議致電獨居長者確認狀況。\n\n` +
+          `中央氣象署預測明日（${fc.date}）臺北市為${fc.level.zh}色燈號。\n\n` +
+          `CWA 發布時間：${fc.issued}\n` +
+          `有效至：${fc.validto}\n\n` +
+          `--- CWA 原文 ---\n${fc.content}\n\n` +
           `📌 由 heat-alert 系統自動建立\n` +
-          `資料來源：CWA F-D0047-063`,
-        color: 'TANGERINE',
+          `資料來源：CWA W29 Warning_Content.js + Warning_Taiwan.js`,
+        color: fc.level.color,
       });
-    } else if (fc) {
-      console.log(`ℹ️  副軌：明日（${fc.date}）大安區預報 ${fc.peakC}°C < ${FORECAST_THRESHOLD_C}°C，不觸發`);
+    } else if (fc && fc.isToday) {
+      console.log(`ℹ️  副軌：CWA 當前 W29 advisory 涵蓋今日（${fc.date}），副軌跳過（主軌處理）`);
+    } else {
+      console.log('ℹ️  副軌：CWA 目前無臺北 W29 警報');
     }
   } catch (e) {
-    console.error('❌ 副軌（F-D0047-063）失敗：', e.message);
+    console.error('❌ 副軌（W29 JS）失敗：', e.message);
   }
 
   if (events.length === 0) {
