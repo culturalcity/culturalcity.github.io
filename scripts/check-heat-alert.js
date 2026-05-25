@@ -237,19 +237,23 @@ async function checkForecast() {
   }
 
   // 副軌
+  // 注意：event 的 date 是「預測指向的那一天」(fc.date)，所以打開 event 時
+  // 觀看者眼中那天就是「本日」。description 一律從「本日」視角寫，不要用「明日」
+  // （script 跑的時間視角是前一日傍晚、event 觀看時間視角是當日，兩者錯一日）。
+  // CWA 原文照搬不動，但加 disclaimer 告知讀者「明(N)日」是 CWA 前一日傍晚發布的時間視角。
   try {
     const fc = await checkForecast();
     if (fc && !fc.isToday) {
-      console.log(`🌡️  副軌：CWA 預測明日（${fc.date}）臺北為 ${fc.level.zh}燈`);
+      console.log(`🌡️  副軌：CWA 預測 ${fc.date} 臺北為 ${fc.level.zh}燈`);
       events.push({
         track: 'forecast',
         date: fc.date,
-        title: `🌡️ 預報明日臺北${fc.level.zh}燈・建議關懷獨居長者`,
+        title: `🌡️ 預報臺北${fc.level.zh}燈・建議關懷獨居長者`,
         description:
-          `中央氣象署預測明日（${fc.date}）臺北市為${fc.level.zh}色燈號。\n\n` +
-          `CWA 發布時間：${fc.issued}\n` +
+          `中央氣象署預測本日（${fc.date}）臺北市為${fc.level.zh}色燈號。\n\n` +
+          `CWA 發布時間：${fc.issued}（前一日傍晚預測）\n` +
           `有效至：${fc.validto}\n\n` +
-          `--- CWA 原文 ---\n${fc.content}\n\n` +
+          `--- CWA 原文（前一日傍晚預測，內文「明(N)日」即本事件當日）---\n${fc.content}\n\n` +
           `📌 由 heat-alert 系統自動建立\n` +
           `資料來源：CWA W29 Warning_Content.js + Warning_Taiwan.js`,
         color: fc.level.color,
