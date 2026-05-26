@@ -1,0 +1,100 @@
+name: Heat Notice Draft (CWA W29 → PR)
+
+# 每天 08:00 台北：抓 CWA W29 settled 等級 → 生成公告草稿檔 → 建分支 + 開 PR 給主委 review。
+#
+# 為什麼 08:00 而不是 heat-alert 那個 17:00：
+#   - 主委 review PR 後 merge → deploy 上線，是公告，要 CWA 已 settle 的當日確認等級
+#   - heat-alert 17:00 跑的是「前一日預測明日」，可能跨夜更新（黃↔橙↔紅），準確度不夠
+#   - CWA 07:30 publish 當日 advisory，08:00 跑時資料已 settle 30 分鐘
+#
+# GitHub Actions 對這個 repo schedule 持續延遲 51-60 min，實際觸發落在 08:51-09:00。
+# 對主委早上工作節奏沒差。
+#
+# 為什麼用 PR 不是直接 commit 到 main：
+#   - 公告對住戶可見、有主委權責，自動內容必須過人眼最後一關
+#   - PR 給主委 30 秒掃描；OK 就 merge、要改就在 PR 上 commit
+#   - 跟 deploy.yml 路徑乾淨分流：merge 到 main 才觸發 build & deploy
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # UTC 00:00 = 台北 08:00
+  workflow_dispatch:       # 允許手動觸發測試
+
+permissions:
+  contents: write          # create branch + commit
+  pull-requests: write     # open PR
+
+concurrency:
+  group: heat-notice-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0   # 連續日計算需讀 src/notice/ 完整檔案列表
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Run heat notice draft script
+        id: draft
+        run: node scripts/draft-heat-notice.js
+
+      - name: Create branch + commit + open PR
+        if: steps.draft.outputs.filepath != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FILEPATH: ${{ steps.draft.outputs.filepath }}
+          LEVEL: ${{ steps.draft.outputs.level }}
+          DAY: ${{ steps.draft.outputs.day }}
+          DATE: ${{ steps.draft.outputs.date }}
+        run: |
+          set -e
+          BRANCH="heat-draft-${DATE}"
+
+          # 若 branch 已存在（同日重跑），skip 避免 force-push
+          if git ls-remote --heads origin "$BRANCH" | grep -q "refs/heads/$BRANCH"; then
+            echo "ℹ️  Branch $BRANCH 已存在，skip（同日已開過 PR）"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "$FILEPATH"
+          git commit -m "feat(notice): [auto-draft] ${DATE} 臺北市高溫${LEVEL}燈・社區提醒（連續第 ${DAY} 日)"
+          git push origin "$BRANCH"
+
+          PR_BODY=$(cat <<EOF
+          自動產生的高溫公告草稿。
+
+          - **日期**：${DATE}
+          - **等級**：${LEVEL}燈
+          - **連續第幾日**：${DAY}
+          - **資料來源**：CWA W29 高溫資訊（Warning_Content.js + Warning_Taiwan.js）
+
+          ## 怎麼處理
+
+          - **內容 OK** → 直接 merge，merge 到 main 自動 deploy，約 1-2 分鐘上線
+          - **要改文字** → 在此 PR 上直接 commit 修改，再 merge
+
+          ## 注意
+
+          - 自動草稿只是「合理起點」，每篇仍可能需要等級／連續日相關文字微調
+          - 若今日不該公告（譬如 CWA 已 downgrade 但 W29.js 尚未同步），關 PR 即可
+
+          ---
+          🤖 由 \`.github/workflows/heat-notice-draft.yml\` 自動產生
+          EOF
+          )
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "[草稿] ${DATE} 臺北市高溫${LEVEL}燈・社區提醒（連續第 ${DAY} 日）" \
+            --body "$PR_BODY"
