@@ -20,9 +20,15 @@ on:
     # GitHub Actions schedule 對 1x/day 低頻 cron 不可靠（會 silently skip），
     # 開 3 次提高機率。Apps Script bridge 已內建 title+date dedup，同日跑多次
     # 只會 create 一筆 Calendar event、其餘 action:skipped。
-    - cron: '0 0 * * *'    # UTC 00:00 = 台北 08:00
-    - cron: '30 0 * * *'   # UTC 00:30 = 台北 08:30
-    - cron: '0 1 * * *'    # UTC 01:00 = 台北 09:00
+    #
+    # 排程設計：
+    # - 避開 :00 / :30（GH 文件建議：整點 traffic spike 較易 skip）
+    # - 第一次 07:45 cron + 51-60min 延遲 = 08:36-08:45 fire，給主委看到 result 的時間
+    # - CWA 07:31 publish + 14 分鐘 buffer 給偶爾延遲
+    # - 30 分間隔讓三次跨不同 batch，避免 GH scheduler 一次卡死全部
+    - cron: '45 23 * * *'  # UTC 23:45 = 台北 07:45
+    - cron: '15 0 * * *'   # UTC 00:15 = 台北 08:15
+    - cron: '45 0 * * *'   # UTC 00:45 = 台北 08:45
   workflow_dispatch:       # 允許手動觸發測試
 
 permissions:
