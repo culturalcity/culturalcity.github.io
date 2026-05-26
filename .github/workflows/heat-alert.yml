@@ -1,19 +1,28 @@
 name: Heat Alert (CWA → Google Calendar)
 
-# 每天 17:00 台北：抓 CWA 高溫警報（W-C0033-005）+ 大安區明日預報（F-D0047-063），
-# 觸發條件達標就 POST 到 Apps Script bridge，建立 culturalcity85 Calendar 全天事件。
+# 每天早上 08:00–09:00 台北：抓 CWA 高溫警報、若臺北有 advisory 就建 Calendar 事件
+# 給總幹事一上班看到的當日關懷 todo。
+#
+# 為什麼是早上不是前一晚：總幹事 18:00 下班，前一晚的「明日預測」對他沒 actionable
+# advantage——他次日早上才會看 Calendar，那時看「今日 settled 等級」比「前一晚預測」
+# 更準（沒跨夜跳級的問題）。原本副軌的「前一晚預測明日」設計於 2026-05-27 簡化掉。
 #
 # 為什麼獨立 workflow（不併進 deploy.yml）：
 #   1. heat-alert 不 commit 任何檔，不需要走 Pages build/deploy
-#   2. 改 deploy.yml 的 cron 會讓下一次觸發被 GitHub 跳過（事故 2026-05-05、2026-05-06）；
-#      獨立 workflow 不影響 fetch-weather 的排程穩定性
+#   2. 改 deploy.yml 的 cron 會讓下一次觸發被 GitHub 跳過（事故 2026-05-05、2026-05-06）
 #
-# 排程觀察：GitHub Actions schedule 對這個 repo 持續延遲 51-60 min（記在 deploy.yml 註解）。
-# 用 09:00 UTC 對應台北 17:00，實際觸發落在 17:51~18:00。對「明日提醒」場景沒差。
+# 排程觀察：GitHub Actions schedule 對這個 repo 持續延遲 51-60 min。
+# 08:00/08:30/09:00 cron 實際觸發落在 08:51~10:00 之間，CWA 07:30 publish 已 settle。
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # UTC 09:00 = 台北 17:00
+    # 三個 cron 時段地位平等——只要早上有任一次成功跑、總幹事就能看到 Calendar 事件。
+    # GitHub Actions schedule 對 1x/day 低頻 cron 不可靠（會 silently skip），
+    # 開 3 次提高機率。Apps Script bridge 已內建 title+date dedup，同日跑多次
+    # 只會 create 一筆 Calendar event、其餘 action:skipped。
+    - cron: '0 0 * * *'    # UTC 00:00 = 台北 08:00
+    - cron: '30 0 * * *'   # UTC 00:30 = 台北 08:30
+    - cron: '0 1 * * *'    # UTC 01:00 = 台北 09:00
   workflow_dispatch:       # 允許手動觸發測試
 
 permissions:

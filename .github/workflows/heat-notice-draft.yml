@@ -17,7 +17,12 @@ name: Heat Notice Draft (CWA W29 → PR)
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # UTC 00:00 = 台北 08:00
+    # 三個時段：GitHub Actions schedule 對 1x/day 低頻 cron 不可靠（會 silently skip）。
+    # 同日多次跑：script 偵測到 src/notice/ 已存在當日檔就 skip 寫檔（idempotent）；
+    # 若已開過 PR，workflow 偵測到 branch heat-draft-YYYY-MM-DD 存在也會 skip。
+    - cron: '0 0 * * *'    # UTC 00:00 = 台北 08:00（主要）
+    - cron: '0 2 * * *'    # UTC 02:00 = 台北 10:00（backup 1）
+    - cron: '0 4 * * *'    # UTC 04:00 = 台北 12:00（backup 2）
   workflow_dispatch:       # 允許手動觸發測試
 
 permissions:
