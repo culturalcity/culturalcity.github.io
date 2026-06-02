@@ -1,0 +1,250 @@
+{
+  "asOf": "本名單為約四年前交屋時，建商提供之原始供應廠商與對接窗口，整理供住戶查詢參考。",
+  "disclaimer": "名單不代表管委會推薦或背書。各項設備保固年限與是否仍在保固期內，請住戶自行向建商或廠商確認；如涉及結構、防水或多戶共通問題，建議先反映給管委會協助釐清。",
+  "notices": [
+    "窗口為交屋當時的對接人員，可能已轉調、離職或更換電話。<strong>若您撥打時發現窗口已不在、或電話有誤，煩請告知管理中心，我們會更新名單</strong>，方便之後的住戶。",
+    "名單所列為廠商提供給社區的工作聯絡方式，請於上班時間以禮貌方式聯繫，並僅用於設備維修洽詢。",
+    "若有窗口希望調整或移除其聯絡資訊，亦請告知管理中心，我們會立即處理。"
+  ],
+  "categories": [
+    {
+      "name": "建商・保固報修",
+      "icon": "🏗️",
+      "note": "保固期內，或結構、防水、多戶共通的問題，請依您的買賣契約聯繫原建商；管委會可協助釐清。一般設備若已過保固，可直接聯繫各設備廠商（見以下分類）。",
+      "vendors": [
+        {
+          "name": "敦實建設股份有限公司",
+          "service": "建設開發",
+          "brand": "",
+          "phone": "02-8773-5636",
+          "tel": "0287735636",
+          "contactName": "張佩琪",
+          "contactMobile": "",
+          "contactMobileTel": ""
+        },
+        {
+          "name": "福一建設股份有限公司",
+          "service": "建設開發",
+          "brand": "",
+          "phone": "02-2732-7666",
+          "tel": "0227327666",
+          "contactName": "何萬枝",
+          "contactMobile": "",
+          "contactMobileTel": ""
+        }
+      ]
+    },
+    {
+      "name": "門窗・玻璃",
+      "icon": "🪟",
+      "note": "",
+      "vendors": [
+        {
+          "name": "祐昀有限公司",
+          "service": "玻璃工程/製品",
+          "brand": "LOW-E",
+          "phone": "02-8797-5473",
+          "tel": "0287975473",
+          "contactName": "許萬昌",
+          "contactMobile": "0933-029-833",
+          "contactMobileTel": "0933029833"
+        },
+        {
+          "name": "銓鋐鋁業有限公司",
+          "service": "鋁門窗/氣密窗安裝",
+          "brand": "YKK",
+          "phone": "02-2547-3886",
+          "tel": "0225473886",
+          "contactName": "尤清宏",
+          "contactMobile": "0935-135-560",
+          "contactMobileTel": "0935135560"
+        },
+        {
+          "name": "金亞金屬工業（股）公司",
+          "service": "玄關門（含電子鎖/門弓器）、防火門（含門弓器）",
+          "brand": "WAFERLOCK",
+          "phone": "02-2676-5666",
+          "tel": "0226765666",
+          "contactName": "陳國良",
+          "contactMobile": "0920-116-117",
+          "contactMobileTel": "0920116117"
+        },
+        {
+          "name": "俊林實業（股）公司",
+          "service": "室內門/臥室門安裝、逃生梯扶手",
+          "brand": "",
+          "phone": "02-2577-7272",
+          "tel": "0225777272",
+          "contactName": "林建修",
+          "contactMobile": "0913-887-336",
+          "contactMobileTel": "0913887336"
+        }
+      ]
+    },
+    {
+      "name": "廚具・衛浴",
+      "icon": "🚿",
+      "note": "",
+      "vendors": [
+        {
+          "name": "麗舍生活國際（股）公司",
+          "service": "廚具設備/安裝、衛浴配件（店面面盆）、衛浴配件（龍頭/面盆/花灑）",
+          "brand": "KOHLER",
+          "phone": "02-2546-7575",
+          "tel": "0225467575",
+          "contactName": "程千容",
+          "contactMobile": "0988-248-234",
+          "contactMobileTel": "0988248234"
+        },
+        {
+          "name": "佳程企業有限公司",
+          "service": "浴櫃/檯面/鏡箱",
+          "brand": "檯面西班牙賽麗石",
+          "phone": "02-2293-9900",
+          "tel": "0222939900",
+          "contactName": "林冠勳",
+          "contactMobile": "0975-304-379",
+          "contactMobileTel": "0975304379"
+        },
+        {
+          "name": "品協企業（股）公司",
+          "service": "衛浴配件（龍頭/面盆/花灑）",
+          "brand": "GROHE",
+          "phone": "02-2563-2266",
+          "tel": "0225632266",
+          "contactName": "許奕偉",
+          "contactMobile": "0928-005-277",
+          "contactMobileTel": "0928005277"
+        },
+        {
+          "name": "達冠科技（股）公司",
+          "service": "三合一暖風機安裝/銷售",
+          "brand": "Mitsubishi三菱",
+          "phone": "02-2567-2216",
+          "tel": "0225672216",
+          "contactName": "馬小姐",
+          "contactMobile": "0980-185-578",
+          "contactMobileTel": "0980185578"
+        },
+        {
+          "name": "今冠實業有限公司",
+          "service": "免治馬桶安裝/銷售",
+          "brand": "",
+          "phone": "02-2596-2080",
+          "tel": "0225962080",
+          "contactName": "王政工",
+          "contactMobile": "0933-921-736",
+          "contactMobileTel": "0933921736"
+        },
+        {
+          "name": "富合利建材行",
+          "service": "淋浴拉門安裝/維修",
+          "brand": "",
+          "phone": "02-2731-2488",
+          "tel": "0227312488",
+          "contactName": "賴之平",
+          "contactMobile": "0982-888-695",
+          "contactMobileTel": "0982888695"
+        }
+      ]
+    },
+    {
+      "name": "空調",
+      "icon": "❄️",
+      "note": "",
+      "vendors": [
+        {
+          "name": "強發冷氣熱泵工程有限公司",
+          "service": "空調設備安裝/保養/維修",
+          "brand": "三菱",
+          "phone": "07-310-5219",
+          "tel": "073105219",
+          "contactName": "賴坤柏",
+          "contactMobile": "0935-398-188",
+          "contactMobileTel": "0935398188"
+        }
+      ]
+    },
+    {
+      "name": "淨水",
+      "icon": "💧",
+      "note": "",
+      "vendors": [
+        {
+          "name": "諾德淨水（股）公司",
+          "service": "淨水器/濾心",
+          "brand": "",
+          "phone": "02-2598-0855",
+          "tel": "0225980855",
+          "contactName": "許庭瑄",
+          "contactMobile": "",
+          "contactMobileTel": ""
+        }
+      ]
+    },
+    {
+      "name": "地板・室內維修",
+      "icon": "🔧",
+      "note": "",
+      "vendors": [
+        {
+          "name": "諾貝達精品磁磚（股）公司",
+          "service": "室內磁磚/地磚、衛浴磁磚/建材",
+          "brand": "",
+          "phone": "02-8671-0808",
+          "tel": "0286710808",
+          "contactName": "黃奕平",
+          "contactMobile": "0952-719-622",
+          "contactMobileTel": "0952719622"
+        },
+        {
+          "name": "本家室內裝修設計有限公司",
+          "service": "室內裝修設計、木作工程、陽台鋁企天花",
+          "brand": "",
+          "phone": "02-2970-1310",
+          "tel": "0229701310",
+          "contactName": "林聖揚",
+          "contactMobile": "0970-623-888",
+          "contactMobileTel": "0970623888"
+        },
+        {
+          "name": "大昕工程有限公司",
+          "service": "油漆/塗料工程",
+          "brand": "",
+          "phone": "02-2261-5135",
+          "tel": "0222615135",
+          "contactName": "林春利",
+          "contactMobile": "0939-723-396",
+          "contactMobileTel": "0939723396"
+        },
+        {
+          "name": "億輝工程有限公司",
+          "service": "PVC地板施工",
+          "brand": "",
+          "phone": "02-8668-0370",
+          "tel": "0286680370",
+          "contactName": "吳孟恩",
+          "contactMobile": "0910-276-494",
+          "contactMobileTel": "0910276494"
+        }
+      ]
+    },
+    {
+      "name": "陽台遮陽",
+      "icon": "☀️",
+      "note": "陽台電動百葉窗為住戶自行加裝的設備（非交屋原始配備）。為維持社區外觀的整體一致，若您打算加裝，建議沿用既有的規格與廠商。",
+      "vendors": [
+        {
+          "name": "宏太金屬工程有限公司",
+          "service": "窗簾/遮陽設備安裝、金屬製品、電動百葉窗",
+          "brand": "",
+          "phone": "02-2857-6321",
+          "tel": "0228576321",
+          "contactName": "鍾炘志",
+          "contactMobile": "0970-262-000",
+          "contactMobileTel": "0970262000"
+        }
+      ]
+    }
+  ]
+}
