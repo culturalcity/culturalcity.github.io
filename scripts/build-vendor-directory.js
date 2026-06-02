@@ -86,7 +86,9 @@ const CATEGORIES = [
     name: "空調",
     icon: "❄️",
     vendors: [
-      "強發冷氣熱泵工程有限公司",
+      // 列上洋(三菱、免付費服務專線)而非強發：強發是原建案安裝商、號碼為高雄，
+      // 實際派工/維修通常是上洋(備註「強發上包」)，住戶找上洋的 0800 較對。
+      "上洋產業股份有限公司",
     ],
   },
   {
@@ -155,6 +157,8 @@ function fmtPhone(raw) {
   if (!digits) return { display: "", tel: "" };
   let display = digits;
   if (/^09\d{8}$/.test(digits)) {                      // 手機（09 開頭 10 碼）
+    display = digits.slice(0, 4) + "-" + digits.slice(4, 7) + "-" + digits.slice(7);
+  } else if (/^080\d{7}$/.test(digits)) {              // 免付費（0800/0809）
     display = digits.slice(0, 4) + "-" + digits.slice(4, 7) + "-" + digits.slice(7);
   } else if (/^0\d{9}$/.test(digits)) {                // 市話 10 碼（02 區碼）
     display = digits.slice(0, 2) + "-" + digits.slice(2, 6) + "-" + digits.slice(6);
