@@ -71,7 +71,7 @@
         },
         {
           "name": "俊林實業（股）公司",
-          "service": "室內門/臥室門安裝、逃生梯扶手",
+          "service": "室內門/臥室門安裝",
           "brand": "",
           "phone": "02-2577-7272",
           "tel": "0225777272",
@@ -137,14 +137,14 @@
           "contactMobileTel": "0933921736"
         },
         {
-          "name": "富合利建材行",
+          "name": "富譁工程有限公司",
           "service": "淋浴拉門安裝/維修",
           "brand": "",
           "phone": "02-2731-2488",
           "tel": "0227312488",
-          "contactName": "賴之平",
-          "contactMobile": "0982-888-695",
-          "contactMobileTel": "0982888695"
+          "contactName": "丘建蒂",
+          "contactMobile": "",
+          "contactMobileTel": ""
         }
       ]
     },
@@ -216,16 +216,6 @@
           "contactName": "林春利",
           "contactMobile": "0939-723-396",
           "contactMobileTel": "0939723396"
-        },
-        {
-          "name": "億輝工程有限公司",
-          "service": "PVC地板施工",
-          "brand": "",
-          "phone": "02-8668-0370",
-          "tel": "0286680370",
-          "contactName": "吳孟恩",
-          "contactMobile": "0910-276-494",
-          "contactMobileTel": "0910276494"
         }
       ]
     },
