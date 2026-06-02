@@ -89,6 +89,23 @@ extraStyles: |
   /* ── LANG CONTENT ── */
   .lang-content{display:none;}
   .lang-content.active{display:block;}
+extraScripts: |
+  function setLang(lang) {
+    ['zh','en','ja'].forEach(function(l){
+      var btn = document.getElementById('btn-' + l);
+      var content = document.getElementById('content-' + l);
+      if (btn) btn.classList.toggle('active', l === lang);
+      if (content) content.classList.toggle('active', l === lang);
+    });
+    var titles = { zh: '新住戶須知', en: 'Welcome Guide', ja: '新入居者ガイド' };
+    var titleEl = document.getElementById('header-title');
+    if (titleEl && titles[lang]) titleEl.textContent = titles[lang];
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : (lang === 'ja' ? 'ja' : 'en');
+  }
+  function toggleDetail(headEl) {
+    var block = headEl.parentElement;
+    if (block) block.classList.toggle('open');
+  }
 ---
 <div class="header">
   <div class="header-inner">
