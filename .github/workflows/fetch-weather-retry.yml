@@ -1,0 +1,64 @@
+name: Fetch Weather Retry (safety net)
+
+# deploy.yml 的 Fetch daily weather (CODiS) 步驟若連 210.69.218.23 失敗
+# （ETIMEDOUT 或 5xx），整個 build 就 fail、當天高低溫永久缺漏。
+# 這隻 workflow 是備援：白天再跑兩次補抓昨日資料，缺什麼就補什麼。
+#
+# fetch-weather.js 本身是 idempotent（已存在的天不會覆寫），多跑幾次無害。
+# 如果該抓的天都齊了，commit 步驟會跳過、不會留垃圾 commit。
+#
+# 排程：台北 12:00、18:00（UTC 04:00、10:00）。
+# 加上 deploy.yml 的 06:00 本班，每天有 3 個時段嘗試。
+
+on:
+  schedule:
+    - cron: '0 4 * * *'    # UTC 04:00 = 台北 12:00
+    - cron: '0 10 * * *'   # UTC 10:00 = 台北 18:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-weather-retry
+  cancel-in-progress: false
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch daily weather (CODiS)
+        run: node scripts/fetch-weather.js
+
+      - name: Commit data updates if changed
+        run: |
+          changed=()
+          for f in daily-temp:氣溫 daily-rain:降雨; do
+            name=${f%%:*}; label=${f##*:}
+            path="utility/data/${name}.json"
+            [ -f "$path" ] || continue
+            git add "$path"
+            if ! git diff --cached --quiet "$path"; then
+              changed+=("$label")
+            fi
+          done
+          if [ ${#changed[@]} -eq 0 ]; then
+            echo "No new weather data, skipping commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            msg="data: 每日$(IFS=/; printf '%s' "${changed[*]}")更新（retry 補抓）"
+            git commit -m "$msg"
+            git push
+          fi
