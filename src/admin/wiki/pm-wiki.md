@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/pm-wiki/index.html
+permalink: /admin/wiki/pm-wiki/index.html
 title: 閱大安總幹事 Wiki
 docTitle: 總幹事 Wiki
 lastUpdate: 2026-05-21

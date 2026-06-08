@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/chair-wiki/index.html
+permalink: /admin/wiki/chair-wiki/index.html
 title: 閱大安主委 Wiki
 docTitle: 主委 Wiki
 lastUpdate: 2026-05-20
@@ -34,7 +34,7 @@ eleventyExcludeFromCollections: true
 - **跟廠商開會前**：掃一下該系統的「§X.末末 不必懂但要會問」清單
 - **跨任交接時**：把這份文件直接交給下任主委，比口述快十倍
 
-文件刻意寫得**淺**——讓你能在通勤、午休、洗澡前一段段啃完。**寫得深的執行細節在《閱大安總幹事 Wiki》**（`/admin/pm-wiki/`），那邊有具體 SOP、廠商電話、合約附註，是「執行層」的文件。本份是「**決策層**」的文件。
+文件刻意寫得**淺**——讓你能在通勤、午休、洗澡前一段段啃完。**寫得深的執行細節在《閱大安總幹事 Wiki》**（`/admin/wiki/pm-wiki/`），那邊有具體 SOP、廠商電話、合約附註，是「執行層」的文件。本份是「**決策層**」的文件。
 
 > 兩份文件的差異：總幹事 Wiki回答「**怎麼做**」，本份回答「**這是什麼、依據什麼、什麼時候我該介入、怎麼判斷**」。
 
@@ -66,8 +66,8 @@ flowchart LR
 
 ## 配套文件
 
-- **《對外窗口 Wiki》**（`/admin/chair-gov-wiki/`）：跟臺北市政府 15+ 個對接科的快查清單。本書 互相連結 過去而不重複收錄
-- **《主委個人備忘》**（`/admin/chair-notes/`）：歷屆主委的個人 working note。內容主觀、個人，不在本書收錄範圍
+- **《對外窗口 Wiki》**（`/admin/wiki/chair-gov-wiki/`）：跟臺北市政府 15+ 個對接科的快查清單。本書 互相連結 過去而不重複收錄
+- **《主委個人備忘》**（`/admin/wiki/chair-notes/`）：歷屆主委的個人 working note。內容主觀、個人，不在本書收錄範圍
 
 ---
 
@@ -2909,8 +2909,8 @@ flowchart TD
 ## B. 與其他文件的關係
 
 - **本文件**（chair-primer）：給**主委**的建築整體觀地圖
-- **總幹事 Wiki**（`/admin/pm-wiki/`）：給**總幹事**的執行 SOP
-- **主委筆記**（`/admin/chair-notes/`）：歷屆主委的個人備忘
+- **總幹事 Wiki**（`/admin/wiki/pm-wiki/`）：給**總幹事**的執行 SOP
+- **主委筆記**（`/admin/wiki/chair-notes/`）：歷屆主委的個人備忘
 - **網站公開內容**（公告、會議、規約、財報）：給**住戶**的資訊
 
 四份文件**互相獨立但 互相連結**——遇到具體議題時，可從本文件的章節跳到總幹事 Wiki的對應 SOP。

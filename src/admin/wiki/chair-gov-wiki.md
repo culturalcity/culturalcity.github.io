@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/chair-gov-wiki/index.html
+permalink: /admin/wiki/chair-gov-wiki/index.html
 title: 閱大安・對外窗口 Wiki
 docTitle: 對外窗口 Wiki
 lastUpdate: 2026-05-21
@@ -15,9 +15,9 @@ eleventyExcludeFromCollections: true
 
 **跟其他文件的關係**：
 
-- 《閱大安主委 Wiki》（`/admin/chair-wiki/`）：主委的整體參考書——工程實務 + 行政法規 + 判斷工具
+- 《閱大安主委 Wiki》（`/admin/wiki/chair-wiki/`）：主委的整體參考書——工程實務 + 行政法規 + 判斷工具
 - 《對外窗口 Wiki》（本文件）：**對外窗口地圖**——跟政府單位的對接
-- 《總幹事 Wiki》（`/admin/pm-wiki/`）：執行層 SOP
+- 《總幹事 Wiki》（`/admin/wiki/pm-wiki/`）：執行層 SOP
 
 兩張地圖（對內 + 對外）合起來，覆蓋主委 90% 的決策視野。
 
@@ -494,8 +494,8 @@ flowchart TD
 ## B. 與其他文件的關係
 
 - **本文件**（chair-gov-wiki）：對外窗口 Wiki
-- **《閱大安主委 Wiki》**（`/admin/chair-wiki/`）：主委的整體參考書
-- **《總幹事 Wiki》**（`/admin/pm-wiki/`）：執行 SOP
+- **《閱大安主委 Wiki》**（`/admin/wiki/chair-wiki/`）：主委的整體參考書
+- **《總幹事 Wiki》**（`/admin/wiki/pm-wiki/`）：執行 SOP
 
 ## C. 版本歷史
 
