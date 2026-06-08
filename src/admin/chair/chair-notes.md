@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/wiki/chair-notes/index.html
+permalink: /admin/chair/chair-notes/index.html
 title: 閱大安主委交接備忘
 eyebrow: CULTURAL CITY · CHAIR NOTES
 headerSub: 閱大安管理委員會・主委內部備忘（不對總幹事揭露）
@@ -16,7 +16,7 @@ eleventyExcludeFromCollections: true
 
 所以採取「兩本 Wiki」結構：
 
-- **總幹事 Wiki**（`/admin/wiki/pm-wiki/`）：對外、執行導向、流程清楚；給每年可能輪替的物業員工
+- **總幹事 Wiki**（`/admin/staff/pm-wiki/`）：對外、執行導向、流程清楚；給每年可能輪替的物業員工
 - **主委交接備忘**（本頁）：對內、策略與數字底線、新舊主委之間傳承
 
 > **不要把主委備忘給總幹事看**。如果要在會議上引用本頁內容，請事先抽出該段、單獨給管委會委員。
@@ -27,7 +27,7 @@ eleventyExcludeFromCollections: true
 
 ## 1. 會議當天主席自己的節奏（總幹事不需要知道的細節）
 
-時間軸（給總幹事知道）與 AGM Tool 操作（總幹事輔助）寫在 [總幹事 Wiki §4.2.4](/admin/wiki/pm-wiki/#4-2-4-會議當天時間軸以第五屆-2026-05-16-為例)。下面是**主席自己**該記住的事：
+時間軸（給總幹事知道）與 AGM Tool 操作（總幹事輔助）寫在 [總幹事 Wiki §4.2.4](/admin/staff/pm-wiki/#4-2-4-會議當天時間軸以第五屆-2026-05-16-為例)。下面是**主席自己**該記住的事：
 
 | 階段 | 主席自己的動作 | 為什麼不告訴總幹事 |
 |---|---|---|

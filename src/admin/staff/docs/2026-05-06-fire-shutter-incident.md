@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/docs/2026-05-06-fire-shutter-incident/index.html
+permalink: /admin/staff/docs/2026-05-06-fire-shutter-incident/index.html
 title: 地下停車場防火鐵捲門「無火警誤降」事件
 docTitle: 事件記錄
 eyebrow: CULTURAL CITY · INCIDENT LOG

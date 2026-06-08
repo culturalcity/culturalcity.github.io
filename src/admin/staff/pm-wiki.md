@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /admin/wiki/pm-wiki/index.html
+permalink: /admin/staff/pm-wiki/index.html
 title: 閱大安總幹事 Wiki
 docTitle: 總幹事 Wiki
 lastUpdate: 2026-05-21
@@ -315,8 +315,6 @@ flowchart LR
 - **同步**：Drive Desktop 即時雙向同步，會議當天可在不同電腦切換不掉資料
 - **權限**：物業協助簽到時可委派物業同事操作 ③ 簽到分頁；簽到完成後工作檔交回主委由主委接續 ④–⑥
 
-> 物業同仁簽到分頁的詳細步驟見 `/admin/staff-guide.html`（總幹事可印給物業協助人員預習）。
-
 ### 7.2 會議當天 SOP（主委視角）
 
 | 時點 | 分頁 | 動作 |
@@ -616,7 +614,7 @@ flowchart TD
 
 每年 4 月上傳前執行。**目標：證明這幾個零件目前都是正常可用的狀態**。
 
-> 📋 **檢查表工具（自用工作底稿）**：`/admin/inspection-osf.html`（CC-FORM-OSF-001）
+> 📋 **檢查表工具（自用工作底稿）**：`/admin/staff/inspection-osf.html`（CC-FORM-OSF-001）
 > 22 項分 6 區、手機／平板現場填寫、自動儲存。**僅供社區內部紀錄**——「臺北市排水案件管理平台」**只接受圖檔上傳，不收 PDF**，所以這份檢查表不會出現在政府平台上，但可列印或存 PDF 留在 Google Drive 當當年度檢查的工作底稿，並可給接任主委對照學習。
 
 **完整理解圖（拍照部位 + 名詞 + 簡單記法一張看完）**：
@@ -1079,10 +1077,9 @@ gantt
 - AGM Tool（`agm-tools.html`）名冊匯入校對完成（第二章 §7）
 - 簡報終稿、決議票卡備妥（議案票卡、委員選舉票卡分顏色）
 - 報到桌動線：簽到 → 領票 → 入座
-- 物業簽到人員預習 `/admin/staff-guide.html`
 
 **總幹事在會議當天的協助項目**：
-- **13:00–14:00 報到**：操作 AGM Tool ③ 簽到頁、引導住戶簽到（詳細步驟見 `/admin/staff-guide.html`）
+- **13:00–14:00 報到**：操作 AGM Tool ③ 簽到頁、引導住戶簽到
 - **14:00 開會時點**：簽到頁數字定格，將工作筆電交給主席
 - **議程進行中**：協助接收住戶提案紙條、提醒主席殘存議題
 - **委員選舉**：發票、收票、計票（AGM Tool ⑤ 自動排名）
