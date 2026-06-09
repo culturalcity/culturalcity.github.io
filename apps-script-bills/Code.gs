@@ -53,9 +53,22 @@ function processBills() {
     let threadHandled = false; // 有附件被處理（無論新增或 duplicate）
     for (const msg of thread.getMessages()) {
       const atts = msg.getAttachments();
+      const isSinopac = isSinopacMessage(msg);
       for (const att of atts) {
         if (!att.getName().toLowerCase().endsWith('.pdf')) continue;
         try {
+          // 永豐：subject + msg.getDate() 已含全部所需 metadata，走純解密路徑
+          if (isSinopac) {
+            const r = processSinopacAttachment(msg, att);
+            if (r.savedTo === 'duplicate') {
+              skipped.push(r.filename);
+              log.push(`Skip duplicate: ${r.filename}`);
+            } else {
+              successes.push(`${r.type}: ${r.filename}`);
+            }
+            threadHandled = true;
+            continue;
+          }
           const result = decryptAndExtract(att);
           if (result.type === 'unknown') {
             errors.push(`Unknown type [${att.getName()}]: ${result.textPreview || ''}`);
@@ -94,6 +107,88 @@ function processBills() {
   }
   log.forEach(l => Logger.log(l));
   return { successes: successes.length, skipped: skipped.length, errors: errors.length };
+}
+
+/** 判斷 message 是否來自永豐銀行。 */
+function isSinopacMessage(msg) {
+  const from = (msg.getFrom() || '').toLowerCase();
+  return from.indexOf('ebillservice@newebill.banksinopac.com.tw') >= 0;
+}
+
+/** 對永豐 attachment：從 subject/msg.getDate() 抓 metadata、呼叫 Cloud Run 純解密、命名存檔。
+ *  完全不靠 PDF 內容辨識（對帳單從 subject，交易單證從信件時間）。
+ *  回傳 { type, filename, savedTo } 給 caller，介面對齊 decryptAndExtract + saveToDrive 流程。 */
+function processSinopacAttachment(msg, att) {
+  const subject = msg.getSubject() || '';
+  const dateObj = msg.getDate();
+  let type, filename, folderId, useSequenceDaily = false;
+
+  if (subject.indexOf('電子綜合對帳單') >= 0) {
+    // 「閱大安管理委員會君 永豐銀行2025年10月份電子綜合對帳單」→ 202510
+    const ymM = subject.match(/(\d{4})\s*年\s*(\d{1,2})\s*月/);
+    if (!ymM) throw new Error('永豐對帳單 subject 抓不到年月：' + subject);
+    const ym = ymM[1] + ('0' + parseInt(ymM[2])).slice(-2);
+    type = 'sinopac-statement';
+    filename = '永豐銀行電子綜合對帳單 ' + ym + '.pdf';
+    folderId = CONFIG.sinopacStatementFolder;
+    if (!folderId) throw new Error('SINOPAC_STATEMENT_FOLDER_ID 未設定');
+  } else if (subject.indexOf('交易單證') >= 0) {
+    const ymd = Utilities.formatDate(dateObj, 'Asia/Taipei', 'yyyyMMdd');
+    type = 'sinopac-transaction';
+    filename = '永豐銀行交易單證 ' + ymd + '.pdf'; // base name；下面會加序號
+    folderId = CONFIG.sinopacTransactionFolder;
+    if (!folderId) throw new Error('SINOPAC_TRANSACTION_FOLDER_ID 未設定');
+    useSequenceDaily = true;
+  } else {
+    throw new Error('永豐信件 subject 不認得：' + subject);
+  }
+
+  // 呼叫 Cloud Run /decrypt-only（純解密）
+  const url = CONFIG.decryptUrl;
+  if (!url) throw new Error('CLOUD_RUN_URL Script Property 未設定');
+  const secret = PropertiesService.getScriptProperties().getProperty('SHARED_SECRET');
+  if (!secret) throw new Error('SHARED_SECRET Script Property 未設定');
+  const b64 = Utilities.base64Encode(att.getBytes());
+  const response = UrlFetchApp.fetch(url.replace(/\/$/, '') + '/decrypt-only', {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'X-Auth-Secret': secret },
+    payload: JSON.stringify({ pdf_b64: b64 }),
+    muteHttpExceptions: true,
+  });
+  const code = response.getResponseCode();
+  const body = response.getContentText();
+  if (code !== 200) throw new Error('decrypt-only ' + code + ': ' + body.substring(0, 300));
+  const result = JSON.parse(body);
+
+  // 寫入 Drive
+  const folder = DriveApp.getFolderById(folderId);
+  const bytes = Utilities.base64Decode(result.decryptedPdf_b64);
+
+  if (useSequenceDaily) {
+    const baseName = filename.replace(/\.pdf$/, '');
+    const escaped = baseName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pat = new RegExp('^' + escaped + '-(\\d+)\\.pdf$');
+    let maxN = 0;
+    const iter = folder.getFiles();
+    while (iter.hasNext()) {
+      const fm = iter.next().getName().match(pat);
+      if (fm) {
+        const n = parseInt(fm[1], 10);
+        if (n > maxN) maxN = n;
+      }
+    }
+    const newName = baseName + '-' + ('0' + (maxN + 1)).slice(-2) + '.pdf';
+    folder.createFile(Utilities.newBlob(bytes, 'application/pdf', newName));
+    return { type: type, filename: newName, savedTo: 'saved' };
+  }
+
+  // 一般類型：同名跳過
+  if (folder.getFilesByName(filename).hasNext()) {
+    return { type: type, filename: filename, savedTo: 'duplicate' };
+  }
+  folder.createFile(Utilities.newBlob(bytes, 'application/pdf', filename));
+  return { type: type, filename: filename, savedTo: 'saved' };
 }
 
 /** 呼叫 Cloud Run 解密 + 抽資料。 */
@@ -226,6 +321,55 @@ function installTrigger() {
     .forEach(t => ScriptApp.deleteTrigger(t));
   ScriptApp.newTrigger('processBills').timeBased().everyHours(1).create();
   Logger.log('Trigger installed: processBills 每小時跑一次');
+}
+
+/**
+ * 一次性回填：把 Gmail 內所有歷史的永豐銀行對帳單 + 交易單證歸檔。
+ * 每次最多處理 25 thread（避免 Apps Script 6 分鐘執行上限）；
+ * 已加 label 的 thread 會被排除，重複跑直到 summary 顯示「Found 0 threads」為止。
+ */
+function backfillSinopac() {
+  // Query 只排除「帳單已歸檔」（不排除「帳單需檢視」），讓上次失敗的 thread 被 retry。
+  // 新路徑完全不打 Gemini，速度快、不會撞 quota，整批 50 筆也安全。
+  const query = 'has:attachment filename:pdf -label:帳單已歸檔 ' +
+                'from:ebillservice@newebill.banksinopac.com.tw';
+  const label = getOrCreateLabel(CONFIG.processedLabel);
+  const failLabel = getOrCreateLabel(CONFIG.failedLabel);
+  const successes = [], skipped = [], errors = [];
+
+  const threads = GmailApp.search(query, 0, 50);
+  Logger.log(`backfillSinopac: ${threads.length} threads found`);
+
+  for (const thread of threads) {
+    let threadHadError = false;
+    let threadHandled = false;
+    for (const msg of thread.getMessages()) {
+      for (const att of msg.getAttachments()) {
+        if (!att.getName().toLowerCase().endsWith('.pdf')) continue;
+        try {
+          const r = processSinopacAttachment(msg, att);
+          if (r.savedTo === 'duplicate') skipped.push(r.filename);
+          else successes.push(`${r.type}: ${r.filename}`);
+          threadHandled = true;
+        } catch (e) {
+          errors.push(`[${att.getName()}] ${e.toString()}`);
+          threadHadError = true;
+        }
+      }
+    }
+    if (threadHadError) {
+      thread.addLabel(failLabel);
+    } else {
+      thread.removeLabel(failLabel); // 上次失敗、這次成功 → 清掉需檢視
+      if (threadHandled) thread.addLabel(label);
+    }
+  }
+
+  if (successes.length > 0 || skipped.length > 0 || errors.length > 0) {
+    sendSummary(successes, skipped, errors);
+  }
+  Logger.log(`backfillSinopac done: found=${threads.length} saved=${successes.length} dup=${skipped.length} err=${errors.length}`);
+  return { found: threads.length, successes: successes.length, skipped: skipped.length, errors: errors.length };
 }
 
 /** Debug：列出最近一次搜尋條件命中的信件。 */

@@ -455,6 +455,43 @@ async function updateTelecomChart(info) {
 // ── HTTP endpoints ──
 app.get('/health', (_req, res) => res.send('ok'));
 
+// 純解密端點：給「client 端已自行決定 filename」的用途（如永豐銀行——
+// 對帳單從 subject 抓年月、交易單證從 msg.getDate() 抓日期，
+// 完全不需要 PDF 內容辨識）。
+// request:  { pdf_b64 }
+// response: { decryptedPdf_b64, wasEncrypted }
+app.post('/decrypt-only', async (req, res) => {
+  try {
+    if (!req.body || !req.body.pdf_b64) {
+      return res.status(400).json({ error: 'Missing pdf_b64' });
+    }
+    const pdfBytes = Buffer.from(req.body.pdf_b64, 'base64');
+    const doc = mupdf.Document.openDocument(pdfBytes, 'application/pdf');
+    const encrypted = doc.needsPassword();
+    if (encrypted) {
+      let ok = false;
+      for (const pw of PASSWORDS) {
+        if (doc.authenticatePassword(pw)) { ok = true; break; }
+      }
+      if (!ok) return res.status(401).json({ error: 'PDF 密碼錯誤' });
+    }
+    let outBytes;
+    if (encrypted) {
+      const buf = doc.saveToBuffer('decrypt=yes,encrypt=none');
+      outBytes = Buffer.from(buf.asUint8Array());
+    } else {
+      outBytes = pdfBytes;
+    }
+    res.json({
+      decryptedPdf_b64: outBytes.toString('base64'),
+      wasEncrypted: encrypted,
+    });
+  } catch (e) {
+    console.error('decrypt-only error:', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.post('/decrypt-bill', async (req, res) => {
   try {
     if (!req.body || !req.body.pdf_b64) {
@@ -532,7 +569,9 @@ app.post('/decrypt-bill', async (req, res) => {
     }
 
     if (type === 'unknown') {
+      // type: 'unknown' 一定要明確帶在 422 response 內，client 端才能用 result.type 統一判斷
       return res.status(422).json({
+        type: 'unknown',
         error: 'Unknown bill type',
         geminiUsed,
         textPreview: text.substring(0, 500),
