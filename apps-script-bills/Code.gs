@@ -10,6 +10,8 @@
 //      TAIPOWER_PARENT_FOLDER_ID           （Drive「台電電費電子帳單暨繳費憑證」資料夾 ID）
 //      WATER_FOLDER_ID                     （Drive 自來水帳單暨繳費憑證資料夾 ID）
 //      TELECOM_FOLDER_ID                   （Drive 中華電信帳單暨繳費憑證資料夾 ID）
+//      SINOPAC_STATEMENT_FOLDER_ID         （Drive 永豐銀行電子綜合對帳單資料夾 ID）
+//      SINOPAC_TRANSACTION_FOLDER_ID       （Drive 永豐銀行交易單證資料夾 ID）
 //   2. 跑 installTrigger() 一次裝上每小時 trigger
 //   3. 跑 processBills() 一次手動測試
 //
@@ -20,14 +22,17 @@ const CONFIG = {
   get taipowerParent() { return PropertiesService.getScriptProperties().getProperty('TAIPOWER_PARENT_FOLDER_ID'); },
   get waterFolder() { return PropertiesService.getScriptProperties().getProperty('WATER_FOLDER_ID'); },
   get telecomFolder() { return PropertiesService.getScriptProperties().getProperty('TELECOM_FOLDER_ID'); },
+  get sinopacStatementFolder() { return PropertiesService.getScriptProperties().getProperty('SINOPAC_STATEMENT_FOLDER_ID'); },
+  get sinopacTransactionFolder() { return PropertiesService.getScriptProperties().getProperty('SINOPAC_TRANSACTION_FOLDER_ID'); },
   processedLabel: '帳單已歸檔',
   failedLabel: '帳單需檢視',
   // 寄信條件：寄到「自己」(culturalcity85)。可改成主委信箱
   notifyTo: Session.getActiveUser().getEmail(),
-  // Gmail 搜尋條件：含 PDF 附件、未標處理、來自台電/水/中華電信
+  // Gmail 搜尋條件：含 PDF 附件、未標處理、來自台電/水/中華電信/永豐
   searchQuery: 'has:attachment filename:pdf -label:帳單已歸檔 -label:帳單需檢視 ' +
                '(from:ebill@ebppsmtp.taipower.com.tw OR from:ebill@water.gov.taipei ' +
-               ' OR from:cht_ebpp@cht.com.tw) newer_than:60d',
+               ' OR from:cht_ebpp@cht.com.tw' +
+               ' OR from:ebillservice@newebill.banksinopac.com.tw) newer_than:60d',
 };
 
 /** 主要入口：被 trigger 呼叫，或手動執行做測試。 */
@@ -134,15 +139,48 @@ function saveToDrive(result) {
     const id = CONFIG.telecomFolder;
     if (!id) throw new Error('TELECOM_FOLDER_ID 未設定');
     folder = DriveApp.getFolderById(id);
+  } else if (result.type === 'sinopac-statement') {
+    const id = CONFIG.sinopacStatementFolder;
+    if (!id) throw new Error('SINOPAC_STATEMENT_FOLDER_ID 未設定');
+    folder = DriveApp.getFolderById(id);
+  } else if (result.type === 'sinopac-transaction') {
+    const id = CONFIG.sinopacTransactionFolder;
+    if (!id) throw new Error('SINOPAC_TRANSACTION_FOLDER_ID 未設定');
+    folder = DriveApp.getFolderById(id);
   } else {
     throw new Error('Unknown type ' + result.type);
   }
 
-  // 避免重複歸檔
+  const bytes = Utilities.base64Decode(result.decryptedPdf_b64);
+
+  // sequence-daily：同日多筆交易單證 → 自動 -01 / -02 / ... 序號
+  if (result.filenameStrategy === 'sequence-daily') {
+    // result.filename 例：「永豐銀行交易單證 20251015.pdf」（不含序號）
+    const m = result.filename.match(/^(.+)\.pdf$/);
+    if (!m) throw new Error('sequence-daily 檔名格式錯誤：' + result.filename);
+    const baseName = m[1]; // 「永豐銀行交易單證 20251015」
+    const escaped = baseName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pat = new RegExp('^' + escaped + '-(\\d+)\\.pdf$');
+    let maxN = 0;
+    const iter = folder.getFiles();
+    while (iter.hasNext()) {
+      const fm = iter.next().getName().match(pat);
+      if (fm) {
+        const n = parseInt(fm[1], 10);
+        if (n > maxN) maxN = n;
+      }
+    }
+    const newName = baseName + '-' + ('0' + (maxN + 1)).slice(-2) + '.pdf';
+    folder.createFile(Utilities.newBlob(bytes, 'application/pdf', newName));
+    // 為了讓 summary 顯示實際存檔名稱，回寫 filename
+    result.filename = newName;
+    return 'saved';
+  }
+
+  // 一般類型：同名檔即視為重複，跳過
   const dupCheck = folder.getFilesByName(result.filename);
   if (dupCheck.hasNext()) return 'duplicate';
 
-  const bytes = Utilities.base64Decode(result.decryptedPdf_b64);
   const blob = Utilities.newBlob(bytes, 'application/pdf', result.filename);
   folder.createFile(blob);
   return 'saved';

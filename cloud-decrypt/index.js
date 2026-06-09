@@ -8,9 +8,12 @@
 // GET /health → "ok"
 //
 // 環境變數：
-//   PDF_PASSWORD     台電加密 PDF 的解密密碼（社區公務行動門號）。預設沿用既有密碼。
+//   PDF_PASSWORDS    加密 PDF 的密碼候選清單（逗號分隔）。會依序嘗試。
+//                    預設：0989648285（公用事業，社區公務行動門號）+ 88329471（永豐銀行，閱大安統編）
+//   PDF_PASSWORD     舊單一密碼變數，僅作 fallback；建議改用 PDF_PASSWORDS。
 //   GEMINI_API_KEY   Google AI Studio API key。若設定，mupdf 抽不到文字（影像型 PDF）時
 //                    會 fallback 用 Gemini vision 解析。未設定則只用 mupdf。
+//                    永豐銀行交易單證為影像型 PDF，必須有此 key 才能解析。
 
 import express from 'express';
 import * as mupdf from 'mupdf';
@@ -18,7 +21,8 @@ import * as mupdf from 'mupdf';
 const app = express();
 app.use(express.json({ limit: '20mb' }));
 
-const PASSWORD = process.env.PDF_PASSWORD || '0989648285';
+const PASSWORDS = (process.env.PDF_PASSWORDS || process.env.PDF_PASSWORD || '0989648285,88329471')
+  .split(',').map(s => s.trim()).filter(Boolean);
 const SHARED_SECRET = process.env.SHARED_SECRET || '';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
@@ -45,6 +49,9 @@ const TAIPOWER_METER = {
 
 const WATER_FOLDER = '台北自來水事業處水費電子帳單暨繳費憑證';
 const TELECOM_FOLDER = '中華電信台北營運處繳費通知暨繳費憑證';
+// 永豐銀行 folder 名稱純文字，Apps Script 端用 type 來路由不靠這字串
+const SINOPAC_STATEMENT_FOLDER = '永豐銀行電子綜合對帳單';
+const SINOPAC_TRANSACTION_FOLDER = '永豐銀行交易單證';
 
 // ── 共用工具 ──
 function pad(n) { return String(n).padStart(2, '0'); }
@@ -65,7 +72,10 @@ function extractText(pdfBytes) {
   const doc = mupdf.Document.openDocument(pdfBytes, 'application/pdf');
   const encrypted = doc.needsPassword();
   if (encrypted) {
-    const ok = doc.authenticatePassword(PASSWORD);
+    let ok = false;
+    for (const pw of PASSWORDS) {
+      if (doc.authenticatePassword(pw)) { ok = true; break; }
+    }
     if (!ok) throw Object.assign(new Error('Password mismatch'), { code: 'BAD_PASSWORD' });
   }
   let text = '';
@@ -90,6 +100,10 @@ function detectType(text) {
     if (/繳費結果通知/.test(head)) return 'telecom-receipt';
     if (/繳費通知/.test(head)) return 'telecom-bill';
   }
+  // 永豐銀行電子綜合對帳單：page 1 header 一定有「綜合對帳單」字眼
+  if (/永豐銀行/.test(head) && /綜合對帳單/.test(head)) return 'sinopac-statement';
+  // 永豐銀行交易單證為影像型 PDF；mupdf 抽不到文字，會走 Gemini 路徑
+  // 因此這裡偵測不到也沒關係，type 會是 'unknown' → 觸發 Gemini fallback
   return 'unknown';
 }
 
@@ -179,6 +193,26 @@ function parseTelecom(text) {
   return out;
 }
 
+function parseSinopacStatement(text) {
+  const out = {};
+  // 「2025年10月綜合對帳單」（西元年；page 1、page footer 都有）
+  const ymM = text.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*綜合對帳單/);
+  if (ymM) {
+    const y = ymM[1];
+    const m = pad(parseInt(ymM[2]));
+    out.yearMonth = y + m; // "202510"
+    out.adYear = parseInt(y);
+    out.adMonth = parseInt(ymM[2]);
+  }
+  // 「對帳單期間:2025/10/01~2025/10/31」
+  const periodM = text.match(/對帳單期間[：:]\s*(\d{4}\/\d{2}\/\d{2})\s*[~～]\s*(\d{4}\/\d{2}\/\d{2})/);
+  if (periodM) {
+    out.periodStart = periodM[1];
+    out.periodEnd = periodM[2];
+  }
+  return out;
+}
+
 /** 中華電信 period 推估：帳單月份對應前一個自然月 1 日~月底。
  *  mupdf 規律：parseTelecom 內已做；Gemini 路徑也需要這個，因此抽出共用。 */
 function estimateTelecomPeriod(rocYearMonth) {
@@ -199,21 +233,25 @@ function estimateTelecomPeriod(rocYearMonth) {
 async function extractWithGemini(pdfBytes) {
   if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY 未設定');
 
-  const prompt = `這是一份台灣公用事業帳單 PDF（台電電費、台北自來水、或中華電信）。請從中萃取結構化資料，回傳純 JSON（不要 markdown、不要說明文字）。
+  const prompt = `這是一份台灣公用事業帳單或永豐銀行 PDF。請從中萃取結構化資料，回傳純 JSON（不要 markdown、不要說明文字）。
 
 回傳格式：
 {
   "type": 字串，須為下列之一：
-     "taipower-bill"     台電電費通知
-     "taipower-receipt"  台電繳費憑證
-     "water-bill"        台北自來水電子帳單／通知單
-     "water-receipt"     台北自來水電子繳費憑證
-     "telecom-bill"      中華電信繳費通知
-     "telecom-receipt"   中華電信繳費結果通知
-     "unknown"           其他
-  "rocYearMonth": "民國年/月 譬如 115/05",
-  "periodStart": "民國日期 譬如 115/04/01（無則 null）",
-  "periodEnd":   "民國日期 譬如 115/04/30（無則 null）",
+     "taipower-bill"        台電電費通知
+     "taipower-receipt"     台電繳費憑證
+     "water-bill"           台北自來水電子帳單／通知單
+     "water-receipt"        台北自來水電子繳費憑證
+     "telecom-bill"         中華電信繳費通知
+     "telecom-receipt"      中華電信繳費結果通知
+     "sinopac-statement"    永豐銀行電子綜合對帳單（月對帳單，多帳號彙整）
+     "sinopac-transaction"  永豐銀行交易單證（單筆交易確認單）
+     "unknown"              其他
+  "rocYearMonth":    "民國年/月 譬如 115/05（公用事業用；永豐銀行填 null）",
+  "yearMonth":       "西元年月 6 碼譬如 202510（永豐銀行對帳單用；其他填 null）",
+  "transactionDate": "交易日 YYYY-MM-DD 西元（永豐銀行交易單證用；其他填 null）",
+  "periodStart":     "民國日期譬如 115/04/01 或西元 YYYY/MM/DD（公用事業民國、永豐西元；無則 null）",
+  "periodEnd":       "（同上）",
   "meter":   "台電電號 XX-XX-XXXX-XX-X 格式（非台電帳單填 null）",
   "fee":     自來水帳單金額（純整數，無逗號；非自來水填 null）,
   "tonnes":  自來水用水度數（純整數；非自來水填 null）,
@@ -227,7 +265,9 @@ async function extractWithGemini(pdfBytes) {
 - 民國年 = 西元年 - 1911
 - 不確定或不存在的欄位填 null，禁止編造數字
 - 金額純整數，移除逗號與貨幣符號
-- 「繳費通知」與「繳費結果通知」是不同 type，仔細辨識`;
+- 「繳費通知」與「繳費結果通知」是不同 type，仔細辨識
+- 永豐銀行對帳單 header 會有「永豐銀行為您提供專屬電子綜合對帳單」或「YYYY年MM月綜合對帳單」
+- 永豐銀行交易單證會有「交易單證」字樣 + 單筆交易明細（日期/金額/帳號/類型）`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
   const res = await fetch(url, {
@@ -281,6 +321,18 @@ function buildTelecomName(type, info) {
     : '';
   const docLabel = type === 'telecom-receipt' ? '繳費結果通知' : '繳費通知';
   return `中華電信台北營運處${docLabel} ${yyyy}-${mm}${periodTag}.pdf`;
+}
+
+function buildSinopacStatementName(info) {
+  // 「永豐銀行電子綜合對帳單 202510.pdf」
+  return `永豐銀行電子綜合對帳單 ${info.yearMonth}.pdf`;
+}
+
+function buildSinopacTransactionBase(info) {
+  // base name 不含 -NN 序號與 .pdf；Apps Script 端掃資料夾後決定序號
+  // info.transactionDate 為 YYYY-MM-DD（Gemini 回傳）
+  const compact = info.transactionDate.replace(/-/g, '');
+  return `永豐銀行交易單證 ${compact}`;
 }
 
 // ── GitHub API：把 chart JSON 更新並 commit 上 main branch ──
@@ -417,6 +469,8 @@ app.post('/decrypt-bill', async (req, res) => {
     if (type === 'taipower-bill' || type === 'taipower-receipt') info = parseTaipower(text);
     else if (type === 'water-bill' || type === 'water-receipt') info = parseWater(text);
     else if (type === 'telecom-bill' || type === 'telecom-receipt') info = parseTelecom(text);
+    else if (type === 'sinopac-statement') info = parseSinopacStatement(text);
+    // sinopac-transaction 為影像型 PDF，沒有 mupdf 路徑，純走 Gemini
 
     // 解密過的 PDF bytes（給 Gemini 與最後輸出共用）
     let decryptedBytes;
@@ -432,16 +486,21 @@ app.post('/decrypt-bill', async (req, res) => {
     // 後者更常見：中華電信 / 自來水的 PDF 格式偶爾微調，某些 regex 就抓不到，
     // 但 type/月份 等大方向還是抓得到 → 沒有 fallback 的話會默默漏資料。
     let geminiUsed = false;
+    const utilityType = type === 'taipower-bill' || type === 'taipower-receipt' ||
+                        type === 'water-bill' || type === 'water-receipt' ||
+                        type === 'telecom-bill' || type === 'telecom-receipt';
     const missingTelecomBillFields = type === 'telecom-bill' &&
       (info?.phone == null || info?.dataGB == null);
     const missingWaterFields = (type === 'water-bill' || type === 'water-receipt') &&
       (info?.fee == null || info?.tonnes == null);
+    const missingSinopacStatement = type === 'sinopac-statement' && !info?.yearMonth;
     const needsGemini = !!GEMINI_API_KEY && (
       type === 'unknown' ||
-      !info?.rocYearMonth ||
+      (utilityType && !info?.rocYearMonth) ||
       ((type === 'taipower-bill' || type === 'taipower-receipt') && !info?.meter) ||
       missingTelecomBillFields ||
-      missingWaterFields
+      missingWaterFields ||
+      missingSinopacStatement
     );
     if (needsGemini) {
       try {
@@ -452,7 +511,8 @@ app.post('/decrypt-bill', async (req, res) => {
         info = info || {};
         // mupdf 抓到的值優先（信任 text-based）；只補空缺
         for (const k of ['rocYearMonth', 'periodStart', 'periodEnd', 'meter',
-                          'fee', 'tonnes', 'phone', 'mobile', 'total', 'dataGB']) {
+                          'fee', 'tonnes', 'phone', 'mobile', 'total', 'dataGB',
+                          'yearMonth', 'transactionDate']) {
           if ((info[k] == null || info[k] === '') && g[k] != null && g[k] !== '') {
             info[k] = typeof g[k] === 'string' ? g[k].trim() : g[k];
           }
@@ -479,7 +539,7 @@ app.post('/decrypt-bill', async (req, res) => {
       });
     }
 
-    let filename, folder;
+    let filename, folder, filenameStrategy;
     if (type === 'taipower-bill' || type === 'taipower-receipt') {
       if (!info?.meter) return res.status(422).json({ error: '台電帳單無法抓到電號', geminiUsed });
       if (!info.rocYearMonth) return res.status(422).json({ error: '台電帳單無法抓到帳單月份', geminiUsed });
@@ -493,6 +553,16 @@ app.post('/decrypt-bill', async (req, res) => {
       if (!info?.rocYearMonth) return res.status(422).json({ error: '中華電信帳單無法抓到月份', geminiUsed });
       filename = buildTelecomName(type, info);
       folder = TELECOM_FOLDER;
+    } else if (type === 'sinopac-statement') {
+      if (!info?.yearMonth) return res.status(422).json({ error: '永豐對帳單無法抓到帳單年月', geminiUsed });
+      filename = buildSinopacStatementName(info);
+      folder = SINOPAC_STATEMENT_FOLDER;
+    } else if (type === 'sinopac-transaction') {
+      if (!info?.transactionDate) return res.status(422).json({ error: '永豐交易單證無法抓到交易日', geminiUsed });
+      // 交易單證：回 base name（含日期不含序號），Apps Script 端掃資料夾後決定 -01/-02 序號
+      filename = buildSinopacTransactionBase(info) + '.pdf';
+      filenameStrategy = 'sequence-daily';
+      folder = SINOPAC_TRANSACTION_FOLDER;
     }
 
     const outputBytes = decryptedBytes;
@@ -517,6 +587,7 @@ app.post('/decrypt-bill', async (req, res) => {
       type,
       filename,
       folder,
+      filenameStrategy,
       extracted: info,
       wasEncrypted: encrypted,
       geminiUsed,
