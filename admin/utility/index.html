@@ -981,8 +981,8 @@ function dlPNG(){
   var origTxt=btn.textContent;
   btn.textContent='⏳ 下載中';btn.disabled=true;
   var rep=currentReportDate;
-  var short=fmtDateShort(rep);
-  var fname='閱大安_'+short+'_每日水電公告.png';
+  var ymd=(rep||'').replace(/-/g,'');
+  var fname=ymd+' 每日水電公告.png';
 
   function finish(blob){
     var url=URL.createObjectURL(blob);
