@@ -3,9 +3,25 @@ layout: base.njk
 permalink: /transport/index.html
 title: 綠色交通資訊專區
 eleventyExcludeFromCollections: true
+extraScripts: |
+  function setLang(lang) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('[data-lang-text]').forEach(el => {
+      el.style.display = el.dataset.langText === lang ? '' : 'none';
+    });
+  }
 extraStyles: |
   .wrap{max-width:760px;margin:0 auto;padding:36px 40px 64px;}
   @media(max-width:600px){.wrap{padding:24px 24px 48px;}}
+  .lang-bar{margin-bottom:26px;}
+  .lang-bar-inner{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .lang-btn{padding:7px 16px;font-size:13px;font-family:inherit;background:var(--white);color:var(--wg9);border:none;border-right:1px solid var(--line);cursor:pointer;letter-spacing:.04em;transition:all .15s;}
+  .lang-btn:last-child{border-right:none;}
+  .lang-btn:hover{color:var(--wg41);}
+  .lang-btn.active{background:var(--wg41);color:var(--wg1);}
+  .lang-block{display:none;}
+  .lang-block.active{display:block;}
   .lede{font-size:16px;color:var(--wg11);line-height:1.85;margin-bottom:28px;}
   .lede strong{color:var(--wg41);}
   .gt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
@@ -25,59 +41,139 @@ extraStyles: |
 ---
 <div class="header">
   <div class="header-inner">
-    <a href="/" class="back-link">返回社區主頁</a>
+    <a href="/" class="back-link"><span data-lang-text="zh">返回社區主頁</span><span data-lang-text="en" style="display:none">Back to community home</span><span data-lang-text="ja" style="display:none">コミュニティトップへ</span></a>
     <div class="header-eyebrow">GREEN TRANSPORT</div>
-    <h1>綠色交通資訊專區</h1>
+    <h1><span data-lang-text="zh">綠色交通資訊專區</span><span data-lang-text="en" style="display:none">Green Transport Guide</span><span data-lang-text="ja" style="display:none">グリーン交通ガイド</span></h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
   </div>
 </div>
 <div class="wrap">
 
-  <p class="lede">本社區位於<strong>臺北市大安區羅斯福路二段85號</strong>，緊鄰古亭捷運站，搭乘大眾運輸與騎乘自行車皆十分便利。離開社區時，邀請住戶一起優先選擇低碳的移動方式，<strong>響應淨零新生活、減少碳排放</strong>。</p>
-
-  <div class="gt-grid">
-
-    <div class="gt-card">
-      <div class="gt-mode"><span class="ico">🚇</span>捷運 MRT</div>
-      <div class="gt-name">古亭站 3 號出口，步行約 2 分鐘</div>
-      <div class="gt-meta">雙線轉乘站：綠線（松山新店線）往新店／往松山、橘線（中和新蘆線）往南勢角／往蘆洲・迴龍</div>
-      <a class="gt-link" href="https://web.metro.taipei/pages2026/WebStation/041/8" target="_blank" rel="noopener">古亭站時刻表與首末班車</a>
-      <a class="gt-link" href="https://www.metro.taipei/cp.aspx?n=59D50DF212B82F6A" target="_blank" rel="noopener">列車即時到站動態</a>
+  <div class="lang-bar">
+    <div class="lang-bar-inner">
+      <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
     </div>
-
-    <div class="gt-card">
-      <div class="gt-mode"><span class="ico">🚌</span>公車 BUS</div>
-      <div class="gt-name">鄰近三處公車站牌</div>
-      <div class="gt-meta">沿羅斯福路與和平東路的多線聯營公車，可達臺北車站、公館、新店、中和等地。點站名查即時到站：</div>
-      <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stop.jsp?sid=11467" target="_blank" rel="noopener">捷運古亭站(羅斯福)</a>
-      <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=6026" target="_blank" rel="noopener">捷運古亭站(和平)</a>
-      <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=1000049" target="_blank" rel="noopener">羅斯福金門街口</a>
-    </div>
-
-    <div class="gt-card">
-      <div class="gt-mode"><span class="ico">🚲</span>YouBike 微笑單車</div>
-      <div class="gt-name">捷運古亭站(2號出口)</div>
-      <div class="gt-meta">羅斯福路二段168號，與本社區同一路段，步行可達</div>
-      <a class="gt-link" href="https://www.youbike.com.tw/region/taipei/stations/" target="_blank" rel="noopener">即時可借／可還車輛數</a>
-    </div>
-
-    <div class="gt-card">
-      <div class="gt-mode"><span class="ico">🛴</span>自行車道 BIKEWAY</div>
-      <div class="gt-name">新店溪河濱自行車道</div>
-      <div class="gt-meta">經客家文化主題公園／古亭河濱公園入口接駁，往北可達大稻埕、往南可往新店</div>
-      <a class="gt-link" href="https://www.google.com/maps/search/古亭河濱公園+自行車道入口" target="_blank" rel="noopener">河濱自行車道路線地圖</a>
-    </div>
-
   </div>
 
-  <div class="gt-maptitle">周邊交通地圖</div>
+  <!-- ════ 中文 ════ -->
+  <div class="lang-block active" data-lang="zh">
+    <p class="lede">本社區位於<strong>臺北市大安區羅斯福路二段85號</strong>，緊鄰古亭捷運站，搭乘大眾運輸與騎乘自行車皆十分便利。離開社區時，邀請住戶一起優先選擇低碳的移動方式，<strong>響應淨零新生活、減少碳排放</strong>。</p>
+    <div class="gt-grid">
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚇</span>捷運 MRT</div>
+        <div class="gt-name">古亭站 3 號出口，步行約 2 分鐘</div>
+        <div class="gt-meta">雙線轉乘站：綠線（松山新店線）往新店／往松山、橘線（中和新蘆線）往南勢角／往蘆洲・迴龍</div>
+        <a class="gt-link" href="https://web.metro.taipei/pages2026/WebStation/041/8" target="_blank" rel="noopener">古亭站時刻表與首末班車</a>
+        <a class="gt-link" href="https://www.metro.taipei/cp.aspx?n=59D50DF212B82F6A" target="_blank" rel="noopener">列車即時到站動態</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚌</span>公車 BUS</div>
+        <div class="gt-name">鄰近三處公車站牌</div>
+        <div class="gt-meta">沿羅斯福路與和平東路的多線聯營公車，可達臺北車站、公館、新店、中和等地。點站名查即時到站：</div>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stop.jsp?sid=11467" target="_blank" rel="noopener">捷運古亭站(羅斯福)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=6026" target="_blank" rel="noopener">捷運古亭站(和平)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=1000049" target="_blank" rel="noopener">羅斯福金門街口</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚲</span>YouBike 微笑單車</div>
+        <div class="gt-name">捷運古亭站(2號出口)</div>
+        <div class="gt-meta">羅斯福路二段168號，與本社區同一路段，步行可達</div>
+        <a class="gt-link" href="https://www.youbike.com.tw/region/taipei/stations/" target="_blank" rel="noopener">即時可借／可還車輛數</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🛴</span>自行車道 BIKEWAY</div>
+        <div class="gt-name">新店溪河濱自行車道</div>
+        <div class="gt-meta">經客家文化主題公園／古亭河濱公園入口接駁，往北可達大稻埕、往南可往新店</div>
+        <a class="gt-link" href="https://www.google.com/maps/search/古亭河濱公園+自行車道入口" target="_blank" rel="noopener">河濱自行車道路線地圖</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ English ════ -->
+  <div class="lang-block" data-lang="en">
+    <p class="lede">Our community is located at <strong>No. 85, Sec. 2, Roosevelt Rd., Da'an District, Taipei</strong>, right beside Guting MRT Station, with excellent access to public transport and cycling. When you head out, we invite every resident to choose low-carbon travel, <strong>supporting net-zero living and cutting carbon emissions</strong>.</p>
+    <div class="gt-grid">
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚇</span>MRT</div>
+        <div class="gt-name">Guting Station, Exit 3 — about a 2-minute walk</div>
+        <div class="gt-meta">Interchange of two lines: Green Line (Songshan–Xindian) toward Xindian / Songshan, and Orange Line (Zhonghe–Xinlu) toward Nanshijiao / Luzhou·Huilong.</div>
+        <a class="gt-link" href="https://web.metro.taipei/pages2026/WebStation/041/8" target="_blank" rel="noopener">Guting Station timetable & first/last train</a>
+        <a class="gt-link" href="https://www.metro.taipei/cp.aspx?n=59D50DF212B82F6A" target="_blank" rel="noopener">Live train arrivals</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚌</span>Bus</div>
+        <div class="gt-name">Three nearby bus stops</div>
+        <div class="gt-meta">Many routes along Roosevelt Rd. and Heping E. Rd. reach Taipei Main Station, Gongguan, Xindian and Zhonghe. Tap a stop for live arrivals:</div>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stop.jsp?sid=11467" target="_blank" rel="noopener">Guting Stn. (Roosevelt)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=6026" target="_blank" rel="noopener">Guting Stn. (Heping)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=1000049" target="_blank" rel="noopener">Roosevelt–Jinmen St.</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚲</span>YouBike</div>
+        <div class="gt-name">Guting MRT Station (Exit 2)</div>
+        <div class="gt-meta">No. 168, Sec. 2, Roosevelt Rd. — on the same street as our community, within walking distance.</div>
+        <a class="gt-link" href="https://www.youbike.com.tw/region/taipei/stations/" target="_blank" rel="noopener">Live bikes / docks available</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🛴</span>Bikeway</div>
+        <div class="gt-name">Xindian River Riverside Bikeway</div>
+        <div class="gt-meta">Access via Hakka Cultural Park / Guting Riverside Park entrance; north to Dadaocheng, south to Xindian.</div>
+        <a class="gt-link" href="https://www.google.com/maps/search/古亭河濱公園+自行車道入口" target="_blank" rel="noopener">Riverside bikeway route map</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ 日本語 ════ -->
+  <div class="lang-block" data-lang="ja">
+    <p class="lede">当コミュニティは<strong>台北市大安区羅斯福路二段85号</strong>、古亭MRT駅のすぐそばに位置し、公共交通機関や自転車での移動がとても便利です。お出かけの際は、低炭素な移動手段を優先し、<strong>ネットゼロな暮らしと脱炭素にご協力ください</strong>。</p>
+    <div class="gt-grid">
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚇</span>MRT（地下鉄）</div>
+        <div class="gt-name">古亭駅 3番出口、徒歩約2分</div>
+        <div class="gt-meta">2路線の乗換駅。松山新店線（緑）新店方面／松山方面、中和新蘆線（橙）南勢角方面／蘆洲・迴龍方面。</div>
+        <a class="gt-link" href="https://web.metro.taipei/pages2026/WebStation/041/8" target="_blank" rel="noopener">古亭駅 時刻表・始発／終電</a>
+        <a class="gt-link" href="https://www.metro.taipei/cp.aspx?n=59D50DF212B82F6A" target="_blank" rel="noopener">列車のリアルタイム到着案内</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚌</span>バス</div>
+        <div class="gt-name">近隣のバス停 3か所</div>
+        <div class="gt-meta">羅斯福路・和平東路沿いの多数の路線で台北駅、公館、新店、中和などへ。停留所名をタップでリアルタイム到着：</div>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stop.jsp?sid=11467" target="_blank" rel="noopener">古亭駅(羅斯福)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=6026" target="_blank" rel="noopener">古亭駅(和平)</a>
+        <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stoplocation.jsp?slid=1000049" target="_blank" rel="noopener">羅斯福金門街口</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🚲</span>YouBike</div>
+        <div class="gt-name">古亭MRT駅(2番出口)</div>
+        <div class="gt-meta">羅斯福路二段168号、当コミュニティと同じ通り沿いで徒歩圏内。</div>
+        <a class="gt-link" href="https://www.youbike.com.tw/region/taipei/stations/" target="_blank" rel="noopener">貸出・返却可能台数（リアルタイム）</a>
+      </div>
+      <div class="gt-card">
+        <div class="gt-mode"><span class="ico">🛴</span>サイクリングロード</div>
+        <div class="gt-name">新店渓リバーサイド・サイクリングロード</div>
+        <div class="gt-meta">客家文化主題公園／古亭リバーサイド公園の入口から接続。北は大稻埕、南は新店方面へ。</div>
+        <a class="gt-link" href="https://www.google.com/maps/search/古亭河濱公園+自行車道入口" target="_blank" rel="noopener">リバーサイド自転車道 ルートマップ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="gt-maptitle">
+    <span data-lang-text="zh">周邊交通地圖</span>
+    <span data-lang-text="en" style="display:none">Area transit map</span>
+    <span data-lang-text="ja" style="display:none">周辺交通マップ</span>
+  </div>
   <div class="gt-map">
     <iframe src="https://www.google.com/maps?q=臺北市大安區羅斯福路二段85號&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="閱大安周邊交通地圖"></iframe>
   </div>
-  <p class="gt-asof">公車與 YouBike 即時資訊以官方系統為準，連結將另開官方頁面查詢。本專區由閱大安管理委員會維護，推廣綠色運輸、響應臺北市淨零行動。</p>
+  <p class="gt-asof">
+    <span data-lang-text="zh">公車與 YouBike 即時資訊以官方系統為準，連結將另開官方頁面查詢。本專區由閱大安管理委員會維護，推廣綠色運輸、響應臺北市淨零行動。</span>
+    <span data-lang-text="en" style="display:none">Live bus and YouBike data are provided by official systems; links open official pages. This guide is maintained by the Cultural City (Yuè Dà'ān) Management Committee in support of green transport and Taipei's net-zero goals.</span>
+    <span data-lang-text="ja" style="display:none">バス・YouBikeのリアルタイム情報は公式システムに基づきます。リンクは公式ページが開きます。本ガイドは閱大安管理委員会が運営し、グリーン交通と台北市のネットゼロを推進します。</span>
+  </p>
 
   <div class="footer">
-    <span class="footer-left">閱大安管理委員會</span>
-    <span class="footer-right">CULTURAL CITY COMMUNITY</span>
+    <span class="footer-left">閱大安管理委員會　·　CULTURAL CITY COMMUNITY</span>
   </div>
 </div>
