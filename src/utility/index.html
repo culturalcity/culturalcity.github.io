@@ -114,6 +114,28 @@ extraStyles: |
 
 <div class="main">
 
+  <style>
+    .emgmt{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;}
+    .emgmt-hd{font-size:15px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin-bottom:4px;}
+    .emgmt-lead{font-size:14px;color:var(--wg9);line-height:1.8;margin-bottom:14px;}
+    .emgmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:620px){.emgmt-grid{grid-template-columns:1fr;}}
+    .emgmt-item{border:1px solid var(--line);border-radius:var(--radius);padding:11px 14px;}
+    .emgmt-item h4{font-size:13px;font-weight:700;color:var(--dp);letter-spacing:.06em;margin:0 0 4px;}
+    .emgmt-item p{font-size:13.5px;color:var(--wg11);line-height:1.7;margin:0;}
+    .emgmt-item strong{color:var(--wg41);}
+  </style>
+  <div class="emgmt">
+    <div class="emgmt-hd">閱大安能源管理機制</div>
+    <div class="emgmt-lead">本頁不只是帳單紀錄，而是社區「能源管理」的公開儀表板——以資料驅動，持續監測、設定目標、檢討與改善公共用電。</div>
+    <div class="emgmt-grid">
+      <div class="emgmt-item"><h4>監測 MONITOR</h4><p>每月彙整<strong>大公電與公水用量</strong>，逐期追蹤趨勢並偵測異常（見下方圖表與明細）。</p></div>
+      <div class="emgmt-item"><h4>目標 TARGET</h4><p>以<strong>固定的氣溫基準模型</strong>，把每日氣溫換算成當日合理用電上限（天熱合理高、天涼則低），作為穩定一致的節能標竿。</p></div>
+      <div class="emgmt-item"><h4>責任 OWNERSHIP</h4><p>由<strong>管理委員會與潤泰維護</strong>專責管理；契約容量、用電異常等議題提管委會檢討。</p></div>
+      <div class="emgmt-item"><h4>改善 IMPROVE</h4><p>發現異常即分析、公告、調整——如<strong>契約容量自 99→70→50 瓩</strong>、公共區 LED、空調分時管理；並<strong>每年檢視用電基準是否重設</strong>，使目標貼近現況而不浮動。</p></div>
+    </div>
+  </div>
+
   <div class="tabs" role="tablist">
     <button class="tab active" role="tab" aria-selected="true" aria-controls="tab-elec" onclick="sw('elec')">電力</button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="tab-water" onclick="sw('water')">自來水</button>

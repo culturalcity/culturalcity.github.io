@@ -1,0 +1,80 @@
+---
+layout: base.njk
+permalink: /transport/index.html
+title: 綠色交通資訊專區
+eleventyExcludeFromCollections: true
+extraStyles: |
+  .wrap{max-width:760px;margin:0 auto;padding:36px 40px 64px;}
+  @media(max-width:600px){.wrap{padding:24px 24px 48px;}}
+  .lede{font-size:16px;color:var(--wg11);line-height:1.85;margin-bottom:28px;}
+  .lede strong{color:var(--wg41);}
+  .gt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
+  .gt-card{background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:6px;}
+  .gt-mode{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--wg11);}
+  .gt-mode .ico{font-size:17px;}
+  .gt-name{font-size:17px;font-weight:500;color:var(--wg41);line-height:1.5;margin-top:2px;}
+  .gt-meta{font-size:14px;color:var(--wg9);line-height:1.7;}
+  .gt-link{margin-top:6px;font-size:14px;letter-spacing:.02em;color:var(--dp);text-decoration:none;display:inline-flex;align-items:center;gap:5px;align-self:flex-start;}
+  .gt-link::after{content:'↗';font-size:12px;}
+  .gt-link:hover{text-decoration:underline;}
+  .gt-maptitle{font-size:13px;letter-spacing:.16em;color:var(--wg11);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .gt-maptitle::after{content:'';flex:1;height:1px;background:var(--line);}
+  .gt-map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;line-height:0;}
+  .gt-map iframe{width:100%;height:340px;border:0;display:block;}
+  .gt-asof{margin-top:14px;font-size:13px;color:var(--wg9);line-height:1.8;}
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">GREEN TRANSPORT</div>
+    <h1>綠色交通資訊專區</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+<div class="wrap">
+
+  <p class="lede">本社區位於<strong>臺北市大安區羅斯福路二段85號</strong>，緊鄰古亭捷運站，搭乘大眾運輸與騎乘自行車皆十分便利。離開社區時，邀請住戶一起優先選擇低碳的移動方式，<strong>響應淨零新生活、減少碳排放</strong>。</p>
+
+  <div class="gt-grid">
+
+    <div class="gt-card">
+      <div class="gt-mode"><span class="ico">🚇</span>捷運 MRT</div>
+      <div class="gt-name">古亭站　3 號出口步行約 2 分鐘</div>
+      <div class="gt-meta">松山新店線（綠線 G09）・中和新蘆線（橘線 O05）雙線轉乘</div>
+      <a class="gt-link" href="https://www.metro.taipei/" target="_blank" rel="noopener">臺北捷運路網與時刻</a>
+    </div>
+
+    <div class="gt-card">
+      <div class="gt-mode"><span class="ico">🚌</span>公車 BUS</div>
+      <div class="gt-name">站牌「捷運古亭站(羅斯福)」</div>
+      <div class="gt-meta">羅斯福路幹線等多線聯營公車，沿羅斯福路可達臺北車站、公館、新店等地</div>
+      <a class="gt-link" href="https://pda5284.gov.taipei/MQS/stop.jsp?sid=11467" target="_blank" rel="noopener">本站即時到站動態</a>
+    </div>
+
+    <div class="gt-card">
+      <div class="gt-mode"><span class="ico">🚲</span>YouBike 微笑單車</div>
+      <div class="gt-name">捷運古亭站(2號出口)</div>
+      <div class="gt-meta">羅斯福路二段168號，與本社區同一路段，步行可達</div>
+      <a class="gt-link" href="https://www.youbike.com.tw/region/taipei/" target="_blank" rel="noopener">即時可借／可還車輛數</a>
+    </div>
+
+    <div class="gt-card">
+      <div class="gt-mode"><span class="ico">🛴</span>自行車道 BIKEWAY</div>
+      <div class="gt-name">新店溪河濱自行車道</div>
+      <div class="gt-meta">經客家文化主題公園／古亭河濱公園入口接駁，往北可達大稻埕、往南可往新店</div>
+      <a class="gt-link" href="https://www.google.com/maps/search/古亭河濱公園+自行車道入口" target="_blank" rel="noopener">河濱自行車道路線地圖</a>
+    </div>
+
+  </div>
+
+  <div class="gt-maptitle">周邊交通地圖</div>
+  <div class="gt-map">
+    <iframe src="https://www.google.com/maps?q=臺北市大安區羅斯福路二段85號&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="閱大安周邊交通地圖"></iframe>
+  </div>
+  <p class="gt-asof">公車與 YouBike 即時資訊以官方系統為準，連結將另開官方頁面查詢。本專區由閱大安管理委員會維護，推廣綠色運輸、響應臺北市淨零行動。</p>
+
+  <div class="footer">
+    <span class="footer-left">閱大安管理委員會</span>
+    <span class="footer-right">CULTURAL CITY COMMUNITY</span>
+  </div>
+</div>
