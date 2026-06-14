@@ -3,7 +3,20 @@ layout: regulations.njk
 permalink: /regulations/regulations-垃圾分類回收指引.html
 title: 社區資源垃圾分類回收指引
 category: guide
+extraScripts: |
+  function setLang(lang) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
 extraStyles: |
+  .lang-bar{margin:0 0 20px;}
+  .lang-bar-inner{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .lang-btn{padding:7px 16px;font-size:13px;font-family:inherit;background:var(--white);color:var(--wg9);border:none;border-right:1px solid var(--line);cursor:pointer;letter-spacing:.04em;transition:all .15s;}
+  .lang-btn:last-child{border-right:none;}
+  .lang-btn:hover{color:var(--wg41);}
+  .lang-btn.active{background:var(--wg41);color:var(--wg1);}
+  .lang-block{display:none;}
+  .lang-block.active{display:block;}
   .note-box{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:14px;color:var(--wg11);line-height:1.8;margin-bottom:20px;}
   .tbl-wrap{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;background:var(--white);}
@@ -15,170 +28,123 @@ extraStyles: |
   td.loc{width:180px;font-size:14px;}
   td.note{font-size:14px;}
   tr:hover td{background:rgba(60,56,53,0.03);}
+  .footer{border-top:1px solid var(--line);padding-top:16px;margin-top:20px;font-size:13px;color:var(--wg9);line-height:1.8;}
 ---
-<div class="note-box">
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>
+
+<!-- ════ 中文 ════ -->
+<div class="lang-block active" data-lang="zh">
+  <div class="note-box">
     本表為閱大安社區垃圾分類指引，以官方環保局分類為基礎，並標註本社區實際丟置地點。如有不確定的項目，請以「一般垃圾」方式處理。
   </div>
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>分類</th><th>常見項目</th><th>本社區丟置地點</th><th>丟棄注意事項</th></tr></thead>
       <tbody>
-
-      <tr>
-        <td class="cat general">一般垃圾<br>（不可回收）</td>
-        <td></td>
-        <td class="loc"><strong>B1環保室冷藏室</strong></td>
-        <td class="note">本社區無須使用專用垃圾袋。<br>垃圾袋應密封，勿使垃圾旁落或溢出。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">廚餘</td>
-        <td>堆肥廚餘（無法食用之有機資材）：果皮、食材外殼、骨頭、果核、花材、樹葉、茶渣、咖啡渣、盆栽土壤<br><br>養豬廚餘（煮熟後豬可吃的）：尚未腐敗之肉類、內臟、蔬菜、水果、冷凍食品</td>
-        <td class="loc"><strong>B1環保室冷藏室</strong></td>
-        <td class="note">本社區廚餘請以一般垃圾方式處理丟棄。<br>丟棄前應將水分盡量濾乾，以減少垃圾袋破損後汁液外溢的機率，並降低對焚化爐焚燒效率之影響。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢紙</td>
-        <td>辦公影印紙、再生紙、報紙、廣告紙（有塗布的紙）、透明雞蛋盒腰封、碎紙、產品紙盒外包裝（非牛皮之厚紙板或白色紙面）、雜誌、紙袋、舊書<br><br>應丟一般垃圾：廢紙容器、飲料杯套、西點餐盒、小吃紙袋、紙尿褲（片）、衛生紙（棉）、膠膜感熱紙（電子發票、ATM提款單、彩券、停車繳費單）、照片紙、複寫紙、護貝及離心紙、防油紙、砂紙、便利貼</td>
-        <td class="loc"><strong>B1環保室紙類回收箱</strong></td>
-        <td class="note">請盡量先移除裝訂用的釘書針與夾子。<br>舊書可先試著在二手書店或讀冊賣掉。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢紙箱</td>
-        <td>乾淨、未沾到油膩的廢紙箱、牛皮紙袋<br><br>應丟一般垃圾：披薩盒及其他沾到油膩的紙箱</td>
-        <td class="loc"><strong>B1電表箱走道紙箱區</strong></td>
-        <td class="note">在拿出家門前請先將紙箱的膠帶封裝處切開並攤平，再拿到B1電表箱走道紙箱區攤平放置。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">廢紙容器</td>
-        <td>罐裝洋芋片（品客）瓶身、菸盒（去除內紙襯與封膜）、紙盒容器外紙提袋、紙盒外包裝（非牛皮之厚紙板或白色紙面）<br><br>應丟一般垃圾：紙杯、鋁箔包、牛奶及飲料紙盒、紙便當盒、泡麵碗、熱咖啡紙杯杯身等油膩髒污紙容器</td>
-        <td class="loc"><strong>B1環保室冷藏室</strong></td>
-        <td class="note">紙容器含有一層聚乙烯PE塑膠膜，回收前需充分沖洗，且目前回收價值低、業者回收意願不高，因此本社區不單獨分類回收，請以一般垃圾丟棄。<br>請特別注意不要混進廢紙類。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">塑膠容器<br>（1號 PET、<br>2號 HDPE）</td>
-        <td>1號 PET：保特瓶（含瓶蓋）<br><br>2號 HDPE：沐浴乳瓶罐、洗髮精瓶、洗衣精桶、牛奶桶、硬質洗面乳瓶</td>
-        <td class="loc"><strong>B1環保室塑膠類回收箱</strong></td>
-        <td class="note">倒空容器內之殘餘物，沖洗後壓扁再丟棄。<br>保特瓶身標籤請撕下以一般垃圾處理。<br>本社區回收箱容量小，請確實壓扁。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">塑膠容器<br>（3–7號）</td>
-        <td>塑膠餐盒（厚底）、透明雞蛋盒盒體、養樂多瓶身、生鮮托盤、奶球容器、優格杯、熱咖啡紙杯杯蓋、薄塑膠餐盒（壽司、滷味）</td>
-        <td class="loc"><strong>B1環保室冷藏室</strong></td>
-        <td class="note">3–7號塑膠容器回收價值低，本社區不單獨分類回收，請以一般垃圾丟棄。<br>瓶底三角標誌內的數字即為塑膠號碼。<br>發泡PS（保麗龍容器類如漁箱、冰品盒、蛋糕盒）亦請以一般垃圾處理。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">一般塑膠</td>
-        <td>乾淨塑膠袋（不含油漬、湯汁、血水等）、洋蔥網袋、塑膠湯匙、餅乾盒內盒、輕便雨衣、原子筆筆桿/筆蓋、防撞乖乖粒（緩衝材）、披薩固定架、口紅管身、立可帶外殼、膠囊咖啡底殼、衛生紙塑膠包裝、隱形眼鏡塑膠容器、彩色筆筆管與筆蓋、含回收標章之塑膠花盆</td>
-        <td class="loc"><strong>B1環保室冷藏室</strong></td>
-        <td class="note">大部分一般塑膠製品後端回收價格不好，最後大多當成一般垃圾燒掉，建議直接以一般垃圾處理。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">乾淨保麗龍</td>
-        <td>工業用保麗龍（緩衝材）、冰淇淋與生鮮用保麗龍<br><br>應丟一般垃圾：超市分裝魚肉的小型保麗龍長盒、包水果的網狀保麗龍</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">小型保麗龍請自行在家分解、裝袋後當成一般垃圾丟棄。<br><br>體積過大不方便分解者，請住戶自行送至：<br>1. 資源回收車（立體類每週二、四、六 20:57於羅斯福路二段79號西堤牛排前）<br>2. 大安區清潔隊和平分隊（辛亥路一段臨143號）</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢玻璃容器</td>
-        <td>酒瓶、調味品玻璃瓶身、特定保養品瓶身<br><br>應丟一般垃圾或大型垃圾：鏡子、衛浴設備、陶磁（瓷）製品、陶瓷花瓶、磁磚（無法進入玻璃回收系統）<br><br>碎玻璃、碎陶瓷：包裝完善後丟一般垃圾</td>
-        <td class="loc"><strong>B1環保室玻璃類回收箱</strong></td>
-        <td class="note">1. 去除瓶蓋、吸管並倒空容器內之殘餘物，用水略為沖洗後回收。<br>2. 尖銳易碎物品應先以紙張捆紮妥當。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢鐵鋁罐</td>
-        <td>鋁罐、高壓瓶瓶身、奶粉罐罐身、金屬餅乾盒身與盒蓋、金屬瓶蓋、油漆筒、啞鈴、鐵絲、鐵釘、鐵碗、鐵鍋、菜刀刀身、鋁鍋、鋁盆、雨傘骨架（不含傘布）、鐵架<br><br>應丟一般垃圾：鋁箔紙、雨傘帆布<br>應循來源管道回收：氣體鋼瓶</td>
-        <td class="loc"><strong>B1環保室鐵鋁罐回收箱</strong></td>
-        <td class="note">1. 先行倒空容器內之殘餘物，清洗、壓扁後丟棄。<br>2. 非金屬類的附著物需分離拆解。<br>3. 瓦斯罐或其他高壓鐵罐（如髮膠罐）回收前應至空曠處將內容物排出，避免遇熱引爆。<br>4. 尖銳易碎物品應先以紙張捆紮妥當。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢照明電源</td>
-        <td>各式長2吋（含）以上燈管（冷陰極燈、感應式螢光燈、其他含汞燈）：暫放B1電表箱走道紙箱區旁，由服務人員處理<br><br>應丟一般垃圾（包裝完善）：各式燈泡、HID燈、水銀溫度計、檯燈燈條</td>
-        <td class="loc"><strong>B1電表箱走道紙箱區</strong></td>
-        <td class="note">1. 不要打破，避免散發有毒水銀氣體危害人體健康。<br>2. 尖銳易碎物品應先以紙張捆紮妥當。<br>3. 社區現階段外包清運垃圾無合作商可收燈管，長燈管請暫放指定位置由管理員處理。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">廢油類</td>
-        <td>環境衛生用藥廢容器、潤滑油、食用油</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">請住戶自備容器盛裝蓋緊，交付環保局資源回收車清運：<br>1. 資源回收車（其他類每週一、二、四、五、六 20:57於羅斯福路二段79號西堤牛排前）<br>2. 大安區清潔隊和平分隊（辛亥路一段臨143號）</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢資訊物品</td>
-        <td>電腦主機、螢幕、掃描器、印表機、碳粉匣（原廠）、筆電、手機、平板電腦、大型耳機、外接硬碟、隨身碟、充電器、鍵盤、滑鼠、充電線</td>
-        <td class="loc"><strong>B1電表箱走道紙箱區</strong></td>
-        <td class="note">1. 回收前請先確認私人資料已刪除，能拆的電池先拆掉，拔除記憶卡與SIM卡。<br>2. 亦可送至燦坤、全國電子、全家、萊爾富、7-11回收；手機回收可上網查詢獎勵回饋方案。<br>3. 如不方便送回收，鍵盤、滑鼠、耳機線、充電線等小型周邊可以一般垃圾處理。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢電子電器</td>
-        <td>吸塵器、吹風機、電話、傳真機、手提式收錄音機、音響、錄放影機、播放器、電子遊樂器、捕蚊燈、檯燈<br><br>應丟一般垃圾：電蚊拍、燈具塑膠外殼、電源線</td>
-        <td class="loc"><strong>B1電表箱走道紙箱區</strong></td>
-        <td class="note">1. 內部電池請先拆除丟至電池回收桶。<br>2. 亦可送至燦坤、全國電子回收。<br>3. 如不方便送回收，小型廢電子電器可以一般垃圾處理。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢光碟片</td>
-        <td>包括CD、VCD、DVD，但不含外殼</td>
-        <td class="loc"><strong>B1環保室電池類與光碟片回收箱</strong></td>
-        <td class="note">1. 卸除外包裝（如棉套或塑膠盒）後丟棄。<br>2. 外殼若為PC塑膠材質另行回收。<br>亦可送至全家、萊爾富、7-11回收。</td>
-      </tr>
-
-      <tr>
-        <td class="cat recycle">廢電池</td>
-        <td>一次性：傳統乾電池（鉛酸、鹼性）、水銀電池等<br><br>可充電電池：鎳鎘、鎳氫、鋰電池、行動電源</td>
-        <td class="loc"><strong>B1環保室電池類與光碟片回收箱</strong></td>
-        <td class="note">亦可送至全家、萊爾富、7-11回收。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">其他</td>
-        <td>長柄掃具（請拆解後丟一般垃圾）、廢安全帽（丟一般垃圾）、廢獎盃（座）（丟一般垃圾）、廢輪胎、鉛蓄電池、壓克力<br><br>雨傘：傘骨（金屬）→廢鐵鋁罐；傘布→一般垃圾</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">1. 廢輪胎：內胎及鋼圈應先分離，交由輪胎行、汽機車行或保修廠回收。<br>2. 鉛蓄電池：可交由資源回收車或汽機車行逆向回收。<br>其他請住戶自行送至資源回收車或大安區清潔隊和平分隊（辛亥路一段臨143號）。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">乾淨舊衣</td>
-        <td>上衣、外褲、外套、女性內衣、圍巾、毛帽、手套等乾淨衣物<br><br>應丟一般垃圾：泡水、髒污、破舊、發臭之舊衣、襪子、內衣褲、布料（含碎布）、毛巾、浴巾、棉被、枕頭、床單、窗簾、鞋類、絨毛玩具、皮包、背包</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">請丟至羅斯福路二段101巷（全家便利商店巷口）摩托車停車位旁（恩寶身心障礙者關懷協會設立）。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">藥品</td>
-        <td>針劑、抗腫瘤藥物、抗生素、賀爾蒙、管制藥品（特別應回收）</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">離社區最近的廢棄藥物檢收站為信康藥局（南昌路一段143號），或送回原就診地點。<br><br>藥品包裝請丟一般垃圾。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">大型垃圾</td>
-        <td>大型家電：電冰箱、大型飲水機、電風扇、電視機、洗衣機、冷氣機、抽油煙機、瓦斯爐<br><br>傢俱：櫥櫃、床組、桌椅、沙發、彈簧床墊、跑步機、按摩椅<br><br>其他：手推車、腳踏車、廢行李箱3只（含）以上<br><br>應丟一般垃圾：乳膠床墊、乳膠枕</td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">請洽管理中心聯絡清潔隊回收，清潔隊回收前一晚22:00以後拿出放在大門前羅斯福路上。<br><br>廢行李箱1個：可直接丟市府垃圾車（每週一、二、四、五、六晚上08:57–09:05停靠羅斯福路二段79號）。<br>廢行李箱3個以上：請洽管理中心預約清潔隊清運。<br><br>乳膠床墊、乳膠枕請先洽管理中心確認尺寸及清運安排後，移至B1環保室置放。</td>
-      </tr>
-
-      <tr>
-        <td class="cat general">裝修垃圾</td>
-        <td></td>
-        <td class="loc"><strong>無</strong></td>
-        <td class="note">依照本社區裝潢管理辦法，裝修垃圾應請裝潢工班載走，不能放置於環保室。</td>
-      </tr>
-
+      <tr><td class="cat general">一般垃圾<br>（不可回收）</td><td></td><td class="loc"><strong>B1環保室冷藏室</strong></td><td class="note">本社區無須使用專用垃圾袋。<br>垃圾袋應密封，勿使垃圾旁落或溢出。</td></tr>
+      <tr><td class="cat general">廚餘</td><td>堆肥廚餘（無法食用之有機資材）：果皮、食材外殼、骨頭、果核、花材、樹葉、茶渣、咖啡渣、盆栽土壤<br><br>養豬廚餘（煮熟後豬可吃的）：尚未腐敗之肉類、內臟、蔬菜、水果、冷凍食品</td><td class="loc"><strong>B1環保室冷藏室</strong></td><td class="note">本社區廚餘請以一般垃圾方式處理丟棄。<br>丟棄前應將水分盡量濾乾，以減少垃圾袋破損後汁液外溢的機率，並降低對焚化爐焚燒效率之影響。</td></tr>
+      <tr><td class="cat recycle">廢紙</td><td>辦公影印紙、再生紙、報紙、廣告紙（有塗布的紙）、透明雞蛋盒腰封、碎紙、產品紙盒外包裝（非牛皮之厚紙板或白色紙面）、雜誌、紙袋、舊書<br><br>應丟一般垃圾：廢紙容器、飲料杯套、西點餐盒、小吃紙袋、紙尿褲（片）、衛生紙（棉）、膠膜感熱紙（電子發票、ATM提款單、彩券、停車繳費單）、照片紙、複寫紙、護貝及離心紙、防油紙、砂紙、便利貼</td><td class="loc"><strong>B1環保室紙類回收箱</strong></td><td class="note">請盡量先移除裝訂用的釘書針與夾子。<br>舊書可先試著在二手書店或讀冊賣掉。</td></tr>
+      <tr><td class="cat recycle">廢紙箱</td><td>乾淨、未沾到油膩的廢紙箱、牛皮紙袋<br><br>應丟一般垃圾：披薩盒及其他沾到油膩的紙箱</td><td class="loc"><strong>B1電表箱走道紙箱區</strong></td><td class="note">在拿出家門前請先將紙箱的膠帶封裝處切開並攤平，再拿到B1電表箱走道紙箱區攤平放置。</td></tr>
+      <tr><td class="cat general">廢紙容器</td><td>罐裝洋芋片（品客）瓶身、菸盒（去除內紙襯與封膜）、紙盒容器外紙提袋、紙盒外包裝（非牛皮之厚紙板或白色紙面）<br><br>應丟一般垃圾：紙杯、鋁箔包、牛奶及飲料紙盒、紙便當盒、泡麵碗、熱咖啡紙杯杯身等油膩髒污紙容器</td><td class="loc"><strong>B1環保室冷藏室</strong></td><td class="note">紙容器含有一層聚乙烯PE塑膠膜，回收前需充分沖洗，且目前回收價值低、業者回收意願不高，因此本社區不單獨分類回收，請以一般垃圾丟棄。<br>請特別注意不要混進廢紙類。</td></tr>
+      <tr><td class="cat recycle">塑膠容器<br>（1號 PET、<br>2號 HDPE）</td><td>1號 PET：保特瓶（含瓶蓋）<br><br>2號 HDPE：沐浴乳瓶罐、洗髮精瓶、洗衣精桶、牛奶桶、硬質洗面乳瓶</td><td class="loc"><strong>B1環保室塑膠類回收箱</strong></td><td class="note">倒空容器內之殘餘物，沖洗後壓扁再丟棄。<br>保特瓶身標籤請撕下以一般垃圾處理。<br>本社區回收箱容量小，請確實壓扁。</td></tr>
+      <tr><td class="cat general">塑膠容器<br>（3–7號）</td><td>塑膠餐盒（厚底）、透明雞蛋盒盒體、養樂多瓶身、生鮮托盤、奶球容器、優格杯、熱咖啡紙杯杯蓋、薄塑膠餐盒（壽司、滷味）</td><td class="loc"><strong>B1環保室冷藏室</strong></td><td class="note">3–7號塑膠容器回收價值低，本社區不單獨分類回收，請以一般垃圾丟棄。<br>瓶底三角標誌內的數字即為塑膠號碼。<br>發泡PS（保麗龍容器類如漁箱、冰品盒、蛋糕盒）亦請以一般垃圾處理。</td></tr>
+      <tr><td class="cat general">一般塑膠</td><td>乾淨塑膠袋（不含油漬、湯汁、血水等）、洋蔥網袋、塑膠湯匙、餅乾盒內盒、輕便雨衣、原子筆筆桿/筆蓋、防撞乖乖粒（緩衝材）、披薩固定架、口紅管身、立可帶外殼、膠囊咖啡底殼、衛生紙塑膠包裝、隱形眼鏡塑膠容器、彩色筆筆管與筆蓋、含回收標章之塑膠花盆</td><td class="loc"><strong>B1環保室冷藏室</strong></td><td class="note">大部分一般塑膠製品後端回收價格不好，最後大多當成一般垃圾燒掉，建議直接以一般垃圾處理。</td></tr>
+      <tr><td class="cat general">乾淨保麗龍</td><td>工業用保麗龍（緩衝材）、冰淇淋與生鮮用保麗龍<br><br>應丟一般垃圾：超市分裝魚肉的小型保麗龍長盒、包水果的網狀保麗龍</td><td class="loc"><strong>無</strong></td><td class="note">小型保麗龍請自行在家分解、裝袋後當成一般垃圾丟棄。<br><br>體積過大不方便分解者，請住戶自行送至：<br>1. 資源回收車（立體類每週二、四、六 20:57於羅斯福路二段79號西堤牛排前）<br>2. 大安區清潔隊和平分隊（辛亥路一段臨143號）</td></tr>
+      <tr><td class="cat recycle">廢玻璃容器</td><td>酒瓶、調味品玻璃瓶身、特定保養品瓶身<br><br>應丟一般垃圾或大型垃圾：鏡子、衛浴設備、陶磁（瓷）製品、陶瓷花瓶、磁磚（無法進入玻璃回收系統）<br><br>碎玻璃、碎陶瓷：包裝完善後丟一般垃圾</td><td class="loc"><strong>B1環保室玻璃類回收箱</strong></td><td class="note">1. 去除瓶蓋、吸管並倒空容器內之殘餘物，用水略為沖洗後回收。<br>2. 尖銳易碎物品應先以紙張捆紮妥當。</td></tr>
+      <tr><td class="cat recycle">廢鐵鋁罐</td><td>鋁罐、高壓瓶瓶身、奶粉罐罐身、金屬餅乾盒身與盒蓋、金屬瓶蓋、油漆筒、啞鈴、鐵絲、鐵釘、鐵碗、鐵鍋、菜刀刀身、鋁鍋、鋁盆、雨傘骨架（不含傘布）、鐵架<br><br>應丟一般垃圾：鋁箔紙、雨傘帆布<br>應循來源管道回收：氣體鋼瓶</td><td class="loc"><strong>B1環保室鐵鋁罐回收箱</strong></td><td class="note">1. 先行倒空容器內之殘餘物，清洗、壓扁後丟棄。<br>2. 非金屬類的附著物需分離拆解。<br>3. 瓦斯罐或其他高壓鐵罐（如髮膠罐）回收前應至空曠處將內容物排出，避免遇熱引爆。<br>4. 尖銳易碎物品應先以紙張捆紮妥當。</td></tr>
+      <tr><td class="cat recycle">廢照明電源</td><td>各式長2吋（含）以上燈管（冷陰極燈、感應式螢光燈、其他含汞燈）：暫放B1電表箱走道紙箱區旁，由服務人員處理<br><br>應丟一般垃圾（包裝完善）：各式燈泡、HID燈、水銀溫度計、檯燈燈條</td><td class="loc"><strong>B1電表箱走道紙箱區</strong></td><td class="note">1. 不要打破，避免散發有毒水銀氣體危害人體健康。<br>2. 尖銳易碎物品應先以紙張捆紮妥當。<br>3. 社區現階段外包清運垃圾無合作商可收燈管，長燈管請暫放指定位置由管理員處理。</td></tr>
+      <tr><td class="cat general">廢油類</td><td>環境衛生用藥廢容器、潤滑油、食用油</td><td class="loc"><strong>無</strong></td><td class="note">請住戶自備容器盛裝蓋緊，交付環保局資源回收車清運：<br>1. 資源回收車（其他類每週一、二、四、五、六 20:57於羅斯福路二段79號西堤牛排前）<br>2. 大安區清潔隊和平分隊（辛亥路一段臨143號）</td></tr>
+      <tr><td class="cat recycle">廢資訊物品</td><td>電腦主機、螢幕、掃描器、印表機、碳粉匣（原廠）、筆電、手機、平板電腦、大型耳機、外接硬碟、隨身碟、充電器、鍵盤、滑鼠、充電線</td><td class="loc"><strong>B1電表箱走道紙箱區</strong></td><td class="note">1. 回收前請先確認私人資料已刪除，能拆的電池先拆掉，拔除記憶卡與SIM卡。<br>2. 亦可送至燦坤、全國電子、全家、萊爾富、7-11回收；手機回收可上網查詢獎勵回饋方案。<br>3. 如不方便送回收，鍵盤、滑鼠、耳機線、充電線等小型周邊可以一般垃圾處理。</td></tr>
+      <tr><td class="cat recycle">廢電子電器</td><td>吸塵器、吹風機、電話、傳真機、手提式收錄音機、音響、錄放影機、播放器、電子遊樂器、捕蚊燈、檯燈<br><br>應丟一般垃圾：電蚊拍、燈具塑膠外殼、電源線</td><td class="loc"><strong>B1電表箱走道紙箱區</strong></td><td class="note">1. 內部電池請先拆除丟至電池回收桶。<br>2. 亦可送至燦坤、全國電子回收。<br>3. 如不方便送回收，小型廢電子電器可以一般垃圾處理。</td></tr>
+      <tr><td class="cat recycle">廢光碟片</td><td>包括CD、VCD、DVD，但不含外殼</td><td class="loc"><strong>B1環保室電池類與光碟片回收箱</strong></td><td class="note">1. 卸除外包裝（如棉套或塑膠盒）後丟棄。<br>2. 外殼若為PC塑膠材質另行回收。<br>亦可送至全家、萊爾富、7-11回收。</td></tr>
+      <tr><td class="cat recycle">廢電池</td><td>一次性：傳統乾電池（鉛酸、鹼性）、水銀電池等<br><br>可充電電池：鎳鎘、鎳氫、鋰電池、行動電源</td><td class="loc"><strong>B1環保室電池類與光碟片回收箱</strong></td><td class="note">亦可送至全家、萊爾富、7-11回收。</td></tr>
+      <tr><td class="cat general">其他</td><td>長柄掃具（請拆解後丟一般垃圾）、廢安全帽（丟一般垃圾）、廢獎盃（座）（丟一般垃圾）、廢輪胎、鉛蓄電池、壓克力<br><br>雨傘：傘骨（金屬）→廢鐵鋁罐；傘布→一般垃圾</td><td class="loc"><strong>無</strong></td><td class="note">1. 廢輪胎：內胎及鋼圈應先分離，交由輪胎行、汽機車行或保修廠回收。<br>2. 鉛蓄電池：可交由資源回收車或汽機車行逆向回收。<br>其他請住戶自行送至資源回收車或大安區清潔隊和平分隊（辛亥路一段臨143號）。</td></tr>
+      <tr><td class="cat general">乾淨舊衣</td><td>上衣、外褲、外套、女性內衣、圍巾、毛帽、手套等乾淨衣物<br><br>應丟一般垃圾：泡水、髒污、破舊、發臭之舊衣、襪子、內衣褲、布料（含碎布）、毛巾、浴巾、棉被、枕頭、床單、窗簾、鞋類、絨毛玩具、皮包、背包</td><td class="loc"><strong>無</strong></td><td class="note">請丟至羅斯福路二段101巷（全家便利商店巷口）摩托車停車位旁（恩寶身心障礙者關懷協會設立）。</td></tr>
+      <tr><td class="cat general">藥品</td><td>針劑、抗腫瘤藥物、抗生素、賀爾蒙、管制藥品（特別應回收）</td><td class="loc"><strong>無</strong></td><td class="note">離社區最近的廢棄藥物檢收站為信康藥局（南昌路一段143號），或送回原就診地點。<br><br>藥品包裝請丟一般垃圾。</td></tr>
+      <tr><td class="cat general">大型垃圾</td><td>大型家電：電冰箱、大型飲水機、電風扇、電視機、洗衣機、冷氣機、抽油煙機、瓦斯爐<br><br>傢俱：櫥櫃、床組、桌椅、沙發、彈簧床墊、跑步機、按摩椅<br><br>其他：手推車、腳踏車、廢行李箱3只（含）以上<br><br>應丟一般垃圾：乳膠床墊、乳膠枕</td><td class="loc"><strong>無</strong></td><td class="note">請洽管理中心聯絡清潔隊回收，清潔隊回收前一晚22:00以後拿出放在大門前羅斯福路上。<br><br>廢行李箱1個：可直接丟市府垃圾車（每週一、二、四、五、六晚上08:57–09:05停靠羅斯福路二段79號）。<br>廢行李箱3個以上：請洽管理中心預約清潔隊清運。<br><br>乳膠床墊、乳膠枕請先洽管理中心確認尺寸及清運安排後，移至B1環保室置放。</td></tr>
+      <tr><td class="cat general">裝修垃圾</td><td></td><td class="loc"><strong>無</strong></td><td class="note">依照本社區裝潢管理辦法，裝修垃圾應請裝潢工班載走，不能放置於環保室。</td></tr>
       </tbody>
     </table>
   </div>
   <div class="footer">閱大安管理委員會・本指引經管理委員會會議審議通過後公佈實行之，修訂時亦同。・如有疑問請洽管理中心</div>
+</div>
+
+<!-- ════ English ════ -->
+<div class="lang-block" data-lang="en">
+  <div class="note-box">
+    This is the waste-sorting guide for Cultural City (Yuè Dà'ān), based on the official Environmental Protection Bureau categories and annotated with where to dispose of each item in our building. If you're unsure, treat the item as general waste. (Common items below are representative examples, not exhaustive.)
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Common items</th><th>Where to dispose (in our building)</th><th>Notes</th></tr></thead>
+      <tbody>
+      <tr><td class="cat general">General waste<br>(non-recyclable)</td><td></td><td class="loc"><strong>B1 Eco Room cold storage</strong></td><td class="note">No special bags required. Seal bags well; don't let waste spill.</td></tr>
+      <tr><td class="cat general">Food waste</td><td>Compost scraps (inedible organics): peels, shells, bones, pits, flowers, leaves, tea/coffee grounds, potting soil.<br><br>Pig-feed scraps (cooked, still edible): un-spoiled meat, offal, vegetables, fruit, frozen food.</td><td class="loc"><strong>B1 Eco Room cold storage</strong></td><td class="note">In our community, dispose of food waste as general waste.<br>Drain liquid first to reduce leaks and help incineration efficiency.</td></tr>
+      <tr><td class="cat recycle">Waste paper</td><td>Office/printer paper, newspaper, flyers, shredded paper, magazines, paper bags, old books, plain (non-coated) cardboard packaging.<br><br>Put in general waste: coated paper containers, cup sleeves, pastry boxes, snack bags, diapers, tissues, thermal paper (e-receipts, ATM slips, lottery & parking tickets), photo paper, carbon/laminated/greaseproof paper, sandpaper, sticky notes.</td><td class="loc"><strong>B1 Eco Room, paper bin</strong></td><td class="note">Remove staples and clips first.<br>Consider selling old books to a used bookstore.</td></tr>
+      <tr><td class="cat recycle">Cardboard boxes</td><td>Clean, grease-free cardboard boxes and kraft paper bags.<br><br>Put in general waste: pizza boxes and other greasy boxes.</td><td class="loc"><strong>B1 meter-room corridor, cardboard area</strong></td><td class="note">Before bringing it out, cut the tape and flatten the box, then lay it flat in the B1 meter-room corridor.</td></tr>
+      <tr><td class="cat general">Coated paper containers</td><td>Pringles-type canisters, cigarette boxes (remove inner foil/film), paper carrier bags, coated paper packaging.<br><br>Put in general waste: paper cups, foil-lined cartons, milk/drink cartons, paper lunch boxes, instant-noodle bowls, hot-coffee cups and other greasy paper containers.</td><td class="loc"><strong>B1 Eco Room cold storage</strong></td><td class="note">These have a PE plastic film and low recycling value, so our community treats them as general waste.<br>Be careful not to mix them into waste paper.</td></tr>
+      <tr><td class="cat recycle">Plastic containers<br>(#1 PET,<br>#2 HDPE)</td><td>#1 PET: drink bottles (with caps).<br><br>#2 HDPE: body-wash & shampoo bottles, detergent jugs, milk jugs, firm cleanser bottles.</td><td class="loc"><strong>B1 Eco Room, plastic bin</strong></td><td class="note">Empty, rinse and flatten before disposal.<br>Peel off bottle labels and put them in general waste.<br>Bin space is small — please flatten well.</td></tr>
+      <tr><td class="cat general">Plastic containers<br>(#3–7)</td><td>Thick plastic food boxes, clear egg-carton bodies, Yakult bottles, fresh-food trays, creamer cups, yogurt cups, hot-coffee cup lids, thin sushi/deli boxes.</td><td class="loc"><strong>B1 Eco Room cold storage</strong></td><td class="note">#3–7 plastics have low recycling value; treat as general waste.<br>The number in the triangle on the base is the plastic code.<br>Foamed PS (styrofoam boxes) also go to general waste.</td></tr>
+      <tr><td class="cat general">General plastics</td><td>Clean plastic bags (no grease/soup/blood), mesh produce bags, plastic spoons, biscuit-box inner trays, light rain ponchos, pen barrels/caps, packing-foam pellets, pizza-box supports, lipstick tubes, correction-tape shells, coffee-capsule shells, tissue wrap, contact-lens cases, marker barrels/caps, plant pots with a recycling mark.</td><td class="loc"><strong>B1 Eco Room cold storage</strong></td><td class="note">Most general plastics have poor downstream recycling value and are usually incinerated anyway — best treated as general waste.</td></tr>
+      <tr><td class="cat general">Clean styrofoam</td><td>Industrial styrofoam (cushioning), ice-cream & fresh-food styrofoam.<br><br>Put in general waste: small supermarket fish/meat trays, foam-net fruit wraps.</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Break up small styrofoam at home, bag it, and put in general waste.<br><br>For pieces too large to break down, take to:<br>1. Recycling truck (bulky items: Tue/Thu/Sat 20:57, in front of TASTY steakhouse 西堤牛排, No. 79, Sec. 2, Roosevelt Rd.)<br>2. Da'an District Cleaning Squad, Heping Team 大安區清潔隊和平分隊 (No. 143-adj., Sec. 1, Xinhai Rd.)</td></tr>
+      <tr><td class="cat recycle">Glass containers</td><td>Liquor bottles, condiment glass bottles, some cosmetic bottles.<br><br>Put in general/bulky waste: mirrors, bathroom fixtures, ceramics, ceramic vases, tiles (cannot enter glass recycling).<br><br>Broken glass/ceramic: wrap well, put in general waste.</td><td class="loc"><strong>B1 Eco Room, glass bin</strong></td><td class="note">1. Remove caps & straws, empty and rinse lightly before recycling.<br>2. Wrap sharp/fragile pieces in paper first.</td></tr>
+      <tr><td class="cat recycle">Metal cans</td><td>Aluminum cans, pressurized-can bodies, milk-powder cans, metal biscuit tins & lids, metal caps, paint cans, dumbbells, wire, nails, metal bowls/pots, knife blades, aluminum pots/basins, umbrella frames (no fabric), metal racks.<br><br>Put in general waste: aluminum foil, umbrella fabric.<br>Return via source channel: gas cylinders.</td><td class="loc"><strong>B1 Eco Room, metal-can bin</strong></td><td class="note">1. Empty, clean and flatten first.<br>2. Separate non-metal attachments.<br>3. For pressurized cans (e.g., hairspray), release contents in an open area before recycling to avoid explosion from heat.<br>4. Wrap sharp/fragile pieces in paper.</td></tr>
+      <tr><td class="cat recycle">Waste lamps & tubes</td><td>Tubes 2 inches or longer (cold-cathode, induction fluorescent, other mercury tubes): leave beside the B1 meter-room corridor cardboard area for staff to handle.<br><br>Put in general waste (well-wrapped): bulbs, HID lamps, mercury thermometers, desk-lamp strips.</td><td class="loc"><strong>B1 meter-room corridor</strong></td><td class="note">1. Don't break them — toxic mercury vapor is harmful.<br>2. Wrap sharp/fragile pieces in paper.<br>3. Our current waste contractor can't take tubes, so leave long tubes at the designated spot for the manager.</td></tr>
+      <tr><td class="cat general">Waste oil</td><td>Empty pest-control containers, lubricating oil, cooking oil.</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Bring your own sealed container and hand it to the recycling truck:<br>1. Recycling truck (other items: Mon/Tue/Thu/Fri/Sat 20:57, in front of TASTY steakhouse, No. 79, Sec. 2, Roosevelt Rd.)<br>2. Da'an District Cleaning Squad, Heping Team (No. 143-adj., Sec. 1, Xinhai Rd.)</td></tr>
+      <tr><td class="cat recycle">Waste IT equipment</td><td>Desktop PCs, monitors, scanners, printers, (original) toner cartridges, laptops, phones, tablets, large headphones, external drives, USB sticks, chargers, keyboards, mice, charging cables.</td><td class="loc"><strong>B1 meter-room corridor</strong></td><td class="note">1. Erase personal data, remove removable batteries, take out memory/SIM cards first.<br>2. Can also drop at Tkec, ELIFE, FamilyMart, Hi-Life, 7-11; check phone-recycling reward programs online.<br>3. Small peripherals (keyboards, mice, cables) may go to general waste if recycling is inconvenient.</td></tr>
+      <tr><td class="cat recycle">Waste electronics & appliances</td><td>Vacuum cleaners, hair dryers, phones, fax machines, portable radios, stereos, VCRs, players, game consoles, bug zappers, desk lamps.<br><br>Put in general waste: electric swatters, plastic lamp housings, power cords.</td><td class="loc"><strong>B1 meter-room corridor</strong></td><td class="note">1. Remove internal batteries and put them in the battery bin.<br>2. Can also drop at Tkec / ELIFE.<br>3. Small electronics may go to general waste if recycling is inconvenient.</td></tr>
+      <tr><td class="cat recycle">Discs (CD/DVD)</td><td>CDs, VCDs, DVDs (without cases).</td><td class="loc"><strong>B1 Eco Room, battery & disc bin</strong></td><td class="note">1. Remove outer packaging (sleeves/cases) first.<br>2. PC-plastic cases are recycled separately.<br>Can also drop at FamilyMart, Hi-Life, 7-11.</td></tr>
+      <tr><td class="cat recycle">Batteries</td><td>Single-use: traditional dry cells (lead-acid, alkaline), mercury batteries.<br><br>Rechargeable: NiCd, NiMH, lithium, power banks.</td><td class="loc"><strong>B1 Eco Room, battery & disc bin</strong></td><td class="note">Can also drop at FamilyMart, Hi-Life, 7-11.</td></tr>
+      <tr><td class="cat general">Others</td><td>Long-handled cleaning tools (dismantle, then general waste), helmets (general waste), trophies (general waste), tires, lead-acid batteries, acrylic.<br><br>Umbrellas: metal frame → metal cans; fabric → general waste.</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">1. Tires: separate inner tube and rim; return via a tire/auto shop.<br>2. Lead-acid batteries: return via recycling truck or auto shop.<br>Take others to the recycling truck or the Da'an Cleaning Squad Heping Team (No. 143-adj., Sec. 1, Xinhai Rd.).</td></tr>
+      <tr><td class="cat general">Clean used clothing</td><td>Tops, trousers, coats, women's underwear, scarves, beanies, gloves — clean items only.<br><br>Put in general waste: wet/dirty/worn/smelly clothes, socks, underwear, fabric (incl. scraps), towels, quilts, pillows, sheets, curtains, shoes, plush toys, bags, backpacks.</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Drop at the clothing box beside the scooter parking on Ln. 101, Sec. 2, Roosevelt Rd. (by the FamilyMart corner), run by the Enbao Disability Care Association.</td></tr>
+      <tr><td class="cat general">Medicines</td><td>Injectables, anti-tumor drugs, antibiotics, hormones, controlled drugs (these especially should be returned).</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Nearest drug take-back: Xinkang Pharmacy 信康藥局 (No. 143, Sec. 1, Nanchang Rd.), or return to where it was prescribed.<br><br>Put medicine packaging in general waste.</td></tr>
+      <tr><td class="cat general">Bulky waste</td><td>Large appliances: fridges, large water dispensers, fans, TVs, washers, A/C units, range hoods, gas stoves.<br><br>Furniture: cabinets, beds, tables/chairs, sofas, spring mattresses, treadmills, massage chairs.<br><br>Others: carts, bicycles, 3+ old suitcases.<br><br>Put in general waste: latex mattresses & pillows.</td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Contact the Management Center to arrange Cleaning Squad pickup; put items out on Roosevelt Rd. in front of the main gate after 22:00 the night before.<br><br>1 old suitcase: can go directly to the city garbage truck (Mon/Tue/Thu/Fri/Sat 20:57–21:05, No. 79, Sec. 2, Roosevelt Rd.).<br>3+ suitcases: book a Cleaning Squad pickup via the Management Center.<br><br>For latex mattresses/pillows, confirm size and arrangements with the Management Center first, then move them to the B1 Eco Room.</td></tr>
+      <tr><td class="cat general">Renovation debris</td><td></td><td class="loc"><strong>Not collected in building</strong></td><td class="note">Per our renovation rules, renovation debris must be hauled away by your contractor and may not be left in the Eco Room.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">Cultural City Management Committee · This guide takes effect after approval by the committee, and likewise for revisions. · For questions, please contact the Management Center.</div>
+</div>
+
+<!-- ════ 日本語 ════ -->
+<div class="lang-block" data-lang="ja">
+  <div class="note-box">
+    本表は閱大安コミュニティのごみ分別ガイドです。環境保護局の公式分類に基づき、館内での出し場所を併記しています。判断に迷う場合は「一般ごみ」として処理してください。（「主な品目」は代表例であり、すべてを網羅したものではありません。）
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>分類</th><th>主な品目</th><th>館内の出し場所</th><th>注意事項</th></tr></thead>
+      <tbody>
+      <tr><td class="cat general">一般ごみ<br>（リサイクル不可）</td><td></td><td class="loc"><strong>B1エコルーム冷蔵室</strong></td><td class="note">専用ごみ袋は不要です。<br>袋はしっかり密封し、ごみがこぼれないように。</td></tr>
+      <tr><td class="cat general">生ごみ</td><td>堆肥用（食べられない有機物）：皮、殻、骨、種、花材、落ち葉、茶がら、コーヒーかす、鉢の土<br><br>養豚用（加熱済みで食べられる物）：傷んでいない肉、内臓、野菜、果物、冷凍食品</td><td class="loc"><strong>B1エコルーム冷蔵室</strong></td><td class="note">当コミュニティでは生ごみは一般ごみとして処理します。<br>水気をよく切ってから出すと、漏れを防ぎ焼却効率も向上します。</td></tr>
+      <tr><td class="cat recycle">古紙</td><td>コピー用紙、新聞、チラシ、シュレッダー紙、雑誌、紙袋、古本、無加工の厚紙包装<br><br>一般ごみへ：加工紙容器、カップスリーブ、洋菓子箱、軽食の紙袋、紙おむつ、ティッシュ、感熱紙（電子レシート・ATM明細・宝くじ・駐車券）、写真用紙、カーボン紙・ラミネート紙・耐油紙、紙やすり、付箋</td><td class="loc"><strong>B1エコルーム 紙類回収箱</strong></td><td class="note">ホチキスやクリップは外してください。<br>古本は古書店での売却もご検討を。</td></tr>
+      <tr><td class="cat recycle">ダンボール</td><td>汚れ・油のない清潔なダンボール、クラフト紙袋<br><br>一般ごみへ：ピザ箱など油の付いた箱</td><td class="loc"><strong>B1電気メーター室通路 段ボール置き場</strong></td><td class="note">出す前にテープを切り、平らに畳んでからB1電気メーター室通路に平置きしてください。</td></tr>
+      <tr><td class="cat general">加工紙容器</td><td>筒型ポテトチップス容器、たばこの箱（内側のフィルム除去）、紙手提げ袋、加工紙の包装<br><br>一般ごみへ：紙コップ、アルミ内張りパック、牛乳・飲料の紙パック、紙弁当箱、カップ麺容器、ホットコーヒーのカップなど油・汚れのある紙容器</td><td class="loc"><strong>B1エコルーム冷蔵室</strong></td><td class="note">PEフィルムが貼られリサイクル価値が低いため、当コミュニティでは一般ごみとします。<br>古紙に混ぜないようご注意ください。</td></tr>
+      <tr><td class="cat recycle">プラ容器<br>（#1 PET、<br>#2 HDPE）</td><td>#1 PET：ペットボトル（キャップ付き）<br><br>#2 HDPE：ボディソープ・シャンプー容器、洗剤ボトル、牛乳ボトル、硬質の洗顔料容器</td><td class="loc"><strong>B1エコルーム プラ回収箱</strong></td><td class="note">中身を空にし、すすいで潰してから出してください。<br>ラベルは剥がして一般ごみへ。<br>回収箱が小さいので、しっかり潰してください。</td></tr>
+      <tr><td class="cat general">プラ容器<br>（#3〜7）</td><td>厚手プラ弁当箱、透明卵パック本体、ヤクルト容器、生鮮トレー、コーヒーフレッシュ容器、ヨーグルトカップ、ホットコーヒーの蓋、薄手の寿司・惣菜容器</td><td class="loc"><strong>B1エコルーム冷蔵室</strong></td><td class="note">#3〜7はリサイクル価値が低く、当コミュニティでは一般ごみとします。<br>底の三角マーク内の数字がプラ番号です。<br>発泡PS（発泡スチロール容器）も一般ごみへ。</td></tr>
+      <tr><td class="cat general">その他プラ</td><td>清潔なポリ袋（油・汁・血液なし）、ネット袋、プラスプーン、菓子箱の内トレー、簡易レインコート、ボールペンの軸・キャップ、緩衝材の粒、ピザの支え、口紅の容器、修正テープの外殻、コーヒーカプセルの殻、ティッシュの包装、コンタクト容器、マーカーの軸・キャップ、リサイクルマーク付きの植木鉢</td><td class="loc"><strong>B1エコルーム冷蔵室</strong></td><td class="note">多くのその他プラは再生価値が低く、結局焼却されることが多いため、一般ごみでの処理を推奨します。</td></tr>
+      <tr><td class="cat general">清潔な発泡スチロール</td><td>工業用（緩衝材）、アイス・生鮮用の発泡スチロール<br><br>一般ごみへ：スーパーの小型魚肉トレー、果物用ネット状発泡材</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">小型は自宅で砕き、袋に入れて一般ごみへ。<br><br>大きく砕けない物は、住民ご自身で下記へ：<br>1. 資源回収車（立体類：火・木・土 20:57、羅斯福路二段79号「西堤牛排」前）<br>2. 大安区清掃隊 和平分隊（辛亥路一段臨143号）</td></tr>
+      <tr><td class="cat recycle">ガラス容器</td><td>酒瓶、調味料のガラス瓶、一部の化粧品瓶<br><br>一般・大型ごみへ：鏡、浴室設備、陶磁器、陶器の花瓶、タイル（ガラス回収不可）<br><br>割れたガラス・陶器：しっかり包んで一般ごみへ</td><td class="loc"><strong>B1エコルーム ガラス回収箱</strong></td><td class="note">1. キャップ・ストローを外し、空にして軽くすすいでから回収。<br>2. 鋭利・割れ物は先に紙で包んでください。</td></tr>
+      <tr><td class="cat recycle">鉄・アルミ缶</td><td>アルミ缶、高圧缶の本体、粉ミルク缶、金属菓子缶と蓋、金属キャップ、ペンキ缶、ダンベル、針金、釘、鉄の器・鍋、包丁の刃、アルミ鍋・盆、傘の骨（布なし）、金属ラック<br><br>一般ごみへ：アルミホイル、傘の布<br>購入元へ返却：ガスボンベ</td><td class="loc"><strong>B1エコルーム 鉄・アルミ缶回収箱</strong></td><td class="note">1. 中身を空にし、洗って潰してから。<br>2. 金属以外の付着物は分離。<br>3. ガス缶・高圧缶（ヘアスプレー等）は加熱による爆発を防ぐため、屋外で中身を出してから。<br>4. 鋭利・割れ物は紙で包む。</td></tr>
+      <tr><td class="cat recycle">廃照明（ランプ・蛍光管）</td><td>長さ2インチ以上の管（冷陰極・誘導蛍光・その他水銀管）：B1電気メーター室通路の段ボール置き場横に置き、係員が対応<br><br>一般ごみへ（しっかり包装）：各種電球、HIDランプ、水銀体温計、デスクライトのバー</td><td class="loc"><strong>B1電気メーター室通路</strong></td><td class="note">1. 割らないこと。有毒な水銀蒸気が人体に有害です。<br>2. 鋭利・割れ物は紙で包む。<br>3. 現在の委託業者は蛍光管を回収できないため、長い管は指定位置に置き管理員が対応します。</td></tr>
+      <tr><td class="cat general">廃油</td><td>衛生用薬剤の空容器、潤滑油、食用油</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">ご自身で容器に入れ密封し、資源回収車へ：<br>1. 資源回収車（その他類：月・火・木・金・土 20:57、羅斯福路二段79号「西堤牛排」前）<br>2. 大安区清掃隊 和平分隊（辛亥路一段臨143号）</td></tr>
+      <tr><td class="cat recycle">廃情報機器</td><td>PC本体、モニター、スキャナー、プリンター、（純正）トナー、ノートPC、スマホ、タブレット、大型ヘッドホン、外付けHDD、USBメモリ、充電器、キーボード、マウス、充電ケーブル</td><td class="loc"><strong>B1電気メーター室通路</strong></td><td class="note">1. 個人データを消去し、外せる電池は外し、メモリ・SIMカードを抜いてから。<br>2. Tkec・ELIFE・ファミマ・Hi-Life・セブンでも回収可。スマホは特典プログラムをネットで確認。<br>3. 小型周辺機器（キーボード・マウス・各種ケーブル）は不便なら一般ごみでも可。</td></tr>
+      <tr><td class="cat recycle">廃電子・電気製品</td><td>掃除機、ドライヤー、電話、FAX、携帯ラジカセ、オーディオ、ビデオ、プレーヤー、ゲーム機、捕虫器、デスクライト<br><br>一般ごみへ：電気蚊たたき、照明のプラ外殻、電源コード</td><td class="loc"><strong>B1電気メーター室通路</strong></td><td class="note">1. 内蔵電池は外して電池回収箱へ。<br>2. Tkec・ELIFEでも回収可。<br>3. 小型品は不便なら一般ごみでも可。</td></tr>
+      <tr><td class="cat recycle">CD・DVD</td><td>CD・VCD・DVD（ケースを除く）</td><td class="loc"><strong>B1エコルーム 電池・ディスク回収箱</strong></td><td class="note">1. 外装（スリーブ・ケース）を外してから。<br>2. PCプラ製のケースは別途回収。<br>ファミマ・Hi-Life・セブンでも回収可。</td></tr>
+      <tr><td class="cat recycle">廃電池</td><td>使い切り：乾電池（鉛蓄・アルカリ）、水銀電池など<br><br>充電式：ニカド、ニッケル水素、リチウム、モバイルバッテリー</td><td class="loc"><strong>B1エコルーム 電池・ディスク回収箱</strong></td><td class="note">ファミマ・Hi-Life・セブンでも回収可。</td></tr>
+      <tr><td class="cat general">その他</td><td>長柄の掃除具（分解して一般ごみ）、ヘルメット（一般ごみ）、トロフィー（一般ごみ）、廃タイヤ、鉛蓄電池、アクリル<br><br>傘：骨（金属）→鉄・アルミ缶；布→一般ごみ</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">1. 廃タイヤ：チューブとホイールを分離し、タイヤ店・整備店へ。<br>2. 鉛蓄電池：資源回収車や整備店へ返却。<br>その他は資源回収車、または大安区清掃隊 和平分隊（辛亥路一段臨143号）へ。</td></tr>
+      <tr><td class="cat general">清潔な古着</td><td>上着、ズボン、コート、女性用下着、マフラー、ニット帽、手袋など清潔な衣類<br><br>一般ごみへ：濡れ・汚れ・破れ・臭いのある古着、靴下、下着、布類（端切れ含む）、タオル、布団、枕、シーツ、カーテン、靴、ぬいぐるみ、バッグ、リュック</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">羅斯福路二段101巷（ファミマの角）バイク駐輪場横の古着回収箱（恩寶身心障礙者關懷協會設置）へ。</td></tr>
+      <tr><td class="cat general">医薬品</td><td>注射剤、抗腫瘍薬、抗生物質、ホルモン剤、規制薬（特に回収が必要）</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">最寄りの廃棄医薬品回収所は信康藥局（南昌路一段143号）、または処方を受けた医療機関へ。<br><br>薬の包装は一般ごみへ。</td></tr>
+      <tr><td class="cat general">大型ごみ</td><td>大型家電：冷蔵庫、大型給水器、扇風機、テレビ、洗濯機、エアコン、レンジフード、ガスコンロ<br><br>家具：戸棚、ベッド、机・椅子、ソファ、スプリングマットレス、ランニングマシン、マッサージチェア<br><br>その他：手押し車、自転車、廃スーツケース3個以上<br><br>一般ごみへ：ラテックスのマットレス・枕</td><td class="loc"><strong>館内回収なし</strong></td><td class="note">管理センターへ連絡し清掃隊の回収を手配。前夜22:00以降に正門前の羅斯福路に出してください。<br><br>スーツケース1個：市のごみ収集車に直接（月・火・木・金・土 20:57〜21:05、羅斯福路二段79号）。<br>3個以上：管理センター経由で清掃隊の回収を予約。<br><br>ラテックスのマットレス・枕は、サイズと回収方法を管理センターで確認後、B1エコルームへ。</td></tr>
+      <tr><td class="cat general">改装ごみ</td><td></td><td class="loc"><strong>館内回収なし</strong></td><td class="note">当コミュニティの内装管理規定により、改装ごみは施工業者が持ち帰るものとし、エコルームに置くことはできません。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">閱大安管理委員会・本ガイドは管理委員会の審議承認を経て施行し、改訂時も同様とします。・ご不明な点は管理センターまで。</div>
+</div>
