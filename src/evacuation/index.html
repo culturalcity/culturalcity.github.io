@@ -1,0 +1,261 @@
+---
+layout: base.njk
+permalink: /evacuation/index.html
+title: 緊急避難圖
+extraStyles: |
+  :root{
+    --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+    --exit:#1C6B3A;--fire:#8C1F1F;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:17px;line-height:1.75;min-height:100vh;}
+  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+  .header-inner{max-width:860px;margin:0 auto;position:relative;}
+  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:12px;transition:color .18s;}
+  .back-link:hover{color:var(--wg1);}
+  .back-link::before{content:'←';}
+  .header-eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
+  .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.14em;}
+  /* 語言切換鈕（同公告 notice.css 慣例） */
+  .lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
+  .lang-bar-inner{max-width:860px;margin:0 auto;display:flex;}
+  .lang-btn{padding:10px 18px;font-size:14px;font-family:inherit;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+  .lang-btn:hover{color:rgba(234,231,225,0.8);}
+  .lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+  .lang-block{display:none;}
+  .lang-block.active{display:block;}
+  /* 日文內容以 Noto Sans JP 優先，避免「図」「経」等日文字形 fallback 不一致（中文不受影響） */
+  .lang-block[data-lang="ja"],[data-lang-text="ja"]{font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic UI','Meiryo','Noto Sans TC',sans-serif;}
+  .main{max-width:860px;margin:0 auto;padding:32px 24px 64px;}
+  @media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
+  /* 說明 */
+  .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-left:3px solid var(--exit);border-radius:var(--radius);padding:14px 18px;font-size:15px;color:var(--wg9);line-height:1.85;margin-bottom:22px;}
+  .notice-box strong{color:var(--wg41);}
+  /* 文字圖例 */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:22px;font-size:14px;color:var(--wg11);}
+  .legend .li{display:flex;align-items:center;gap:6px;}
+  .legend .sw{width:22px;height:0;border-top-width:3px;border-top-style:solid;display:inline-block;}
+  .legend .sw.exit{border-color:var(--exit);}
+  .legend .sw.dir{border-color:var(--exit);border-top-style:dashed;}
+  .legend .dot{width:11px;height:11px;border-radius:2px;display:inline-block;}
+  .legend .dot.fire{background:var(--fire);}
+  .legend .dot.you{background:#E8B400;border-radius:50%;}
+  /* 樓層面板 */
+  .panel-label{font-size:12px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .floor-panel{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:26px;}
+  @media(max-width:560px){.floor-panel{grid-template-columns:repeat(4,1fr);}}
+  .fbtn{appearance:none;font-family:inherit;cursor:pointer;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);color:var(--wg41);padding:12px 4px;text-align:center;transition:all .15s;line-height:1.25;}
+  .fbtn:hover{border-color:var(--wg11);background:#F2F0EC;}
+  .fbtn .fn{display:block;font-size:17px;font-weight:700;letter-spacing:.04em;}
+  .fbtn .fs{display:block;font-size:11px;color:var(--wg9);letter-spacing:.04em;margin-top:1px;}
+  .fbtn.b{background:rgba(60,56,53,0.04);}
+  .fbtn.active{background:var(--wg41);border-color:var(--wg41);color:var(--wg1);}
+  .fbtn.active .fs{color:rgba(234,231,225,0.65);}
+  /* 圖面檢視 */
+  .viewer{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .viewer-hd{padding:11px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .viewer-title{font-size:16px;font-weight:700;color:var(--wg41);letter-spacing:.04em;}
+  .viewer-title .vt-sub{font-size:13px;font-weight:400;color:var(--wg9);margin-left:8px;letter-spacing:.02em;}
+  .viewer-acts{display:flex;gap:8px;}
+  .vbtn{appearance:none;font-family:inherit;font-size:13px;letter-spacing:.04em;cursor:pointer;background:transparent;border:1px solid var(--wg11);color:var(--wg11);border-radius:var(--radius);padding:6px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;}
+  .vbtn:hover{background:var(--wg11);color:var(--wg1);}
+  .viewer-bd{padding:14px;background:#FBFAF8;}
+  .viewer-bd img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius);cursor:zoom-in;background:#fff;}
+  .viewer-tip{font-size:13px;color:var(--wg9);text-align:center;padding:10px 14px 2px;letter-spacing:.04em;}
+  /* 全螢幕燈箱 */
+  .lightbox{position:fixed;inset:0;background:rgba(28,25,23,0.94);z-index:99;display:none;align-items:center;justify-content:center;overflow:auto;padding:16px;cursor:zoom-out;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:none;width:auto;min-width:60%;border-radius:2px;background:#fff;}
+  .lightbox-close{position:fixed;top:14px;right:18px;font-size:30px;line-height:1;color:rgba(234,231,225,0.8);cursor:pointer;background:none;border:none;z-index:100;}
+  .footer{border-top:1px solid var(--line);padding-top:18px;margin-top:36px;font-size:13px;color:var(--wg9);letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  /* 列印：只印當前樓層圖 */
+  @media print{
+    body{background:#fff;}
+    .header,.lang-bar,.notice-box,.legend,.panel-label,.floor-panel,.viewer-hd,.viewer-tip,.footer,.back-link{display:none !important;}
+    .main{padding:0;max-width:100%;}
+    .viewer,.viewer-bd{border:none;padding:0;background:#fff;}
+    .viewer-bd img{border:none;}
+  }
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">EVACUATION PLAN</div>
+    <h1>
+      <span data-lang-text="zh">緊急避難圖</span>
+      <span data-lang-text="en" style="display:none">Evacuation Plan</span>
+      <span data-lang-text="ja" style="display:none">避難経路図</span>
+    </h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="lang-block active" data-lang="zh">
+    <div class="notice-box">
+      本社區依消防法規於<strong>各樓電梯間</strong>張貼各層緊急避難圖，此處為線上版方便隨時查看。使用方式：<strong>選擇您所在的樓層</strong> → 找到圖上的<strong>黃點「現在位置」</strong> → 循<strong>綠色逃生方向</strong>走到最近的緊急出口。<br>⚠ 地震、火災時請走<strong>樓梯</strong>，切勿搭乘電梯；並留意沿途<strong>消防栓與滅火器</strong>位置。
+    </div>
+  </div>
+  <div class="lang-block" data-lang="en">
+    <div class="notice-box">
+      In accordance with fire safety regulations, evacuation plans for each floor are posted in the <strong>elevator halls</strong>; this online version is provided for easy reference. How to use: <strong>select your floor</strong> → find the yellow <strong>“You Are Here”</strong> dot → follow the <strong>green evacuation route</strong> to the nearest emergency exit.<br>⚠ In an earthquake or fire, use the <strong>stairs</strong> — never the elevator. Note the locations of <strong>fire hydrants and extinguishers</strong> along the way.
+    </div>
+  </div>
+  <div class="lang-block" data-lang="ja">
+    <div class="notice-box">
+      当マンションでは消防法令に基づき、各階の避難経路図を<strong>エレベーターホール</strong>に掲示しています。こちらはいつでも確認できるオンライン版です。ご利用方法：<strong>ご自身の階を選択</strong> → 図中の黄色い<strong>「現在地」</strong>を確認 → <strong>緑色の避難経路</strong>に沿って最寄りの非常口へ。<br>⚠ 地震・火災の際は<strong>階段</strong>をご利用ください。エレベーターは絶対に使用しないでください。途中の<strong>消火栓・消火器</strong>の位置もご確認ください。
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="li"><span class="dot you"></span><span data-lang-text="zh">現在位置</span><span data-lang-text="en" style="display:none">You Are Here</span><span data-lang-text="ja" style="display:none">現在地</span></span>
+    <span class="li"><span class="sw exit"></span><span data-lang-text="zh">緊急出口・逃生路線</span><span data-lang-text="en" style="display:none">Emergency Exit &amp; Route</span><span data-lang-text="ja" style="display:none">非常口・避難経路</span></span>
+    <span class="li"><span class="sw dir"></span><span data-lang-text="zh">逃生方向</span><span data-lang-text="en" style="display:none">Evacuation Direction</span><span data-lang-text="ja" style="display:none">避難方向</span></span>
+    <span class="li"><span class="dot fire"></span><span data-lang-text="zh">消防栓・滅火器</span><span data-lang-text="en" style="display:none">Fire Hydrant &amp; Extinguisher</span><span data-lang-text="ja" style="display:none">消火栓・消火器</span></span>
+  </div>
+
+  <div class="panel-label">
+    <span data-lang-text="zh">選擇樓層　SELECT FLOOR</span>
+    <span data-lang-text="en" style="display:none">SELECT FLOOR</span>
+    <span data-lang-text="ja" style="display:none">階を選択　SELECT FLOOR</span>
+  </div>
+  <div class="floor-panel" id="floor-panel"></div>
+
+  <div class="viewer">
+    <div class="viewer-hd">
+      <div class="viewer-title"><span id="cur-floor">1F</span><span class="vt-sub" id="cur-sub">地面層</span></div>
+      <div class="viewer-acts">
+        <button class="vbtn" onclick="window.print()">
+          <span data-lang-text="zh">🖨 列印本層</span>
+          <span data-lang-text="en" style="display:none">🖨 Print This Floor</span>
+          <span data-lang-text="ja" style="display:none">🖨 この階を印刷</span>
+        </button>
+        <a class="vbtn" href="/images/evacuation/evacuation-plan.pdf" target="_blank" rel="noopener">
+          <span data-lang-text="zh">⬇ 完整 PDF</span>
+          <span data-lang-text="en" style="display:none">⬇ Full PDF</span>
+          <span data-lang-text="ja" style="display:none">⬇ PDF全体</span>
+        </a>
+      </div>
+    </div>
+    <div class="viewer-bd">
+      <img id="evac-img" src="/images/evacuation/evac-1f.png" alt="緊急避難圖" onclick="openLightbox()">
+    </div>
+    <div class="viewer-tip">
+      <span data-lang-text="zh">點圖可放大檢視　·　共 20 個樓層平面</span>
+      <span data-lang-text="en" style="display:none">Tap the image to enlarge　·　20 floor plans</span>
+      <span data-lang-text="ja" style="display:none">画像をタップで拡大　·　全20フロア</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>
+      <span data-lang-text="zh">閱大安管理委員會</span>
+      <span data-lang-text="en" style="display:none">Cultural City Management Committee</span>
+      <span data-lang-text="ja" style="display:none">閱大安理事会</span>
+    </span>
+    <span>
+      <span data-lang-text="zh">逃生圖版本 2026-06・如有疑問請洽管理中心</span>
+      <span data-lang-text="en" style="display:none">Plan version 2026-06 · For questions, contact the Management Center</span>
+      <span data-lang-text="ja" style="display:none">避難図 2026-06版・ご不明な点は管理センターまで</span>
+    </span>
+  </div>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" aria-label="關閉" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="緊急避難圖（放大）">
+</div>
+
+<script>
+let LANG = 'zh';
+const T_ALT = {zh:'緊急避難圖', en:'Evacuation Plan', ja:'避難経路図'};
+const FLOORS = [
+  {c:'r1',  n:'RF',  s:{zh:'屋頂',  en:'Roof',  ja:'屋上'}},
+  {c:'15f', n:'15F'},
+  {c:'14f', n:'14F'},
+  {c:'13f', n:'13F'},
+  {c:'12f', n:'12F'},
+  {c:'11f', n:'11F'},
+  {c:'10f', n:'10F'},
+  {c:'9f',  n:'9F'},
+  {c:'8f',  n:'8F'},
+  {c:'7f',  n:'7F'},
+  {c:'6f',  n:'6F'},
+  {c:'5f',  n:'5F'},
+  {c:'4f',  n:'4F'},
+  {c:'3f',  n:'3F'},
+  {c:'2f',  n:'2F'},
+  {c:'1f',  n:'1F',  s:{zh:'地面層',en:'Ground',ja:'地上'}},
+  {c:'b1',  n:'B1F', b:true},
+  {c:'b2',  n:'B2F', b:true},
+  {c:'b3',  n:'B3F', b:true},
+  {c:'b4',  n:'B4F', b:true},
+];
+
+const panel = document.getElementById('floor-panel');
+const img = document.getElementById('evac-img');
+const curFloor = document.getElementById('cur-floor');
+const curSub = document.getElementById('cur-sub');
+let curC = '1f';
+
+FLOORS.forEach(f => {
+  const b = document.createElement('button');
+  b.className = 'fbtn' + (f.b ? ' b' : '') + (f.c === '1f' ? ' active' : '');
+  b.dataset.c = f.c;
+  b.innerHTML = '<span class="fn">' + f.n + '</span>' + (f.s ? '<span class="fs">' + f.s[LANG] + '</span>' : '');
+  b.addEventListener('click', () => select(f));
+  panel.appendChild(b);
+});
+
+function select(f) {
+  curC = f.c;
+  img.src = '/images/evacuation/evac-' + f.c + '.png';
+  img.alt = f.n + ' ' + T_ALT[LANG];
+  curFloor.textContent = f.n;
+  curSub.textContent = f.s ? f.s[LANG] : '';
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.toggle('active', b.dataset.c === f.c));
+  history.replaceState(null, '', '#' + f.c);
+}
+
+function setLang(lang) {
+  LANG = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.querySelectorAll('[data-lang-text]').forEach(el => {
+    el.style.display = el.dataset.langText === lang ? '' : 'none';
+  });
+  // 樓層副標 + 目前樓層副標隨語言更新
+  document.querySelectorAll('.fbtn').forEach(b => {
+    const f = FLOORS.find(x => x.c === b.dataset.c);
+    const fs = b.querySelector('.fs');
+    if (fs && f && f.s) fs.textContent = f.s[lang];
+  });
+  const cf = FLOORS.find(x => x.c === curC);
+  curSub.textContent = cf && cf.s ? cf.s[lang] : '';
+}
+
+// 燈箱
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+function openLightbox(){ lbImg.src = img.src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+// 進站時若 hash 指定樓層則直接開該層
+const h = (location.hash || '').replace('#','');
+const init = FLOORS.find(f => f.c === h);
+if (init) select(init);
+</script>

@@ -87,6 +87,8 @@ body {
 /* ── 語言區塊切換 ── */
 .lang-block { display: none; }
 .lang-block.active { display: block; }
+/* 日文內容以 Noto Sans JP 優先，避免「図」「経」等日文字形 fallback 不一致（中文不受影響） */
+.lang-block[data-lang="ja"], [data-lang-text="ja"] { font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', 'Noto Sans TC', sans-serif; }
 
 /* ── 通用內容元件 ── */
 .sec { margin-bottom: 28px; }
