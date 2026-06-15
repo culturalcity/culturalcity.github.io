@@ -45,7 +45,7 @@ extraStyles: |
   .fs-title{font-size:15px;font-weight:700;color:var(--wg41);margin-bottom:6px;letter-spacing:.02em;display:flex;align-items:center;gap:8px;}
   .fs-icon{font-size:18px;}
   .fs-desc{font-size:14px;color:var(--wg11);line-height:1.8;}
-  .fs-note{margin-top:14px;background:rgba(43,74,107,0.05);border-left:3px solid var(--blue);padding:12px 16px;font-size:14px;color:var(--wg41);line-height:1.85;border-radius:0 var(--radius) var(--radius) 0;}
+  .fs-note{margin-top:14px;margin-bottom:44px;background:rgba(43,74,107,0.05);border-left:3px solid var(--blue);padding:12px 16px;font-size:14px;color:var(--wg41);line-height:1.85;border-radius:0 var(--radius) var(--radius) 0;}
   .fs-note strong{color:var(--wg41);}
   /* ── OWNERSHIP TIERS ── */
   .tier-list{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;}
@@ -106,13 +106,13 @@ extraStyles: |
   /* ── HOA NATURE BLOCK ── */
   .hoa-text{font-size:15px;color:var(--wg11);line-height:1.9;margin-bottom:14px;}
   .hoa-text strong{color:var(--wg41);}
-  .hoa-bullets{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 20px;margin-bottom:14px;}
+  .hoa-bullets{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 20px;margin-bottom:44px;}
   .hoa-bullets ul{padding-left:1.3em;margin:0;}
   .hoa-bullets li{font-size:14px;color:var(--wg11);line-height:1.9;margin-bottom:6px;}
   .hoa-bullets li:last-child{margin-bottom:0;}
   .hoa-bullets strong{color:var(--wg41);}
   /* ── PARTICIPATION ── */
-  .part-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .part-list{display:flex;flex-direction:column;gap:8px;margin-bottom:44px;}
   .part-item{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;}
   .part-num{font-size:13px;font-weight:700;color:var(--white);background:var(--wg41);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
   .part-content{flex:1;}
@@ -406,65 +406,73 @@ extraScripts: |
 
   </div>
 
-  <div class="sec-label"><span class="sec-num">04</span>APPEARANCE &nbsp;·&nbsp; 外觀與陽台的詳細規範</div>
-  <div class="sec-intro">對比表第 3 條（建物外觀變更）涉及多項細節，由於陽台與外牆是整棟社區形象的核心，特別在此展開說明。下列每一項都跟「不能單方變更共用部分」的原則一脈相承。</div>
+  <div class="fs-note">
+    <strong>貨梯保護的延伸提醒：</strong>第 08 條「資材限走貨梯」這原則<strong>不限於裝潢期間</strong>。平時搬大型家電、家具進出，也請<strong>事先聯繫物業人員預先掛好貨梯掛毯</strong>，並提醒搬運工人謹慎操作。掛毯能保護貨梯內部大部分區域，但<strong>地面與貨梯門側仍有機會被刮損</strong>；任何損壞的修復屬全棟住戶共同承擔的成本。
+  </div>
 
-  <div class="appearance-list">
-    <div class="ap-item forbid">
-      <div class="ap-head">
-        <span class="ap-icon">🚧</span>
-        <span class="ap-title">陽台外推</span>
-        <span class="ap-tag forbid">禁止</span>
-      </div>
-      <div class="ap-body">陽台外推屬<strong>違章建築</strong>（內政部營建署明文認定），同時違反建築法與公寓大廈管理條例。一旦被檢舉須自行拆除，社區整體外觀亦會永久受損。</div>
-    </div>
-    <div class="ap-item forbid">
-      <div class="ap-head">
-        <span class="ap-icon">🪟</span>
-        <span class="ap-title">加裝鐵窗</span>
-        <span class="ap-tag forbid">原則禁止</span>
-      </div>
-      <div class="ap-body">閱大安在建築設計階段已具備門禁、保全與防墜配套，<strong>不接受個別住戶加裝鐵窗</strong>。鐵窗會破壞外觀統一、影響消防逃生路徑，亦讓社區外貌「老化感」突顯，整體房價皆受影響。</div>
-    </div>
-    <div class="ap-item cond">
-      <div class="ap-head">
-        <span class="ap-icon">👶</span>
-        <span class="ap-title">兒童／寵物防墜</span>
-        <span class="ap-tag cond">須核定</span>
-      </div>
-      <div class="ap-body">有 12 歲以下兒童或寵物者，<strong>可申請設置防墜措施</strong>。但材質（透明壓克力或細鋼絲網等）、顏色（配合外牆色系）、安裝方式須經管委會核定，不得自行決定樣式。</div>
-    </div>
-    <div class="ap-item cond">
-      <div class="ap-head">
-        <span class="ap-icon">❄️</span>
-        <span class="ap-title">冷氣室外機</span>
-        <span class="ap-tag cond">須裝指定位置</span>
-      </div>
-      <div class="ap-body">須安裝於建商預留的<strong>冷氣機專用平台或陽台指定位置</strong>。不得懸掛於外牆、不得遮蔽他戶採光，冷凝水管須引入陽台地排避免滴落他戶。</div>
-    </div>
-    <div class="ap-item cond">
-      <div class="ap-head">
-        <span class="ap-icon">🧺</span>
-        <span class="ap-title">晾曬衣物</span>
-        <span class="ap-tag cond">陽台內側</span>
-      </div>
-      <div class="ap-body">晾衣架須設置於<strong>陽台內側</strong>，不得突出陽台外緣或外牆。棉被、衣物不得橫掛於陽台欄杆外側。突出物影響外觀統一，且掉落有公共安全疑慮。</div>
-    </div>
-    <div class="ap-item forbid">
-      <div class="ap-head">
-        <span class="ap-icon">🪧</span>
-        <span class="ap-title">招牌與廣告物</span>
-        <span class="ap-tag forbid">禁止</span>
-      </div>
-      <div class="ap-body">陽台、外牆、共用部分<strong>不得設置任何招牌、廣告、海報、旗幟</strong>。閱大安為純住宅社區，住辦混合會破壞居住安寧與外觀調性（一樓營業空間另有規範）。</div>
-    </div>
+  <div class="sec-label" id="sec-appearance"><span class="sec-num">04</span>APPEARANCE &nbsp;·&nbsp; 外觀變更：為什麼老社區的習慣行不通</div>
+  <div class="sec-intro">對比表第 3 項（建物外觀變更）是最容易引發誤會的領域：陽台外推、加裝鐵窗、自己掛冷氣機、貼招牌——這些在老社區「自家做主」很自然，搬進新社區卻一條不能動。具體規則（哪些絕對禁止／哪些須核定／指定位置）整理在<a href="/welcome/#detail-appearance">新住戶須知 § 陽台、外牆與建物使用限制</a>，本節展開的是<strong>背後的「為什麼」</strong>。</div>
+
+  <div class="hoa-text">
+    <strong>① 「我家陽台空著也是空著」——外推</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>陽台是我家的，敲掉外牆做進室內可以多出一些坪數。<br>
+    <em>新社區的現實：</em>陽台外推屬<strong>違章建築</strong>（內政部營建署明文認定），整棟外觀因一戶外推就缺一塊；<strong>社區整體資產價值因此下滑——每個住戶分擔損失</strong>。同樣的外推工程在閱大安是違法、可被檢舉拆除。
+  </div>
+
+  <div class="hoa-text">
+    <strong>② 「樓下治安差，我們要自保」——加裝鐵窗</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>每家自己決定要不要加鐵窗、樣式隨便。<br>
+    <em>新社區的現實：</em>閱大安的鐵窗禁止<strong>不是規約自訂的偏好，是法令鎖死的項目</strong>。鐵窗會封閉外牆預留的緊急救助開口、阻礙消防救援路徑。建商在設計階段已把門禁、保全與防墜配套做進去——所以「需要加鐵窗才安全」的前提在這裡並不成立。
+  </div>
+
+  <div class="hoa-text">
+    <strong>③ 「外觀小變更沒礙到誰」——冷氣機、晾衣、招牌</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>冷氣機鎖外牆、棉被晾欄杆外、店家招牌自己決定大小位置——「沒礙到誰」。<br>
+    <em>新社區的現實：</em>陽台上方有建商預設的室外機吊掛位置；晾衣須在陽台內側；一樓 5 個店面的招牌須使用建商預留的指定位置。每一項規定都不是裝飾性的，而是<strong>「外牆所有權屬全體共有」這個原則的具體展開</strong>——個別住戶不能單方變更全體共有的東西。
   </div>
 
   <div class="fs-note">
-    <strong>共同原則：</strong>以上所有規定都源自同一個觀念——陽台、外牆雖然「位置上是您家」，但<strong>所有權屬全體共有</strong>（見 02 OWNERSHIP）。任何外露變更都需要全體區權人的「集體同意」（透過規約或管委會核定）。這不是限制您的居住自由，而是保護所有住戶共同擁有的外觀資產。
+    <strong>共同原則：</strong>陽台、外牆雖然「位置上是您家」，但<strong>所有權屬全體共有</strong>（見 02 OWNERSHIP）。任何外露變更都需要全體區權人的「集體同意」（透過規約或管委會核定）。這不是限制您的居住自由，而是保護所有住戶共同擁有的外觀資產。具體可做不可做的清單請看<a href="/welcome/#detail-appearance">新住戶須知 § 陽台、外牆與建物使用限制</a>。
   </div>
 
-  <div class="sec-label"><span class="sec-num">05</span>MANAGEMENT COMMITTEE &nbsp;·&nbsp; 管委會不是服務業</div>
+  <div class="sec-label" id="sec-interior"><span class="sec-num">05</span>INTERIOR &nbsp;·&nbsp; 室內裝修：為什麼您過去沒遇過這道關卡</div>
+  <div class="sec-intro">對比表第 02 項（室內裝潢施工）有兩層關卡：① 社區內部的施工申請（向管委會、繳裝潢保證金），② <strong>政府核發的「室內裝修許可」</strong>（依《建築法》第 77-2 條）。第二道關卡是從老社區搬來的住戶最容易漏掉的，因為您過去住的房子可能根本不需要——而閱大安為地上 15 層集合住宅，依法每戶都跑不掉。具體申請流程、費用與罰則整理在<a href="/welcome/#detail-renovation">新住戶須知 § 裝潢施工申請流程</a>，本節展開的是<strong>觀念落差的部分</strong>。</div>
+
+  <div class="hoa-text">
+    <strong>① 「找熟識的師傅敲牆就好」</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>師傅就是裝潢專業，他說怎麼做就怎麼做。透天或 5 樓以下公寓多年來都這樣，沒人查、也沒事。<br>
+    <em>新社區的現實：</em>內政部依《建築法》第 77-2 條認定「六層樓以上集合住宅」<strong>變更隔間、牆面、天花板、地坪結構、防火區劃、消防設備皆須事先取得室內裝修許可</strong>。這是中央法令，不是社區自訂規矩；您過去沒遇過，不代表這裡不適用。沒申請即施工依《建築法》第 95-1 條<strong>可罰新台幣 6 萬至 30 萬元、逾期未改善可連續處罰</strong>。
+  </div>
+
+  <div class="hoa-text">
+    <strong>② 「許可只是多一筆錢，能省就省」</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>反正沒人查，能不申請就不申請。<br>
+    <em>新社區的現實：</em>閱大安管委會收件審查時會請住戶出示這份許可，沒有許可無法進場。<strong>政府核發的室內裝修許可與管委會的內部施工申請（裝潢保證金 $50,000）是兩道獨立關卡，缺一不可。</strong>
+  </div>
+
+  <div class="hoa-text">
+    <strong>③ 「裝潢只是我家的事」</strong>
+  </div>
+  <div class="hoa-text">
+    <em>老社區常見的觀念：</em>關起門來敲、改，與鄰居無關。<br>
+    <em>新社區的現實：</em>六層以上集合住宅的高密度與結構複雜度，是您過去住的低樓層建物所沒有的——<strong>一戶施工的影響可能波及整棟結構、消防系統與管線</strong>。承重牆、隔音牆、共用管線通道一旦被誤動，後果不只您一家承擔。
+  </div>
+
+  <div class="fs-note">
+    <strong>共同原則：</strong>新社區的「規矩比較多」背後，多半是<strong>「您家的影響範圍其實比您想像得大」</strong>這個事實。室內裝修許可、施工申請、保證金——三者疊起來看似繁瑣，本質上是在保護整棟結構與全體住戶共同利益。具體流程、費用、實務做法與省錢提醒請直接看<a href="/welcome/#detail-renovation">新住戶須知 § 裝潢施工申請流程</a>。
+  </div>
+
+  <div class="sec-label"><span class="sec-num">06</span>MANAGEMENT COMMITTEE &nbsp;·&nbsp; 管委會不是服務業</div>
   <div class="sec-intro">這是另一個常見的觀念落差——老社區若有管委會，通常是「幾個熱心鄰居」；新社區的管委會則是依條例正式成立的住戶自治組織。理解這個差異，跟管理中心、跟主委的互動會順很多。</div>
 
   <div class="hoa-text">
@@ -485,7 +493,7 @@ extraScripts: |
     </ul>
   </div>
 
-  <div class="sec-label"><span class="sec-num">06</span>PARTICIPATION &nbsp;·&nbsp; 怎麼參與社區事務</div>
+  <div class="sec-label"><span class="sec-num">07</span>PARTICIPATION &nbsp;·&nbsp; 怎麼參與社區事務</div>
   <div class="sec-intro">如果您覺得某條規約不合理、或想推動某件事，這裡是正規管道：</div>
 
   <div class="part-list">
@@ -519,7 +527,7 @@ extraScripts: |
     </div>
   </div>
 
-  <div class="sec-label"><span class="sec-num">07</span>EVOLUTION &nbsp;·&nbsp; 規則會與時俱進</div>
+  <div class="sec-label"><span class="sec-num">08</span>EVOLUTION &nbsp;·&nbsp; 規則會與時俱進</div>
   <div class="sec-intro">這份文件不是「規矩的終點」。閱大安今日依循的條例與規約，是公寓大廈管理條例 1995 年立法以來 30 年間不斷修法演進的結果——而它還會繼續調整。以下是幾個正在或可預見會影響社區規範的議題：</div>
 
   <div class="evolve-list">
@@ -576,8 +584,8 @@ extraScripts: |
   </div>
   <div class="stub">
     <p>The full content of this orientation guide is currently available in Chinese only. We recommend referring to the Chinese version above for the complete explanation, which covers:</p>
-    <p>· The three-tier framework (Condominium Act → Community Bylaws → Management Committee Resolutions)<br>· The distinction between <em>exclusive</em>, <em>shared</em>, and <em>designated-exclusive</em> property<br>· 10 common habits from older apartments that don't apply here, with reasoning<br>· The nature of the Management Committee as a residents' self-governing body, not a service provider<br>· How to raise concerns or propose changes</p>
-    <p>For the operational essentials (fees, access fobs, waste, facilities), please return to the <a href="./">Welcome Guide</a>. For specific regulations, see the <a href="/regulations/">Community Regulations</a>. The Management Center is happy to walk you through any item.</p>
+    <p>· The three-tier framework (Condominium Act → Community Bylaws → Management Committee Resolutions)<br>· The distinction between <em>exclusive</em>, <em>shared</em>, and <em>designated-exclusive</em> property<br>· 10 common habits from older apartments that don't apply here, with reasoning<br>· Why building exteriors cannot be modified unilaterally — the "collective ownership" principle behind rules on balcony extensions, window grilles, AC outdoor units, and signage<br>· Why interior renovation in a 6+ story building requires a government-issued permit (Article 77-2 of the Building Act)<br>· The nature of the Management Committee as a residents' self-governing body, not a service provider<br>· How to raise concerns or propose changes<br>· How community regulations evolve over time, and the mindset of continuous adaptation</p>
+    <p>For the operational essentials (fees, access fobs, waste, facilities, renovation procedures, moving large items, and balcony/exterior rules), please return to the <a href="./">Welcome Guide</a>. For specific regulations, see the <a href="/regulations/">Community Regulations</a>. The Management Center is happy to walk you through any item.</p>
   </div>
   <div class="back-strip">
     <span class="back-strip-text">Return to the operational guide:</span>
@@ -600,8 +608,8 @@ extraScripts: |
   </div>
   <div class="stub">
     <p>本オリエンテーション・ガイドの詳細は現在中国語のみのご提供となっております。中国語版では以下の内容を扱っています：</p>
-    <p>・三層構造（管理条例 → 社区規約 → 管理委員会の決議）<br>・「専有部分」「共用部分」「約定専用部分」の所有権概念<br>・旧マンションでの慣習が新マンションでは通用しない 10 のケースと、その理由<br>・管理委員会は「サービス業」ではなく、住民の自治組織であること<br>・意見の伝え方・提案の方法</p>
-    <p>管理費・アクセスカード・ゴミ・共用施設などの実務情報は <a href="./">新入居者ガイド</a> を、規約の詳細は <a href="/regulations/">コミュニティ規約</a> をご覧ください。管理センターでも個別にご案内いたします。</p>
+    <p>・三層構造（管理条例 → 社区規約 → 管理委員会の決議）<br>・「専有部分」「共用部分」「約定専用部分」の所有権概念<br>・旧マンションでの慣習が新マンションでは通用しない10のケースとその理由<br>・建物の外観を単独で変更できない理由 —— バルコニー張り出し、面格子、エアコン室外機、看板に関するルールの背景にある「全員共有」の原則<br>・6階以上の集合住宅で室内リフォームに政府発行の許可が必要な理由（建築法第77-2条）<br>・管理委員会は「サービス業」ではなく住民の自治組織であること<br>・意見の伝え方・提案の方法<br>・コミュニティの規約は時代とともに進化することと、継続的に適応する姿勢</p>
+    <p>管理費・アクセスカード・ゴミ・共用施設・リノベーション手続・大型物の搬入・バルコニーや外壁に関するルールなどの実務情報は <a href="./">新入居者ガイド</a> を、規約の詳細は <a href="/regulations/">コミュニティ規約</a> をご覧ください。管理センターでも個別にご案内いたします。</p>
   </div>
   <div class="back-strip">
     <span class="back-strip-text">実務ガイドに戻る：</span>

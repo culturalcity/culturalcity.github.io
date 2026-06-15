@@ -169,6 +169,29 @@
 | 新美齊（物業/清潔） | Jean Property Management Co. | 新美齊 |
 | 潤泰維護（現任物業） | Ruentex Maintenance | 潤泰維護 |
 
+## K. 裝潢・施工・外觀變更
+| 中文 | English | 日本語 |
+|---|---|---|
+| 室內裝修許可 | Interior Renovation Permit | 室内リフォーム許可 |
+| 室內裝修業者 | Licensed Interior Renovation Contractor | 内装工事業者 |
+| 裝潢保證金 | Renovation Deposit | リフォーム保証金 |
+| 裝潢施工申請 | Renovation Application | リフォーム申請 |
+| 違章建築 | Unauthorized Structure | 違法建築 |
+| 陽台外推 | Balcony Extension | バルコニー張り出し |
+| 鐵窗 / 鐵鋁窗 | Window Grilles | 面格子 |
+| 防墜措施 / 防墜設施 | Fall-Prevention Measures | 落下防止措置 |
+| 緊急救助開口 | Emergency Rescue Opening | 緊急救助開口部 |
+| 貨梯掛毯 | Protective Drape | 保護シート |
+| 冷氣室外機吊掛位置 | Designated AC Unit Mount | 指定エアコン取付位置 |
+| 一樓店面招牌位 | Designated Signage Zone | 指定看板エリア |
+| 室內隔間 / 輕隔間 | Interior Partition / Lightweight Partition | 室内間仕切り／軽量間仕切り |
+| 承重牆 | Load-Bearing Wall | 耐力壁 |
+| 建築法 | Building Act | 建築法 |
+| 建築法第 77-2 條 | Article 77-2 of the Building Act | 建築法第77-2条 |
+| 建築法第 95-1 條 | Article 95-1 of the Building Act | 建築法第95-1条 |
+| 公寓大廈管理條例 | Condominium Management Act | 公寓大廈管理条例 |
+| 內政部營建署 | Construction and Planning Agency, MOI | 内政部営建署 |
+
 ---
 
 # 二、片語／句型庫
@@ -240,6 +263,8 @@
 **🔴 新詞流程（強制）**：日後做三語內容若遇**大樓內部專有的地點／設施詞**（某某室、某某區、機房、設備名⋯）**不在本表**，先停下來把該詞列給主委確認譯法，**定案後才加入本表、再產出內容**；不自行臨時翻譯該類專有詞（一般通用詞照常翻）。新詞定案後同步更新三處副本：① 本檔（canonical）② Notion「閱大安・文件」頁 ③ Obsidian `閱大安-多語用語對照表.md`。
 
 **全數定案（2026-06-15）**：大門/自動門、環保室、1F/RF 閱覽室（棄用「交誼廳」）、機車位、無障礙停車位、充電樁（EV Charger）、YouBike 站、古亭捷運站、管理中心、管委會、健身房、提籠（ペットキャリー）、門禁磁扣（Access Tag）、區權會（Owners' General Meeting；定期 AGM／臨時 EGM）、後花園（1F Back Garden）、空中花園（RF Sky Garden）。
+
+**2026-06-15 主委確認的閱大安專有詞**：貨梯掛毯（Protective Drape／保護シート）、冷氣室外機吊掛位置（Designated AC Unit Mount／指定エアコン取付位置）、一樓店面招牌位（Designated Signage Zone／指定看板エリア）。
 
 **待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
 - 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
