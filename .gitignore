@@ -22,6 +22,9 @@ _site/
 # Claude Code 內部資料
 .claude/
 
+# Playwright MCP 除錯產物（console/page dump，不上線）
+.playwright-mcp/
+
 # 環境變數（含 API 金鑰，禁止上傳）
 .env
 .env.local
