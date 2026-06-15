@@ -31,9 +31,20 @@ extraStyles: |
   .sec-label{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
   /* ── INTRO BANNER ── */
-  .intro{background:var(--wg41);border-radius:var(--radius);padding:20px 24px;margin-bottom:40px;color:var(--wg1);}
+  .intro{background:var(--wg41);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;color:var(--wg1);}
   .intro-title{font-size:17px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;}
   .intro-text{font-size:15px;color:rgba(234,231,225,0.7);line-height:1.85;}
+  /* ── TRANSITION CTA ── */
+  .transition-cta{display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;margin-bottom:40px;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:background .15s;}
+  .transition-cta::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);}
+  .transition-cta:hover{background:#F2F0EC;}
+  .tc-icon{font-size:24px;flex-shrink:0;line-height:1;}
+  .tc-body{flex:1;min-width:0;}
+  .tc-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--blue);font-weight:700;margin-bottom:3px;}
+  .tc-title{font-size:15px;font-weight:700;color:var(--wg41);margin-bottom:3px;line-height:1.5;letter-spacing:.03em;}
+  .tc-desc{font-size:13px;color:var(--wg11);line-height:1.7;}
+  .tc-arrow{color:var(--blue);font-size:18px;flex-shrink:0;transition:transform .15s;}
+  .transition-cta:hover .tc-arrow{transform:translateX(3px);}
   /* ── CARD GRID ── */
   .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px;}
   @media(max-width:560px){.card-grid{grid-template-columns:1fr;}}
@@ -136,6 +147,16 @@ extraScripts: |
     <div class="intro-title">搬進來之前，請先看這裡</div>
     <div class="intro-text">這份須知整理了入住閱大安最常需要了解的事項，涵蓋管理費繳納、門禁磁扣、垃圾分類、公共設施使用等。建議在搬入前完整閱讀一遍，有疑問歡迎直接洽詢管理中心。</div>
   </div>
+
+  <a href="./transition.html" class="transition-cta">
+    <span class="tc-icon">📖</span>
+    <div class="tc-body">
+      <div class="tc-eyebrow">ORIENTATION GUIDE</div>
+      <div class="tc-title">從老社區搬過來？</div>
+      <div class="tc-desc">老社區自然的習慣，在新社區為什麼不一樣——一份觀念對齊的閱讀指南。</div>
+    </div>
+    <span class="tc-arrow">→</span>
+  </a>
 
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; 馬上要知道</div>
   <div class="card-grid">
@@ -325,6 +346,16 @@ extraScripts: |
     <div class="intro-text">This guide covers the essential information for new residents of Cultural City Community, including management fees, access cards, waste disposal, and facility usage. We recommend reading through it before your move-in date. Please contact the Management Center if you have any questions.</div>
   </div>
 
+  <a href="./transition.html" class="transition-cta">
+    <span class="tc-icon">📖</span>
+    <div class="tc-body">
+      <div class="tc-eyebrow">ORIENTATION GUIDE</div>
+      <div class="tc-title">Moving from an older community?</div>
+      <div class="tc-desc">Habits that felt natural in older buildings often don't apply here — a guide to recalibrate expectations.</div>
+    </div>
+    <span class="tc-arrow">→</span>
+  </a>
+
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; What You Need to Know</div>
   <div class="card-grid">
     <div class="info-card blue">
@@ -506,6 +537,16 @@ extraScripts: |
     <div class="intro-title">入居前に必ずお読みください</div>
     <div class="intro-text">このガイドは、閱大安コミュニティへの新入居者が知っておくべき重要事項をまとめたものです。管理費の支払い、アクセスカード、ゴミの分別、共用施設の利用方法などを網羅しています。入居前にご一読ください。ご不明な点は管理センターまでお問い合わせください。</div>
   </div>
+
+  <a href="./transition.html" class="transition-cta">
+    <span class="tc-icon">📖</span>
+    <div class="tc-body">
+      <div class="tc-eyebrow">ORIENTATION GUIDE</div>
+      <div class="tc-title">旧マンションからお越しの方へ</div>
+      <div class="tc-desc">築20〜30年以上のマンションでの慣習と新築マンションの運営の違いを整理したガイドです。</div>
+    </div>
+    <span class="tc-arrow">→</span>
+  </a>
 
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; まず知っておくこと</div>
   <div class="card-grid">
