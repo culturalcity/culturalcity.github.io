@@ -34,6 +34,7 @@
 |---|---|---|
 | 大門（正門・入口） | Main Entrance | 正面玄関 |
 | 自動門（門機構） | Automatic Door | 自動ドア |
+| 大廳 | Lobby | エントランスホール |
 | B1 車道快速捲門 | B1 Ramp Roller Shutter | B1車道の高速シャッター |
 | 環保室 | Garbage Room | ゴミ置き場 |
 | 電表箱走道 | Meter-Box Corridor | 電気メーターボックス廊下 |
@@ -96,7 +97,12 @@
 | 預檢 / 事前點檢 | Pre-Inspection | 事前点検 |
 | 緊急照明 | Emergency Lighting | 非常用照明 |
 | 避難方向 / 避難經路 | Evacuation Route | 避難経路 |
+| 緊急避難圖（樓層避難圖） | Evacuation Plan | 避難経路図 |
+| 現在位置（圖上黃點） | You Are Here | 現在地 |
 | 出口指示 | Exit Indicators | 出口表示 |
+| 緊急出口 | Emergency Exit | 非常口 |
+| 消防栓 | Fire Hydrant | 消火栓 |
+| 滅火器 | Fire Extinguisher | 消火器 |
 | 逃生梯 / 非常階段 | Emergency Stairs | 非常階段 |
 | 防火門 | Fire Door | 防火戸 |
 | 防水閘門 | Floodgate | 防水ゲート |
@@ -148,12 +154,24 @@
 ## I. 社區治理・會議・身分
 | 中文 | English | 日本語 |
 |---|---|---|
-| 管理委員會 / 管委會 | Management Committee | 管理委員会 |
+| 管理委員會 / 管委會 | Management Committee | 理事会 |
+| 管理委員 | Committee Member | 理事 |
+| 主任委員 / 主委 | Chairperson | 理事長 |
+| 財務委員 / 司庫 | Treasurer | 会計担当理事 |
+| 監事 | Supervisor | 監事 |
 | 管理中心 | Management Center | 管理センター |
-| 主任委員 / 主委 | Chairperson | 主任委員 |
-| 區分所有權人會議（通稱） | Owners' General Meeting | 区分所有者総会 |
-| 定期區權會 | AGM (Annual General Meeting) | 定期総会 |
+| 住戶 | Resident | 入居者 |
+| 區分所有權人 | Unit Owner | 区分所有者 |
+| 管理組合（住戶自治組織） | Owners' Association | 管理組合 |
+| 區分所有權人會議（通稱） | Owners' General Meeting | 管理組合の総会 |
+| 定期區權會 | AGM (Annual General Meeting) | 通常総会 |
 | 臨時區權會 | EGM (Extraordinary General Meeting) | 臨時総会 |
+| 管理費 | Management Fee | 管理費 |
+| 公共基金 / 管理基金 | Reserve Fund | 修繕積立金 |
+| 社區規約 | Community Bylaws | 管理規約 |
+| 專有部分 | Exclusive Portion | 専有部分 |
+| 共用部分 | Common Portion | 共用部分 |
+| 約定專用部分 | Designated-Exclusive Portion | 約定専用部分 |
 | 善良管理人責任 | Duty of Care | 善良な管理者としての責任 |
 
 ## J. 廠商名（專名照原樣）
@@ -204,7 +222,7 @@
 | 親愛的住戶 | Dear Residents | 住民の皆様へ |
 | ◯月公共設施例行保養時程 | Monthly Communal Facility Maintenance Schedule for [Month] | [年][月]公共施設定期メンテナンススケジュール |
 | 項目／日期時間／施作範圍 | Item / Date and Time / Scope of Work | 項目／実施日時／実施範囲 |
-| 閱大安管理委員會（落款） | Cultural City Management Committee | 閱大安管理委員会 |
+| 閱大安管理委員會（落款） | Cultural City Management Committee | 閱大安理事会 |
 | 閱大安管理中心（落款） | Cultural City Management Center | 閱大安管理センター |
 
 ## 保養施作範圍（每月固定句）
@@ -265,6 +283,10 @@
 **全數定案（2026-06-15）**：大門/自動門、環保室、1F/RF 閱覽室（棄用「交誼廳」）、機車位、無障礙停車位、充電樁（EV Charger）、YouBike 站、古亭捷運站、管理中心、管委會、健身房、提籠（ペットキャリー）、門禁磁扣（Access Tag）、區權會（Owners' General Meeting；定期 AGM／臨時 EGM）、後花園（1F Back Garden）、空中花園（RF Sky Garden）。
 
 **2026-06-15 主委確認的閱大安專有詞**：貨梯掛毯（Protective Drape／保護シート）、冷氣室外機吊掛位置（Designated AC Unit Mount／指定エアコン取付位置）、一樓店面招牌位（Designated Signage Zone／指定看板エリア）。
+
+**2026-06-15（緊急避難圖頁三語化）新增定案**：緊急避難圖（Evacuation Plan／避難経路図）、現在位置（You Are Here／現在地）、緊急出口（Emergency Exit／非常口）、消防栓（Fire Hydrant／消火栓）、滅火器（Fire Extinguisher／消火器）。已列入 E. 消防・安全・防災區。同步狀態：① 本檔（canonical）已更新；② Notion、③ Obsidian 兩副本**待手動同步**。
+
+**2026-06-15（對照 2024 任內手做《社區外語詞彙.xlsx》）修訂**：日文治理用語改採道地日本公寓法版本——管委會＝**理事会**、主任委員＝**理事長**、管理委員＝理事、財務委員＝会計担当理事、定期區權會＝**通常総会**、區權會（通稱）＝**管理組合の総会**；落款日文同步改 閱大安**理事会**。並依舊表新增：住戶（Resident／入居者）、管理費（Management Fee／管理費）、大廳（Lobby／エントランスホール）、區分所有權人（Unit Owner／区分所有者）、管理組合（Owners' Association／管理組合）、公共基金（Reserve Fund／修繕積立金）、社區規約（Community Bylaws／管理規約）、專有／共用／約定專用部分。**全站日文已連動回改**（管理委員会→理事会 27 處、区分所有者総会→管理組合の総会 2 處）。同步狀態：① 本檔已更新；② Notion、③ Obsidian **待手動同步**（連同上方 K 區、避難圖頁一併）。
 
 **待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
 - 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
