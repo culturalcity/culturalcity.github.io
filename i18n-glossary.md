@@ -1,144 +1,162 @@
 # 閱大安 多語用語對照表（中｜English｜日本語）
 
-> **用途**：產生任何三語（中英日）內容前，**先查這張表、用 canonical 欄的譯法**，避免逐案翻譯漂移。
-> 來源：以**主委任內（2023/07–2024/06）公告**為權威依據（標 ✓）；非任內者逐項檢討定案。並參酌現行三語網頁。
-> **有疑義者見文末「待定案」。**
-> 維護：本檔為 canonical 源頭（版本控管於 repo）；Notion／Obsidian 為閱讀副本。
+> **用途**：產生任何三語（中英日）內容前，**先查本表、用此處譯法**，避免逐案翻譯漂移。
+> **權威**：以**主委任內（2023/07–2024/06）公告**為準；非任內／後期變體已逐項定案（見文末）。
+> **結構**：分「**一、單詞表**」與「**二、片語／句型庫**」兩部分（單詞歸單詞、片語另列）。
+> 維護：本檔為 canonical 源頭（版本控管於 repo）。
 
 ## 通用原則
-- **英文採 Title Case**：每個主要單字首字大寫；a/an/the、and/or/but、of/in/on/at/to 等虛詞除首字外小寫；縮寫（RF、B1F、EV、MRT、PET、HDPE、LED、AC、SC、HID）維持全大寫；品牌專名（YouBike 等）照原樣。
-- 設備保養英譯一律採 2026／任內正確版（早期 2024-06～2025 多份因模板複製把機電誤貼成電梯內容，勿沿用）。
-- 樓層代碼：1F／B1F–B4F／RF。
-- 日文需 Noto Sans JP（medium／light）才正確顯示。中文標點音界號用全形「・」不加空格。
+- **英文一律 Title Case**：主要字首字大寫；a/an/the、and/or/but、of/in/on/at/to 等虛詞除首字外小寫；縮寫（RF、B1F、EV、MRT、PET、HDPE、LED、AC、SC、HID、AGM、EGM）全大寫；專名（YouBike）照原樣。
+- 樓層代碼：1F／B1F–B4F／RF。日文需 Noto Sans JP（medium／light）。中文音界號用全形「・」不加空格。
+- 設備保養英譯採任內／2026 正確版（勿用 2024-06～2025 把機電誤貼成電梯內容的版本）。
 
-## 1. 樓層與位置
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 一樓 / 1F | 1F | 1階 | ✓ |
-| 地下一～四樓 | B1F–B4F | 地下1〜4階 | ✓ |
-| 頂樓 / R樓 / RF | RF (Roof Floor) | RF（屋上階） | ✓ |
-| 梯廳 / 電梯廳 | Elevator Hall | エレベーターホール | ✓ |
-| 樓梯間 | Stairwell | 階段ホール | ✓ |
-| 共用走廊 | Corridor | 共用廊下 | ✓ |
-| 後門 | Rear Door | バックドア | ✓ |
-| 女兒牆 | Parapet | パラペット | ✓ |
-| 陽台 | Balcony | バルコニー | ✓ |
-| 露臺 / 外周 | Outer Terrace | 外周テラス | ✓ |
+---
 
-## 2. 公共空間與設施
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 大門（正門・入口處） | Main Entrance | 正面玄関 | 定（地點名）|
-| 自動門（門機構） | Automatic Door | 自動ドア | 定（講開關/模式時用，任內版）|
-| B1 車道快速捲門 | B1 Ramp Roller Shutter | B1車道の高速シャッター | ✓ |
-| 環保室 | Garbage Room | ゴミ置き場 | ✓ |
-| 電表箱走道 | Meter-Box Corridor | 電気メーターボックス廊下 | ✓（日）／英我定 |
-| 紙箱回收區 | Cardboard Recycling Area | ダンボール回収場所 | ✓ |
-| 健身房（2F） | 2F Gym | 2階のジム | ✓ |
-| 停車場 / 地下停車場 | Basement Parking Lot | 地下駐車場 | ✓ |
-| 車道出入口 | Parking Entrance | 駐車場出入口 | ✓ |
-| 交誼廳（1F） | 1F Lounge | 1階ラウンジ | **需定** |
-| RF 閱覽室 | RF Lounge | RF ラウンジ | **需定** |
-| 機車位 | Scooter Parking Space | バイク駐輪スペース | **需定** |
-| 無障礙停車位 | Accessible Parking Space | バリアフリー駐車スペース | **需定** |
-| 電動車充電樁 | EV Charging Point | EV充電器 | **需定** |
-| YouBike 站 | YouBike Station | YouBikeステーション | **需定** |
-| 古亭捷運站 | Guting MRT Station | 古亭MRT駅 | **需定** |
+# 一、單詞表
 
-## 3. 機電與設備
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 公設 / 公共設施 | Communal Facility | 公共施設 | ✓ |
-| 消防設備（含警報系統） | Fire-Fighting Equipment (incl. Alarm Systems) | 消防設備（警報システムを含む） | ✓ |
-| 公設電氣設備 | Public Electrical Equipment | 公共電気設備 | ✓ |
-| 給排水衛生設備 | Plumbing and Sanitary Facilities | 給排水衛生設備 | ✓ |
-| 發電機設備 | Generator Equipment | 発電機設備 | ✓ |
-| 雨水泵浦設備 | Rainwater Pump Equipment | 雨水ポンプ設備 | ✓ |
-| 加壓馬達 / 加壓泵 | Water Pressure Pump | 加圧ポンプ | ✓ |
-| 空調（冷氣）設備 | Air-Conditioning Equipment | エアコン設備 | ✓ |
-| 總開關箱 | Distribution Box | 総合スイッチボックス | ✓（任內日）|
-| 水龍頭 | Faucet | 蛇口 | ✓ |
-| 排煙窗 | Smoke Vent | 排煙窓 | ✓ |
-| 撒水（澆灌）設備 | Watering Equipment | 散水設備 | ✓ |
-| 排水設備 | Drainage Equipment | 排水設備 | ✓ |
-| 外牆磁磚 | Exterior Wall Tiles | 外壁タイル | ✓ |
-| 鉸鍊 / 地鉸鍊 | Floor Hinge | フロアヒンジ | ✓ |
-| 鷹架 / 作業架 | Scaffold | 作業用足場 | ✓ |
+## A. 樓層與位置
+| 中文 | English | 日本語 |
+|---|---|---|
+| 一樓 / 1F | 1F | 1階 |
+| 地下一～四樓 | B1F–B4F | 地下1〜4階 |
+| 頂樓 / RF | RF (Roof Floor) | RF（屋上階） |
+| 梯廳 / 電梯廳 | Elevator Hall | エレベーターホール |
+| 樓梯間 | Stairwell | 階段ホール |
+| 共用走廊 | Corridor | 共用廊下 |
+| 後門 | Rear Door | バックドア |
+| 女兒牆 | Parapet | パラペット |
+| 陽台 | Balcony | バルコニー |
+| 露臺 | Terrace | テラス |
+| 窗台 / 窗邊 | Windowsill | 窓際 |
 
-## 4. 電梯
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 電梯 | Elevator | エレベーター | ✓ |
-| 客梯 / 貨梯 | Passenger / Freight Elevator | 乗用／荷物用エレベーター | ✓ |
-| 電梯機房及機坑 | Elevator Machine Rooms and Pits | エレベーター機械室及びピット | ✓ |
-| 車廂 | Elevator Car | キャリッジ（車内） | ✓ |
-| 曳引鋼索 | Hoisting Ropes | 巻上ロープ | ✓（日譯修正，舊版「基板の持ち上げ」誤）|
-| 保養期間停機一台 | One Elevator Out of Service During Maintenance | メンテナンス中は1台運転停止 | ✓ |
+## B. 公共空間與設施
+| 中文 | English | 日本語 |
+|---|---|---|
+| 大門（正門・入口） | Main Entrance | 正面玄関 |
+| 自動門（門機構） | Automatic Door | 自動ドア |
+| B1 車道快速捲門 | B1 Ramp Roller Shutter | B1車道の高速シャッター |
+| 環保室 | Garbage Room | ゴミ置き場 |
+| 電表箱走道 | Meter-Box Corridor | 電気メーターボックス廊下 |
+| 紙箱回收區 | Cardboard Recycling Area | ダンボール回収場所 |
+| 健身房（2F） | 2F Gym | 2階のジム |
+| 1F 閱覽室（勿用「交誼廳」） | 1F Lounge | 1階ラウンジ |
+| RF 閱覽室 | RF Lounge | RF ラウンジ |
+| 1F 後花園 | 1F Back Garden | 1階裏庭 |
+| RF 空中花園 | RF Sky Garden | R階屋上庭園 |
+| 停車場 / 地下停車場 | Basement Parking Lot | 地下駐車場 |
+| 車道出入口 | Parking Entrance | 駐車場出入口 |
+| 機車位 | Scooter Parking Space | バイク駐輪スペース |
+| 無障礙停車位 | Accessible Parking Space | バリアフリー駐車スペース |
+| 電動車充電樁（單支） | EV Charger | EV充電器 |
+| 電動車充電區 | EV Charging Station | EV充電エリア |
+| 門禁磁扣 | Access Tag | 入退館用タグ |
+| 智生活 APP | Zhishenghuo App | 智生活アプリ |
+| YouBike 站 | YouBike Station | YouBikeステーション |
+| 古亭捷運站 | Guting MRT Station | 古亭MRT駅 |
+| 河濱自行車道 | Riverside Bikeway | リバーサイド・サイクリングロード |
 
-## 5. 消防・安全・防災
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 消防安全設備 | Fire Safety Equipment | 消防設備 | ✓ |
-| 火警自動警報設備 | Automatic Fire Alarm Devices | 火災自動警報設備 | ✓ |
-| 預檢 / 事前點檢 | Pre-Inspection | 事前点検 | ✓ |
-| 緊急照明 | Emergency Lighting | 非常用照明 | ✓ |
-| 避難方向 / 避難經路 | Evacuation Route | 避難経路 | ✓ |
-| 出口指示 | Exit Indicators | 出口表示 | ✓ |
-| 逃生梯 / 非常階段 | Emergency Stairs | 非常階段 | ✓ |
-| 防火門 | Fire Door | 防火戸 | ✓ |
-| 防水閘門 | Floodgate | 防水ゲート | ✓ |
-| 颱風（陸上）警報 | (Land) Typhoon Warning | 陸上台風警報 | ✓ |
-| 中央氣象署 | Central Weather Administration | 中央気象署 | ✓ |
-| 臺北觀測所 | Taipei Station | 台北観測所 | ✓ |
-| 行動電源 | Power Bank | パワー・バンク | ✓ |
-| SC 鋼骨結構 | SC (Steel Construction) | SC（鉄骨造） | ✓ |
-| 減震墊 / 防振 | Anti-Vibration Pads | 防振対策 | ✓ |
+## C. 機電與設備
+| 中文 | English | 日本語 |
+|---|---|---|
+| 公設 / 公共設施 | Communal Facility | 公共施設 |
+| 消防設備（含警報系統） | Fire-Fighting Equipment (incl. Alarm Systems) | 消防設備（警報システムを含む） |
+| 公設電氣設備 | Public Electrical Equipment | 公共電気設備 |
+| 給排水衛生設備 | Plumbing and Sanitary Facilities | 給排水衛生設備 |
+| 發電機設備 | Generator Equipment | 発電機設備 |
+| 雨水泵浦設備 | Rainwater Pump Equipment | 雨水ポンプ設備 |
+| 加壓泵 / 加壓馬達 | Water Pressure Pump | 加圧ポンプ |
+| 空調（冷氣）設備 | Air-Conditioning Equipment | エアコン設備 |
+| 總開關箱 | Distribution Box | 総合スイッチボックス |
+| 水龍頭 | Faucet | 蛇口 |
+| 排煙窗 | Smoke Vent | 排煙窓 |
+| 撒水（澆灌）設備 | Watering Equipment | 散水設備 |
+| 排水設備 | Drainage Equipment | 排水設備 |
+| 外牆磁磚 | Exterior Wall Tiles | 外壁タイル |
+| 地鉸鍊 / 鉸鍊 | Floor Hinge | フロアヒンジ |
+| 鷹架 / 作業架 | Scaffold | 作業用足場 |
+| 水塔 / 貯水槽 | Water Tank | 貯水槽 |
+| 頂樓水塔 | RF Water Tank | R階貯水槽 |
+| 地下蓄水池 | Basement Water Tank | 地下貯水槽 |
 
-## 6. 無障礙
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 點字、語音功能 | Tactile and Auditory Description Function | 点字と音声案内 | ✓ |
-| 身障（浮凸）標誌 | Disability Sign | 身体障害者標識 | ✓ |
-| 身障停車證 | Disability Parking Permit | 障害者用駐車証 | ✓ |
+## D. 電梯
+| 中文 | English | 日本語 |
+|---|---|---|
+| 電梯 | Elevator | エレベーター |
+| 客梯 / 貨梯 | Passenger / Freight Elevator | 乗用／荷物用エレベーター |
+| 電梯機房及機坑 | Elevator Machine Rooms and Pits | エレベーター機械室及びピット |
+| 車廂 | Elevator Car | キャリッジ |
+| 曳引鋼索 | Hoisting Ropes | 巻上ロープ |
+| 門片 | Door Panel | ドアパネル |
 
-## 7. 回收與清潔分類
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 一般垃圾 / 可燃垃圾 | General Waste | 一般ごみ | ✓ |
-| 廚餘 | Food Waste | 生ごみ | ✓ |
-| 資源回收物 | Recyclable Materials | 資源物 | ✓ |
-| 紙類 | Waste Paper | 古紙 | ✓ |
-| 紙箱 / 瓦楞紙箱 | Cardboard | ダンボール | ✓ |
-| 保麗龍 | Styrofoam | 発泡スチロール | ✓ |
-| 塑膠袋 | Plastic Bag | ポリ袋 | ✓ |
-| 玻璃容器 | Glass Container | ガラス容器 | ✓ |
-| 鐵鋁罐 | Metal Can | 鉄・アルミ缶 | ✓ |
-| 廢電池 | Waste Battery | 廃電池 | ✓ |
-| 焚化爐 | Incinerator | ごみ焼却炉 | ✓ |
-| 環保局清潔隊 | Environmental Protection Bureau Cleaning Team | 清掃隊 | ✓ |
-| 大型（家具）垃圾 | Bulky Waste / Large Furniture | 大型ごみ・大型家具 | ✓ |
+## E. 消防・安全・防災
+| 中文 | English | 日本語 |
+|---|---|---|
+| 消防安全設備 | Fire Safety Equipment | 消防設備 |
+| 火警自動警報設備 | Automatic Fire Alarm Devices | 火災自動警報設備 |
+| 預檢 / 事前點檢 | Pre-Inspection | 事前点検 |
+| 緊急照明 | Emergency Lighting | 非常用照明 |
+| 避難方向 / 避難經路 | Evacuation Route | 避難経路 |
+| 出口指示 | Exit Indicators | 出口表示 |
+| 逃生梯 / 非常階段 | Emergency Stairs | 非常階段 |
+| 防火門 | Fire Door | 防火戸 |
+| 防水閘門 | Floodgate | 防水ゲート |
+| 颱風（陸上）警報 | (Land) Typhoon Warning | 陸上台風警報 |
+| 中央氣象署 | Central Weather Administration | 中央気象署 |
+| 臺北觀測所 | Taipei Station | 台北観測所 |
+| 行動電源 | Power Bank | パワー・バンク |
+| SC 鋼骨結構 | SC (Steel Construction) | SC（鉄骨造） |
+| 減震墊 / 防振 | Anti-Vibration Pads | 防振対策 |
 
-## 8. 寵物
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 寵物 | Pet | ペット | ✓ |
-| 牽繩 / 繫短繩 | Leash / Short Leash | リード（短く持つ） | ✓ |
-| 嘴套 / 口罩 | Muzzle | 口輪（マズル） | ✓ |
-| 提籠 / 推車 | Carrier / Stroller | ケージ／カート | ✓ |
-| 飼養動物管理辦法 | Cultural City Pet Management Rules | 動物飼育管理規則 | ✓ |
+## F. 無障礙
+| 中文 | English | 日本語 |
+|---|---|---|
+| 點字、語音功能 | Tactile and Auditory Description Function | 点字と音声案内 |
+| 身障（浮凸）標誌 | Disability Sign | 身体障害者標識 |
+| 身障停車證 | Disability Parking Permit | 障害者用駐車証 |
 
-## 9. 活動・節慶・公告框架
-| 中文 | English | 日本語 | 狀態 |
-|---|---|---|---|
-| 社區公告 | Announcement | お知らせ | ✓ |
-| 親愛的住戶 | Dear Residents | 住民の皆様へ | ✓ |
-| 包場 | Private Reservation | 貸切 | ✓ |
-| 跨年夜 | New Year's Eve | 年越し | ✓ |
-| 春節 | Chinese New Year | 春節 | ✓ |
-| 中元普渡 | Zhongyuan Pudu | 中元普渡 | ✓ |
-| 金紙 | Joss Paper | 紙銭 | ✓ |
+## G. 回收與清潔
+| 中文 | English | 日本語 |
+|---|---|---|
+| 一般垃圾 / 可燃垃圾 | General Waste | 一般ごみ |
+| 廚餘 | Food Waste | 生ごみ |
+| 廚餘回收冷藏櫃 | Food-Waste Fridge | 生ごみ冷蔵庫 |
+| 資源回收物 | Recyclable Materials | 資源物 |
+| 紙類 | Waste Paper | 古紙 |
+| 紙箱 / 瓦楞紙箱 | Cardboard | ダンボール |
+| 保麗龍 | Styrofoam | 発泡スチロール |
+| 塑膠袋 | Plastic Bag | ポリ袋 |
+| 玻璃容器 | Glass Container | ガラス容器 |
+| 鐵鋁罐 | Metal Can | 鉄・アルミ缶 |
+| 廢電池 | Waste Battery | 廃電池 |
+| 焚化爐 | Incinerator | ごみ焼却炉 |
+| 資源回收車 | Recycling Truck | 資源回収車 |
+| 環保局清潔隊 | Environmental Protection Bureau Cleaning Team | 清掃隊 |
+| 大安區清潔隊和平分隊 | Da'an District Cleaning Squad, Heping Team | 大安区清掃隊 和平分隊 |
+| 大型垃圾 | Bulky Waste | 大型ごみ |
+| 裝修垃圾 | Renovation Debris | 改装ごみ |
 
-## 10. 廠商名（中｜English｜日本語，專名照原樣）
+## H. 寵物
+| 中文 | English | 日本語 |
+|---|---|---|
+| 寵物 | Pet | ペット |
+| 牽繩 / 繫短繩 | Leash / Short Leash | リード |
+| 嘴套 / 口罩 | Muzzle | 口輪（マズル） |
+| 提籠 / 外出籠 | Carrier | ペットキャリー |
+| 推車 | Stroller | ペットカート |
+| 飼養動物管理辦法 | Pet Management Rules | 動物飼育管理規則 |
+
+## I. 社區治理・會議・身分
+| 中文 | English | 日本語 |
+|---|---|---|
+| 管理委員會 / 管委會 | Management Committee | 管理委員会 |
+| 管理中心 | Management Center | 管理センター |
+| 主任委員 / 主委 | Chairperson | 主任委員 |
+| 區分所有權人會議（通稱） | Owners' General Meeting | 区分所有者総会 |
+| 定期區權會 | AGM (Annual General Meeting) | 定期総会 |
+| 臨時區權會 | EGM (Extraordinary General Meeting) | 臨時総会 |
+| 善良管理人責任 | Duty of Care | 善良な管理者としての責任 |
+
+## J. 廠商名（專名照原樣）
 | 中文 | English | 日本語 |
 |---|---|---|
 | 太古華電 | Taikwu Industry Co. | 太古華電 |
@@ -153,17 +171,81 @@
 
 ---
 
-## 待定案
+# 二、片語／句型庫
+> 較長描述、保養施作範圍、會重複用到的制式句；非單一名詞。
 
-**已定（2026-06-15）**：大門＝Main Entrance／正面玄関（地點）；自動門＝Automatic Door／自動ドア（機構）；環保室＝Garbage Room／ゴミ置き場。
+## 公告框架
+| 中文 | English | 日本語 |
+|---|---|---|
+| 社區公告 | Announcement | お知らせ |
+| 親愛的住戶 | Dear Residents | 住民の皆様へ |
+| ◯月公共設施例行保養時程 | Monthly Communal Facility Maintenance Schedule for [Month] | [年][月]公共施設定期メンテナンススケジュール |
+| 項目／日期時間／施作範圍 | Item / Date and Time / Scope of Work | 項目／実施日時／実施範囲 |
+| 閱大安管理委員會（落款） | Cultural City Management Committee | 閱大安管理委員会 |
+| 閱大安管理中心（落款） | Cultural City Management Center | 閱大安管理センター |
 
-**仍需主委裁示（標「需定」者，非任內、無權威來源）**：
-1. 交誼廳（1F）→ 提案 1F Lounge／1階ラウンジ
-2. RF 閱覽室 → 提案 RF Lounge／RF ラウンジ
-3. 機車位 → 提案 Scooter Parking Space／バイク駐輪スペース
-4. 無障礙停車位 → 提案 Accessible Parking Space／バリアフリー駐車スペース
-5. 電動車充電樁 → 提案 EV Charging Point／EV充電器
-6. YouBike 站 → 提案 YouBike Station／YouBikeステーション
-7. 古亭捷運站 → 提案 Guting MRT Station／古亭MRT駅
+## 保養施作範圍（每月固定句）
+| 中文 | English | 日本語 |
+|---|---|---|
+| 電梯機房及機坑保養 | Maintenance of elevator machine rooms and pits | エレベーター機械室及びピットのメンテナンス |
+| 電梯車廂與曳引鋼索保養 | Maintenance of elevator cars and hoisting ropes | エレベーターのキャリッジと巻上ロープのメンテナンス |
+| 無障礙觸覺及語音功能檢查 | Inspection of tactile and auditory description function for accessibility | 身体障害者のための点字と音声検査 |
+| 無障礙標誌檢查 | Inspection of disability sign for accessibility | 身体障害者用標識の検査 |
+| 保養期間單台電梯停用 | One elevator out of service during maintenance | メンテナンス中は1台運転停止 |
+| 後院、停車入口及 RF 植栽修剪 | Pruning of plants in the backyard, beside the parking entrance, and on the Roof Floor | 裏庭、R階、車道の植木や植栽の整備 |
+| 病蟲害防治 | Pest and disease control | 害虫および病気の管理 |
+| 除草及枯枝清理 | Weed removal and dead branch cleanup | 雑草を抜き、枯れ枝を取り除く |
+| 攀藤清除 | Removal of vines | つる植物の取り外し |
+| 自動門保養與潤滑 | Automatic door maintenance and lubrication | 自動ドアメンテナンスとヒンジの潤滑 |
 
-> 定案後：回填上表並回改現有網頁（含把淨零頁 陽台 ベランダ→バルコニー、環保室相關日文/英文統一）。
+## 停水・水塔
+| 中文 | English | 日本語 |
+|---|---|---|
+| 清洗水塔暨停水作業須知 | Water Tank Cleaning and Water Supply Suspension Guidelines | 貯水槽清掃および断水のご案内 |
+| 請事先儲備足量用水 | Please store an adequate supply of water in advance | 事前に十分な水の備蓄をお願い申し上げます |
+| 視天候調整 | May change subject to weather conditions | 悪天候の場合は別日程に延期 |
+
+## 防災・颱風
+| 中文 | English | 日本語 |
+|---|---|---|
+| 颱風防颱注意事項 | Typhoon [Name] Preparedness Guidelines | 台風[名]への備え |
+| 颱風前完成陽台收納 | Secure your balcony before typhoons | 台風前にバルコニーを片付ける |
+
+## 制式結尾・問候
+| 中文 | English | 日本語 |
+|---|---|---|
+| 造成不便敬請見諒，感謝配合（完整版） | We kindly ask for your understanding for any inconvenience caused and appreciate your cooperation. | 何かとご不便をおかけいたしますが、ご理解・ご協力の程、どうぞ宜しくお願い申し上げます。 |
+| 造成不便敬請見諒（簡版） | We apologize for any inconvenience caused. | ご不便をおかけして申し訳ありません。 |
+| 感謝您的配合 | Thank you for your cooperation. | ご協力に感謝申し上げます。 |
+| 如有疑問請洽管理中心 | For questions, please contact the Management Center. | ご不明な点は管理センターまで。 |
+
+## 包場（標準句，已修正舊版誤殘「the gym」）
+| 中文 | English | 日本語 |
+|---|---|---|
+| ◯◯因包場活動暫不開放，歡迎於其他時段使用 | [Place] will be reserved for a private event; please avoid using it during this period. Other times welcome. | [場所]は貸切となります。当該時間帯のご利用はお控えください。他の時間帯はご利用いただけます。 |
+
+## 淨零・回收
+| 中文 | English | 日本語 |
+|---|---|---|
+| 邁向 2050 淨零排放 | Reaching net-zero emissions by 2050 | 2050年のネットゼロ達成 |
+| 食・衣・住・行・育樂・購 | food, clothing, housing, transport, leisure, purchasing | 食・衣・住・行・育楽・購 |
+| 閱大安的作為／你可以這樣做 | What We Do / What You Can Do | 私たちの取組／あなたにできること |
+| 本社區無須使用專用垃圾袋 | No special garbage bags required. | 専用ごみ袋は不要です。 |
+| 如有不確定的項目，請以「一般垃圾」方式處理 | If you're unsure, treat the item as general waste. | 判断に迷う場合は「一般ごみ」として処理してください。 |
+
+---
+
+# 三、定案紀錄與待回改
+
+**全數定案（2026-06-15）**：大門/自動門、環保室、1F/RF 閱覽室（棄用「交誼廳」）、機車位、無障礙停車位、充電樁（EV Charger）、YouBike 站、古亭捷運站、管理中心、管委會、健身房、提籠（ペットキャリー）、門禁磁扣（Access Tag）、區權會（Owners' General Meeting；定期 AGM／臨時 EGM）、後花園（1F Back Garden）、空中花園（RF Sky Garden）。
+
+**待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
+- 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
+- 陽台日文 ベランダ → バルコニー
+- meter-room → Meter-Box Corridor（連字號統一）
+- 交誼廳 → 1F/RF 閱覽室（Lounge）；saloon／Social Hall／Penthouse 棄用
+- 管理中心 マネジメントセンター → 管理センター；管委會 HOA／管理組合 → Management Committee／管理委員会
+- 健身房 フィットネスルーム → ジム
+- 充電樁 EVチャージャー／charging station/point → EV Charger／EV充電器
+- 曳引鋼索日文「基板の持ち上げ」→「巻上ロープ」
+- 公告模板 bug：英文標題月份殘留「August」、機電欄英日誤貼成電梯內容、4月保養日文日期誤植、水塔「May and May」等。
