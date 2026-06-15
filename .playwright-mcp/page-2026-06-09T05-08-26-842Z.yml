@@ -1,0 +1,242 @@
+- generic [active] [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - region
+  - generic [ref=e4]:
+    - navigation [ref=e5]:
+      - button "跳到主要內容" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: 跳到主要內容
+      - button "鍵盤快速鍵" [ref=e11] [cursor=pointer]:
+        - generic [ref=e13]: 鍵盤快速鍵
+      - button "無障礙工具意見回饋" [ref=e15] [cursor=pointer]:
+        - generic [ref=e17]: 無障礙工具意見回饋
+    - banner [ref=e19]:
+      - generic [ref=e20]:
+        - link "雲端硬碟" [ref=e24] [cursor=pointer]:
+          - /url: https://drive.google.com/?tab=oo&authuser=0
+          - img [ref=e25]
+          - generic [ref=e26]: 雲端硬碟
+        - generic [ref=e27]:
+          - search [ref=e29]:
+            - table [ref=e31]:
+              - rowgroup [ref=e32]:
+                - row [ref=e33]:
+                  - cell [ref=e34]:
+                    - textbox "在雲端硬碟中搜尋" [ref=e35]
+            - button "進階搜尋" [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+            - button "搜尋 Google 雲端硬碟" [ref=e39] [cursor=pointer]:
+              - img [ref=e40]
+          - generic [ref=e43]:
+            - button "支援" [ref=e46] [cursor=pointer]:
+              - img [ref=e47]
+            - button "設定" [ref=e51] [cursor=pointer]:
+              - img [ref=e53]
+            - generic [ref=e60]:
+              - generic:
+                - button "試用 Gemini" [ref=e67] [cursor=pointer]
+                - tooltip [ref=e70]: 試用 Gemini
+            - generic [ref=e78]:
+              - button "升級" [ref=e80] [cursor=pointer]:
+                - generic [ref=e82]: 升級
+              - tooltip [ref=e83]: 升級即可使用付費功能
+        - generic [ref=e85]:
+          - button "Google 應用程式" [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+          - button "Google 帳戶： 閱大安 (culturalcity85@gmail.com)" [ref=e95] [cursor=pointer]:
+            - img [ref=e97]
+            - img [ref=e103]
+    - button "新增" [ref=e106] [cursor=pointer]:
+      - img [ref=e109]
+      - generic [ref=e111]: 新增
+    - navigation [ref=e117]:
+      - heading "資料夾和檢視模式" [level=2] [ref=e118]
+      - tree "資料夾和檢視模式" [ref=e119]:
+        - treeitem "首頁" [ref=e120]:
+          - link "首頁" [ref=e121] [cursor=pointer]:
+            - generic "首頁" [ref=e124]:
+              - generic [ref=e126]:
+                - img [ref=e129]
+                - img [ref=e134]
+              - generic "首頁" [ref=e139]
+          - group
+        - treeitem "我的雲端硬碟" [ref=e140]:
+          - link "我的雲端硬碟" [ref=e141] [cursor=pointer]:
+            - img [ref=e144]
+            - generic "我的雲端硬碟" [ref=e147]:
+              - generic [ref=e149]:
+                - img [ref=e152]
+                - img [ref=e156]
+              - generic "我的雲端硬碟" [ref=e158]
+        - treeitem "電腦" [ref=e159]:
+          - link "電腦" [ref=e160] [cursor=pointer]:
+            - img [ref=e163]
+            - generic "電腦" [ref=e166]:
+              - generic [ref=e168]:
+                - img [ref=e171]
+                - img [ref=e176]
+              - generic "電腦" [ref=e179]
+        - treeitem "與我共用" [ref=e180]:
+          - link "與我共用" [ref=e181] [cursor=pointer]:
+            - generic "與我共用" [ref=e184]:
+              - generic [ref=e186]:
+                - img [ref=e189]
+                - img [ref=e194]
+              - generic "與我共用的項目" [ref=e200]: 與我共用
+          - group
+        - treeitem "近期存取" [ref=e201]:
+          - link "近期存取" [ref=e202] [cursor=pointer]:
+            - generic "近期存取" [ref=e205]:
+              - generic [ref=e207]:
+                - img [ref=e210]
+                - img [ref=e216]
+              - generic "最近使用過的項目" [ref=e221]: 近期存取
+          - group
+        - treeitem "已加星號" [ref=e222]:
+          - link "已加星號" [ref=e223] [cursor=pointer]:
+            - generic "已加星號" [ref=e226]:
+              - generic [ref=e228]:
+                - img [ref=e230]
+                - img [ref=e233]
+              - generic "加上星號的項目" [ref=e237]: 已加星號
+          - group
+        - treeitem "垃圾內容" [ref=e238]:
+          - link "垃圾內容" [ref=e239] [cursor=pointer]:
+            - generic "垃圾內容" [ref=e242]:
+              - generic [ref=e244]:
+                - img [ref=e247]
+                - img [ref=e251]
+              - generic "垃圾內容" [ref=e256]
+          - group
+        - treeitem "垃圾桶" [ref=e257]:
+          - link "垃圾桶" [ref=e258] [cursor=pointer]:
+            - generic "垃圾桶" [ref=e261]:
+              - generic [ref=e263]:
+                - img [ref=e266]
+                - img [ref=e271]
+              - generic "已丟進垃圾桶的項目" [ref=e276]: 垃圾桶
+          - group
+        - treeitem "儲存空間" [ref=e277]:
+          - link "儲存空間" [ref=e278] [cursor=pointer]:
+            - generic "儲存空間" [ref=e281]:
+              - generic [ref=e283]:
+                - img [ref=e286]
+                - img [ref=e291]
+              - generic "儲存空間" [ref=e294]
+          - group
+      - generic [ref=e299]:
+        - generic "儲存空間概況：目前使用量：131.35 GB (儲存空間配額：200 GB)" [ref=e303] [cursor=pointer]: 目前使用量：131.35 GB (儲存空間配額：200 GB)
+        - generic [ref=e307] [cursor=pointer]:
+          - text: 取得更多儲存空間
+          - link "取得更多儲存空間" [ref=e308]:
+            - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+    - generic [ref=e311]:
+      - generic [ref=e317]:
+        - generic [ref=e320]:
+          - generic [ref=e322]:
+            - navigation [ref=e324]:
+              - heading "資料夾路徑" [ref=e325]
+              - list "資料夾路徑" [ref=e326]:
+                - listitem [ref=e327]:
+                  - button "顯示路徑" [ref=e328] [cursor=pointer]:
+                    - img [ref=e330]
+                  - img [ref=e333]
+                - listitem [ref=e335]:
+                  - button "交易單證" [ref=e336] [cursor=pointer]:
+                    - generic [ref=e337]: 交易單證
+                    - img [ref=e339]
+            - button "已共用" [ref=e342] [cursor=pointer]:
+              - img [ref=e344]
+          - toolbar [ref=e346]:
+            - generic [ref=e347]:
+              - radiogroup "清單或格狀版面配置 (Alt+V 再按 L)" [ref=e351]:
+                - generic [ref=e352]:
+                  - radio "清單" [checked] [ref=e353] [cursor=pointer]:
+                    - generic [ref=e354]:
+                      - img [ref=e355]
+                      - img [ref=e359]
+                  - radio "格狀檢視" [ref=e362] [cursor=pointer]:
+                    - generic [ref=e363]:
+                      - img [ref=e364]
+                      - img [ref=e368]
+              - button "隱藏詳細資料 (Alt+V 再按 D)" [ref=e371] [cursor=pointer]:
+                - img [ref=e373]
+        - generic [ref=e379]:
+          - generic [ref=e380]: 沒有套用任何篩選條件
+          - toolbar "篩選器" [ref=e382]:
+            - generic [ref=e384]:
+              - button "類型" [ref=e385] [cursor=pointer]:
+                - generic [ref=e386]:
+                  - generic [ref=e387]: 類型
+                  - img [ref=e389]
+              - button "使用者" [ref=e391] [cursor=pointer]:
+                - generic [ref=e392]:
+                  - generic [ref=e393]: 使用者
+                  - img [ref=e395]
+              - button "上次修改日期" [ref=e397] [cursor=pointer]:
+                - generic [ref=e398]:
+                  - generic [ref=e399]: 上次修改日期
+                  - img [ref=e401]
+              - button "來源" [ref=e403] [cursor=pointer]:
+                - generic [ref=e404]:
+                  - generic [ref=e405]: 來源
+                  - img [ref=e407]
+      - main [ref=e410]:
+        - generic [ref=e414]:
+          - complementary [ref=e420]:
+            - generic [ref=e421]:
+              - img [ref=e424]
+              - generic [ref=e430]:
+                - heading "運用 AI 技術，在更短的時間內完成更多工作" [level=3] [ref=e432]
+                - generic [ref=e433]: 在幾秒內草擬及潤飾文件、撰寫會議記錄、製作簡報及分析資料
+            - link "免付費試用" [ref=e438] [cursor=pointer]:
+              - generic [ref=e440]: 免付費試用
+            - generic:
+              - button "關閉橫幅" [ref=e441] [cursor=pointer]:
+                - img [ref=e443]
+              - tooltip [ref=e446]: 關閉橫幅
+          - region [ref=e448]:
+            - generic [ref=e449]:
+              - status [ref=e451]:
+                - generic "將檔案拖曳到這裡， 或使用「新增」按鈕。" [ref=e452]:
+                  - generic [ref=e453]:
+                    - generic [ref=e454]: 將檔案拖曳到這裡，
+                    - generic [ref=e455]: 或使用「新增」按鈕。
+              - progressbar [ref=e458]:
+                - img [ref=e460]
+      - generic [ref=e463]:
+        - complementary "詳細資料窗格" [ref=e465]:
+          - generic [ref=e471]:
+            - generic [ref=e472]:
+              - generic "交易單證 共用的「Google 雲端硬碟資料夾」檔案" [ref=e475] [cursor=pointer]:
+                - heading "共用的 Google 雲端硬碟資料夾 檔 交易單證" [level=2] [ref=e476]:
+                  - link "共用的 Google 雲端硬碟資料夾 檔 交易單證" [ref=e477]:
+                    - img "共用的 Google 雲端硬碟資料夾 檔" [ref=e480]:
+                      - img [ref=e481]
+                    - generic [ref=e485]: 交易單證
+              - generic [ref=e487]:
+                - button "隱藏詳細資料" [ref=e488] [cursor=pointer]:
+                  - img [ref=e490]
+                - tooltip [ref=e493]: 隱藏詳細資料
+            - tablist [ref=e496]:
+              - generic [ref=e499]:
+                - tab "詳細資料" [ref=e500] [cursor=pointer]:
+                  - generic:
+                    - generic: 詳細資料
+                - tab "活動" [selected] [ref=e501] [cursor=pointer]:
+                  - generic:
+                    - generic: 活動
+        - navigation
+    - generic [ref=e505]:
+      - complementary "側面板" [ref=e506]:
+        - tablist [ref=e508]:
+          - tab "日曆"
+          - tab "Keep"
+          - tab "Tasks"
+          - tab "聯絡人"
+          - separator [disabled] [ref=e513]
+      - generic:
+        - button "隱藏側邊面板":
+          - img [ref=e519] [cursor=pointer]
+  - region
+  - img [ref=e523]

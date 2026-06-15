@@ -1,0 +1,616 @@
+---
+layout: base.njk
+permalink: /welcome/transition.html
+title: 從老社區搬來的觀念更新
+extraStyles: |
+  :root{
+    --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+    --blue:#2B4A6B;--dp:#1F5C38;--warn:#8C5A00;--old:#8C5A00;
+  }
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:17px;line-height:1.8;min-height:100vh;}
+  /* ── HEADER ── */
+  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 32px;position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+  .header-inner{max-width:760px;margin:0 auto;position:relative;}
+  .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .back{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.08em;color:var(--wg9);text-decoration:none;margin-bottom:16px;transition:color .18s;}
+  .back::before{content:'←';}.back:hover{color:var(--wg1);}
+  .eyebrow{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:10px;}
+  .header h1{font-size:24px;font-weight:700;letter-spacing:.06em;margin-bottom:6px;line-height:1.35;}
+  .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.14em;}
+  /* ── LANG SWITCHER ── */
+  .lang-switcher{display:flex;gap:6px;flex-shrink:0;margin-top:4px;}
+  .lang-btn{padding:4px 10px;font-size:12px;letter-spacing:.06em;border:1px solid rgba(234,231,225,0.25);background:transparent;color:rgba(234,231,225,0.5);cursor:pointer;border-radius:1px;transition:all .18s;font-family:inherit;}
+  .lang-btn:hover{color:var(--wg1);border-color:rgba(234,231,225,0.6);}
+  .lang-btn.active{color:var(--wg1);border-color:var(--wg1);background:rgba(234,231,225,0.1);}
+  /* ── MAIN ── */
+  .main{max-width:760px;margin:0 auto;padding:36px 40px 72px;}
+  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 56px;}.header h1{font-size:19px;}}
+  /* ── SECTION LABEL ── */
+  .sec-label{font-size:12px;letter-spacing:.28em;color:var(--wg9);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+  .sec-num{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;padding:0 8px;background:var(--wg41);color:var(--wg1);border-radius:2px;font-size:12px;font-weight:700;letter-spacing:.1em;font-family:'Noto Sans TC',sans-serif;flex-shrink:0;}
+  .sec-intro{font-size:15px;color:var(--wg11);line-height:1.85;margin-bottom:22px;}
+  /* ── INTRO BANNER ── */
+  .intro{background:var(--wg41);border-radius:var(--radius);padding:22px 26px;margin-bottom:44px;color:var(--wg1);}
+  .intro-title{font-size:17px;font-weight:700;letter-spacing:.04em;margin-bottom:10px;}
+  .intro-text{font-size:15px;color:rgba(234,231,225,0.72);line-height:1.85;}
+  /* ── FRAMEWORK STEPS ── */
+  .framework{margin-bottom:44px;}
+  .fs-step{display:flex;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:10px;position:relative;}
+  .fs-step:not(:last-of-type)::after{content:'';position:absolute;left:31px;bottom:-10px;width:2px;height:10px;background:var(--line);}
+  .fs-num{flex-shrink:0;width:34px;height:34px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin-top:2px;}
+  .fs-body{flex:1;}
+  .fs-title{font-size:15px;font-weight:700;color:var(--wg41);margin-bottom:6px;letter-spacing:.02em;display:flex;align-items:center;gap:8px;}
+  .fs-icon{font-size:18px;}
+  .fs-desc{font-size:14px;color:var(--wg11);line-height:1.8;}
+  .fs-note{margin-top:14px;background:rgba(43,74,107,0.05);border-left:3px solid var(--blue);padding:12px 16px;font-size:14px;color:var(--wg41);line-height:1.85;border-radius:0 var(--radius) var(--radius) 0;}
+  .fs-note strong{color:var(--wg41);}
+  /* ── OWNERSHIP TIERS ── */
+  .tier-list{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;}
+  .tier{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px 16px 22px;position:relative;overflow:hidden;display:flex;gap:16px;align-items:flex-start;}
+  .tier::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
+  .tier.exclusive::before{background:var(--dp);}
+  .tier.shared::before{background:var(--blue);}
+  .tier.designated::before{background:var(--warn);}
+  .tier-icon{flex-shrink:0;width:48px;height:48px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:26px;margin-top:2px;}
+  .tier.exclusive .tier-icon{background:rgba(31,92,56,0.1);}
+  .tier.shared .tier-icon{background:rgba(43,74,107,0.1);}
+  .tier.designated .tier-icon{background:rgba(140,90,0,0.1);}
+  .tier-body{flex:1;min-width:0;}
+  .tier-head{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+  .tier-name{font-size:15px;font-weight:700;color:var(--wg41);letter-spacing:.02em;}
+  .tier-en{font-size:12px;color:var(--wg9);letter-spacing:.1em;}
+  .tier-desc{font-size:14px;color:var(--wg11);line-height:1.8;}
+  /* ── COMPARE ROWS ── */
+  .compare-list{margin-bottom:44px;}
+  .compare-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px 16px;margin-bottom:10px;}
+  .compare-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line);}
+  .compare-icon{flex-shrink:0;width:34px;height:34px;background:rgba(60,56,53,0.06);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .compare-topic{font-size:14px;font-weight:700;color:var(--wg41);letter-spacing:.04em;}
+  .compare-idx{font-size:11px;color:var(--wg9);letter-spacing:.14em;font-weight:700;margin-left:auto;}
+  .compare-top{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-bottom:12px;}
+  .compare-old,.compare-new{padding:10px 14px;font-size:14px;line-height:1.7;border-radius:var(--radius);}
+  .compare-old{background:rgba(140,90,0,0.06);border-left:3px solid var(--old);color:var(--wg11);}
+  .compare-new{background:rgba(43,74,107,0.06);border-left:3px solid var(--blue);color:var(--wg41);}
+  .compare-new strong{color:var(--wg41);}
+  .compare-arrow{display:flex;align-items:center;color:var(--wg9);font-size:16px;}
+  .compare-why{font-size:14px;color:var(--wg41);line-height:1.85;padding:12px 14px;background:rgba(43,74,107,0.04);border-radius:var(--radius);border-left:3px solid var(--blue);}
+  .compare-why-label{display:block;font-size:11px;letter-spacing:.22em;color:var(--blue);font-weight:700;margin-bottom:4px;}
+  .compare-why-label::before{content:'💡 ';font-size:13px;letter-spacing:0;}
+  @media(max-width:560px){
+    .compare-top{grid-template-columns:1fr;gap:6px;}
+    .compare-arrow{display:none;}
+    .compare-old::before{content:'過去 ';font-weight:700;color:var(--old);letter-spacing:.04em;}
+    .compare-new::before{content:'現在 ';font-weight:700;color:var(--blue);letter-spacing:.04em;}
+    .compare-idx{display:none;}
+  }
+  /* ── APPEARANCE ── */
+  .appearance-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+  @media(max-width:560px){.appearance-list{grid-template-columns:1fr;}}
+  .ap-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 14px 18px;position:relative;}
+  .ap-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+  .ap-item.forbid::before{background:var(--old);}
+  .ap-item.allow::before{background:var(--dp);}
+  .ap-item.cond::before{background:var(--blue);}
+  .ap-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .ap-icon{font-size:20px;line-height:1;}
+  .ap-title{font-size:14px;font-weight:700;color:var(--wg41);letter-spacing:.02em;flex:1;}
+  .ap-tag{font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.14em;font-weight:700;flex-shrink:0;}
+  .ap-tag.forbid{background:rgba(140,90,0,0.12);color:var(--old);}
+  .ap-tag.allow{background:rgba(31,92,56,0.12);color:var(--dp);}
+  .ap-tag.cond{background:rgba(43,74,107,0.12);color:var(--blue);}
+  .ap-body{font-size:13px;color:var(--wg11);line-height:1.8;}
+  .ap-body strong{color:var(--wg41);}
+  /* ── HOA NATURE BLOCK ── */
+  .hoa-text{font-size:15px;color:var(--wg11);line-height:1.9;margin-bottom:14px;}
+  .hoa-text strong{color:var(--wg41);}
+  .hoa-bullets{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 20px;margin-bottom:14px;}
+  .hoa-bullets ul{padding-left:1.3em;margin:0;}
+  .hoa-bullets li{font-size:14px;color:var(--wg11);line-height:1.9;margin-bottom:6px;}
+  .hoa-bullets li:last-child{margin-bottom:0;}
+  .hoa-bullets strong{color:var(--wg41);}
+  /* ── PARTICIPATION ── */
+  .part-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .part-item{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;}
+  .part-num{font-size:13px;font-weight:700;color:var(--white);background:var(--wg41);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .part-content{flex:1;}
+  .part-title{font-size:15px;font-weight:600;color:var(--wg41);margin-bottom:2px;}
+  .part-desc{font-size:14px;color:var(--wg11);line-height:1.75;}
+  .part-desc a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(43,74,107,0.3);}
+  .part-desc a:hover{border-bottom-color:var(--blue);}
+  /* ── EVOLUTION ── */
+  .evolve-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+  @media(max-width:560px){.evolve-list{grid-template-columns:1fr;}}
+  .evolve-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+  .ev-icon{font-size:22px;flex-shrink:0;line-height:1.2;width:30px;text-align:center;}
+  .ev-body{flex:1;font-size:14px;color:var(--wg11);line-height:1.75;}
+  .ev-body strong{color:var(--wg41);display:block;margin-bottom:2px;font-size:14px;letter-spacing:.02em;}
+  .evolve-close{background:var(--wg41);color:var(--wg1);padding:20px 24px;border-radius:var(--radius);margin-bottom:18px;}
+  .evolve-close-title{font-size:15px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;color:var(--wg1);}
+  .evolve-close-text{font-size:14px;color:rgba(234,231,225,0.78);line-height:1.9;}
+  .evolve-close-text strong{color:var(--wg1);font-weight:600;}
+  /* ── BACK STRIP ── */
+  .back-strip{margin-top:36px;padding:18px 20px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .back-strip-text{font-size:14px;color:var(--wg11);}
+  .back-strip a{font-size:14px;color:var(--blue);text-decoration:none;letter-spacing:.04em;display:inline-flex;align-items:center;gap:4px;transition:gap .15s;}
+  .back-strip a::after{content:'→';}
+  .back-strip a:hover{gap:8px;}
+  .footer{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  /* ── LANG CONTENT ── */
+  .lang-content{display:none;}
+  .lang-content.active{display:block;}
+  .stub{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;}
+  .stub p{font-size:15px;color:var(--wg11);line-height:1.9;margin-bottom:12px;}
+  .stub p:last-child{margin-bottom:0;}
+  .stub a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(43,74,107,0.3);}
+  .stub a:hover{border-bottom-color:var(--blue);}
+extraScripts: |
+  function setLang(lang) {
+    ['zh','en','ja'].forEach(function(l){
+      var btn = document.getElementById('btn-' + l);
+      var content = document.getElementById('content-' + l);
+      if (btn) btn.classList.toggle('active', l === lang);
+      if (content) content.classList.toggle('active', l === lang);
+    });
+    var titles = { zh: '從老社區搬來的觀念更新', en: 'Moving From an Older Community', ja: '旧マンションからのお引越しの方へ' };
+    var titleEl = document.getElementById('header-title');
+    if (titleEl && titles[lang]) titleEl.textContent = titles[lang];
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : (lang === 'ja' ? 'ja' : 'en');
+  }
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="./" class="back">返回新住戶須知</a>
+    <div class="header-top">
+      <div>
+        <div class="eyebrow">ORIENTATION GUIDE</div>
+        <h1 id="header-title">從老社區搬來的觀念更新</h1>
+        <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+        <button class="lang-btn" id="btn-ja" onclick="setLang('ja')">日本語</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════
+     中文
+══════════════════════════════════════════════ -->
+<div class="lang-content active" id="content-zh">
+
+  <div class="intro">
+    <div class="intro-title">寫給「以前住老社區」的新住戶</div>
+    <div class="intro-text">如果您過去住的是 20、30 年以上的老社區，搬進閱大安之後可能會覺得「規矩怎麼這麼多」。其實不是規矩變多，而是 1995 年立法的《公寓大廈管理條例》把集合住宅的管理規格化了；新建社區依此運作，跟老社區的「自由自治」會有許多落差。先了解這份框架，再看規約細節，會輕鬆許多。</div>
+  </div>
+
+  <div class="sec-label"><span class="sec-num">01</span>FRAMEWORK &nbsp;·&nbsp; 規範來自三層</div>
+  <div class="sec-intro">新社區的所有規則不是隨意制定的，而是從上而下三層架構：</div>
+
+  <div class="framework">
+    <div class="fs-step">
+      <div class="fs-num">1</div>
+      <div class="fs-body">
+        <div class="fs-title"><span class="fs-icon">⚖️</span>公寓大廈管理條例（法律層級）</div>
+        <div class="fs-desc">1995 年立法、2003 年大幅修正後成型，是台灣 1995 年後新建集合住宅的根本法規。社區規約不得違反本條例。譬如「共用部分不得任意使用」「管理費可訴請法院給付」「重大決議須區權會通過」都明定於條例中。</div>
+      </div>
+    </div>
+    <div class="fs-step">
+      <div class="fs-num">2</div>
+      <div class="fs-body">
+        <div class="fs-title"><span class="fs-icon">📜</span>社區規約（社區的「憲法」）</div>
+        <div class="fs-desc">每個社區依條例規定須有規約，由全體區分所有權人會議通過。涵蓋管理費標準、施工管理、寵物、停車、公共設施使用等具體規範。每年區權會可修正。</div>
+      </div>
+    </div>
+    <div class="fs-step">
+      <div class="fs-num">3</div>
+      <div class="fs-body">
+        <div class="fs-title"><span class="fs-icon">🗂️</span>管委會決議與辦法（執行細節）</div>
+        <div class="fs-desc">在規約授權範圍內，管委會制定具體執行辦法，如裝潢申請流程、磁扣使用規則、頂樓借用程序等。這些辦法不能逾越規約，規約不能逾越條例。</div>
+      </div>
+    </div>
+    <div class="fs-note">
+      <strong>為什麼老社區比較「自由」？</strong>30 年以上的老社區往往沒有成立管委會，或規約只是建商當年附的樣板從沒人在用。這不代表「過去比較合理」，而是「過去比較沒有制度」——一旦發生糾紛（漏水、噪音、欠費），缺乏制度的社區只能訴諸鄰里情面或司法訴訟，往往兩敗俱傷。
+    </div>
+  </div>
+
+  <div class="sec-label"><span class="sec-num">02</span>OWNERSHIP &nbsp;·&nbsp; 你買的不只是「你家」</div>
+  <div class="sec-intro">最容易產生誤會的，是「我家」到底包含什麼。可以這樣想：整棟大樓像一塊大蛋糕切片，您買到的那一份，其實包含三種不同的權屬：</div>
+
+  <div class="tier-list">
+    <div class="tier exclusive">
+      <div class="tier-icon">🏠</div>
+      <div class="tier-body">
+        <div class="tier-head">
+          <span class="tier-name">專有部分</span>
+          <span class="tier-en">EXCLUSIVE</span>
+        </div>
+        <div class="tier-desc">您家門內，從牆面、地板、天花板的「內側」往內。可以裝潢、改造、出售（在規約允許範圍內）。這部分真的是「您的」。</div>
+      </div>
+    </div>
+    <div class="tier shared">
+      <div class="tier-icon">🏢</div>
+      <div class="tier-body">
+        <div class="tier-head">
+          <span class="tier-name">共用部分</span>
+          <span class="tier-en">SHARED</span>
+        </div>
+        <div class="tier-desc">外牆、樓梯間、電梯、屋頂、地下室、消防管路、所有住戶共用的水電氣管線——全體區權人按持分共有。任何變更須經區權會決議。</div>
+      </div>
+    </div>
+    <div class="tier designated">
+      <div class="tier-icon">🚗</div>
+      <div class="tier-body">
+        <div class="tier-head">
+          <span class="tier-name">約定專用部分</span>
+          <span class="tier-en">DESIGNATED</span>
+        </div>
+        <div class="tier-desc">陽台、停車位、信箱——所有權仍屬全體共有，但「使用權」分配給特定區權人。您可以使用，但不能擅自改造外觀或結構。</div>
+      </div>
+    </div>
+  </div>
+  <div class="fs-note">
+    <strong>常見誤區：</strong>「陽台是我家的，我想外推就外推」。事實上陽台屬約定專用，外牆面屬共用部分；個人沒有單方變更外觀的權利。這不是「管委會找麻煩」，是物權法本來就這樣規定。
+  </div>
+
+  <div class="sec-label"><span class="sec-num">03</span>COMPARISON &nbsp;·&nbsp; 老習慣 vs 新規範</div>
+  <div class="sec-intro">以下整理 10 條最常見的觀念落差。左邊是老社區常見做法，右邊是閱大安（依條例與規約）的規範，下方說明「為什麼」——理解了 why，規矩就不再只是規矩。</div>
+
+  <div class="compare-list">
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🪜</div>
+        <div class="compare-topic">樓梯間與梯廳</div>
+        <div class="compare-idx">01 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">樓梯間、梯廳放鞋櫃、嬰兒車、回收紙箱</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new"><strong>共用部分禁堆置</strong>任何私人物品</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>消防法明定逃生通道暢通；公寓大廈管理條例第 16 條也禁止任意使用共用部分。緊急時刻多一個障礙物就可能多一條人命，這不是「管太多」，是底線。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🔨</div>
+        <div class="compare-topic">室內裝潢施工</div>
+        <div class="compare-idx">02 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">找熟識的師傅就直接敲牆、改格局、隨時動工</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">所有施工<strong>開工 7 日前申請</strong>＋裝潢保證金 $50,000＋切結書</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>您家的牆可能是承重牆、隔音牆、或共用管線通道；一戶施工的噪音與粉塵會影響整棟；保證金保障若施工損及共用設施，管委會可立即修復不必先吵責任歸屬。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🏗️</div>
+        <div class="compare-topic">建物外觀變更</div>
+        <div class="compare-idx">03 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">陽台外推、加裝鐵窗、外牆設冷氣外機或廣告</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">外觀變更須經<strong>區權會決議</strong>，個人無權單方執行</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>外牆是共用部分，個人無權單方變更；統一的外觀是社區整體資產價值的一部分，一戶破壞，全棟貶值。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">💳</div>
+        <div class="compare-topic">管理費的性質</div>
+        <div class="compare-idx">04 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">「管理費＝服務費，不滿意就不繳」</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new"><strong>法定義務</strong>，欠繳可被催收、訴追</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>公寓大廈管理條例第 21 條：管委會得「訴請法院命其給付」。管理費是維持公共設施運作的成本，由全體住戶按持分分擔，不是任意付費。對服務不滿請走申訴／提案管道。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🔑</div>
+        <div class="compare-topic">門禁磁扣</div>
+        <div class="compare-idx">05 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">鑰匙拿到外面配一把給家人、保母、長輩</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">磁扣<strong>禁自行複製</strong>；遺失立即通知管理中心註銷</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>磁扣不是鑰匙，而是身分認證——每個編碼可追蹤進出時間。自行複製等於把整棟的安全系統打洞，且無法追責。家人、保母需要長期進出，請至管理中心正式申辦並登記。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🐾</div>
+        <div class="compare-topic">寵物與電梯</div>
+        <div class="compare-idx">06 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">寵物抱著上電梯就好</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new"><strong>外出籠／推車／牽繩</strong>；遇住戶已在電梯內或等候則禮讓改搭下一趟</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>共用空間要顧及怕動物、過敏體質、行動不便的住戶。牽繩防止寵物突然撲跳驚嚇他人；禮讓電梯避免雙方為難。這不是針對愛寵物的人，是平衡所有人的舒適度。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">📜</div>
+        <div class="compare-topic">規約的效力</div>
+        <div class="compare-idx">07 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">規約寫太多太囉嗦，自己看著辦就好</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">規約是<strong>區權會多數決通過、具拘束力</strong></div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>規約是社區的「憲法」，違反可依規約處置（罰金、暫停使用公共設施等）。它不是建商或主委單方訂的，而是全體區權人投票通過的共同承諾。覺得不合理請走修約程序，不要單方無視。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">⏰</div>
+        <div class="compare-topic">施工時間與動線</div>
+        <div class="compare-idx">08 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">裝潢隨時施工、深夜搬材料</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">施工限<strong>週一至五 08:00–17:30</strong>；資材限走貨梯</div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>高密度居住，作息會互相影響——別人的週末安寧值得被尊重，就像您的也是。客梯不是設計來載重物的，把建材塞進客梯損壞了得全棟一起修。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">📦</div>
+        <div class="compare-topic">共用空間占用</div>
+        <div class="compare-idx">09 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">屋頂、地下室、走道角落放點私人物品「也沒礙到誰」</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">共用空間<strong>不得占用</strong></div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>產權概念釐清——您買到的「房子」是專有部分（家門內），屋頂、地下室、走道屬全體共有，個人不能私自占用。如果每戶都占用「一點點」，整棟很快就無處可走。</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-head">
+        <div class="compare-icon">🤝</div>
+        <div class="compare-topic">規約執行的裁量</div>
+        <div class="compare-idx">10 / 10</div>
+      </div>
+      <div class="compare-top">
+        <div class="compare-old">「我跟主委是好朋友，他可以幫我通融」</div>
+        <div class="compare-arrow">→</div>
+        <div class="compare-new">主委<strong>無權單方放寬規約</strong></div>
+      </div>
+      <div class="compare-why"><span class="compare-why-label">為什麼這樣規定</span>主委是執行者，不是規則制定者。規則由區權會多數決，主委單方放寬等於違反全體住戶共識，反而會被質疑「為什麼別人不行你可以」。要改規則請走區權會提案。</div>
+    </div>
+
+  </div>
+
+  <div class="sec-label"><span class="sec-num">04</span>APPEARANCE &nbsp;·&nbsp; 外觀與陽台的詳細規範</div>
+  <div class="sec-intro">對比表第 3 條（建物外觀變更）涉及多項細節，由於陽台與外牆是整棟社區形象的核心，特別在此展開說明。下列每一項都跟「不能單方變更共用部分」的原則一脈相承。</div>
+
+  <div class="appearance-list">
+    <div class="ap-item forbid">
+      <div class="ap-head">
+        <span class="ap-icon">🚧</span>
+        <span class="ap-title">陽台外推</span>
+        <span class="ap-tag forbid">禁止</span>
+      </div>
+      <div class="ap-body">陽台外推屬<strong>違章建築</strong>（內政部營建署明文認定），同時違反建築法與公寓大廈管理條例。一旦被檢舉須自行拆除，社區整體外觀亦會永久受損。</div>
+    </div>
+    <div class="ap-item forbid">
+      <div class="ap-head">
+        <span class="ap-icon">🪟</span>
+        <span class="ap-title">加裝鐵窗</span>
+        <span class="ap-tag forbid">原則禁止</span>
+      </div>
+      <div class="ap-body">閱大安在建築設計階段已具備門禁、保全與防墜配套，<strong>不接受個別住戶加裝鐵窗</strong>。鐵窗會破壞外觀統一、影響消防逃生路徑，亦讓社區外貌「老化感」突顯，整體房價皆受影響。</div>
+    </div>
+    <div class="ap-item cond">
+      <div class="ap-head">
+        <span class="ap-icon">👶</span>
+        <span class="ap-title">兒童／寵物防墜</span>
+        <span class="ap-tag cond">須核定</span>
+      </div>
+      <div class="ap-body">有 12 歲以下兒童或寵物者，<strong>可申請設置防墜措施</strong>。但材質（透明壓克力或細鋼絲網等）、顏色（配合外牆色系）、安裝方式須經管委會核定，不得自行決定樣式。</div>
+    </div>
+    <div class="ap-item cond">
+      <div class="ap-head">
+        <span class="ap-icon">❄️</span>
+        <span class="ap-title">冷氣室外機</span>
+        <span class="ap-tag cond">須裝指定位置</span>
+      </div>
+      <div class="ap-body">須安裝於建商預留的<strong>冷氣機專用平台或陽台指定位置</strong>。不得懸掛於外牆、不得遮蔽他戶採光，冷凝水管須引入陽台地排避免滴落他戶。</div>
+    </div>
+    <div class="ap-item cond">
+      <div class="ap-head">
+        <span class="ap-icon">🧺</span>
+        <span class="ap-title">晾曬衣物</span>
+        <span class="ap-tag cond">陽台內側</span>
+      </div>
+      <div class="ap-body">晾衣架須設置於<strong>陽台內側</strong>，不得突出陽台外緣或外牆。棉被、衣物不得橫掛於陽台欄杆外側。突出物影響外觀統一，且掉落有公共安全疑慮。</div>
+    </div>
+    <div class="ap-item forbid">
+      <div class="ap-head">
+        <span class="ap-icon">🪧</span>
+        <span class="ap-title">招牌與廣告物</span>
+        <span class="ap-tag forbid">禁止</span>
+      </div>
+      <div class="ap-body">陽台、外牆、共用部分<strong>不得設置任何招牌、廣告、海報、旗幟</strong>。閱大安為純住宅社區，住辦混合會破壞居住安寧與外觀調性（一樓營業空間另有規範）。</div>
+    </div>
+  </div>
+
+  <div class="fs-note">
+    <strong>共同原則：</strong>以上所有規定都源自同一個觀念——陽台、外牆雖然「位置上是您家」，但<strong>所有權屬全體共有</strong>（見 02 OWNERSHIP）。任何外露變更都需要全體區權人的「集體同意」（透過規約或管委會核定）。這不是限制您的居住自由，而是保護所有住戶共同擁有的外觀資產。
+  </div>
+
+  <div class="sec-label"><span class="sec-num">05</span>MANAGEMENT COMMITTEE &nbsp;·&nbsp; 管委會不是服務業</div>
+  <div class="sec-intro">這是另一個常見的觀念落差——老社區若有管委會，通常是「幾個熱心鄰居」；新社區的管委會則是依條例正式成立的住戶自治組織。理解這個差異，跟管理中心、跟主委的互動會順很多。</div>
+
+  <div class="hoa-text">
+    <strong>主任委員、委員是區權人輪任、無給職。</strong>他們不是物業管理公司的員工，而是您的鄰居志工——上完正職、利用週末晚上開會、處理大家的事。
+  </div>
+  <div class="hoa-text">
+    <strong>管理中心（總幹事、保全、清潔）是管委會用大家繳的管理費「外聘」執行日常事務。</strong>他們向管委會負責，最終向所有住戶負責——但是是「全體」住戶的代理人，不是個別住戶的助理。
+  </div>
+  <div class="hoa-text">
+    換句話說，他們執行的是<strong>全體住戶共同決定的規則</strong>，不是「個別住戶想要的服務」。實務上：
+  </div>
+  <div class="hoa-bullets">
+    <ul>
+      <li>規約明文限制的事，管理中心無權通融——他們也不想被指責「為什麼別人不行你可以」</li>
+      <li>對某條規約不滿，請走區權會提案修改的程序，不是去跟管理中心或主委吵架</li>
+      <li>遇到爭議，先看規約怎麼寫；規約沒寫的，看管委會決議；都沒有的，可在月例會提案討論</li>
+      <li>平日溝通仍要相互尊重——他們不是百貨公司專櫃，但也不是任何人的僕人</li>
+    </ul>
+  </div>
+
+  <div class="sec-label"><span class="sec-num">06</span>PARTICIPATION &nbsp;·&nbsp; 怎麼參與社區事務</div>
+  <div class="sec-intro">如果您覺得某條規約不合理、或想推動某件事，這裡是正規管道：</div>
+
+  <div class="part-list">
+    <div class="part-item">
+      <div class="part-num">1</div>
+      <div class="part-content">
+        <div class="part-title">列席管委會例會</div>
+        <div class="part-desc">每月召開一次。有意願請洽管理中心，會議通知與紀錄均公告於 <a href="/minutes/">社區網站・會議紀錄</a>。列席可聽、可表達意見，但表決權在委員。</div>
+      </div>
+    </div>
+    <div class="part-item">
+      <div class="part-num">2</div>
+      <div class="part-content">
+        <div class="part-title">區權會提案</div>
+        <div class="part-desc">每年至少召開一次，是社區最高決策機構。重大事項（規約修正、大型工程、特別預算）須區權會決議。每位區分所有權人都有提案與投票權，提案門檻請參閱規約。</div>
+      </div>
+    </div>
+    <div class="part-item">
+      <div class="part-num">3</div>
+      <div class="part-content">
+        <div class="part-title">日常意見反映</div>
+        <div class="part-desc">管理中心電話、現場、智生活 APP 留言皆可。緊急或重大事項會由總幹事彙整提至月例會討論。</div>
+      </div>
+    </div>
+    <div class="part-item">
+      <div class="part-num">4</div>
+      <div class="part-content">
+        <div class="part-title">平時觀察社區動態</div>
+        <div class="part-desc">閱讀 <a href="/notice/">社區公告</a>、<a href="/minutes/">會議紀錄</a> 與 <a href="/">社區主頁</a> 最新動態，了解最近大家在討論什麼，是融入社區最快的方式。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span class="sec-num">07</span>EVOLUTION &nbsp;·&nbsp; 規則會與時俱進</div>
+  <div class="sec-intro">這份文件不是「規矩的終點」。閱大安今日依循的條例與規約，是公寓大廈管理條例 1995 年立法以來 30 年間不斷修法演進的結果——而它還會繼續調整。以下是幾個正在或可預見會影響社區規範的議題：</div>
+
+  <div class="evolve-list">
+    <div class="evolve-item">
+      <span class="ev-icon">🔌</span>
+      <div class="ev-body">
+        <strong>電動車與能源</strong>充電管理、消防安全規範隨電動車普及持續更新。
+      </div>
+    </div>
+    <div class="evolve-item">
+      <span class="ev-icon">♿</span>
+      <div class="ev-body">
+        <strong>高齡與無障礙</strong>老化社會帶來的友善設施需求、緊急照護機制。
+      </div>
+    </div>
+    <div class="evolve-item">
+      <span class="ev-icon">🌱</span>
+      <div class="ev-body">
+        <strong>永續環境</strong>節能、垃圾減量、雨水回收、外牆隔熱、太陽能應用。
+      </div>
+    </div>
+    <div class="evolve-item">
+      <span class="ev-icon">🛡️</span>
+      <div class="ev-body">
+        <strong>個資與資訊安全</strong>門禁進出紀錄、監視畫面保存、APP 個資處理。
+      </div>
+    </div>
+  </div>
+
+  <div class="evolve-close">
+    <div class="evolve-close-title">當未來規約更新時⋯⋯</div>
+    <div class="evolve-close-text">請把它看作社區的進步，而非「又增加的限制」。<strong>從老社區搬來的住戶，把「持續配合演進」的心態一起帶進閱大安</strong>——一個有制度的社區，正是因為大家願意一起跟著時代調整，才得以維持品質。我們不是要您一次學完所有規矩，而是邀請您加入「持續與時俱進」的這個共同體。</div>
+  </div>
+
+  <div class="back-strip">
+    <span class="back-strip-text">已閱讀完畢？回到新住戶須知檢視具體規範與費率：</span>
+    <a href="./">返回新住戶須知</a>
+  </div>
+  <div class="footer">
+    <span>閱大安管理委員會・本頁旨在協助新住戶適應公寓大廈管理條例下的社區運作</span>
+    <span>如有疑問請洽管理中心</span>
+  </div>
+
+</div><!-- /content-zh -->
+
+
+<!-- ══════════════════════════════════════════════
+     English (stub)
+══════════════════════════════════════════════ -->
+<div class="lang-content" id="content-en">
+  <div class="intro">
+    <div class="intro-title">For Residents Moving From an Older Apartment</div>
+    <div class="intro-text">This page explains the cultural and legal context behind community living in apartments managed under Taiwan's Condominium Management Act (公寓大廈管理條例, enacted 1995). Newer buildings like Cultural City operate under this Act, which differs substantially from how older Taipei apartments are typically managed.</div>
+  </div>
+  <div class="stub">
+    <p>The full content of this orientation guide is currently available in Chinese only. We recommend referring to the Chinese version above for the complete explanation, which covers:</p>
+    <p>· The three-tier framework (Condominium Act → Community Bylaws → Management Committee Resolutions)<br>· The distinction between <em>exclusive</em>, <em>shared</em>, and <em>designated-exclusive</em> property<br>· 10 common habits from older apartments that don't apply here, with reasoning<br>· The nature of the Management Committee as a residents' self-governing body, not a service provider<br>· How to raise concerns or propose changes</p>
+    <p>For the operational essentials (fees, access fobs, waste, facilities), please return to the <a href="./">Welcome Guide</a>. For specific regulations, see the <a href="/regulations/">Community Regulations</a>. The Management Center is happy to walk you through any item.</p>
+  </div>
+  <div class="back-strip">
+    <span class="back-strip-text">Return to the operational guide:</span>
+    <a href="./">Back to Welcome Guide</a>
+  </div>
+  <div class="footer">
+    <span>Cultural City Community Management Committee · This page helps new residents adapt to Taiwan's Condominium Management Act</span>
+    <span>Contact the Management Center for assistance</span>
+  </div>
+</div><!-- /content-en -->
+
+
+<!-- ══════════════════════════════════════════════
+     日本語 (stub)
+══════════════════════════════════════════════ -->
+<div class="lang-content" id="content-ja">
+  <div class="intro">
+    <div class="intro-title">旧型マンションからお越しの方へ</div>
+    <div class="intro-text">このページでは、台湾の「公寓大廈管理條例」（1995 年制定）に基づいて運営される新築マンションと、築 20〜30 年以上の旧マンションとの管理上の違いを説明しています。閱大安は本条例のもとで運営されており、旧マンションでの慣習とは異なる点が多くあります。</div>
+  </div>
+  <div class="stub">
+    <p>本オリエンテーション・ガイドの詳細は現在中国語のみのご提供となっております。中国語版では以下の内容を扱っています：</p>
+    <p>・三層構造（管理条例 → 社区規約 → 管理委員会の決議）<br>・「専有部分」「共用部分」「約定専用部分」の所有権概念<br>・旧マンションでの慣習が新マンションでは通用しない 10 のケースと、その理由<br>・管理委員会は「サービス業」ではなく、住民の自治組織であること<br>・意見の伝え方・提案の方法</p>
+    <p>管理費・アクセスカード・ゴミ・共用施設などの実務情報は <a href="./">新入居者ガイド</a> を、規約の詳細は <a href="/regulations/">コミュニティ規約</a> をご覧ください。管理センターでも個別にご案内いたします。</p>
+  </div>
+  <div class="back-strip">
+    <span class="back-strip-text">実務ガイドに戻る：</span>
+    <a href="./">新入居者ガイドへ戻る</a>
+  </div>
+  <div class="footer">
+    <span>閱大安管理委員会・本ページは新入居者の方が公寓大廈管理條例下の運営に慣れるための補助資料です</span>
+    <span>ご不明な点は管理センターまで</span>
+  </div>
+</div><!-- /content-ja -->
+
+</div><!-- /main -->

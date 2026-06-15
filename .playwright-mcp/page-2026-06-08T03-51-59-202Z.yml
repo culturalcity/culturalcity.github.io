@@ -1,0 +1,3957 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: CULTURAL CITY · PROPERTY MANAGER HANDBOOK
+    - heading "閱大安總幹事 Wiki" [level=1] [ref=e5]
+    - generic [ref=e6]: 閱大安管理委員會・內部文件
+  - generic [ref=e7]:
+    - navigation "章節目錄" [ref=e8]:
+      - generic [ref=e9]:
+        - heading "章節目錄" [level=2] [ref=e10]
+        - list [ref=e12]:
+          - listitem [ref=e13]:
+            - link "前言" [ref=e14] [cursor=pointer]:
+              - /url: "#前言"
+            - list [ref=e15]:
+              - listitem [ref=e16]:
+                - link "1. 系統性根源：產業結構的先天限制" [ref=e17] [cursor=pointer]:
+                  - /url: "#1-系統性根源產業結構的先天限制"
+              - listitem [ref=e18]:
+                - link "2. 中間環節：管理斷層與經驗歸零" [ref=e19] [cursor=pointer]:
+                  - /url: "#2-中間環節管理斷層與經驗歸零"
+              - listitem [ref=e20]:
+                - link "3. 具體衝擊：社區行政資產流失" [ref=e21] [cursor=pointer]:
+                  - /url: "#3-具體衝擊社區行政資產流失"
+              - listitem [ref=e22]:
+                - link "4. 最終困境：管委會職能錯置" [ref=e23] [cursor=pointer]:
+                  - /url: "#4-最終困境管委會職能錯置"
+          - listitem [ref=e24]:
+            - link "第一章：核心管理哲學與職責定位" [ref=e25] [cursor=pointer]:
+              - /url: "#第一章核心管理哲學與職責定位"
+            - list [ref=e26]:
+              - listitem [ref=e27]:
+                - link "1. 目標與願景" [ref=e28] [cursor=pointer]:
+                  - /url: "#1-目標與願景"
+              - listitem [ref=e29]:
+                - link "2. 核心策略與指導原則" [ref=e30] [cursor=pointer]:
+                  - /url: "#2-核心策略與指導原則"
+              - listitem [ref=e31]:
+                - link "3. 角色定位與職責界定" [ref=e32] [cursor=pointer]:
+                  - /url: "#3-角色定位與職責界定"
+              - listitem [ref=e33]:
+                - link "4. 具體執行辦法" [ref=e34] [cursor=pointer]:
+                  - /url: "#4-具體執行辦法"
+          - listitem [ref=e35]:
+            - link "第二章：數位營運系統操作指南" [ref=e36] [cursor=pointer]:
+              - /url: "#第二章數位營運系統操作指南"
+            - list [ref=e37]:
+              - listitem [ref=e38]:
+                - link "1. 核心數位身份與帳號管理" [ref=e39] [cursor=pointer]:
+                  - /url: "#1-核心數位身份與帳號管理"
+              - listitem [ref=e40]:
+                - link "2. Google Workspace 雲端辦公室規範" [ref=e41] [cursor=pointer]:
+                  - /url: "#2-google-workspace-雲端辦公室規範"
+              - listitem [ref=e42]:
+                - link "3. Line 官方與群組管理" [ref=e43] [cursor=pointer]:
+                  - /url: "#3-line-官方與群組管理"
+              - listitem [ref=e44]:
+                - link "4. Notion 社區資料中心" [ref=e45] [cursor=pointer]:
+                  - /url: "#4-notion-社區資料中心"
+              - listitem [ref=e46]:
+                - link "5. 智生活（社區管理APP）管理後台" [ref=e47] [cursor=pointer]:
+                  - /url: "#5-智生活社區管理app管理後台"
+              - listitem [ref=e48]:
+                - link "6. 其他數位設備與規範" [ref=e49] [cursor=pointer]:
+                  - /url: "#6-其他數位設備與規範"
+              - listitem [ref=e50]:
+                - link "7. AGM Tool（區權會專用工作檔）" [ref=e51] [cursor=pointer]:
+                  - /url: "#7-agm-tool區權會專用工作檔"
+              - listitem [ref=e52]:
+                - link "8. 每日水電公告產生器（每日例行工作）" [ref=e53] [cursor=pointer]:
+                  - /url: "#8-每日水電公告產生器每日例行工作"
+          - listitem [ref=e54]:
+            - link "第三章：設施維護與廠商管理" [ref=e55] [cursor=pointer]:
+              - /url: "#第三章設施維護與廠商管理"
+            - list [ref=e56]:
+              - listitem [ref=e57]:
+                - link "1. 例行性保養排程與策略" [ref=e58] [cursor=pointer]:
+                  - /url: "#1-例行性保養排程與策略"
+              - listitem [ref=e59]:
+                - link "2. 重大維護項目與策略" [ref=e60] [cursor=pointer]:
+                  - /url: "#2-重大維護項目與策略"
+              - listitem [ref=e61]:
+                - link "3. 廠商管理與招標" [ref=e62] [cursor=pointer]:
+                  - /url: "#3-廠商管理與招標"
+              - listitem [ref=e63]:
+                - link "4. 清潔" [ref=e64] [cursor=pointer]:
+                  - /url: "#4-清潔"
+              - listitem [ref=e65]:
+                - link "5. 垃圾清運與環保室管理" [ref=e66] [cursor=pointer]:
+                  - /url: "#5-垃圾清運與環保室管理"
+          - listitem [ref=e67]:
+            - link "第四章：行政、財務與法規遵循" [ref=e68] [cursor=pointer]:
+              - /url: "#第四章行政財務與法規遵循"
+            - list [ref=e69]:
+              - listitem [ref=e70]:
+                - link "1. 銀行與財務帳戶" [ref=e71] [cursor=pointer]:
+                  - /url: "#1-銀行與財務帳戶"
+              - listitem [ref=e72]:
+                - link "2. 財務流程" [ref=e73] [cursor=pointer]:
+                  - /url: "#2-財務流程"
+              - listitem [ref=e74]:
+                - link "3. 公共事業費管理" [ref=e75] [cursor=pointer]:
+                  - /url: "#3-公共事業費管理"
+              - listitem [ref=e76]:
+                - link "4. 行政與文件管理" [ref=e77] [cursor=pointer]:
+                  - /url: "#4-行政與文件管理"
+              - listitem [ref=e78]:
+                - link "5. 管委會換屆交接流程" [ref=e79] [cursor=pointer]:
+                  - /url: "#5-管委會換屆交接流程"
+              - listitem [ref=e80]:
+                - link "6. 公共意外險與火險" [ref=e81] [cursor=pointer]:
+                  - /url: "#6-公共意外險與火險"
+              - listitem [ref=e82]:
+                - link "7. 公共安全檢查（每 3 年一次）" [ref=e83] [cursor=pointer]:
+                  - /url: "#7-公共安全檢查每-3-年一次"
+              - listitem [ref=e84]:
+                - link "8. 住戶室內裝修管理 SOP" [ref=e85] [cursor=pointer]:
+                  - /url: "#8-住戶室內裝修管理-sop"
+              - listitem [ref=e86]:
+                - link "9. 圖書管理" [ref=e87] [cursor=pointer]:
+                  - /url: "#9-圖書管理"
+              - listitem [ref=e88]:
+                - link "10. 議題：社區採購與比價流程" [ref=e89] [cursor=pointer]:
+                  - /url: "#10-議題社區採購與比價流程"
+          - listitem [ref=e90]:
+            - link "第五章：安全防災相關標準作業程序" [ref=e91] [cursor=pointer]:
+              - /url: "#第五章安全防災相關標準作業程序"
+            - list [ref=e92]:
+              - listitem [ref=e93]:
+                - link "1. 安全防災" [ref=e94] [cursor=pointer]:
+                  - /url: "#1-安全防災"
+              - listitem [ref=e95]:
+                - link "2. 特殊場景" [ref=e96] [cursor=pointer]:
+                  - /url: "#2-特殊場景"
+          - listitem [ref=e97]:
+            - link "第六章：重點議題與住戶關係" [ref=e98] [cursor=pointer]:
+              - /url: "#第六章重點議題與住戶關係"
+            - list [ref=e99]:
+              - listitem [ref=e100]:
+                - link "1. 會議與議題管理" [ref=e101] [cursor=pointer]:
+                  - /url: "#1-會議與議題管理"
+              - listitem [ref=e102]:
+                - link "2. 住戶關係管理" [ref=e103] [cursor=pointer]:
+                  - /url: "#2-住戶關係管理"
+              - listitem [ref=e104]:
+                - link "3. 社區活動" [ref=e105] [cursor=pointer]:
+                  - /url: "#3-社區活動"
+              - listitem [ref=e106]:
+                - link "4. 鄰里關係管理" [ref=e107] [cursor=pointer]:
+                  - /url: "#4-鄰里關係管理"
+              - listitem [ref=e108]:
+                - link "5. 電動車充電系統營運與管理" [ref=e109] [cursor=pointer]:
+                  - /url: "#5-電動車充電系統營運與管理"
+              - listitem [ref=e110]:
+                - link "6. 特殊案例與歷史沿革" [ref=e111] [cursor=pointer]:
+                  - /url: "#6-特殊案例與歷史沿革"
+          - listitem [ref=e112]:
+            - link "附錄 A：年度循環議題快速索引表" [ref=e113] [cursor=pointer]:
+              - /url: "#附錄-a年度循環議題快速索引表"
+          - listitem [ref=e114]:
+            - link "附錄 B：跨屆議題追蹤機制與進行中議題清單" [ref=e115] [cursor=pointer]:
+              - /url: "#附錄-b跨屆議題追蹤機制與進行中議題清單"
+            - list [ref=e116]:
+              - listitem [ref=e117]:
+                - link "為什麼要有正式的議題追蹤機制" [ref=e118] [cursor=pointer]:
+                  - /url: "#為什麼要有正式的議題追蹤機制"
+              - listitem [ref=e119]:
+                - link "解法：Notion 議題追蹤資料庫（社區共用 Notion）" [ref=e120] [cursor=pointer]:
+                  - /url: "#解法notion-議題追蹤資料庫社區共用-notion"
+              - listitem [ref=e121]:
+                - link "交接時的議題盤點原則" [ref=e122] [cursor=pointer]:
+                  - /url: "#交接時的議題盤點原則"
+              - listitem [ref=e123]:
+                - link "當前進行中議題清單（2026-04-30 當下快照）" [ref=e124] [cursor=pointer]:
+                  - /url: "#當前進行中議題清單2026-04-30-當下快照"
+          - listitem [ref=e125]:
+            - link "附錄 C：增補版維護日誌" [ref=e126] [cursor=pointer]:
+              - /url: "#附錄-c增補版維護日誌"
+    - main [ref=e127]:
+      - heading "前言" [level=1] [ref=e128]
+      - paragraph [ref=e129]: 歡迎您進駐閱大安社區擔任總幹事。本份 Wiki整理了社區的數位系統、設施保養、行政財務、安全防災、住戶關係等各面向的工作內容與標準作業流程，作為您到職訓練、日常工作與未來交接時的依據。
+      - paragraph [ref=e130]:
+        - text: 社區自第一屆管委會以來追求「
+        - strong [ref=e131]: 屬社區的資產而非屬個人的習慣
+        - text: 」——也就是不論誰擔任總幹事，社區的管理品質應該維持穩定、文件格式應該一致、廠商關係與住戶資料應該完整保存。本份 Wiki是這個理念的具體實踐，也希望您在工作中持續累積、優化內容，下任接手時能無縫接續。
+      - separator [ref=e132]
+      - paragraph [ref=e133]:
+        - text: 在第一屆管委會任期內，我們經歷了極不穩定的管理震盪，具體表現為
+        - strong [ref=e134]: 「四位總幹事、四種公告格式、四種財報格式、四種會議記錄格式」
+        - text: 。這不僅是行政效率的耗損，更反映了深層的結構性問題。
+      - document [ref=e136]:
+        - generic [ref=e138]:
+          - generic [ref=e152]: 重啟循環
+          - generic [ref=e153]:
+            - generic [ref=e158]: 物業公司先接案再找人
+            - generic [ref=e163]: 總幹事無訓練直接空降
+            - generic [ref=e168]: 依個人習慣作業
+            - generic [ref=e173]: 格式混亂/資產流失
+            - generic [ref=e178]: 管委會介入校正
+            - generic [ref=e183]: 總幹事壓力大離職
+            - generic [ref=e188]: 四個四現象
+            - generic [ref=e193]: 四位總幹事
+            - generic [ref=e198]: 四種公告格式
+            - generic [ref=e203]: 四種財報格式
+            - generic [ref=e208]: 四種會議記錄格式
+      - paragraph [ref=e209]: 本章節將剖析造成此現象的成因與影響，並確立本份 Wiki存在的必要性。
+      - heading "1. 系統性根源：產業結構的先天限制" [level=2] [ref=e210]
+      - paragraph [ref=e211]: 整體物業產業目前面臨人才供不應求的結構性困境，導致一線人員素質參差不齊。
+      - list [ref=e212]:
+        - listitem [ref=e213]:
+          - strong [ref=e214]: 物業管理公司未落實儲備訓練
+          - text: ：
+          - list [ref=e215]:
+            - listitem [ref=e216]:
+              - strong [ref=e217]: 成本考量
+              - text: ：物業公司為控制營運成本，傾向「少養閒人」，不願在派駐前投入資源培訓儲備幹部。
+            - listitem [ref=e218]:
+              - strong [ref=e219]: 匹配性無法預期
+              - text: ：總幹事的人格特質與未來派駐案場的工作地點、屬性是否匹配難以預料，降低了公司預先培訓的意願。
+        - listitem [ref=e220]:
+          - strong [ref=e221]: 「先接案，再找人」的惡性模式
+          - text: ：
+          - list [ref=e222]:
+            - listitem [ref=e223]: 業界常態傾向於開發到新案場後，才開始在市場上緊急招募總幹事。
+            - listitem [ref=e224]: 一旦招募成功，在完全沒有空檔進行職前教育訓練的情況下，即直接「空降」至案場，導致總幹事缺乏對社區文化的理解與標準化作業能力。
+      - heading "2. 中間環節：管理斷層與經驗歸零" [level=2] [ref=e225]
+      - list [ref=e226]:
+        - listitem [ref=e227]:
+          - strong [ref=e228]: 頻繁的人員異動導致「格式重置」
+          - text: ：
+          - list [ref=e229]:
+            - listitem [ref=e230]: 高流動率使得每一次交接都像是一次「管理模式的重置」。
+            - listitem [ref=e231]: 每位新任總幹事往往帶來個人的工作習慣與格式，而非延續社區既有的制度，造成行政風格無法統一。
+      - heading "3. 具體衝擊：社區行政資產流失" [level=2] [ref=e232]
+      - list [ref=e233]:
+        - listitem [ref=e234]:
+          - strong [ref=e235]: 知識與經驗無法累積
+          - text: ：
+          - list [ref=e236]:
+            - listitem [ref=e237]: 由於缺乏統一標準，流程與檔案格式混亂。
+            - listitem [ref=e238]: 社區的隱性資產（如過往決策邏輯、廠商應對細節、住戶特殊服務紀錄）無法有效沉澱，隨著人員離職而一併流失，導致管委會不斷在處理重複的問題。
+      - heading "4. 最終困境：管委會職能錯置" [level=2] [ref=e239]
+      - list [ref=e240]:
+        - listitem [ref=e241]:
+          - strong [ref=e242]: 監督者被迫成為執行者
+          - text: ：
+          - list [ref=e243]:
+            - listitem [ref=e244]: 委員被迫花費大量時間糾正基本的行政格式、錯字與流程細節，而非專注於社區的重大決策與方向規劃。
+            - listitem [ref=e245]: 難以建立長久且穩定的運作模式，導致社區管理品質始終在低檔徘徊，無法提升。
+      - document [ref=e247]:
+        - generic [ref=e249]:
+          - generic [ref=e250]:
+            - generic [ref=e254]: 依賴個人習慣
+            - generic [ref=e258]: 依賴 Wiki SOP
+          - generic [ref=e259]:
+            - generic [ref=e264]: 人治模式
+            - generic [ref=e269]: 管理震盪
+            - generic [ref=e274]: 制治模式
+            - generic [ref=e279]: 品質穩定
+            - generic [ref=e284]: 建立本份 Wiki
+      - heading "第一章：核心管理哲學與職責定位" [level=1] [ref=e285]
+      - heading "1. 目標與願景" [level=2] [ref=e286]
+      - paragraph [ref=e287]: 本份 Wiki的編撰並非僅為了規範行政細節，而是為了達成以下戰略目標：
+      - list [ref=e288]:
+        - listitem [ref=e289]:
+          - strong [ref=e290]: 願景
+          - text: ：實現社區管理的連續性與一致性，不因人員更迭而中斷。
+        - listitem [ref=e291]:
+          - strong [ref=e292]: 核心轉變
+          - text: ：將管理知識從依賴個人的「屬人」性質，轉變為歸屬於社區的「屬社區」資產。
+        - listitem [ref=e293]:
+          - strong [ref=e294]: 終極目的
+          - text: ：保護並累積閱大安社區的「無形資產」（如：管理經驗、廠商關係、決策脈絡）。
+      - heading "2. 核心策略與指導原則" [level=2] [ref=e295]
+      - paragraph [ref=e296]: 為了落實上述願景，總幹事在執行日常勤務時，應遵循以下四大指導原則：
+      - heading "2.1 數位化優先" [level=3] [ref=e297]
+      - paragraph [ref=e298]: 社區自第一屆管委會起便確立「無紙化辦公」的傳統。總幹事應熟練運用雲端協作工具（如 Google Workspace, Notion），擺脫傳統紙本作業模式，確保資料能即時同步與備份。
+      - heading "2.2 成本效益意識" [level=3] [ref=e299]
+      - paragraph [ref=e300]: 總幹事應具備主動為社區「省錢」與「創造價值」的意識。
+      - list [ref=e301]:
+        - listitem [ref=e302]: 善用電商平台進行比價與採購。
+        - listitem [ref=e303]: 為社區尋求最具經濟效益的解決方案，而非僅依賴廠商報價。
+      - heading "2.3 視覺形象一致性" [level=3] [ref=e304]
+      - paragraph [ref=e305]:
+        - text: 為維護社區整體的專業形象與品牌質感，
+        - strong [ref=e306]: 嚴禁使用任何自製、非官方設計的標語或公告
+        - text: （如手寫、Word 簡易排版）。
+      - list [ref=e307]:
+        - listitem [ref=e308]: 社區已建立一套完整的視覺識別系統 (VIS)。
+        - listitem [ref=e309]:
+          - strong [ref=e310]: 執行要點
+          - text: ：所有公告請直接取用
+          - strong [ref=e311]: Google Drive 資料庫中的「官方設計範本」
+          - text: 進行文字替換，杜絕「土法煉鋼」式的管理痕跡。
+      - heading "2.4 自立自強原則" [level=3] [ref=e312]
+      - paragraph [ref=e313]: 無論進駐的物業管理公司品牌為何，社區的實際管理品質，最終取決於「管委會的投入」與「駐點總幹事的專業責任心」。我們應將物業公司視為合作資源，而非過度依賴其總部的標準化流程，必須建立屬於閱大安自己的管理靈魂。
+      - heading "3. 角色定位與職責界定" [level=2] [ref=e314]
+      - heading "3.1 角色分工" [level=3] [ref=e315]
+      - list [ref=e316]:
+        - listitem [ref=e317]:
+          - strong [ref=e318]: 管理委員會
+          - text: ：制度建立者（制定遊戲規則與決策）。
+        - listitem [ref=e319]:
+          - strong [ref=e320]: 物業公司/總幹事
+          - text: ：專業執行者（落實決策並提供專業建議）。
+      - heading "3.2 總幹事職責界定" [level=3] [ref=e321]
+      - paragraph [ref=e322]: 為了讓總幹事能專注於高價值的管理工作，我們明確區分核心與非核心職責：
+      - list [ref=e323]:
+        - listitem [ref=e324]:
+          - strong [ref=e325]: 核心職責
+          - text: ：
+          - list [ref=e326]:
+            - listitem [ref=e327]: 專業管理顧問。
+            - listitem [ref=e328]: 廠商協調與談判。
+            - listitem [ref=e329]: 行政與財務作業。
+            - listitem [ref=e330]: 數位系統操作與維護。
+            - listitem [ref=e331]: 確實執行管委會決議。
+        - listitem [ref=e332]:
+          - strong [ref=e333]: 非核心職責（釐清期待）
+          - text: ：
+          - list [ref=e334]:
+            - listitem [ref=e335]:
+              - strong [ref=e336]: 範疇
+              - text: ：如更換燈管、簡易修繕等勞務工作。
+            - listitem [ref=e337]:
+              - strong [ref=e338]: 原則
+              - text: ：此類工作屬於總幹事在
+              - strong [ref=e339]: 「不影響核心勤務」且「確保自身安全」前提下
+              - text: ，願意提供的額外協助，
+              - strong [ref=e340]: 但不應被視為理所當然的份內之事
+              - text: 。責任劃分需清晰，避免因瑣事癱瘓核心管理機能。
+      - heading "4. 具體執行辦法" [level=2] [ref=e341]
+      - paragraph [ref=e342]: 為落實管理哲學，我們將透過以下具體手段執行：
+      - list [ref=e343]:
+        - listitem [ref=e344]:
+          - strong [ref=e345]: 文件標準化
+          - text: ：統一所有公告、財報、會議記錄的格式。
+        - listitem [ref=e346]:
+          - strong [ref=e347]: 流程制度化
+          - text: ：將複雜的任務拆解為標準作業程序。
+        - listitem [ref=e348]:
+          - strong [ref=e349]: 建立社區知識庫
+          - text: ：利用 Notion 建構可搜尋、可積累的知識中心。
+        - listitem [ref=e350]:
+          - strong [ref=e351]: 管委會主導的職前訓練
+          - text: ：由管委會親自對新任總幹事進行導讀與訓練，以
+          - strong [ref=e352]: 彌補物業公司職前訓練不足的產業缺口
+          - text: ，並確保其理解社區文化。
+      - heading "第二章：數位營運系統操作指南" [level=1] [ref=e353]
+      - heading "1. 核心數位身份與帳號管理" [level=2] [ref=e354]
+      - paragraph [ref=e355]: 閱大安社區的數位運作核心建立在統一的公務身份上，總幹事需妥善保管以下核心資產：
+      - heading "1.1 公務手機門號" [level=3] [ref=e356]
+      - list [ref=e357]:
+        - listitem [ref=e358]:
+          - strong [ref=e359]: 號碼
+          - text: ：
+          - code [ref=e360]: 0989-648-285
+        - listitem [ref=e361]:
+          - strong [ref=e362]: 合約與電信商變更紀錄
+          - text: ：
+          - list [ref=e363]:
+            - listitem [ref=e364]: 原為遠傳電信（499元限速 21Mbps 吃到飽），合約於 2025/08/30 到期。
+            - listitem [ref=e365]:
+              - strong [ref=e366]: 現況
+              - text: ：已於
+              - strong [ref=e367]: 2025/10/03 凌晨起
+              - text: 攜碼轉移至
+              - strong [ref=e368]: 中華電信
+              - text: （合約維持499元限速 21Mbps 吃到飽）。
+            - listitem [ref=e369]:
+              - strong [ref=e370]: 目的
+              - text: ：方便將行動電話帳單與社區市話帳單整合為同一份電子帳單，簡化請款流程。
+      - heading "1.2 公務 Google 帳號" [level=3] [ref=e371]
+      - list [ref=e372]:
+        - listitem [ref=e373]:
+          - strong [ref=e374]: 帳號
+          - text: ：
+          - code [ref=e375]: culturalcity85@gmail.com
+        - listitem [ref=e376]:
+          - strong [ref=e377]: 重要性
+          - text: ：此帳號為社區數位資產的「鑰匙」，綁定了所有雲端檔案、照片、聯絡人與第三方服務。
+      - heading "1.3 密碼存放與交接" [level=3] [ref=e378]
+      - list [ref=e379]:
+        - listitem [ref=e380]:
+          - strong [ref=e381]: 存放原則
+          - text: ：嚴禁寫在便利貼或私下記錄。
+        - listitem [ref=e382]:
+          - strong [ref=e383]: 指定路徑
+          - text: ：所有社區相關系統（含 Wi-Fi、廠商後台、公務帳號）的最新密碼，統一存放於 Google Drive：
+          - list [ref=e384]:
+            - listitem [ref=e385]:
+              - text: 路徑：
+              - code [ref=e386]: \01. 行政管理\11. 帳號密碼\社區各項密碼.xlsx
+      - heading "1.4 帳號安全政策" [level=3] [ref=e387]
+      - paragraph [ref=e388]:
+        - text: 遇下列時機，
+        - strong [ref=e389]: 必須強制變更
+        - text: Google 及網銀等重要帳號之密碼：
+      - list [ref=e390]:
+        - listitem [ref=e391]:
+          - strong [ref=e392]: 總幹事交接後
+          - text: （新任到職日當天）。
+        - listitem [ref=e393]:
+          - strong [ref=e394]: 管理委員會換屆交接後
+          - text: 。
+      - heading "2. Google Workspace 雲端辦公室規範" [level=2] [ref=e395]
+      - heading "2.1 Gmail（對外溝通樞紐）" [level=3] [ref=e396]
+      - list [ref=e397]:
+        - listitem [ref=e398]:
+          - strong [ref=e399]: 日常維護
+          - text: ：作為與外部廠商的主要聯絡管道，總幹事應每日巡查。
+        - listitem [ref=e400]:
+          - strong [ref=e401]: 信件管理
+          - text: ：
+          - list [ref=e402]:
+            - listitem [ref=e403]: 定期刪除不必要的登入通知與廣告信。
+            - listitem [ref=e404]: 善用「標籤 (Label)」與「資料夾」功能，將重要合約、報價單歸檔。
+            - listitem [ref=e405]: 保持收件匣整潔，避免重要訊息被淹沒。
+      - heading "2.2 Google 聯絡人（動態名冊）" [level=3] [ref=e406]
+      - list [ref=e407]:
+        - listitem [ref=e408]:
+          - strong [ref=e409]: 維護職責
+          - text: ：社區於 2024 年間已建立基礎聯絡人資料，總幹事需根據住戶異動（買賣/租賃）及廠商更替情形，即時更新通訊錄。
+        - listitem [ref=e410]:
+          - strong [ref=e411]: 進階資料庫 (Notion)
+          - text: ：
+          - list [ref=e412]:
+            - listitem [ref=e413]:
+              - text: 自 2025 年 6 月起，更完整且具備交互參照功能的「住戶名冊」與「廠商名冊」已建立於
+              - strong [ref=e414]: Notion 社區資料中心
+              - text: 。
+            - listitem [ref=e415]:
+              - strong [ref=e416]: 操作原則
+              - text: ：日常快速查找可用 Google 聯絡人，但
+              - strong [ref=e417]: 正式資料維護請以 Notion 為主
+              - text: 。
+      - heading "2.3 Google 日曆（排程管理中心）" [level=3] [ref=e418]
+      - paragraph [ref=e419]: 所有社區時程務必數位化，嚴禁只寫在紙本桌曆上：
+      - list [ref=e420]:
+        - listitem [ref=e421]:
+          - strong [ref=e422]: 會議排程
+          - text: ：第四屆管委會例會固定於
+          - strong [ref=e423]: 每月第二個星期一 20:00
+          - text: 。
+        - listitem [ref=e424]:
+          - strong [ref=e425]: 維護排程
+          - text: ：每月初需主動向廠商（機電、電梯、園藝、水塔、消毒、高壓清洗、修繕等）確認當月保養日期，並登錄至日曆。
+        - listitem [ref=e426]:
+          - strong [ref=e427]: 清潔排程
+          - text: ：
+          - list [ref=e428]:
+            - listitem [ref=e429]: 主要是因為清潔人力通常無法在一天當中將大樓進行完整的清潔，因此勢必要依照有限的人力進行排程，請總幹事針對清潔排程進行公告
+            - listitem [ref=e430]: 住戶通常會關心何時會輪到打掃自家門前走廊，特別是有他們發現有髒污時，若有住戶主動反映此類事件請總幹事指揮清潔人員或保全機動支援
+      - paragraph [ref=e431]:
+        - strong [ref=e432]: 自動建立的事件（系統提醒）
+        - text: ：culturalcity85 日曆上有些全天事件是後台系統根據資料自動建立的，請依
+        - strong [ref=e433]: 標題開頭的 emoji
+        - text: 判斷類型、對應 SOP：
+      - table [ref=e434]:
+        - rowgroup [ref=e435]:
+          - row "Emoji 前綴 事件來源 對應 SOP" [ref=e436]:
+            - columnheader "Emoji 前綴" [ref=e437]
+            - columnheader "事件來源" [ref=e438]
+            - columnheader "對應 SOP" [ref=e439]
+        - rowgroup [ref=e440]:
+          - row "💧 澆水提醒（依降雨/預報判斷） 第三章 §3.2 頂樓植栽澆灌" [ref=e441]:
+            - cell "💧" [ref=e442]
+            - cell "澆水提醒（依降雨/預報判斷）" [ref=e443]
+            - cell "第三章 §3.2 頂樓植栽澆灌" [ref=e444]
+          - row "⚠️ CWA 高溫警報 中央氣象署正式發布黃/橘/紅燈 第六章 §2.4（必須關懷）" [ref=e445]:
+            - cell "⚠️ CWA 高溫警報" [ref=e446]
+            - cell "中央氣象署正式發布黃/橘/紅燈" [ref=e447]
+            - cell "第六章 §2.4（必須關懷）" [ref=e448]
+          - row "🌡️ 預報高溫 大安區明日預報 ≥ 36°C 第六章 §2.4（建議關懷）" [ref=e449]:
+            - cell "🌡️ 預報高溫" [ref=e450]
+            - cell "大安區明日預報 ≥ 36°C" [ref=e451]
+            - cell "第六章 §2.4（建議關懷）" [ref=e452]
+          - row "🌀 颱風陸上警報 CWA 發布陸上颱風警報含臺北市 第五章 §1.2（防颱準備）" [ref=e453]:
+            - cell "🌀 颱風陸上警報" [ref=e454]
+            - cell "CWA 發布陸上颱風警報含臺北市" [ref=e455]
+            - cell "第五章 §1.2（防颱準備）" [ref=e456]
+          - row "🔍 颱風後巡查 陸上颱風警報解除後隔日 第五章 §1.2（災後巡查）" [ref=e457]:
+            - cell "🔍 颱風後巡查" [ref=e458]
+            - cell "陸上颱風警報解除後隔日" [ref=e459]
+            - cell "第五章 §1.2（災後巡查）" [ref=e460]
+      - paragraph [ref=e461]: 未來其他社區作業（電梯保養、消防演練自動排程等）若加入自動化也會比照此模式，靠 emoji 區分。
+      - heading "2.4 Google Tasks（任務指派）" [level=3] [ref=e462]
+      - list [ref=e463]:
+        - listitem [ref=e464]:
+          - text: 此為
+          - strong [ref=e465]: 主任委員與總幹事之間
+          - text: 的主要溝通介面。
+        - listitem [ref=e466]: 日常待辦事項、臨時交辦任務，均透過此工具進行指派與追蹤，避免 Line 訊息洗版而被遺忘。
+      - heading "2.5 Google Photos（影像資產庫）" [level=3] [ref=e467]
+      - list [ref=e468]:
+        - listitem [ref=e469]:
+          - strong [ref=e470]: 集中管理原則
+          - text: ：
+          - list [ref=e471]:
+            - listitem [ref=e472]: 本社區的相關照片/影片請盡量用已經設定好社區Google帳號的手機進行拍攝，並注意是否已經順利上傳至Google Photos的空間
+            - listitem [ref=e473]:
+              - text: 若您私人手機的畫質較社區手機佳，或手邊剛好只有私人手機，也歡迎直接使用私人手機拍攝，但請記得最後還是將相片
+              - strong [ref=e474]: 手動上傳
+              - text: 至Google Photos
+        - listitem [ref=e475]:
+          - strong [ref=e476]: 禁用平台
+          - text: ：
+          - list [ref=e477]:
+            - listitem [ref=e478]:
+              - text: ❌
+              - strong [ref=e479]: Line 相簿
+              - text: ：檔案會過期，畫質會被壓縮，且不易搜尋。
+            - listitem [ref=e480]:
+              - text: ❌
+              - strong [ref=e481]: YouTube
+              - text: ：社區雖然也可上傳影片至Youtube且較不佔空間，但考慮相片與影片的集中度與便利性等問題，請仍然以Google Photos為唯一的上傳平台，不另行上傳 YouTube。
+        - listitem [ref=e482]:
+          - strong [ref=e483]: 拍攝指引（短影片優先）
+          - text: ：
+          - list [ref=e484]:
+            - listitem [ref=e485]:
+              - strong [ref=e486]: 以短影片為主，靜態相片為輔
+              - text: ：對於漏水、設備異音等動態問題，影片能提供比照片更豐富的資訊。
+            - listitem [ref=e487]:
+              - strong [ref=e488]: 附帶旁白
+              - text: ：拍攝時應有意識地運用廣角、特寫、多視角取景，並搭配口頭說明，讓平日比較沒有接觸到社區細節的住戶或管委能夠較完整的瞭解問題全貌
+      - heading "2.6 Google Drive（雲端檔案總管）" [level=3] [ref=e489]
+      - list [ref=e490]:
+        - listitem [ref=e491]:
+          - strong [ref=e492]: 工作模式變革（重要）
+          - text: ：
+          - list [ref=e493]:
+            - listitem [ref=e494]:
+              - text: ❌
+              - strong [ref=e495]: 錯誤做法
+              - text: ：在電腦桌面編輯 Word/Excel 檔 -> 做完再上傳（容易造成版本混亂、漏上傳）。
+            - listitem [ref=e496]:
+              - text: ✅
+              - strong [ref=e497]: 正確做法
+              - text: ：
+              - strong [ref=e498]: 直接在 Google Drive 資料夾中開啟檔案進行編輯
+              - text: 。Google 具備即時儲存與版本紀錄功能，確保資料永遠同步。
+        - listitem [ref=e499]:
+          - strong [ref=e500]: 容量說明
+          - text: ：本社區 Google One 方案已於 2025 年 7 月擴容至
+          - strong [ref=e501]: 200GB
+          - text: ，請安心存放文件與影像。
+      - heading "3. Line 官方與群組管理" [level=2] [ref=e502]
+      - heading "3.1 群組分類與功能" [level=3] [ref=e503]
+      - paragraph [ref=e504]: 社區 Line 群組區分為不同層級，總幹事需嚴格遵守發言界線：
+      - list [ref=e505]:
+        - listitem [ref=e506]:
+          - strong [ref=e507]: 社區公告群組
+          - text: ：僅限管理中心發布重要公告（單向），避免社區公告被住戶的討論淹沒。
+        - listitem [ref=e508]:
+          - strong [ref=e509]: 住戶討論群組
+          - text: ：住戶交流區，總幹事需適度關注但不介入非公務閒聊。
+        - listitem [ref=e510]:
+          - strong [ref=e511]: 管理委員會群組
+          - text: ：核心決策圈。
+        - listitem [ref=e512]:
+          - strong [ref=e513]: 管委會+建設公司群組
+          - text: ：涉及保固修繕議題使用。
+      - heading "3.2 權限交接" [level=3] [ref=e514]
+      - list [ref=e515]:
+        - listitem [ref=e516]: 總幹事異動時，務必確認所有群組的管理權限已完整移轉給新任總幹事或主委。
+      - heading "4. Notion 社區資料中心" [level=2] [ref=e517]
+      - list [ref=e518]:
+        - listitem [ref=e519]:
+          - strong [ref=e520]: 啟用時間
+          - text: ：2025 年 6 月建置。
+        - listitem [ref=e521]:
+          - strong [ref=e522]: 核心價值
+          - text: ：
+          - list [ref=e523]:
+            - listitem [ref=e524]: 解決傳統 Office 檔案分散、難以交互參照的問題。
+            - listitem [ref=e525]:
+              - text: 包含
+              - strong [ref=e526]: 12 個模組、32 張資料表
+              - text: （如：住戶資料可直接連動管理費紀錄、廠商資料可連動維修紀錄）。
+        - listitem [ref=e527]:
+          - strong [ref=e528]: 操作與學習門檻
+          - text: ：
+          - list [ref=e529]:
+            - listitem [ref=e530]:
+              - text: 此系統功能強大，但對於習慣傳統文書作業的總幹事可能會有
+              - strong [ref=e531]: 轉換陣痛期
+              - text: 。
+            - listitem [ref=e532]:
+              - strong [ref=e533]: 心態建設
+              - text: ：初期操作較慢是正常的，請務必參閱專屬教學章節，一旦上手，將大幅減少重複作業的時間。
+      - heading "5. 智生活（社區管理APP）管理後台" [level=2] [ref=e534]
+      - heading "5.1 核心功能操作" [level=3] [ref=e535]
+      - list [ref=e536]:
+        - listitem [ref=e537]:
+          - strong [ref=e538]: 管理費收繳
+          - text: ：每月
+          - strong [ref=e539]: 20 號
+          - text: 為系統關帳日，需登入後台進行結算與報表產出。
+        - listitem [ref=e540]:
+          - strong [ref=e541]: 包裹通知
+          - text: ：確實登錄，系統將自動推播給住戶。
+        - listitem [ref=e542]:
+          - strong [ref=e543]: 瓦斯度數回報
+          - text: ：提醒住戶透過 App 回報度數。
+      - heading "5.2 公告發布" [level=3] [ref=e544]
+      - list [ref=e545]:
+        - listitem [ref=e546]: 智生活 App 為社區「公告張貼三處」之二（另外兩處為 Line 公告群組、信箱區螢幕）。
+      - heading "6. 其他數位設備與規範" [level=2] [ref=e547]
+      - heading "6.1 信箱區液晶螢幕" [level=3] [ref=e548]
+      - list [ref=e549]:
+        - listitem [ref=e550]:
+          - strong [ref=e551]: 用途
+          - text: ：電子佈告欄（公告張貼三處之三）。
+        - listitem [ref=e552]:
+          - strong [ref=e553]: 內容
+          - text: ：需與 Line、智生活公告同步更新。
+      - heading "6.2 文件掃描標準" [level=3] [ref=e554]
+      - list [ref=e555]:
+        - listitem [ref=e556]:
+          - text: 使用 Canon 事務機掃描多頁合約或文件時，務必設定存為
+          - strong [ref=e557]: PDF 格式
+          - text: 。
+        - listitem [ref=e558]:
+          - strong [ref=e559]: 嚴禁
+          - text: 存成多張 JPG 圖片檔，以利後續歸檔與閱讀。
+      - heading "6.3 網路環境 (Wi-Fi)" [level=3] [ref=e560]
+      - list [ref=e561]:
+        - listitem [ref=e562]:
+          - strong [ref=e563]: 服務商
+          - text: ：
+          - list [ref=e564]:
+            - listitem [ref=e565]:
+              - strong [ref=e566]: 凱擘大寬頻
+              - text: ：提供 1F 大廳、2F 公共空間。
+            - listitem [ref=e567]:
+              - strong [ref=e568]: 今網寬頻
+              - text: ：提供 RF 頂樓、地下室公共空間。
+        - listitem [ref=e569]:
+          - strong [ref=e570]: 歷史決策脈絡（為何不選中嘉？）
+          - text: ：
+          - list [ref=e571]:
+            - listitem [ref=e572]:
+              - text: 第一屆管委會曾評估導入「中嘉寬頻」，但因
+              - strong [ref=e573]: 管道數量
+              - text: 與
+              - strong [ref=e574]: 機電箱空間限制
+              - text: ，最終決定不導入。
+            - listitem [ref=e575]:
+              - strong [ref=e576]: 提醒
+              - text: ：未來若有網路升級需求，請優先考量現有兩家廠商，避免重複評估不可行的方案。
+        - listitem [ref=e577]:
+          - strong [ref=e578]: 密碼管理
+          - text: ：全社區公共區域 Wi-Fi 密碼皆已統一（請洽弱電廠商或查閱密碼表）。
+      - heading "6.4 AI 工具應用" [level=3] [ref=e579]
+      - list [ref=e580]:
+        - listitem [ref=e581]:
+          - text: 鼓勵總幹事使用
+          - strong [ref=e582]: ChatGPT
+          - text: 或
+          - strong [ref=e583]: Gemini
+          - text: 等生成式 AI 工具，協助草擬公告文案、信件回覆或活動企劃，提升行政效率。
+      - heading "7. AGM Tool（區權會專用工作檔）" [level=2] [ref=e584]
+      - paragraph [ref=e585]:
+        - text: 每年一度的區分所有權人會議（AGM）由本社區自製單檔工具
+        - code [ref=e586]: agm-tools.html
+        - text: 處理「簽到 → 議題唱票 → 委員選舉 → 紀錄」全流程。工具以六個分頁串接會議當天工作流：
+      - document [ref=e588]:
+        - generic [ref=e591]:
+          - generic [ref=e597]:
+            - text: ① 設定
+            - text: 場次／門檻
+          - generic [ref=e603]:
+            - text: ② 名冊維護
+            - text: 90 戶區權比
+          - generic [ref=e609]:
+            - text: ③ 簽到
+            - text: 計戶數／比例
+          - generic [ref=e615]:
+            - text: ④ 議題投票
+            - text: 逐案唱票
+          - generic [ref=e621]:
+            - text: ⑤ 委員選舉
+            - text: 得票排名
+          - generic [ref=e627]:
+            - text: ⑥ 會議紀錄
+            - text: 匯出 docx
+      - heading "7.1 部署與授權" [level=3] [ref=e628]
+      - list [ref=e629]:
+        - listitem [ref=e630]:
+          - strong [ref=e631]: 檔案位置
+          - text: ：Google Drive 共用資料夾下的
+          - code [ref=e632]: agm-tools.html
+          - text: （單檔 SPA，無後端依賴）
+        - listitem [ref=e633]:
+          - strong [ref=e634]: 開啟方式
+          - text: ：雙擊即可（瀏覽器直接讀 file://），不需要架伺服器
+        - listitem [ref=e635]:
+          - strong [ref=e636]: 同步
+          - text: ：Drive Desktop 即時雙向同步，會議當天可在不同電腦切換不掉資料
+        - listitem [ref=e637]:
+          - strong [ref=e638]: 權限
+          - text: ：物業協助簽到時可委派物業同事操作 ③ 簽到分頁；簽到完成後工作檔交回主委由主委接續 ④–⑥
+      - heading "7.2 會議當天 SOP（主委視角）" [level=3] [ref=e639]
+      - table [ref=e640]:
+        - rowgroup [ref=e641]:
+          - row "時點 分頁 動作" [ref=e642]:
+            - columnheader "時點" [ref=e643]
+            - columnheader "分頁" [ref=e644]
+            - columnheader "動作" [ref=e645]
+        - rowgroup [ref=e646]:
+          - row "會前 1 週 ② 把最新住戶名冊（樓層／戶號／姓名／區權比／代理委託）匯入確認" [ref=e647]:
+            - cell "會前 1 週" [ref=e648]
+            - cell "②" [ref=e649]
+            - cell "把最新住戶名冊（樓層／戶號／姓名／區權比／代理委託）匯入確認" [ref=e650]
+          - row "13:00 報到開始 ③ 物業逐戶報到，畫面投影即時統計給住戶看出席進度" [ref=e651]:
+            - cell "13:00 報到開始" [ref=e652]
+            - cell "③" [ref=e653]
+            - cell "物業逐戶報到，畫面投影即時統計給住戶看出席進度" [ref=e654]
+          - row "14:00 會議成立 ③ 主席切到 ③ 統計區，宣讀「出席戶數比例」確認過半 → 宣告會議成立" [ref=e655]:
+            - cell "14:00 會議成立" [ref=e656]
+            - cell "③" [ref=e657]
+            - cell "主席切到 ③ 統計區，宣讀「出席戶數比例」確認過半 → 宣告會議成立" [ref=e658]
+          - row "議程 04 委員選舉 ⑤ 收齊選票後逐張唱票，工具自動排名" [ref=e659]:
+            - cell "議程 04 委員選舉" [ref=e660]
+            - cell "⑤" [ref=e661]
+            - cell "收齊選票後逐張唱票，工具自動排名" [ref=e662]
+          - row "散會前 ⑥ 主席帶委員/監委檢視會議紀錄草稿、確認決議文字" [ref=e663]:
+            - cell "散會前" [ref=e664]
+            - cell "⑥" [ref=e665]
+            - cell "主席帶委員/監委檢視會議紀錄草稿、確認決議文字" [ref=e666]
+          - row "會後 7 日內 ⑥ 匯出 docx 給主委定稿 → 寄發住戶" [ref=e667]:
+            - cell "會後 7 日內" [ref=e668]
+            - cell "⑥" [ref=e669]
+            - cell "匯出 docx 給主委定稿 → 寄發住戶" [ref=e670]
+      - heading "7.3 常見問題" [level=3] [ref=e671]
+      - list [ref=e672]:
+        - listitem [ref=e673]:
+          - strong [ref=e674]: 簽到資料突然不見
+          - text: ：先檢查瀏覽器是否誤開了另一份
+          - code [ref=e675]: agm-tools.html
+          - text: （會議當天最好只開一個分頁）。Drive Desktop 同步衝突會出現
+          - code [ref=e676]: agm-tools (1).html
+          - text: ，要刪掉
+        - listitem [ref=e677]:
+          - strong [ref=e678]: 委託書怎麼登錄
+          - text: ：在 ③ 簽到分頁勾「委託」並輸入委託人戶號；同一被委託人最多代理戶數依規約檢查
+        - listitem [ref=e679]:
+          - strong [ref=e680]: 議案唱票數字對不上
+          - text: ：④ 投票分頁的「贊成／反對／棄權」三者相加應等於該案有投票權戶數；若對不上，回 ③ 確認簽到資料是否在過程被改
+      - heading "8. 每日水電公告產生器（每日例行工作）" [level=2] [ref=e681]
+      - paragraph [ref=e682]:
+        - text: 每天早上完成「每日水電公告」是總幹事的核心例行工作之一。位於
+        - code [ref=e683]: /admin/utility/
+        - text: ，
+        - strong [ref=e684]: 用社區公務帳號的密碼即可登入
+        - text: 。
+      - paragraph [ref=e685]: 這個工具會：
+      - list [ref=e686]:
+        - listitem [ref=e687]: 自動帶昨日臺北氣溫（GitHub Actions 凌晨自動抓取 CODiS 資料）
+        - listitem [ref=e688]:
+          - text: 根據昨日最高溫推算「
+          - strong [ref=e689]: 目標用電量
+          - text: 」並標示狀態（低於 / 接近 / 超出預期）
+        - listitem [ref=e690]: 根據是否清潔日，套用兩段式用水標準（清潔日 ≤0.5 度為正常、非清潔日 ≤0.2 度為正常）
+        - listitem [ref=e691]: 一鍵產生公告卡片 PNG，可直接下載發布
+      - heading "8.1 每日工作流（5 步驟）" [level=3] [ref=e692]
+      - document [ref=e694]:
+        - generic [ref=e697]:
+          - generic [ref=e703]:
+            - text: 1. 開啟
+            - text: /admin/utility/
+          - generic [ref=e709]:
+            - text: 2. 確認昨日氣溫
+            - text: 系統已自動帶
+          - generic [ref=e715]:
+            - text: 3. 填昨日
+            - text: 水度數＋電度數
+          - generic [ref=e721]:
+            - text: 4. 如有事件
+            - text: 填備註欄
+          - generic [ref=e727]:
+            - text: 5. 下載 PNG
+            - text: 發布 3 處
+      - paragraph [ref=e728]:
+        - strong [ref=e729]: 詳細步驟
+        - text: ：
+      - table [ref=e730]:
+        - rowgroup [ref=e731]:
+          - row "# 動作 時點 來源" [ref=e732]:
+            - columnheader "#" [ref=e733]
+            - columnheader "動作" [ref=e734]
+            - columnheader "時點" [ref=e735]
+            - columnheader "來源" [ref=e736]
+        - rowgroup [ref=e737]:
+          - row "1 開啟 /admin/utility/ 每天早上 09:00 前 瀏覽器書籤" [ref=e738]:
+            - cell "1" [ref=e739]
+            - cell "開啟 /admin/utility/" [ref=e740]:
+              - text: 開啟
+              - code [ref=e741]: /admin/utility/
+            - cell "每天早上 09:00 前" [ref=e742]
+            - cell "瀏覽器書籤" [ref=e743]
+          - row "2 確認昨日氣溫（系統已自動帶） — CODiS 466920 臺北站" [ref=e744]:
+            - cell "2" [ref=e745]
+            - cell "確認昨日氣溫（系統已自動帶）" [ref=e746]
+            - cell "—" [ref=e747]
+            - cell "CODiS 466920 臺北站" [ref=e748]
+          - row "3 填昨日水度數（單日 + 累計） — 台北自來水「水管家」系統" [ref=e749]:
+            - cell "3" [ref=e750]
+            - cell "填昨日水度數（單日 + 累計）" [ref=e751]:
+              - text: 填昨日
+              - strong [ref=e752]: 水度數
+              - text: （單日 + 累計）
+            - cell "—" [ref=e753]
+            - cell "台北自來水「水管家」系統" [ref=e754]
+          - row "3 填昨日電度數（單日 + 累計） — 「臺灣電力 APP」AMI 智慧電錶" [ref=e755]:
+            - cell "3" [ref=e756]
+            - cell "填昨日電度數（單日 + 累計）" [ref=e757]:
+              - text: 填昨日
+              - strong [ref=e758]: 電度數
+              - text: （單日 + 累計）
+            - cell "—" [ref=e759]
+            - cell "「臺灣電力 APP」AMI 智慧電錶" [ref=e760]
+          - row "4 填備註（如有事件） — 見 §8.3" [ref=e761]:
+            - cell "4" [ref=e762]
+            - cell "填備註（如有事件）" [ref=e763]
+            - cell "—" [ref=e764]
+            - cell "見 §8.3" [ref=e765]
+          - row "5 下載 PNG → 發布 3 處 09:00 前 見 §8.2" [ref=e766]:
+            - cell "5" [ref=e767]
+            - cell "下載 PNG → 發布 3 處" [ref=e768]
+            - cell "09:00 前" [ref=e769]
+            - cell "見 §8.2" [ref=e770]
+      - heading "8.2 三個發布管道（同步）" [level=3] [ref=e771]
+      - paragraph [ref=e772]: 公告 PNG 必須同步發布在以下三處——這是「公告張貼三處」的標準作業（呼應 §3.1、§5.2、§6.1）：
+      - table [ref=e773]:
+        - rowgroup [ref=e774]:
+          - row "管道 操作 受眾" [ref=e775]:
+            - columnheader "管道" [ref=e776]
+            - columnheader "操作" [ref=e777]
+            - columnheader "受眾" [ref=e778]
+        - rowgroup [ref=e779]:
+          - row "Line 公告群組 在「閱大安社區公告群組」貼上 PNG 全體住戶（即時推播）" [ref=e780]:
+            - cell "Line 公告群組" [ref=e781]:
+              - strong [ref=e782]: Line 公告群組
+            - cell "在「閱大安社區公告群組」貼上 PNG" [ref=e783]
+            - cell "全體住戶（即時推播）" [ref=e784]
+          - row "智生活 App 公告 後台上傳 PNG 全體住戶（App 推播）" [ref=e785]:
+            - cell "智生活 App 公告" [ref=e786]:
+              - strong [ref=e787]: 智生活 App 公告
+            - cell "後台上傳 PNG" [ref=e788]
+            - cell "全體住戶（App 推播）" [ref=e789]
+          - row "信箱區液晶螢幕 透過後台更新顯示圖檔 進出大樓住戶（被動看到）" [ref=e790]:
+            - cell "信箱區液晶螢幕" [ref=e791]:
+              - strong [ref=e792]: 信箱區液晶螢幕
+            - cell "透過後台更新顯示圖檔" [ref=e793]
+            - cell "進出大樓住戶（被動看到）" [ref=e794]
+      - heading "8.3 備註欄使用原則（重要）" [level=3] [ref=e795]
+      - paragraph [ref=e796]:
+        - text: 備註欄不是裝飾——是
+        - strong [ref=e797]: 社區用水/用電歷史資料庫的關鍵欄位
+        - text: ，每筆事件都會成為未來判斷異常的依據。請務必當天填寫，事後補登記憶會模糊。
+      - paragraph [ref=e798]:
+        - strong [ref=e799]: 該填的事件類型
+        - text: ：
+      - list [ref=e800]:
+        - listitem [ref=e801]:
+          - strong [ref=e802]: 設備異常或故障
+          - text: ：揚水馬達、抽水泵、空壓機、冷氣等運作異常
+        - listitem [ref=e803]:
+          - strong [ref=e804]: 設備維修或更換
+          - text: ：哪天請哪家廠商來修什麼
+        - listitem [ref=e805]:
+          - strong [ref=e806]: 計水/計電中斷
+          - text: ：智慧電錶或水管家系統當機、抄表延遲
+        - listitem [ref=e807]:
+          - strong [ref=e808]: 特殊用水/用電場景
+          - text: ：水塔清洗、外牆清洗、高壓沖洗、大型活動
+        - listitem [ref=e809]:
+          - strong [ref=e810]: 施工
+          - text: ：住戶裝修、社區工程、廠商進場
+        - listitem [ref=e811]:
+          - strong [ref=e812]: 異常天氣
+          - text: ：颱風前後、寒流、熱浪
+      - paragraph [ref=e813]:
+        - strong [ref=e814]: 為什麼這件事重要
+        - text: ：2026 年 4 月曾發生揚水馬達軟管破裂、3 天用電飆到 540 度（vs 平日 200 度）。
+        - strong [ref=e815]: 因為當時備註欄有記
+        - text: ，事後查資料時才能快速判斷「這 3 天是設備故障、不是熱浪」，避免污染整個迴歸模型。詳見第四章 §3.1.3。
+      - heading "8.4 故障排除" [level=3] [ref=e816]
+      - table [ref=e817]:
+        - rowgroup [ref=e818]:
+          - row "症狀 處理" [ref=e819]:
+            - columnheader "症狀" [ref=e820]
+            - columnheader "處理" [ref=e821]
+        - rowgroup [ref=e822]:
+          - row "開頁面跳「需要登入」 用社區公務帳號密碼登入；密碼存於 Google Drive \\01. 行政管理\\11. 帳號密碼\\社區各項密碼.xlsx" [ref=e823]:
+            - cell "開頁面跳「需要登入」" [ref=e824]
+            - cell "用社區公務帳號密碼登入；密碼存於 Google Drive \\01. 行政管理\\11. 帳號密碼\\社區各項密碼.xlsx" [ref=e825]:
+              - text: 用社區公務帳號密碼登入；密碼存於 Google Drive
+              - code [ref=e826]: \01. 行政管理\11. 帳號密碼\社區各項密碼.xlsx
+          - row "toolbar 顯示「離線模式」 雲端 KV 同步失敗，工具會自動降級用 localStorage；網路恢復後資料會自動同步上去" [ref=e827]:
+            - cell "toolbar 顯示「離線模式」" [ref=e828]
+            - cell "雲端 KV 同步失敗，工具會自動降級用 localStorage；網路恢復後資料會自動同步上去" [ref=e829]
+          - row "昨日氣溫沒帶 GitHub Actions 偶爾延遲，可從 CWA CODiS 466920 臺北站手動查" [ref=e830]:
+            - cell "昨日氣溫沒帶" [ref=e831]
+            - cell "GitHub Actions 偶爾延遲，可從 CWA CODiS 466920 臺北站手動查" [ref=e832]:
+              - text: GitHub Actions 偶爾延遲，可從
+              - link "CWA CODiS" [ref=e833] [cursor=pointer]:
+                - /url: https://codis.cwa.gov.tw/
+              - text: 466920 臺北站手動查
+          - row "電度數對不上 AMI 台電 AMI 顯示有時延遲一天，以實際抄表日為準" [ref=e834]:
+            - cell "電度數對不上 AMI" [ref=e835]
+            - cell "台電 AMI 顯示有時延遲一天，以實際抄表日為準" [ref=e836]
+      - heading "8.5 為什麼這個工具的真正價值是「資料庫」" [level=3] [ref=e837]
+      - paragraph [ref=e838]:
+        - strong [ref=e839]: 短期看
+        - text: ：每天發 1 張公告而已。
+        - strong [ref=e840]: 長期看
+        - text: ：4 年累積下來，是社區從未擁有過的真實水電歷史資料庫——
+      - list [ref=e841]:
+        - listitem [ref=e842]: 知道社區基準負載 ~190 度／日（不開冷氣最低耗電）
+        - listitem [ref=e843]: 知道冷氣負載年化 ~18,500 度（19% 總用電）
+        - listitem [ref=e844]: 知道公水自動澆灌排程過量 2-6 倍（vs 校準後的合理用量）
+        - listitem [ref=e845]: 設備故障時可快速比對歷史 pattern 判斷原因
+      - paragraph [ref=e846]:
+        - strong [ref=e847]: 這份資料庫就是您每天 10 分鐘工作的最大產出
+        - text: 。下任總幹事接手時，整套歷史可無縫延續判斷力。
+      - heading "第三章：設施維護與廠商管理" [level=1] [ref=e848]
+      - heading "1. 例行性保養排程與策略" [level=2] [ref=e849]
+      - heading "1.1 機電保養" [level=3] [ref=e850]
+      - list [ref=e851]:
+        - listitem [ref=e852]:
+          - strong [ref=e853]: 廠商
+          - text: ：太古華電
+        - listitem [ref=e854]:
+          - strong [ref=e855]: 頻率
+          - text: ：依合約定期執行
+        - listitem [ref=e856]:
+          - strong [ref=e857]: 年度換約啟動點
+          - text: ：合約到期前 2 個月由總幹事啟動議價，避免年底匆忙。詳見本章 §3 廠商管理與招標。
+        - listitem [ref=e858]:
+          - strong [ref=e859]: 延伸
+          - text: ：機電廠商有時會額外提報修繕／改善案（如緊急發電機保養、外掛式充電器增設），需由管委會單獨議決，不可預設併入年度合約。
+      - heading "1.2 電梯保養" [level=3] [ref=e860]
+      - list [ref=e861]:
+        - listitem [ref=e862]:
+          - strong [ref=e863]: 廠商
+          - text: ：三菱電梯
+        - listitem [ref=e864]:
+          - strong [ref=e865]: 合約期
+          - text: ：
+          - strong [ref=e866]: 兩年期
+          - text: （與其他保養合約不同點）
+        - listitem [ref=e867]:
+          - strong [ref=e868]: 到期月份
+          - text: ：11 月底（如 114/11/30 到期 → 115/12/01 起算下一個兩年）
+        - listitem [ref=e869]:
+          - strong [ref=e870]: 歷年單價
+          - text: ：113 年起每月 $12,870；115 年議價後維持原價續約 2 年至 117/11
+        - listitem [ref=e871]:
+          - strong [ref=e872]: 議價原則
+          - text: ：
+          - list [ref=e873]:
+            - listitem [ref=e874]: 廠商通常會嘗試小幅調漲（如 $12,870 → $13,100，漲 $230）
+            - listitem [ref=e875]:
+              - strong [ref=e876]: 管委會應堅持維持原價續約
+              - text: ，過往三菱多會接受
+            - listitem [ref=e877]: 議價策略：以「持續配合且無重大變動」為理由
+        - listitem [ref=e878]:
+          - strong [ref=e879]: 法規衍生注意
+          - text: ：每三年公共安全檢查時，可能會有新的電梯相關法規要求（詳第四章 §7）
+      - heading "1.3 園藝" [level=3] [ref=e880]
+      - list [ref=e881]:
+        - listitem [ref=e882]:
+          - strong [ref=e883]: 頻率
+          - text: ：每年 7 次（3、5、6、7、8、10、12月）。
+        - listitem [ref=e884]:
+          - strong [ref=e885]: 策略
+          - text: ：跳過冬季月份以節省預算。
+        - listitem [ref=e886]:
+          - strong [ref=e887]: 年度換約啟動點
+          - text: ：合約到期前 2 個月由總幹事啟動議價。詳見本章 §3。
+      - heading "1.4 電動大門" [level=3] [ref=e888]
+      - list [ref=e889]:
+        - listitem [ref=e890]:
+          - strong [ref=e891]: 核心問題
+          - text: ：本社區電動大門因門扇重量（單扇約 190-200 公斤）對電動馬達造成較大負擔，使其成為最脆弱、最不耐久的一環，因此需要定期的專業保養。
+        - listitem [ref=e892]:
+          - strong [ref=e893]: 市場特性
+          - text: ：自動門馬達（鉸鏈）在雙北市場基本上為「多堡科技」與「美德亞」兩家代理商所寡佔，導致議價空間極小。
+        - listitem [ref=e894]:
+          - strong [ref=e895]: 決策過程
+          - text: ：管委會曾深入探討多個方案，包括將大門改為較輕的手動門（備案）、增設玻璃小門以降低大門使用頻率等，但最終考量到大門使用的必要性與穩定性，決議仍維持現有電動大門並執行定期保養。
+        - listitem [ref=e896]:
+          - strong [ref=e897]: 廠商更替
+          - text: ：大門馬達的保養廠商已由初期的「多堡」更換為後來的「美德亞」。
+        - listitem [ref=e898]:
+          - strong [ref=e899]: 現行保養合約與 SOP
+          - text: ：
+          - list [ref=e900]:
+            - listitem [ref=e901]:
+              - strong [ref=e902]: 決議方案
+              - text: ：第二屆第十次管委會（2024/04/18）決議，接受「美德亞」的保養方案。
+            - listitem [ref=e903]:
+              - strong [ref=e904]: 合約內容
+              - text: ：每三個月一次，每次 8,000 元（未稅）。
+            - listitem [ref=e905]:
+              - strong [ref=e906]: 保養項目
+              - text: ：依 DORMA 原廠規定程序進行（檢視、清潔、防銹、潤滑、微調、校正、及教育住戶正確使用方式）。
+            - listitem [ref=e907]:
+              - strong [ref=e908]: 注意事項
+              - text: ：保養涉及專業系統檢查，無法由社區人員自行執行。總幹事應定期安排時程並登錄至 Google 日曆。
+        - listitem [ref=e909]:
+          - strong [ref=e910]: 長期議題與備援方案
+          - text: （若未來需更換，需經區權會決議）：
+          - list [ref=e911]:
+            - listitem [ref=e912]:
+              - strong [ref=e913]: 備案一（輕量化手動大門）
+              - text: ：由「金耀」廠商設計，重量降至 150KG，預算約 35.88 萬元（不含泥作）。
+            - listitem [ref=e914]:
+              - strong [ref=e915]: 備案二（增設玻璃小門）
+              - text: ：由「金耀」設計，將小門寬度由 60cm 增加至 72cm，預算約 12.45 萬元。
+            - listitem [ref=e916]:
+              - strong [ref=e917]: 委員會共識
+              - text: ：任何「換門」決策必經區權會同意。
+      - heading "1.5 水塔清洗" [level=3] [ref=e918]
+      - list [ref=e919]:
+        - listitem [ref=e920]:
+          - strong [ref=e921]: 技術特性
+          - text: ：頂樓為「單一進出水閥」相通設計，清洗時必定需要停水。
+        - listitem [ref=e922]:
+          - strong [ref=e923]: 地下室水箱定水位閥問題
+          - text: ：
+          - list [ref=e924]:
+            - listitem [ref=e925]:
+              - strong [ref=e926]: B2 水箱
+              - text: ：已於 2025/07 更換（社區第四年）。
+            - listitem [ref=e927]:
+              - strong [ref=e928]: B4 水箱
+              - text: ：於 2025 年間發現水流較小，但尚足補充用水，暫不更換。
+        - listitem [ref=e929]:
+          - strong [ref=e930]: 最佳化時程 SOP (公告範本)
+          - text: ：
+          - list [ref=e931]:
+            - listitem [ref=e932]:
+              - strong [ref=e933]: 事前宣導
+              - text: ：提醒儲水。
+              - strong [ref=e934]: 請 13-15 樓住戶 09:00 前關閉加壓馬達電源
+              - text: ，以免空轉燒毀。
+            - listitem [ref=e935]:
+              - strong [ref=e936]: 09:10-11:20
+              - text: ：放空頂樓上水塔（開始停水）。
+            - listitem [ref=e937]:
+              - strong [ref=e938]: 11:20-13:00
+              - text: ：清洗頂樓上水塔。
+            - listitem [ref=e939]:
+              - strong [ref=e940]: 13:00-15:00
+              - text: ：地下室打水至頂樓（逐漸復水），清洗地下室下水塔。
+              - list [ref=e941]:
+                - listitem [ref=e942]:
+                  - strong [ref=e943]: 復水提醒
+                  - text: ：若無水請開水龍頭排氣。13-15 樓住戶記得重啟加壓馬達。
+            - listitem [ref=e944]:
+              - strong [ref=e945]: 15:00-17:00
+              - text: ：清洗地下室下水箱。
+      - heading "1.6 高壓沖洗" [level=3] [ref=e946]
+      - list [ref=e947]:
+        - listitem [ref=e948]:
+          - strong [ref=e949]: 緣由
+          - text: ：曾有騎機車住戶因雨天地下室入口車道濕滑而摔倒。
+        - listitem [ref=e950]:
+          - strong [ref=e951]: 解決方案
+          - text: ：評估後暫不採化學或物理防滑工程，維持每年兩次由物業公司執行高壓沖洗，已有效改善青苔問題。
+        - listitem [ref=e952]:
+          - strong [ref=e953]: 延伸待辦
+          - text: ：需請總幹事向潤泰清潔人員確認上次交接的「吹苔清」藥劑施作地點（據稱為身障停車位區域）。
+      - heading "1.7 公設空調保養清洗" [level=3] [ref=e954]
+      - list [ref=e955]:
+        - listitem [ref=e956]:
+          - strong [ref=e957]: 執行策略
+          - text: ：安排於淡季（如 12 月），可與機電保養協調，利用搭設的鷹架一併處理大廳高處燈具更換。
+        - listitem [ref=e958]:
+          - strong [ref=e959]: 高處燈具更換原則
+          - text: ：
+          - list [ref=e960]:
+            - listitem [ref=e961]:
+              - strong [ref=e962]: 成本策略
+              - text: ：採「集中處理」或「一次性全數更換」，換下良品做備品，避免頻繁搭架。
+            - listitem [ref=e963]:
+              - strong [ref=e964]: 安全責任
+              - text: ：嚴禁非專業人員搭架。合約需明訂廠商指派持證（高空作業證照）人員，以實現責任轉移。
+            - listitem [ref=e965]:
+              - strong [ref=e966]: 長期方案
+              - text: ：研議採購社區自有鷹架供廠商使用，以降低報價。
+      - heading "1.8 垃圾冷藏設備" [level=3] [ref=e967]
+      - list [ref=e968]:
+        - listitem [ref=e969]:
+          - strong [ref=e970]: 維護策略
+          - text: ：取得鴻海環境科技報價後，因非營業急迫性設施，第四屆管委會決議採取「壞了再報修」策略。
+      - heading "1.9 地下室連續壁截水溝" [level=3] [ref=e971]
+      - list [ref=e972]:
+        - listitem [ref=e973]:
+          - strong [ref=e974]: 歷史現況
+          - text: ：社區共 74 個連續壁排水孔，確認真正有功能的「濕孔」為 22 個。
+        - listitem [ref=e975]:
+          - strong [ref=e976]: 權責範圍
+          - text: ：
+          - strong [ref=e977]: 不包含
+          - text: 在機電廠商（太古華電）合約內，需自行發包。
+        - listitem [ref=e978]:
+          - strong [ref=e979]: 建議執行廠商
+          - text: ：
+          - list [ref=e980]:
+            - listitem [ref=e981]:
+              - strong [ref=e982]: 首選
+              - text: ：冠駿潔境清潔（前廠商，熟悉管路）。
+            - listitem [ref=e983]:
+              - strong [ref=e984]: 備選
+              - text: ：潤泰物業配合廠商。
+        - listitem [ref=e985]:
+          - strong [ref=e986]: 成本參考
+          - text: ：冠駿曾報價 9,200 元（22 孔），遠低於市價（200-300元/孔）。
+        - listitem [ref=e987]:
+          - strong [ref=e988]: 策略
+          - text: ：目前採「有狀況再處理」，未來可考慮將「颱風季前預防性通管」列為年度例行項目。
+      - heading "1.10 地板石材晶化" [level=3] [ref=e989]
+      - list [ref=e990]:
+        - listitem [ref=e991]:
+          - strong [ref=e992]: 執行紀錄
+          - text: ：2024/03 由鼎峰石材行施作（大廳、交誼廳、頂樓、電梯），費用 34,650 元。
+        - listitem [ref=e993]:
+          - strong [ref=e994]: 建議
+          - text: ：若無更優廠商，建議沿用。
+      - heading "1.11 流出抑制設施（雨水緩衝池）" [level=3] [ref=e995]
+      - heading "1.11.1 主管機關、法源與年度義務" [level=4] [ref=e996]
+      - paragraph [ref=e997]:
+        - strong [ref=e998]: 主管機關
+        - text: ：
+      - list [ref=e999]:
+        - listitem [ref=e1000]:
+          - strong [ref=e1001]: 臺北市政府工務局水利工程處
+          - text: （業務承辦：
+          - strong [ref=e1002]: 雨水下水道管理科
+          - text: ）
+        - listitem [ref=e1003]: 地址：110204 臺北市信義區市府路 1 號 7 樓西南區
+        - listitem [ref=e1004]: 電話：(02) 2720-8889 或 1999 轉 8191
+        - listitem [ref=e1005]: 電子信箱：da_hsj@gov.taipei
+      - paragraph [ref=e1006]:
+        - strong [ref=e1007]: 法源
+        - text: ：
+      - list [ref=e1008]:
+        - listitem [ref=e1009]:
+          - text: 《
+          - strong [ref=e1010]: 臺北市雨水下水道相關設施與用戶排水設備審查暨查驗及檢查要點
+          - text: 》第 11 點
+        - listitem [ref=e1011]:
+          - text: 《
+          - strong [ref=e1012]: 臺北市基地開發排入雨水下水道逕流量標準
+          - text: 》（設施設置依據）
+        - listitem [ref=e1013]:
+          - text: 《
+          - strong [ref=e1014]: 臺北市下水道管理自治條例
+          - text: 》第 23 條（
+          - strong [ref=e1015]: 罰則依據
+          - text: ）
+      - paragraph [ref=e1016]:
+        - strong [ref=e1017]: 閱大安專屬資訊
+        - text: （公文上載明）：
+      - list [ref=e1018]:
+        - listitem [ref=e1019]:
+          - text: 案件編號：
+          - strong [ref=e1020]: OF1100624001
+        - listitem [ref=e1021]:
+          - text: 建造號碼：
+          - strong [ref=e1022]: 104 建字第 0086
+        - listitem [ref=e1023]: 設施位置：106012 臺北市大安區羅斯福路 2 段 83 之 3 號
+      - paragraph [ref=e1024]:
+        - strong [ref=e1025]: 年度義務
+        - text: ：
+      - list [ref=e1026]:
+        - listitem [ref=e1027]:
+          - strong [ref=e1028]: 每年 4 月
+          - text: 自主上傳維護文件到「
+          - strong [ref=e1029]: 臺北市排水案件管理平台
+          - text: 」
+        - listitem [ref=e1030]:
+          - text: 上傳網址：
+          - link "https://heochk.gov.taipei/DrainWater/Default" [ref=e1031] [cursor=pointer]:
+            - /url: https://heochk.gov.taipei/DrainWater/Default
+          - text: → 點選「
+          - strong [ref=e1032]: 流出抑制設施檢查
+          - text: 」項下
+        - listitem [ref=e1033]:
+          - text: 上傳項目：
+          - strong [ref=e1034]: 維護設施平面圖
+          - text: +
+          - strong [ref=e1035]: 現況照片
+          - text: （只接受圖檔，不收 PDF——這點重要，影響檢查表設計）
+      - paragraph [ref=e1036]:
+        - strong [ref=e1037]: 罰則
+        - text: ：
+      - blockquote [ref=e1038]:
+        - paragraph [ref=e1039]:
+          - text: 依《臺北市下水道管理自治條例》第 23 條：維護相關流出抑制設施之基地使用人，
+          - strong [ref=e1040]: 如經通知限期改善，屆期仍未改善者，得處新臺幣 1 萬元以上 5 萬元以下罰鍰，按次處罰至其改善為止
+          - text: 。
+      - paragraph [ref=e1041]:
+        - strong [ref=e1042]: 抽檢機制
+        - text: ：
+      - list [ref=e1043]:
+        - listitem [ref=e1044]:
+          - text: 水利處受託專業單位「
+          - strong [ref=e1045]: 社團法人台北市水利技師公會
+          - text: 」每年抽檢部分社區
+        - listitem [ref=e1046]: 被抽到會另行通知，社區需配合現場檢查
+        - listitem [ref=e1047]:
+          - strong [ref=e1048]: 未自主上傳的社區更容易被列入抽檢名冊
+          - text: ——這是 4 月按時上傳的實際誘因
+      - paragraph [ref=e1049]:
+        - strong [ref=e1050]: 閱大安處理紀錄
+        - text: ：
+      - list [ref=e1051]:
+        - listitem [ref=e1052]:
+          - strong [ref=e1053]: 115 年 5 月 7 日
+          - text: 收到水利處
+          - code [ref=e1054]: 北市工水水字第 1156030111 號
+          - text: 函（因 4 月底前未上傳，要求延期至 5 月 20 日前完成）
+        - listitem [ref=e1055]:
+          - text: 自此每年
+          - strong [ref=e1056]: 4 月底前
+          - text: 主動上傳，避免被催 + 被列抽檢
+        - listitem [ref=e1057]: 完整紀錄、廠商函詢、檢查照片集中放入 Google Drive 「年度法規遵循 / 流出抑制設施」資料夾，下任主委可調閱對照
+      - heading "1.11.2 系統概念" [level=4] [ref=e1058]
+      - paragraph [ref=e1059]:
+        - strong [ref=e1060]: 這是緩衝池（buffer），不是蓄水池（reservoir）
+        - text: ——平時應該接近空池，下雨時暫存、雨停後排空，跟「儲水備用」邏輯
+        - strong [ref=e1061]: 剛好相反
+        - text: 。
+      - document [ref=e1063]:
+        - generic [ref=e1065]:
+          - generic [ref=e1071]:
+            - generic [ref=e1075]: 水位高啟動
+            - generic [ref=e1079]: 馬達失效時被動排出
+          - generic [ref=e1080]:
+            - generic [ref=e1086]:
+              - text: 屋頂 / 露台 / 中庭
+              - text: 雨水
+            - generic [ref=e1091]: 雨水管
+            - generic [ref=e1097]:
+              - text: 集水井 / 沉砂井
+              - text: ＋進水閘閥
+            - generic [ref=e1103]:
+              - text: 雨水池
+              - text: 平時近空
+            - generic [ref=e1108]: 浮球水位感測
+            - generic [ref=e1113]: 沈水馬達
+            - generic [ref=e1119]:
+              - text: 止水閥
+              - text: 逆止閥
+            - generic [ref=e1125]:
+              - text: 溢流口
+              - text: 被動安全
+            - generic [ref=e1130]: 市政雨水下水道
+      - paragraph [ref=e1131]:
+        - text: 設計核心：進水（雨）是「隨機暴衝」、出水（馬達抽出）是「定速穩定」，中間靠水位緩衝。市政下水道收到的就不再是瞬間暴雨，而是平緩水流——這就是「
+        - strong [ref=e1132]: 流出抑制
+        - text: 」這個名字的由來。
+      - paragraph [ref=e1133]:
+        - strong [ref=e1134]: 物理空間配置（剖面示意）
+        - text: ：
+      - img "流出抑制設施剖面示意圖" [ref=e1135]
+      - heading "1.11.3 五個核心零件" [level=4] [ref=e1136]
+      - table [ref=e1137]:
+        - rowgroup [ref=e1138]:
+          - row "零件 功能 檢查重點" [ref=e1139]:
+            - columnheader "零件" [ref=e1140]
+            - columnheader "功能" [ref=e1141]
+            - columnheader "檢查重點" [ref=e1142]
+        - rowgroup [ref=e1143]:
+          - row "雨水管 把屋頂／陽台／中庭雨水導入地下雨水池 管口無堵塞、無破損" [ref=e1144]:
+            - cell "雨水管" [ref=e1145]:
+              - strong [ref=e1146]: 雨水管
+            - cell "把屋頂／陽台／中庭雨水導入地下雨水池" [ref=e1147]
+            - cell "管口無堵塞、無破損" [ref=e1148]
+          - row "雨水池 緩衝暫存（平時近空，雨時暫蓄，雨停排空） 平時水位應低；若長期蓄水代表馬達或浮球失效" [ref=e1149]:
+            - cell "雨水池" [ref=e1150]:
+              - strong [ref=e1151]: 雨水池
+            - cell "緩衝暫存（平時近空，雨時暫蓄，雨停排空）" [ref=e1152]
+            - cell "平時水位應低；若長期蓄水代表馬達或浮球失效" [ref=e1153]:
+              - strong [ref=e1154]: 平時水位應低
+              - text: ；若長期蓄水代表馬達或浮球失效
+          - row "浮球 水位感測，自動觸發馬達啟停（跟廁所水箱浮球同理） 能自由上下浮動，沒被淤泥／雜物卡住——最常見故障點" [ref=e1155]:
+            - cell "浮球" [ref=e1156]:
+              - strong [ref=e1157]: 浮球
+            - cell "水位感測，自動觸發馬達啟停（跟廁所水箱浮球同理）" [ref=e1158]
+            - cell "能自由上下浮動，沒被淤泥／雜物卡住——最常見故障點" [ref=e1159]:
+              - text: 能自由上下浮動，沒被淤泥／雜物卡住——
+              - strong [ref=e1160]: 最常見故障點
+          - row "沈水馬達 沈於池底的離心式抽水機，把池水加壓抽到地面層下水道 控制箱電源燈、自動／手動切換鈕、運轉燈正常" [ref=e1161]:
+            - cell "沈水馬達" [ref=e1162]:
+              - strong [ref=e1163]: 沈水馬達
+            - cell "沈於池底的離心式抽水機，把池水加壓抽到地面層下水道" [ref=e1164]
+            - cell "控制箱電源燈、自動／手動切換鈕、運轉燈正常" [ref=e1165]
+          - row "止水閥（逆止閥） 裝在馬達出水管末段，單向放行：池內水可出，市政下水道水不可倒灌回池 手動閥要在「開」位置（手把與管路平行）；逆止閥閥瓣無卡死" [ref=e1166]:
+            - cell "止水閥（逆止閥）" [ref=e1167]:
+              - strong [ref=e1168]: 止水閥（逆止閥）
+            - cell "裝在馬達出水管末段，單向放行：池內水可出，市政下水道水不可倒灌回池" [ref=e1169]:
+              - text: 裝在馬達出水管末段，
+              - strong [ref=e1170]: 單向放行
+              - text: ：池內水可出，市政下水道水不可倒灌回池
+            - cell "手動閥要在「開」位置（手把與管路平行）；逆止閥閥瓣無卡死" [ref=e1171]
+      - heading "1.11.4 進水閘閥與溢流口（兩個必須認得但不日常操作的點）" [level=4] [ref=e1172]
+      - list [ref=e1173]:
+        - listitem [ref=e1174]:
+          - strong [ref=e1175]: 進水閘閥
+          - text: ：在雨水管即將進入池體之前的閘閥。
+          - strong [ref=e1176]: 平時應該是「開」
+          - text: ，只有以下三種狀況才關：
+          - list [ref=e1177]:
+            - listitem [ref=e1178]:
+              - strong [ref=e1179]: 檢修時關閉
+              - text: ：派人下池清淤／檢查馬達／換浮球時，若不關進水萬一突然下雨人在池底會很危險
+            - listitem [ref=e1180]:
+              - strong [ref=e1181]: 故障時隔離
+              - text: ：池體破裂、馬達燒毀、止水閥失效市政水倒灌時，手動關閉避免擴大
+            - listitem [ref=e1182]:
+              - strong [ref=e1183]: 平時驗證
+              - text: ：年度注水測試確認馬達能啟動時可能會用
+        - listitem [ref=e1184]:
+          - strong [ref=e1185]: 溢流口
+          - text: ：當馬達徹底失效、池水暴漲時，從一個「比較高、但低於池頂」的位置溢流到市政下水道，避免水從人孔蓋頂出去淹到地面。
+          - strong [ref=e1186]: 被動安全機制、沒有閥可控
+          - text: ，檢查時看有沒有被雜物堵住
+      - blockquote [ref=e1187]:
+        - paragraph [ref=e1188]:
+          - text: ⚠️
+          - strong [ref=e1189]: 常見住戶誤解
+          - text: ：「下大雨前是不是把進水關起來就好？」——
+          - strong [ref=e1190]: 錯
+          - text: 。雨水不會因為你關閉就消失，反而會在屋頂、露台、車道截水溝、集水井累積，嚴重時倒灌淹到地下室。流出抑制設施就是要讓水進來暫存再受控排出，
+          - strong [ref=e1191]: 主動拒絕進水違背系統設計初衷
+          - text: 。
+      - heading "1.11.5 「沈水馬達」名詞釐清（避免跟「揚水馬達」混淆）" [level=4] [ref=e1192]
+      - paragraph [ref=e1193]: 兩個工程名詞的命名邏輯不同：
+      - table [ref=e1194]:
+        - rowgroup [ref=e1195]:
+          - row "名詞 命名依據 範例" [ref=e1196]:
+            - columnheader "名詞" [ref=e1197]
+            - columnheader "命名依據" [ref=e1198]
+            - columnheader "範例" [ref=e1199]
+        - rowgroup [ref=e1200]:
+          - row "揚水馬達 功能方向：「把水往上揚升」 地下水箱抽到屋頂水塔的馬達（社區也有，在 §6.4 揚水系統）" [ref=e1201]:
+            - cell "揚水馬達" [ref=e1202]:
+              - strong [ref=e1203]: 揚水馬達
+            - cell "功能方向：「把水往上揚升」" [ref=e1204]:
+              - strong [ref=e1205]: 功能方向
+              - text: ：「把水往上揚升」
+            - cell "地下水箱抽到屋頂水塔的馬達（社區也有，在 §6.4 揚水系統）" [ref=e1206]
+          - row "沈水馬達 馬達本身環境：「馬達本體沉入水中運作」 流出抑制設施的這台" [ref=e1207]:
+            - cell "沈水馬達" [ref=e1208]:
+              - strong [ref=e1209]: 沈水馬達
+            - cell "馬達本身環境：「馬達本體沉入水中運作」" [ref=e1210]:
+              - strong [ref=e1211]: 馬達本身環境
+              - text: ：「馬達本體沉入水中運作」
+            - cell "流出抑制設施的這台" [ref=e1212]
+      - paragraph [ref=e1213]:
+        - text: 兩個概念
+        - strong [ref=e1214]: 可以重疊
+        - text: ：
+      - list [ref=e1215]:
+        - listitem [ref=e1216]: 「沈水式揚水馬達」：泡在水裡、把水打到高處的供水機
+        - listitem [ref=e1217]:
+          - strong [ref=e1218]: 本社區流出抑制設施的馬達是「沈水式排水馬達」
+          - text: ：泡在水裡、把水加壓排到下水道（功能是排水、命名是依環境）
+      - paragraph [ref=e1219]:
+        - strong [ref=e1220]: 為什麼這台要沈水？
+        - text: 因為它要把池底的水抽到地面層的市政下水道，位置比排水終點低、靠重力流不出去，必須加壓。馬達本體和接線都做了防水處理；泡在池水裡反而能藉水散熱。
+      - heading "1.11.6 年度自主檢查 SOP" [level=4] [ref=e1221]
+      - paragraph [ref=e1222]:
+        - text: 每年 4 月上傳前執行。
+        - strong [ref=e1223]: 目標：證明這幾個零件目前都是正常可用的狀態
+        - text: 。
+      - blockquote [ref=e1224]:
+        - paragraph [ref=e1225]:
+          - text: 📋
+          - strong [ref=e1226]: 檢查表工具（自用工作底稿）
+          - text: ：
+          - code [ref=e1227]: /admin/staff/inspection-osf.html
+          - text: （CC-FORM-OSF-001） 22 項分 6 區、手機／平板現場填寫、自動儲存。
+          - strong [ref=e1228]: 僅供社區內部紀錄
+          - text: ——「臺北市排水案件管理平台」
+          - strong [ref=e1229]: 只接受圖檔上傳，不收 PDF
+          - text: ，所以這份檢查表不會出現在政府平台上，但可列印或存 PDF 留在 Google Drive 當當年度檢查的工作底稿，並可給接任主委對照學習。
+      - paragraph [ref=e1230]:
+        - strong [ref=e1231]: 完整理解圖（拍照部位 + 名詞 + 簡單記法一張看完）
+        - text: ：
+      - img "流出抑制設施完整系統示意圖（含拍照部位）" [ref=e1232]
+      - blockquote [ref=e1233]:
+        - paragraph [ref=e1234]:
+          - text: 此圖由 AI 生成，
+          - strong [ref=e1235]: 照片部分為示意非本社區實景
+          - text: ，僅供總幹事與管委會教育學習用。
+          - strong [ref=e1236]: 不可上傳市政平台
+          - text: ——平台要求社區實景照片。
+      - paragraph [ref=e1237]:
+        - strong [ref=e1238]: 實際上傳到平台的東西
+        - text: （只有兩類，
+        - strong [ref=e1239]: 都是圖檔
+        - text: ）：
+      - list [ref=e1240]:
+        - listitem [ref=e1241]:
+          - strong [ref=e1242]: 維護設施平面圖
+          - text: （top-down 平面圖）—— 從建商交付的原始圖說中找；
+          - strong [ref=e1243]: 不是剖面示意圖
+          - text: 。檔案如果是 PDF 要先轉成 PNG/JPG。
+        - listitem [ref=e1244]:
+          - strong [ref=e1245]: 現況照片
+          - text: —— 按下表分區拍攝，
+          - strong [ref=e1246]:
+            - text: 檔名建議用
+            - code [ref=e1247]: A1-01.jpg
+            - text: 這種對得起來檢查表編號的格式
+      - paragraph [ref=e1248]:
+        - strong [ref=e1249]: 必拍照片（按區塊分）
+        - text: ：
+      - table [ref=e1250]:
+        - rowgroup [ref=e1251]:
+          - row "區塊 拍什麼" [ref=e1252]:
+            - columnheader "區塊" [ref=e1253]
+            - columnheader "拍什麼" [ref=e1254]
+        - rowgroup [ref=e1255]:
+          - row "A. 雨水池本體 人孔蓋（檢查口）、池體標示牌（如有）、池內全景（打開人孔蓋往下拍）" [ref=e1256]:
+            - cell "A. 雨水池本體" [ref=e1257]:
+              - strong [ref=e1258]: A. 雨水池本體
+            - cell "人孔蓋（檢查口）、池體標示牌（如有）、池內全景（打開人孔蓋往下拍）" [ref=e1259]
+          - row "B. 進水側 雨水池進水口、進水前的集水井／沉砂井、進水閘閥、池內進水管口、溢流口" [ref=e1260]:
+            - cell "B. 進水側" [ref=e1261]:
+              - strong [ref=e1262]: B. 進水側
+            - cell "雨水池進水口、進水前的集水井／沉砂井、進水閘閥、池內進水管口、溢流口" [ref=e1263]
+          - row "C. 排水側 池內出水管口、止水閥（逆止閥）、排放口或接入市政雨水下水道處" [ref=e1264]:
+            - cell "C. 排水側" [ref=e1265]:
+              - strong [ref=e1266]: C. 排水側
+            - cell "池內出水管口、止水閥（逆止閥）、排放口或接入市政雨水下水道處" [ref=e1267]
+          - row "D. 控制系統 沈水馬達本體與電源線、控制箱（電源燈、自動／手動切換鈕、運轉指示燈）、配電箱內部（無跳脫、無警示燈亮）" [ref=e1268]:
+            - cell "D. 控制系統" [ref=e1269]:
+              - strong [ref=e1270]: D. 控制系統
+            - cell "沈水馬達本體與電源線、控制箱（電源燈、自動／手動切換鈕、運轉指示燈）、配電箱內部（無跳脫、無警示燈亮）" [ref=e1271]
+          - row "E. 浮球 浮球本體與纜線（重點：能否自由上下浮動，沒被卡住）" [ref=e1272]:
+            - cell "E. 浮球" [ref=e1273]:
+              - strong [ref=e1274]: E. 浮球
+            - cell "浮球本體與纜線（重點：能否自由上下浮動，沒被卡住）" [ref=e1275]
+          - row "F. 周邊 池內無大量淤泥堆積、無雜物" [ref=e1276]:
+            - cell "F. 周邊" [ref=e1277]:
+              - strong [ref=e1278]: F. 周邊
+            - cell "池內無大量淤泥堆積、無雜物" [ref=e1279]
+      - paragraph [ref=e1280]:
+        - strong [ref=e1281]: 功能測試（可選但建議）
+        - text: ：
+      - list [ref=e1282]:
+        - listitem [ref=e1283]: 注水測試：人工灌少量水進池，確認浮球觸發馬達啟動、馬達能把水抽出
+        - listitem [ref=e1284]: 停水測試：水位降到設定低點時，浮球落下、馬達自動停止
+      - heading "1.11.7 三個最常見失效情境" [level=4] [ref=e1285]
+      - list [ref=e1286]:
+        - listitem [ref=e1287]:
+          - strong [ref=e1288]: 浮球卡死
+          - text: （被池底淤泥、雜物纏住）→ 馬達該啟動時不啟動，池子越積越滿，下大雨時直接溢流
+        - listitem [ref=e1289]:
+          - strong [ref=e1290]: 沈水馬達燒毀
+          - text: （長期不運轉、繞組受潮）→ 同上，水抽不出去。
+          - strong [ref=e1291]: 建議每年至少一次注水測試
+          - text: 確認馬達能啟動
+        - listitem [ref=e1292]:
+          - strong [ref=e1293]: 止水閥失效
+          - text: （閥瓣卡住關不緊）→ 市政下水道倒灌進池子，把池子變成藏污納垢之地，下水道臭味也會從你家管線冒上來
+      - paragraph [ref=e1294]:
+        - strong [ref=e1295]: 發現異常時的責任分工
+        - text: ：
+      - list [ref=e1296]:
+        - listitem [ref=e1297]:
+          - strong [ref=e1298]: 發現方
+          - text: ：通常是保全或總幹事（潤泰維護派駐人員）日常巡檢時察覺，或年度自主檢查時發現
+        - listitem [ref=e1299]:
+          - strong [ref=e1300]: 回報方
+          - text: ：總幹事彙整異常項目（含現場照片）通報主委
+        - listitem [ref=e1301]:
+          - strong [ref=e1302]: 檢修方
+          - text: ：
+          - list [ref=e1303]:
+            - listitem [ref=e1304]:
+              - strong [ref=e1305]: 機電一般故障
+              - text: （控制箱、配電、線路、止水閥）→
+              - strong [ref=e1306]: 機電廠商太古華電
+            - listitem [ref=e1307]:
+              - strong [ref=e1308]: 沈水馬達／浮球專業故障
+              - text: （馬達燒毀、浮球感測失靈）→
+              - strong [ref=e1309]: 太古華電評估後若超出能力，轉沈水馬達原廠
+            - listitem [ref=e1310]:
+              - strong [ref=e1311]: 池體結構問題
+              - text: （裂縫、滲水）→ 視範圍另尋土木／結構廠商
+        - listitem [ref=e1312]:
+          - strong [ref=e1313]: 紀錄方
+          - text: ：改善前後的照片務必留存於 Google Drive「年度法規遵循 / 流出抑制設施」資料夾，這在後續查核輔導時是重要佐證
+      - heading "1.11.8 廠商歸屬" [level=4] [ref=e1314]
+      - blockquote [ref=e1315]:
+        - paragraph [ref=e1316]:
+          - strong [ref=e1317]: 115 年首次處理時待確認
+          - text: ：流出抑制設施的保養是否在機電廠商（太古華電）合約範圍內？若否，需單獨發包。建議首次上傳前致電太古華電與潤泰維護分別確認，並把答覆記在合約附註內。
+      - heading "2. 重大維護項目與策略" [level=2] [ref=e1318]
+      - heading "2.1 停車場 Epoxy 地面" [level=3] [ref=e1319]
+      - list [ref=e1320]:
+        - listitem [ref=e1321]:
+          - strong [ref=e1322]: 問題根源
+          - text: ：地面顯髒主因為顏色過淺，非清潔不力。
+        - listitem [ref=e1323]:
+          - strong [ref=e1324]: 處理原則
+          - text: ：全面改色報價高達 75 萬元，故現階段採「有住戶反映髒污時，再安排專案清洗」。
+      - heading "2.2 大樓外牆清洗" [level=3] [ref=e1325]
+      - list [ref=e1326]:
+        - listitem [ref=e1327]:
+          - strong [ref=e1328]: 週期
+          - text: ：每四年一次「全外牆清洗」，與「單獨洗玻璃」交錯進行。
+        - listitem [ref=e1329]:
+          - strong [ref=e1330]: 法律規範
+          - text: ：依「台北市建築管理自治條例」，本社區屋齡未滿 15 年，無強制申報外牆安檢之急迫性。
+        - listitem [ref=e1331]:
+          - strong [ref=e1332]: 執行策略
+          - text: ：以「清洗」為主，請廠商順便目視檢測磁磚即可。
+        - listitem [ref=e1333]:
+          - strong [ref=e1334]: 預算
+          - text: ：費用可能超過 30 萬，需經區權會決議。
+      - heading "3. 廠商管理與招標" [level=2] [ref=e1335]
+      - heading "3.1 物業管理合約年度換約 SOP" [level=3] [ref=e1336]
+      - paragraph [ref=e1337]:
+        - text: 物業管理合約
+        - strong [ref=e1338]: 每年 12 月 31 日到期
+        - text: 。第三季（9 月）必須啟動以下流程：
+      - heading "3.1.1 標準時程" [level=4] [ref=e1339]
+      - table [ref=e1340]:
+        - rowgroup [ref=e1341]:
+          - row "月份 動作 備註" [ref=e1342]:
+            - columnheader "月份" [ref=e1343]
+            - columnheader "動作" [ref=e1344]
+            - columnheader "備註" [ref=e1345]
+        - rowgroup [ref=e1346]:
+          - row "9 月 管委會討論：續約 vs 公開招標 第三季管委會議決方向" [ref=e1347]:
+            - cell "9 月" [ref=e1348]
+            - cell "管委會討論：續約 vs 公開招標" [ref=e1349]
+            - cell "第三季管委會議決方向" [ref=e1350]
+          - row "10 月 若公開招標：刊登招標訊息 管道：台北市保全商業同業公會 + 新北市保全商業同業公會官網" [ref=e1351]:
+            - cell "10 月" [ref=e1352]
+            - cell "若公開招標：刊登招標訊息" [ref=e1353]
+            - cell "管道：台北市保全商業同業公會 + 新北市保全商業同業公會官網" [ref=e1354]:
+              - text: 管道：
+              - strong [ref=e1355]: 台北市保全商業同業公會 + 新北市保全商業同業公會
+              - text: 官網
+          - row "11 月初 第一階段書面審查 從投標廠商遴選簡報名單" [ref=e1356]:
+            - cell "11 月初" [ref=e1357]
+            - cell "第一階段書面審查" [ref=e1358]
+            - cell "從投標廠商遴選簡報名單" [ref=e1359]
+          - row "11 月中 第二階段簡報會議 4 家為合理規模" [ref=e1360]:
+            - cell "11 月中" [ref=e1361]
+            - cell "第二階段簡報會議" [ref=e1362]
+            - cell "4 家為合理規模" [ref=e1363]
+          - row "11 月底 議價並決定續約對象" [ref=e1364]:
+            - cell "11 月底" [ref=e1365]
+            - cell "議價並決定續約對象" [ref=e1366]
+            - cell [ref=e1367]
+          - row "12 月 完成合約用印程序" [ref=e1368]:
+            - cell "12 月" [ref=e1369]
+            - cell "完成合約用印程序" [ref=e1370]
+            - cell [ref=e1371]
+          - row "翌年 1 月 新合約生效，存查" [ref=e1372]:
+            - cell "翌年 1 月" [ref=e1373]
+            - cell "新合約生效，存查" [ref=e1374]
+            - cell [ref=e1375]
+      - heading "3.1.2 上架要件" [level=4] [ref=e1376]
+      - list [ref=e1377]:
+        - listitem [ref=e1378]: 招標文件需蓋社區大章
+        - listitem [ref=e1379]:
+          - text: 必須註明「
+          - strong [ref=e1380]: 不收押標金及履約保證金
+          - text: 」
+      - heading "3.1.3 服務延續性原則" [level=4] [ref=e1381]
+      - paragraph [ref=e1382]:
+        - text: 社區一貫的價值觀：
+        - strong [ref=e1383]: 「服務延續性與穩定性」優於「廠商比價」
+        - text: 。除非廠商表現有明顯不足，否則傾向續約。
+      - paragraph [ref=e1384]: 對總幹事的工作意義：
+      - list [ref=e1385]:
+        - listitem [ref=e1386]: 物業合約年底議價的協助項目，請按 §3.1.1 的時程準備（9 月彙整資料、10 月若招標則協助刊登、11 月協助會議紀錄）
+        - listitem [ref=e1387]: 議價方向與結果由管委會議決後通知總幹事執行
+      - heading "3.2 其他保養合約年度換約" [level=3] [ref=e1388]
+      - paragraph [ref=e1389]:
+        - text: 機電、園藝、垃圾清運、電梯（兩年期）、消防（含安檢） — 各合約到期前
+        - strong [ref=e1390]: 2 個月
+        - text: 啟動議價，避免年底匆忙積壓。詳細各廠商資訊見第三章 §1。
+      - heading "4. 清潔" [level=2] [ref=e1391]
+      - heading "4.1 人力管理" [level=3] [ref=e1392]
+      - list [ref=e1393]:
+        - listitem [ref=e1394]: 需持續觀察並向物業公司反映「休假不補人」對品質的影響，避免連續兩天無人清潔。
+      - heading "4.2 排程 SOP" [level=3] [ref=e1395]
+      - list [ref=e1396]:
+        - listitem [ref=e1397]:
+          - strong [ref=e1398]: 緣由
+          - text: ：應對住戶對於「走廊為何多日未掃」的抱怨。
+        - listitem [ref=e1399]:
+          - strong [ref=e1400]: 管理要求
+          - text: ：總幹事需維護詳細「清潔工作排程表」（可參考新美齊時代範本）。
+        - listitem [ref=e1401]:
+          - strong [ref=e1402]: 溝通用途
+          - text: ：遇投訴時，出示排程告知預計打掃日期。
+      - heading "4.3 環境維護技巧" [level=3] [ref=e1403]
+      - list [ref=e1404]:
+        - listitem [ref=e1405]:
+          - strong [ref=e1406]: 防狗尿
+          - text: ：可使用零用金購置「明星花露水」噴灑於騎樓柱邊驅趕犬隻。
+      - heading "5. 垃圾清運與環保室管理" [level=2] [ref=e1407]
+      - heading "5.1 變革背景與核心原因" [level=3] [ref=e1408]
+      - list [ref=e1409]:
+        - listitem [ref=e1410]:
+          - paragraph [ref=e1411]:
+            - strong [ref=e1412]: 核心改變
+            - text: ：因大型壓縮車無法進入，改由清潔人員打包後以 3.5 噸貨車清運。
+        - listitem [ref=e1413]:
+          - paragraph [ref=e1414]:
+            - link "原始作業模式" [ref=e1415] [cursor=pointer]:
+              - /url: https://photos.app.goo.gl/MX3qyVDkvYjsdL287
+              - strong [ref=e1416]: 原始作業模式
+        - listitem [ref=e1417]:
+          - paragraph [ref=e1418]:
+            - strong [ref=e1419]: 主要限制因素
+            - text: ：
+          - list [ref=e1420]:
+            - listitem [ref=e1421]:
+              - strong [ref=e1422]: 地理限制
+              - text: ：大型車難以通過和平東路一段 104 巷轉進社區（轉彎死角、碰撞風險）。
+            - listitem [ref=e1423]:
+              - strong [ref=e1424]: 經濟規模
+              - text: ：社區垃圾量（1.5 噸/月）太少，廠商無意願冒險派大車。
+      - heading "5.2 廠商更替與決策過程" [level=3] [ref=e1425]
+      - list [ref=e1426]:
+        - listitem [ref=e1427]:
+          - strong [ref=e1428]: 與原廠商「誠上」的協商困境
+          - text: ：
+          - list [ref=e1429]:
+            - listitem [ref=e1430]:
+              - paragraph [ref=e1431]: 原廠商「誠上」在未經司機實際勘查的情況下逕行接單，清運近一年後，司機與廠商已不願再承受轉彎不易的風險。
+            - listitem [ref=e1432]:
+              - paragraph [ref=e1433]: 廠商提出方案，要求將垃圾量估算加倍（由一噸增至兩噸），否則將提前解約，且即使加價，未來也只願派遣3.5噸貨車。
+            - listitem [ref=e1434]:
+              - paragraph [ref=e1435]: 管委會曾嘗試溝通為司機加價，但所能提供的價格，仍無法覆蓋司機所認知的風險。
+        - listitem [ref=e1436]:
+          - strong [ref=e1437]: 尋找其他廠商的挑戰
+          - text: ：
+          - list [ref=e1438]:
+            - listitem [ref=e1439]: 垃圾清運廠商間彼此熟識，會相互打聽社區風評與棄單原因。
+            - listitem [ref=e1440]: 經管委會與總幹事實際洽詢本地區其他社區（如耕曦、正隆天第）的清運廠商後，得到的反應大同小異，幾乎可以判斷已無廠商願意派遣大型垃圾壓縮車前來服務。
+            - listitem [ref=e1441]: 其他社區（如隔壁大安晶華）的解決方案則是派員追垃圾車，此模式不適合本社區。
+        - listitem [ref=e1442]:
+          - strong [ref=e1443]: 更換為新廠商「極速環保/仕功」
+          - text: ：
+          - list [ref=e1444]:
+            - listitem [ref=e1445]: 2024/02/01 起接手（原為「耕曦社區」廠商）。
+            - listitem [ref=e1446]:
+              - strong [ref=e1447]: 選擇原因
+              - text: ：願意承接風險，且同意採「連續七天秤重」推估月總量，計價合理；春節不休息。
+      - blockquote [ref=e1448]:
+        - paragraph [ref=e1449]: 2025年間仍有其他垃圾清運廠商到社區來招攬生意，但是在經過司機路線場勘後紛紛放棄。
+      - heading "5.3 現行作業流程與影響" [level=3] [ref=e1450]
+      - list [ref=e1451]:
+        - listitem [ref=e1452]:
+          - paragraph [ref=e1453]:
+            - strong [ref=e1454]: 垃圾桶更換
+            - text: ：
+          - list [ref=e1455]:
+            - listitem [ref=e1456]: 移除 660L 深底大子車（無法撈取）。
+            - listitem [ref=e1457]:
+              - text: 改用多個
+              - strong [ref=e1458]: 175L 淺底垃圾桶
+              - text: （方便清潔員徒手打包）。
+        - listitem [ref=e1459]:
+          - paragraph [ref=e1460]:
+            - strong [ref=e1461]: 衍生問題與應對
+            - text: ：
+          - list [ref=e1462]:
+            - listitem [ref=e1463]: 小桶易滿且投遞口不易對準。
+            - listitem [ref=e1464]: 應對：清潔員需頻繁對調桶位；總幹事引導住戶若前方桶滿，直接開冷藏庫門丟後方空桶。
+      - heading "5.4 總幹事與住戶配合事項" [level=3] [ref=e1465]
+      - list [ref=e1466]:
+        - listitem [ref=e1467]:
+          - text: 此改變加重清潔員負擔，需籲請住戶配合：
+          - list [ref=e1468]:
+            - listitem [ref=e1469]: 確實分類。
+            - listitem [ref=e1470]: 廚餘瀝乾、垃圾袋密封綁緊。
+            - listitem [ref=e1471]: 維持環保室整潔。
+      - heading "5.5 相關資產與附註" [level=3] [ref=e1472]
+      - list [ref=e1473]:
+        - listitem [ref=e1474]:
+          - paragraph [ref=e1475]:
+            - strong [ref=e1476]: 舊垃圾子車去向
+            - text: ：原 660 公升子車清洗後，暫存於
+            - strong [ref=e1477]: B4 消防機房前
+            - text: 。
+        - listitem [ref=e1478]:
+          - paragraph [ref=e1479]:
+            - strong [ref=e1480]: 為何無法每日秤重？
+            - text: ：
+          - list [ref=e1481]:
+            - listitem [ref=e1482]: 秤重耗時，對以「總載運量」計效的司機無效益（寧願多跑幾家）。
+            - listitem [ref=e1483]:
+              - strong [ref=e1484]: 市場生態
+              - text: ：此為台北市普遍現象（規模小、單價低 4-5 元）；與新北市（規模大、單價高 7-8 元）不同。
+        - listitem [ref=e1485]:
+          - paragraph [ref=e1486]:
+            - strong [ref=e1487]: B1-43 號車位使用權
+            - text: ：
+          - list [ref=e1488]:
+            - listitem [ref=e1489]: 管委會協調該車位無償提供給廠商每日暫停，總幹事需了解此交換歷史。
+        - listitem [ref=e1490]:
+          - paragraph [ref=e1491]:
+            - strong [ref=e1492]: 清運價格調整
+            - text: ：
+          - list [ref=e1493]:
+            - listitem [ref=e1494]: 2024/02 起：5,000 元/噸（月費 7,875 元）。
+            - listitem [ref=e1495]:
+              - text: 2025/04 起：
+              - strong [ref=e1496]: 6,000 元/噸
+              - text: （因焚化爐漲價），月費
+              - strong [ref=e1497]: 9,450 元
+              - text: （含稅）。
+      - heading "第四章：行政、財務與法規遵循" [level=1] [ref=e1498]
+      - heading "1. 銀行與財務帳戶" [level=2] [ref=e1499]
+      - heading "1.1 往來銀行策略" [level=3] [ref=e1500]
+      - list [ref=e1501]:
+        - listitem [ref=e1502]:
+          - strong [ref=e1503]: 主要銀行
+          - text: ：
+          - strong [ref=e1504]: 永豐銀行
+          - text: 。
+        - listitem [ref=e1505]:
+          - strong [ref=e1506]: 選擇原因
+          - text: ：雖然周邊有更近的台北企銀、土地銀行，但因永豐銀行為社區管理 APP「智生活」的主要配合銀行，故第一屆管委會選定其為主要往來銀行。
+      - heading "1.2 各分行帳戶明細與用途" [level=3] [ref=e1507]
+      - list [ref=e1508]:
+        - listitem [ref=e1509]:
+          - strong [ref=e1510]: 建成分行
+          - text: (開戶行，但距離遠，現僅作帳戶存續)
+          - list [ref=e1511]:
+            - listitem [ref=e1512]:
+              - strong [ref=e1513]: 管理費帳戶
+              - list [ref=e1514]:
+                - listitem [ref=e1515]: 戶名：閱大安管理委員會
+                - listitem [ref=e1516]:
+                  - text: 帳號：
+                  - code [ref=e1517]: 103-018-2003121-9
+            - listitem [ref=e1518]:
+              - strong [ref=e1519]: 公共基金帳戶
+              - list [ref=e1520]:
+                - listitem [ref=e1521]: 戶名：閱大安管理委員會
+                - listitem [ref=e1522]:
+                  - text: 帳號：
+                  - code [ref=e1523]: 103-018-2003120-2
+        - listitem [ref=e1524]:
+          - strong [ref=e1525]: 南門分行
+          - text: (最近但不方便)
+          - list [ref=e1526]:
+            - listitem [ref=e1527]: 雖為實體距離最近，但步行辛苦，故幾無往來。
+        - listitem [ref=e1528]:
+          - strong [ref=e1529]: 東門分行
+          - text: (主要實體往來行)
+          - list [ref=e1530]:
+            - listitem [ref=e1531]:
+              - strong [ref=e1532]: 優勢
+              - text: ：捷運古亭站搭一站至東門站，4 號出口即達，交通最便。
+            - listitem [ref=e1533]:
+              - strong [ref=e1534]: 充電樁線路維護費帳戶
+              - text: (專款專用)
+              - list [ref=e1535]:
+                - listitem [ref=e1536]: 戶名：閱大安管理委員會
+                - listitem [ref=e1537]:
+                  - text: 帳號：
+                  - code [ref=e1538]: 033-018-0013393-2
+                - listitem [ref=e1539]:
+                  - strong [ref=e1540]: 開戶背景
+                  - text: ：原永豐拒絕多開第三帳戶，經解釋充電樁基金需專款專用後才獲准開設。
+      - heading "2. 財務流程" [level=2] [ref=e1541]
+      - heading "2.1 財務報表製作" [level=3] [ref=e1542]
+      - list [ref=e1543]:
+        - listitem [ref=e1544]:
+          - strong [ref=e1545]: 分工模式
+          - text: ：
+          - list [ref=e1546]:
+            - listitem [ref=e1547]:
+              - strong [ref=e1548]: 前端
+              - text: ：總幹事於「新都興社區財務系統」登錄支出與確認管理費收繳。
+            - listitem [ref=e1549]:
+              - strong [ref=e1550]: 後端
+              - text: ：由潤泰總公司會計支援製作正式財報。
+        - listitem [ref=e1551]:
+          - strong [ref=e1552]: 目標
+          - text: ：潤泰會計將持續輔導，最終目標為移轉給總幹事獨立製作。
+      - heading "2.2 零用金管理" [level=3] [ref=e1553]
+      - list [ref=e1554]:
+        - listitem [ref=e1555]:
+          - strong [ref=e1556]: 標準作業
+          - text: ：廠商押金退款等應由
+          - strong [ref=e1557]: 管理費主帳戶
+          - text: 支出，
+          - strong [ref=e1558]: 嚴禁直接從零用金墊付
+          - text: ，避免帳務混亂（2025/01 曾發生誤用零用金支付公共意外險保險金之案例，需引以為戒）。
+        - listitem [ref=e1559]:
+          - strong [ref=e1560]: 撥補程序
+          - text: ：如有不合規帳目，需透過正式請款流程進行「撥補」，確保帳實相符。
+      - heading "2.3 管理費收繳方式比較" [level=3] [ref=e1561]
+      - paragraph [ref=e1562]: 總幹事需掌握以下兩種模式的優缺點，以回應住戶詢問：
+      - list [ref=e1563]:
+        - listitem [ref=e1564]:
+          - strong [ref=e1565]: 模式 A：智生活虛擬帳號 (永豐中崙分行)
+          - list [ref=e1566]:
+            - listitem [ref=e1567]:
+              - strong [ref=e1568]: 機制
+              - text: ：每戶每月帳號不同。
+            - listitem [ref=e1569]:
+              - strong [ref=e1570]: 繳款管道
+              - text: ：APP 信用卡、超商 (手續費 10-15 元)、轉帳。
+            - listitem [ref=e1571]:
+              - strong [ref=e1572]: 優點 (管理端)
+              - text: ：系統自動對帳，方便。
+            - listitem [ref=e1573]:
+              - strong [ref=e1574]: 缺點 (住戶端)
+              - text: ：因帳號每月變動，
+              - strong [ref=e1575]: 無法設定銀行自動轉帳
+              - text: 。
+        - listitem [ref=e1576]:
+          - strong [ref=e1577]: 模式 B：固定帳號匯款 (永豐建成分行)
+          - list [ref=e1578]:
+            - listitem [ref=e1579]:
+              - strong [ref=e1580]: 帳號
+              - text: ：
+              - code [ref=e1581]: 103-018-200-31219
+              - text: (銀行代號 807)。
+            - listitem [ref=e1582]:
+              - strong [ref=e1583]: 優點 (住戶端)
+              - text: ：帳號固定，可設定每月自動定期定額轉帳 (適合一次繳多月或懶人法)。
+            - listitem [ref=e1584]:
+              - strong [ref=e1585]: 缺點 (管理端)
+              - text: ：需人工核對匯款帳號後 5 碼。
+      - heading "2.4 電動車充電代墊代收流程" [level=3] [ref=e1586]
+      - list [ref=e1587]:
+        - listitem [ref=e1588]:
+          - strong [ref=e1589]: 代墊
+          - text: ：管委會收到台電帳單，先以管理費支付。
+        - listitem [ref=e1590]:
+          - strong [ref=e1591]: 計算
+          - text: ：總幹事依據 EMS 報表計算個別住戶電費。
+        - listitem [ref=e1592]:
+          - strong [ref=e1593]: 收費
+          - text: ：發出收費通知 (或併入管理費)。
+        - listitem [ref=e1594]:
+          - strong [ref=e1595]: 歸墊
+          - text: ：收回款項後歸入管理費帳戶。
+      - heading "2.5 對住戶報告財務的口徑原則" [level=3] [ref=e1596]
+      - paragraph [ref=e1597]:
+        - text: 這節是
+        - strong [ref=e1598]: 做年度財報簡報時必讀
+        - text: ，避免同一份簡報內出現自打嘴巴的論述（2026 第五屆首次 AGM 排雷出來的共識）。
+      - heading "2.5.1 總資產視角（重要框架）" [level=4] [ref=e1599]
+      - paragraph [ref=e1600]:
+        - text: "社區的「維修基金提撥」（每月 6 萬，從 #31219 一般帳戶撥入 #31202 公共基金帳戶）本質上是"
+        - strong [ref=e1601]: 內部轉帳，不是費用
+        - text: ——錢只是從左口袋換到右口袋，住戶共有的總資產淨值並未減少。
+      - document [ref=e1603]:
+        - generic [ref=e1605]:
+          - generic [ref=e1610]:
+            - generic [ref=e1615]:
+              - text: 每月 6 萬
+              - text: 內部轉帳
+            - generic [ref=e1619]: 帳面結餘
+            - generic [ref=e1623]: 同樣計入
+          - generic [ref=e1624]:
+            - generic [ref=e1630]:
+              - text: 本期收入
+              - text: 管理費
+            - generic [ref=e1636]:
+              - text: 一般帳戶
+              - text: "#31219"
+            - generic [ref=e1642]:
+              - text: 公共基金
+              - text: "#31202"
+            - generic [ref=e1648]:
+              - text: 經常性費用
+              - text: 物業/水電/保養
+            - generic [ref=e1654]:
+              - text: 業主權益
+              - text: = 總資產
+      - paragraph [ref=e1655]:
+        - strong [ref=e1656]: 為什麼這件事重要
+        - text: ：如果用「帳面結餘」（扣掉 6 萬提撥後的本期損益）來談財務，會看起來像每月貼平甚至虧損；但用「總資產淨增」（業主權益、資產負債表視角）來看，社區其實是穩定累積。
+        - strong [ref=e1657]: 同一份簡報不能一頁用帳面、另一頁用總資產
+        - text: ——住戶會困惑、信任度下降。
+      - heading "2.5.2 收入用「合約承諾下限」，不用「實際數外推」" [level=4] [ref=e1658]
+      - paragraph [ref=e1659]:
+        - text: 預算編列、長期模型、年化推估
+        - strong [ref=e1660]: 全部使用合約承諾的固定收入下限
+        - text: （房屋管理費依坪 × 12、停車位依車位 × 12），不要把過去實際年收入直接外推。
+      - table [ref=e1661]:
+        - rowgroup [ref=e1662]:
+          - row "項目 該入「年化收入」嗎 為什麼" [ref=e1663]:
+            - columnheader "項目" [ref=e1664]
+            - columnheader "該入「年化收入」嗎" [ref=e1665]
+            - columnheader "為什麼" [ref=e1666]
+        - rowgroup [ref=e1667]:
+          - row "房屋管理費（依坪） ✅ 入 合約承諾、收齊率 100%" [ref=e1668]:
+            - cell "房屋管理費（依坪）" [ref=e1669]
+            - cell "✅ 入" [ref=e1670]
+            - cell "合約承諾、收齊率 100%" [ref=e1671]
+          - row "停車位（依車位） ✅ 入 合約承諾、不變" [ref=e1672]:
+            - cell "停車位（依車位）" [ref=e1673]
+            - cell "✅ 入" [ref=e1674]
+            - cell "合約承諾、不變" [ref=e1675]
+          - row "利息收入 ❌ 不入 隨利率波動" [ref=e1676]:
+            - cell "利息收入" [ref=e1677]
+            - cell "❌ 不入" [ref=e1678]
+            - cell "隨利率波動" [ref=e1679]
+          - row "氣候行動獎獎金 ❌ 不入 一次性" [ref=e1680]:
+            - cell "氣候行動獎獎金" [ref=e1681]
+            - cell "❌ 不入" [ref=e1682]
+            - cell "一次性" [ref=e1683]
+          - row "裝潢清潔費 ❌ 不入 入住率到頂後歸零" [ref=e1684]:
+            - cell "裝潢清潔費" [ref=e1685]
+            - cell "❌ 不入" [ref=e1686]
+            - cell "入住率到頂後歸零" [ref=e1687]
+          - row "充電樁電費代收 ❌ 不入 代收代付，有對應費用沖銷" [ref=e1688]:
+            - cell "充電樁電費代收" [ref=e1689]
+            - cell "❌ 不入" [ref=e1690]
+            - cell "代收代付，有對應費用沖銷" [ref=e1691]
+      - paragraph [ref=e1692]:
+        - strong [ref=e1693]: Why
+        - text: ：偶發收入「能多賺最好，但不能依賴」。最忌諱「預估持平、實際赤字」——若採用保守估法，實際好過預估反而是正面驚喜。
+      - heading "2.5.3 代收代付類科目要先看對應費用才能談淨值" [level=4] [ref=e1694]
+      - paragraph [ref=e1695]:
+        - text: 代收代付類（電動車充電樁電費、押金）對結餘的影響為 0，因為有對應的「沖銷費用」抵掉。
+        - strong [ref=e1696]: 敘事時不能單獨列這 33,076 元收入
+        - text: ，會誤導住戶以為社區多賺。要嘛同時列收入與費用、要嘛就不講。
+      - heading "2.5.4 跨投影片數字一致性檢查" [level=4] [ref=e1697]
+      - paragraph [ref=e1698]: 如果同一個數字在多張投影片出現（譬如「年收入 500 萬」），務必跨頁對齊：
+      - list [ref=e1699]:
+        - listitem [ref=e1700]: 譬如：第 24 張投影片的「年收入 500 萬」必須等於第 26 張投影片預算明細的「房屋管理費 4,528,692 + 停車位 470,400 = 4,999,092」
+        - listitem [ref=e1701]: 改一個數字就要從頭跑一遍跨投影片檢查（財報簡報通常 5–8 張會引用同一條基礎數字）
+      - heading "3. 公共事業費管理" [level=2] [ref=e1702]
+      - heading "3.1 台灣電力公司 (四張帳單)" [level=3] [ref=e1703]
+      - paragraph [ref=e1704]: 需每月追蹤並更新至「氣候行動獎」相關明細表：
+      - list [ref=e1705]:
+        - listitem [ref=e1706]:
+          - strong [ref=e1707]: 大公電（分攤到各戶電費單中）
+          - list [ref=e1708]:
+            - listitem [ref=e1709]: 契約：低壓電力非時間電價 (契約容量 50瓩)。
+            - listitem [ref=e1710]: 現況：最高需求曾達 48瓩，下調空間不大。
+            - listitem [ref=e1711]: 重點：偶有住戶質疑分攤費過高，需定期追蹤度數以備解釋。
+        - listitem [ref=e1712]:
+          - strong [ref=e1713]: 電信室
+          - text: ：表燈非時間電價。
+        - listitem [ref=e1714]:
+          - strong [ref=e1715]: B1+B2 充電樁
+          - text: ：表燈非時間電價。
+        - listitem [ref=e1716]:
+          - strong [ref=e1717]: B3+B4 充電樁
+          - text: ：表燈非時間電價 (預定改為二段式時間電價，無契約容量)。
+      - list [ref=e1718]:
+        - listitem [ref=e1719]:
+          - strong [ref=e1720]: 管理工具
+          - text: ：已申請電子帳單，電號管理需透過手機「臺灣電力 APP」操作。
+      - heading "3.1.1 大公電契約容量年度檢討（每年 10-11 月）" [level=4] [ref=e1721]
+      - paragraph [ref=e1722]:
+        - strong [ref=e1723]: 啟動點
+        - text: ：每年
+        - strong [ref=e1724]: 10 月底至 11 月初
+        - text: 檢視當年夏季高峰用電（通常落在 7、8、9 月）。
+      - paragraph [ref=e1725]:
+        - strong [ref=e1726]: 歷年下修記錄
+        - text: ：
+      - table [ref=e1727]:
+        - rowgroup [ref=e1728]:
+          - row "年度 契約容量 觸發" [ref=e1729]:
+            - columnheader "年度" [ref=e1730]
+            - columnheader "契約容量" [ref=e1731]
+            - columnheader "觸發" [ref=e1732]
+        - rowgroup [ref=e1733]:
+          - row "原始 99 kW 建設公司初期設定" [ref=e1734]:
+            - cell "原始" [ref=e1735]
+            - cell "99 kW" [ref=e1736]
+            - cell "建設公司初期設定" [ref=e1737]
+          - row "112/01 起 70 kW 參考福一潭美社區後初次下修" [ref=e1738]:
+            - cell "112/01 起" [ref=e1739]
+            - cell "70 kW" [ref=e1740]
+            - cell "參考福一潭美社區後初次下修" [ref=e1741]
+          - row "113/01 起 50 kW 第二次下修" [ref=e1742]:
+            - cell "113/01 起" [ref=e1743]
+            - cell "50 kW" [ref=e1744]
+            - cell "第二次下修" [ref=e1745]
+          - row "114 觀察 維持 50 kW 9 月最高 48 kW 已接近上限" [ref=e1746]:
+            - cell "114 觀察" [ref=e1747]
+            - cell "維持 50 kW" [ref=e1748]
+            - cell "9 月最高 48 kW 已接近上限" [ref=e1749]
+      - paragraph [ref=e1750]:
+        - strong [ref=e1751]: 判斷原則
+        - text: ：
+      - list [ref=e1752]:
+        - listitem [ref=e1753]:
+          - text: 若
+          - strong [ref=e1754]: 夏季最高用電 < 契約容量 × 80%
+          - text: → 可考慮下修
+        - listitem [ref=e1755]:
+          - text: 若
+          - strong [ref=e1756]: "> 80%"
+          - text: → 維持，避免超約罰款
+        - listitem [ref=e1757]:
+          - strong [ref=e1758]: 延伸觀察
+          - text: ：夏季電費異常高漲時，要追查根因（雨水多 → 廢水池馬達運轉時間增加；防火門無自動回歸 → 冷氣外洩等）。曾發現一樓大門電梯旁防火門因風大常開導致冷氣流失，建議聯絡金屬門廠商「金亞」尋找新的不鏽鋼門鉸鏈或自動關門器（Waterson）。
+      - heading "3.1.2 大公電 1 年資料洞見（AMI 智慧電錶 2025-04 起）" [level=4] [ref=e1759]
+      - paragraph [ref=e1760]:
+        - strong [ref=e1761]: 基準負載與冷氣負載拆解
+        - text: ：
+      - list [ref=e1762]:
+        - listitem [ref=e1763]:
+          - text: 冬季最低 ~190 度／日 = 「不開冷氣的最低耗電」（燈、電梯、抽水馬達、監視器、走廊照明）——稱為
+          - strong [ref=e1764]: 基準負載
+        - listitem [ref=e1765]:
+          - text: 夏季高峰 ~344 度／日，扣掉基準負載後
+          - strong [ref=e1766]: 冷氣負載 ~154 度／日
+        - listitem [ref=e1767]: 冷氣負載年化 ~18,500 度 ≈ 年度總用電 19%
+        - listitem [ref=e1768]:
+          - strong [ref=e1769]: 節電優化空間最大的是夏季冷氣相關設備
+          - text: （變頻 vs 定頻、運轉時段、溫度設定）；冬季基準負載不可壓縮
+      - paragraph [ref=e1770]:
+        - strong [ref=e1771]: 目標用電量公式（凍結迴歸模型）
+        - text: ：
+      - code [ref=e1773]: 目標用電量 = max(190, 72.99 + 7.07 × tmax) （floor=190；轉折 16.6°C；資料基礎 2025-04-20 ~ 2026-04-19 共 365 筆）
+      - list [ref=e1774]:
+        - listitem [ref=e1775]:
+          - text: 公式植入
+          - code [ref=e1776]: /admin/utility/
+          - text: （每日水電公告產生器），總幹事每日填昨日用量、系統自動算「低於 / 接近 / 超出預期」
+        - listitem [ref=e1777]: 模型在高溫端可能略低估（31.5°C 公式預測 292 度、實測 ~299 度），4 年氣溫資料補齊後可重新校準
+      - heading "3.1.3 設備故障導致用電飆升的案例（重要：必須記入備註）" [level=4] [ref=e1778]
+      - paragraph [ref=e1779]:
+        - text: 2026-04-13 至 15 三天突然衝到 540 度／日（vs 平日 200 度），4/16 一夜回到基準值（base load）。
+        - strong [ref=e1780]: 這不是熱浪
+        - text: ——熱浪不會「一夜跌 63%」。實地查驗發現是
+        - strong [ref=e1781]: 揚水馬達軟管破裂
+        - text: 導致馬達持續高轉空載運轉，4/15 修復後立刻歸位。
+      - paragraph [ref=e1782]:
+        - strong [ref=e1783]: 為什麼這件事教訓重要
+        - text: ：
+      - blockquote [ref=e1784]:
+        - paragraph [ref=e1785]:
+          - text: 如果這次沒記下來，未來看到類似的用量飆升曲線會誤以為是熱浪。所有設備故障、檢修、調整
+          - strong [ref=e1786]:
+            - text: 必須當天記入
+            - code [ref=e1787]: /admin/utility/
+            - text: 備註欄
+          - text: ，否則資料會逐漸失去診斷力。
+      - paragraph [ref=e1788]:
+        - strong [ref=e1789]: 處理 SOP
+        - text: ：
+      - list [ref=e1790]:
+        - listitem [ref=e1791]:
+          - text: 發現異常飆升（連續 1-2 天 >150% 平日）→ 第一個動作不是查冷氣，是
+          - strong [ref=e1792]: 檢查機房
+          - text: （揚水馬達、抽水泵、空壓機）
+        - listitem [ref=e1793]:
+          - text: 在
+          - code [ref=e1794]: /admin/utility/
+          - text: 備註欄記下：日期、症狀、查證原因、處理結果
+        - listitem [ref=e1795]:
+          - text: 修復後在
+          - code [ref=e1796]: /admin/utility/
+          - text: 備註欄補一筆「已修復」確認回到基準值
+      - heading "3.2 台北自來水" [level=3] [ref=e1797]
+      - list [ref=e1798]:
+        - listitem [ref=e1799]: 已申請網路會員與電子帳單，需定期登入「水管家系統」查詢明細並更新紀錄。
+        - listitem [ref=e1800]:
+          - text: 公水度數每日記入
+          - code [ref=e1801]: /admin/utility/
+          - text: （每日水電公告產生器），4 年資料庫已累積至 2026-04，作為下任主委的判斷依據
+      - heading "3.2.1 公水 4 年治理脈絡（建議新總幹事必讀）" [level=4] [ref=e1802]
+      - paragraph [ref=e1803]: 社區公水用量 4 年走過 4 個治理階段，每段台階對應一個決策，不是自然波動：
+      - table [ref=e1804]:
+        - rowgroup [ref=e1805]:
+          - row "期間 月均用水 治理狀態" [ref=e1806]:
+            - columnheader "期間" [ref=e1807]
+            - columnheader "月均用水" [ref=e1808]
+            - columnheader "治理狀態" [ref=e1809]
+        - rowgroup [ref=e1810]:
+          - row "2022-02 ~ 2022-06 0.55–0.87 度 啟動期，系統剛啟用" [ref=e1811]:
+            - cell "2022-02 ~ 2022-06" [ref=e1812]
+            - cell "0.55–0.87 度" [ref=e1813]
+            - cell "啟動期，系統剛啟用" [ref=e1814]
+          - row "2022-07 ~ 2024-07 1.1–4.3 度 園藝廠商自動澆灌，從未跳過雨天" [ref=e1815]:
+            - cell "2022-07 ~ 2024-07" [ref=e1816]
+            - cell "1.1–4.3 度" [ref=e1817]
+            - cell "園藝廠商自動澆灌，從未跳過雨天" [ref=e1818]:
+              - text: 園藝廠商自動澆灌，
+              - strong [ref=e1819]: 從未跳過雨天
+          - row "2024-08 ~ 2025-06 0.45 度 節電輔導期：改手動，但沒人勤快執行，植物開始渴死" [ref=e1820]:
+            - cell "2024-08 ~ 2025-06" [ref=e1821]
+            - cell "0.45 度" [ref=e1822]
+            - cell "節電輔導期：改手動，但沒人勤快執行，植物開始渴死" [ref=e1823]:
+              - text: 節電輔導期：改手動，但
+              - strong [ref=e1824]: 沒人勤快執行
+              - text: ，
+              - strong [ref=e1825]: 植物開始渴死
+          - row "2025-07 ~ 2026-03 2–4.5 度 園藝廠商重啟自動避免植物渴死，回到無腦撒水模式" [ref=e1826]:
+            - cell "2025-07 ~ 2026-03" [ref=e1827]
+            - cell "2–4.5 度" [ref=e1828]
+            - cell "園藝廠商重啟自動避免植物渴死，回到無腦撒水模式" [ref=e1829]
+          - row "2026-04 起 顯著下降 主動斷開自動 + 主委手動 + Calendar 提醒，目前最低配置" [ref=e1830]:
+            - cell "2026-04 起" [ref=e1831]
+            - cell "顯著下降" [ref=e1832]
+            - cell "主動斷開自動 + 主委手動 + Calendar 提醒，目前最低配置" [ref=e1833]:
+              - strong [ref=e1834]: 主動斷開自動 + 主委手動 + Calendar 提醒
+              - text: ，目前最低配置
+      - paragraph [ref=e1835]:
+        - strong [ref=e1836]: 關鍵發現（2026-04 斷開後驗證）
+        - text: ：
+      - list [ref=e1837]:
+        - listitem [ref=e1838]:
+          - text: 過去自動排程「3 次/日 × 5 分鐘」相對需求
+          - strong [ref=e1839]: 過量 2–6 倍
+          - text: （夏 2–3 倍、冬 4–6 倍）
+        - listitem [ref=e1840]:
+          - text: 自動澆灌
+          - strong [ref=e1841]: 從未在雨天跳過
+          - text: （455 天日線無一日歸零）——原機電廠商承做的雨水感測器疑似從未運作
+        - listitem [ref=e1842]:
+          - text: 真正主因是
+          - strong [ref=e1843]: 排程過量
+          - text: 而非大漏水
+      - paragraph [ref=e1844]:
+        - strong [ref=e1845]: 目前的治理機制
+        - text: ：
+      - document [ref=e1847]:
+        - generic [ref=e1849]:
+          - generic [ref=e1857]:
+            - generic [ref=e1861]: 該澆
+            - generic [ref=e1865]: 不該澆
+          - generic [ref=e1866]:
+            - generic [ref=e1871]: CWA 每日預報
+            - generic [ref=e1877]:
+              - text: Google Apps Script
+              - text: 每天 05:00 判斷
+            - generic [ref=e1883]:
+              - text: GitHub 歷史降雨
+              - text: 過去 5 日
+            - generic [ref=e1889]:
+              - text: culturalcity85
+              - text: Calendar 06:30 事件
+            - generic [ref=e1894]: 跳過
+            - generic [ref=e1900]:
+              - text: 總幹事 06:00 收提醒
+              - text: → 去澆水 → 改灰色完成
+            - generic [ref=e1906]:
+              - text: 每月 1 日 07:00
+              - text: 月報自動寄送
+      - paragraph [ref=e1907]:
+        - strong [ref=e1908]: 4 年回測
+        - text: ：平均一年澆 123 天（vs 過去無腦撒水 365 天，理論節水 67%）。
+        - strong [ref=e1909]: 3 月才是澆水主力
+        - text: （年均 15.4 天/月），不是夏天——3 月乾日多、梅雨/颱風季反而濕。
+      - heading "3.2.2 給下任主委 / 總幹事的 3 步建議" [level=4] [ref=e1910]
+      - list [ref=e1911]:
+        - listitem [ref=e1912]:
+          - strong [ref=e1913]: 第一步：維持目前的「手動 + Calendar 提醒」配置
+          - list [ref=e1914]:
+            - listitem [ref=e1915]: 這已是用量最低配置，園藝廠商評估期間不必急動
+        - listitem [ref=e1916]:
+          - strong [ref=e1917]: 第二步：找第三方廠商評估
+          - text: （原機電廠商已倒閉）
+          - list [ref=e1918]:
+            - listitem [ref=e1919]: 翼詠科技 Yardian、機電工程行或大型景觀工程公司
+            - listitem [ref=e1920]: 評估項目：實測植栽面積、雨水感測器補裝（~3,000 元，第一年回本）、小滲漏壓力測試、流量感測器（~10,000 元）
+        - listitem [ref=e1921]:
+          - strong [ref=e1922]: 第三步：若決定重啟自動，務必校準排程
+          - list [ref=e1923]:
+            - listitem [ref=e1924]:
+              - strong [ref=e1925]: 絕對不要回到「3 次 × 5 分鐘」舊設定
+            - listitem [ref=e1926]: 新排程：夏季清晨 1 次 × 5 分鐘 / 冬季清晨 1 次 × 3 分鐘 / 雨天靠感測器跳過
+            - listitem [ref=e1927]: 重啟後 2-3 個月密切記錄，建立社區從未擁有過的真實基準值
+      - heading "3.3 電信門號 (中華電信)" [level=3] [ref=e1928]
+      - list [ref=e1929]:
+        - listitem [ref=e1930]:
+          - strong [ref=e1931]: 市話
+          - text: ：
+          - code [ref=e1932]: (02) 2367-7065
+        - listitem [ref=e1933]:
+          - strong [ref=e1934]: 行動
+          - text: ：
+          - code [ref=e1935]: (0989) 648-285
+          - list [ref=e1936]:
+            - listitem [ref=e1937]:
+              - strong [ref=e1938]: 異動紀錄
+              - text: ：2025/10/03 自遠傳攜碼至中華電信，已申請合併帳單。
+        - listitem [ref=e1939]:
+          - strong [ref=e1940]: 服務據點
+          - text: ：
+          - list [ref=e1941]:
+            - listitem [ref=e1942]:
+              - strong [ref=e1943]: 特約
+              - text: ：對面神腦國際 (簡易業務)。
+            - listitem [ref=e1944]:
+              - strong [ref=e1945]: 直營
+              - text: ：台北師大服務中心 (和平東路一段 182-2 號，複雜業務需至此)。
+      - heading "4. 行政與文件管理" [level=2] [ref=e1946]
+      - heading "4.1 公告與標語製作 SOP" [level=3] [ref=e1947]
+      - list [ref=e1948]:
+        - listitem [ref=e1949]:
+          - strong [ref=e1950]: 指導原則
+          - text: ：「張貼標語」僅是手段，解決問題才是目的。
+        - listitem [ref=e1951]:
+          - strong [ref=e1952]: 流程
+          - text: ：
+          - list [ref=e1953]:
+            - listitem [ref=e1954]:
+              - strong [ref=e1955]: 例行性公告
+              - text: (水塔清洗、開會通知)：直接套用 Google Drive 官方範本，知會主委後發布。
+            - listitem [ref=e1956]:
+              - strong [ref=e1957]: 新議題公告
+              - text: ：
+              - list [ref=e1958]:
+                - listitem [ref=e1959]: 先提出問題根源。
+                - listitem [ref=e1960]: 總幹事草擬內容 (Word/Excel 皆可)。
+                - listitem [ref=e1961]:
+                  - strong [ref=e1962]: 提交管委會討論定稿
+                  - text: 。
+                - listitem [ref=e1963]: 由主委或委員依 VIS 系統進行美編設計。
+                - listitem [ref=e1964]: 總幹事張貼發布。
+      - heading "4.2 區權會年度召開 SOP" [level=3] [ref=e1965]
+      - paragraph [ref=e1966]:
+        - text: 公寓大廈管理條例 + 社區規約：
+        - strong [ref=e1967]: 每年至少召開一次
+        - text: 區分所有權人會議。
+      - heading "4.2.1 標準時程模板（以第五屆為例，115/05/16）" [level=4] [ref=e1968]
+      - table [ref=e1969]:
+        - rowgroup [ref=e1970]:
+          - row "時點 動作" [ref=e1971]:
+            - columnheader "時點" [ref=e1972]
+            - columnheader "動作" [ref=e1973]
+        - rowgroup [ref=e1974]:
+          - row "召開前 8-10 週 管委會議決召開日期、開始前置作業" [ref=e1975]:
+            - cell "召開前 8-10 週" [ref=e1976]
+            - cell "管委會議決召開日期、開始前置作業" [ref=e1977]
+          - row "召開前 6-8 週 公告徵求區權會提案；徵求下一屆管委會委員候選人" [ref=e1978]:
+            - cell "召開前 6-8 週" [ref=e1979]
+            - cell "公告徵求區權會提案；徵求下一屆管委會委員候選人" [ref=e1980]
+          - row "召開前 4-6 週 完成正式公告" [ref=e1981]:
+            - cell "召開前 4-6 週" [ref=e1982]
+            - cell "完成正式公告" [ref=e1983]
+          - row "召開前 2 週 調閱謄本確認區權人資格（本社區僅 90 戶，2 週足夠；大型社區 300+ 戶可能 2 個月前就要準備）" [ref=e1984]:
+            - cell "召開前 2 週" [ref=e1985]:
+              - text: 召開前
+              - strong [ref=e1986]: 2 週
+            - cell "調閱謄本確認區權人資格（本社區僅 90 戶，2 週足夠；大型社區 300+ 戶可能 2 個月前就要準備）" [ref=e1987]:
+              - strong [ref=e1988]: 調閱謄本確認區權人資格
+              - text: （本社區僅 90 戶，2 週足夠；大型社區 300+ 戶可能 2 個月前就要準備）
+          - row "召開前 10 日 法定開會通知（最後期限）" [ref=e1989]:
+            - cell "召開前 10 日" [ref=e1990]:
+              - text: 召開前
+              - strong [ref=e1991]: 10 日
+            - cell "法定開會通知（最後期限）" [ref=e1992]
+          - row "開會當日 召開區權會（建議週六下午）" [ref=e1993]:
+            - cell "開會當日" [ref=e1994]
+            - cell "召開區權會（建議週六下午）" [ref=e1995]:
+              - text: 召開區權會（建議
+              - strong [ref=e1996]: 週六下午
+              - text: ）
+          - row "開會後 進入新舊管委會交接流程（詳本章 §5 換屆交接）" [ref=e1997]:
+            - cell "開會後" [ref=e1998]
+            - cell "進入新舊管委會交接流程（詳本章 §5 換屆交接）" [ref=e1999]
+      - heading "4.2.2 召開地點" [level=4] [ref=e2000]
+      - paragraph [ref=e2001]: 固定使用「閱大安二樓管委會使用空間」。物業負責後續執行細節。
+      - heading "4.2.3 任期管理" [level=4] [ref=e2002]
+      - list [ref=e2003]:
+        - listitem [ref=e2004]: 管委會委員任期 1 年（依規約）
+        - listitem [ref=e2005]: 任期到期年必須重選（如 115 年）
+        - listitem [ref=e2006]: 即使非任期到期年也須召開區權會（規約規定每年一次）
+      - heading "4.2.4 會議當天時間軸（以第五屆 2026/05/16 為例）" [level=4] [ref=e2007]
+      - document [ref=e2009]:
+        - generic [ref=e2010]:
+          - generic [ref=e2013]: 13:00
+          - generic [ref=e2015]: 13:15
+          - generic [ref=e2017]: 13:30
+          - generic [ref=e2019]: 13:45
+          - generic [ref=e2021]: 14:00
+          - generic [ref=e2023]: 14:15
+          - generic [ref=e2025]: 14:30
+          - generic [ref=e2027]: 14:45
+          - generic [ref=e2029]: 15:00
+          - generic [ref=e2031]: 15:15
+          - generic [ref=e2033]: 15:30
+          - generic [ref=e2035]: 15:45
+        - generic [ref=e2044]:
+          - generic [ref=e2052]: 住戶簽到（投影封面）
+          - generic [ref=e2053]: 出席比例報告（成立程序）
+          - generic [ref=e2054]: 01 上屆管委會工作報告
+          - generic [ref=e2055]: 02 年度財務報告
+          - generic [ref=e2056]: 03 長期財務展望（意見交流）
+          - generic [ref=e2057]: 04 新屆管理委員選舉
+          - generic [ref=e2058]: 05 臨時動議
+        - generic [ref=e2059]:
+          - generic [ref=e2060]: 報到時段
+          - generic [ref=e2061]: 會議成立
+          - generic [ref=e2062]: 正式議程
+        - generic [ref=e2063]: 區權會當天時間軸
+      - paragraph [ref=e2064]:
+        - strong [ref=e2065]: 會議學原則
+        - text: ：「出席戶數比例報告」是
+        - strong [ref=e2066]: 會議成立前的程序
+        - text: ，不算正式議程、不列入議案編號。確認過半才宣告會議成立，再進入正式議程。
+      - paragraph [ref=e2067]:
+        - strong [ref=e2068]: 會前 1 週準備
+        - text: ：
+      - list [ref=e2069]:
+        - listitem [ref=e2070]:
+          - text: AGM Tool（
+          - code [ref=e2071]: agm-tools.html
+          - text: ）名冊匯入校對完成（第二章 §7）
+        - listitem [ref=e2072]: 簡報終稿、決議票卡備妥（議案票卡、委員選舉票卡分顏色）
+        - listitem [ref=e2073]: 報到桌動線：簽到 → 領票 → 入座
+      - paragraph [ref=e2074]:
+        - strong [ref=e2075]: 總幹事在會議當天的協助項目
+        - text: ：
+      - list [ref=e2076]:
+        - listitem [ref=e2077]:
+          - strong [ref=e2078]: 13:00–14:00 報到
+          - text: ：操作 AGM Tool ③ 簽到頁、引導住戶簽到
+        - listitem [ref=e2079]:
+          - strong [ref=e2080]: 14:00 開會時點
+          - text: ：簽到頁數字定格，將工作筆電交給主席
+        - listitem [ref=e2081]:
+          - strong [ref=e2082]: 議程進行中
+          - text: ：協助接收住戶提案紙條、提醒主席殘存議題
+        - listitem [ref=e2083]:
+          - strong [ref=e2084]: 委員選舉
+          - text: ：發票、收票、計票（AGM Tool ⑤ 自動排名）
+        - listitem [ref=e2085]:
+          - strong [ref=e2086]: 散會後
+          - text: ：保存 AGM Tool 工作檔、整理現場、確認 Drive 已同步
+      - heading "4.2.5 會議結束後文書 SOP" [level=4] [ref=e2087]
+      - paragraph [ref=e2088]: 區權會散會不等於工作結束，後續還有 50–70 天的文書與行政動作要走完：
+      - document [ref=e2090]:
+        - generic [ref=e2098]:
+          - generic [ref=e2104]:
+            - text: 區權會散會
+            - text: 會議紀錄草稿封存
+          - generic [ref=e2110]:
+            - text: 7 日內
+            - text: 會議紀錄定稿
+          - generic [ref=e2116]:
+            - text: 10 日內
+            - text: 寄發住戶決議公告
+          - generic [ref=e2122]:
+            - text: 盡速送出
+            - text: 建管處組織報備變更
+          - generic [ref=e2128]:
+            - text: 國稅局負責人變更
+            - text: 大小章＋委託書
+          - generic [ref=e2134]:
+            - text: 銀行印鑑變更
+            - text: 永豐東門分行
+            - text: 詳 §5.3
+          - generic [ref=e2140]:
+            - text: 等核備函
+            - text: 50-70 天
+          - generic [ref=e2146]:
+            - text: 更新管理中心存留
+            - text: 市府核備公文
+          - generic [ref=e2152]:
+            - text: 執行區權會通過議案
+            - text: 詳 §5.1 第 7 項
+      - paragraph [ref=e2153]:
+        - strong [ref=e2154]: 時間敏感度
+        - text: ：
+      - list [ref=e2155]:
+        - listitem [ref=e2156]: 會議紀錄寄發有規約規定的時效（10 日內）——遲了會被住戶質疑
+        - listitem [ref=e2157]:
+          - text: 建管處報備是
+          - strong [ref=e2158]: 唯一可控的動作
+          - text: ，越早送越早收到核備函；核備函未到之前，新主委對外仍以舊主委身分行事不合法
+        - listitem [ref=e2159]: 銀行印鑑變更需「新任主委、財委、監委 + 原任主委」共 4 人到場（詳第四章 §5.3），時間要先約
+      - paragraph [ref=e2160]:
+        - strong [ref=e2161]: 接續到 §5.1 換屆 12 步
+        - text: ：若該屆是任期到期年（如 115 年），會議結束就觸發 §5.1 全套交接流程；非任期年則只需執行決議事項。
+      - heading "4.3 辦公室設備" [level=3] [ref=e2162]
+      - list [ref=e2163]:
+        - listitem [ref=e2164]:
+          - strong [ref=e2165]: Canon 多功能事務機
+          - text: ：已改用副廠碳粉匣以節省成本。
+        - listitem [ref=e2166]:
+          - strong [ref=e2167]: 文件掃描標準
+          - text: ：務必設定存為
+          - strong [ref=e2168]: PDF
+          - text: 格式 (嚴禁多張 JPG)。
+      - heading "5. 管委會換屆交接流程" [level=2] [ref=e2169]
+      - heading "5.1 交接 12 步 SOP（任期屆滿時）" [level=3] [ref=e2170]
+      - paragraph [ref=e2171]:
+        - text: 新舊主委交接時必須完成以下 12 項。標準交接日為
+        - strong [ref=e2172]: 6/30
+        - text: （與會計年度切齊）。
+      - table [ref=e2173]:
+        - rowgroup [ref=e2174]:
+          - row "# 項目 注意點" [ref=e2175]:
+            - columnheader "#" [ref=e2176]
+            - columnheader "項目" [ref=e2177]
+            - columnheader "注意點" [ref=e2178]
+        - rowgroup [ref=e2179]:
+          - row "1 建管處公寓大廈科 組織報備變更管理委員會負責人" [ref=e2180]:
+            - cell "1" [ref=e2181]
+            - cell "建管處公寓大廈科" [ref=e2182]:
+              - strong [ref=e2183]: 建管處公寓大廈科
+            - cell "組織報備變更管理委員會負責人" [ref=e2184]
+          - row "2 國稅局 變更管理負責人 — 需填寫委託書並蓋大小章" [ref=e2185]:
+            - cell "2" [ref=e2186]
+            - cell "國稅局" [ref=e2187]:
+              - strong [ref=e2188]: 國稅局
+            - cell "變更管理負責人 — 需填寫委託書並蓋大小章" [ref=e2189]:
+              - text: 變更管理負責人 —
+              - strong [ref=e2190]: 需填寫委託書並蓋大小章
+          - row "3 永豐銀行東門分行 變更管委會帳戶、公共基金帳戶取款印鑑（詳本章 §5.3）" [ref=e2191]:
+            - cell "3" [ref=e2192]
+            - cell "永豐銀行東門分行" [ref=e2193]:
+              - strong [ref=e2194]: 永豐銀行東門分行
+            - cell "變更管委會帳戶、公共基金帳戶取款印鑑（詳本章 §5.3）" [ref=e2195]
+          - row "4 帳戶移交 管理費帳戶 + 公共基金帳戶" [ref=e2196]:
+            - cell "4" [ref=e2197]
+            - cell "帳戶移交" [ref=e2198]:
+              - strong [ref=e2199]: 帳戶移交
+            - cell "管理費帳戶 + 公共基金帳戶" [ref=e2200]
+          - row "5 印鑑交接 本大樓管委會印鑑（含大小章）" [ref=e2201]:
+            - cell "5" [ref=e2202]
+            - cell "印鑑交接" [ref=e2203]:
+              - strong [ref=e2204]: 印鑑交接
+            - cell "本大樓管委會印鑑（含大小章）" [ref=e2205]
+          - row "6 合約續簽 本大樓各項合約到期者於交接後續簽" [ref=e2206]:
+            - cell "6" [ref=e2207]
+            - cell "合約續簽" [ref=e2208]:
+              - strong [ref=e2209]: 合約續簽
+            - cell "本大樓各項合約到期者於交接後續簽" [ref=e2210]
+          - row "7 區權會決議執行 執行該屆區權會通過的各項決議" [ref=e2211]:
+            - cell "7" [ref=e2212]
+            - cell "區權會決議執行" [ref=e2213]:
+              - strong [ref=e2214]: 區權會決議執行
+            - cell "執行該屆區權會通過的各項決議" [ref=e2215]
+          - row "8 免稅證明 管理中心櫃檯存留" [ref=e2216]:
+            - cell "8" [ref=e2217]
+            - cell "免稅證明" [ref=e2218]:
+              - strong [ref=e2219]: 免稅證明
+            - cell "管理中心櫃檯存留" [ref=e2220]
+          - row "9 市府組織報備證明 管理中心櫃檯存留" [ref=e2221]:
+            - cell "9" [ref=e2222]
+            - cell "市府組織報備證明" [ref=e2223]:
+              - strong [ref=e2224]: 市府組織報備證明
+            - cell "管理中心櫃檯存留" [ref=e2225]
+          - row "10 市府核備公文 管理中心櫃檯存留" [ref=e2226]:
+            - cell "10" [ref=e2227]
+            - cell "市府核備公文" [ref=e2228]:
+              - strong [ref=e2229]: 市府核備公文
+            - cell "管理中心櫃檯存留" [ref=e2230]
+          - row "11 共同消防防護計畫書變更 變更共同防火管理人" [ref=e2231]:
+            - cell "11" [ref=e2232]
+            - cell "共同消防防護計畫書變更" [ref=e2233]:
+              - strong [ref=e2234]: 共同消防防護計畫書變更
+            - cell "變更共同防火管理人" [ref=e2235]
+          - row "12 建築竣工圖、財產清冊、收發文件、操作說明電子檔 管理中心櫃檯、二樓管委會空間存留" [ref=e2236]:
+            - cell "12" [ref=e2237]
+            - cell "建築竣工圖、財產清冊、收發文件、操作說明電子檔" [ref=e2238]:
+              - strong [ref=e2239]: 建築竣工圖、財產清冊、收發文件、操作說明電子檔
+            - cell "管理中心櫃檯、二樓管委會空間存留" [ref=e2240]
+      - paragraph [ref=e2241]:
+        - strong [ref=e2242]: 執行原則
+        - text: ：委請物業團隊協助新任管委會完成必要之組織報備變更與相關事務。
+      - heading "5.2 報備時程 (台北市工務局)" [level=3] [ref=e2243]
+      - list [ref=e2244]:
+        - listitem [ref=e2245]:
+          - strong [ref=e2246]: 經驗值
+          - text: ：從報備到收到核備函約需
+          - strong [ref=e2247]: 50-70 天
+          - text: 。
+        - listitem [ref=e2248]:
+          - strong [ref=e2249]: 總幹事職責
+          - text: ：區權會結束後，應盡速送出報備資料，這是唯一可控的環節。
+      - heading "5.3 銀行印鑑更換 (永豐東門分行)" [level=3] [ref=e2250]
+      - list [ref=e2251]:
+        - listitem [ref=e2252]:
+          - strong [ref=e2253]: 出席人員 (共 4 位)
+          - text: ：
+          - list [ref=e2254]:
+            - listitem [ref=e2255]:
+              - strong [ref=e2256]: 新任
+              - text: ：主委、財委、監委 (三位皆需到場，主委財委更換印鑑，監委交接大章)。
+            - listitem [ref=e2257]:
+              - strong [ref=e2258]: 原任
+              - text: ：僅需
+              - strong [ref=e2259]: 原主委
+              - text: 出席即可 (原財委、監委不必到場)。
+      - heading "6. 公共意外險與火險" [level=2] [ref=e2260]
+      - heading "6.1 投保策略" [level=3] [ref=e2261]
+      - list [ref=e2262]:
+        - listitem [ref=e2263]:
+          - strong [ref=e2264]: 日期對齊
+          - text: ：自
+          - strong [ref=e2265]: 2026/01/01 起
+          - text: 將公共意外險與火險日期對齊（每年 12 月底到期）。
+        - listitem [ref=e2266]:
+          - strong [ref=e2267]: 廠商選擇
+          - text: ：固定比價南山、國泰、富邦三家。
+          - strong [ref=e2268]: 國泰產險
+          - text: 在組合報價上最具優勢，故已從南山更換為國泰。
+        - listitem [ref=e2269]:
+          - strong [ref=e2270]: 條款重點
+          - text: ：
+          - list [ref=e2271]:
+            - listitem [ref=e2272]:
+              - strong [ref=e2273]: 無自負額
+              - text: ：優先選擇無自負額保單，確保小額損壞 (1-2萬) 能獲得理賠
+            - listitem [ref=e2274]:
+              - strong [ref=e2275]: 承保範圍
+              - text: ：確認涵蓋
+              - strong [ref=e2276]: EMS 中控主機、伺服器及公共配電盤
+      - heading "6.2 公共意外險年度換約 SOP" [level=3] [ref=e2277]
+      - heading "6.2.1 時程" [level=4] [ref=e2278]
+      - paragraph [ref=e2279]:
+        - text: 合約
+        - strong [ref=e2280]: 每年 12 月 31 日到期
+        - text: 。
+        - strong [ref=e2281]: 每年 11 月
+        - text: 啟動比價。
+      - heading "6.2.2 比價框架" [level=4] [ref=e2282]
+      - list [ref=e2283]:
+        - listitem [ref=e2284]:
+          - text: 固定比價三家：
+          - strong [ref=e2285]: 國泰、富邦、南山
+        - listitem [ref=e2286]:
+          - strong [ref=e2287]: 只評估零自負額方案
+          - text: （已有歷年共識）
+        - listitem [ref=e2288]:
+          - text: 廠商間價差通常不大（百元級）→ 以
+          - strong [ref=e2289]: 穩定續保
+          - text: 為原則
+      - heading "6.2.3 歷年參考" [level=4] [ref=e2290]
+      - list [ref=e2291]:
+        - listitem [ref=e2292]: 115 年：$6,350（國泰，零自負額）
+        - listitem [ref=e2293]: 比價結果：南山 $6,680，富邦未在最終比較中
+      - heading "6.3 商業火險年度換約 SOP" [level=3] [ref=e2294]
+      - heading "6.3.1 投保標的（歷年微調的最終結果）" [level=4] [ref=e2295]
+      - table [ref=e2296]:
+        - rowgroup [ref=e2297]:
+          - row "標的 金額" [ref=e2298]:
+            - columnheader "標的" [ref=e2299]
+            - columnheader "金額" [ref=e2300]
+        - rowgroup [ref=e2301]:
+          - row "原有建物 $11,000,000" [ref=e2302]:
+            - cell "原有建物" [ref=e2303]
+            - cell "$11,000,000" [ref=e2304]
+          - row "保留營業裝修 $10,000,000" [ref=e2305]:
+            - cell "保留營業裝修" [ref=e2306]
+            - cell "$10,000,000" [ref=e2307]
+          - row "營業生財器具（櫃檯螢幕、主機等） $2,000,000" [ref=e2308]:
+            - cell "營業生財器具（櫃檯螢幕、主機等）" [ref=e2309]
+            - cell "$2,000,000" [ref=e2310]
+          - row "機器設備（公共區域機電含電梯） $10,000,000" [ref=e2311]:
+            - cell "機器設備（公共區域機電含電梯）" [ref=e2312]
+            - cell "$10,000,000" [ref=e2313]
+          - row "合計 $33,000,000" [ref=e2314]:
+            - cell "合計" [ref=e2315]:
+              - strong [ref=e2316]: 合計
+            - cell "$33,000,000" [ref=e2317]:
+              - strong [ref=e2318]: $33,000,000
+      - paragraph [ref=e2319]:
+        - strong [ref=e2320]: 附加險
+        - text: ：
+        - strong [ref=e2321]: 不投保煙燻險、爆炸險
+        - text: （已多次檢討確認無必要）
+      - heading "6.3.2 比價廠商與報價（113 年範例）" [level=4] [ref=e2322]
+      - table [ref=e2323]:
+        - rowgroup [ref=e2324]:
+          - row "廠商 保費 自負額" [ref=e2325]:
+            - columnheader "廠商" [ref=e2326]
+            - columnheader "保費" [ref=e2327]
+            - columnheader "自負額" [ref=e2328]
+        - rowgroup [ref=e2329]:
+          - row "富邦 $3,564 每事故賠償金額 10%，至少 $30,000" [ref=e2330]:
+            - cell "富邦" [ref=e2331]
+            - cell "$3,564" [ref=e2332]
+            - cell "每事故賠償金額 10%，至少 $30,000" [ref=e2333]
+          - row "南山 $4,752 每事故賠償金額 10%，至少 $30,000" [ref=e2334]:
+            - cell "南山" [ref=e2335]
+            - cell "$4,752" [ref=e2336]
+            - cell "每事故賠償金額 10%，至少 $30,000" [ref=e2337]
+          - row "國泰 $5,280 無自負額（歷年首選）" [ref=e2338]:
+            - cell "國泰" [ref=e2339]:
+              - strong [ref=e2340]: 國泰
+            - cell "$5,280" [ref=e2341]:
+              - strong [ref=e2342]: $5,280
+            - cell "無自負額（歷年首選）" [ref=e2343]:
+              - strong [ref=e2344]: 無自負額
+              - text: （歷年首選）
+      - heading "6.3.3 比價基礎一致性原則（重要）" [level=4] [ref=e2345]
+      - paragraph [ref=e2346]:
+        - strong [ref=e2347]: 若三家報價基礎不同，務必先協商統一報價基礎再比較
+        - text: ，否則無法做出有效對照。歷年常見的不一致來源：保額拆分項目、附加險種、自負額條款。
+      - heading "6.3.4 設備變動觸發" [level=4] [ref=e2348]
+      - paragraph [ref=e2349]:
+        - text: 如有大樓設備價值變化（新增機電、電梯改造），需請建設公司或機電廠商提供
+        - strong [ref=e2350]: 機械設備估價更新
+        - text: 後再報。
+      - heading "7. 公共安全檢查（每 3 年一次）" [level=2] [ref=e2351]
+      - heading "7.1 法規依據" [level=3] [ref=e2352]
+      - paragraph [ref=e2353]:
+        - text: 建管處函令：
+        - strong [ref=e2354]: 8 樓以上集合式建築自 112 年起每 3 年須做公共安全檢查申報
+        - text: 。下次到期年：
+        - strong [ref=e2355]: 115 年
+        - text: （再下次：118 年）。
+      - heading "7.2 廠商與報價" [level=3] [ref=e2356]
+      - list [ref=e2357]:
+        - listitem [ref=e2358]:
+          - strong [ref=e2359]: 固定廠商
+          - text: ：大台北建築物公共安全檢查股份有限公司
+        - listitem [ref=e2360]:
+          - strong [ref=e2361]: 115 年報價
+          - text: ：$14,390（未稅）
+        - listitem [ref=e2362]:
+          - strong [ref=e2363]: 行情對比
+          - text: ：其他廠商多在 $20,000 以上 → 大台北仍是合理選擇
+        - listitem [ref=e2364]:
+          - strong [ref=e2365]: 議價要點
+          - text: ：如有漲價需確認漲價原因與是否含稅
+      - heading "7.3 標準時程" [level=3] [ref=e2366]
+      - table [ref=e2367]:
+        - rowgroup [ref=e2368]:
+          - row "時點 動作" [ref=e2369]:
+            - columnheader "時點" [ref=e2370]
+            - columnheader "動作" [ref=e2371]
+        - rowgroup [ref=e2372]:
+          - row "1 月 管委會議決廠商與議價" [ref=e2373]:
+            - cell "1 月" [ref=e2374]
+            - cell "管委會議決廠商與議價" [ref=e2375]
+          - row "2 月 確認安檢日程" [ref=e2376]:
+            - cell "2 月" [ref=e2377]
+            - cell "確認安檢日程" [ref=e2378]
+          - row "上半年內 安檢執行 + 申報完成" [ref=e2379]:
+            - cell "上半年內" [ref=e2380]
+            - cell "安檢執行 + 申報完成" [ref=e2381]
+      - heading "7.4 法規衍生改善要求（115 年範例）" [level=3] [ref=e2382]
+      - paragraph [ref=e2383]:
+        - text: 公安檢查不只是「派人來看一遍」 —
+        - strong [ref=e2384]: 每次檢查都會帶來新的法規衍生改善要求
+        - text: ，總幹事要主動跟廠商確認當年法規變化。115 年實例：
+      - list [ref=e2385]:
+        - listitem [ref=e2386]:
+          - strong [ref=e2387]: 各樓層安全梯門檻
+          - text: 需貼
+          - strong [ref=e2388]: 反光防滑膠帶
+          - text: （已執行）
+        - listitem [ref=e2389]:
+          - strong [ref=e2390]: B1 梯廳通往停車場的防火門
+          - text: ：消防規定關閉時不能上鎖且必須能直接推開 → 將該扇門的磁力鎖（陽極鎖）感應處貼起使其無法通電上鎖
+      - paragraph [ref=e2391]:
+        - strong [ref=e2392]: 這類「順便要做的事」往往是公安檢查最大的價值來源 — 別只把它當作報備程序。
+      - heading "8. 住戶室內裝修管理 SOP" [level=2] [ref=e2393]
+      - heading "8.1 階段一：申請審核 (判斷要務)" [level=3] [ref=e2394]
+      - paragraph [ref=e2395]: 總幹事需依《建築物室內裝修管理辦法》判斷是否需申請許可：
+      - list [ref=e2396]:
+        - listitem [ref=e2397]:
+          - strong [ref=e2398]: 必需申請之條件
+          - text: ：
+          - list [ref=e2399]:
+            - listitem [ref=e2400]:
+              - strong [ref=e2401]: 天花板
+              - text: ：固著於構造體之裝修。
+            - listitem [ref=e2402]:
+              - strong [ref=e2403]: 內部牆面
+              - text: ：不含壁紙壁布。
+            - listitem [ref=e2404]:
+              - strong [ref=e2405]: 固定隔屏
+              - text: ：高度超過 1.2 公尺 (含系統櫃)。
+            - listitem [ref=e2406]:
+              - strong [ref=e2407]: 分間牆變更
+              - text: 。
+        - listitem [ref=e2408]:
+          - strong [ref=e2409]: 文件查核
+          - text: ：匯款證明 (保證金 5 萬)、申請單、切結書、施工圖、許可文件 (若符合上述條件)。
+      - heading "8.2 階段二：施工前現場管理" [level=3] [ref=e2410]
+      - list [ref=e2411]:
+        - listitem [ref=e2412]:
+          - strong [ref=e2413]: 保護工程會勘 (關鍵)
+          - text: ：廠商施作保護「前」，務必錄影存證公共區域現況，釐清責任。
+        - listitem [ref=e2414]:
+          - strong [ref=e2415]: 保護材標準
+          - text: ：
+          - list [ref=e2416]:
+            - listitem [ref=e2417]: 地板/壁面：三層 (防水布+PP板+木板)。
+            - listitem [ref=e2418]: 電梯：雙層 (PP板+木板)，需保護門框。
+            - listitem [ref=e2419]: 門口：透明防塵布簾。
+      - heading "8.3 階段三：施工期間巡檢" [level=3] [ref=e2420]
+      - list [ref=e2421]:
+        - listitem [ref=e2422]:
+          - strong [ref=e2423]: 每日清潔
+          - text: ：收工前 30 分鐘巡查電梯與動線。
+        - listitem [ref=e2424]:
+          - strong [ref=e2425]: 廢棄物
+          - text: ：嚴禁堆置社區或丟入垃圾間。
+        - listitem [ref=e2426]:
+          - strong [ref=e2427]: 違規開罰
+          - text: ：依罰則表開立通知書，並從保證金扣款。
+      - heading "8.4 階段四：完工與退款" [level=3] [ref=e2428]
+      - list [ref=e2429]:
+        - listitem [ref=e2430]:
+          - strong [ref=e2431]: 陽台測試
+          - text: ：需協同測試前後陽台排水是否暢通。
+        - listitem [ref=e2432]:
+          - strong [ref=e2433]: 拆除會勘
+          - text: ：拆除保護材時再次會勘，確認無損後始可退還保證金。
+      - heading "9. 圖書管理" [level=2] [ref=e2434]
+      - heading "9.1 來源與原則" [level=3] [ref=e2435]
+      - list [ref=e2436]:
+        - listitem [ref=e2437]:
+          - strong [ref=e2438]: 來源
+          - text: ：敦寶建設回饋 (Boven 選書，2024 年期滿未續約)、住戶捐贈。
+        - listitem [ref=e2439]:
+          - strong [ref=e2440]: 管理原則
+          - text: ：
+          - strong [ref=e2441]: 禁止外借
+          - text: 。為減少物業負擔，請住戶於公共區域閱讀，不外借回自家。
+      - heading "10. 議題：社區採購與比價流程" [level=2] [ref=e2442]
+      - heading "10.1 困境分析" [level=3] [ref=e2443]
+      - list [ref=e2444]:
+        - listitem [ref=e2445]:
+          - strong [ref=e2446]: 規定
+          - text: ：超過一萬元需三家比價。
+        - listitem [ref=e2447]:
+          - strong [ref=e2448]: 實務痛點
+          - text: ：
+          - list [ref=e2449]:
+            - listitem [ref=e2450]: 金額小、利潤薄，廠商不願「陪標」。
+            - listitem [ref=e2451]: 緊急搶修或獨家代理產品，根本找不到三家。
+            - listitem [ref=e2452]: 長期導致社區信用受損，廠商拒絕報價。
+      - heading "10.2 解決策略" [level=3] [ref=e2453]
+      - list [ref=e2454]:
+        - listitem [ref=e2455]:
+          - strong [ref=e2456]: 修訂規約
+          - text: ：增訂緊急搶修或獨家代理之例外條款。
+        - listitem [ref=e2457]:
+          - strong [ref=e2458]: 續約機制
+          - text: ：針對優良廠商建立評估續約制，取代重複比價。
+        - listitem [ref=e2459]:
+          - strong [ref=e2460]: 建立備援
+          - text: ：平時將非核心小案件發包給備援廠商，培養關係以備不時之需。
+      - heading "第五章：安全防災相關標準作業程序" [level=1] [ref=e2461]
+      - heading "1. 安全防災" [level=2] [ref=e2462]
+      - heading "1.1 安防系統" [level=3] [ref=e2463]
+      - list [ref=e2464]:
+        - listitem [ref=e2465]:
+          - strong [ref=e2466]: 基礎要求
+          - text: ：需全盤了解監視器與門禁系統運作狀況、鑰匙與門禁卡管理權限。
+        - listitem [ref=e2467]:
+          - strong [ref=e2468]: 伺服器維護
+          - text: ：
+          - list [ref=e2469]:
+            - listitem [ref=e2470]:
+              - strong [ref=e2471]: 設備
+              - text: ：使用飛瑞 UPS 鉛酸電池。
+            - listitem [ref=e2472]:
+              - strong [ref=e2473]: 維護頻率
+              - text: ：應
+              - strong [ref=e2474]: 每半年放電一次
+              - text: 以延長電池壽命。
+      - heading "1.2 颱風" [level=3] [ref=e2475]
+      - paragraph [ref=e2476]:
+        - strong [ref=e2477]: 自動提醒系統
+        - text: ：社區後台每天 6:00 / 12:00 / 18:00 自動讀取中央氣象署警特報資料，臺北市進入陸上颱風警報時，culturalcity85 日曆會自動建立
+        - strong [ref=e2478]: 🌀 颱風陸上警報・防颱準備清單
+        - text: （紅色全天事件）；警報解除後隔日會自動建立
+        - strong [ref=e2479]: 🔍 颱風後巡查清單
+        - text: （藍色全天事件）。
+      - paragraph [ref=e2480]:
+        - text: 系統設定為「臺北市進入陸上颱風警報」才觸發，
+        - strong [ref=e2481]: 海上颱風警報不會觸發
+        - text: ，社區從陸上警報才開始進入防颱模式。臺北市範圍涵蓋大安區，所以「臺北市發布陸上警報」與「大安區受影響」是等義的。
+      - heading "1.2.1 防颱準備公設施作項目" [level=4] [ref=e2482]
+      - paragraph [ref=e2483]: 颱風來臨前的施作項目：
+      - list [ref=e2484]:
+        - listitem [ref=e2485]:
+          - paragraph [ref=e2486]: R3F電梯機房窗戶檢查與關閉
+          - list [ref=e2487]:
+            - listitem [ref=e2488]: 務必將靠電梯設備側的活動百葉窗葉片關閉
+        - listitem [ref=e2489]:
+          - paragraph [ref=e2490]: R2F水錶室窗戶檢查與關閉
+        - listitem [ref=e2491]:
+          - paragraph [ref=e2492]: 2F-15F排煙窗、窗戶檢查與關閉
+        - listitem [ref=e2493]:
+          - paragraph [ref=e2494]: 2F-15F各樓層A、B兩安全梯防火門檢查與關閉
+        - listitem [ref=e2495]:
+          - paragraph [ref=e2496]: 1F、B1F排水溝檢查
+          - list [ref=e2497]:
+            - listitem [ref=e2498]: 1F後花園排水溝檢查及淤泥、落葉清除
+            - listitem [ref=e2499]: 1F車坡道出入口排水溝檢查及淤泥、落葉清除
+            - listitem [ref=e2500]: B1F車坡道出入口排水溝檢查及淤泥、落葉清除
+            - listitem [ref=e2501]: 1F行動不便車位拒馬綁牢固定串聯，放倒
+        - listitem [ref=e2502]:
+          - paragraph [ref=e2503]: R樓閱覽室防颱作業
+          - list [ref=e2504]:
+            - listitem [ref=e2505]:
+              - text: R樓閱覽室出入口門口沙包預防
+              - list [ref=e2506]:
+                - listitem [ref=e2507]: 沙包平時收在地下停車場B4消防機房裡，風雨還不大時沙包可暫堆在近內外出入門口窗戶下方
+            - listitem [ref=e2508]:
+              - text: R樓空中花園桌椅收入室內
+              - list [ref=e2509]:
+                - listitem [ref=e2510]: 大理石板易碎，曾發生搬動過程掉落碎裂需花費更換，搬動時請小心
+        - listitem [ref=e2511]:
+          - paragraph [ref=e2512]: 防水閘門安裝
+          - blockquote [ref=e2513]:
+            - paragraph [ref=e2514]:
+              - text: 雖然羅斯福路淹水的機會不高，但是請新總幹事上任時務必
+              - strong [ref=e2515]: 至少安裝一次防水閘門
+              - text: 。
+            - paragraph [ref=e2516]:
+              - strong [ref=e2517]: 操作提醒
+              - text: ：防水閘門普遍被認為不太好裝，有其訣竅，安裝前請務必參照教學影片練習。
+          - list [ref=e2518]:
+            - listitem [ref=e2519]:
+              - text: 前門防水閘門安裝
+              - list [ref=e2520]:
+                - listitem [ref=e2521]: 全程需時約40分鐘──防水閘門支柱安裝以及門片安裝各約20分鐘。
+                - listitem [ref=e2522]: 前門的防水閘門支柱較容易安裝。
+                - listitem [ref=e2523]:
+                  - text: 防水閘門片在從上往下安裝時，由於門片與門片間有橡膠墊可能會造成無法很順利的往下卡緊、門片之間有間隙，也會造成手轉的螺絲難以對位鎖入的情況，這種狀況下最好能
+                  - strong [ref=e2524]: 準備膠槌將門片稍作敲打
+                  - text: 較能順利密合與將螺絲鎖入。
+                - listitem [ref=e2525]: 在風雨還不明顯的時候我們會先將防水閘門支柱的部分先安裝好，門片暫放置於入口進門左側處，底部先鋪瓦楞紙板或厚紙板以免門片刮傷大理石地板。
+            - listitem [ref=e2526]:
+              - text: 後門防水閘門安裝
+              - list [ref=e2527]:
+                - listitem [ref=e2528]: 全程需時約40分鐘──防水閘門支柱安裝以及門片安裝各約20分鐘。
+                - listitem [ref=e2529]:
+                  - text: 後門的防水閘門支柱安裝難度較高
+                  - list [ref=e2530]:
+                    - listitem [ref=e2531]: 由於所螺絲時螺帽上方的空間限制，在鎖入兩邊上下個三根螺絲的時候最好使用10元硬幣而非螺絲起子；
+                    - listitem [ref=e2532]: 鎖螺絲的順序最好是由最下面的螺絲開始往上鎖（有實證成功經驗）；如果從上面的螺絲開始鎖的話，下面兩顆螺絲孔會有對位的困難。
+                - listitem [ref=e2533]: 在風雨還不明顯的時候我們會先將防水閘門支柱的部分先安裝好，門片暫放置於門外左側處，底部先鋪瓦楞紙板或厚紙板以免門片刮傷大理石地板。
+        - listitem [ref=e2534]:
+          - paragraph [ref=e2535]: 地排蓋拔除
+          - list [ref=e2536]:
+            - listitem [ref=e2537]: 一樓至十五樓安全梯（A梯，靠近電梯之安全梯）流水地排蓋拔除
+            - listitem [ref=e2538]: 流水地排蓋拔除置放旁邊
+            - listitem [ref=e2539]: 一樓A安全梯排水溝拆除蓋片，引導雨勢大時的水流疏通，有部分水量是由雨水打入樓上安全梯間後所流到一樓來的
+            - listitem [ref=e2540]: 茶水間水槽底部地排蓋設法打開，並可考慮將圍牆上的排水孔（從狀元及第端流往圍牆內的）堵住
+        - listitem [ref=e2541]:
+          - paragraph [ref=e2542]: 與狀元及第鄰接牆的排水疏通
+          - list [ref=e2543]:
+            - listitem [ref=e2544]: 該洞必須疏通後水才有辦法往暗溝排走
+      - heading "1.2.2 災後巡查" [level=4] [ref=e2545]
+      - paragraph [ref=e2546]:
+        - text: 颱風警報解除後系統會自動建立 🔍 颱風後巡查清單事件（隔日全天）。視當日風雨狀況執行，雨勢仍大可延至次日。
+        - strong [ref=e2547]: 重點是確認災損狀況、及早通報、及早處理
+        - text: 。
+      - paragraph [ref=e2548]: 巡查項目：
+      - list [ref=e2549]:
+        - listitem [ref=e2550]: 地下室排水溝、機房地坪是否積水
+        - listitem [ref=e2551]: 頂樓植栽倒伏、盆器破損狀況
+        - listitem [ref=e2552]: 外牆磁磚剝落（從對街用望遠鏡或無人機檢查）
+        - listitem [ref=e2553]: 招牌、廣告物、頂樓設備固定情況
+        - listitem [ref=e2554]: 停車場入口擋水閘門 / 抽水馬達回復狀態
+        - listitem [ref=e2555]: 電梯機房積水、電梯運作測試
+        - listitem [ref=e2556]: 緊急照明、逃生燈是否正常
+        - listitem [ref=e2557]: 信箱區 / 公佈欄漏水
+        - listitem [ref=e2558]: 中庭排水孔阻塞（落葉、塑膠袋）
+        - listitem [ref=e2559]: 對講機、門禁系統運作正常
+      - paragraph [ref=e2560]:
+        - text: 巡查發現異常處請
+        - strong [ref=e2561]: 拍照記錄、通知主委、視損害程度決定是否動用社區公基金修繕
+        - text: 。重大災損（外牆磁磚成片脫落、結構性裂縫、設備損毀）建議當天通報主委召開臨時委員會。
+      - heading "1.3 火災" [level=3] [ref=e2562]
+      - list [ref=e2563]:
+        - listitem [ref=e2564]:
+          - strong [ref=e2565]: 共同消防防護計畫
+          - text: ：
+          - list [ref=e2566]:
+            - listitem [ref=e2567]:
+              - strong [ref=e2568]: 防火管理人
+              - text: ：依法應由持有防火管理人證照者掛名（通常由總幹事擔任）。
+            - listitem [ref=e2569]:
+              - strong [ref=e2570]: 更新時機
+              - text: ：應於總幹事更換或委員會換屆的時候，更新資料給
+              - strong [ref=e2571]: 臺北市消防局金華分隊
+              - text: 。
+        - listitem [ref=e2572]:
+          - strong [ref=e2573]: 電動車火災防治
+          - text: ：
+          - list [ref=e2574]:
+            - listitem [ref=e2575]:
+              - strong [ref=e2576]: 現況
+              - text: ：鑑於鋰電池火災風險，提前研究新型滅火系統（如防火毯、細水霧防火系統）。
+            - listitem [ref=e2577]:
+              - strong [ref=e2578]: 法規備註
+              - text: ：行政院國土署建築技術科目前還沒有正式推出電動車防火相關規範，需持續關注。
+      - heading "1.4 地震" [level=3] [ref=e2579]
+      - paragraph [ref=e2580]: 地震停止後，應立即依序執行以下巡檢與處置：
+      - list [ref=e2581]:
+        - listitem [ref=e2582]:
+          - strong [ref=e2583]: 第一步：人員安全確認
+          - list [ref=e2584]:
+            - listitem [ref=e2585]: 立即檢查監視器畫面，確認各公共區域無明顯人員受傷或受困情況。
+            - listitem [ref=e2586]: 檢查電梯是否因地震停止運作，確認是否有住戶受困於電梯內。若有，立即聯繫電梯維護廠商（三菱）進行救援。
+        - listitem [ref=e2587]:
+          - strong [ref=e2588]: 第二步：設施安全巡檢（由上至下）
+          - list [ref=e2589]:
+            - listitem [ref=e2590]:
+              - strong [ref=e2591]: 頂樓
+              - text: ：檢查水塔、水箱有無破損或位移，管線有無斷裂漏水。
+            - listitem [ref=e2592]:
+              - strong [ref=e2593]: 各樓層梯廳與走廊
+              - text: ：
+              - list [ref=e2594]:
+                - listitem [ref=e2595]: 檢查天花板、消防灑水頭有無鬆脫或漏水。
+                - listitem [ref=e2596]:
+                  - strong [ref=e2597]: 重點項目
+                  - text: ：仔細檢查牆面磁磚，特別是
+                  - strong [ref=e2598]: 5樓至7樓區域
+                  - text: ，是否有「膨拱」（空心）或剝落的跡象（此為 403 大地震後的災損經驗）。
+        - listitem [ref=e2599]:
+          - strong [ref=e2600]: 第三步：地下室巡檢
+          - list [ref=e2601]:
+            - listitem [ref=e2602]:
+              - strong [ref=e2603]: 重點項目
+              - text: ：檢查停車場的
+              - strong [ref=e2604]: Epoxy 地面
+              - text: 是否有新的裂縫產生。
+            - listitem [ref=e2605]: 檢查發電機房、各機電設備、管線是否有損壞或漏水。
+            - listitem [ref=e2606]: 檢查連續壁是否有滲水或結構裂痕。
+        - listitem [ref=e2607]:
+          - strong [ref=e2608]: 第四步：瓦斯管線
+          - list [ref=e2609]:
+            - listitem [ref=e2610]: 巡查是否有瓦斯外洩氣味，若有應立即關閉總閥並通知瓦斯公司。
+        - listitem [ref=e2611]:
+          - strong [ref=e2612]: 第五步：狀況回報與公告
+          - list [ref=e2613]:
+            - listitem [ref=e2614]: 將初步巡檢結果，立即回報給主委及管委會。
+            - listitem [ref=e2615]: 透過「社區公告 Line 群組」向全體住戶發布初步安全通報。
+            - listitem [ref=e2616]: 若電梯停用，應立即在各樓層電梯口張貼停用公告。
+        - listitem [ref=e2617]:
+          - strong [ref=e2618]: 第六步：災損記錄與修復
+          - list [ref=e2619]:
+            - listitem [ref=e2620]: 將所有災損情況以拍照及錄影方式詳細記錄，並上傳至 Google Photos。
+            - listitem [ref=e2621]: 部分非緊急性的災損（如地下室 Epoxy 地面裂縫）可經管委會決議後，列入議題追蹤，暫緩處理。
+      - heading "1.5 停電" [level=3] [ref=e2622]
+      - list [ref=e2623]:
+        - listitem [ref=e2624]:
+          - strong [ref=e2625]: 事中應變（停電發生當下）
+          - list [ref=e2626]:
+            - listitem [ref=e2627]:
+              - strong [ref=e2628]: 啟動緊急電力
+              - text: ：確認 B2 發電機房之緊急發電機是否自動啟動。若未啟動，需手動啟動或聯繫廠商。
+            - listitem [ref=e2629]:
+              - strong [ref=e2630]: 人員安全確認
+              - text: ：首要任務是透過電梯監視器或對講機，確認有無住戶受困。
+            - listitem [ref=e2631]:
+              - strong [ref=e2632]: 緊急照明
+              - text: ：確認各樓層逃生梯間照明是否亮起。
+            - listitem [ref=e2633]:
+              - strong [ref=e2634]: 門禁管制
+              - text: ：檢查大門、車道柵欄是否失效。若失效需切換為手動模式，並加派人力管制。
+            - listitem [ref=e2635]:
+              - strong [ref=e2636]: 公告
+              - text: ：致電台電查詢原因，並於 Line 群組發布通知，提醒住戶拔除敏感電器插頭。
+        - listitem [ref=e2637]:
+          - strong [ref=e2638]: 事後復原與巡檢
+          - list [ref=e2639]:
+            - listitem [ref=e2640]:
+              - strong [ref=e2641]: 關閉緊急電力
+              - text: ：確認市電穩定後，依程序關閉發電機。
+            - listitem [ref=e2642]:
+              - strong [ref=e2643]: 系統重啟測試
+              - text: ：
+              - list [ref=e2644]:
+                - listitem [ref=e2645]:
+                  - strong [ref=e2646]: 電梯
+                  - text: ：測試上下行是否順暢。
+                - listitem [ref=e2647]:
+                  - strong [ref=e2648]: 門禁
+                  - text: ：讀卡機、自動門、柵欄是否恢復。
+                - listitem [ref=e2649]:
+                  - strong [ref=e2650]: 網路監控
+                  - text: ：管理中心網路與監視器是否連線。
+                - listitem [ref=e2651]:
+                  - strong [ref=e2652]: 揚水馬達
+                  - text: ：確認頂樓水塔馬達是否正常補水。
+            - listitem [ref=e2653]:
+              - strong [ref=e2654]: 紀錄
+              - text: ：詳細記錄停電時間與復原狀況於工作日誌。
+      - heading "2. 特殊場景" [level=2] [ref=e2655]
+      - heading "2.1 大門保護與風力監測" [level=3] [ref=e2656]
+      - list [ref=e2657]:
+        - listitem [ref=e2658]:
+          - strong [ref=e2659]: 緣起
+          - text: ：直到 2023 年 9 月初才明確建立「遇強風需將電動大門切換為手動」的觀念。
+        - listitem [ref=e2660]:
+          - strong [ref=e2661]: 標準訂定的困難
+          - text: ：對於「多強才是強風」缺乏客觀定義。
+        - listitem [ref=e2662]:
+          - strong [ref=e2663]: 2023 年小犬颱風的經驗
+          - text: ：
+          - list [ref=e2664]:
+            - listitem [ref=e2665]:
+              - strong [ref=e2666]: 原定標準
+              - text: ：以「台北測站測得 8 級陣風」作為切換指標。
+            - listitem [ref=e2667]:
+              - strong [ref=e2668]: 實際狀況
+              - text: ：雖然當時陣風僅 5 級，但在「後玻璃門與前左大門同時打開」形成的穿堂風效應下，大門關閉時被陣風加速猛力撞擊，可能損害馬達或鬆開拉臂螺絲。
+        - listitem [ref=e2669]:
+          - strong [ref=e2670]: 現行標準
+          - text: ：
+          - list [ref=e2671]:
+            - listitem [ref=e2672]:
+              - text: 修正為
+              - strong [ref=e2673]: 「客觀資料陣風 5、6 級之間 + 配合體感」
+              - text: 來決定切換手動的時機。
+            - listitem [ref=e2674]: 這與是否為颱風過境無絕對關係，東北季風增強時亦可能達此標準。
+        - listitem [ref=e2675]:
+          - strong [ref=e2676]: 心理建設
+          - text: ：請住戶做好未來「手動開門頻率增加」的心理準備。
+        - listitem [ref=e2677]:
+          - strong [ref=e2678]: 參考工具
+          - text: ：中央氣象署風速觀測網址（台北測站數據最穩定）。
+      - heading "2.2 後巷（羅斯福路二段 81 巷）臨時阻塞應變" [level=3] [ref=e2679]
+      - list [ref=e2680]:
+        - listitem [ref=e2681]:
+          - strong [ref=e2682]: 緣由
+          - text: ：停車場出入口巷道為單行道且僅容一線車道，任何臨停都將導致車輛無法進出。
+        - listitem [ref=e2683]:
+          - strong [ref=e2684]: 應變作業流程
+          - text: ：
+          - list [ref=e2685]:
+            - listitem [ref=e2686]:
+              - strong [ref=e2687]: 現場查勘
+              - text: ：判斷性質（救護/故障/違停/卸貨）與預估時間。
+            - listitem [ref=e2688]:
+              - strong [ref=e2689]: 緊急公告（關鍵）
+              - text: ：
+              - list [ref=e2690]:
+                - listitem [ref=e2691]: 立即在「住戶討論 Line 群組」發布。
+                - listitem [ref=e2692]: 內容要素：事由、影響範圍、預估時效、行動建議（如建議暫緩返家）。
+            - listitem [ref=e2693]:
+              - strong [ref=e2694]: 現場引導
+              - text: ：若時間長，派保全至巷口引導避免車輛誤入。若為違停且無法聯繫車主，通報警方。
+            - listitem [ref=e2695]:
+              - strong [ref=e2696]: 解除通報
+              - text: ：恢復暢通後，再次發布訊息告知住戶。
+            - listitem [ref=e2697]:
+              - strong [ref=e2698]: 紀錄
+              - text: ：記入工作日誌。
+      - heading "2.3 騎樓街友問題處理原則" [level=3] [ref=e2699]
+      - list [ref=e2700]:
+        - listitem [ref=e2701]:
+          - strong [ref=e2702]: 核心原則
+          - text: ：合法合規、人道關懷。管理的是「行為」，而非「身分」。
+        - listitem [ref=e2703]:
+          - strong [ref=e2704]: 分級處理 SOP
+          - text: ：
+          - list [ref=e2705]:
+            - listitem [ref=e2706]:
+              - strong [ref=e2707]: 第一級：靜態停留
+              - text: （僅休息，無騷擾）
+              - list [ref=e2708]:
+                - listitem [ref=e2709]:
+                  - strong [ref=e2710]: 動作
+                  - text: ：保持觀察。
+                - listitem [ref=e2711]:
+                  - strong [ref=e2712]: 通報
+                  - text: ：撥打
+                  - strong [ref=e2713]: 1999 轉社會局
+                  - text: （建立社工訪視檔案，這是最根本措施）。
+            - listitem [ref=e2714]:
+              - strong [ref=e2715]: 第二級：影響環境
+              - text: （堆物、異味）
+              - list [ref=e2716]:
+                - listitem [ref=e2717]:
+                  - strong [ref=e2718]: 動作
+                  - text: ：加強清潔、溫和勸導。
+                - listitem [ref=e2719]:
+                  - strong [ref=e2720]: 通報
+                  - text: ：若未改善，通報
+                  - strong [ref=e2721]: 1999 轉環保局
+                  - text: （清理前需拍照）。
+            - listitem [ref=e2722]:
+              - strong [ref=e2723]: 第三級：違法或滋擾
+              - text: （騷擾、攻擊、阻礙通行、侵入）
+              - list [ref=e2724]:
+                - listitem [ref=e2725]:
+                  - strong [ref=e2726]: 動作
+                  - text: ：確保安全，避免衝突。
+                - listitem [ref=e2727]:
+                  - strong [ref=e2728]: 通報
+                  - text: ：立即撥打
+                  - strong [ref=e2729]: 110 報警
+                  - text: （說明違反社維法或道交條例）。協助蒐證。
+        - listitem [ref=e2730]:
+          - strong [ref=e2731]: 處理禁忌
+          - text: ：嚴禁言語羞辱、暴力驅趕、潑水或擅自丟棄其個人財物。
+      - heading "2.4 高溫關懷" [level=3] [ref=e2732]
+      - list [ref=e2733]:
+        - listitem [ref=e2734]:
+          - strong [ref=e2735]: 背景
+          - text: ：源於 2025 年「臺北市氣候行動獎」，將「主動關懷脆弱族群」納入社會韌性策略。
+        - listitem [ref=e2736]:
+          - strong [ref=e2737]: 執行原因
+          - text: ：極端高溫對長者（尤其是獨居者）有致命風險（熱衰竭/熱中暑）。總幹事是唯一的外部干預防線。
+      - heading "2.4.1 自動提醒系統（不必自己盯氣象）" [level=4] [ref=e2738]
+      - paragraph [ref=e2739]:
+        - text: 為避免漏接，社區後台每天 17:00 自動讀取中央氣象署資料，達條件時在 culturalcity85 日曆建立全天事件。
+        - strong [ref=e2740]: 總幹事只需要每天打開日曆
+        - text: ，看到下列任一事件即啟動 SOP：
+      - document [ref=e2742]:
+        - generic [ref=e2744]:
+          - generic [ref=e2752]:
+            - generic [ref=e2756]: 是
+            - generic [ref=e2760]: 是
+            - generic [ref=e2764]: 否
+            - generic [ref=e2768]: 否
+          - generic [ref=e2769]:
+            - generic [ref=e2775]:
+              - text: CWA 高溫資訊 API
+              - text: 每天 17:00 抓
+            - generic [ref=e2780]: 台北是否有黃/橘/紅燈?
+            - generic [ref=e2785]: CWA 大安區預報
+            - generic [ref=e2790]: 明日最高溫 ≥ 36°C?
+            - generic [ref=e2796]:
+              - text: ⚠️ CWA 高溫警報
+              - text: 紅色全天事件
+              - text: 必須關懷
+            - generic [ref=e2802]:
+              - text: 🌡️ 預報高溫
+              - text: 橘色全天事件
+              - text: 建議關懷
+            - generic [ref=e2807]: 不建事件
+      - paragraph [ref=e2808]: 兩種事件意義不同：
+      - table [ref=e2809]:
+        - rowgroup [ref=e2810]:
+          - row "事件 顏色 何時出現 意義 SOP" [ref=e2811]:
+            - columnheader "事件" [ref=e2812]
+            - columnheader "顏色" [ref=e2813]
+            - columnheader "何時出現" [ref=e2814]
+            - columnheader "意義" [ref=e2815]
+            - columnheader "SOP" [ref=e2816]
+        - rowgroup [ref=e2817]:
+          - row "⚠️ CWA 高溫警報・必須關懷獨居長者 紅色（Tomato） CWA 正式發布警報當天 中央氣象署官方認定的高溫日；對應氣候行動獎審核標準 當天下午 3 點前完成全冊電話關懷" [ref=e2818]:
+            - cell "⚠️ CWA 高溫警報・必須關懷獨居長者" [ref=e2819]:
+              - strong [ref=e2820]: ⚠️ CWA 高溫警報・必須關懷獨居長者
+            - cell "紅色（Tomato）" [ref=e2821]
+            - cell "CWA 正式發布警報當天" [ref=e2822]
+            - cell "中央氣象署官方認定的高溫日；對應氣候行動獎審核標準" [ref=e2823]
+            - cell "當天下午 3 點前完成全冊電話關懷" [ref=e2824]:
+              - strong [ref=e2825]: 當天下午 3 點前完成
+              - text: 全冊電話關懷
+          - row "🌡️ 預報高溫・建議關懷獨居長者（明日 X°C） 橘色（Tangerine） 前一晚 17:00 出現於隔日 預報達黃燈門檻、明天 CWA 很可能正式發布；社區主動提前一晚 今晚先安排明天時段，明天視 CWA 實際發布決定是否升級為必須關懷" [ref=e2826]:
+            - cell "🌡️ 預報高溫・建議關懷獨居長者（明日 X°C）" [ref=e2827]:
+              - strong [ref=e2828]: 🌡️ 預報高溫・建議關懷獨居長者（明日 X°C）
+            - cell "橘色（Tangerine）" [ref=e2829]
+            - cell "前一晚 17:00 出現於隔日" [ref=e2830]
+            - cell "預報達黃燈門檻、明天 CWA 很可能正式發布；社區主動提前一晚" [ref=e2831]
+            - cell "今晚先安排明天時段，明天視 CWA 實際發布決定是否升級為必須關懷" [ref=e2832]:
+              - strong [ref=e2833]: 今晚先安排明天時段
+              - text: ，明天視 CWA 實際發布決定是否升級為必須關懷
+      - paragraph [ref=e2834]: 兩者可能同日出現（先有橘色預報、隔天 CWA 發布變紅色警報）。看到紅色就以紅色 SOP 為準。
+      - heading "2.4.2 執行 SOP" [level=4] [ref=e2835]
+      - list [ref=e2836]:
+        - listitem [ref=e2837]:
+          - strong [ref=e2838]: 對象
+          - text: ：
+          - strong [ref=e2839]: 65 歲以上獨居者
+          - text: 、行動不便獨居者、日間無人照顧者。
+        - listitem [ref=e2840]:
+          - strong [ref=e2841]: 名冊建立
+          - text: ：採「自願登記制」，建立「閱大安 安心關懷名冊」，絕對保密。
+        - listitem [ref=e2842]:
+          - strong [ref=e2843]: 執行動作
+          - text: ：
+          - list [ref=e2844]:
+            - listitem [ref=e2845]:
+              - text: 看到紅色 ⚠️ 事件：
+              - strong [ref=e2846]: 當天下午 3 點前
+              - text: 完成全冊電話關懷
+            - listitem [ref=e2847]: 看到橘色 🌡️ 事件：當晚先排好隔天的訪視時段；隔天打開日曆若升級為紅色，按紅色 SOP 執行
+        - listitem [ref=e2848]:
+          - strong [ref=e2849]: 話術
+          - text: ：「X 先生/小姐您好，這裡是管理中心，今天天氣非常熱，提醒您多補水、開冷氣、盡量別出門，有不舒服請立刻通知我們。」
+        - listitem [ref=e2850]:
+          - strong [ref=e2851]: 紀錄
+          - text: ：完成關懷後在該日曆事件加上一行 comment（譬如「2026-05-21 14:30 完成全 5 位電話關懷，X 阿嬤無人接聽已通報緊急聯絡人」），作為氣候行動獎稽核佐證。
+      - heading "2.4.3 系統壞掉時的備援" [level=4] [ref=e2852]
+      - paragraph [ref=e2853]: 自動提醒不是百分百保險，偶爾會碰到這兩種狀況：
+      - list [ref=e2854]:
+        - listitem [ref=e2855]: 連續幾天日曆都沒出現任何相關事件（系統可能卡住沒在跑）
+        - listitem [ref=e2856]: 氣象署明明發了警報、但日曆當天卻沒跳事件（資料抓取出問題）
+      - paragraph [ref=e2857]: 碰到時的處理：
+      - list [ref=e2858]:
+        - listitem [ref=e2859]:
+          - strong [ref=e2860]: 以氣象署官網為準手動執行關懷
+          - text: ：到
+          - link "https://www.cwa.gov.tw" [ref=e2861] [cursor=pointer]:
+            - /url: https://www.cwa.gov.tw
+          - text: 點「高溫資訊」頁，自己確認台北是否在警報範圍。有的話照 §2.4.2 SOP 完成電話關懷，不用等系統。
+        - listitem [ref=e2862]:
+          - strong [ref=e2863]: 回報主委
+          - text: ：把狀況（譬如「2026-07-15 氣象署發黃燈但日曆當天沒事件」）傳給主委，由主委檢查自動化系統哪裡出問題、安排修復。
+      - paragraph [ref=e2864]:
+        - strong [ref=e2865]: 重要心態
+        - text: ：系統只是用來減少漏接的輔助工具，
+        - strong [ref=e2866]: 真正的責任仍在總幹事
+        - text: 。氣候行動獎審核看的是實際關懷紀錄，
+        - strong [ref=e2867]: 不能用「系統當天沒提醒」當作沒做的理由
+        - text: 。把它想成「鬧鐘」——鬧鐘壞了人還是要自己起床。
+      - heading "第六章：重點議題與住戶關係" [level=1] [ref=e2868]
+      - heading "1. 會議與議題管理" [level=2] [ref=e2869]
+      - heading "1.1 會議記錄與追蹤" [level=3] [ref=e2870]
+      - list [ref=e2871]:
+        - listitem [ref=e2872]:
+          - strong [ref=e2873]: 會議記錄
+          - text: ：需完整歸檔並熟悉歷屆管委會、區權會等會議記錄，以利查閱歷史決策。
+        - listitem [ref=e2874]:
+          - strong [ref=e2875]: 議題追蹤
+          - text: ：需掌握近期重要議題、決議要點，並持續追蹤「未決議」或「待執行」事項的進度。
+        - listitem [ref=e2876]:
+          - strong [ref=e2877]: 住戶提案
+          - text: ：需記錄並跟進住戶的提案計畫，定期回報管委會。
+      - heading "2. 住戶關係管理" [level=2] [ref=e2878]
+      - heading "2.0 對住戶的溝通語氣原則" [level=3] [ref=e2879]
+      - paragraph [ref=e2880]:
+        - text: 閱大安管委會的姿態是「主席帶領住戶共同決定」
+        - strong [ref=e2881]: 而非「向住戶宣布」
+        - text: 。所有對住戶溝通的文字（公告、月報、AGM 簡報、Line 訊息）都要反映這個姿態。下面是禁區詞與替換建議：
+      - table [ref=e2882]:
+        - rowgroup [ref=e2883]:
+          - row "禁區詞 改用 理由" [ref=e2884]:
+            - columnheader "禁區詞" [ref=e2885]
+            - columnheader "改用" [ref=e2886]
+            - columnheader "理由" [ref=e2887]
+        - rowgroup [ref=e2888]:
+          - row "告知 提前意見交流、徵詢、預告 「告知」是行政機關下行公文的詞，不是社區自治的詞" [ref=e2889]:
+            - cell "告知" [ref=e2890]
+            - cell "提前意見交流、徵詢、預告" [ref=e2891]
+            - cell "「告知」是行政機關下行公文的詞，不是社區自治的詞" [ref=e2892]
+          - row "宣告 / 通知您 邀請、歡迎、討論 同上" [ref=e2893]:
+            - cell "宣告 / 通知您" [ref=e2894]
+            - cell "邀請、歡迎、討論" [ref=e2895]
+            - cell "同上" [ref=e2896]
+          - row "表決 議決 「議決」更貼近社區自治語境" [ref=e2897]:
+            - cell "表決" [ref=e2898]
+            - cell "議決" [ref=e2899]:
+              - strong [ref=e2900]: 議決
+            - cell "「議決」更貼近社區自治語境" [ref=e2901]
+          - row "「請住戶……」 「邀請住戶……」「歡迎住戶……」 主語從命令轉為邀約" [ref=e2902]:
+            - cell "「請住戶……」" [ref=e2903]
+            - cell "「邀請住戶……」「歡迎住戶……」" [ref=e2904]
+            - cell "主語從命令轉為邀約" [ref=e2905]
+          - row "口徑 實際/推估、比較基礎 「口徑」是內部術語，住戶聽不懂" [ref=e2906]:
+            - cell "口徑" [ref=e2907]
+            - cell "實際/推估、比較基礎" [ref=e2908]
+            - cell "「口徑」是內部術語，住戶聽不懂" [ref=e2909]
+      - paragraph [ref=e2910]:
+        - strong [ref=e2911]: 自我檢查問題
+        - text: ：寫完一句後問「這句話讓住戶覺得自己是參與者還是接收者？」——應該感覺是前者。
+      - paragraph [ref=e2912]:
+        - strong [ref=e2913]: 為什麼這個原則重要
+        - text: ：第五屆 AGM 準備過程中，主委在簡報內三處主動把「告知」改成「提前意見交流」。沿用過去文字時要審視語氣對不對，不是只看文字對不對。
+      - paragraph [ref=e2914]:
+        - strong [ref=e2915]: 自擬規則的標示原則
+        - text: ：如果某個閾值/公式/判斷規則是管委會憑經驗或直覺擬的（無外部依據），要主動標示「這是我們社區的內部慣例」，
+        - strong [ref=e2916]: 不要包裝成「業界標準」「規範要求」
+        - text: ——否則被住戶質疑時無法辯護。
+      - heading "2.1 外送服務管理原則" [level=3] [ref=e2917]
+      - list [ref=e2918]:
+        - listitem [ref=e2919]:
+          - strong [ref=e2920]: 管理原則
+          - text: ：
+          - list [ref=e2921]:
+            - listitem [ref=e2922]:
+              - text: 為維護社區安全、隱私與管理秩序，原則上
+              - strong [ref=e2923]: 禁止
+              - text: 餐飲、快遞等外送人員「單獨」進入住戶樓層。
+            - listitem [ref=e2924]: 住戶需自行至一樓大廳或管理中心領取。
+        - listitem [ref=e2925]:
+          - strong [ref=e2926]: 例外情況（大型重物配送）
+          - text: ：
+          - list [ref=e2927]:
+            - listitem [ref=e2928]:
+              - strong [ref=e2929]: 適用範圍
+              - text: ：僅限大型生鮮食品、箱裝乾糧（如家樂福、大潤發、COSTCO 線上購物）等重物，且廠商提供送貨到府服務者。
+            - listitem [ref=e2930]:
+              - strong [ref=e2931]: SOP
+              - text: ：
+              - list [ref=e2932]:
+                - listitem [ref=e2933]:
+                  - strong [ref=e2934]: 確認
+                  - text: ：送貨員抵達表明為特定住戶送重物。
+                - listitem [ref=e2935]:
+                  - strong [ref=e2936]: 聯繫
+                  - text: ：管理中心致電住戶確認在家。
+                - listitem [ref=e2937]:
+                  - strong [ref=e2938]: 執行（關鍵）
+                  - text: ：明確告知住戶，依決議需
+                  - strong [ref=e2939]: 請住戶親自下樓至大廳，接待並「陪同」送貨人員上樓
+                  - text: 。
+                - listitem [ref=e2940]:
+                  - strong [ref=e2941]: 登記
+                  - text: ：保全仍需對送貨員進行訪客登記。
+        - listitem [ref=e2942]:
+          - strong [ref=e2943]: 決策理由
+          - text: ：
+          - list [ref=e2944]:
+            - listitem [ref=e2945]:
+              - strong [ref=e2946]: 安全與隱私
+              - text: ：降低陌生人遊蕩風險。
+            - listitem [ref=e2947]:
+              - strong [ref=e2948]: 成本管控
+              - text: ：減少管理人員頻繁換證的負擔。
+            - listitem [ref=e2949]:
+              - strong [ref=e2950]: 秩序維護
+              - text: ：避免用餐尖峰時刻電梯被外送員佔用。
+      - heading "2.2 頂樓空中花園禁止曬衣" [level=3] [ref=e2951]
+      - list [ref=e2952]:
+        - listitem [ref=e2953]:
+          - strong [ref=e2954]: 管理原則
+          - text: ：全面
+          - strong [ref=e2955]: 禁止
+          - text: 在頂樓空中花園等公共可視區域晾曬任何衣物、被單。
+        - listitem [ref=e2956]:
+          - strong [ref=e2957]: 主要理由
+          - text: ：
+          - list [ref=e2958]:
+            - listitem [ref=e2959]:
+              - strong [ref=e2960]: 形象資產
+              - text: ：頂樓花園為重要公設，萬國旗般的衣物會嚴重破壞設計感與房價基礎。
+            - listitem [ref=e2961]:
+              - strong [ref=e2962]: 糾紛預防
+              - text: ：避免空間佔用糾紛、物品遺失責任不清。
+            - listitem [ref=e2963]:
+              - strong [ref=e2964]: 公共安全
+              - text: ：避免衣物滴水造成地滑，或被強風吹落砸傷人車。
+        - listitem [ref=e2965]:
+          - strong [ref=e2966]: 執行 SOP
+          - text: ：
+          - list [ref=e2967]:
+            - listitem [ref=e2968]:
+              - strong [ref=e2969]: 巡檢
+              - text: ：列入日常巡邏動線。
+            - listitem [ref=e2970]:
+              - strong [ref=e2971]: 勸導
+              - text: ：發現時溫和勸導（參考話術：維護社區景觀，麻煩收一下）。
+            - listitem [ref=e2972]:
+              - strong [ref=e2973]: 開罰
+              - text: ：屢勸不聽者拍照存證，依規約開立違規通知單。
+      - heading "2.3 一樓閱覽室電視使用管理" [level=3] [ref=e2974]
+      - list [ref=e2975]:
+        - listitem [ref=e2976]:
+          - strong [ref=e2977]: 管理原則
+          - text: ：一樓閱覽室 65 吋電視，僅限
+          - strong [ref=e2978]: 管委會開會
+          - text: 或
+          - strong [ref=e2979]: 經核准的社區活動
+          - text: 使用，
+          - strong [ref=e2980]: 不對外開放
+          - text: 給住戶個人觀看節目。
+        - listitem [ref=e2981]:
+          - strong [ref=e2982]: 主要理由
+          - text: ：
+          - list [ref=e2983]:
+            - listitem [ref=e2984]:
+              - strong [ref=e2985]: 功能衝突
+              - text: ：閱覽室核心為「安靜閱讀」，電視聲光會破壞此功能。
+            - listitem [ref=e2986]:
+              - strong [ref=e2987]: 爭議預防
+              - text: ：避免「遙控器戰爭」（搶頻道）及長時間佔用問題。
+            - listitem [ref=e2988]:
+              - strong [ref=e2989]: 成本考量
+              - text: ：減少電費與設備損耗。
+        - listitem [ref=e2990]:
+          - strong [ref=e2991]: 執行 SOP
+          - text: ：
+          - list [ref=e2992]:
+            - listitem [ref=e2993]:
+              - strong [ref=e2994]: 應對提案
+              - text: ：若住戶建議開放，請禮貌說明上述原則（保護安靜功能）。
+            - listitem [ref=e2995]:
+              - strong [ref=e2996]: 違規處理
+              - text: ：發現私自使用者，上前溫和勸導並請其關閉；無效則回報管委會。
+      - heading "3. 社區活動" [level=2] [ref=e2997]
+      - heading "3.1 中元普渡" [level=3] [ref=e2998]
+      - list [ref=e2999]:
+        - listitem [ref=e3000]:
+          - strong [ref=e3001]: 活動背景
+          - text: ：每年約 10 戶住戶共同參與，具凝聚力。亦會收到信義房屋、永慶房屋等外部贊助。
+        - listitem [ref=e3002]:
+          - strong [ref=e3003]: 籌備事項清單
+          - text: ：
+          - list [ref=e3004]:
+            - listitem [ref=e3005]:
+              - strong [ref=e3006]: 預算
+              - text: ：管委會供品採購預算為
+              - strong [ref=e3007]: 3,000 元
+              - text: 。
+            - listitem [ref=e3008]:
+              - strong [ref=e3009]: 採購原則
+              - text: ：以零食、水果為主；
+              - strong [ref=e3010]: 不採購
+              - text: 鮮花、牲禮（難處理）。
+            - listitem [ref=e3011]:
+              - strong [ref=e3012]: 普渡旗
+              - text: ：剩餘旗幟應填上當屆委員姓名。
+            - listitem [ref=e3013]:
+              - strong [ref=e3014]: 物資
+              - text: ：供桌使用健身房折疊桌；需區分兩個金爐（普渡公 vs 好兄弟）。
+            - listitem [ref=e3015]:
+              - strong [ref=e3016]: 雨天備案
+              - text: ：可向一樓永慶房屋借用帳棚（需提前預約，2025 年已預約 2026 年農曆七月第一個週六）。
+            - listitem [ref=e3017]:
+              - strong [ref=e3018]: 路權
+              - text: ：若佔用人行道需提前申請。
+        - listitem [ref=e3019]:
+          - strong [ref=e3020]: 祭文內容範本
+          - text: ：
+          - list [ref=e3021]:
+            - listitem [ref=e3022]:
+              - paragraph [ref=e3023]:
+                - strong [ref=e3024]: 祝禱疏文（恭請普渡公）
+                - text: ：
+              - blockquote [ref=e3025]:
+                - paragraph [ref=e3026]: 閱大安（恭請普渡公） 值逢七月普渡，位於臺北市大安區羅斯福路二段83至85號閱大安社區全體住戶，一心虔誠慶贊中元，虔誠敬備供品，供養十方孤魂有情眾。特先恭請普渡公駕臨主持中元普渡慶贊儀式，祈求保護社區安寧、平安、儀式順利。 閱大安主任委員○○○率全體住戶恭請 歲次國曆○○○年○月○日 / 農曆○○年○月○日
+            - listitem [ref=e3027]:
+              - paragraph [ref=e3028]:
+                - strong [ref=e3029]: 普渡文（供養及恭送好兄弟）
+                - text: ：
+              - blockquote [ref=e3030]:
+                - paragraph [ref=e3031]: 閱大安（供養及恭送好兄弟） 值逢七月普渡，位於臺北市大安區羅斯福路二段83至85號閱大安社區全體住戶，虔誠敬備供品，供養十方孤魂好兄弟姊妹有情眾，請受全體住戶供養納受，並祈求保護住戶身體健康、家旺人和、出入平安。社區國泰民安、風調雨順，以此敬請受供。獻金各得其後，恭送各歸本位。 閱大安主任委員○○○率全體住戶供養及恭送 歲次國曆○○○年○月○日 / 農曆○○年○月○日
+      - heading "3.2 農曆新年期間管理" [level=3] [ref=e3032]
+      - paragraph [ref=e3033]: 每年農曆春節前 1-2 週決定年節安排。
+      - heading "3.2.1 標準公告內容（112 年起穩定版本）" [level=4] [ref=e3034]
+      - code [ref=e3036]: 春節期間禁止任何裝修工程。 為避免社區環境髒亂，環保室將暫時關閉上鎖： - 關閉時間：除夕中午 12:00 - 重新開放時間：初三中午 12:00 如有需丟棄大型家具請提前告知管理中心，聯絡台北市政府環保局清潔隊收取。 長時間外出住戶請留意家中電器及安全設定。
+      - heading "3.2.2 值勤人員配置" [level=4] [ref=e3037]
+      - paragraph [ref=e3038]: 需於管委會議決定當年值勤輪班；通常以日班保全為主，夜班可輪替。
+      - heading "4. 鄰里關係管理" [level=2] [ref=e3039]
+      - heading "4.1 五府宮互動原則" [level=3] [ref=e3040]
+      - list [ref=e3041]:
+        - listitem [ref=e3042]:
+          - strong [ref=e3043]: 背景
+          - text: ：位於社區後門，因地緣關係互動頻繁。
+        - listitem [ref=e3044]:
+          - strong [ref=e3045]: 過往困擾
+          - text: ：
+          - list [ref=e3046]:
+            - listitem [ref=e3047]: 人潮與空間佔用（曾移開拒馬佔用身障車位）。
+            - listitem [ref=e3048]: 焚燒紙錢造成空污（有時是隔壁鄰居拿去燒的，廟方背鍋）。
+            - listitem [ref=e3049]: 普渡供桌曾佔用地下室出入口旁花圃。
+        - listitem [ref=e3050]:
+          - strong [ref=e3051]: 目前策略
+          - text: ：
+          - list [ref=e3052]:
+            - listitem [ref=e3053]:
+              - strong [ref=e3054]: 溝通管道
+              - text: ：主委已與廟方窗口
+              - strong [ref=e3055]: 李潔西小姐
+              - text: （宮主姪女）建立 Line 聯繫。
+            - listitem [ref=e3056]:
+              - strong [ref=e3057]: 要求
+              - text: ：舉辦活動前需先知會閱大安。
+            - listitem [ref=e3058]:
+              - strong [ref=e3059]: 立場
+              - text: ：向廟方強調本棟已非私宅，而是區分所有權住宅，需維護住戶權益。
+        - listitem [ref=e3060]:
+          - strong [ref=e3061]: 改善現況
+          - text: ：大型活動頻率減少；李小姐有意願推動減燒紙錢（但受長輩壓力無法即刻禁絕）。
+        - listitem [ref=e3062]:
+          - strong [ref=e3063]: 關鍵人物
+          - text: ：李潔西小姐家人曾任其他大樓主委，對社區立場具同理心，是溝通關鍵。
+      - heading "5. 電動車充電系統營運與管理" [level=2] [ref=e3064]
+      - heading "5.1 基礎設施與產權定義" [level=3] [ref=e3065]
+      - list [ref=e3066]:
+        - listitem [ref=e3067]:
+          - strong [ref=e3068]: 系統架構
+          - text: ：採用「專設一戶」供電，與大公電及住戶家用電實體隔離。
+        - listitem [ref=e3069]:
+          - strong [ref=e3070]: 迴路配置
+          - text: ：
+          - list [ref=e3071]:
+            - listitem [ref=e3072]:
+              - strong [ref=e3073]: B1+B2 迴路
+              - text: ：
+              - list [ref=e3074]:
+                - listitem [ref=e3075]: 獨立電表（表燈 - 非時間電價）。
+                - listitem [ref=e3076]: 現況：每月充電度數未達 800 度。
+            - listitem [ref=e3077]:
+              - strong [ref=e3078]: B3+B4 迴路
+              - text: ：
+              - list [ref=e3079]:
+                - listitem [ref=e3080]: 獨立電表（表燈 - 簡易型時間電價/二段式）。
+                - listitem [ref=e3081]: 現況：每月已達 800 度。
+                - listitem [ref=e3082]:
+                  - strong [ref=e3083]: 優勢
+                  - text: ：
+                  - strong [ref=e3084]: 無契約容量
+                  - text: （無超約罰款風險）；離峰時段（夜間/週末）單價低（約 1.99 元）。
+        - listitem [ref=e3085]:
+          - strong [ref=e3086]: 管理中樞
+          - text: ：台達電 (Delta) EMS 能源管理系統。
+        - listitem [ref=e3087]:
+          - strong [ref=e3088]: 設備現況
+          - text: ：全區 49 車位，已安裝 33 支，常態使用約 4 支。
+        - listitem [ref=e3089]:
+          - strong [ref=e3090]: 產權界定
+          - text: ：
+          - list [ref=e3091]:
+            - listitem [ref=e3092]:
+              - strong [ref=e3093]: 私有
+              - text: ：充電樁本體、公共線槽至樁體之線路。
+            - listitem [ref=e3094]:
+              - strong [ref=e3095]: 公設
+              - text: ：公共線路、EMS 主機。
+      - heading "5.2 設備養護" [level=3] [ref=e3096]
+      - list [ref=e3097]:
+        - listitem [ref=e3098]:
+          - strong [ref=e3099]: 防潮管理
+          - text: ：因地下室濕氣重，採「待機通電」原則，利用設備微熱驅除濕氣，防止電路板鏽蝕。
+      - heading "5.3 財務收支流程" [level=3] [ref=e3100]
+      - list [ref=e3101]:
+        - listitem [ref=e3102]:
+          - strong [ref=e3103]: 代墊代收制
+          - text: ：
+          - list [ref=e3104]:
+            - listitem [ref=e3105]:
+              - strong [ref=e3106]: 支付
+              - text: ：管委會收到台電帳單，先以管理費代墊。
+            - listitem [ref=e3107]:
+              - strong [ref=e3108]: 拆算
+              - text: ：總幹事登入 EMS 後台匯出報表。
+            - listitem [ref=e3109]:
+              - strong [ref=e3110]: 收費
+              - text: ：依金額向車主收費（或併入管理費）。
+            - listitem [ref=e3111]:
+              - strong [ref=e3112]: 歸墊
+              - text: ：款項回補管理費。
+        - listitem [ref=e3113]:
+          - strong [ref=e3114]: 公用電費分攤
+          - text: ：EMS 主機及線損產生之費用，由全體充電樁持有者均攤。
+        - listitem [ref=e3115]:
+          - strong [ref=e3116]: 維護基金
+          - text: ：充電樁住戶每月繳
+          - strong [ref=e3117]: 50 元
+          - text: ，存入「充電樁線路維護費帳戶」（永豐東門分行），專款專用。
+      - heading "5.4 風險管理" [level=3] [ref=e3118]
+      - list [ref=e3119]:
+        - listitem [ref=e3120]:
+          - strong [ref=e3121]: 保險
+          - text: ：商業火險承保範圍需確認涵蓋 EMS 主機、伺服器及公共配電盤。
+        - listitem [ref=e3122]:
+          - strong [ref=e3123]: 緊急應變
+          - text: ：EMS 當機不影響大樓供電安全，僅無法計費。
+      - heading "5.5 綠能評估 (風力發電可行性報告)" [level=3] [ref=e3124]
+      - list [ref=e3125]:
+        - listitem [ref=e3126]:
+          - strong [ref=e3127]: 評估緣起
+          - text: ：第四屆管委會為爭取氣候行動獎，諮詢「元皓能源」並參考「新北市菠爾社區」案例。
+        - listitem [ref=e3128]:
+          - strong [ref=e3129]: 先天限制 (微氣候)
+          - text: ：
+          - list [ref=e3130]:
+            - listitem [ref=e3131]: 雖鄰師大操場有局部通風，但受盆地與高樓影響，風場屬「高紊流」陣風，缺乏發電所需的「穩定層流」。
+            - listitem [ref=e3132]:
+              - text: 市區風速低，發電量可忽略，
+              - strong [ref=e3133]: 回本年限超過設備壽命 (>20年)
+              - text: 。
+        - listitem [ref=e3134]:
+          - strong [ref=e3135]: 法規阻礙
+          - text: ：
+          - list [ref=e3136]:
+            - listitem [ref=e3137]: 需申請「雜項執照」（涉及建築師、結構技師簽證）。
+            - listitem [ref=e3138]: 廠商反饋：近七年雙北幾無成功合法案例，行政成本過高。
+            - listitem [ref=e3139]: 補助看得到吃不到（卡在結構簽證）。
+        - listitem [ref=e3140]:
+          - strong [ref=e3141]: 結構與安全疑慮
+          - text: ：
+          - list [ref=e3142]:
+            - listitem [ref=e3143]:
+              - strong [ref=e3144]: 載重
+              - text: ：旋轉震動長期影響樑柱，需高成本補強。
+            - listitem [ref=e3145]:
+              - strong [ref=e3146]: 噪音
+              - text: ：低頻噪音難消，頂樓住戶投訴風險高。
+            - listitem [ref=e3147]:
+              - strong [ref=e3148]: 風險
+              - text: ：颱風強風恐致葉片斷裂。
+        - listitem [ref=e3149]:
+          - strong [ref=e3150]: 最終決策
+          - text: ：
+          - strong [ref=e3151]: 不予執行
+          - text: 。
+      - heading "6. 特殊案例與歷史沿革" [level=2] [ref=e3152]
+      - heading "6.1 頂樓平台照明演變" [level=3] [ref=e3153]
+      - list [ref=e3154]:
+        - listitem [ref=e3155]:
+          - strong [ref=e3156]: 過程
+          - text: ：從早期的「太陽能燈」（效果不佳）演變至目前的「拉明線手動開關」。
+        - listitem [ref=e3157]:
+          - strong [ref=e3158]: 操作
+          - text: ：提醒保全夜間巡邏時需手動開啟。
+      - heading "6.2 夏日防蚊措施" [level=3] [ref=e3159]
+      - list [ref=e3160]:
+        - listitem [ref=e3161]:
+          - strong [ref=e3162]: 依據
+          - text: ：第二屆管委會決議。
+        - listitem [ref=e3163]:
+          - strong [ref=e3164]: 成效
+          - text: ：有些許成效。
+        - listitem [ref=e3165]:
+          - strong [ref=e3166]: 措施
+          - text: ：
+          - list [ref=e3167]:
+            - listitem [ref=e3168]:
+              - strong [ref=e3169]: 阻絕路徑
+              - text: ：蚊子多從二樓防火門進入電梯，故要求
+              - strong [ref=e3170]: 二樓防火門
+              - text: 與
+              - strong [ref=e3171]: 一樓後門
+              - text: 常時保持關閉。
+            - listitem [ref=e3172]:
+              - strong [ref=e3173]: 藥劑
+              - text: ：於電梯內黏貼防蚊片、外圍排水溝投放氯錠。
+      - heading "6.3 飲水機用水習慣" [level=3] [ref=e3174]
+      - list [ref=e3175]:
+        - listitem [ref=e3176]:
+          - strong [ref=e3177]: 觀察
+          - text: ：物業同仁因「環境心理學」因素不願飲用公設飲水機。此細節可作為未來改善設施之參考。
+      - heading "6.4 氣候行動獎（原零碳標竿獎（2024年以前））脈絡" [level=3] [ref=e3178]
+      - list [ref=e3179]:
+        - listitem [ref=e3180]:
+          - strong [ref=e3181]: 起源
+          - text: ：第二屆主委邀請北市府節電輔導團。
+        - listitem [ref=e3182]:
+          - strong [ref=e3183]: 顧問
+          - text: ：柯明村博士（北科大）、黃郅凱工程師（產發局）建議報名。
+        - listitem [ref=e3184]:
+          - strong [ref=e3185]: 成果
+          - text: ：
+          - list [ref=e3186]:
+            - listitem [ref=e3187]:
+              - strong [ref=e3188]: 2024 零碳標竿獎
+              - text: 獲得典範獎，獎金五萬元。
+            - listitem [ref=e3189]:
+              - strong [ref=e3190]: 2025 氣候行動獎
+              - text: 獲得銀質獎，獎金十萬元。
+        - listitem [ref=e3191]:
+          - strong [ref=e3192]: 2025 氣候行動獎
+          - text: ：
+          - list [ref=e3193]:
+            - listitem [ref=e3194]:
+              - text: 評審陣容（均曾蒞臨閱大安）：
+              - list [ref=e3195]:
+                - listitem [ref=e3196]: 鄭福田（台大環工教授）。
+                - listitem [ref=e3197]: 賴曉芬（主婦聯盟常務監察）。
+                - listitem [ref=e3198]: 楊志彬（社大全國促進會秘書長）。
+                - listitem [ref=e3199]: 楊順美（媽媽監督核電廠聯盟）。
+      - heading "6.5 電梯數位廣告看板決議" [level=3] [ref=e3200]
+      - list [ref=e3201]:
+        - listitem [ref=e3202]:
+          - strong [ref=e3203]: 背景
+          - text: ：東森分眾傳媒於
+          - strong [ref=e3204]: 2025/07/22
+          - text: 接洽，提議安裝並提供每月 500 元/台回饋金。
+        - listitem [ref=e3205]:
+          - strong [ref=e3206]: 決議
+          - text: ：第四屆第一次管委會（2025/07/24）決議
+          - strong [ref=e3207]: 暫不考慮導入
+          - text: 。
+        - listitem [ref=e3208]:
+          - strong [ref=e3209]: 否決理由
+          - text: ：
+          - list [ref=e3210]:
+            - listitem [ref=e3211]:
+              - strong [ref=e3212]: 優點
+              - text: ：雖可開源（補貼電費）、資訊即時。
+            - listitem [ref=e3213]:
+              - strong [ref=e3214]: 缺點（關鍵）
+              - text: ：
+              - list [ref=e3215]:
+                - listitem [ref=e3216]:
+                  - strong [ref=e3217]: 噪音
+                  - text: ：破壞電梯安靜環境。
+                - listitem [ref=e3218]:
+                  - strong [ref=e3219]: 光害
+                  - text: ：螢幕亮度刺眼。
+                - listitem [ref=e3220]:
+                  - strong [ref=e3221]: 反感
+                  - text: ：重複性廣告易致住戶煩躁。
+                - listitem [ref=e3222]:
+                  - strong [ref=e3223]: 質感
+                  - text: ：商業化降低住宅品質與隱私感。
+        - listitem [ref=e3224]:
+          - strong [ref=e3225]: SOP
+          - text: ：若未來再有廠商接洽，可依此決議婉拒。
+      - separator [ref=e3226]
+      - heading "附錄 A：年度循環議題快速索引表" [level=1] [ref=e3227]
+      - blockquote [ref=e3228]:
+        - paragraph [ref=e3229]: 總幹事每月初檢視本表，對照當月應啟動的議題。
+      - table [ref=e3230]:
+        - rowgroup [ref=e3231]:
+          - row "月份 應啟動議題 對照章節" [ref=e3232]:
+            - columnheader "月份" [ref=e3233]
+            - columnheader "應啟動議題" [ref=e3234]
+            - columnheader "對照章節" [ref=e3235]
+        - rowgroup [ref=e3236]:
+          - row "1 月 公共安全檢查（每 3 年）議廠商與議價 第四章 §7" [ref=e3237]:
+            - cell "1 月" [ref=e3238]:
+              - strong [ref=e3239]: 1 月
+            - cell "公共安全檢查（每 3 年）議廠商與議價" [ref=e3240]
+            - cell "第四章 §7" [ref=e3241]
+          - row "1 月 物業合約用印完成、年度合約存查 第三章 §3.1" [ref=e3242]:
+            - cell "1 月" [ref=e3243]
+            - cell "物業合約用印完成、年度合約存查" [ref=e3244]
+            - cell "第三章 §3.1" [ref=e3245]
+          - row "2 月 公共安全檢查日程確認、執行 第四章 §7" [ref=e3246]:
+            - cell "2 月" [ref=e3247]
+            - cell "公共安全檢查日程確認、執行" [ref=e3248]
+            - cell "第四章 §7" [ref=e3249]
+          - row "2 月 農曆新年公告（依當年農曆 1 月對應日） 第六章 §3.2" [ref=e3250]:
+            - cell "2 月" [ref=e3251]
+            - cell "農曆新年公告（依當年農曆 1 月對應日）" [ref=e3252]
+            - cell "第六章 §3.2" [ref=e3253]
+          - row "3-4 月 區權會前置作業（如為任期年） 第四章 §4.2" [ref=e3254]:
+            - cell "3-4 月" [ref=e3255]
+            - cell "區權會前置作業（如為任期年）" [ref=e3256]
+            - cell "第四章 §4.2" [ref=e3257]
+          - row "5 月 召開區權會（建議週六下午） 第四章 §4.2" [ref=e3258]:
+            - cell "5 月" [ref=e3259]
+            - cell "召開區權會（建議週六下午）" [ref=e3260]
+            - cell "第四章 §4.2" [ref=e3261]
+          - row "6 月底 管委會交接 12 步（如為任期年） 第四章 §5.1" [ref=e3262]:
+            - cell "6 月底" [ref=e3263]
+            - cell "管委會交接 12 步（如為任期年）" [ref=e3264]
+            - cell "第四章 §5.1" [ref=e3265]
+          - row "7-8 月 中元普渡籌備（依當年農曆 7 月對應日） 第六章 §3.1" [ref=e3266]:
+            - cell "7-8 月" [ref=e3267]
+            - cell "中元普渡籌備（依當年農曆 7 月對應日）" [ref=e3268]
+            - cell "第六章 §3.1" [ref=e3269]
+          - row "9 月 物業合約討論：續約 vs 公開招標 第三章 §3.1" [ref=e3270]:
+            - cell "9 月" [ref=e3271]
+            - cell "物業合約討論：續約 vs 公開招標" [ref=e3272]:
+              - strong [ref=e3273]: 物業合約
+              - text: 討論：續約 vs 公開招標
+            - cell "第三章 §3.1" [ref=e3274]
+          - row "10 月 物業：刊登招標訊息（如選擇招標） 第三章 §3.1" [ref=e3275]:
+            - cell "10 月" [ref=e3276]
+            - cell "物業：刊登招標訊息（如選擇招標）" [ref=e3277]
+            - cell "第三章 §3.1" [ref=e3278]
+          - row "10-11 月 大公電契約容量檢討（看夏季高峰） 第四章 §3.1.1" [ref=e3279]:
+            - cell "10-11 月" [ref=e3280]
+            - cell "大公電契約容量檢討（看夏季高峰）" [ref=e3281]:
+              - strong [ref=e3282]: 大公電契約容量檢討
+              - text: （看夏季高峰）
+            - cell "第四章 §3.1.1" [ref=e3283]
+          - row "11 月初 物業第一階段書審 第三章 §3.1" [ref=e3284]:
+            - cell "11 月初" [ref=e3285]
+            - cell "物業第一階段書審" [ref=e3286]
+            - cell "第三章 §3.1" [ref=e3287]
+          - row "11 月 公共意外險、火險比價（國泰/富邦/南山） 第四章 §6.2、§6.3" [ref=e3288]:
+            - cell "11 月" [ref=e3289]
+            - cell "公共意外險、火險比價（國泰/富邦/南山）" [ref=e3290]:
+              - strong [ref=e3291]: 公共意外險、火險
+              - text: 比價（國泰/富邦/南山）
+            - cell "第四章 §6.2、§6.3" [ref=e3292]
+          - row "11 月 電梯保養合約議價（兩年期到期年） 第三章 §1.2" [ref=e3293]:
+            - cell "11 月" [ref=e3294]
+            - cell "電梯保養合約議價（兩年期到期年）" [ref=e3295]:
+              - strong [ref=e3296]: 電梯保養
+              - text: 合約議價（兩年期到期年）
+            - cell "第三章 §1.2" [ref=e3297]
+          - row "11 月中 物業第二階段簡報（4 家為合理規模） 第三章 §3.1" [ref=e3298]:
+            - cell "11 月中" [ref=e3299]
+            - cell "物業第二階段簡報（4 家為合理規模）" [ref=e3300]
+            - cell "第三章 §3.1" [ref=e3301]
+          - row "11 月底 物業議價、決定續約對象 第三章 §3.1" [ref=e3302]:
+            - cell "11 月底" [ref=e3303]
+            - cell "物業議價、決定續約對象" [ref=e3304]
+            - cell "第三章 §3.1" [ref=e3305]
+          - row "12 月 物業合約完成用印、保險續保完成 第三章 §3.1、第四章 §6" [ref=e3306]:
+            - cell "12 月" [ref=e3307]
+            - cell "物業合約完成用印、保險續保完成" [ref=e3308]
+            - cell "第三章 §3.1、第四章 §6" [ref=e3309]
+          - row "每月 台電四張帳單追蹤、更新氣候行動獎明細 第四章 §3.1" [ref=e3310]:
+            - cell "每月" [ref=e3311]:
+              - strong [ref=e3312]: 每月
+            - cell "台電四張帳單追蹤、更新氣候行動獎明細" [ref=e3313]
+            - cell "第四章 §3.1" [ref=e3314]
+      - separator [ref=e3315]
+      - heading "附錄 B：跨屆議題追蹤機制與進行中議題清單" [level=1] [ref=e3316]
+      - heading "為什麼要有正式的議題追蹤機制" [level=2] [ref=e3317]
+      - paragraph [ref=e3318]: 社區議題天然會「跨屆延續」——譬如：
+      - list [ref=e3319]:
+        - listitem [ref=e3320]:
+          - strong [ref=e3321]: 貨梯改造案
+          - text: 橫跨第二、三、四屆共 3 屆
+        - listitem [ref=e3322]:
+          - strong [ref=e3323]: 車道反光鏡安全改善
+          - text: 從第一次討論到實際施作橫跨 4 次管委會會議
+        - listitem [ref=e3324]:
+          - strong [ref=e3325]: 外牆清洗
+          - text: 每 4 年一次、跨多屆規劃
+      - paragraph [ref=e3326]:
+        - text: 如果只依賴「會議紀錄逐次翻查」，新任主委/總幹事完全沒辦法接續處理；如果只放在某任主委個人 Notion 裡，
+        - strong [ref=e3327]: 換屆就斷檔
+        - text: 。
+      - heading "解法：Notion 議題追蹤資料庫（社區共用 Notion）" [level=2] [ref=e3328]
+      - paragraph [ref=e3329]:
+        - text: 統一存放於
+        - strong [ref=e3330]: Notion 社區資料中心
+        - text: 的議題追蹤模組（第二章 §4），每條議題包含：
+      - list [ref=e3331]:
+        - listitem [ref=e3332]:
+          - strong [ref=e3333]: 議題名稱
+        - listitem [ref=e3334]:
+          - strong [ref=e3335]: 狀態
+          - text: ：待議 / 進行中 / 已結案 / 暫緩
+        - listitem [ref=e3336]:
+          - strong [ref=e3337]: 首次提案
+          - text: ：哪次會議、誰提
+        - listitem [ref=e3338]:
+          - strong [ref=e3339]: 歷次討論
+          - text: ：時間軸（含每次決議要點）
+        - listitem [ref=e3340]:
+          - strong [ref=e3341]: 負責人
+          - text: ：總幹事 / 主委 / 特定委員
+        - listitem [ref=e3342]:
+          - strong [ref=e3343]: 相關文件
+          - text: ：報價單、現場照、規約引用
+      - document [ref=e3345]:
+        - generic [ref=e3347]:
+          - generic [ref=e3355]:
+            - generic [ref=e3359]: 通過
+            - generic [ref=e3363]: 暫緩
+            - generic [ref=e3367]: 待補資料
+          - generic [ref=e3368]:
+            - generic [ref=e3373]: 住戶提案 / 巡檢發現
+            - generic [ref=e3378]: 總幹事建議題到 Notion
+            - generic [ref=e3383]: 管委會議納入議程
+            - generic [ref=e3388]: 議決
+            - generic [ref=e3393]: 執行 → 結案
+            - generic [ref=e3398]: 註明條件 / 觀察期
+            - generic [ref=e3403]: 退回 → 下次會議
+      - heading "交接時的議題盤點原則" [level=2] [ref=e3404]
+      - paragraph [ref=e3405]:
+        - text: 新舊主委/總幹事交接時，
+        - strong [ref=e3406]: 進行中狀態的所有議題都要逐條過目
+        - text: ，特別注意：
+      - list [ref=e3407]:
+        - listitem [ref=e3408]:
+          - strong [ref=e3409]: 時間敏感
+          - text: ：有沒有規約/法規限期？（譬如「下次會議前回報」）
+        - listitem [ref=e3410]:
+          - strong [ref=e3411]: 暫緩條件
+          - text: ：暫緩的議題等什麼條件？條件何時可能觸發？
+        - listitem [ref=e3412]:
+          - strong [ref=e3413]: 跨屆原承諾
+          - text: ：上屆主委向住戶口頭承諾過的事項，新屆要不要繼承
+      - heading "當前進行中議題清單（2026-04-30 當下快照）" [level=2] [ref=e3414]
+      - blockquote [ref=e3415]:
+        - paragraph [ref=e3416]: 此清單為議題追蹤資料庫的 29 個「進行中」（未結案）議題。詳細討論紀錄留在原 Notion 議題追蹤；本清單作為總幹事案頭備忘。
+      - heading "設備維護類" [level=3] [ref=e3417]
+      - list [ref=e3418]:
+        - listitem [ref=e3419]: B4 電梯旁牆面底部滲水問題
+        - listitem [ref=e3420]: R3 電梯機房百葉更換問題
+        - listitem [ref=e3421]: R2 水塔頂樓排水口積水與漏水問題
+        - listitem [ref=e3422]: B3 13 號車位旁牆壁滲水問題
+        - listitem [ref=e3423]: 噴灌系統漏水處理討論
+        - listitem [ref=e3424]: 14F-5 陽台滴水修繕案
+        - listitem [ref=e3425]: 雨遮玻璃破裂修繕事宜
+        - listitem [ref=e3426]: 326 泡沫撒水系統一齊閥故障修繕討論
+        - listitem [ref=e3427]: 大門之保養價格與頻率研究
+        - listitem [ref=e3428]: 一樓玻璃門門把（一樓大廳後門）可靠度問題
+      - heading "安全 / 法規類" [level=3] [ref=e3429]
+      - list [ref=e3430]:
+        - listitem [ref=e3431]: 社區是否購置電動車防火毯
+        - listitem [ref=e3432]: 社區是否設置 AED（心臟除顫器）
+        - listitem [ref=e3433]: 電動車充電設備環境防災研議計畫
+        - listitem [ref=e3434]: 加強地下停車場出入口車道防滑方案
+        - listitem [ref=e3435]: 高空維護作業用之鷹架購置
+        - listitem [ref=e3436]: 太古華電消防安檢改善費用討論
+        - listitem [ref=e3437]: 太古華電修繕保養費用討論──緊急發電機保養與外掛式充電器
+      - heading "行政 / 治理類" [level=3] [ref=e3438]
+      - list [ref=e3439]:
+        - listitem [ref=e3440]: 各職司委員交接（第五屆）
+        - listitem [ref=e3441]: 第五屆區權會工作時間表討論案
+        - listitem [ref=e3442]: 充電樁收費機制調整
+        - listitem [ref=e3443]: 是否開放機車位停腳踏車？
+        - listitem [ref=e3444]: 與社區非相關之外車於社區無障礙車位臨時停車之收費相關規定
+        - listitem [ref=e3445]: 五府宮舉辦活動對閱大安社區的影響因應事宜
+        - listitem [ref=e3446]: 管理費部分定存討論規劃案
+      - heading "設計 / 形象類" [level=3] [ref=e3447]
+      - list [ref=e3448]:
+        - listitem [ref=e3449]: 閱大安指標優化
+        - listitem [ref=e3450]: 從第三層樓層開始，中華電信訊號不好
+      - heading "已執行（待結案歸檔）" [level=3] [ref=e3451]
+      - list [ref=e3452]:
+        - listitem [ref=e3453]: 進行 1F 和 B1F 裝修保護板拆除及各樓層電梯門片更換鈦金門板（已於 2026-04-14 部分完工）
+        - listitem [ref=e3454]:
+          - text: 地下停車場車位區感應式燈管更換 —
+          - strong [ref=e3455]: 已完工
+          - text: 2026-04-14（詳 [[閱大安地下室停車場照明改善-決策誌]]）
+      - separator [ref=e3456]
+      - heading "附錄 C：增補版維護日誌" [level=1] [ref=e3457]
+      - list [ref=e3458]:
+        - listitem [ref=e3459]:
+          - strong [ref=e3460]: 2026-05-17 v4
+          - text: — 全面修訂：
+          - list [ref=e3461]:
+            - listitem [ref=e3462]: 前言改寫為對總幹事的歡迎與使用指引
+            - listitem [ref=e3463]: 新增第二章 §8「每日水電公告產生器」整節（5 步驟工作流 + 三處發布管道 + 備註欄使用原則 + 故障排除 + 資料庫長期價值說明）
+            - listitem [ref=e3464]: §3.1.3 改為「服務延續性原則」、聚焦總幹事在物業合約年度換約期間的協助項目
+            - listitem [ref=e3465]: §4.2.4 改寫為「總幹事在會議當天的協助項目」
+            - listitem [ref=e3466]: 清除 18 處原 Notion 圖檔殘留佔位
+        - listitem [ref=e3467]:
+          - strong [ref=e3468]: 2026-05-17 v3
+          - text: — 第五屆第一次區權會（5/16 召開）後內容補強。新增 7 個區塊：
+          - list [ref=e3469]:
+            - listitem [ref=e3470]: 第二章 §7「AGM Tool 操作」（含 mermaid 工作流圖）
+            - listitem [ref=e3471]: 第四章 §2.5「對住戶報告財務的口徑原則」（總資產視角、保守收入、代收代付、跨投影片一致性）
+            - listitem [ref=e3472]: 第四章 §3.1.2「大公電 1 年資料洞見」+ §3.1.3「設備故障用電飆升案例」
+            - listitem [ref=e3473]: 第四章 §3.2.1「公水 4 年治理脈絡」+ §3.2.2「給下任主委 3 步建議」
+            - listitem [ref=e3474]: 第四章 §4.2.4「會議當天時間軸」（mermaid 甘特圖）+ §4.2.5「會議後文書 SOP」（mermaid 流程圖）
+            - listitem [ref=e3475]: 第四章 §3.1.6「續約 vs 換廠商決策框架」（mermaid 決策樹）
+            - listitem [ref=e3476]: 第六章 §2.0「對住戶的溝通語氣原則」（禁區詞與替換表）
+            - listitem [ref=e3477]: 附錄 B 開頭新增「跨屆議題追蹤機制」（mermaid 流程圖 + 交接盤點原則）
+        - listitem [ref=e3478]:
+          - strong [ref=e3479]: 技術改進
+          - text: ：修復 markdown-it 對 CJK + 全形標點交界處
+          - code [ref=e3480]: "**粗體**"
+          - text: 未渲染的 bug（裝
+          - code [ref=e3481]: markdown-it-cjk-friendly
+          - text: plugin）。
+        - listitem [ref=e3482]:
+          - strong [ref=e3483]: 2026-04-30 v2
+          - text: — 全面整合改寫。將 167 個議題追蹤資料庫中的 24 個年度例常性議題深度整合進原前六章對應位置（第三章 §1.2 電梯、§3 廠商招標；第四章 §3.1 台電、§4.2 區權會、§5 換屆、§6 保險；第六章 §3.2 農曆新年），並新增第四章 §7 公共安全檢查（每 3 年）。隨之 renumber：原第四章 §7-9 改為 §8-10。新增附錄 A 年度循環索引表（採「第 X 章 §Y.Z」全章節指向格式）+ 附錄 B 當前 29 個 Open 議題清單。修正子節編號一致性（§8.1-8.4、§9.1、§10.1-10.2）。
+        - listitem [ref=e3484]:
+          - strong [ref=e3485]: 2026-04-30 v1
+          - text: — 初版（章節附加式）：在原前六章末尾附加第七章。已被 v2 取代。
+      - separator [ref=e3486]
+      - generic [ref=e3487]:
+        - generic [ref=e3488]: 閱大安管理委員會・總幹事 Wiki 最後更新 Thu May 21 2026 08:00:00 GMT+0800 (台北標準時間)
+        - generic [ref=e3489]: CULTURAL CITY COMMUNITY

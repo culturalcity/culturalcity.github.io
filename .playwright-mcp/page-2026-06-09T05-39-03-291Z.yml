@@ -1,0 +1,228 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Google Apps Script" [ref=e10] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e11]
+          - generic [ref=e12]: Apps Script
+        - generic [ref=e13]:
+          - generic [ref=e16]:
+            - button "重新命名" [ref=e18] [cursor=pointer]: 閱大安帳單歸檔
+            - generic [ref=e1024]: cloud_done
+          - generic [ref=e26]:
+            - button "部署" [ref=e31] [cursor=pointer]:
+              - generic [ref=e34]:
+                - text: 部署
+                - generic [ref=e35]: 
+            - button "與他人共用這個專案" [ref=e39] [cursor=pointer]:
+              - generic [ref=e40]: person_add
+            - button "支援" [ref=e42] [cursor=pointer]:
+              - generic [ref=e45]: help_outline
+        - generic [ref=e47]:
+          - button "Google 應用程式" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+          - button "Google 帳戶： 閱大安 (culturalcity85@gmail.com)" [ref=e57] [cursor=pointer]:
+            - img [ref=e59]
+            - img [ref=e65]
+    - generic [ref=e67]:
+      - navigation "Apps Script 專案頁面" [ref=e69]:
+        - link "總覽" [ref=e70] [cursor=pointer]:
+          - generic [ref=e72]: info_outline
+          - generic [ref=e73]: 總覽
+        - link "編輯器" [ref=e74] [cursor=pointer]:
+          - generic [ref=e76]: code
+          - generic [ref=e77]: 編輯器
+        - link "專案記錄" [ref=e78] [cursor=pointer]:
+          - generic [ref=e80]: history
+          - generic [ref=e81]: 專案記錄
+        - link "觸發條件" [ref=e82] [cursor=pointer]:
+          - generic [ref=e84]: alarm
+          - generic [ref=e85]: 觸發條件
+        - link "執行項目" [ref=e86] [cursor=pointer]:
+          - generic [ref=e88]: playlist_play
+          - generic [ref=e89]: 執行項目
+        - link "專案設定" [ref=e90] [cursor=pointer]:
+          - generic [ref=e92]: settings
+          - generic [ref=e93]: 專案設定
+      - generic [ref=e94]:
+        - heading "編輯器" [level=1] [ref=e95]
+        - generic [ref=e96]:
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - heading "檔案" [level=2] [ref=e100]
+              - generic [ref=e102]:
+                - button "按字母順序排列檔案" [disabled] [ref=e104]:
+                  - generic [ref=e107]: sort_by_alpha
+                - button "新增檔案" [ref=e109] [cursor=pointer]:
+                  - generic [ref=e112]: add
+            - listbox "專案檔案" [ref=e114]:
+              - option "程式碼.gs" [ref=e115] [cursor=pointer]:
+                - generic "程式碼.gs" [ref=e116]
+                - button "「程式碼.gs」的檔案操作選單。" [ref=e117]:
+                  - button "「程式碼.gs」的檔案操作選單。" [ref=e118]:
+                    - generic [ref=e121]: 
+            - generic [ref=e122]:
+              - heading "資料庫" [level=2] [ref=e123]
+              - button "新增資料庫" [ref=e126] [cursor=pointer]:
+                - generic [ref=e129]: add
+            - generic [ref=e130]:
+              - heading "服務" [level=2] [ref=e131]
+              - button "新增服務" [ref=e134] [cursor=pointer]:
+                - generic [ref=e137]: add
+          - separator "調整窗格大小" [ref=e138]
+          - generic [ref=e144]:
+            - region [ref=e145]:
+              - generic [ref=e146]:
+                - generic [ref=e147]:
+                  - generic [ref=e150]:
+                    - button "復原程式碼編輯動作" [disabled]:
+                      - generic: undo
+                  - generic [ref=e153]:
+                    - button "重做程式碼編輯動作" [disabled]:
+                      - generic: redo
+                - generic [ref=e157]:
+                  - button "將專案儲存至雲端硬碟" [disabled]:
+                    - img
+                - generic [ref=e1025]:
+                  - button "執行所選函式" [ref=e1029] [cursor=pointer]:
+                    - generic [ref=e1032]: play_arrow
+                    - generic [ref=e1033]: 執行
+                  - button "對所選函式進行偵錯" [ref=e1037]:
+                    - img [ref=e1040]
+                    - generic [ref=e1043]: 偵錯
+                  - listbox "請選取要執行的函式" [ref=e1046] [cursor=pointer]:
+                    - option "backfillSinopac" [selected] [ref=e1062]
+                - button "關閉執行作業記錄面板" [ref=e1071]:
+                  - generic [ref=e188]: 執行記錄
+            - generic [ref=e190]:
+              - main [ref=e194]:
+                - generic [ref=e195]: .
+                - generic [ref=e197]:
+                  - iframe [ref=e198]:
+                    
+                  - code [ref=e200]:
+                    - generic [ref=e201]:
+                      - generic [ref=e204]:
+                        - generic [ref=e632]: "1"
+                        - generic [ref=e634]: "2"
+                        - generic [ref=e636]: "3"
+                        - generic [ref=e638]: "4"
+                        - generic [ref=e640]: "5"
+                        - generic [ref=e642]: "6"
+                        - generic [ref=e644]: "7"
+                        - generic [ref=e646]: "8"
+                        - generic [ref=e648]: "9"
+                        - generic [ref=e650]: "10"
+                        - generic [ref=e652]: "11"
+                        - generic [ref=e654]: "12"
+                        - generic [ref=e656]: "13"
+                        - generic [ref=e658]: "14"
+                        - generic [ref=e660]: "15"
+                        - generic [ref=e662]: "16"
+                        - generic [ref=e664]: "17"
+                        - generic [ref=e666]: "18"
+                        - generic [ref=e668]: "19"
+                        - generic [ref=e669]:
+                          - generic [ref=e670] [cursor=pointer]: 
+                          - generic [ref=e671]: "20"
+                        - generic [ref=e673]: "21"
+                        - generic [ref=e675]: "22"
+                        - generic [ref=e678]: "23"
+                        - generic [ref=e680]: "24"
+                        - generic [ref=e682]: "25"
+                        - generic [ref=e685]: "26"
+                        - generic [ref=e688]: "27"
+                        - generic [ref=e690]: "28"
+                        - generic [ref=e692]: "29"
+                        - generic [ref=e694]: "30"
+                        - generic [ref=e696]: "31"
+                        - generic [ref=e697]:
+                          - generic [ref=e698] [cursor=pointer]: 
+                          - generic [ref=e699]: "32"
+                        - generic [ref=e701]: "33"
+                        - generic [ref=e703]: "34"
+                        - generic [ref=e705]: "35"
+                        - generic [ref=e707]: "36"
+                        - generic [ref=e709]: "37"
+                        - generic [ref=e711]: "38"
+                        - generic [ref=e712]:
+                          - generic [ref=e713] [cursor=pointer]: 
+                          - generic [ref=e714]: "39"
+                        - generic [ref=e716]: "40"
+                      - generic [ref=e475]:
+                        - generic [ref=e899]: // 閱大安公用事業帳單自動歸檔（Apps Script）
+                        - generic [ref=e901]: //
+                        - generic [ref=e903]: // 此 script 在 culturalcity85@gmail.com 帳號下執行。
+                        - generic [ref=e905]: // 每小時掃 Gmail，找到公用事業帳單 PDF，呼叫 Cloud Run 解密 + 解析，
+                        - generic [ref=e907]: // 重新命名後存到 Google Drive 對應子資料夾。
+                        - generic [ref=e909]: //
+                        - generic [ref=e911]: // 一次性設定：
+                        - generic [ref=e913]: // 1. Script Properties（檔案→專案屬性→指令碼屬性）設定下列鍵：
+                        - generic [ref=e915]: // CLOUD_RUN_URL https://yda-cloud-decrypt-xxx.run.app
+                        - generic [ref=e917]: // TAIPOWER_PARENT_FOLDER_ID （Drive「台電電費電子帳單暨繳費憑證」資料夾 ID）
+                        - generic [ref=e919]: // WATER_FOLDER_ID （Drive 自來水帳單暨繳費憑證資料夾 ID）
+                        - generic [ref=e921]: // TELECOM_FOLDER_ID （Drive 中華電信帳單暨繳費憑證資料夾 ID）
+                        - generic [ref=e923]: // SINOPAC_STATEMENT_FOLDER_ID （Drive 永豐銀行電子綜合對帳單資料夾 ID）
+                        - generic [ref=e925]: // SINOPAC_TRANSACTION_FOLDER_ID （Drive 永豐銀行交易單證資料夾 ID）
+                        - generic [ref=e927]: // 2. 跑 installTrigger() 一次裝上每小時 trigger
+                        - generic [ref=e929]: // 3. 跑 processBills() 一次手動測試
+                        - generic [ref=e931]: //
+                        - generic [ref=e933]: // 取得資料夾 ID：在 Drive 開啟資料夾，網址 https://drive.google.com/drive/folders/<ID>
+                        - generic [ref=e936]: "const CONFIG = {"
+                        - generic [ref=e938]: "get decryptUrl() { return PropertiesService.getScriptProperties().getProperty('CLOUD_RUN_URL'); },"
+                        - generic [ref=e940]: "get taipowerParent() { return PropertiesService.getScriptProperties().getProperty"
+                        - generic [ref=e942]: "('TAIPOWER_PARENT_FOLDER_ID'); },"
+                        - generic [ref=e944]: "get waterFolder() { return PropertiesService.getScriptProperties().getProperty('WATER_FOLDER_ID'); },"
+                        - generic [ref=e946]: "get telecomFolder() { return PropertiesService.getScriptProperties().getProperty('TELECOM_FOLDER_ID'); },"
+                        - generic [ref=e948]: "get sinopacStatementFolder() { return PropertiesService.getScriptProperties().getProperty"
+                        - generic [ref=e950]: "('SINOPAC_STATEMENT_FOLDER_ID'); },"
+                        - generic [ref=e952]: "get sinopacTransactionFolder() { return PropertiesService.getScriptProperties().getProperty"
+                        - generic [ref=e954]: "('SINOPAC_TRANSACTION_FOLDER_ID'); },"
+                        - generic [ref=e956]: "processedLabel: '帳單已歸檔',"
+                        - generic [ref=e958]: "failedLabel: '帳單需檢視',"
+                        - generic [ref=e960]: // 寄信條件：寄到「自己」(culturalcity85)。可改成主委信箱
+                        - generic [ref=e962]: "notifyTo: Session.getActiveUser().getEmail(),"
+                        - generic [ref=e964]: // Gmail 搜尋條件：含 PDF 附件、未標處理、來自台電/水/中華電信/永豐
+                        - generic [ref=e966]: "searchQuery: 'has:attachment filename:pdf -label:帳單已歸檔 -label:帳單需檢視 ' +"
+                        - generic [ref=e968]: "'(from:ebill@ebppsmtp.taipower.com.tw OR from:ebill@water.gov.taipei ' +"
+                        - generic [ref=e970]: "' OR from:cht_ebpp@cht.com.tw' +"
+                        - generic [ref=e972]: "' OR from:ebillservice@newebill.banksinopac.com.tw) newer_than:60d',"
+                        - generic [ref=e974]: "};"
+                        - generic [ref=e977]: /** 主要入口：被 trigger 呼叫，或手動執行做測試。 */
+                        - generic [ref=e979]: "function processBills() {"
+                        - generic [ref=e981]: const log = [];
+                      - textbox "編輯器內容;按 Alt+F1 可取得協助工具選項。" [active] [ref=e597]: // 閱大安公用事業帳單自動歸檔（Apps Script） // // 此 script 在 culturalcity85@gmail.com 帳號下執行。 // 每小時掃 Gmail，找到公用事業帳單 PDF，呼叫 Cloud Run 解密 + 解析， // 重新命名後存到 Google Drive 對應子資料夾。 // // 一次性設定： // 1. Script Properties（檔案→專案屬性→指令碼屬性）設定下列鍵： // CLOUD_RUN_URL https://yda-cloud-decrypt-xxx.run.app // TAIPOWER_PARENT_FOLDER_ID （Drive「台電電費電子帳單暨繳費憑證」資料夾 ID）
+              - separator "調整窗格大小" [ref=e1072]
+              - generic [ref=e1073]:
+                - complementary [ref=e1075]:
+                  - generic [ref=e1077]: 執行記錄
+                  - list "記錄" [ref=e1082]:
+                    - listitem "記錄 1。 下午1:36:41. 通知. 開始執行." [ref=e1083]:
+                      - generic [ref=e1084]: 下午1:36:41
+                      - generic [ref=e1085]: 通知
+                      - generic [ref=e1086]: 開始執行
+                    - 'listitem "記錄 2。 下午1:36:55. 資訊. backfillSinopac: 25 threads found." [ref=e1087]':
+                      - generic [ref=e1088]: 下午1:36:55
+                      - generic [ref=e1089]: 資訊
+                      - generic [ref=e1090]: "backfillSinopac: 25 threads found"
+                    - 'listitem "記錄 3。 下午1:38:46. 資訊. backfillSinopac done: found=25 saved=14 dup=0 err=11." [ref=e1124]':
+                      - generic [ref=e1125]: 下午1:38:46
+                      - generic [ref=e1126]: 資訊
+                      - generic [ref=e1127]: "backfillSinopac done: found=25 saved=14 dup=0 err=11"
+                    - listitem "記錄 4。 下午1:38:33. 通知. 執行完畢." [ref=e1128]:
+                      - generic [ref=e1129]: 下午1:38:33
+                      - generic [ref=e1130]: 通知
+                      - generic [ref=e1131]: 執行完畢
+                - generic:
+                  - button "關閉執行記錄窗格" [ref=e1122] [cursor=pointer]:
+                    - generic [ref=e1123]: close
+                  - tooltip [ref=e598]: 關閉執行記錄
+  - generic: 正在儲存專案…
+  - generic [ref=e599]:
+    - alert
+    - alert
+    - complementary
+    - complementary

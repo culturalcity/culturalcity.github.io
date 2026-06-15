@@ -1,0 +1,237 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e10]:
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - link "移至內容" [ref=e14] [cursor=pointer]:
+          - /url: ""
+        - link "透過螢幕閱讀器使用 Gmail" [ref=e15] [cursor=pointer]:
+          - /url: ""
+      - heading [level=1] [ref=e17]:
+        - banner [ref=e18]:
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - button "主選單" [expanded] [ref=e21] [cursor=pointer]:
+                - img [ref=e22]
+              - link "Gmail" [ref=e26] [cursor=pointer]:
+                - /url: "#inbox"
+                - img [ref=e27]
+            - generic [ref=e28]:
+              - search [ref=e30]:
+                - heading "搜尋" [level=2] [ref=e31]
+                - combobox "搜尋郵件" [ref=e33]: subject:"[閱大安] 帳單歸檔" newer_than:1h
+                - button "進階搜尋選項" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "清除搜尋內容" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+                - button "搜尋郵件" [disabled] [ref=e41] [cursor=pointer]:
+                  - img [ref=e42]
+              - generic [ref=e45]:
+                - button [ref=e46] [cursor=pointer]:
+                  - img [ref=e47]
+                - button "設定" [ref=e49] [cursor=pointer]:
+                  - img [ref=e50]
+            - generic [ref=e54]:
+              - button "Google 應用程式" [ref=e58] [cursor=pointer]:
+                - img [ref=e59]
+              - button "Google 帳戶： 閱大安 (culturalcity85@gmail.com)" [ref=e64] [cursor=pointer]:
+                - img [ref=e66]
+                - img [ref=e72]
+      - alert [ref=e75]
+    - generic [ref=e78]:
+      - navigation [ref=e79]:
+        - button "撰寫" [ref=e82] [cursor=pointer]
+        - generic [ref=e88]:
+          - generic "標籤" [ref=e90]:
+            - heading "標籤" [level=2] [ref=e91]
+            - generic [ref=e92]:
+              - generic [ref=e93]:
+                - generic [ref=e95]:
+                  - generic [ref=e100]:
+                    - link "「收件匣」中有 5 封未讀郵件" [ref=e102] [cursor=pointer]:
+                      - /url: https://mail.google.com/mail/u/0/#inbox
+                      - text: 收件匣
+                    - generic [ref=e103]: "5"
+                  - link "已加星號" [ref=e110] [cursor=pointer]:
+                    - /url: https://mail.google.com/mail/u/0/#starred
+                  - link "已延後" [ref=e117] [cursor=pointer]:
+                    - /url: https://mail.google.com/mail/u/0/#snoozed
+                  - link "寄件備份" [ref=e124] [cursor=pointer]:
+                    - /url: https://mail.google.com/mail/u/0/#sent
+                  - link "草稿" [ref=e131] [cursor=pointer]:
+                    - /url: https://mail.google.com/mail/u/0/#drafts
+                - link "購物交易 含有選單" [ref=e140] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#category/purchases
+                  - text: 購物交易
+              - button "顯示更多標籤" [ref=e142] [cursor=pointer]:
+                - generic [ref=e143]: 更多
+          - generic [ref=e146]:
+            - heading "標籤" [ref=e147]
+            - button "建立新標籤" [ref=e148] [cursor=pointer]
+          - generic "標籤" [ref=e150]:
+            - heading "標籤" [level=2] [ref=e151]
+            - generic [ref=e155]:
+              - generic [ref=e158]:
+                - link "收合標籤：社區廠商" [ref=e159] [cursor=pointer]
+                - link "社區廠商 已展開 含有選單" [ref=e163] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86
+                  - text: 社區廠商
+              - generic [ref=e166]:
+                - link "收合標籤：公用事業" [ref=e167] [cursor=pointer]
+                - link "公用事業 已展開 含有選單" [ref=e171] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD
+                  - text: 公用事業
+              - link "大台北瓦斯 含有選單" [ref=e178] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD/%E5%A4%A7%E5%8F%B0%E5%8C%97%E7%93%A6%E6%96%AF
+                - text: 大台北瓦斯
+              - generic [ref=e183]:
+                - link "「中華電信」中有 2 封未讀郵件 含有選單" [ref=e185] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD/%E4%B8%AD%E8%8F%AF%E9%9B%BB%E4%BF%A1
+                  - text: 中華電信
+                - generic [ref=e186]: "2"
+              - link "臺北自來水事業處 含有選單" [ref=e193] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD/%E8%87%BA%E5%8C%97%E8%87%AA%E4%BE%86%E6%B0%B4%E4%BA%8B%E6%A5%AD%E8%99%95
+                - text: 臺北自來水事業處
+              - generic [ref=e198]:
+                - link "「臺灣電力公司」中有 1 封未讀郵件 含有選單" [ref=e200] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD/%E8%87%BA%E7%81%A3%E9%9B%BB%E5%8A%9B%E5%85%AC%E5%8F%B8
+                  - text: 臺灣電力公司
+                - generic [ref=e201]: "1"
+              - link "遠傳電信 含有選單" [ref=e208] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%85%AC%E7%94%A8%E4%BA%8B%E6%A5%AD/%E9%81%A0%E5%82%B3%E9%9B%BB%E4%BF%A1
+                - text: 遠傳電信
+              - link "永豐銀行 含有選單" [ref=e215] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E6%B0%B8%E8%B1%90%E9%8A%80%E8%A1%8C
+                - text: 永豐銀行
+              - generic [ref=e218]:
+                - link "收合標籤：安全與保險" [ref=e219] [cursor=pointer]
+                - link "安全與保險 已展開 含有選單" [ref=e223] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA
+                  - text: 安全與保險
+              - link "建築物公共安全檢查 含有選單" [ref=e230] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA/%E5%BB%BA%E7%AF%89%E7%89%A9%E5%85%AC%E5%85%B1%E5%AE%89%E5%85%A8%E6%AA%A2%E6%9F%A5
+                - text: 建築物公共安全檢查
+              - link "國泰產險 含有選單" [ref=e237] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA/%E5%9C%8B%E6%B3%B0%E7%94%A2%E9%9A%AA
+                - text: 國泰產險
+              - link "富邦產險 含有選單" [ref=e244] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA/%E5%AF%8C%E9%82%A6%E7%94%A2%E9%9A%AA
+                - text: 富邦產險
+              - link "電動車防火毯 含有選單" [ref=e251] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA/%E9%9B%BB%E5%8B%95%E8%BB%8A%E9%98%B2%E7%81%AB%E6%AF%AF
+                - text: 電動車防火毯
+              - link "緊急照明燈 含有選單" [ref=e258] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%AE%89%E5%85%A8%E8%88%87%E4%BF%9D%E9%9A%AA/%E7%B7%8A%E6%80%A5%E7%85%A7%E6%98%8E%E7%87%88
+                - text: 緊急照明燈
+              - generic [ref=e261]:
+                - link "收合標籤：社區管理" [ref=e262] [cursor=pointer]
+                - link "社區管理 已展開 含有選單" [ref=e266] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%A4%BE%E5%8D%80%E7%AE%A1%E7%90%86
+                  - text: 社區管理
+              - link "新美齊 含有選單" [ref=e273] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%A4%BE%E5%8D%80%E7%AE%A1%E7%90%86/%E6%96%B0%E7%BE%8E%E9%BD%8A
+                - text: 新美齊
+              - link "潤泰 含有選單" [ref=e280] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%A4%BE%E5%8D%80%E7%AE%A1%E7%90%86/%E6%BD%A4%E6%B3%B0
+                - text: 潤泰
+              - generic [ref=e283]:
+                - link "收合標籤：建築與設施維護" [ref=e284] [cursor=pointer]
+                - link "建築與設施維護 已展開 含有選單" [ref=e288] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%BB%BA%E7%AF%89%E8%88%87%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7
+                  - text: 建築與設施維護
+              - link "台北市建築師公會 含有選單" [ref=e295] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E5%BB%BA%E7%AF%89%E8%88%87%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E5%8F%B0%E5%8C%97%E5%B8%82%E5%BB%BA%E7%AF%89%E5%B8%AB%E5%85%AC%E6%9C%83
+                - text: 台北市建築師公會
+              - link "產業發展基金會零碳標竿獎 含有選單" [ref=e302] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%94%A2%E6%A5%AD%E7%99%BC%E5%B1%95%E5%9F%BA%E9%87%91%E6%9C%83%E9%9B%B6%E7%A2%B3%E6%A8%99%E7%AB%BF%E7%8D%8E
+                - text: 產業發展基金會零碳標竿獎
+              - generic [ref=e305]:
+                - link "收合標籤：設備與公共設施維護" [ref=e306] [cursor=pointer]
+                - link "設備與公共設施維護 已展開 含有選單" [ref=e310] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7
+                  - text: 設備與公共設施維護
+              - link "今網資訊科技 含有選單" [ref=e317] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E4%BB%8A%E7%B6%B2%E8%B3%87%E8%A8%8A%E7%A7%91%E6%8A%80
+                - text: 今網資訊科技
+              - link "太古華電 含有選單" [ref=e324] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E5%A4%AA%E5%8F%A4%E8%8F%AF%E9%9B%BB
+                - text: 太古華電
+              - link "地下室通風機 含有選單" [ref=e331] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E5%9C%B0%E4%B8%8B%E5%AE%A4%E9%80%9A%E9%A2%A8%E6%A9%9F
+                - text: 地下室通風機
+              - link "冷氣空調 含有選單" [ref=e338] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E5%86%B7%E6%B0%A3%E7%A9%BA%E8%AA%BF
+                - text: 冷氣空調
+              - link "計程車叫車機 含有選單" [ref=e345] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E8%A8%AD%E5%82%99%E8%88%87%E5%85%AC%E5%85%B1%E8%A8%AD%E6%96%BD%E7%B6%AD%E8%AD%B7/%E8%A8%88%E7%A8%8B%E8%BB%8A%E5%8F%AB%E8%BB%8A%E6%A9%9F
+                - text: 計程車叫車機
+              - generic [ref=e348]:
+                - link "收合標籤：環境與清潔管理" [ref=e349] [cursor=pointer]
+                - link "環境與清潔管理 已展開 含有選單" [ref=e353] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%92%B0%E5%A2%83%E8%88%87%E6%B8%85%E6%BD%94%E7%AE%A1%E7%90%86
+                  - text: 環境與清潔管理
+              - link "垃圾清運 含有選單" [ref=e360] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%A4%BE%E5%8D%80%E5%BB%A0%E5%95%86/%E7%92%B0%E5%A2%83%E8%88%87%E6%B8%85%E6%BD%94%E7%AE%A1%E7%90%86/%E5%9E%83%E5%9C%BE%E6%B8%85%E9%81%8B
+                - text: 垃圾清運
+              - link "留存 含有選單" [ref=e367] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E7%95%99%E5%AD%98
+                - text: 留存
+              - generic [ref=e372]:
+                - link "「帳單已歸檔」中有 3 封未讀郵件 含有選單" [ref=e374] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/%E5%B8%B3%E5%96%AE%E5%B7%B2%E6%AD%B8%E6%AA%94
+                  - text: 帳單已歸檔
+                - generic [ref=e375]: "3"
+              - link "帳單需檢視 含有選單" [ref=e382] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E5%B8%B3%E5%96%AE%E9%9C%80%E6%AA%A2%E8%A6%96
+                - text: 帳單需檢視
+              - link "電子發票（網購） 含有選單" [ref=e389] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E9%9B%BB%E5%AD%90%E7%99%BC%E7%A5%A8%EF%BC%88%E7%B6%B2%E8%B3%BC%EF%BC%89
+                - text: 電子發票（網購）
+              - link "臺北市1999 含有選單" [ref=e396] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/%E8%87%BA%E5%8C%97%E5%B8%821999
+                - text: 臺北市1999
+              - generic [ref=e401]:
+                - link "「GH-Noise」中有 1 封未讀郵件 含有選單" [ref=e403] [cursor=pointer]:
+                  - /url: https://mail.google.com/mail/u/0/#label/GH-Noise
+                  - text: GH-Noise
+                - generic [ref=e404]: "1"
+              - link "Google相關（含訂單、發票） 含有選單" [ref=e411] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/Google%E7%9B%B8%E9%97%9C%EF%BC%88%E5%90%AB%E8%A8%82%E5%96%AE%E3%80%81%E7%99%BC%E7%A5%A8%EF%BC%89
+                - text: Google相關（含訂單、發票）
+              - link "IT 含有選單" [ref=e418] [cursor=pointer]:
+                - /url: https://mail.google.com/mail/u/0/#label/IT
+                - text: IT
+      - generic [ref=e431]:
+        - generic [ref=e432]:
+          - generic: 載入指標
+        - main [ref=e462]:
+          - generic [ref=e463]:
+            - toolbar "搜尋修正"
+            - generic [ref=e465]:
+              - button "關聯性最高" [ref=e468] [cursor=pointer]:
+                - generic [ref=e469]: 關聯性最高
+              - generic [ref=e473]:
+                - button "切換分割窗格模式" [ref=e474] [cursor=pointer]
+                - button [ref=e477] [cursor=pointer]
+          - heading "會話群組" [level=2] [ref=e480]
+          - contentinfo [ref=e483]:
+            - link "儲存空間配額：200 GB，目前使用量：65% 前往連結以管理儲存空間" [ref=e488] [cursor=pointer]:
+              - /url: https://drive.google.com/u/0/settings/storage?hl=zh-TW&utm_medium=web&utm_source=gmail&utm_campaign=storage_meter&utm_content=storage_normal
+              - generic [ref=e491]:
+                - generic [ref=e492]: 儲存空間配額：200 GB，目前使用量：65%
+                - img "前往連結以管理儲存空間" [ref=e493]
+            - generic [ref=e497]:
+              - link "條款" [ref=e498] [cursor=pointer]:
+                - /url: https://www.google.com/intl/zh-TW/policies/terms/
+              - text: ·
+              - link "隱私權" [ref=e499] [cursor=pointer]:
+                - /url: https://www.google.com/intl/zh-TW/policies/privacy/
+              - text: ·
+              - link "計劃政策" [ref=e500] [cursor=pointer]:
+                - /url: https://www.google.com/gmail/about/policy/
+            - generic [ref=e503]:
+              - generic [ref=e504]: 上次帳戶活動時間：0 分鐘前
+              - text: 目前有人在另 1 個位置開啟這個帳戶 ·
+              - link "詳細資料" [ref=e505] [cursor=pointer]
+      - complementary "側邊面板" [ref=e509]

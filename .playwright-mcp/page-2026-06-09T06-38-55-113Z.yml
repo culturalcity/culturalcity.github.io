@@ -1,0 +1,628 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - region
+  - generic [ref=e4]:
+    - navigation [ref=e5]:
+      - button "跳到主要內容" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: 跳到主要內容
+      - button "鍵盤快速鍵" [ref=e11] [cursor=pointer]:
+        - generic [ref=e13]: 鍵盤快速鍵
+      - button "無障礙工具意見回饋" [ref=e15] [cursor=pointer]:
+        - generic [ref=e17]: 無障礙工具意見回饋
+    - banner [ref=e19]:
+      - generic [ref=e20]:
+        - link "雲端硬碟" [ref=e24] [cursor=pointer]:
+          - /url: https://drive.google.com/?tab=oo&authuser=0
+          - img [ref=e25]
+          - generic [ref=e26]: 雲端硬碟
+        - generic [ref=e27]:
+          - search [ref=e29]:
+            - table [ref=e31]:
+              - rowgroup [ref=e32]:
+                - row [ref=e33]:
+                  - cell [ref=e34]:
+                    - textbox "在雲端硬碟中搜尋" [ref=e35]
+            - button "進階搜尋" [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+            - button "搜尋 Google 雲端硬碟" [ref=e39] [cursor=pointer]:
+              - img [ref=e40]
+          - generic [ref=e43]:
+            - button "支援" [ref=e46] [cursor=pointer]:
+              - img [ref=e47]
+            - button "設定" [ref=e51] [cursor=pointer]:
+              - img [ref=e53]
+            - generic [ref=e1224]:
+              - generic:
+                - button "試用 Gemini" [ref=e1231] [cursor=pointer]
+                - tooltip [ref=e1234]: 試用 Gemini
+            - generic [ref=e78]:
+              - button "升級" [ref=e80] [cursor=pointer]:
+                - generic [ref=e82]: 升級
+              - tooltip [ref=e83]: 升級即可使用付費功能
+        - generic [ref=e85]:
+          - button "Google 應用程式" [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+          - button "Google 帳戶： 閱大安 (culturalcity85@gmail.com)" [ref=e95] [cursor=pointer]:
+            - img [ref=e97]
+            - img [ref=e103]
+    - button "新增" [ref=e106] [cursor=pointer]:
+      - img [ref=e109]
+      - generic [ref=e111]: 新增
+    - navigation [ref=e117]:
+      - heading "資料夾和檢視模式" [level=2] [ref=e118]
+      - tree "資料夾和檢視模式" [ref=e119]:
+        - treeitem "首頁" [ref=e120]:
+          - link "首頁" [ref=e121] [cursor=pointer]:
+            - generic "首頁" [ref=e124]:
+              - generic [ref=e126]:
+                - img [ref=e129]
+                - img [ref=e134]
+              - generic "首頁" [ref=e139]
+          - group
+        - treeitem "我的雲端硬碟" [ref=e140]:
+          - link "我的雲端硬碟" [ref=e141] [cursor=pointer]:
+            - img [ref=e144]
+            - generic "我的雲端硬碟" [ref=e147]:
+              - generic [ref=e149]:
+                - img [ref=e152]
+                - img [ref=e156]
+              - generic "我的雲端硬碟" [ref=e158]
+        - treeitem "電腦" [ref=e159]:
+          - link "電腦" [ref=e160] [cursor=pointer]:
+            - img [ref=e163]
+            - generic "電腦" [ref=e166]:
+              - generic [ref=e168]:
+                - img [ref=e171]
+                - img [ref=e176]
+              - generic "電腦" [ref=e179]
+        - treeitem "與我共用" [ref=e180]:
+          - link "與我共用" [ref=e181] [cursor=pointer]:
+            - generic "與我共用" [ref=e184]:
+              - generic [ref=e186]:
+                - img [ref=e189]
+                - img [ref=e194]
+              - generic "與我共用的項目" [ref=e200]: 與我共用
+          - group
+        - treeitem "近期存取" [ref=e201]:
+          - link "近期存取" [ref=e202] [cursor=pointer]:
+            - generic "近期存取" [ref=e205]:
+              - generic [ref=e207]:
+                - img [ref=e210]
+                - img [ref=e216]
+              - generic "最近使用過的項目" [ref=e221]: 近期存取
+          - group
+        - treeitem "已加星號" [ref=e222]:
+          - link "已加星號" [ref=e223] [cursor=pointer]:
+            - generic "已加星號" [ref=e226]:
+              - generic [ref=e228]:
+                - img [ref=e230]
+                - img [ref=e233]
+              - generic "加上星號的項目" [ref=e237]: 已加星號
+          - group
+        - treeitem "垃圾內容" [ref=e238]:
+          - link "垃圾內容" [ref=e239] [cursor=pointer]:
+            - generic "垃圾內容" [ref=e242]:
+              - generic [ref=e244]:
+                - img [ref=e247]
+                - img [ref=e251]
+              - generic "垃圾內容" [ref=e256]
+          - group
+        - treeitem "垃圾桶" [ref=e257]:
+          - link "垃圾桶" [ref=e258] [cursor=pointer]:
+            - generic "垃圾桶" [ref=e261]:
+              - generic [ref=e263]:
+                - img [ref=e266]
+                - img [ref=e271]
+              - generic "已丟進垃圾桶的項目" [ref=e276]: 垃圾桶
+          - group
+        - treeitem "儲存空間" [ref=e277]:
+          - link "儲存空間" [ref=e278] [cursor=pointer]:
+            - generic "儲存空間" [ref=e281]:
+              - generic [ref=e283]:
+                - img [ref=e1235]
+                - img [ref=e1238]
+              - generic "儲存空間" [ref=e294]
+          - group
+      - generic [ref=e1243]:
+        - generic "儲存空間概況：目前使用量：131.36 GB (儲存空間配額：200 GB)" [ref=e1247] [cursor=pointer]: 目前使用量：131.36 GB (儲存空間配額：200 GB)
+        - generic [ref=e1251] [cursor=pointer]:
+          - text: 取得更多儲存空間
+          - link "取得更多儲存空間" [ref=e1252]:
+            - /url: https://drive.google.com/settings/storage?authuser=0&i=m&utm_source=drive&utm_medium=web&utm_campaign=g1_widget_normal#upgrade
+    - generic [ref=e311]:
+      - generic [ref=e317]:
+        - generic [ref=e320]:
+          - generic [ref=e322]:
+            - navigation [ref=e1254]:
+              - heading "資料夾路徑" [ref=e323]
+              - list "資料夾路徑" [ref=e1255]:
+                - listitem [ref=e1256]:
+                  - button "顯示路徑" [ref=e1257] [cursor=pointer]:
+                    - img [ref=e1259]
+                  - img [ref=e1262]
+                - listitem [ref=e1264]:
+                  - button "電子綜合對帳單" [ref=e1265] [cursor=pointer]:
+                    - generic [ref=e1266]: 電子綜合對帳單
+                    - img [ref=e1268]
+            - button "已共用" [ref=e325] [cursor=pointer]:
+              - img [ref=e327]
+          - toolbar [ref=e329]:
+            - generic [ref=e330]:
+              - radiogroup "清單或格狀版面配置 (Alt+V 再按 L)" [ref=e334]:
+                - generic [ref=e335]:
+                  - radio "清單" [checked] [ref=e336] [cursor=pointer]:
+                    - generic [ref=e337]:
+                      - img [ref=e338]
+                      - img [ref=e342]
+                  - radio "格狀檢視" [ref=e345] [cursor=pointer]:
+                    - generic [ref=e346]:
+                      - img [ref=e347]
+                      - img [ref=e351]
+              - button "隱藏詳細資料 (Alt+V 再按 D)" [ref=e1270] [cursor=pointer]:
+                - img [ref=e356]
+        - generic [ref=e362]:
+          - generic [ref=e363]: 沒有套用任何篩選條件
+          - toolbar "篩選器" [ref=e365]:
+            - generic [ref=e367]:
+              - button "類型" [ref=e368] [cursor=pointer]:
+                - generic [ref=e369]:
+                  - generic [ref=e370]: 類型
+                  - img [ref=e372]
+              - button "使用者" [ref=e374] [cursor=pointer]:
+                - generic [ref=e375]:
+                  - generic [ref=e376]: 使用者
+                  - img [ref=e378]
+              - button "上次修改日期" [ref=e380] [cursor=pointer]:
+                - generic [ref=e381]:
+                  - generic [ref=e382]: 上次修改日期
+                  - img [ref=e384]
+              - button "來源" [ref=e386] [cursor=pointer]:
+                - generic [ref=e387]:
+                  - generic [ref=e388]: 來源
+                  - img [ref=e390]
+      - main [ref=e393]:
+        - generic [ref=e397]:
+          - complementary [ref=e403]:
+            - generic [ref=e404]:
+              - img [ref=e407]
+              - generic [ref=e413]:
+                - heading "運用 AI 技術，在更短的時間內完成更多工作" [level=3] [ref=e415]
+                - generic [ref=e416]: 在幾秒內草擬及潤飾文件、撰寫會議記錄、製作簡報及分析資料
+            - link "免付費試用" [ref=e421] [cursor=pointer]:
+              - generic [ref=e423]: 免付費試用
+            - generic:
+              - button "關閉橫幅" [ref=e425] [cursor=pointer]:
+                - img [ref=e427]
+              - tooltip [ref=e430]: 關閉橫幅
+          - region [active] [ref=e432]:
+            - generic [ref=e433]:
+              - grid "項目清單" [ref=e436]:
+                - rowgroup [ref=e437]:
+                  - generic [ref=e438] [cursor=pointer]: 名稱
+                  - img [ref=e440] [cursor=pointer]
+                  - generic [ref=e1272]:
+                    - button "排序" [ref=e1273] [cursor=pointer]:
+                      - img [ref=e1275]
+                    - tooltip [ref=e1278]: 查看排序選項
+                - rowgroup [ref=e458]:
+                  - row "永豐銀行電子綜合對帳單 202402.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1279]:
+                    - gridcell "永豐銀行電子綜合對帳單 202402.pdf PDF 已共用" [ref=e1280]:
+                      - generic [ref=e1281]:
+                        - img [ref=e1287]
+                        - generic "永豐銀行電子綜合對帳單 202402.pdf PDF 已共用" [ref=e1290]:
+                          - strong [ref=e1293]: 永豐銀行電子綜合對帳單 202402.pdf
+                          - img "已共用" [ref=e1295]:
+                            - img [ref=e1296]
+                            - generic [ref=e1299]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1300]:
+                      - generic [ref=e1303]:
+                        - button "更多動作 (Alt+A)" [ref=e1304] [cursor=pointer]:
+                          - img [ref=e1307]
+                        - tooltip [ref=e1310]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202408.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1311]:
+                    - gridcell "永豐銀行電子綜合對帳單 202408.pdf PDF 已共用" [ref=e1312]:
+                      - generic [ref=e1313]:
+                        - img [ref=e1319]
+                        - generic "永豐銀行電子綜合對帳單 202408.pdf PDF 已共用" [ref=e1322]:
+                          - strong [ref=e1325]: 永豐銀行電子綜合對帳單 202408.pdf
+                          - img "已共用" [ref=e1327]:
+                            - img [ref=e1328]
+                            - generic [ref=e1331]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1332]:
+                      - generic [ref=e1335]:
+                        - button "更多動作 (Alt+A)" [ref=e1336] [cursor=pointer]:
+                          - img [ref=e1339]
+                        - tooltip [ref=e1342]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202409.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1343]:
+                    - gridcell "永豐銀行電子綜合對帳單 202409.pdf PDF 已共用" [ref=e1344]:
+                      - generic [ref=e1345]:
+                        - img [ref=e1351]
+                        - generic "永豐銀行電子綜合對帳單 202409.pdf PDF 已共用" [ref=e1354]:
+                          - strong [ref=e1357]: 永豐銀行電子綜合對帳單 202409.pdf
+                          - img "已共用" [ref=e1359]:
+                            - img [ref=e1360]
+                            - generic [ref=e1363]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1364]:
+                      - generic [ref=e1367]:
+                        - button "更多動作 (Alt+A)" [ref=e1368] [cursor=pointer]:
+                          - img [ref=e1371]
+                        - tooltip [ref=e1374]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202410.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1375]:
+                    - gridcell "永豐銀行電子綜合對帳單 202410.pdf PDF 已共用" [ref=e1376]:
+                      - generic [ref=e1377]:
+                        - img [ref=e1383]
+                        - generic "永豐銀行電子綜合對帳單 202410.pdf PDF 已共用" [ref=e1386]:
+                          - strong [ref=e1389]: 永豐銀行電子綜合對帳單 202410.pdf
+                          - img "已共用" [ref=e1391]:
+                            - img [ref=e1392]
+                            - generic [ref=e1395]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1396]:
+                      - generic [ref=e1399]:
+                        - button "更多動作 (Alt+A)" [ref=e1400] [cursor=pointer]:
+                          - img [ref=e1403]
+                        - tooltip [ref=e1406]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202411.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1407]:
+                    - gridcell "永豐銀行電子綜合對帳單 202411.pdf PDF 已共用" [ref=e1408]:
+                      - generic [ref=e1409]:
+                        - img [ref=e1415]
+                        - generic "永豐銀行電子綜合對帳單 202411.pdf PDF 已共用" [ref=e1418]:
+                          - strong [ref=e1421]: 永豐銀行電子綜合對帳單 202411.pdf
+                          - img "已共用" [ref=e1423]:
+                            - img [ref=e1424]
+                            - generic [ref=e1427]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1428]:
+                      - generic [ref=e1431]:
+                        - button "更多動作 (Alt+A)" [ref=e1432] [cursor=pointer]:
+                          - img [ref=e1435]
+                        - tooltip [ref=e1438]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202412.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1439]:
+                    - gridcell "永豐銀行電子綜合對帳單 202412.pdf PDF 已共用" [ref=e1440]:
+                      - generic [ref=e1441]:
+                        - img [ref=e1447]
+                        - generic "永豐銀行電子綜合對帳單 202412.pdf PDF 已共用" [ref=e1450]:
+                          - strong [ref=e1453]: 永豐銀行電子綜合對帳單 202412.pdf
+                          - img "已共用" [ref=e1455]:
+                            - img [ref=e1456]
+                            - generic [ref=e1459]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1460]:
+                      - generic [ref=e1463]:
+                        - button "更多動作 (Alt+A)" [ref=e1464] [cursor=pointer]:
+                          - img [ref=e1467]
+                        - tooltip [ref=e1470]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202501.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1471]:
+                    - gridcell "永豐銀行電子綜合對帳單 202501.pdf PDF 已共用" [ref=e1472]:
+                      - generic [ref=e1473]:
+                        - img [ref=e1479]
+                        - generic "永豐銀行電子綜合對帳單 202501.pdf PDF 已共用" [ref=e1482]:
+                          - strong [ref=e1485]: 永豐銀行電子綜合對帳單 202501.pdf
+                          - img "已共用" [ref=e1487]:
+                            - img [ref=e1488]
+                            - generic [ref=e1491]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1492]:
+                      - generic [ref=e1495]:
+                        - button "更多動作 (Alt+A)" [ref=e1496] [cursor=pointer]:
+                          - img [ref=e1499]
+                        - tooltip [ref=e1502]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202502.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1503]:
+                    - gridcell "永豐銀行電子綜合對帳單 202502.pdf PDF 已共用" [ref=e1504]:
+                      - generic [ref=e1505]:
+                        - img [ref=e1511]
+                        - generic "永豐銀行電子綜合對帳單 202502.pdf PDF 已共用" [ref=e1514]:
+                          - strong [ref=e1517]: 永豐銀行電子綜合對帳單 202502.pdf
+                          - img "已共用" [ref=e1519]:
+                            - img [ref=e1520]
+                            - generic [ref=e1523]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1524]:
+                      - generic [ref=e1527]:
+                        - button "更多動作 (Alt+A)" [ref=e1528] [cursor=pointer]:
+                          - img [ref=e1531]
+                        - tooltip [ref=e1534]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202503.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1535]:
+                    - gridcell "永豐銀行電子綜合對帳單 202503.pdf PDF 已共用" [ref=e1536]:
+                      - generic [ref=e1537]:
+                        - img [ref=e1543]
+                        - generic "永豐銀行電子綜合對帳單 202503.pdf PDF 已共用" [ref=e1546]:
+                          - strong [ref=e1549]: 永豐銀行電子綜合對帳單 202503.pdf
+                          - img "已共用" [ref=e1551]:
+                            - img [ref=e1552]
+                            - generic [ref=e1555]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1556]:
+                      - generic [ref=e1559]:
+                        - button "更多動作 (Alt+A)" [ref=e1560] [cursor=pointer]:
+                          - img [ref=e1563]
+                        - tooltip [ref=e1566]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202504.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1567]:
+                    - gridcell "永豐銀行電子綜合對帳單 202504.pdf PDF 已共用" [ref=e1568]:
+                      - generic [ref=e1569]:
+                        - img [ref=e1575]
+                        - generic "永豐銀行電子綜合對帳單 202504.pdf PDF 已共用" [ref=e1578]:
+                          - strong [ref=e1581]: 永豐銀行電子綜合對帳單 202504.pdf
+                          - img "已共用" [ref=e1583]:
+                            - img [ref=e1584]
+                            - generic [ref=e1587]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1588]:
+                      - generic [ref=e1591]:
+                        - button "更多動作 (Alt+A)" [ref=e1592] [cursor=pointer]:
+                          - img [ref=e1595]
+                        - tooltip [ref=e1598]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202505.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1599]:
+                    - gridcell "永豐銀行電子綜合對帳單 202505.pdf PDF 已共用" [ref=e1600]:
+                      - generic [ref=e1601]:
+                        - img [ref=e1607]
+                        - generic "永豐銀行電子綜合對帳單 202505.pdf PDF 已共用" [ref=e1610]:
+                          - strong [ref=e1613]: 永豐銀行電子綜合對帳單 202505.pdf
+                          - img "已共用" [ref=e1615]:
+                            - img [ref=e1616]
+                            - generic [ref=e1619]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1620]:
+                      - generic [ref=e1623]:
+                        - button "更多動作 (Alt+A)" [ref=e1624] [cursor=pointer]:
+                          - img [ref=e1627]
+                        - tooltip [ref=e1630]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202506.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1631]:
+                    - gridcell "永豐銀行電子綜合對帳單 202506.pdf PDF 已共用" [ref=e1632]:
+                      - generic [ref=e1633]:
+                        - img [ref=e1639]
+                        - generic "永豐銀行電子綜合對帳單 202506.pdf PDF 已共用" [ref=e1642]:
+                          - strong [ref=e1645]: 永豐銀行電子綜合對帳單 202506.pdf
+                          - img "已共用" [ref=e1647]:
+                            - img [ref=e1648]
+                            - generic [ref=e1651]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1652]:
+                      - generic [ref=e1655]:
+                        - button "更多動作 (Alt+A)" [ref=e1656] [cursor=pointer]:
+                          - img [ref=e1659]
+                        - tooltip [ref=e1662]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202508.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1663]:
+                    - gridcell "永豐銀行電子綜合對帳單 202508.pdf PDF 已共用" [ref=e1664]:
+                      - generic [ref=e1665]:
+                        - img [ref=e1671]
+                        - generic "永豐銀行電子綜合對帳單 202508.pdf PDF 已共用" [ref=e1674]:
+                          - strong [ref=e1677]: 永豐銀行電子綜合對帳單 202508.pdf
+                          - img "已共用" [ref=e1679]:
+                            - img [ref=e1680]
+                            - generic [ref=e1683]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1684]:
+                      - generic [ref=e1687]:
+                        - button "更多動作 (Alt+A)" [ref=e1688] [cursor=pointer]:
+                          - img [ref=e1691]
+                        - tooltip [ref=e1694]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202509.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1695]:
+                    - gridcell "永豐銀行電子綜合對帳單 202509.pdf PDF 已共用" [ref=e1696]:
+                      - generic [ref=e1697]:
+                        - img [ref=e1703]
+                        - generic "永豐銀行電子綜合對帳單 202509.pdf PDF 已共用" [ref=e1706]:
+                          - strong [ref=e1709]: 永豐銀行電子綜合對帳單 202509.pdf
+                          - img "已共用" [ref=e1711]:
+                            - img [ref=e1712]
+                            - generic [ref=e1715]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1716]:
+                      - generic [ref=e1719]:
+                        - button "更多動作 (Alt+A)" [ref=e1720] [cursor=pointer]:
+                          - img [ref=e1723]
+                        - tooltip [ref=e1726]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202510.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1727]:
+                    - gridcell "永豐銀行電子綜合對帳單 202510.pdf PDF 已共用" [ref=e1728]:
+                      - generic [ref=e1729]:
+                        - img [ref=e1735]
+                        - generic "永豐銀行電子綜合對帳單 202510.pdf PDF 已共用" [ref=e1738]:
+                          - strong [ref=e1741]: 永豐銀行電子綜合對帳單 202510.pdf
+                          - img "已共用" [ref=e1743]:
+                            - img [ref=e1744]
+                            - generic [ref=e1747]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1748]:
+                      - generic [ref=e1751]:
+                        - button "更多動作 (Alt+A)" [ref=e1752] [cursor=pointer]:
+                          - img [ref=e1755]
+                        - tooltip [ref=e1758]: 更多動作 (Alt+A)
+                  - row "永豐銀行電子綜合對帳單 202605.pdf PDF 已共用 更多動作 (Alt+A)" [ref=e1759]:
+                    - gridcell "永豐銀行電子綜合對帳單 202605.pdf PDF 已共用" [ref=e1760]:
+                      - generic [ref=e1761]:
+                        - img [ref=e1767]
+                        - generic "永豐銀行電子綜合對帳單 202605.pdf PDF 已共用" [ref=e1770]:
+                          - strong [ref=e1773]: 永豐銀行電子綜合對帳單 202605.pdf
+                          - img "已共用" [ref=e1775]:
+                            - img [ref=e1776]
+                            - generic [ref=e1779]: 已共用
+                    - gridcell "更多動作 (Alt+A)" [ref=e1780]:
+                      - generic [ref=e1783]:
+                        - button "更多動作 (Alt+A)" [ref=e1784] [cursor=pointer]:
+                          - img [ref=e1787]
+                        - tooltip [ref=e1790]: 更多動作 (Alt+A)
+              - progressbar [ref=e1213]:
+                - img [ref=e1215]
+      - generic [ref=e1791]:
+        - complementary "詳細資料窗格" [ref=e1793]:
+          - generic [ref=e1798]:
+            - generic [ref=e1799]:
+              - generic [ref=e1800]:
+                - generic "電子綜合對帳單 共用的「Google 雲端硬碟資料夾」檔案" [ref=e1803] [cursor=pointer]:
+                  - heading "共用的 Google 雲端硬碟資料夾 檔 電子綜合對帳單" [level=2] [ref=e1804]:
+                    - link "共用的 Google 雲端硬碟資料夾 檔 電子綜合對帳單" [ref=e1805]:
+                      - img "共用的 Google 雲端硬碟資料夾 檔" [ref=e1808]:
+                        - img [ref=e1809]
+                      - generic [ref=e1813]: 電子綜合對帳單
+                - generic [ref=e1815]:
+                  - button "隱藏詳細資料" [ref=e1816] [cursor=pointer]:
+                    - img [ref=e1818]
+                  - tooltip [ref=e1821]: 隱藏詳細資料
+              - tablist [ref=e1824]:
+                - generic [ref=e1827]:
+                  - tab "詳細資料" [ref=e1828] [cursor=pointer]:
+                    - generic:
+                      - generic: 詳細資料
+                  - tab "活動" [selected] [ref=e1829] [cursor=pointer]:
+                    - generic:
+                      - generic: 活動
+            - iframe [ref=e1834]:
+              - main [ref=f41e3]:
+                - region "活動" [ref=f41e8]:
+                  - document [ref=f41e9]:
+                    - region "Activity from 今天" [ref=f41e10]:
+                      - generic [ref=f41e11]:
+                        - heading "Activity from 今天" [level=3] [ref=f41e12]: 今天
+                        - tooltip [ref=f41e13]: 今天
+                      - feed [ref=f41e14]:
+                        - article "你上傳了一個項目 在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」 在 PDF中開啟「永豐銀行電子綜合對帳單 202402.pdf」 在資料夾中檢視檔案 下午1:50 6月9日" [ref=f41e15]:
+                          - heading "你上傳了一個項目 下午1:50 6月9日" [level=4] [ref=f41e16]:
+                            - img [ref=f41e18]
+                            - generic [ref=f41e19]:
+                              - generic [ref=f41e20]: 你上傳了一個項目
+                              - generic [ref=f41e21]: 下午1:50 6月9日
+                          - generic [ref=f41e22]:
+                            - list [ref=f41e24]:
+                              - option [ref=f41e25]:
+                                - toolbar [ref=f41e27]:
+                                  - button "在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」" [ref=f41e30] [cursor=pointer]:
+                                    - generic:
+                                      - generic:
+                                        - img "Google 雲端硬碟資料夾"
+                                    - generic [ref=f41e31]: 電子綜合對帳單
+                            - list [ref=f41e33]:
+                              - option "在資料夾中檢視檔案" [ref=f41e34]:
+                                - toolbar [ref=f41e37]:
+                                  - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202402.pdf」" [ref=f41e40] [cursor=pointer]:
+                                    - generic:
+                                      - generic:
+                                        - img "PDF"
+                                    - generic [ref=f41e41]: 永豐銀行電子綜合對帳單 202402.pdf
+                                - generic [ref=f41e43]:
+                                  - button "在資料夾中檢視檔案" [ref=f41e44] [cursor=pointer]:
+                                    - img [ref=f41e47]
+                                  - tooltip [ref=f41e51]: 在資料夾中檢視檔案
+                        - article "你上傳了 15 個項目 在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」 在 PDF中開啟「永豐銀行電子綜合對帳單 202408.pdf」 在資料夾中檢視檔案 在 PDF中開啟「永豐銀行電子綜合對帳單 202409.pdf」 在資料夾中檢視檔案 在 PDF中開啟「永豐銀行電子綜合對帳單 202410.pdf」 在資料夾中檢視檔案 在 PDF中開啟「永豐銀行電子綜合對帳單 202411.pdf」 在資料夾中檢視檔案 在 PDF中開啟「永豐銀行電子綜合對帳單 202412.pdf」 在資料夾中檢視檔案 在 PDF中開啟「永豐銀行電子綜合對帳單 202501.pdf」 在資料夾中檢視檔案 顯示全部 下午1:38 6月9日" [ref=f41e52]:
+                          - heading "你上傳了 15 個項目 下午1:38 6月9日" [level=4] [ref=f41e53]:
+                            - img [ref=f41e55]
+                            - generic [ref=f41e56]:
+                              - generic [ref=f41e57]: 你上傳了 15 個項目
+                              - generic [ref=f41e58]: 下午1:38 6月9日
+                          - generic [ref=f41e59]:
+                            - list [ref=f41e61]:
+                              - option [ref=f41e62]:
+                                - toolbar [ref=f41e64]:
+                                  - button "在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」" [ref=f41e67] [cursor=pointer]:
+                                    - generic:
+                                      - generic:
+                                        - img "Google 雲端硬碟資料夾"
+                                    - generic [ref=f41e68]: 電子綜合對帳單
+                            - generic [ref=f41e69]:
+                              - list [ref=f41e70]:
+                                - option "在資料夾中檢視檔案" [ref=f41e71]:
+                                  - toolbar [ref=f41e74]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202408.pdf」" [ref=f41e77] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e78]: 永豐銀行電子綜合對帳單 202408.pdf
+                                  - generic [ref=f41e80]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e81] [cursor=pointer]:
+                                      - img [ref=f41e84]
+                                    - tooltip [ref=f41e88]: 在資料夾中檢視檔案
+                                - option "在資料夾中檢視檔案" [ref=f41e89]:
+                                  - toolbar [ref=f41e92]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202409.pdf」" [ref=f41e95] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e96]: 永豐銀行電子綜合對帳單 202409.pdf
+                                  - generic [ref=f41e98]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e99] [cursor=pointer]:
+                                      - img [ref=f41e102]
+                                    - tooltip [ref=f41e106]: 在資料夾中檢視檔案
+                                - option "在資料夾中檢視檔案" [ref=f41e107]:
+                                  - toolbar [ref=f41e110]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202410.pdf」" [ref=f41e113] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e114]: 永豐銀行電子綜合對帳單 202410.pdf
+                                  - generic [ref=f41e116]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e117] [cursor=pointer]:
+                                      - img [ref=f41e120]
+                                    - tooltip [ref=f41e124]: 在資料夾中檢視檔案
+                                - option "在資料夾中檢視檔案" [ref=f41e125]:
+                                  - toolbar [ref=f41e128]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202411.pdf」" [ref=f41e131] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e132]: 永豐銀行電子綜合對帳單 202411.pdf
+                                  - generic [ref=f41e134]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e135] [cursor=pointer]:
+                                      - img [ref=f41e138]
+                                    - tooltip [ref=f41e142]: 在資料夾中檢視檔案
+                                - option "在資料夾中檢視檔案" [ref=f41e143]:
+                                  - toolbar [ref=f41e146]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202412.pdf」" [ref=f41e149] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e150]: 永豐銀行電子綜合對帳單 202412.pdf
+                                  - generic [ref=f41e152]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e153] [cursor=pointer]:
+                                      - img [ref=f41e156]
+                                    - tooltip [ref=f41e160]: 在資料夾中檢視檔案
+                                - option "在資料夾中檢視檔案" [ref=f41e161]:
+                                  - toolbar [ref=f41e164]:
+                                    - button "在 PDF中開啟「永豐銀行電子綜合對帳單 202501.pdf」" [ref=f41e167] [cursor=pointer]:
+                                      - generic:
+                                        - generic:
+                                          - img "PDF"
+                                      - generic [ref=f41e168]: 永豐銀行電子綜合對帳單 202501.pdf
+                                  - generic [ref=f41e170]:
+                                    - button "在資料夾中檢視檔案" [ref=f41e171] [cursor=pointer]:
+                                      - img [ref=f41e174]
+                                    - tooltip [ref=f41e178]: 在資料夾中檢視檔案
+                              - button "顯示全部" [ref=f41e180] [cursor=pointer]:
+                                - generic [ref=f41e182]: 顯示全部
+                        - article "你已在以下位置建立一個項目並將該項目設為共用： 在 Google 雲端硬碟資料夾中開啟「永豐銀行」 在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」 在資料夾中檢視檔案 jessiechang08@gmail.com 加註者 上午11:15 6月9日" [ref=f41e183]:
+                          - heading "你已在以下位置建立一個項目並將該項目設為共用： 上午11:15 6月9日" [level=4] [ref=f41e184]:
+                            - img [ref=f41e186]
+                            - generic [ref=f41e187]:
+                              - generic [ref=f41e188]: 你已在以下位置建立一個項目並將該項目設為共用：
+                              - generic [ref=f41e189]: 上午11:15 6月9日
+                          - generic [ref=f41e190]:
+                            - list [ref=f41e192]:
+                              - option [ref=f41e193]:
+                                - toolbar [ref=f41e195]:
+                                  - button "在 Google 雲端硬碟資料夾中開啟「永豐銀行」" [ref=f41e198] [cursor=pointer]:
+                                    - generic:
+                                      - generic:
+                                        - img "Google 雲端硬碟資料夾"
+                                    - generic [ref=f41e199]: 永豐銀行
+                            - list [ref=f41e201]:
+                              - option "在資料夾中檢視檔案" [ref=f41e202]:
+                                - toolbar [ref=f41e205]:
+                                  - button "在 Google 雲端硬碟資料夾中開啟「電子綜合對帳單」" [ref=f41e208] [cursor=pointer]:
+                                    - generic:
+                                      - generic:
+                                        - img "Google 雲端硬碟資料夾"
+                                    - generic [ref=f41e209]: 電子綜合對帳單
+                                - generic [ref=f41e211]:
+                                  - button "在資料夾中檢視檔案" [ref=f41e212] [cursor=pointer]:
+                                    - img [ref=f41e215]
+                                  - tooltip [ref=f41e219]: 在資料夾中檢視檔案
+                            - list [ref=f41e221]:
+                              - listitem [ref=f41e222]:
+                                - generic [ref=f41e225]: j
+                                - generic [ref=f41e227]:
+                                  - generic [ref=f41e228]:
+                                    - generic [ref=f41e229]: jessiechang08@gmail.com
+                                    - tooltip [ref=f41e230]: jessiechang08@gmail.com
+                                  - generic [ref=f41e231]: 加註者
+        - navigation
+    - generic [ref=e1218]:
+      - complementary "側面板" [ref=e1835]:
+        - tablist [ref=e1837]:
+          - tab "日曆"
+          - tab "Keep"
+          - tab "Tasks"
+          - tab "聯絡人"
+          - separator [disabled] [ref=e1842]
+          - tab "取得外掛程式"
+      - generic:
+        - button "隱藏側邊面板":
+          - img [ref=e1845] [cursor=pointer]
+  - region
+  - img [ref=e1220]

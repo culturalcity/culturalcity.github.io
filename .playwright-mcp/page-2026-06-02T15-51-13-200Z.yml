@@ -1,0 +1,226 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Google Apps Script" [ref=e13] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e14]
+          - generic [ref=e15]: Apps Script
+        - generic [ref=e16]:
+          - generic [ref=e325]: cloud_done
+          - button "支援" [ref=e327] [cursor=pointer]:
+            - generic [ref=e330]: help_outline
+        - generic [ref=e45]:
+          - button "Google 應用程式" [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+          - button "Google 帳戶： 閱大安 (culturalcity85@gmail.com)" [ref=e55] [cursor=pointer]:
+            - img [ref=e57]
+            - img [ref=e63]
+    - generic [ref=e334]:
+      - navigation [ref=e336]:
+        - link [ref=e337] [cursor=pointer]:
+          - generic [ref=e339]: info_outline
+          - generic [ref=e340]: 總覽
+        - link [ref=e341] [cursor=pointer]:
+          - generic [ref=e343]: code
+          - generic [ref=e344]: 編輯器
+        - link [ref=e345] [cursor=pointer]:
+          - generic [ref=e347]: history
+          - generic [ref=e348]: 專案記錄
+        - link [ref=e349] [cursor=pointer]:
+          - generic [ref=e351]: alarm
+          - generic [ref=e352]: 觸發條件
+        - link [ref=e353] [cursor=pointer]:
+          - generic [ref=e355]: playlist_play
+          - generic [ref=e356]: 執行項目
+        - link [ref=e357] [cursor=pointer]:
+          - generic [ref=e359]: settings
+          - generic [ref=e360]: 專案設定
+      - generic [ref=e361]:
+        - heading [level=1] [ref=e362]: 編輯器
+        - generic [ref=e363]:
+          - generic [ref=e365]:
+            - generic [ref=e366]:
+              - heading [level=2] [ref=e367]: 檔案
+              - generic [ref=e369]:
+                - button [disabled] [ref=e371]:
+                  - generic [ref=e374]: sort_by_alpha
+                - button [ref=e376] [cursor=pointer]:
+                  - generic [ref=e379]: add
+            - listbox [ref=e381]:
+              - option [ref=e382] [cursor=pointer]:
+                - generic [ref=e383]: 程式碼.gs
+                - button [ref=e384]:
+                  - button [ref=e385]:
+                    - generic [ref=e388]: 
+            - generic [ref=e389]:
+              - heading [level=2] [ref=e390]: 資料庫
+              - button [ref=e393] [cursor=pointer]:
+                - generic [ref=e396]: add
+            - generic [ref=e397]:
+              - heading [level=2] [ref=e398]: 服務
+              - button [ref=e401] [cursor=pointer]:
+                - generic [ref=e404]: add
+          - generic [ref=e411]:
+            - region [ref=e412]:
+              - generic [ref=e413]:
+                - generic [ref=e414]:
+                  - generic [ref=e417]:
+                    - button [disabled]:
+                      - generic: undo
+                  - generic [ref=e420]:
+                    - button [disabled]:
+                      - generic: redo
+                - generic [ref=e424]:
+                  - button [disabled]:
+                    - img
+                - generic [ref=e425]:
+                  - button [ref=e429]:
+                    - generic [ref=e432]: play_arrow
+                    - generic [ref=e433]: 執行
+                  - button [ref=e437]:
+                    - img [ref=e440]
+                    - generic [ref=e443]: 偵錯
+                  - listbox [ref=e446] [cursor=pointer]:
+                    - option [selected] [ref=e447]: todayTaipei
+                - button [ref=e452]:
+                  - generic [ref=e455]: 執行記錄
+            - generic [ref=e457]:
+              - main [ref=e461]:
+                - generic [ref=e462]: .
+                - generic [ref=e464]:
+                  - iframe [ref=e465]:
+                    
+                  - code [ref=e467]:
+                    - generic [ref=e468]:
+                      - generic [ref=e471]:
+                        - generic [ref=e474]: "1"
+                        - generic [ref=e476]: "2"
+                        - generic [ref=e478]: "3"
+                        - generic [ref=e480]: "4"
+                        - generic [ref=e482]: "5"
+                        - generic [ref=e484]: "6"
+                        - generic [ref=e486]: "7"
+                        - generic [ref=e488]: "8"
+                        - generic [ref=e490]: "9"
+                        - generic [ref=e492]: "10"
+                        - generic [ref=e494]: "11"
+                        - generic [ref=e496]: "12"
+                        - generic [ref=e498]: "13"
+                        - generic [ref=e500]: "14"
+                        - generic [ref=e502]: "15"
+                        - generic [ref=e504]: "16"
+                        - generic [ref=e506]: "17"
+                        - generic [ref=e508]: "18"
+                        - generic [ref=e510]: "19"
+                        - generic [ref=e512]: "20"
+                        - generic [ref=e514]: "21"
+                        - generic [ref=e516]: "22"
+                        - generic [ref=e518]: "23"
+                        - generic [ref=e520]: "24"
+                        - generic [ref=e522]: "25"
+                        - generic [ref=e524]: "26"
+                        - generic [ref=e526]: "27"
+                        - generic [ref=e528]: "28"
+                        - generic [ref=e530]: "29"
+                        - generic [ref=e532]: "30"
+                        - generic [ref=e534]: "31"
+                        - generic [ref=e536]: "32"
+                        - generic [ref=e538]: "33"
+                        - generic [ref=e540]: "34"
+                        - generic [ref=e542]: "35"
+                        - generic [ref=e544]: "36"
+                        - generic [ref=e546]: "37"
+                        - generic [ref=e548]: "38"
+                        - generic [ref=e550]: "39"
+                        - generic [ref=e552]: "40"
+                        - generic [ref=e554]: "41"
+                        - generic [ref=e556]: "42"
+                        - generic [ref=e558]: "43"
+                        - generic [ref=e560]: "44"
+                        - generic [ref=e562]: "45"
+                        - generic [ref=e564]: "46"
+                        - generic [ref=e566]: "47"
+                        - generic [ref=e568]: "48"
+                        - generic [ref=e570]: "49"
+                        - generic [ref=e572]: "50"
+                        - generic [ref=e574]: "51"
+                        - generic [ref=e576]: "52"
+                        - generic [ref=e578]: "53"
+                        - generic [ref=e580]: "54"
+                        - generic [ref=e582]: "55"
+                        - generic [ref=e584]: "56"
+                        - generic [ref=e586]: "57"
+                        - generic [ref=e588]: "58"
+                        - generic [ref=e590]: "59"
+                        - generic [ref=e592]: "60"
+                        - generic [ref=e594]: "61"
+                        - generic [ref=e596]: "62"
+                      - generic [ref=e692]:
+                        - generic [ref=e694]: // ═══════════════════════════════════════════════════════════════
+                        - generic [ref=e696]: // 閱大安 Heat Alert Polling（Apps Script）
+                        - generic [ref=e698]: // ═══════════════════════════════════════════════════════════════
+                        - generic [ref=e700]: //
+                        - generic [ref=e702]: // 每 5 分鐘 trigger：07:30-09:00 台北 window 內偵測 CWA W29 高溫資訊，
+                        - generic [ref=e704]: // 若臺北今日有 advisory，建立：
+                        - generic [ref=e706]: // 1. Google Calendar 全天事件（給總幹事一上班看的 todo）
+                        - generic [ref=e708]: // 2. GitHub PR（公告草稿給主委 review + merge → deploy）
+                        - generic [ref=e710]: //
+                        - generic [ref=e712]: // 取代 GitHub Actions heat-alert.yml + heat-notice-draft.yml，
+                        - generic [ref=e714]: // 因為 GH Actions cron 不可靠（51-60min 延遲 + silently skip）。
+                        - generic [ref=e716]: //
+                        - generic [ref=e718]: // Script Properties 需設定：
+                        - generic [ref=e720]: // GH_PAT — GitHub Personal Access Token（repo + workflow scope）
+                        - generic [ref=e722]: //
+                        - generic [ref=e724]: // 安裝：跑 setup() 一次，會自動建立 time trigger。
+                        - generic [ref=e727]: // ── 常數 ──────────────────────────────────────────
+                        - generic [ref=e730]: var CALENDAR_ID = 'culturalcity85@gmail.com';
+                        - generic [ref=e732]: var GH_OWNER = 'culturalcity';
+                        - generic [ref=e734]: var GH_REPO = 'culturalcity.github.io';
+                        - generic [ref=e736]: var CWA_W29_BASE = 'https://www.cwa.gov.tw/Data/js/warn';
+                        - generic [ref=e738]: var TAIPEI_CODE = '63';
+                        - generic [ref=e741]: "var W29_LEVELS = {"
+                        - generic [ref=e743]: "'1': { zh: '黃', en: 'Yellow', ja: '黄', num: '1' },"
+                        - generic [ref=e745]: "'2': { zh: '橙', en: 'Orange', ja: '橙', num: '2' },"
+                        - generic [ref=e747]: "'3': { zh: '紅', en: 'Red', ja: '赤', num: '3' }"
+                        - generic [ref=e749]: "};"
+                        - generic [ref=e752]: // ── Helpers ────────────────────────────────────────
+                        - generic [ref=e755]: "function todayTaipei() {"
+                        - generic [ref=e757]: var now = new Date();
+                        - generic [ref=e759]: var taipeiMs = now.getTime() + 8 * 60 * 60 * 1000;
+                        - generic [ref=e761]: var t = new Date(taipeiMs);
+                        - generic [ref=e763]: return t.toISOString().substring(0, 10);
+                        - generic [ref=e765]: "}"
+                        - generic [ref=e768]: "function addDays(yyyyMmDd, delta) {"
+                        - generic [ref=e770]: var d = new Date(yyyyMmDd + 'T00:00:00Z');
+                        - generic [ref=e772]: d.setUTCDate(d.getUTCDate() + delta);
+                        - generic [ref=e774]: return d.toISOString().substring(0, 10);
+                        - generic [ref=e776]: "}"
+                        - generic [ref=e779]: "function taipeiHourMin() {"
+                        - generic [ref=e781]: var now = new Date();
+                        - generic [ref=e783]: var taipeiMs = now.getTime() + 8 * 60 * 60 * 1000;
+                        - generic [ref=e785]: var t = new Date(taipeiMs);
+                        - generic [ref=e787]: "return { h: t.getUTCHours(), m: t.getUTCMinutes() };"
+                        - generic [ref=e789]: "}"
+                        - generic [ref=e792]: "function githubApi(method, path, payload) {"
+                        - generic [ref=e794]: var token = PropertiesService.getScriptProperties().getProperty('GH_PAT');
+                        - generic [ref=e796]: if (!token) throw new Error('GH_PAT not set in Script Properties');
+                        - generic [ref=e798]: "var options = {"
+                        - generic [ref=e800]: "method: method.toLowerCase(),"
+                        - generic [ref=e802]: "headers: {"
+                        - generic [ref=e804]: "'Authorization': 'Bearer ' + token,"
+                        - generic [ref=e806]: "'Accept': 'application/vnd.github+json',"
+                        - generic [ref=e808]: "'User-Agent': 'culturalcity-heat-poll'"
+                      - textbox [ref=e810]: // ═══════════════════════════════════════════════════════════════ // 閱大安 Heat Alert Polling（Apps Script） // ═══════════════════════════════════════════════════════════════ // // 每 5 分鐘 trigger：07:30-09:00 台北 window 內偵測 CWA W29 高溫資訊， // 若臺北今日有 advisory，建立： // 1. Google Calendar 全天事件（給總幹事一上班看的 todo） // 2. GitHub PR（公告草稿給主委 review + merge → deploy） // // 取代 GitHub Actions heat-alert.yml + heat-notice-draft.yml，
+              - button [ref=e811] [cursor=pointer]:
+                - generic [ref=e812]: close
+              - tooltip [ref=e813]: 關閉執行記錄
+  - generic: 排序依據：上次修改時間，遞減。反向排序。
+  - generic [ref=e814]: 載入中…
+  - generic [ref=e815]:
+    - alert
+    - alert
+    - complementary
+    - complementary
