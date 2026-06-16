@@ -1325,7 +1325,10 @@ function latestElecKpi(){
 function kpiHtml(label, val, diff, unit, inverse, compareLabel){
   const cls = diff===null?'':diff>0?(inverse?'dn':'dp'):(inverse?'dp':'dn');
   const sign = diff>0?'+':'';
-  const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}</span>`:'';
+  const base = (diff!==null) ? val - diff : null;        // 對照基準（去年/上期同期值）
+  const pct  = (base && base!==0) ? diff/base : null;    // 同比百分比
+  const pctStr = pct!==null ? ` (${sign}${(pct*100).toFixed(1)}%)` : '';
+  const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}${pctStr}</span>`:'';
   const lbl = compareLabel || '同比';
   return `<div class="kpi"><div class="kpi-label">${label}</div>
     <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:15px;font-weight:400;margin-left:3px">${unit}</span></div>
