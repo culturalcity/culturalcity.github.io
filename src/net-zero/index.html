@@ -47,6 +47,15 @@ extraStyles: |
   .ext-label{margin:34px 0 14px;font-size:12px;letter-spacing:.2em;color:var(--wg9);display:flex;align-items:center;gap:10px;}
   .ext-label::after{content:'';flex:1;height:1px;background:var(--line);}
   .closing{font-size:14px;color:var(--wg9);line-height:1.85;margin-top:30px;}
+  .nz-cta{background:var(--dp);color:#fff;border-radius:var(--radius);padding:20px 22px;margin-bottom:36px;}
+  .nz-cta-h{font-size:17px;font-weight:700;letter-spacing:.04em;margin-bottom:9px;}
+  .nz-cta-p{font-size:14.5px;line-height:1.85;color:rgba(255,255,255,0.92);margin-bottom:14px;}
+  .nz-cta-p strong{color:#fff;}
+  .nz-cta-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--dp);text-decoration:none;padding:11px 20px;border-radius:var(--radius);font-size:15px;font-weight:700;letter-spacing:.04em;}
+  .nz-cta-btn::after{content:'↗';font-size:12px;}
+  .nz-cta-btn:hover{opacity:.92;}
+  .nz-cta-2nd{display:inline-block;margin-left:14px;font-size:14px;color:rgba(255,255,255,0.9);text-decoration:underline;}
+  @media(max-width:480px){.nz-cta-2nd{margin-left:0;margin-top:10px;}}
 ---
 <div class="header">
   <div class="header-inner">
@@ -70,6 +79,13 @@ extraStyles: |
   <div class="lang-block active" data-lang="zh">
     <p class="lede">邁向 <strong>2050 淨零排放</strong> 是全球與臺灣共同的目標。淨零不只是口號，而是一種更友善環境的生活態度——可以從<strong>食、衣、住、行、育樂、購</strong>各個生活層面做起。</p>
     <div class="official">本專區依循環境部「<strong>淨零綠生活行動指引（2024）</strong>」的六大面向規劃，並結合<strong>閱大安社區實際的設施與作為</strong>，讓每一項國家倡議都能在我們的日常中真正落地。</div>
+
+    <div class="nz-cta">
+      <div class="nz-cta-h">🏆 參加市府「節電3%獎百萬」節電獎勵活動</div>
+      <div class="nz-cta-p">台北市環保局節電獎勵活動——<strong>每半年用電比去年同期省 3% 以上即可抽獎</strong>，總獎額 400 萬、共 400 名。社區公共用電上半年已較去年同期約 −9%，邀請住戶在自家一起節電、還有機會中獎。<strong>6/30 前登錄可參加上下半年兩次抽獎。</strong></div>
+      <a class="nz-cta-btn" href="https://energysaving.gov.taipei/" target="_blank" rel="noopener">前往活動官網報名</a>
+      <a class="nz-cta-2nd" href="/notice/2026-06-16-節電獎百萬.html">看活動公告</a>
+    </div>
 
     <div class="dim">
       <img src="/images/netzero-food.webp?v=2026061602" class="dim-illus" alt="飲食面向插畫" loading="lazy">
