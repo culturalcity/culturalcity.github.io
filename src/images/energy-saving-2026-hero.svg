@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240" role="img" aria-label="臺北市節電獎勵活動：節電3%獎百萬">
+  <defs>
+    <pattern id="tex" width="46" height="46" patternUnits="userSpaceOnUse" patternTransform="rotate(-12)">
+      <line x1="0" y1="0" x2="0" y2="46" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#205F3A"/>
+      <stop offset="1" stop-color="#1A4E30"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4.5" flood-color="#FFD23F" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+
+  <!-- 底 -->
+  <rect width="800" height="240" fill="url(#bg)"/>
+  <rect width="800" height="240" fill="url(#tex)"/>
+  <!-- 右上柔光 -->
+  <circle cx="690" cy="40" r="150" fill="#ffffff" opacity="0.04"/>
+
+  <!-- 左：文字 -->
+  <text x="58" y="64" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="17" letter-spacing="5" fill="#A9CDB8">臺北市政府環保局節電獎勵活動</text>
+
+  <text x="56" y="150" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-weight="800" fill="#FFFFFF">
+    <tspan font-size="50">節電</tspan><tspan font-size="84" fill="#EFE3C4" dx="6">3%</tspan><tspan font-size="50" dx="6">獎百萬</tspan>
+  </text>
+
+  <text x="58" y="192" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="20" fill="#CFE3D6">每半年省電 3% 以上即可抽獎・總獎 400 萬元／共 400 名</text>
+
+  <!-- 右：獎章圓徽 -->
+  <g transform="translate(688,112)">
+    <circle r="50" fill="#ffffff" fill-opacity="0.05" stroke="#EFE3C4" stroke-width="3"/>
+    <polygon points="12,-43 -20,7 -2,7 -12,43 22,-8 4,-8" fill="#FFD23F" filter="url(#glow)"/>
+  </g>
+</svg>
