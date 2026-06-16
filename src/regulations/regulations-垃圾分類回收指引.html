@@ -29,6 +29,29 @@ extraStyles: |
   td.note{font-size:14px;}
   tr:hover td{background:rgba(60,56,53,0.03);}
   .footer{border-top:1px solid var(--line);padding-top:16px;margin-top:20px;font-size:13px;color:var(--wg9);line-height:1.8;}
+  /* ── 手機：4 欄表格 → 卡片堆疊（桌面/平板維持原表格）── */
+  @media (max-width:600px){
+    .tbl-wrap{overflow-x:visible;}
+    table,thead,tbody,tr,td{display:block;width:auto;}
+    thead{display:none;}
+    tr{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--wg9);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;}
+    tr:has(td.cat.recycle){border-left-color:#2B4A6B;}
+    td{padding:11px 15px;border:none;border-bottom:1px solid var(--line);line-height:1.75;}
+    td:last-child{border-bottom:none;}
+    td:empty{display:none;}
+    td.cat{width:auto;white-space:normal;border-left:none;font-size:15px;background:rgba(60,56,53,0.04);}
+    td.loc{width:auto;}
+    td:nth-child(2)::before,td.loc::before,td.note::before{display:block;margin-bottom:3px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--wg9);}
+    .lang-block[data-lang="zh"] td:nth-child(2)::before{content:"常見項目";}
+    .lang-block[data-lang="zh"] td.loc::before{content:"本社區丟置地點";}
+    .lang-block[data-lang="zh"] td.note::before{content:"丟棄注意事項";}
+    .lang-block[data-lang="en"] td:nth-child(2)::before{content:"COMMON ITEMS";}
+    .lang-block[data-lang="en"] td.loc::before{content:"WHERE TO DISPOSE";}
+    .lang-block[data-lang="en"] td.note::before{content:"NOTES";}
+    .lang-block[data-lang="ja"] td:nth-child(2)::before{content:"主な品目";}
+    .lang-block[data-lang="ja"] td.loc::before{content:"館内の出し場所";}
+    .lang-block[data-lang="ja"] td.note::before{content:"注意事項";}
+  }
 ---
 <div class="lang-bar">
   <div class="lang-bar-inner">
