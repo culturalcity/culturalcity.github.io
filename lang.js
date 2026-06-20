@@ -8,11 +8,10 @@
  * 樣式在 global.css 的「三語切換」段；預設靠 CSS .active 顯示中文，JS 壞了也能看中文。
  *
  * 切完語言後會呼叫 window.onLangChange(lang)（若有定義）── 給「切語言要多做事」的頁面
- * 插自己的動作。例：evacuation 用它重貼樓層副標（地圖標籤）＋更新該頁 LANG 變數。
+ * 插自己的動作。例：evacuation 重貼樓層副標（地圖標籤）；welcome 改 header 標題文字。
  *
- * ⚠️ 例外（不走這支，各自有正當理由，勿硬併）：
- *   - welcome/index、welcome/transition：用 #btn-zh/#content-zh 的 ID 慣例 → 保留自有版
- *   - notice.njk：模板已單一來源服務所有公告，且多 #type-label 處理 → 保留自有版
+ * ⚠️ 唯一未走這支：notice.njk（公告「模板」，setLang 已單一來源服務所有公告、且有
+ *   #type-label 特例）→ 保留模板自有版（本來就 DRY、非重複，故未強迫併入）。
  */
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(function (b) {

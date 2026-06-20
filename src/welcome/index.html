@@ -2,6 +2,7 @@
 layout: base.njk
 permalink: /welcome/index.html
 title: 新住戶須知
+trilingual: true
 extraStyles: |
   :root{
     --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
@@ -97,22 +98,14 @@ extraStyles: |
   .contact-label{font-size:12px;letter-spacing:.12em;color:var(--wg9);margin-bottom:4px;}
   .contact-val{font-size:17px;font-weight:600;color:var(--wg41);}
   .footer{border-top:1px solid var(--line);padding-top:18px;font-size:13px;color:var(--wg9);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
-  /* ── LANG CONTENT ── */
-  .lang-content{display:none;}
-  .lang-content.active{display:block;}
 extraScripts: |
-  function setLang(lang) {
-    ['zh','en','ja'].forEach(function(l){
-      var btn = document.getElementById('btn-' + l);
-      var content = document.getElementById('content-' + l);
-      if (btn) btn.classList.toggle('active', l === lang);
-      if (content) content.classList.toggle('active', l === lang);
-    });
+  // 三語切換用共用 /lang.js（trilingual:true）。此頁獨有的「標題隨語言改字」插在掛鉤上。
+  // 核心切換(.lang-btn/.lang-block by data-lang)＋html lang 由 lang.js 處理。
+  window.onLangChange = function (lang) {
     var titles = { zh: '新住戶須知', en: 'Welcome Guide', ja: '新入居者ガイド' };
     var titleEl = document.getElementById('header-title');
     if (titleEl && titles[lang]) titleEl.textContent = titles[lang];
-    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : (lang === 'ja' ? 'ja' : 'en');
-  }
+  };
   function toggleDetail(headEl) {
     var block = headEl.parentElement;
     if (block) block.classList.toggle('open');
@@ -128,9 +121,9 @@ extraScripts: |
         <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
       </div>
       <div class="lang-switcher">
-        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
-        <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
-        <button class="lang-btn" id="btn-ja" onclick="setLang('ja')">日本語</button>
+        <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+        <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
       </div>
     </div>
   </div>
@@ -141,7 +134,7 @@ extraScripts: |
 <!-- ══════════════════════════════════════════════
      中文
 ══════════════════════════════════════════════ -->
-<div class="lang-content active" id="content-zh">
+<div class="lang-block active" data-lang="zh">
 
   <div class="intro">
     <div class="intro-title">搬進來之前，請先看這裡</div>
@@ -385,7 +378,7 @@ extraScripts: |
 <!-- ══════════════════════════════════════════════
      English
 ══════════════════════════════════════════════ -->
-<div class="lang-content" id="content-en">
+<div class="lang-block" data-lang="en">
 
   <div class="intro">
     <div class="intro-title">Please read this before moving in</div>
@@ -623,7 +616,7 @@ extraScripts: |
 <!-- ══════════════════════════════════════════════
      日本語
 ══════════════════════════════════════════════ -->
-<div class="lang-content" id="content-ja">
+<div class="lang-block" data-lang="ja">
 
   <div class="intro">
     <div class="intro-title">入居前に必ずお読みください</div>
