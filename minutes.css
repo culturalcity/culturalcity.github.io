@@ -229,6 +229,9 @@ body {
   .tabs { display: none !important; }
   #tab-notice { display: none !important; }
   #tab-minutes { display: block !important; }
+  .toc, .back-link { display: none !important; }
+  .agenda-item, .work-log { break-inside: avoid; }
+  .finance-banner { background: #3C3835 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
 /* ── 工作報告表格 ── */
@@ -252,3 +255,88 @@ body {
   font-family: 'Noto Sans TC','Consolas',monospace;
   color: var(--wg11); font-size: 13px; white-space: nowrap;
 }
+
+/* ── 板會紀錄元件（minutes-4-*；2026-06 從各檔 extraStyles 統一搬入）──
+   議案/決議/TOC/工作日誌/財務橫幅/簽名/統計/分攤表等。原本每篇板會 frontmatter
+   各複製一份且漂移成多種變體，現統一於此（取最新值）。新增板會沿用這些 class
+   即可，不需在 frontmatter 內嵌樣式。 */
+.toc { background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 18px;margin-bottom:24px; }
+.toc-title { font-size:12px;letter-spacing:.2em;color:var(--wg9);margin-bottom:10px; }
+.toc-items { display:flex;flex-wrap:wrap;gap:5px 14px; }
+.toc-item { font-size:14px;color:var(--wg9);text-decoration:none; display:inline-flex;align-items:center;gap:4px;transition:color .15s; }
+.toc-item:hover { color:var(--wg41); }
+.toc-dot { width:5px;height:5px;border-radius:50%;background:var(--wg9);flex-shrink:0; }
+.toc-dot.blue { background:var(--blue); }
+.toc-dot.green { background:var(--dp); }
+.toc-dot.warn { background:var(--warn); }
+.section { margin-bottom:32px; }
+.section-head { display:flex;align-items:center;gap:10px; margin-bottom:16px;padding-bottom:8px; border-bottom:1px solid var(--line); }
+.section-roman { font-size:12px;font-weight:700;letter-spacing:.16em; color:var(--white);background:var(--wg11);padding:2px 7px;border-radius:1px; }
+.section-title { font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--wg41); }
+.open-card { background:var(--white);border:1px solid var(--line); border-radius:var(--radius);padding:14px 16px; font-size:15px;color:var(--wg9); }
+.stats-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+.stat-card { background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px; }
+.stat-label { font-size:12px;color:var(--wg9);margin-bottom:3px; }
+.stat-val { font-size:17px;font-weight:700;color:var(--wg41); }
+.stat-sub { font-size:12px;color:var(--wg9);margin-top:2px; }
+.stat-val.pos { color:var(--dp); }
+.finance-banner { background:var(--wg41);border-radius:var(--radius); padding:14px 18px;margin-bottom:10px; display:flex;align-items:center;justify-content:space-between; flex-wrap:wrap;gap:12px; }
+.finance-banner-text { color:var(--wg1); }
+.finance-banner-title { font-size:14px;font-weight:600;letter-spacing:.04em;margin-bottom:3px; }
+.finance-banner-sub { font-size:13px;color:var(--wg9); }
+.finance-btn { display:inline-flex;align-items:center;gap:6px; background:rgba(234,231,225,0.1);border:1px solid rgba(234,231,225,0.25); color:var(--wg1);font-size:13px;padding:7px 14px; border-radius:1px;text-decoration:none;letter-spacing:.06em; transition:all .18s;white-space:nowrap; font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif; }
+.finance-btn:hover { background:rgba(234,231,225,0.18); }
+.work-log { background:var(--white);border:1px solid var(--line); border-radius:var(--radius);overflow:hidden; }
+.log-row { display:flex;gap:0;border-bottom:1px solid rgba(60,56,53,0.06); }
+.log-row:last-child { border-bottom:none; }
+.log-date { width:52px;flex-shrink:0;padding:8px 10px; font-size:13px;font-weight:500;color:var(--wg9); background:rgba(60,56,53,0.03);letter-spacing:.02em; border-right:1px solid rgba(60,56,53,0.06); line-height:1.5;text-align:center; }
+.log-content { flex:1;padding:8px 14px;font-size:15px;color:var(--wg11);line-height:1.65; }
+.agenda-item { background:var(--white);border:1px solid var(--line); border-radius:var(--radius);margin-bottom:10px; overflow:hidden;position:relative; }
+.agenda-item::before { content:'';position:absolute;left:0;top:0;bottom:0;width:3px; background:var(--blue); }
+.agenda-item.resolved::before { background:var(--dp); }
+.agenda-item.pending::before { background:var(--warn); }
+.agenda-header { display:flex;align-items:baseline;gap:10px; padding:11px 16px 10px 18px; border-bottom:1px solid rgba(60,56,53,0.07); }
+.agenda-num { font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--wg9);flex-shrink:0; }
+.agenda-title { font-size:15px;font-weight:600;color:var(--wg41);flex:1; }
+.agenda-badge { font-size:12px;padding:2px 8px;border-radius:1px;border:1px solid;flex-shrink:0; }
+.badge-resolved { color:var(--dp);border-color:rgba(31,92,56,0.3);background:rgba(31,92,56,0.06); }
+.badge-pending { color:var(--warn);border-color:rgba(140,90,0,0.3);background:rgba(140,90,0,0.06); }
+.badge-closed { color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04); }
+.badge-eval { color:var(--blue);border-color:rgba(43,74,107,0.3);background:rgba(43,74,107,0.05); }
+.agenda-body { padding:14px 16px 14px 18px; }
+.agenda-section-label { font-size:12px;letter-spacing:.14em;color:var(--wg9);margin-bottom:6px;margin-top:12px; }
+.agenda-section-label:first-child { margin-top:0; }
+.agenda-discussion { font-size:15px;color:var(--wg11);line-height:1.8;margin-bottom:4px; }
+.agenda-discussion ul { padding-left:1.4em;margin-top:4px; }
+.agenda-discussion li { margin-bottom:4px; }
+.agenda-resolution { background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.15); border-radius:var(--radius);padding:10px 13px; font-size:15px;color:var(--wg41);line-height:1.8;margin-top:10px; }
+.agenda-resolution-label { font-size:11px;letter-spacing:.2em;color:var(--dp);margin-bottom:4px;font-weight:600; }
+.agenda-resolution ul { padding-left:1.4em;margin-top:4px; }
+.agenda-resolution li { margin-bottom:4px; }
+.sign-area { display:flex;justify-content:flex-end;margin-top:32px; }
+.sign-block { text-align:center;border-top:1px solid var(--wg11);padding-top:8px;min-width:120px; }
+.sign-label { font-size:13px;color:var(--wg9);letter-spacing:.08em; }
+.sign-name { font-size:15px;font-weight:500;color:var(--wg41);margin-top:4px; }
+.doc-footer { border-top:1px solid var(--line);padding-top:16px;margin-top:32px; font-size:13px;color:var(--wg9); display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px; }
+.fin-table { width:100%;border-collapse:collapse;font-size:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:12px; }
+.fin-table th { background:rgba(60,56,53,0.04);padding:7px 12px;text-align:left;font-size:12px;letter-spacing:.06em;color:var(--wg9);border-bottom:1px solid var(--line); }
+.fin-table td { padding:7px 12px;border-bottom:1px solid rgba(60,56,53,0.05);font-size:14px;color:var(--wg11); }
+.fin-table tr:last-child td { border-bottom:none; }
+.fin-table .text-right { text-align:right;font-variant-numeric:tabular-nums; }
+.fin-table .row-total { background:rgba(60,56,53,0.03);font-weight:600;color:var(--wg41); }
+.data-table { width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px; }
+.data-table thead tr { background:rgba(60,56,53,0.04); }
+.data-table th { text-align:left;padding:7px 12px;color:var(--wg9);font-size:12px;letter-spacing:.06em;border-bottom:1px solid var(--line); }
+.data-table td { padding:7px 12px;border-bottom:1px solid rgba(60,56,53,0.05); }
+.data-table tbody tr:last-child td { border-bottom:none; }
+.data-table .text-right { text-align:right; }
+.data-table .row-highlight { background:rgba(43,74,107,0.04); }
+.pending-card { background:rgba(140,90,0,0.04);border:1px solid rgba(140,90,0,0.18); border-left:3px solid var(--warn); border-radius:var(--radius);padding:14px 16px; font-size:15px;color:var(--warn); }
+.badge-tbd { color:var(--wg9);border-color:var(--line);background:rgba(60,56,53,0.04); }
+.stat-val.neg { color:var(--warn); }
+.alloc-table { width:100%;border-collapse:collapse;font-size:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px; }
+.alloc-table th { background:rgba(60,56,53,0.04);padding:7px 12px;font-size:12px;letter-spacing:.06em;color:var(--wg9);border-bottom:1px solid var(--line);text-align:left; }
+.alloc-table td { padding:8px 12px;border-bottom:1px solid rgba(60,56,53,0.05);color:var(--wg11); }
+.alloc-table .text-right { text-align:right;font-variant-numeric:tabular-nums; }
+.alloc-table .row-total { background:rgba(60,56,53,0.04);font-weight:600;color:var(--wg41); }
+.alloc-table tbody tr:last-child td { border-bottom:none; }
