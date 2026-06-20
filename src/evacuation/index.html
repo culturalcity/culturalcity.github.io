@@ -2,6 +2,7 @@
 layout: base.njk
 permalink: /evacuation/index.html
 title: 緊急避難圖
+trilingual: true
 extraStyles: |
   :root{
     --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
@@ -230,14 +231,11 @@ function select(f) {
   history.replaceState(null, '', '#' + f.c);
 }
 
-function setLang(lang) {
+// 三語切換用共用機制（trilingual:true 載入的 /lang.js 提供 setLang，含語言鈕/內容塊/
+// data-lang-text 三組切換）。此頁額外需求「重貼樓層副標 + 更新 LANG（select 用）」
+// 透過 lang.js 的 onLangChange 掛鉤插入——切完語言後自動呼叫。
+window.onLangChange = function (lang) {
   LANG = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-  document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-  document.querySelectorAll('[data-lang-text]').forEach(el => {
-    el.style.display = el.dataset.langText === lang ? '' : 'none';
-  });
-  // 樓層副標 + 目前樓層副標隨語言更新
   document.querySelectorAll('.fbtn').forEach(b => {
     const f = FLOORS.find(x => x.c === b.dataset.c);
     const fs = b.querySelector('.fs');
@@ -245,7 +243,7 @@ function setLang(lang) {
   });
   const cf = FLOORS.find(x => x.c === curC);
   curSub.textContent = cf && cf.s ? cf.s[lang] : '';
-}
+};
 
 // 燈箱
 const lb = document.getElementById('lightbox');

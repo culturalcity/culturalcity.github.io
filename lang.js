@@ -7,8 +7,10 @@
  *   - 行內小字：<span data-lang-text="zh|en|ja">…</span>
  * 樣式在 global.css 的「三語切換」段；預設靠 CSS .active 顯示中文，JS 壞了也能看中文。
  *
+ * 切完語言後會呼叫 window.onLangChange(lang)（若有定義）── 給「切語言要多做事」的頁面
+ * 插自己的動作。例：evacuation 用它重貼樓層副標（地圖標籤）＋更新該頁 LANG 變數。
+ *
  * ⚠️ 例外（不走這支，各自有正當理由，勿硬併）：
- *   - evacuation：setLang 綁樓層圖的 LANG 變數（重繪地圖）→ 保留頁內自有版
  *   - welcome/index、welcome/transition：用 #btn-zh/#content-zh 的 ID 慣例 → 保留自有版
  *   - notice.njk：模板已單一來源服務所有公告，且多 #type-label 處理 → 保留自有版
  */
@@ -23,4 +25,9 @@ function setLang(lang) {
     el.style.display = el.dataset.langText === lang ? '' : 'none';
   });
   document.documentElement.lang = lang === 'zh' ? 'zh-TW' : lang; // zh→zh-TW、en→en、ja→ja（無障礙/字型）
+
+  // 掛鉤：頁面若定義 window.onLangChange，切完語言後呼叫它做額外的事。
+  // 大多數頁面用不到；像 evacuation（避難圖）會插上「重貼樓層副標」。
+  // 因 onLangChange 定義在該頁自己的 script 內，可存取該頁私有變數（LANG、地圖等）。
+  if (typeof window.onLangChange === 'function') window.onLangChange(lang);
 }
