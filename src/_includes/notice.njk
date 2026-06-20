@@ -1,16 +1,14 @@
 ---
 layout: base.njk
 pageCss: notice.css
+trilingual: true
 extraScripts: |
-  function setLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.querySelectorAll('[data-lang-text]').forEach(el => {
-      el.style.display = el.dataset.langText === lang ? '' : 'none';
-    });
+  // 三語切換用共用 /lang.js（trilingual:true）。核心 .lang-btn/.lang-block/[data-lang-text]
+  // 切換＋html lang 由 lang.js 處理；公告獨有的「類別標籤 #type-label 隨語言改字」插在掛鉤。
+  window.onLangChange = function (lang) {
     const labelEl = document.getElementById('type-label');
     if (labelEl && labelEl.dataset[lang]) labelEl.textContent = labelEl.dataset[lang];
-  }
+  };
 ---
 <div class="header">
   <div class="header-inner">

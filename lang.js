@@ -8,10 +8,11 @@
  * 樣式在 global.css 的「三語切換」段；預設靠 CSS .active 顯示中文，JS 壞了也能看中文。
  *
  * 切完語言後會呼叫 window.onLangChange(lang)（若有定義）── 給「切語言要多做事」的頁面
- * 插自己的動作。例：evacuation 重貼樓層副標（地圖標籤）；welcome 改 header 標題文字。
+ * 插自己的動作。已用掛鉤併入標準的：evacuation（重貼樓層副標＝地圖標籤）、welcome
+ * （改 header 標題）、notice.njk（公告類別標籤 #type-label 隨語言改字）。
  *
- * ⚠️ 唯一未走這支：notice.njk（公告「模板」，setLang 已單一來源服務所有公告、且有
- *   #type-label 特例）→ 保留模板自有版（本來就 DRY、非重複，故未強迫併入）。
+ * ✅ 全站三語頁皆走此共用機制，已無例外。各頁的 lang bar 樣式可不同（深色 header 版 vs
+ *    淺色 pill 版，靠 pageCss/extraStyles 覆蓋 global），那是正當的版型差異、非機制例外。
  */
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(function (b) {
