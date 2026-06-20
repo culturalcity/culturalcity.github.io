@@ -5,7 +5,8 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/global.css">
+<link rel="stylesheet" href="{{ '/global.css' | cssBust }}">
+{% if pageCss %}<link rel="stylesheet" href="{{ ('/' + pageCss) | cssBust }}">{% endif %}
 <title>閱大安{% if title %}・{{ title }}{% endif %}</title>
 {% if extraStyles %}<style>{{ extraStyles | safe }}</style>{% endif %}
 {% if extraHead %}{{ extraHead | safe }}{% endif %}

@@ -13,6 +13,26 @@ module.exports = function(eleventyConfig) {
     return String(s || "").split(sep);
   });
 
+  // ── cssBust：CSS 連結加「內容指紋」破快取 ──
+  // 用法：href="{{ '/global.css' | cssBust }}" → 輸出 /global.css?v=a1b2c3d4
+  // 讀該 CSS 檔內容算 8 碼雜湊當版本；CSS 內容一變、雜湊就變、網址就變，
+  // 瀏覽器自動抓新版。配合 Worker 對 HTML 的 no-cache（HTML 永遠最新、引用到
+  // 最新雜湊），住戶改版後不必清快取就看到新樣式。只有真的被改到的 CSS 會破
+  // 快取，沒被改的維持長快取。找不到檔就原樣返回，不擋 build。
+  const crypto = require("crypto");
+  const fs = require("fs");
+  const path = require("path");
+  eleventyConfig.addFilter("cssBust", function(urlPath) {
+    try {
+      const rel = String(urlPath).replace(/^\//, "").split("?")[0];
+      const buf = fs.readFileSync(path.join(__dirname, rel));
+      const hash = crypto.createHash("sha1").update(buf).digest("hex").slice(0, 8);
+      return `${urlPath}?v=${hash}`;
+    } catch (e) {
+      return urlPath;
+    }
+  });
+
   // ── 按發布日排序（用於最新動態時間軸）──
   // 優先取 frontmatter 的 publishDate，否則 fallback 到 item.date。
   // 必須在 template 階段排序：在 addCollection 階段排序時，11ty 在
