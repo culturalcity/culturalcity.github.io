@@ -7,6 +7,32 @@ extraHead: |
 ---
 {{ content | safe }}
 {% if pdfUrl %}
+<style>
+/* 原始財報 PDF 橫幅樣式。刻意寫在 HTML 內（隨頁面出貨），不放 finance.css——
+   因為 .css 會被 Cloudflare／瀏覽器邊緣快取，CSS 改了住戶端可能還拿到舊版，
+   橫幅就會「有文字、沒樣式」。HTML 不被快取，inline style 永遠是新的。 */
+.pdf-banner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px;
+  margin: 0 0 26px; padding: 14px 18px;
+  background: var(--paper2); border: 1px solid var(--border);
+  border-left: 3px solid var(--blue); border-radius: 8px;
+  font-size: 14px; color: var(--ink2);
+}
+.pdf-banner .pdf-banner-label { display: inline-flex; align-items: center; gap: 7px; }
+.pdf-banner a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 14px; font-weight: 600;
+  color: var(--paper); background: var(--blue);
+  border-radius: 6px; text-decoration: none; letter-spacing: .02em;
+  transition: opacity .18s;
+}
+.pdf-banner a:hover { opacity: .85; }
+@media (max-width: 600px) { .pdf-banner { padding: 12px 14px; } }
+@media print {
+  .pdf-banner { border-left-color: #666; background: #f3f3f3; }
+  .pdf-banner a { color: #000; background: transparent; border: 1px solid #666; padding: 2px 6px; }
+}
+</style>
 <script>
 /* 有原始財報 PDF 時，於內容區頂端自動插入連結橫幅（單頁分享給住戶時也看得到原始檔）。
    逐月維護由 frontmatter 的 pdfUrl 控制，模板只渲染一次，所有月報自動套用。 */
