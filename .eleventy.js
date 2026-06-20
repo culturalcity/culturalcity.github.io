@@ -91,12 +91,8 @@ module.exports = function(eleventyConfig) {
     return `${y}/${m}/${day}`;
   });
 
-  // 把 global.css 和 favicon 等靜態檔複製到輸出目錄
-  eleventyConfig.addPassthroughCopy("global.css");
-  eleventyConfig.addPassthroughCopy("notice.css");
-  eleventyConfig.addPassthroughCopy("regulations.css");
-  eleventyConfig.addPassthroughCopy("finance.css");
-  eleventyConfig.addPassthroughCopy("minutes.css");
+  // 把根目錄所有共用 CSS 複製到輸出目錄（用 glob，新增 .css 不會漏）
+  eleventyConfig.addPassthroughCopy("*.css");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");

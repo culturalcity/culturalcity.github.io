@@ -1,8 +1,7 @@
 /* minutes.css — 會議紀錄共用樣式 */
 
 :root {
-  --dp: #1F5C38;
-  --dn: #8C1F1F;
+  /* --dp / --dn 已由 global.css 定義（值相同），不重宣告；此處只放 minutes 專屬色 */
   --warn: #8C5A00;
   --blue: #2B4A6B;
 }
