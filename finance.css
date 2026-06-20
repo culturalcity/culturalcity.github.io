@@ -217,6 +217,7 @@ tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04
 
 /* ── 圖表 ── */
 .ch { position: relative; height: 210px; }
+.ch-sm { position: relative; height: 170px; }
 
 /* ── 按鈕 ── */
 .btn {
