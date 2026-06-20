@@ -81,11 +81,11 @@ body {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 0; transition: color .18s;
 }
-.month-nav a:hover { color: var(--wg1); }
+.month-nav a:hover { color: var(--wg41); }
 .month-nav .disabled { opacity: 0.3; cursor: default; pointer-events: none; }
 .month-nav .center {
   font-size: 14px; font-weight: 700;
-  color: rgba(234,231,225,0.6); letter-spacing: .12em;
+  color: var(--wg41); letter-spacing: .12em;
 }
 @media (max-width: 600px) { .month-nav { padding: 10px 20px; } }
 
