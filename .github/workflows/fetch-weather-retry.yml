@@ -7,14 +7,16 @@ name: Fetch Weather Retry (safety net)
 # fetch-weather.js 本身是 idempotent（已存在的天不會覆寫），多跑幾次無害。
 # 如果該抓的天都齊了，commit 步驟會跳過、不會留垃圾 commit。
 #
-# 排程：每 30 分鐘跑一次（24 小時、48 次/天）。
-# fetch-weather.js 已存在天不會覆寫，沒新資料時 commit 步驟會 skip，
-# 純 no-op cost 很低（public repo Actions 無計費限制）。
-# 加上 deploy.yml 的 06:00 本班，每天最多 49 次嘗試。
+# 排程：只在「早上時段」每 30 分鐘一次（昨日資料只在早上落地，下午/半夜空轉沒意義）。
+# UTC 22:00-05:59 = 台北 06:00-13:59，約 16 次/天（含 GitHub 排程慣性延遲仍涵蓋）。
+# fetch-weather.js 已存在天不會覆寫，沒新資料時 commit 步驟會 skip。
+#
+# 不 build、不需任何 npm 套件（fetch-weather.js 只用 fs/path/https 內建），故不跑 npm ci，
+# 以節省 Actions 用量（為日後 repo 轉私有計量預作準備；正班 deploy.yml 仍照常跑、不受影響）。
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/30 22-23,0-5 * * *'   # UTC 22-05 = 台北 06:00-13:59 早上時段
   workflow_dispatch:
 
 permissions:
@@ -34,10 +36,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '22'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Fetch daily weather (CODiS)
         run: node scripts/fetch-weather.js
