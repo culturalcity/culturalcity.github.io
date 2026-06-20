@@ -184,6 +184,22 @@ module.exports = function(eleventyConfig) {
     };
   });
 
+  // ── 給單篇財報月報頁的 prev/next 導航（取代各檔寫死的 month-nav）──
+  // 只認 /finance/YYYY-MM.html 月報（排除年報、長期模型、草稿）；草稿因
+  // eleventyExcludeFromCollections 不在 collection 內，自然不會被連結。
+  // 升冪排序：prev=較舊月、next=較新月。
+  eleventyConfig.addFilter("getFinancePager", function(collections, currentUrl) {
+    const items = (collections.finance || [])
+      .filter(i => /\/finance\/\d{4}-\d{2}\.html$/.test(i.url || ''))
+      .sort((a, b) => (a.url > b.url ? 1 : -1));
+    const idx = items.findIndex(i => i.url === currentUrl);
+    if (idx < 0) return null;
+    return {
+      prev: idx > 0 ? items[idx - 1] : null,
+      next: idx < items.length - 1 ? items[idx + 1] : null,
+    };
+  });
+
   // ── 統一最新動態：合併 notice + finance + minutes，按發布日排序 ──
   // 不複製 item（會觸發 templateContent 早期存取錯誤），類別從 URL 推斷
   // 排序語意是「對住戶公開的時間」：優先用 frontmatter 的 publishDate，

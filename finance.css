@@ -83,10 +83,6 @@ body {
 }
 .month-nav a:hover { color: var(--wg41); }
 .month-nav .disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-.month-nav .center {
-  font-size: 14px; font-weight: 700;
-  color: var(--wg41); letter-spacing: .12em;
-}
 @media (max-width: 600px) { .month-nav { padding: 10px 20px; } }
 
 /* ── 分頁 ── */

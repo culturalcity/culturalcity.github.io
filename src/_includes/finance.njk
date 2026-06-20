@@ -4,7 +4,31 @@ pageCss: finance.css
 extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+extraScripts: |
+  // 把 .month-nav 搬到 .header 之後（nav 在模板渲染於 content 前，需移到 header 下方）
+  (function relocateNav(){
+    var nav = document.querySelector('.month-nav');
+    var header = document.querySelector('.header');
+    if (nav && header && header.nextSibling !== nav) {
+      header.parentNode.insertBefore(nav, header.nextSibling);
+    }
+  })();
 ---
+{%- set fnav = collections | getFinancePager(page.url) %}
+{%- if fnav %}
+<div class="month-nav no-print">
+{%- if fnav.prev %}
+  <a href="{{ fnav.prev.url }}">← {{ fnav.prev.data.title | replace(' 財務月報', '') }}</a>
+{%- else %}
+  <span></span>
+{%- endif %}
+{%- if fnav.next %}
+  <a href="{{ fnav.next.url }}">{{ fnav.next.data.title | replace(' 財務月報', '') }} →</a>
+{%- else %}
+  <span></span>
+{%- endif %}
+</div>
+{%- endif %}
 {{ content | safe }}
 {% if pdfUrl %}
 <style>
