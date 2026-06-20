@@ -52,7 +52,7 @@ body {
 .back-nav { display: flex; gap: 16px; margin-bottom: 14px; }
 .back-nav a {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size: 13px; letter-spacing: .08em; color: var(--wg9);
+  font-size: 13px; letter-spacing: .08em; color: var(--wg7);
   text-decoration: none; transition: color .18s;
 }
 .back-nav a::before { content: '←'; }

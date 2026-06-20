@@ -5,7 +5,7 @@ title: 緊急避難圖
 trilingual: true
 extraStyles: |
   :root{
-    --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
     --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
     --exit:#1C6B3A;--fire:#8C1F1F;
   }
@@ -14,16 +14,16 @@ extraStyles: |
   .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
   .header-inner{max-width:860px;margin:0 auto;position:relative;}
-  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:12px;transition:color .18s;}
+  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:12px;transition:color .18s;}
   .back-link:hover{color:var(--wg1);}
   .back-link::before{content:'←';}
-  .header-eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+  .header-eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
   .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
-  .header-sub{font-size:14px;color:var(--wg9);letter-spacing:.14em;}
+  .header-sub{font-size:14px;color:var(--wg7);letter-spacing:.14em;}
   /* 語言切換鈕（同公告 notice.css 慣例） */
   .lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
   .lang-bar-inner{max-width:860px;margin:0 auto;display:flex;}
-  .lang-btn{padding:10px 18px;font-size:14px;font-family:inherit;letter-spacing:.06em;color:rgba(234,231,225,0.45);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
+  .lang-btn{padding:10px 18px;font-size:14px;font-family:inherit;letter-spacing:.06em;color:rgba(234,231,225,0.72);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
   .lang-btn:hover{color:rgba(234,231,225,0.8);}
   .lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
   .lang-block{display:none;}

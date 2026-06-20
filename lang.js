@@ -16,7 +16,9 @@
  */
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(function (b) {
-    b.classList.toggle('active', b.dataset.lang === lang);
+    var on = b.dataset.lang === lang;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false'); // 報讀器知道目前選中哪個語言
   });
   document.querySelectorAll('.lang-block').forEach(function (b) {
     b.classList.toggle('active', b.dataset.lang === lang);
@@ -31,3 +33,13 @@ function setLang(lang) {
   // 因 onLangChange 定義在該頁自己的 script 內，可存取該頁私有變數（LANG、地圖等）。
   if (typeof window.onLangChange === 'function') window.onLangChange(lang);
 }
+
+// 載入時補語言鈕的無障礙屬性（lang.js 為 defer，DOM 已 parse）：
+//   - lang 屬性：讓報讀器用對的語音念「English」「日本語」（否則可能用中文語音念）
+//   - aria-pressed 初值：反映預設選中（中文）
+(function initLangButtons() {
+  document.querySelectorAll('.lang-btn').forEach(function (b) {
+    if (b.dataset.lang && b.dataset.lang !== 'zh') b.setAttribute('lang', b.dataset.lang);
+    b.setAttribute('aria-pressed', b.classList.contains('active') ? 'true' : 'false');
+  });
+})();

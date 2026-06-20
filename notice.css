@@ -29,7 +29,7 @@ body {
 .header-inner { max-width: 680px; margin: 0 auto; position: relative; }
 .back {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; letter-spacing: .1em; color: var(--wg9);
+  font-size: 13px; letter-spacing: .1em; color: var(--wg7);
   text-decoration: none; margin-bottom: 6px; margin-right: 16px;
   transition: color .18s;
 }
@@ -40,7 +40,7 @@ body {
   line-height: 1.35; margin-bottom: 6px;
 }
 .header-meta {
-  font-size: 14px; color: var(--wg9); letter-spacing: .08em;
+  font-size: 14px; color: var(--wg7); letter-spacing: .08em;
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px;
 }
 

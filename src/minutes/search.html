@@ -5,7 +5,7 @@ title: 會議紀錄搜尋
 eleventyExcludeFromCollections: true
 extraStyles: |
   :root{
-    --wg1:#EAE7E1;--wg9:#898480;--wg11:#696460;--wg41:#3C3835;
+    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
     --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
     --blue:#2B4A6B;--orange:#6B3A1F;
   }
@@ -13,12 +13,12 @@ extraStyles: |
   .header{background:var(--wg41);color:var(--wg1);padding:40px 40px 32px;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
   .header-inner{max-width:720px;margin:0 auto;position:relative;}
-  .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg9);text-decoration:none;margin-bottom:18px;transition:color .18s;}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:18px;transition:color .18s;}
   .back::before{content:'←';}
   .back:hover{color:var(--wg1);}
-  .eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;}
+  .eyebrow{font-size:12px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
   .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
-  .header-sub{font-size:13px;color:var(--wg9);letter-spacing:.16em;}
+  .header-sub{font-size:13px;color:var(--wg7);letter-spacing:.16em;}
   .main{max-width:720px;margin:0 auto;padding:32px 40px 64px;}
   @media(max-width:600px){
     .header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}

@@ -2,7 +2,8 @@
 
 :root {
   --wg1:  #EAE7E1;
-  --wg9:  #898480;
+  --wg7:  #ADA8A2;  /* 較亮的灰：用於「深色 header」上的次要文字（深底需 ≥4.5:1，#ADA8A2=4.92:1）*/
+  --wg9:  #5F5A55;  /* 次要文字灰：2026-06 由 #898480 調深以過 WCAG AA；訂在 #5F5A55 是為了連半透明深色卡片(notice-box，疊後約 #e1ded8)上也達 4.5:1；深底文字改用 --wg7 */
   --wg11: #696460;
   --wg41: #3C3835;
   --white: #F7F5F2;
@@ -41,16 +42,16 @@ body {
   pointer-events: none;
 }
 .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
-.header-eyebrow { font-size: 13px; letter-spacing: 0.25em; color: var(--wg9); margin-bottom: 12px; }
+.header-eyebrow { font-size: 13px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
 .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
-.header-sub { font-size: 14px; color: var(--wg9); letter-spacing: 0.16em; }
-.header-rule { width: 36px; height: 1px; background: var(--wg9); margin: 20px 0; }
+.header-sub { font-size: 14px; color: var(--wg7); letter-spacing: 0.16em; }
+.header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
 .header-desc { font-size: 16px; color: rgba(234,231,225,0.55); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }
 
 /* 返回連結 */
 .back-link {
   display: inline-flex; align-items: center; gap: 5px;
-  font-size: 14px; letter-spacing: 0.1em; color: var(--wg9);
+  font-size: 14px; letter-spacing: 0.1em; color: var(--wg7);
   text-decoration: none; margin-bottom: 16px; transition: color 0.18s;
 }
 .back-link:hover { color: var(--wg1); }
@@ -80,7 +81,7 @@ body {
   flex-wrap: wrap; gap: 8px;
 }
 .footer-left { font-size: 14px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
-.footer-right { font-size: 13px; color: rgba(137,132,128,0.7); letter-spacing: 0.08em; }
+.footer-right { font-size: 13px; color: var(--wg9); letter-spacing: 0.08em; }
 
 /* ── 響應式（共用） ── */
 @media (max-width: 600px) {
