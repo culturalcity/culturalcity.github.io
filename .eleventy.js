@@ -91,8 +91,31 @@ module.exports = function(eleventyConfig) {
     return `${y}/${m}/${day}`;
   });
 
+  // ── 全站警示橫條：找出當前 active 的緊急公告 ──
+  // 使用：{% set b = collections.notice | activeBanner %} → 回傳最新一則
+  // banner:true 且 bannerUntil >= 今天 的公告物件；無則 null。
+  // 用於 base.njk <body> 開頭渲染黃條。每日 06:00 build 重跑、過期自動消失。
+  eleventyConfig.addFilter("activeBanner", function(notices) {
+    if (!Array.isArray(notices) || !notices.length) return null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const active = notices
+      .filter(n => n.data && n.data.banner === true)
+      .filter(n => {
+        if (!n.data.bannerUntil) return true; // 無到期日 = 一直顯示（HTML 註解提醒）
+        const u = n.data.bannerUntil;
+        const until = (u instanceof Date) ? u : new Date(String(u).replace(/\//g, '-'));
+        if (isNaN(until)) return true;
+        return until >= today;
+      })
+      .sort((a, b) => b.date - a.date);
+    return active[0] || null;
+  });
+
   // 把根目錄所有共用 CSS 複製到輸出目錄（用 glob，新增 .css 不會漏）
   eleventyConfig.addPassthroughCopy("*.css");
+  // 三語切換共用機制（trilingual:true 頁面由 base.njk 載入）
+  eleventyConfig.addPassthroughCopy("lang.js");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");

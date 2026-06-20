@@ -3,25 +3,10 @@ layout: base.njk
 permalink: /net-zero/index.html
 title: 淨零新生活專區
 eleventyExcludeFromCollections: true
-extraScripts: |
-  function setLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.querySelectorAll('[data-lang-text]').forEach(el => {
-      el.style.display = el.dataset.langText === lang ? '' : 'none';
-    });
-  }
+trilingual: true
 extraStyles: |
   .wrap{max-width:760px;margin:0 auto;padding:40px 40px 64px;}
   @media(max-width:600px){.wrap{padding:28px 24px 48px;}}
-  .lang-bar{margin-bottom:28px;}
-  .lang-bar-inner{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
-  .lang-btn{padding:7px 16px;font-size:13px;font-family:inherit;background:var(--white);color:var(--wg9);border:none;border-right:1px solid var(--line);cursor:pointer;letter-spacing:.04em;transition:all .15s;}
-  .lang-btn:last-child{border-right:none;}
-  .lang-btn:hover{color:var(--wg41);}
-  .lang-btn.active{background:var(--wg41);color:var(--wg1);}
-  .lang-block{display:none;}
-  .lang-block.active{display:block;}
   .lede{font-size:16px;color:var(--wg11);line-height:1.9;margin-bottom:22px;}
   .lede strong{color:var(--wg41);}
   .official{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.18);border-left:3px solid var(--dp);border-radius:var(--radius);padding:14px 18px;font-size:14px;color:var(--wg11);line-height:1.85;margin-bottom:36px;}

@@ -3,20 +3,8 @@ layout: regulations.njk
 permalink: /regulations/regulations-垃圾分類回收指引.html
 title: 社區資源垃圾分類回收指引
 category: guide
-extraScripts: |
-  function setLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.querySelectorAll('.lang-block').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-  }
+trilingual: true
 extraStyles: |
-  .lang-bar{margin:0 0 20px;}
-  .lang-bar-inner{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
-  .lang-btn{padding:7px 16px;font-size:13px;font-family:inherit;background:var(--white);color:var(--wg9);border:none;border-right:1px solid var(--line);cursor:pointer;letter-spacing:.04em;transition:all .15s;}
-  .lang-btn:last-child{border-right:none;}
-  .lang-btn:hover{color:var(--wg41);}
-  .lang-btn.active{background:var(--wg41);color:var(--wg1);}
-  .lang-block{display:none;}
-  .lang-block.active{display:block;}
   .note-box{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:14px;color:var(--wg11);line-height:1.8;margin-bottom:20px;}
   .tbl-wrap{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:14px;background:var(--white);}

@@ -1,0 +1,9 @@
+{# 三語切換的標準語言列。新三語頁用 {% include "lang-bar.njk" %} 放在內容頂端。
+   需搭配 frontmatter `trilingual: true`（載入 /lang.js）＋內容包在 .lang-block[data-lang] 裡。 #}
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</div>

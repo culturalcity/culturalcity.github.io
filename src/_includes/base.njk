@@ -10,8 +10,20 @@
 <title>閱大安{% if title %}・{{ title }}{% endif %}</title>
 {% if extraStyles %}<style>{{ extraStyles | safe }}</style>{% endif %}
 {% if extraHead %}{{ extraHead | safe }}{% endif %}
+{% if trilingual %}<script src="{{ '/lang.js' | cssBust }}" defer></script>{% endif %}
 </head>
 <body>
+{%- set alertBanner = collections.notice | activeBanner -%}
+{%- if alertBanner %}
+<aside class="alert-banner" role="alert">
+  <a href="{{ alertBanner.url }}" class="alert-banner-link">
+    <span class="alert-banner-icon" aria-hidden="true">⚠</span>
+    <span class="alert-banner-text">{{ alertBanner.data.bannerMessage or alertBanner.data.titleZh or alertBanner.data.title }}</span>
+    <span class="alert-banner-cta">詳細說明 →</span>
+  </a>
+</aside>
+{%- if not alertBanner.data.bannerUntil %}<!-- ⚠ alert "{{ alertBanner.data.title }}" has no bannerUntil and will display until manually removed -->{% endif %}
+{% endif -%}
 {{ content | safe }}
 {% if extraScripts %}<script>{{ extraScripts | safe }}</script>{% endif %}
 </body>
