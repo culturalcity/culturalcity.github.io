@@ -6,3 +6,20 @@ extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 ---
 {{ content | safe }}
+{% if pdfUrl %}
+<script>
+/* 有原始財報 PDF 時，於內容區頂端自動插入連結橫幅（單頁分享給住戶時也看得到原始檔）。
+   逐月維護由 frontmatter 的 pdfUrl 控制，模板只渲染一次，所有月報自動套用。 */
+(function () {
+  var url = "{{ pdfUrl }}";
+  var main = document.querySelector(".main");
+  if (!url || !main) return;
+  var bar = document.createElement("div");
+  bar.className = "pdf-banner";
+  bar.innerHTML =
+    '<span class="pdf-banner-label">📄 本頁為原始財務報表之數位彙整，原始檔（含完整收支明細）可於此查閱：</span>' +
+    '<a href="' + url + '" target="_blank" rel="noopener">↓ 檢視／下載原始財報 PDF</a>';
+  main.insertBefore(bar, main.firstChild);
+})();
+</script>
+{% endif %}

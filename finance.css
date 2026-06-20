@@ -107,6 +107,29 @@ body {
 /* ── MAIN ── */
 .main { max-width: 1060px; margin: 0 auto; padding: 28px 20px 60px; }
 
+/* ── 原始財報 PDF 橫幅（由 finance.njk 在有 pdfUrl 時自動注入 .main 頂端）── */
+.pdf-banner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px;
+  margin: 0 0 26px; padding: 14px 18px;
+  background: var(--paper2); border: 1px solid var(--border);
+  border-left: 3px solid var(--blue); border-radius: 8px;
+  font-size: 14px; color: var(--ink2);
+}
+.pdf-banner .pdf-banner-label { display: inline-flex; align-items: center; gap: 7px; }
+.pdf-banner a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 14px; font-weight: 600;
+  color: var(--paper); background: var(--blue);
+  border-radius: 6px; text-decoration: none; letter-spacing: .02em;
+  transition: opacity .18s;
+}
+.pdf-banner a:hover { opacity: .85; }
+@media (max-width: 600px) { .pdf-banner { padding: 12px 14px; } }
+@media print {
+  .pdf-banner { border-left-color: #666; background: #f3f3f3; }
+  .pdf-banner a { color: #000; background: transparent; border: 1px solid #666; padding: 2px 6px; }
+}
+
 /* ── 區段標題 ── */
 .sl {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
