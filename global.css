@@ -11,6 +11,7 @@
   --radius: 2px;
   --dp: #1F5C38;
   --dn: #8C1F1F;
+  --page-max-width: 760px;  /* header-inner / breadcrumb-inner 共用；非預設由各 layout/頁的 :root 覆寫 */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,7 +42,7 @@ body {
     repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
   pointer-events: none;
 }
-.header-inner { max-width: 760px; margin: 0 auto; position: relative; }
+.header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
 .header-eyebrow { font-size:15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
 .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
 .header-sub { font-size:15px; color: var(--wg7); letter-spacing: 0.16em; }
@@ -95,6 +96,60 @@ button, [role="button"] { cursor: pointer; }
 :focus-visible {
   outline: 2px solid var(--wg41);
   outline-offset: 2px;
+}
+
+/* ── 麵包屑（base.njk 依 URL 前綴自動產生） ── */
+/* 與 dark header 連成同一塊深褐區（無 border、bg 一致）；
+   取代各頁原本的 back-link，住戶從這條知道自己在哪、可一步回上層 */
+.breadcrumb {
+  background: var(--wg41);
+  color: var(--wg7);  /* 深底用 --wg7（4.92:1 ≥ AA 4.5:1）；wg9 是淺底用的，放這裡會掛無障礙 */
+  font-size: 13px;
+  letter-spacing: .06em;
+  padding: 0 40px;  /* 橫向 gutter 跟 .header 一致；垂直在 .breadcrumb-inner */
+  position: relative;
+}
+.breadcrumb::before {
+  /* 沿用 header 的織紋，視覺更連貫 */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+  pointer-events: none;
+}
+.breadcrumb-inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 12px 0 4px;  /* 橫向 padding 已上移到 .breadcrumb，此處只管垂直 */
+  line-height: 1.6;
+  position: relative;
+}
+.breadcrumb a {
+  color: var(--wg7);  /* 同上：深底必須 wg7 才過 AA */
+  text-decoration: underline;  /* 預設加底線：跟 header eyebrow 同色，必須這樣才看得出是 link（gov.uk 同樣 pattern）*/
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-thickness .12s;
+}
+.breadcrumb a:hover {
+  /* gov.uk pattern：hover 只加粗底線，文字顏色不變、不變粗 */
+  text-decoration-thickness: 3px;
+}
+.breadcrumb-sep {
+  margin: 0 .4em;
+  color: var(--wg7);
+}
+.breadcrumb-current {
+  color: var(--wg7);  /* 跟 link 同色；游標 + hover 區分；wg1 太亮會搶 h1 注意力 */
+}
+/* 緊接 breadcrumb 的 .header 縮上方 padding，視覺融成一塊 */
+.breadcrumb + .header { padding-top: 16px; }
+@media (max-width: 600px) {
+  .breadcrumb { padding: 0 24px; }
+  .breadcrumb-inner { padding: 10px 0 4px; font-size: 12px; }
+  .breadcrumb + .header { padding-top: 14px; }
 }
 
 /* ── 全站警示橫條（緊急公告自動觸發） ── */

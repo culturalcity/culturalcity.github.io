@@ -4,6 +4,7 @@
   /* --dp / --dn 已由 global.css 定義（值相同），不重宣告；此處只放 minutes 專屬色 */
   --warn: #8C5A00;
   --blue: #2B4A6B;
+  --page-max-width: 900px;  /* minutes 自訂寬，breadcrumb-inner 自動跟著 */
 }
 
 body {

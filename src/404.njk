@@ -1,0 +1,88 @@
+---
+layout: base.njk
+permalink: /404.html
+title: 找不到這個頁面
+eleventyExcludeFromCollections: true
+extraStyles: |
+  .nf-main {
+    max-width: 760px; margin: 0 auto; padding: 56px 40px 80px;
+  }
+  .nf-h1 {
+    font-size: 28px; font-weight: 700; color: var(--wg41);
+    letter-spacing: .04em; margin-bottom: 12px;
+  }
+  .nf-lede {
+    font-size: 17px; color: var(--wg11); line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .nf-sec-label {
+    font-size: 12px; letter-spacing: .28em; color: var(--wg9);
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nf-sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .nf-links { list-style: none; padding: 0; margin: 0; }
+  .nf-links li { margin-bottom: 4px; }
+  .nf-links a {
+    display: block; padding: 14px 18px;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--wg41); text-decoration: none;
+    transition: border-color .18s, background .18s;
+  }
+  .nf-links a:hover {
+    border-color: var(--wg11);
+    background: #F2F0EC;
+  }
+  .nf-links a strong {
+    display: block; font-size: 16px; font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .nf-links a span {
+    font-size: 14px; color: var(--wg9);
+  }
+  @media (max-width: 600px) {
+    .nf-main { padding: 36px 20px 56px; }
+    .nf-h1 { font-size: 22px; }
+  }
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">TAIPEI · DA'AN DISTRICT</div>
+    <h1>閱大安</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · RESIDENT PORTAL</div>
+  </div>
+</div>
+
+<div class="nf-main">
+  <h1 class="nf-h1">找不到這個頁面</h1>
+  <p class="nf-lede">
+    可能是連結已失效、網址打錯，或內容已下架重整。
+    這個網站的內容偶爾會調整位置，舊網址可能就此消失。
+  </p>
+
+  <div class="nf-sec-label">FIND WHAT YOU NEED ・ 從這些入口找找</div>
+  <ul class="nf-links">
+    <li><a href="/">
+      <strong>回首頁</strong>
+      <span>所有區塊的索引</span>
+    </a></li>
+    <li><a href="/notice/">
+      <strong>社區公告</strong>
+      <span>近期施工、設備停用、規約公告</span>
+    </a></li>
+    <li><a href="/minutes/">
+      <strong>會議紀錄</strong>
+      <span>歷次管委會、區權人會議</span>
+    </a></li>
+    <li><a href="/regulations/">
+      <strong>規約辦法</strong>
+      <span>社區規約、各項管理辦法</span>
+    </a></li>
+    <li><a href="/directory/">
+      <strong>廠商聯絡簿</strong>
+      <span>原廠維修、保固聯絡資訊</span>
+    </a></li>
+  </ul>
+</div>

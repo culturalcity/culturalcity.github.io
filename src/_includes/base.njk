@@ -24,6 +24,37 @@
 </aside>
 {%- if not alertBanner.data.bannerUntil %}<!-- ⚠ alert "{{ alertBanner.data.title }}" has no bannerUntil and will display until manually removed -->{% endif %}
 {% endif -%}
+{#- ── 麵包屑（除首頁 / admin / 404 外自動產生）─────────────────────
+    URL prefix → 區段標籤。命中其中之一才渲染；首頁、admin、404 等
+    不出現在表內的頁，不產生 breadcrumb。第三段（具體頁）用 titleZh
+    優先、否則 title。   ───────────────────────────────────────── #}
+{%- set bcUrl = '' -%}
+{%- set bcLabel = '' -%}
+{%- if '/notice/' in page.url %}{% set bcUrl = '/notice/' %}{% set bcLabel = '社區公告' %}
+{%- elif '/finance/' in page.url %}{% set bcUrl = '/finance/' %}{% set bcLabel = '財務月報' %}
+{%- elif '/minutes/' in page.url %}{% set bcUrl = '/minutes/' %}{% set bcLabel = '會議紀錄' %}
+{%- elif '/regulations/' in page.url %}{% set bcUrl = '/regulations/' %}{% set bcLabel = '規約辦法' %}
+{%- elif '/welcome/' in page.url %}{% set bcUrl = '/welcome/' %}{% set bcLabel = '新住戶須知' %}
+{%- elif '/utility/' in page.url %}{% set bcUrl = '/utility/' %}{% set bcLabel = '公共事業' %}
+{%- elif '/directory/' in page.url %}{% set bcUrl = '/directory/' %}{% set bcLabel = '廠商聯絡簿' %}
+{%- elif '/evacuation/' in page.url %}{% set bcUrl = '/evacuation/' %}{% set bcLabel = '緊急避難圖' %}
+{%- elif '/net-zero/' in page.url %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
+{%- elif '/transport/' in page.url %}{% set bcUrl = '/transport/' %}{% set bcLabel = '綠色運輸' %}
+{%- endif -%}
+{%- if bcLabel %}
+{#- 只到區段層；當前頁名由下方 h1 自然顯示，不在 breadcrumb 重複（gov.uk 慣例） -#}
+<nav class="breadcrumb" aria-label="麵包屑">
+  <div class="breadcrumb-inner">
+    <a href="/">閱大安</a>
+    <span class="breadcrumb-sep" aria-hidden="true">›</span>
+    {%- if page.url == bcUrl %}
+    <span class="breadcrumb-current">{{ bcLabel }}</span>
+    {%- else %}
+    <a href="{{ bcUrl }}">{{ bcLabel }}</a>
+    {%- endif %}
+  </div>
+</nav>
+{% endif -%}
 {{ content | safe }}
 {% if extraScripts %}<script>{{ extraScripts | safe }}</script>{% endif %}
 </body>

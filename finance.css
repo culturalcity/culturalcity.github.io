@@ -32,6 +32,12 @@ body {
 }
 
 /* ── HEADER ── */
+/* 財報頁無 .header-inner 包裝、內容直接吃 .header 的 padding（48px），且寬度撐滿；
+   breadcrumb 對齊規則因此跟一般 layout 不同：取消 max-width 限制、padding 改 48 對齊 */
+:root { --page-max-width: none; }
+.breadcrumb { padding: 0 48px; }
+@media (max-width: 600px) { .breadcrumb { padding: 0 20px; } }
+
 .header {
   background: var(--ink); color: var(--paper);
   padding: 28px 48px 22px;

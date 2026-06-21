@@ -2,6 +2,7 @@
 layout: base.njk
 extraStyles: |
   /* ── handbook 專用版型 ── */
+  :root { --page-max-width: 1180px; }
   /* header 對齊 hb-wrap 寬度，標題靠左與 sidebar 對齊 */
   .header .header-inner { max-width: 1180px; padding: 0 32px; }
   @media (max-width: 900px) {
@@ -236,7 +237,6 @@ extraScripts: |
   </nav>
 
   <main class="hb-main">
-    {% if backLink %}<a href="{{ backLink }}" class="back-link">{{ backText or '返回' }}</a>{% endif %}
     {{ content | safe }}
 
     <hr>

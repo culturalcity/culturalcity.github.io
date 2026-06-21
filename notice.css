@@ -7,6 +7,7 @@
   --c-meeting: #2B4A6B;
   --c-safety: #8C1F1F;
   --c-equip: #8C1F1F;
+  --page-max-width: 680px;  /* notice.njk header-inner 同步給 breadcrumb-inner */
 }
 
 body {
