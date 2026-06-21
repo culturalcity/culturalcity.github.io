@@ -1123,55 +1123,9 @@ Promise.all([
   // 支援 URL hash 切換 tab（譬如 /utility/#telecom）
   const hashName = (location.hash || '').replace('#','');
   if (['water','telecom'].includes(hashName)) sw(hashName);
-
-  // ── 從 admin/utility KV 拉每日資料，覆蓋靜態 daily-*.json 中較新的天 ──
-  // 全站在 Basic Auth 之後、住戶有同一組密碼，所以 fetch 通過。
-  // 開發環境沒有 Worker → 靜默 fallback 使用靜態資料。
-  mergeKVDaily();
+  // 註：每日水電 json 由 GitHub Actions 每天自動把 KV 落地更新（到昨天），公開頁直接讀
+  // 靜態 daily-*.json 即可，不再從 KV 疊加（KV 已改總幹事級、住戶 fetch 會 401；且 json 已每天最新）。
 });
-
-async function mergeKVDaily() {
-  try {
-    const res = await fetch('/admin/utility/api/data', { credentials: 'same-origin', cache: 'no-store' });
-    if (!res.ok) return;
-    const kv = await res.json();
-    if (!kv || typeof kv !== 'object') return;
-    let changed = false;
-    // 用電
-    if (kv.electric && typeof kv.electric === 'object') {
-      const elecMap = new Map(DAILY_ELEC.map(r => [r.d, r]));
-      const tempMap = (kv.temperature && typeof kv.temperature === 'object') ? kv.temperature : {};
-      Object.keys(kv.electric).forEach(d => {
-        const v = parseFloat(kv.electric[d]);
-        if (!isFinite(v)) return;
-        const existing = elecMap.get(d) || { d };
-        existing.k = v;
-        if (tempMap[d] != null) existing.tmax = parseFloat(tempMap[d]);
-        elecMap.set(d, existing);
-        changed = true;
-      });
-      DAILY_ELEC = [...elecMap.values()].sort((a, b) => a.d.localeCompare(b.d));
-    }
-    // 用水
-    if (kv.water && typeof kv.water === 'object') {
-      const waterMap = new Map(DAILY_WATER.map(r => [r.d, r]));
-      Object.keys(kv.water).forEach(d => {
-        const v = parseFloat(kv.water[d]);
-        if (!isFinite(v)) return;
-        waterMap.set(d, { d, w: v });
-        changed = true;
-      });
-      DAILY_WATER = [...waterMap.values()].sort((a, b) => a.d.localeCompare(b.d));
-    }
-    if (changed) {
-      initDailyElec();
-      initDailyWater();
-    }
-  } catch (e) {
-    // 開發環境 / 網路問題 → 留靜態資料即可
-    console.info('KV merge skipped:', e.message);
-  }
-}
 
 // ── 每日資料：依粒度聚合 ──
 // rows: [{d:'2026-04-01', k:218 | w:0.5}, ...], key: 'k' or 'w'
