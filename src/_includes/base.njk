@@ -30,16 +30,19 @@
     優先、否則 title。   ───────────────────────────────────────── #}
 {%- set bcUrl = '' -%}
 {%- set bcLabel = '' -%}
-{%- if '/notice/' in page.url %}{% set bcUrl = '/notice/' %}{% set bcLabel = '社區公告' %}
-{%- elif '/finance/' in page.url %}{% set bcUrl = '/finance/' %}{% set bcLabel = '財務月報' %}
-{%- elif '/minutes/' in page.url %}{% set bcUrl = '/minutes/' %}{% set bcLabel = '會議紀錄' %}
-{%- elif '/regulations/' in page.url %}{% set bcUrl = '/regulations/' %}{% set bcLabel = '規約辦法' %}
-{%- elif '/welcome/' in page.url %}{% set bcUrl = '/welcome/' %}{% set bcLabel = '新住戶須知' %}
-{%- elif '/utility/' in page.url %}{% set bcUrl = '/utility/' %}{% set bcLabel = '公共事業' %}
-{%- elif '/directory/' in page.url %}{% set bcUrl = '/directory/' %}{% set bcLabel = '廠商聯絡簿' %}
-{%- elif '/evacuation/' in page.url %}{% set bcUrl = '/evacuation/' %}{% set bcLabel = '緊急避難圖' %}
-{%- elif '/net-zero/' in page.url %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
-{%- elif '/transport/' in page.url %}{% set bcUrl = '/transport/' %}{% set bcLabel = '綠色運輸' %}
+{#- 防呆：permalink:false 的頁（如 utility/electricity-trend.html 保留檔）page.url 是 false 不是字串；
+    用 page.url | string 強制轉成空字串避免 'in' 操作炸鍋 -#}
+{%- set pageUrl = page.url | string -%}
+{%- if '/notice/' in pageUrl %}{% set bcUrl = '/notice/' %}{% set bcLabel = '社區公告' %}
+{%- elif '/finance/' in pageUrl %}{% set bcUrl = '/finance/' %}{% set bcLabel = '財務月報' %}
+{%- elif '/minutes/' in pageUrl %}{% set bcUrl = '/minutes/' %}{% set bcLabel = '會議紀錄' %}
+{%- elif '/regulations/' in pageUrl %}{% set bcUrl = '/regulations/' %}{% set bcLabel = '規約辦法' %}
+{%- elif '/welcome/' in pageUrl %}{% set bcUrl = '/welcome/' %}{% set bcLabel = '新住戶須知' %}
+{%- elif '/utility/' in pageUrl %}{% set bcUrl = '/utility/' %}{% set bcLabel = '公共事業' %}
+{%- elif '/directory/' in pageUrl %}{% set bcUrl = '/directory/' %}{% set bcLabel = '廠商聯絡簿' %}
+{%- elif '/evacuation/' in pageUrl %}{% set bcUrl = '/evacuation/' %}{% set bcLabel = '緊急避難圖' %}
+{%- elif '/net-zero/' in pageUrl %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
+{%- elif '/transport/' in pageUrl %}{% set bcUrl = '/transport/' %}{% set bcLabel = '綠色運輸' %}
 {%- endif -%}
 {%- if bcLabel %}
 {#- 只到區段層；當前頁名由下方 h1 自然顯示，不在 breadcrumb 重複（gov.uk 慣例） -#}
@@ -47,7 +50,7 @@
   <div class="breadcrumb-inner">
     <a href="/">閱大安</a>
     <span class="breadcrumb-sep" aria-hidden="true">›</span>
-    {%- if page.url == bcUrl %}
+    {%- if pageUrl == bcUrl %}
     <span class="breadcrumb-current">{{ bcLabel }}</span>
     {%- else %}
     <a href="{{ bcUrl }}">{{ bcLabel }}</a>
