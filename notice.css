@@ -109,3 +109,48 @@ body {
   border-top: 1px solid var(--line); padding-top: 18px; margin-top: 40px;
   font-size:15px; color: var(--wg9); letter-spacing: .06em;
 }
+
+/* ── 保養通知 .maint-table 手機卡片堆疊（≤ 600px） ─────────────────
+   桌機維持原 3 欄表格；手機改為每列一張卡片，避開 390px 第 3 欄逐字換行。
+   選擇器都以 .maint-table tbody 前綴（specificity 0,2,2 起跳），刻意比每篇
+   公告 extraStyles 內的 .maint-table td:first-child 等選擇器（0,2,1）高，
+   以覆蓋 white-space:nowrap 與固定欄寬。9 篇保養通知共用同一份 markup
+   結構，故零修改即可生效。 */
+@media (max-width: 600px) {
+  .maint-table,
+  .maint-table thead,
+  .maint-table tbody,
+  .maint-table tbody tr,
+  .maint-table tbody td {
+    display: block;
+    width: auto;
+  }
+  .maint-table thead { display: none; }
+  .maint-table tbody tr {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--wg9);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .maint-table tbody td {
+    padding: 11px 16px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    white-space: normal;
+  }
+  .maint-table tbody td:last-child { border-bottom: none; }
+  .maint-table tbody td:first-child {
+    font-size: 17px;
+    font-weight: 700;
+    white-space: normal;
+    background: rgba(60,56,53,0.04);
+  }
+  .maint-table tbody td:nth-child(2) {
+    white-space: normal;
+  }
+  .maint-table tbody td ul {
+    padding-left: 1.2em;
+  }
+}
