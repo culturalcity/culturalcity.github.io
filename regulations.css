@@ -24,24 +24,24 @@ body {
 .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
 .back {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; letter-spacing: .1em; color: var(--wg7);
+  font-size:15px; letter-spacing: .1em; color: var(--wg7);
   text-decoration: none; margin-bottom: 16px; transition: color .18s;
 }
 .back::before { content: '←'; }
 .back:hover { color: var(--wg1); }
-.eyebrow { font-size: 13px; letter-spacing: .25em; color: var(--wg7); margin-bottom: 8px; }
+.eyebrow { font-size:15px; letter-spacing: .25em; color: var(--wg7); margin-bottom: 8px; }
 .header h1 {
   font-size: 26px; font-weight: 700; letter-spacing: .06em;
   line-height: 1.35; margin-bottom: 8px;
 }
 .header-meta {
-  font-size: 14px; color: var(--wg7);
+  font-size:15px; color: var(--wg7);
   display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px;
 }
 .meta-pill {
   border: 1px solid rgba(234,231,225,0.2);
   padding: 2px 10px; border-radius: 1px;
-  font-size: 12px; letter-spacing: .06em;
+  font-size:13px; letter-spacing: .06em;
 }
 
 /* ── MAIN ── */
@@ -53,18 +53,18 @@ body {
 
 /* ── 修訂紀錄 ── */
 .rev-summary {
-  cursor: pointer; font-size: 13px; letter-spacing: .1em;
+  cursor: pointer; font-size:15px; letter-spacing: .1em;
   color: var(--wg11); padding: 8px 0; user-select: none;
 }
 .rev-summary:hover { color: var(--wg41); }
 .rev-table {
-  width: 100%; border-collapse: collapse; font-size: 14px;
+  width: 100%; border-collapse: collapse; font-size:15px;
   margin: 8px 0 20px; background: var(--white); border: 1px solid var(--line);
 }
 .rev-table th {
   background: var(--wg41); color: var(--wg1);
   padding: 8px 14px; text-align: left;
-  font-weight: 500; font-size: 12px; letter-spacing: .08em;
+  font-weight: 500; font-size:13px; letter-spacing: .08em;
 }
 .rev-table td {
   padding: 8px 14px; border-bottom: 1px solid var(--line2);
@@ -80,14 +80,14 @@ body {
 @media (max-width: 600px) { .doc-body { padding: 20px 18px; } }
 
 .chapter {
-  font-size: 12px; font-weight: 700; letter-spacing: .2em;
+  font-size:13px; font-weight: 700; letter-spacing: .2em;
   color: var(--wg9); margin: 28px 0 8px; padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
 }
 .chapter:first-child { margin-top: 0; }
 
 .annex {
-  font-size: 15px; font-weight: 700; letter-spacing: .04em;
+  font-size:16px; font-weight: 700; letter-spacing: .04em;
   color: var(--wg41); margin: 48px 0 16px;
   padding: 20px 0 12px;
   border-top: 2px solid var(--wg11); border-bottom: 1px solid var(--line);
@@ -97,11 +97,11 @@ body {
 .art-block:first-child { border-top: none; padding-top: 0; }
 .art-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
 .art-num {
-  font-size: 14px; font-weight: 700; color: var(--wg41);
+  font-size:15px; font-weight: 700; color: var(--wg41);
   letter-spacing: .04em; flex-shrink: 0; min-width: 54px;
 }
-.art-name { font-size: 15px; font-weight: 600; color: var(--wg11); }
-.art-body { font-size: 15px; color: var(--wg11); line-height: 1.9; }
+.art-name { font-size:16px; font-weight: 600; color: var(--wg11); }
+.art-body { font-size:16px; color: var(--wg11); line-height: 1.9; }
 .art-body p { margin-bottom: 6px; padding-left: 0; }
 .art-body p:last-child { margin-bottom: 0; }
 .art-body p.indent-1 { padding-left: 2em; text-indent: -2em; }
@@ -113,5 +113,5 @@ body {
 
 .footer {
   border-top: 1px solid var(--line); padding-top: 18px;
-  font-size: 13px; color: var(--wg9);
+  font-size:15px; color: var(--wg9);
 }

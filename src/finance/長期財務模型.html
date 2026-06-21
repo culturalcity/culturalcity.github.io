@@ -16,15 +16,15 @@ eleventyExcludeFromCollections: true
 <style>
 :root{--warn:#8C5A00;--blue:#2B4A6B;}
 .tabs{background:var(--wg41);display:flex;padding:0 40px;overflow-x:auto;border-bottom:1px solid rgba(60,56,53,0.4);}
-.tab{padding:9px 16px;font-size:14px;color:var(--wg9);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:.04em;}
+.tab{padding:9px 16px;font-size:15px;color:var(--wg9);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:.04em;}
 .tab:hover{color:var(--wg1);}.tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
 .main{max-width:1200px;margin:0 auto;padding:20px 20px 60px;}
 .tab-content{display:none;}.tab-content.active{display:block;}
-.sl{font-size:12px;letter-spacing:.2em;color:var(--wg11);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
+.sl{font-size:13px;letter-spacing:.2em;color:var(--wg11);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
 .sl::after{content:'';flex:1;height:1px;background:var(--line);}
 .sl-gap{margin-top:20px;}
 .panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;}
-.ph{padding:9px 14px;background:#F0EDE8;border-bottom:1px solid var(--line);font-size:13px;font-weight:600;color:var(--wg11);letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;}
+.ph{padding:9px 14px;background:#F0EDE8;border-bottom:1px solid var(--line);font-size:15px;font-weight:600;color:var(--wg11);letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;}
 .pb{padding:12px 14px;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:800px){.grid2{grid-template-columns:1fr;}}
@@ -33,18 +33,18 @@ eleventyExcludeFromCollections: true
 .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:12px 12px 9px;position:relative;}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
 .kpi.red::before{background:var(--dn);}.kpi.green::before{background:var(--dp);}.kpi.warn::before{background:var(--warn);}
-.kpi-label{font-size:12px;color:var(--wg9);letter-spacing:.04em;margin-bottom:5px;}
+.kpi-label{font-size:13px;color:var(--wg9);letter-spacing:.04em;margin-bottom:5px;}
 .kpi-val{font-size:19px;font-weight:700;color:var(--wg41);}
 .kpi-val.pos{color:var(--dp);}.kpi-val.neg{color:var(--dn);}
-.kpi-sub{font-size:12px;color:var(--wg9);margin-top:3px;}
-input[type=number],input[type=text]{border:1px solid var(--line);border-radius:var(--radius);padding:5px 8px;font-size:14px;font-family:'Noto Sans TC',sans-serif;background:var(--wg1);color:var(--wg41);transition:border-color .15s;width:100%;}
+.kpi-sub{font-size:13px;color:var(--wg9);margin-top:3px;}
+input[type=number],input[type=text]{border:1px solid var(--line);border-radius:var(--radius);padding:5px 8px;font-size:15px;font-family:'Noto Sans TC',sans-serif;background:var(--wg1);color:var(--wg41);transition:border-color .15s;width:100%;}
 input[type=number]:focus,input[type=text]:focus{outline:none;border-color:var(--wg11);background:var(--white);}
 input[type=range]{width:100%;accent-color:var(--wg41);}
 .ch{position:relative;height:280px;}
 .ch-sm{position:relative;height:180px;}
 .tbl-wrap{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:11.5px;}
-th{text-align:left;padding:5px 9px;background:#F0EDE8;color:var(--wg9);font-weight:500;font-size:12px;letter-spacing:.05em;border-bottom:1px solid var(--line);white-space:nowrap;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:5px 9px;background:#F0EDE8;color:var(--wg9);font-weight:500;font-size:13px;letter-spacing:.05em;border-bottom:1px solid var(--line);white-space:nowrap;}
 th.r,td.r{text-align:right;}
 td{padding:5px 9px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);white-space:nowrap;font-variant-numeric:tabular-nums;}
 tr:last-child td{border-bottom:none;}
@@ -53,17 +53,17 @@ tr.neg-row td{color:var(--dn);}
 tr.warn-row td{color:var(--warn);}
 tr.peak-row td{background:rgba(140,90,0,0.06);}
 .dp{color:var(--dp);font-weight:500;}.dn{color:var(--dn);font-weight:500;}.dw{color:var(--warn);font-weight:500;}
-.alert-box{background:rgba(140,31,31,0.07);border:1px solid rgba(140,31,31,0.2);border-radius:var(--radius);padding:9px 13px;font-size:14px;color:var(--dn);line-height:1.8;margin-bottom:14px;}
-.ok-box{background:rgba(31,92,56,0.07);border:1px solid rgba(31,92,56,0.2);border-radius:var(--radius);padding:9px 13px;font-size:14px;color:var(--dp);line-height:1.8;margin-bottom:14px;}
-.warn-box{background:rgba(140,90,0,0.07);border:1px solid rgba(140,90,0,0.2);border-radius:var(--radius);padding:9px 13px;font-size:14px;color:var(--warn);line-height:1.8;margin-bottom:14px;}
-.info-box{background:rgba(43,74,107,0.06);border:1px solid rgba(43,74,107,0.18);border-radius:var(--radius);padding:9px 13px;font-size:14px;color:var(--blue);line-height:1.8;margin-bottom:14px;}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;font-size:14px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .18s;border:1px solid var(--line);background:transparent;color:var(--wg11);}
+.alert-box{background:rgba(140,31,31,0.07);border:1px solid rgba(140,31,31,0.2);border-radius:var(--radius);padding:9px 13px;font-size:15px;color:var(--dn);line-height:1.8;margin-bottom:14px;}
+.ok-box{background:rgba(31,92,56,0.07);border:1px solid rgba(31,92,56,0.2);border-radius:var(--radius);padding:9px 13px;font-size:15px;color:var(--dp);line-height:1.8;margin-bottom:14px;}
+.warn-box{background:rgba(140,90,0,0.07);border:1px solid rgba(140,90,0,0.2);border-radius:var(--radius);padding:9px 13px;font-size:15px;color:var(--warn);line-height:1.8;margin-bottom:14px;}
+.info-box{background:rgba(43,74,107,0.06);border:1px solid rgba(43,74,107,0.18);border-radius:var(--radius);padding:9px 13px;font-size:15px;color:var(--blue);line-height:1.8;margin-bottom:14px;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;font-size:15px;font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .18s;border:1px solid var(--line);background:transparent;color:var(--wg11);}
 .btn:hover{background:var(--wg1);border-color:var(--wg11);}
 .btn-primary{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
 .btn-primary:hover{background:var(--wg11);}
 .btn-danger{background:transparent;color:var(--dn);border-color:rgba(140,31,31,0.3);}
 .btn-danger:hover{background:rgba(140,31,31,0.07);}
-.btn-sm{padding:4px 10px;font-size:13px;}
+.btn-sm{padding:4px 10px;font-size:15px;}
 /* CAPEX CARDS */
 .capex-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .capex-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;gap:10px;padding:10px 14px;position:relative;overflow:hidden;}
@@ -71,19 +71,19 @@ tr.peak-row td{background:rgba(140,90,0,0.06);}
 .capex-row.large::before{background:var(--dn);}
 .capex-row.mega::before{background:var(--dn);width:4px;}
 .capex-name-wrap{flex:2;min-width:140px;}
-.capex-name{font-size:14px;font-weight:500;color:var(--wg41);}
-.capex-vendor{font-size:12px;color:var(--wg9);margin-top:1px;}
+.capex-name{font-size:15px;font-weight:500;color:var(--wg41);}
+.capex-vendor{font-size:13px;color:var(--wg9);margin-top:1px;}
 .capex-fields{display:flex;gap:8px;flex:3;flex-wrap:wrap;}
 .capex-field{display:flex;flex-direction:column;gap:2px;min-width:90px;}
-.capex-field label{font-size:12px;color:var(--wg9);}
+.capex-field label{font-size:13px;color:var(--wg9);}
 .capex-field input{width:100%;}
 /* RATE SCHEDULE */
 .rate-schedule-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
 .rate-row{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;}
-.rate-row-label{font-size:13px;color:var(--wg9);width:60px;flex-shrink:0;}
+.rate-row-label{font-size:15px;color:var(--wg9);width:60px;flex-shrink:0;}
 .rate-row-fields{display:flex;gap:8px;flex:1;flex-wrap:wrap;}
 .rate-field{display:flex;flex-direction:column;gap:2px;}
-.rate-field label{font-size:12px;color:var(--wg9);}
+.rate-field label{font-size:13px;color:var(--wg9);}
 .rate-field input{width:90px;}
 .rate-row-del{margin-left:auto;flex-shrink:0;}
 
@@ -91,7 +91,7 @@ tr.peak-row td{background:rgba(140,90,0,0.06);}
 .header-inner{max-width:1200px;}
 .tabs{padding:0 max(20px,calc((100vw - 1200px)/2 + 20px));}
 .kpi-val{font-size:22px;}
-table{font-size:13px;}
+table{font-size:15px;}
 td{padding:7px 10px;}
 </style>
 </head>
@@ -126,7 +126,7 @@ td{padding:7px 10px;}
   <div class="kpi-row" id="kpi-overview"></div>
   <div id="alert-overview"></div>
   <div class="panel">
-    <div class="ph">46年資產水位 <span style="font-size:12px;color:var(--wg9);font-weight:400">屋齡4～50年・含安全警戒線與大型資本支出標示</span></div>
+    <div class="ph">46年資產水位 <span style="font-size:13px;color:var(--wg9);font-weight:400">屋齡4～50年・含安全警戒線與大型資本支出標示</span></div>
     <div class="pb"><div class="ch"><canvas id="chart-assets"></canvas></div></div>
   </div>
   <div class="grid2">
@@ -159,17 +159,17 @@ td{padding:7px 10px;}
     <button class="btn btn-primary" onclick="applyPreset('proposal')">📌 主推方案：5 年週期 × 4.2%（起 180、2062 凍結 750 元）</button>
     <button class="btn" onclick="applyPreset('proposal_uncapped')">↔ 對比：不凍結版（持續調漲至 2072）</button>
   </div>
-  <div style="font-size:12px;color:var(--wg9);margin-bottom:16px">兩段式設計：<strong>2027-2062 每 5 年調漲一次（×4.2%）</strong>累積 sinking fund cover 屋齡 20（2042）跟屋齡 40（2062）兩波大修；<strong>2062 起費率凍結在 750 元</strong>不再調漲，讓累積資金順勢消耗至都更時點。46 年內全程不破產、不跌警戒；50 年資產約 555 萬接近 0，符合「死後不留遺產」設計。<br>按「對比」按鈕可看「若不凍結繼續調漲」的結果——終費率拉到 1,130 元、50 年資產累積到 4,394 萬（over-fund，違反「死後不留遺產」原則）。</div>
+  <div style="font-size:13px;color:var(--wg9);margin-bottom:16px">兩段式設計：<strong>2027-2062 每 5 年調漲一次（×4.2%）</strong>累積 sinking fund cover 屋齡 20（2042）跟屋齡 40（2062）兩波大修；<strong>2062 起費率凍結在 750 元</strong>不再調漲，讓累積資金順勢消耗至都更時點。46 年內全程不破產、不跌警戒；50 年資產約 555 萬接近 0，符合「死後不留遺產」設計。<br>按「對比」按鈕可看「若不凍結繼續調漲」的結果——終費率拉到 1,130 元、50 年資產累積到 4,394 萬（over-fund，違反「死後不留遺產」原則）。</div>
 
   <div class="sl sl-gap">其他變體（情境試算用）</div>
-  <div style="font-size:12px;letter-spacing:.12em;color:var(--wg11);margin-bottom:8px">等差調法</div>
+  <div style="font-size:13px;letter-spacing:.12em;color:var(--wg11);margin-bottom:8px">等差調法</div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
     <button class="btn btn-sm" onclick="applyPreset('flat150')">固定150元</button>
     <button class="btn btn-sm" onclick="applyPreset('every5_10')">每5年+10元</button>
     <button class="btn btn-sm" onclick="applyPreset('every5_15')">每5年+15元</button>
     <button class="btn btn-sm" onclick="applyPreset('every3_10')">每3年+10元</button>
   </div>
-  <div style="font-size:12px;letter-spacing:.12em;color:var(--wg11);margin-bottom:8px">等比調法產生器（自訂節奏，住戶現場提問可即時試算）</div>
+  <div style="font-size:13px;letter-spacing:.12em;color:var(--wg11);margin-bottom:8px">等比調法產生器（自訂節奏，住戶現場提問可即時試算）</div>
   <div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:8px">
     <div class="rate-field"><label>第一調年</label>
       <input id="custom-start-year" type="number" value="2027" min="2026" max="2072" style="width:80px"></div>
@@ -183,7 +183,7 @@ td{padding:7px 10px;}
       <input id="custom-stop-year" type="number" value="2062" placeholder="不凍結" min="2026" max="2072" style="width:80px"></div>
     <button class="btn btn-primary" onclick="applyCustomGeometric()">▶ 產生並套用</button>
   </div>
-  <div id="rate-disclaimer" style="font-size:13px;color:var(--wg9);margin-bottom:16px;line-height:1.9;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:9px 13px;">
+  <div id="rate-disclaimer" style="font-size:15px;color:var(--wg9);margin-bottom:16px;line-height:1.9;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:9px 13px;">
     <!-- 由 renderRateDisclaimer() 動態填入 -->
   </div>
 
@@ -206,35 +206,35 @@ td{padding:7px 10px;}
   <div class="panel"><div class="pb">
     <div class="grid2">
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">計費總坪數</div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">計費總坪數</div>
         <input type="number" id="p-sqm" value="2515.94" step="0.01" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">平面車位數</div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">平面車位數</div>
         <input type="number" id="p-parking" value="49" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">車位清潔費（元/位/月）</div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">車位清潔費（元/位/月）</div>
         <input type="number" id="p-park-fee" value="800" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">起始業主權益（元）<span style="color:var(--wg11);font-weight:400">・來源 2026/4/30 業主權益（不含充電樁基金）</span></div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">起始業主權益（元）<span style="color:var(--wg11);font-weight:400">・來源 2026/4/30 業主權益（不含充電樁基金）</span></div>
         <input type="number" id="p-assets" value="6051823" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">定存年利率（%）</div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">定存年利率（%）</div>
         <input type="number" id="p-tdrate" value="1.6" step="0.1" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">資產安全警戒線（萬元）</div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">資產安全警戒線（萬元）</div>
         <input type="number" id="p-safety" value="500" step="50" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">不定期修繕雜支基準（元/年）<span style="color:var(--wg11);font-weight:400">・來源 2025/7-2026/4 維修事件金額全年化推估</span></div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">不定期修繕雜支基準（元/年）<span style="color:var(--wg11);font-weight:400">・來源 2025/7-2026/4 維修事件金額全年化推估</span></div>
         <input type="number" id="p-misc" value="260000" step="10000" oninput="_cf=null">
       </div>
       <div>
-        <div style="font-size:12px;color:var(--wg9);margin-bottom:4px">不定期修繕雜支通膨率（%/年）<span style="color:var(--wg11);font-weight:400">・物價 4% + 老化 1%</span></div>
+        <div style="font-size:13px;color:var(--wg9);margin-bottom:4px">不定期修繕雜支通膨率（%/年）<span style="color:var(--wg11);font-weight:400">・物價 4% + 老化 1%</span></div>
         <input type="number" id="p-misc-infl" value="5.0" step="0.1" oninput="_cf=null">
       </div>
     </div>
@@ -243,20 +243,20 @@ td{padding:7px 10px;}
   <div class="panel"><div class="pb">
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span style="flex:1;min-width:200px;font-size:14px;color:var(--wg11)">人力服務類（保全・物業・清潔）</span>
-        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-human" value="4.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:13px;color:var(--wg9)">%/年</span></div>
+        <span style="flex:1;min-width:200px;font-size:15px;color:var(--wg11)">人力服務類（保全・物業・清潔）</span>
+        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-human" value="4.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:15px;color:var(--wg9)">%/年</span></div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span style="flex:1;min-width:200px;font-size:14px;color:var(--wg11)">技術營繕類（電梯・機電・消防）</span>
-        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-tech" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:13px;color:var(--wg9)">%/年</span></div>
+        <span style="flex:1;min-width:200px;font-size:15px;color:var(--wg11)">技術營繕類（電梯・機電・消防）</span>
+        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-tech" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:15px;color:var(--wg9)">%/年</span></div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span style="flex:1;min-width:200px;font-size:14px;color:var(--wg11)">一般物價與規費類（保險・水電・耗材）</span>
-        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-gen" value="2.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:13px;color:var(--wg9)">%/年</span></div>
+        <span style="flex:1;min-width:200px;font-size:15px;color:var(--wg11)">一般物價與規費類（保險・水電・耗材）</span>
+        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-gen" value="2.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:15px;color:var(--wg9)">%/年</span></div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span style="flex:1;min-width:200px;font-size:14px;color:var(--wg11)">非經常性支出（資本支出通膨）</span>
-        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-capex" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:13px;color:var(--wg9)">%/年</span></div>
+        <span style="flex:1;min-width:200px;font-size:15px;color:var(--wg11)">非經常性支出（資本支出通膨）</span>
+        <div style="display:flex;align-items:center;gap:6px;"><input type="number" id="infl-capex" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:15px;color:var(--wg9)">%/年</span></div>
       </div>
     </div>
   </div></div>
@@ -275,7 +275,7 @@ td{padding:7px 10px;}
   </div>
   <div id="recurring-content"></div>
   <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center;">
-    <span style="font-size:13px;color:var(--wg9)">新增至：</span>
+    <span style="font-size:15px;color:var(--wg9)">新增至：</span>
     <button class="btn" onclick="addRecurringItem(0)">＋ 合約與固定月費</button>
     <button class="btn" onclick="addRecurringItem(1)">＋ 年度費用</button>
     <button class="btn" onclick="addRecurringItem(2)">＋ 耗材費用</button>
@@ -518,7 +518,7 @@ function renderRateTab(){
     const ageRange = age === endAge ? `屋齡${age}年` : `屋齡${age}～${endAge}年`;
     prevHtml += `<tr><td>${yearRange}</td><td>${ageRange}</td>
       <td class="r"><strong>${s.rate}</strong></td><td class="r">${income.toFixed(1)}</td>
-      <td style="font-size:13px;color:var(--wg9)">${s.note||''}</td></tr>`;
+      <td style="font-size:15px;color:var(--wg9)">${s.note||''}</td></tr>`;
   });
   document.getElementById('rate-preview-tbody').innerHTML = prevHtml;
   renderRateDisclaimer();
@@ -909,11 +909,11 @@ function renderRecurring(){
       html += '<td><input type="text" value="' + (r.freq||'每月') + '" style="width:58px" oninput="recurringItems['+i+'].freq=this.value"></td>';
       html += '<td class="r"><input type="number" value="' + Math.round(monthly) + '" style="width:88px;text-align:right" oninput="recurringItems['+i+'].monthly=parseFloat(this.value)||0;recurringItems['+i+'].annual=(parseFloat(this.value)||0)*12;_cf=null"></td>';
       html += '<td class="r">' + fN(Math.round(annual)) + '</td>';
-      html += '<td><select style="font-size:13px;border:1px solid var(--line);border-radius:var(--radius);padding:3px 5px;background:var(--wg1);color:var(--wg41);font-family:sans-serif" onchange="recurringItems['+i+'].infl_type=this.value;_cf=null">' + inflOpts + '</select></td>';
+      html += '<td><select style="font-size:15px;border:1px solid var(--line);border-radius:var(--radius);padding:3px 5px;background:var(--wg1);color:var(--wg41);font-family:sans-serif" onchange="recurringItems['+i+'].infl_type=this.value;_cf=null">' + inflOpts + '</select></td>';
       html += '<td class="r"><input type="number" value="' + ((r.infl_rate||0.02)*100).toFixed(1) + '" step="0.1" style="width:52px;text-align:right" oninput="recurringItems['+i+'].infl_rate=(parseFloat(this.value)||2)/100;_cf=null"></td>';
       html += '<td style="white-space:nowrap">';
-      html += '<button class="btn btn-sm" style="padding:3px 6px;font-size:13px" onclick="moveRecurringItem('+i+',-1)" title="上移">↑</button>';
-      html += '<button class="btn btn-sm" style="padding:3px 6px;font-size:13px" onclick="moveRecurringItem('+i+',1)" title="下移">↓</button>';
+      html += '<button class="btn btn-sm" style="padding:3px 6px;font-size:15px" onclick="moveRecurringItem('+i+',-1)" title="上移">↑</button>';
+      html += '<button class="btn btn-sm" style="padding:3px 6px;font-size:15px" onclick="moveRecurringItem('+i+',1)" title="下移">↓</button>';
       html += '<button class="btn btn-danger btn-sm" style="margin-left:3px" onclick="delRecurringItem('+i+')">刪</button>';
       html += '</td>';
       html += '</tr>';
@@ -960,9 +960,9 @@ function renderCapexTab(){
     const freq=parseInt(String(c.freq).replace(/[^0-9]/g,''))||0;
     listHtml+=`<div class="capex-row ${cls}">
       <div class="capex-name-wrap">
-        <div class="capex-name"><input type="text" value="${c.name}" style="font-weight:500;border:none;background:transparent;padding:0;font-size:14px;width:100%;color:var(--wg41)"
+        <div class="capex-name"><input type="text" value="${c.name}" style="font-weight:500;border:none;background:transparent;padding:0;font-size:15px;width:100%;color:var(--wg41)"
           oninput="capexItems[${i}].name=this.value;_cf=null;deferPreview()"></div>
-        <div class="capex-vendor"><input type="text" value="${c.vendor||''}" placeholder="廠商（選填）" style="font-size:12px;border:none;background:transparent;padding:0;width:100%;color:var(--wg9)"
+        <div class="capex-vendor"><input type="text" value="${c.vendor||''}" placeholder="廠商（選填）" style="font-size:13px;border:none;background:transparent;padding:0;width:100%;color:var(--wg9)"
           oninput="capexItems[${i}].vendor=this.value"></div>
       </div>
       <div class="capex-fields">
