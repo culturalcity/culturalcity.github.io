@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SRC = path.join(__dirname, '..', 'admin', 'utility', 'index.html');
+const SRC = path.join(__dirname, '..', 'src', 'admin', 'utility', 'index.html');
 const DST = path.join(__dirname, '..', 'utility', 'data', 'daily-water.json');
 
 const html = fs.readFileSync(SRC, 'utf8');

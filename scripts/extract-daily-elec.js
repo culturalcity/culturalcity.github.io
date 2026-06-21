@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SRC = path.join(__dirname, '..', 'admin', 'utility', 'index.html');
+const SRC = path.join(__dirname, '..', 'src', 'admin', 'utility', 'index.html');
 const TEMP_JSON = path.join(__dirname, '..', 'utility', 'data', 'daily-temp.json');
 const DST = path.join(__dirname, '..', 'utility', 'data', 'daily-elec.json');
 
