@@ -1,0 +1,258 @@
+---
+layout: base.njk
+permalink: /search.html
+title: 全站搜尋
+eleventyExcludeFromCollections: true
+extraStyles: |
+  :root{
+    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
+    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+    --c-notice:#6B3A1F;--c-minutes:#3C3835;--c-finance:#2B4A6B;
+    --c-regulation:#1F5C38;--c-guide:#8C5A00;--c-other:#5F5A55;
+    --page-max-width:760px;
+  }
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:18px;line-height:1.7;}
+  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;color:var(--wg1);margin-bottom:4px;}
+  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;}
+  .main{max-width:760px;margin:0 auto;padding:32px 0 64px;}
+  @media(max-width:600px){.main{padding:24px 20px 48px;}}
+  /* 搜尋框 */
+  .search-bar{margin-bottom:20px;}
+  .search-input{width:100%;padding:14px 18px;font-size:17px;font-family:inherit;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);color:var(--wg41);box-sizing:border-box;}
+  .search-input:focus{outline:none;border-color:var(--wg11);box-shadow:0 0 0 3px rgba(60,56,53,.06);}
+  .search-hint{margin-top:8px;font-size:15px;color:var(--wg9);letter-spacing:.04em;}
+  /* 類型篩選 chips */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+  .chip{display:inline-flex;align-items:center;padding:5px 12px;font-size:14px;letter-spacing:.04em;background:var(--white);border:1px solid var(--line);border-radius:99px;color:var(--wg11);cursor:pointer;transition:all .15s;font-family:inherit;}
+  .chip:hover{border-color:var(--wg11);color:var(--wg41);}
+  .chip.active{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
+  .chip-count{margin-left:6px;font-size:13px;opacity:.7;}
+  /* 狀態列 */
+  .status{font-size:15px;color:var(--wg9);margin-bottom:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .status strong{color:var(--wg41);font-weight:500;}
+  /* 結果 */
+  .results{display:flex;flex-direction:column;gap:1px;}
+  .r{display:block;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;padding:14px 18px;border-left-width:3px;}
+  .r+.r{border-top:none;margin-top:-1px;}
+  .r:first-child{border-radius:var(--radius) var(--radius) 0 0;}
+  .r:last-child{border-radius:0 0 var(--radius) var(--radius);}
+  .r:hover{background:#F2F0EC;}
+  .r.t-notice{border-left-color:var(--c-notice);}
+  .r.t-minutes{border-left-color:var(--c-minutes);}
+  .r.t-finance{border-left-color:var(--c-finance);}
+  .r.t-regulation{border-left-color:var(--c-regulation);}
+  .r.t-guide,.r.t-directory,.r.t-evacuation,.r.t-utility,.r.t-net-zero,.r.t-transport{border-left-color:var(--c-guide);}
+  .r-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .r-title{font-size:17px;font-weight:500;color:var(--wg41);flex:1;min-width:0;}
+  .r-meta{font-size:13px;color:var(--wg9);white-space:nowrap;display:flex;gap:10px;align-items:center;}
+  .r-type{font-size:13px;letter-spacing:.06em;padding:1px 7px;border-radius:2px;border:1px solid;}
+  .r-type.t-notice{color:var(--c-notice);border-color:rgba(107,58,31,.3);background:rgba(107,58,31,.06);}
+  .r-type.t-minutes{color:var(--c-minutes);border-color:rgba(60,56,53,.25);background:rgba(60,56,53,.05);}
+  .r-type.t-finance{color:var(--c-finance);border-color:rgba(43,74,107,.3);background:rgba(43,74,107,.06);}
+  .r-type.t-regulation{color:var(--c-regulation);border-color:rgba(31,92,56,.3);background:rgba(31,92,56,.06);}
+  .r-type.t-guide,.r-type.t-directory,.r-type.t-evacuation,.r-type.t-utility,.r-type.t-net-zero,.r-type.t-transport{color:var(--c-guide);border-color:rgba(140,90,0,.3);background:rgba(140,90,0,.06);}
+  .r-snippet{font-size:15px;color:var(--wg11);line-height:1.7;}
+  .r-snippet mark{background:rgba(107,58,31,.15);color:var(--wg41);padding:0 2px;border-radius:1px;font-weight:500;}
+  .empty{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:32px 20px;text-align:center;color:var(--wg9);font-size:15px;line-height:1.8;}
+  .footer-line{border-top:1px solid var(--line);padding-top:18px;margin-top:24px;font-size:14px;color:var(--wg9);letter-spacing:.04em;text-align:center;}
+extraScripts: |
+  var INDEX = null;
+  var ACTIVE_TYPE = 'all';
+  var TYPE_LABELS = { all: '全部', notice: '公告', minutes: '會議紀錄', finance: '財務月報', regulation: '規約辦法', guide: '指南與須知' };
+
+  function el(id) { return document.getElementById(id); }
+
+  function debounce(fn, ms) {
+    var t = null;
+    return function() {
+      var args = arguments;
+      clearTimeout(t);
+      t = setTimeout(function() { fn.apply(null, args); }, ms);
+    };
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  function highlight(text, terms) {
+    var esc = escapeHtml(text);
+    terms.forEach(function(t) {
+      if (!t) return;
+      var re = new RegExp(t.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'), 'gi');
+      esc = esc.replace(re, function(m) { return '<mark>' + m + '</mark>'; });
+    });
+    return esc;
+  }
+
+  function snippet(content, terms, len) {
+    len = len || 200;
+    if (!content) return '';
+    var lc = content.toLowerCase();
+    var firstHit = -1;
+    for (var i = 0; i < terms.length; i++) {
+      var idx = lc.indexOf(terms[i].toLowerCase());
+      if (idx >= 0 && (firstHit < 0 || idx < firstHit)) firstHit = idx;
+    }
+    if (firstHit < 0) return content.slice(0, len) + (content.length > len ? '…' : '');
+    var start = Math.max(0, firstHit - Math.floor(len / 3));
+    var end = Math.min(content.length, start + len);
+    return (start > 0 ? '…' : '') + content.slice(start, end) + (end < content.length ? '…' : '');
+  }
+
+  // 把 directory/evacuation/utility/net-zero/transport 也視為 guide 類，UI 上只顯示 5 個 chip
+  function effectiveType(t) {
+    if (t === 'directory' || t === 'evacuation' || t === 'utility' || t === 'net-zero' || t === 'transport') return 'guide';
+    return t;
+  }
+
+  function matchType(item) {
+    if (ACTIVE_TYPE === 'all') return true;
+    return effectiveType(item.type) === ACTIVE_TYPE;
+  }
+
+  function search(q) {
+    if (!INDEX) return null;
+    var terms = q.trim().toLowerCase().split(/\\s+/).filter(Boolean);
+    var pool = INDEX.filter(matchType);
+    if (terms.length === 0) return pool;
+    return pool.filter(function(item) {
+      var hay = (item.title + ' ' + item.summary + ' ' + item.content).toLowerCase();
+      return terms.every(function(t) { return hay.indexOf(t) >= 0; });
+    });
+  }
+
+  function renderChips() {
+    if (!INDEX) return;
+    var counts = { all: INDEX.length, notice: 0, minutes: 0, finance: 0, regulation: 0, guide: 0 };
+    INDEX.forEach(function(item) {
+      var eff = effectiveType(item.type);
+      if (counts[eff] !== undefined) counts[eff]++;
+    });
+    var bar = el('filters');
+    var order = ['all', 'notice', 'minutes', 'finance', 'regulation', 'guide'];
+    bar.innerHTML = order.map(function(t) {
+      return '<button type="button" class="chip' + (t === ACTIVE_TYPE ? ' active' : '') + '" data-type="' + t + '">'
+        + TYPE_LABELS[t] + '<span class="chip-count">' + counts[t] + '</span></button>';
+    }).join('');
+    bar.querySelectorAll('button.chip').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        ACTIVE_TYPE = btn.dataset.type;
+        renderChips();
+        render(el('q').value);
+      });
+    });
+  }
+
+  function render(q) {
+    var resultsEl = el('results');
+    var statusEl = el('status');
+    if (!INDEX) {
+      statusEl.innerHTML = '索引載入中…';
+      resultsEl.innerHTML = '';
+      return;
+    }
+    if (!q.trim()) {
+      var pool = INDEX.filter(matchType);
+      var typeText = ACTIVE_TYPE === 'all' ? '全部' : TYPE_LABELS[ACTIVE_TYPE];
+      statusEl.innerHTML = typeText + '共 <strong>' + pool.length + '</strong> 篇。輸入關鍵字開始搜尋。';
+      resultsEl.innerHTML = '';
+      return;
+    }
+    var terms = q.trim().split(/\\s+/).filter(Boolean);
+    var hits = search(q);
+    if (hits.length === 0) {
+      statusEl.innerHTML = '找不到符合「<strong>' + escapeHtml(q) + '</strong>」的結果。';
+      resultsEl.innerHTML = '<div class="empty">沒有結果。試試其他關鍵字、或減少關鍵字數量；或選「全部」類別。</div>';
+      return;
+    }
+    statusEl.innerHTML = '找到 <strong>' + hits.length + '</strong> 篇符合「<strong>' + escapeHtml(q) + '</strong>」' + (ACTIVE_TYPE === 'all' ? '' : '的「' + TYPE_LABELS[ACTIVE_TYPE] + '」') + '。';
+    resultsEl.innerHTML = hits.map(function(item) {
+      var eff = effectiveType(item.type);
+      var snip = snippet(item.content || item.summary, terms);
+      return '<a class="r t-' + eff + '" href="' + item.url + '">'
+        + '<div class="r-head">'
+        +   '<div class="r-title">' + highlight(item.title, terms) + '</div>'
+        +   '<div class="r-meta">'
+        +     '<span class="r-type t-' + eff + '">' + escapeHtml(item.typeLabel) + '</span>'
+        +     (item.date ? '<span>' + escapeHtml(item.date) + '</span>' : '')
+        +   '</div>'
+        + '</div>'
+        + (snip ? '<div class="r-snippet">' + highlight(snip, terms) + '</div>' : '')
+        + '</a>';
+    }).join('');
+  }
+
+  function onInput(e) {
+    var q = e.target.value;
+    render(q);
+    var hash = q.trim() ? 'q=' + encodeURIComponent(q) : '';
+    if (ACTIVE_TYPE !== 'all') hash += (hash ? '&' : '') + 'type=' + ACTIVE_TYPE;
+    if (hash) location.hash = hash;
+    else if (location.hash) history.replaceState(null, '', location.pathname);
+  }
+
+  function readQuery() {
+    // 優先 hash（#q=...），其次 query string（?q=...）
+    var src = location.hash.slice(1) || location.search.slice(1);
+    var p = new URLSearchParams(src);
+    return { q: p.get('q') || '', type: p.get('type') || 'all' };
+  }
+
+  function init() {
+    fetch('/search-index.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        INDEX = data;
+        var p = readQuery();
+        if (p.type && ['all','notice','minutes','finance','regulation','guide'].indexOf(p.type) >= 0) {
+          ACTIVE_TYPE = p.type;
+        }
+        renderChips();
+        if (p.q) {
+          el('q').value = p.q;
+          render(p.q);
+        } else {
+          render('');
+        }
+        el('q').focus();
+      })
+      .catch(function(err) {
+        el('status').innerHTML = '<span style="color:#8C1F1F">索引載入失敗：' + escapeHtml(String(err.message || err)) + '</span>';
+      });
+
+    el('q').addEventListener('input', debounce(onInput, 150));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+---
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">SEARCH</div>
+    <h1>全站搜尋</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <form class="search-bar" onsubmit="event.preventDefault();">
+    <input id="q" class="search-input" type="search" autocomplete="off" autocapitalize="off" autocorrect="off" placeholder="搜尋公告、會議、規約、財報…">
+    <div class="search-hint">多個關鍵字以空白分隔；全部命中才顯示（AND 邏輯）。例：「裝潢 申請」、「電梯 包板」。</div>
+  </form>
+
+  <div id="filters" class="filter-bar"></div>
+
+  <div id="status" class="status">索引載入中…</div>
+  <div id="results" class="results"></div>
+
+  <div class="footer-line">純前端搜尋・不送出任何資料</div>
+
+</div>

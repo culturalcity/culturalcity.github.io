@@ -49,7 +49,7 @@ extraStyles: |
     .header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
     .header-desc { font-size:16px; color: rgba(234,231,225,0.55); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }
     /* ── MAIN ── */
-    .main { max-width: 760px; margin: 0 auto; padding: 48px 40px 72px; }
+    .main { max-width: 760px; margin: 0 auto; padding: 48px 0 72px; }
     @media(max-width:600px) {
       .header { padding: 36px 24px 30px; }
       .main { padding: 32px 20px 56px; }
@@ -179,6 +179,16 @@ extraStyles: |
     }
     .footer-left { font-size:15px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
     .footer-right { font-size:15px; color: var(--wg9); letter-spacing: 0.08em; }
+    /* ── 站內搜尋框 ── */
+    .home-search { margin-bottom: 28px; }
+    .home-search-form { display: flex; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); overflow: hidden; transition: border-color .18s, box-shadow .18s; }
+    .home-search-form:focus-within { border-color: var(--wg11); box-shadow: 0 0 0 3px rgba(60,56,53,.06); }
+    .home-search-input { flex: 1; padding: 13px 16px; font-size: 16px; font-family: inherit; background: transparent; border: none; color: var(--wg41); }
+    .home-search-input:focus { outline: none; }
+    .home-search-btn { width: 56px; display: inline-flex; align-items: center; justify-content: center; background: var(--wg41); color: var(--wg1); border: none; cursor: pointer; transition: background .15s; }
+    .home-search-btn:hover { background: var(--wg11); }
+    .home-search-btn:focus-visible { outline: 2px solid var(--wg41); outline-offset: 2px; }
+    @media (max-width: 600px) { .home-search-input { font-size: 15px; padding: 11px 14px; } .home-search-btn { width: 48px; } }
 ---
 <div class="header">
   <div class="header-inner">
@@ -191,6 +201,17 @@ extraStyles: |
 </div>
 
 <div class="main">
+
+  <!-- ── 站內搜尋（永久） ── -->
+  <form class="home-search home-search-form" action="/search.html" method="get" role="search">
+    <input class="home-search-input" name="q" type="search" autocomplete="off" placeholder="搜尋公告、會議、規約、財報…" aria-label="搜尋">
+    <button class="home-search-btn" type="submit" aria-label="搜尋">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+      </svg>
+    </button>
+  </form>
 
   <!-- ── 限時：節電獎勵活動橫幅（活動至 2026/12/31，結束後可移除） ── -->
   <a href="./notice/2026-06-16-節電獎百萬.html" style="display:block;text-decoration:none;background:#1F5C38;color:#fff;border-radius:var(--radius);padding:14px 20px;margin-bottom:36px;line-height:1.65;">

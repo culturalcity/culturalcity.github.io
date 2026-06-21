@@ -32,18 +32,18 @@ body {
 }
 
 /* ── HEADER ── */
-/* 財報頁無 .header-inner 包裝、內容直接吃 .header 的 padding（48px），且寬度撐滿；
-   breadcrumb 對齊規則因此跟一般 layout 不同：取消 max-width 限制、padding 改 48 對齊 */
-:root { --page-max-width: none; }
-.breadcrumb { padding: 0 48px; }
-@media (max-width: 600px) { .breadcrumb { padding: 0 20px; } }
+/* 財報頁屬「寬內容」級（兩級制 1060），header 跟 main 共用同寬置中 */
+:root { --page-max-width: 1060px; }
 
 .header {
   background: var(--ink); color: var(--paper);
-  padding: 28px 48px 22px;
+  padding: 28px 40px 22px;
   border-bottom: 2px solid var(--wg11);
   position: relative; overflow: hidden;
 }
+/* 月報頁的 .header-row 與年報/長期模型的 .header-inner 都置中到 page-max-width
+   讓 header 內容跟 .main（1060）對齊，不再「header 撐滿、內文窄」的不一致 */
+.header-row, .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
 .header::before {
   content: ''; position: absolute; inset: 0;
   background:
@@ -107,7 +107,7 @@ body {
 .tab-content.active { display: block; }
 
 /* ── MAIN ── */
-.main { max-width: 1060px; margin: 0 auto; padding: 28px 20px 60px; }
+.main { max-width: var(--page-max-width); margin: 0 auto; padding: 28px 0 60px; }
 
 /* ── 區段標題 ── */
 .sl {

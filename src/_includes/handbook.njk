@@ -2,14 +2,14 @@
 layout: base.njk
 extraStyles: |
   /* ── handbook 專用版型 ── */
-  :root { --page-max-width: 1180px; }
+  :root { --page-max-width: 1060px; }
   /* header 對齊 hb-wrap 寬度，標題靠左與 sidebar 對齊 */
-  .header .header-inner { max-width: 1180px; padding: 0 32px; }
+  .header .header-inner { max-width: 1060px; padding: 0 32px; }
   @media (max-width: 900px) {
     .header .header-inner { padding: 0 20px; }
   }
 
-  .hb-wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px;
+  .hb-wrap { max-width: 1060px; margin: 0 auto; padding: 28px 32px 80px;
     display: grid; grid-template-columns: 260px 1fr; gap: 48px;
     align-items: start; }
   /* 外殼當 grid item（含 border），不做 sticky，讓 grid 把高度撐滿 */

@@ -8,13 +8,13 @@ extraStyles: |
     --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
     --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
     --exit:#1C6B3A;--fire:#8C1F1F;
-    --page-max-width: 860px;
+    --page-max-width: 760px;
   }
   *{box-sizing:border-box;}
   body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:18px;line-height:1.75;min-height:100vh;}
   .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-  .header-inner{max-width:860px;margin:0 auto;position:relative;}
+  .header-inner{max-width:var(--page-max-width);margin:0 auto;position:relative;}
   .back-link{display:inline-flex;align-items:center;gap:5px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:12px;transition:color .18s;}
   .back-link:hover{color:var(--wg1);}
   .back-link::before{content:'←';}
@@ -23,7 +23,7 @@ extraStyles: |
   .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
   /* 語言切換鈕（同公告 notice.css 慣例） */
   .lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
-  .lang-bar-inner{max-width:860px;margin:0 auto;display:flex;}
+  .lang-bar-inner{max-width:var(--page-max-width);margin:0 auto;display:flex;}
   .lang-btn{padding:10px 18px;font-size:15px;font-family:inherit;letter-spacing:.06em;color:rgba(234,231,225,0.72);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;}
   .lang-btn:hover{color:rgba(234,231,225,0.8);}
   .lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
@@ -31,7 +31,7 @@ extraStyles: |
   .lang-block.active{display:block;}
   /* 日文內容以 Noto Sans JP 優先，避免「図」「経」等日文字形 fallback 不一致（中文不受影響） */
   .lang-block[data-lang="ja"],[data-lang-text="ja"]{font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic UI','Meiryo','Noto Sans TC',sans-serif;}
-  .main{max-width:860px;margin:0 auto;padding:32px 24px 64px;}
+  .main{max-width:var(--page-max-width);margin:0 auto;padding:32px 0 64px;}
   @media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
   /* 說明 */
   .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-left:3px solid var(--exit);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.85;margin-bottom:22px;}
@@ -83,7 +83,7 @@ extraStyles: |
   }
 ---
 <div class="header">
-  <div class="header-inner">
+  <div class="header-inner">
     <div class="header-eyebrow">EVACUATION PLAN</div>
     <h1>
       <span data-lang-text="zh">緊急避難圖</span>

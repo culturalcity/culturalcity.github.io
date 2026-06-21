@@ -15,11 +15,11 @@ eleventyExcludeFromCollections: true
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{--warn:#8C5A00;--blue:#2B4A6B;
-    --page-max-width: 1200px;}
+    --page-max-width: 1060px;}
 .tabs{background:var(--wg41);display:flex;padding:0 40px;overflow-x:auto;border-bottom:1px solid rgba(60,56,53,0.4);}
 .tab{padding:9px 16px;font-size:15px;color:var(--wg9);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:.04em;}
 .tab:hover{color:var(--wg1);}.tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
-.main{max-width:1200px;margin:0 auto;padding:20px 20px 60px;}
+.main{max-width:var(--page-max-width);margin:0 auto;padding:20px 0 60px;}
 .tab-content{display:none;}.tab-content.active{display:block;}
 .sl{font-size:13px;letter-spacing:.2em;color:var(--wg11);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
 .sl::after{content:'';flex:1;height:1px;background:var(--line);}
@@ -89,8 +89,8 @@ tr.peak-row td{background:rgba(140,90,0,0.06);}
 .rate-row-del{margin-left:auto;flex-shrink:0;}
 
 /* ── 對齊全站字級規範（覆蓋上方工具預設） ── */
-.header-inner{max-width:1200px;}
-.tabs{padding:0 max(20px,calc((100vw - 1200px)/2 + 20px));}
+.header-inner{max-width:1060px;}
+.tabs{padding:0 max(20px,calc((100vw - 1060px)/2 + 20px));}
 .kpi-val{font-size:22px;}
 table{font-size:15px;}
 td{padding:7px 10px;}
@@ -99,7 +99,7 @@ td{padding:7px 10px;}
 <body>
 
 <div class="header">
-  <div class="header-inner">
+  <div class="header-inner">
     <div class="header-eyebrow">LONG-TERM FINANCIAL MODEL・46 年現金流互動工具</div>
     <h1>閱大安・長期財務模型</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>

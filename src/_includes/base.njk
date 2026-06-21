@@ -43,21 +43,72 @@
 {%- elif '/evacuation/' in pageUrl %}{% set bcUrl = '/evacuation/' %}{% set bcLabel = '緊急避難圖' %}
 {%- elif '/net-zero/' in pageUrl %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
 {%- elif '/transport/' in pageUrl %}{% set bcUrl = '/transport/' %}{% set bcLabel = '綠色運輸' %}
+{%- elif pageUrl == '/search.html' %}{% set bcUrl = '/search.html' %}{% set bcLabel = '全站搜尋' %}
 {%- endif -%}
-{%- if bcLabel %}
-{#- 只到區段層；當前頁名由下方 h1 自然顯示，不在 breadcrumb 重複（gov.uk 慣例） -#}
-<nav class="breadcrumb" aria-label="麵包屑">
+{#- 全站頂部導覽帶：左側 breadcrumb（無區段時為空）+ 右側搜尋 icon。一律渲染、所有頁面都有 -#}
+<nav class="breadcrumb" aria-label="頂部導覽">
   <div class="breadcrumb-inner">
-    <a href="/">閱大安</a>
-    <span class="breadcrumb-sep" aria-hidden="true">›</span>
-    {%- if pageUrl == bcUrl %}
-    <span class="breadcrumb-current">{{ bcLabel }}</span>
-    {%- else %}
-    <a href="{{ bcUrl }}">{{ bcLabel }}</a>
-    {%- endif %}
+    <div class="breadcrumb-path">
+      {%- if bcLabel %}
+      <a href="/">閱大安</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      {%- if pageUrl == bcUrl %}
+      <span class="breadcrumb-current">{{ bcLabel }}</span>
+      {%- else %}
+      <a href="{{ bcUrl }}">{{ bcLabel }}</a>
+      {%- endif %}
+      {%- endif %}
+    </div>
+    <button type="button" class="site-search-icon" aria-label="搜尋" aria-expanded="false" aria-controls="site-search-panel" onclick="toggleSiteSearch(this)">
+      <svg class="icon-search" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+      </svg>
+      <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="6" y1="18" x2="18" y2="6"></line>
+      </svg>
+    </button>
   </div>
 </nav>
-{% endif -%}
+
+{#- 點 icon 後從上方滑出的搜尋區塊；JS Esc / 再點 icon 收回；送出走 /search.html?q=... -#}
+<div id="site-search-panel" class="site-search-panel" hidden>
+  <form action="/search.html" method="get" role="search" class="site-search-panel-form">
+    <input id="site-search-panel-input" name="q" type="search" class="site-search-panel-input" autocomplete="off" placeholder="搜尋公告、會議、規約、財報…" aria-label="搜尋關鍵字">
+    <button type="submit" class="site-search-panel-btn" aria-label="送出搜尋">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+      </svg>
+    </button>
+  </form>
+</div>
+<script>
+function toggleSiteSearch(btn) {
+  var panel = document.getElementById('site-search-panel');
+  var open = btn.getAttribute('aria-expanded') === 'true';
+  if (open) { closeSiteSearch(); return; }
+  panel.hidden = false;
+  btn.setAttribute('aria-expanded', 'true');
+  requestAnimationFrame(function() {
+    document.getElementById('site-search-panel-input').focus();
+  });
+}
+function closeSiteSearch() {
+  var panel = document.getElementById('site-search-panel');
+  var btn = document.querySelector('.site-search-icon');
+  panel.hidden = true;
+  if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var panel = document.getElementById('site-search-panel');
+    if (panel && !panel.hidden) closeSiteSearch();
+  }
+});
+</script>
+
 {{ content | safe }}
 {% if extraScripts %}<script>{{ extraScripts | safe }}</script>{% endif %}
 </body>
