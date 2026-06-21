@@ -39,5 +39,22 @@ const out = values.map((k, i) => {
   return row;
 });
 
+// 合併 KV 快照（utility/data/kv-snapshot.json）中 SEED 結束日「之後」的天。
+// 每日自動落地：fetch-kv.js 先更新 snapshot，這裡把新天接進 json（date-keyed，容許缺日）。
+const SNAP = path.join(__dirname, '..', 'utility', 'data', 'kv-snapshot.json');
+try {
+  const kv = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
+  const e = kv.electric || {};
+  Object.keys(e).filter(d => d > end).sort().forEach(d => {
+    const row = { d, k: e[d] };
+    if (tempMap[d]) {
+      if (tempMap[d].tmax != null) row.tmax = tempMap[d].tmax;
+      if (tempMap[d].tmin != null) row.tmin = tempMap[d].tmin;
+    }
+    out.push(row);
+  });
+} catch (err) { console.warn('kv-snapshot.json 未合併（電）：', err.message); }
+
+const lastD = out.length ? out[out.length - 1].d : end;
 fs.writeFileSync(DST, JSON.stringify(out), 'utf8');
-console.log(`✓ wrote ${DST} (${out.length} days, ${start} ~ ${end})`);
+console.log(`✓ wrote ${DST} (${out.length} days, ${start} ~ ${lastD})`);

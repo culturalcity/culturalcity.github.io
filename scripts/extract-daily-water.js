@@ -26,5 +26,14 @@ const out = values.map((w, i) => {
   return { d: iso, w };
 });
 
+// 合併 KV 快照中 SEED 結束日「之後」的天（每日自動落地；date-keyed，容許缺日）。
+const SNAP = path.join(__dirname, '..', 'utility', 'data', 'kv-snapshot.json');
+try {
+  const kv = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
+  const w = kv.water || {};
+  Object.keys(w).filter(d => d > end).sort().forEach(d => { out.push({ d, w: w[d] }); });
+} catch (err) { console.warn('kv-snapshot.json 未合併（水）：', err.message); }
+
+const lastD = out.length ? out[out.length - 1].d : end;
 fs.writeFileSync(DST, JSON.stringify(out), 'utf8');
-console.log(`✓ wrote ${DST} (${out.length} days, ${start} ~ ${end})`);
+console.log(`✓ wrote ${DST} (${out.length} days, ${start} ~ ${lastD})`);

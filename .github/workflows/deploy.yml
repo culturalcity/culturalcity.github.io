@@ -44,11 +44,23 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: node scripts/fetch-weather.js
 
+      # 把 KV 的每日水電手填資料落地進 git（floating → 有版本備份）。
+      # fetch-kv 抓失敗/401/格式不符會自動跳過、保留舊備份，不讓部署失敗。
+      # 需 repo secret：YDA_DATA_TOKEN（總幹事 cookie token，見 raw/cloudflare-worker 底稿的 TOKENS）。
+      - name: Bake KV utility data into git
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          YDA_DATA_TOKEN: ${{ secrets.YDA_DATA_TOKEN }}
+        run: |
+          node scripts/fetch-kv.js
+          node scripts/extract-daily-elec.js
+          node scripts/extract-daily-water.js
+
       - name: Commit data updates if changed
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           changed=()
-          for f in daily-temp:氣溫 daily-rain:降雨; do
+          for f in daily-temp:氣溫 daily-rain:降雨 daily-elec:用電 daily-water:用水 kv-snapshot:水電備份; do
             name=${f%%:*}; label=${f##*:}
             path="utility/data/${name}.json"
             [ -f "$path" ] || continue
@@ -62,7 +74,7 @@ jobs:
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            msg="data: 每日$(IFS=/; printf '%s' "${changed[*]}")更新（CODiS 自動）"
+            msg="data: 每日資料自動更新（$(IFS=/; printf '%s' "${changed[*]}")）"
             git commit -m "$msg"
             git push
           fi
