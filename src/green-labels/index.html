@@ -1,0 +1,358 @@
+---
+layout: base.njk
+permalink: /green-labels/index.html
+title: 綠色標章選購指南
+eleventyExcludeFromCollections: true
+trilingual: true
+extraStyles: |
+  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:40px 0 64px;}
+  @media(max-width:600px){.wrap{padding:28px 24px 48px;}}
+  .lede{font-size:17px;color:var(--wg11);line-height:1.9;margin-bottom:22px;}
+  .lede strong{color:var(--wg41);}
+  .official{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.18);border-left:3px solid var(--dp);border-radius:var(--radius);padding:14px 18px;font-size:15px;color:var(--wg11);line-height:1.85;margin-bottom:36px;}
+  .official strong{color:var(--dp);}
+  .label-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:22px 24px;margin-bottom:14px;display:flex;gap:22px;align-items:flex-start;}
+  @media(max-width:560px){.label-card{flex-direction:column;gap:14px;align-items:center;}}
+  .label-logo{flex-shrink:0;width:168px;height:152px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px;}
+  @media(max-width:560px){.label-logo{width:200px;height:160px;}}
+  .label-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+  .label-main{flex:1;min-width:0;}
+  @media(max-width:560px){.label-main{text-align:center;}}
+  .label-head{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:4px;}
+  @media(max-width:560px){.label-head{justify-content:center;}}
+  .label-name{font-size:19px;font-weight:700;color:var(--wg41);letter-spacing:.04em;}
+  .label-badge{flex-shrink:0;font-size:12px;font-weight:700;letter-spacing:.04em;padding:2px 9px;border-radius:999px;}
+  .label-badge.compulsory{background:#fbe9e7;color:#c0492f;}
+  .label-badge.voluntary{background:rgba(31,92,56,0.1);color:var(--dp);}
+  .label-en{font-size:13px;letter-spacing:.08em;color:var(--wg9);margin-bottom:11px;}
+  .label-symbol{font-size:14.5px;color:var(--wg9);font-style:italic;line-height:1.7;margin:0 0 13px;padding-bottom:12px;border-bottom:1px dashed var(--line);}
+  .label-facts{margin:0;}
+  .label-facts > div{display:flex;gap:12px;font-size:15px;line-height:1.8;margin-bottom:8px;}
+  .label-facts > div:last-child{margin-bottom:0;}
+  @media(max-width:560px){.label-facts > div{flex-direction:column;gap:2px;text-align:left;}}
+  .label-facts dt{flex-shrink:0;width:64px;font-weight:700;color:var(--dp);letter-spacing:.04em;}
+  .label-facts dd{flex:1;margin:0;color:var(--wg41);}
+  .label-facts dd strong{color:var(--wg41);font-weight:700;}
+  .closing{font-size:15px;color:var(--wg9);line-height:1.85;margin-top:30px;}
+  .gl-cta{background:var(--dp);color:#fff;border-radius:var(--radius);padding:20px 22px;margin-top:34px;}
+  .gl-cta-h{font-size:18px;font-weight:700;letter-spacing:.04em;margin-bottom:9px;}
+  .gl-cta-p{font-size:15px;line-height:1.85;color:rgba(255,255,255,0.92);margin-bottom:14px;}
+  .gl-cta-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--dp);text-decoration:none;padding:11px 20px;border-radius:var(--radius);font-size:16px;font-weight:700;letter-spacing:.04em;}
+  .gl-cta-btn::after{content:'↗';font-size:13px;}
+  .gl-cta-btn:hover{opacity:.92;}
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">GREEN LABELS</div>
+    <h1><span data-lang-text="zh">綠色標章選購指南</span><span data-lang-text="en" style="display:none">Green Label Buying Guide</span><span data-lang-text="ja" style="display:none">グリーンマーク選購ガイド</span></h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="lang-bar">
+    <div class="lang-bar-inner">
+      <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+    </div>
+  </div>
+
+  <!-- ════ 中文 ════ -->
+  <div class="lang-block active" data-lang="zh">
+    <p class="lede">購物時多看一眼<strong>綠色標章</strong>，就能用同樣的錢，選到更省電、更省水、更環保的產品。以下介紹六種台灣政府推動的綠色標章，幫你一眼看懂、聰明選購。</p>
+    <div class="official">本指南整理自政府各主管機關（經濟部、經濟部水利署、環境部）公開資料，呼應環境部「<strong>淨零綠生活</strong>」的綠色消費倡議，也是<strong>閱大安社區綠色採購</strong>的選購依據。</div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-rating.jpg?v=2026062202" alt="能源效率分級標示" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">能源效率分級標示</span><span class="label-badge compulsory">強制標示</span></div>
+        <div class="label-en">Energy Efficiency Label · 經濟部能源署</div>
+        <p class="label-symbol">「溫度計」象徵能源效率等級，下方為地球——愈接近地球的等級愈節能，排放的二氧化碳愈少、對環境愈友善。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>2009 年（民國 98）起，為<strong>強制性制度</strong>，揭露能源效率、等級與年耗電量。</dd></div>
+          <div><dt>涵蓋</dt><dd>18 項強制列管產品，如：冷氣、電冰箱、除濕機、開飲機、省電燈泡、熱水器等。</dd></div>
+          <div><dt>怎麼看</dt><dd>分 1～5 級，<strong>第 1 級最省電</strong>。選購大型家電時認明「1 級」最划算。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-saving.png?v=2026062202" alt="節能標章" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">節能標章</span><span class="label-badge voluntary">自願申請</span></div>
+        <div class="label-en">Energy-Saving Label · 經濟部能源署</div>
+        <p class="label-symbol">「電源、愛心雙手、生生不息的火苗」象徵用心實踐省電、省油，提醒節約能源從生活小細節做起。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>2001 年（民國 90）起。有節能標章的產品，能源效率比國家認證標準高 <strong>10–50%</strong>。</dd></div>
+          <div><dt>涵蓋</dt><dd>已有 50 種產品通過認證，如：電器、照明設備、瓦斯爐具、汽機車等。</dd></div>
+          <div><dt>怎麼看</dt><dd>同級產品中，<strong>優先選有節能標章者</strong>，比強制分級更進一步省電。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-water-saving.jpg?v=2026062202" alt="省水標章" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">省水標章</span><span class="label-badge voluntary">自願申請</span></div>
+        <div class="label-en">Water-Saving Label · 經濟部水利署</div>
+        <p class="label-symbol">向上的箭頭把水滴接起，強調回收再利用、提高用水效率；右邊三條水帶代表「愛水、親水、節水」。藍色為普級、金色為金級（最高品質）。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>1998 年（民國 87）起，在不影響使用習慣下達到節約用水。</dd></div>
+          <div><dt>涵蓋</dt><dd>11 大類產品，如：洗衣機、馬桶、水龍頭、蓮蓬頭等。</dd></div>
+          <div><dt>怎麼看</dt><dd>以馬桶為例，無標章一次沖水 <strong>12 公升</strong>、普級 <strong>6 公升</strong>、金級僅 <strong>4.8 公升</strong>。換裝認金級最省。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-green-mark.png?v=2026062202" alt="環保標章" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">環保標章</span><span class="label-badge voluntary">自願申請</span></div>
+        <div class="label-en">Green Mark · 環境部</div>
+        <p class="label-symbol">「一片綠色樹葉包裹著純淨、不受污染的地球」，代表「可回收、低污染、省資源」的環保理念。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>1992 年（民國 81）起，鼓勵廠商降低污染、節省資源、達成廢棄物減量與回收再利用。</dd></div>
+          <div><dt>涵蓋</dt><dd>14 大類產品，如：清潔、生活用品、家電、資訊產品、建材等。</dd></div>
+          <div><dt>怎麼看</dt><dd>同一類產品中，環保標章<strong>只頒給環保表現前 20–30% 的產品</strong>，是綠色消費的優選。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-footprint.jpg?v=2026062202" alt="碳足跡標籤" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">碳足跡標籤</span><span class="label-badge voluntary">自願申請</span></div>
+        <div class="label-en">Carbon Footprint Label · 環境部</div>
+        <p class="label-symbol">由綠色心形及綠葉組成腳印，搭配「CO₂」化學符號，表達用愛大自然的心、減碳「酷」地球。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>2011 年（民國 100）起。揭露產品從製造、配送、使用到廢棄回收，整個生命週期換算成的二氧化碳當量總和。</dd></div>
+          <div><dt>涵蓋</dt><dd>16 大類產品，如：食品、紡織品、塑膠製品、光學設備等。</dd></div>
+          <div><dt>怎麼看</dt><dd>標籤上的數字即產品碳排；<strong>比較同類產品，選數字較低者</strong>。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-reduction.jpg?v=2026062202" alt="碳足跡減量標籤" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">碳足跡減量標籤（減碳標籤）</span><span class="label-badge voluntary">自願申請</span></div>
+        <div class="label-en">Carbon Reduction Label · 環境部</div>
+        <p class="label-symbol">「CO₂」符號中的箭頭向下，代表產品已達成審查通過的減碳承諾；標籤上的起始年份可看出何時取得。</p>
+        <dl class="label-facts">
+          <div><dt>推動</dt><dd>2016 年（民國 105）起。代表產品<strong>五年內碳足跡減量達 3% 以上</strong>，是實質減碳成果的展現。</dd></div>
+          <div><dt>涵蓋</dt><dd>16 大類產品，如：食品、生活用品、生活服務等。</dd></div>
+          <div><dt>怎麼看</dt><dd>代表廠商<strong>持續在減碳</strong>；同樣有碳足跡標籤時，可優先支持有減量標籤者。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="gl-cta">
+      <div class="gl-cta-h">🛒 閱大安的綠色採購</div>
+      <div class="gl-cta-p">社區公共採購<strong>優先選用具節能、省水或環保標章的產品</strong>，並推動<strong>登錄環境部綠色採購平台</strong>。把這份指南帶進日常採買，就是最實在的淨零行動。</div>
+      <a class="gl-cta-btn" href="/net-zero/">回到淨零新生活專區</a>
+    </div>
+
+    <p class="closing">綠色標章，是國家替你把關過的「環保保證」。下次採購多看一眼，省下的是電費、水費，也是給地球的一份心意。</p>
+  </div>
+
+  <!-- ════ English ════ -->
+  <div class="lang-block" data-lang="en">
+    <p class="lede">A quick glance at a <strong>green label</strong> when shopping lets you pick a more energy-efficient, water-saving and eco-friendly product for the same money. Here are six green labels promoted by Taiwan's government, made easy to read at a glance.</p>
+    <div class="official">This guide is compiled from official sources (Ministry of Economic Affairs, Water Resources Agency, Ministry of Environment), echoing the Ministry of Environment's <strong>Net-Zero Green Living</strong> green-consumption initiative, and guides <strong>our community's green procurement</strong>.</div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-rating.jpg?v=2026062202" alt="Energy Efficiency Label" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Energy Efficiency Label</span><span class="label-badge compulsory">Mandatory</span></div>
+        <div class="label-en">能源效率分級標示 · Bureau of Energy, MOEA</div>
+        <p class="label-symbol">A "thermometer" represents the efficiency grade above the Earth — the closer to the Earth, the more efficient and the less CO₂ emitted.</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>2009. A <strong>mandatory</strong> scheme disclosing energy efficiency, grade and annual power use.</dd></div>
+          <div><dt>Covers</dt><dd>18 regulated products — A/C, refrigerators, dehumidifiers, water dispensers, lamps, water heaters, etc.</dd></div>
+          <div><dt>How to read</dt><dd>Graded 1–5; <strong>Grade 1 is the most efficient</strong>. Look for "Grade 1" when buying large appliances.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-saving.png?v=2026062202" alt="Energy-Saving Label" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Energy-Saving Label</span><span class="label-badge voluntary">Voluntary</span></div>
+        <div class="label-en">節能標章 · Bureau of Energy, MOEA</div>
+        <p class="label-symbol">A power plug, caring hands and an ever-burning flame symbolize the effort to save energy from life's small details.</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>2001. Labeled products are <strong>10–50% more efficient</strong> than the national certification standard.</dd></div>
+          <div><dt>Covers</dt><dd>50 product types — appliances, lighting, gas stoves, cars and motorcycles, etc.</dd></div>
+          <div><dt>How to read</dt><dd>Among similar products, <strong>prefer one carrying this label</strong> — a step beyond the mandatory grade.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-water-saving.jpg?v=2026062202" alt="Water-Saving Label" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Water-Saving Label</span><span class="label-badge voluntary">Voluntary</span></div>
+        <div class="label-en">省水標章 · Water Resources Agency, MOEA</div>
+        <p class="label-symbol">An upward arrow lifts the water drop to stress reuse and efficiency; three streams mean "love, enjoy and save water." Blue is Standard, gold is Gold (top quality).</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>1998. Saves water without changing your habits.</dd></div>
+          <div><dt>Covers</dt><dd>11 product categories — washing machines, toilets, faucets, showerheads, etc.</dd></div>
+          <div><dt>How to read</dt><dd>A toilet uses <strong>12 L</strong> per flush unlabeled, <strong>6 L</strong> Standard, just <strong>4.8 L</strong> Gold. Choose Gold when replacing.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-green-mark.png?v=2026062202" alt="Green Mark" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Green Mark</span><span class="label-badge voluntary">Voluntary</span></div>
+        <div class="label-en">環保標章 · Ministry of Environment</div>
+        <p class="label-symbol">A green leaf wrapping a clean, unpolluted Earth — standing for "recyclable, low-pollution, resource-saving."</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>1992. Encourages makers to cut pollution, save resources, reduce waste and reuse.</dd></div>
+          <div><dt>Covers</dt><dd>14 categories — cleaning, household goods, appliances, IT products, building materials, etc.</dd></div>
+          <div><dt>How to read</dt><dd>Awarded only to the <strong>top 20–30%</strong> performers in each category — a green-consumption first choice.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-footprint.jpg?v=2026062202" alt="Carbon Footprint Label" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Carbon Footprint Label</span><span class="label-badge voluntary">Voluntary</span></div>
+        <div class="label-en">碳足跡標籤 · Ministry of Environment</div>
+        <p class="label-symbol">A footprint of green hearts and leaves with the "CO₂" symbol — caring for nature and cooling the Earth.</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>2011. Discloses total CO₂-equivalent emissions across a product's whole life cycle — manufacture, delivery, use and disposal.</dd></div>
+          <div><dt>Covers</dt><dd>16 categories — food, textiles, plastics, optical equipment, etc.</dd></div>
+          <div><dt>How to read</dt><dd>The number is the product's carbon emissions; <strong>compare similar products and pick the lower one</strong>.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-reduction.jpg?v=2026062202" alt="Carbon Reduction Label" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">Carbon Reduction Label</span><span class="label-badge voluntary">Voluntary</span></div>
+        <div class="label-en">碳足跡減量標籤 · Ministry of Environment</div>
+        <p class="label-symbol">A downward arrow in the "CO₂" symbol marks an approved carbon-reduction commitment; the start year shows when it was earned.</p>
+        <dl class="label-facts">
+          <div><dt>Since</dt><dd>2016. Means the product has <strong>cut its carbon footprint by 3%+ within five years</strong> — proof of real reduction.</dd></div>
+          <div><dt>Covers</dt><dd>16 categories — food, household goods, services, etc.</dd></div>
+          <div><dt>How to read</dt><dd>Shows the maker <strong>keeps reducing carbon</strong>; given the footprint label too, prefer one that also carries this.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="gl-cta">
+      <div class="gl-cta-h">🛒 Green Procurement at Cultural City</div>
+      <div class="gl-cta-p">Community procurement <strong>prioritizes products with energy-, water- or eco-labels</strong>, and we are pursuing <strong>registration on the Ministry's green-procurement platform</strong>. Bringing this guide into daily shopping is net-zero action made real.</div>
+      <a class="gl-cta-btn" href="/net-zero/">Back to Net-Zero Living</a>
+    </div>
+
+    <p class="closing">A green label is an eco-guarantee the nation has vetted for you. One extra glance when buying saves on power and water bills — and is a kindness to the planet.</p>
+  </div>
+
+  <!-- ════ 日本語 ════ -->
+  <div class="lang-block" data-lang="ja">
+    <p class="lede">買い物のとき<strong>グリーンマーク</strong>をひと目見るだけで、同じ予算でより省エネ・節水・環境にやさしい製品を選べます。台湾政府が推進する6つのグリーンマークを、ひと目で分かるようにご紹介します。</p>
+    <div class="official">本ガイドは各主管官庁（経済部・水利署・環境部）の公開情報をまとめたもので、環境部の<strong>ネットゼロ・グリーンライフ</strong>のグリーン消費提言に沿い、<strong>閱大安コミュニティのグリーン購入</strong>の指針でもあります。</div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-rating.jpg?v=2026062202" alt="エネルギー効率表示" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">エネルギー効率表示</span><span class="label-badge compulsory">義務表示</span></div>
+        <div class="label-en">能源效率分級標示 · 経済部能源署</div>
+        <p class="label-symbol">「温度計」がエネルギー効率の等級を、下の地球を象徴。地球に近い等級ほど省エネで、CO₂排出が少なく環境にやさしい。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>2009年から。<strong>義務制度</strong>として、効率・等級・年間消費電力を表示。</dd></div>
+          <div><dt>対象</dt><dd>18品目の規制対象。エアコン、冷蔵庫、除湿機、ウォーターサーバー、ランプ、給湯器など。</dd></div>
+          <div><dt>見方</dt><dd>1〜5級で、<strong>第1級が最も省エネ</strong>。大型家電は「1級」を選ぶとお得。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-energy-saving.png?v=2026062202" alt="省エネルギーラベル" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">省エネルギーラベル</span><span class="label-badge voluntary">任意申請</span></div>
+        <div class="label-en">節能標章 · 経済部能源署</div>
+        <p class="label-symbol">電源プラグ・思いやりの手・絶えない炎が、省エネ・省油を実践する心を象徴。省エネは生活の小さな工夫から。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>2001年から。認証製品は国家基準より <strong>10〜50%</strong> 高効率。</dd></div>
+          <div><dt>対象</dt><dd>50品目が認証。家電、照明、ガスコンロ、自動車・バイクなど。</dd></div>
+          <div><dt>見方</dt><dd>同等の製品なら<strong>このマーク付きを優先</strong>。義務等級より一歩進んだ省エネ。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-water-saving.jpg?v=2026062202" alt="節水ラベル" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">節水ラベル</span><span class="label-badge voluntary">任意申請</span></div>
+        <div class="label-en">省水標章 · 経済部水利署</div>
+        <p class="label-symbol">上向きの矢印が水滴を持ち上げ、再利用と効率を強調。3本の水帯は「愛水・親水・節水」。青が普級、金が金級（最高品質）。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>1998年から。使い勝手を変えずに節水を実現。</dd></div>
+          <div><dt>対象</dt><dd>11カテゴリ。洗濯機、トイレ、蛇口、シャワーヘッドなど。</dd></div>
+          <div><dt>見方</dt><dd>トイレは無表示で1回 <strong>12L</strong>、普級 <strong>6L</strong>、金級はわずか <strong>4.8L</strong>。交換時は金級が最も節水。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-green-mark.png?v=2026062202" alt="グリーンマーク" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">グリーンマーク（環境ラベル）</span><span class="label-badge voluntary">任意申請</span></div>
+        <div class="label-en">環保標章 · 環境部</div>
+        <p class="label-symbol">一枚の緑の葉が、汚染のない清らかな地球を包む——「リサイクル可・低汚染・省資源」の理念を表す。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>1992年から。汚染削減・省資源・廃棄物減量・再利用を企業に促す。</dd></div>
+          <div><dt>対象</dt><dd>14カテゴリ。清掃用品、生活用品、家電、IT製品、建材など。</dd></div>
+          <div><dt>見方</dt><dd>各カテゴリで環境性能<strong>上位20〜30%</strong>の製品のみに付与。グリーン消費の最優先。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-footprint.jpg?v=2026062202" alt="カーボンフットプリントラベル" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">カーボンフットプリントラベル</span><span class="label-badge voluntary">任意申請</span></div>
+        <div class="label-en">碳足跡標籤 · 環境部</div>
+        <p class="label-symbol">緑のハートと葉でできた足跡に「CO₂」記号。自然を愛し、地球を「クール」にする想いを表現。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>2011年から。製造・輸送・使用・廃棄まで、製品ライフサイクル全体のCO₂換算排出量を表示。</dd></div>
+          <div><dt>対象</dt><dd>16カテゴリ。食品、繊維、プラスチック、光学機器など。</dd></div>
+          <div><dt>見方</dt><dd>数字が製品の排出量。<strong>同種で数字の小さい方を選ぶ</strong>。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="label-card">
+      <div class="label-logo"><img src="/images/label-carbon-reduction.jpg?v=2026062202" alt="カーボン削減ラベル" loading="lazy"></div>
+      <div class="label-main">
+        <div class="label-head"><span class="label-name">カーボン削減ラベル</span><span class="label-badge voluntary">任意申請</span></div>
+        <div class="label-en">碳足跡減量標籤 · 環境部</div>
+        <p class="label-symbol">「CO₂」記号の中の下向き矢印が、審査を通過した削減の約束を表す。開始年から取得時期が分かる。</p>
+        <dl class="label-facts">
+          <div><dt>開始</dt><dd>2016年から。<strong>5年以内にカーボンフットプリントを3%以上削減</strong>した実績の証。</dd></div>
+          <div><dt>対象</dt><dd>16カテゴリ。食品、生活用品、生活サービスなど。</dd></div>
+          <div><dt>見方</dt><dd>企業が<strong>継続して削減している</strong>証。フットプリント表示が同じなら、削減ラベル付きを優先。</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="gl-cta">
+      <div class="gl-cta-h">🛒 閱大安のグリーン購入</div>
+      <div class="gl-cta-p">公共調達は<strong>省エネ・節水・環境マーク付き製品を優先</strong>し、<strong>環境部グリーン購入プラットフォームへの登録</strong>を推進。本ガイドを日々の買い物に活かすことが、確かなネットゼロ行動です。</div>
+      <a class="gl-cta-btn" href="/net-zero/">ネットゼロな暮らしへ戻る</a>
+    </div>
+
+    <p class="closing">グリーンマークは、国があなたに代わって確認した「環境の保証」。買い物でひと目見れば、電気代・水道代を抑え、地球への思いやりにもなります。</p>
+  </div>
+
+  <div class="footer">
+    <span class="footer-left">閱大安管理委員會　·　CULTURAL CITY COMMUNITY</span>
+  </div>
+</div>

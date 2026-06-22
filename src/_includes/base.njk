@@ -43,6 +43,7 @@
 {%- elif '/evacuation/' in pageUrl %}{% set bcUrl = '/evacuation/' %}{% set bcLabel = '緊急避難圖' %}
 {%- elif '/net-zero/' in pageUrl %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
 {%- elif '/transport/' in pageUrl %}{% set bcUrl = '/transport/' %}{% set bcLabel = '綠色運輸' %}
+{%- elif '/green-labels/' in pageUrl %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
 {%- elif pageUrl == '/search.html' %}{% set bcUrl = '/search.html' %}{% set bcLabel = '全站搜尋' %}
 {%- endif -%}
 {#- 全站頂部導覽帶：左側 breadcrumb（無區段時為空）+ 右側搜尋 icon。一律渲染、所有頁面都有 -#}
