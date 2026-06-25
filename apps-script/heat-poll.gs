@@ -94,17 +94,24 @@ function ensureCalendarEvent(level, today) {
   var date = new Date(today + 'T00:00:00+08:00');
   var events = cal.getEventsForDay(date);
   for (var i = 0; i < events.length; i++) {
-    var t = events[i].getTitle();
-    if (t.indexOf('臺北') >= 0 && t.indexOf('燈') >= 0 && t.indexOf('關懷') >= 0) {
-      Logger.log('Calendar event exists: ' + t);
+    // 用「高溫圖卡」當去重標記（不隨待辦措辭微調而失效；與 cold-poll 對稱）
+    if (events[i].getTitle().indexOf('高溫圖卡') >= 0) {
+      Logger.log('Calendar event exists: ' + events[i].getTitle());
       return;
     }
   }
 
-  var title = '⚠️ 臺北' + level.zh + '燈・必須關懷獨居長者';
-  var desc = '中央氣象署今日臺北市為' + level.zh + '色燈號。\n\n' +
-    '📢 LINE 公告請附 Drive 圖卡：\n' +
-    '01. 行政管理 / 09. 公告 / 公告圖卡 / 高溫提醒\n\n' +
+  // 待辦字面＝明確動作（總幹事一看就能照做），與 cold-poll.gs 對稱
+  var title = '⚠️ 臺北' + level.zh + '燈・貼' + level.zh + '燈高溫圖卡到公告群組＋關心獨居長輩';
+  var desc =
+    '中央氣象署今日臺北市發布高溫資訊・' + level.zh + '色燈號。\n\n' +
+    '【請總幹事處理】\n' +
+    '1. 到住戶公告群組張貼「' + level.zh + '燈・高溫提醒」圖卡\n' +
+    '   圖卡位置 → Drive：01. 行政管理 / 09. 公告 / 公告圖卡 / 高溫提醒\n' +
+    '2. 關心社區獨居長輩，確認狀況\n\n' +
+    '【圖卡重點（高溫的危險常被低估、身體不會主動示警）】\n' +
+    '・💧 主動補水、別等口渴；長者口渴感退化更要提醒\n' +
+    '・☀️ 避開正午曝曬，戶外活動移到清晨或傍晚\n\n' +
     'CWA 發布時間：' + level.issued + '\n有效至：' + level.validto + '\n\n' +
     '--- CWA 原文 ---\n' + level.content + '\n\n' +
     '📌 由 Apps Script heat-poll 自動建立';
