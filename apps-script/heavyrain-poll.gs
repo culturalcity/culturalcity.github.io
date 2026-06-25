@@ -35,7 +35,11 @@ var CALENDAR_ID = 'culturalcity85@gmail.com';
 var HEAVYRAIN_DATASET = 'W-C0033-001';
 var TARGET_CITY = '臺北市';
 var RAIN_KEYWORD = '豪雨';        // 含豪雨/大豪雨/超大豪雨；「大雨」不含此二字、自動排除
-var HEAVYRAIN_MARKER = '豪雨特報'; // 行事曆去重標記
+// 行事曆去重標記——⚠️ 必須是「實際事件標題」一定會出現的字串。
+// 標題是用 info.phenomena 組的（氣象署回「豪雨」/「大豪雨」，不含「特報」二字），
+// 故不能用「豪雨特報」當標記（標題裡根本沒這字串、去重會失效、每 30 分重複建一筆）。
+// 用「防汛準備」——它寫死在標題後段，必出現；且與颱風的「防颱準備」不同、不會誤撞。
+var HEAVYRAIN_MARKER = '防汛準備';
 
 // 防汛準備清單（聚焦排水/淹水，不含颱風的強風項；颱風另有專屬清單）
 var FLOOD_PREP_CHECKLIST = [
@@ -153,6 +157,21 @@ function checkHeavyRain() {
   }
   Logger.log('Detected: 臺北「' + info.phenomena + '」');
   ensureCalendarEvent(info, todayTaipei());
+}
+
+// ── 一次性：清掉今天重複的防汛準備事件（留最早一筆） ──
+// 去重 bug 修好前已重複建出多筆時，手動跑這支清理；跑完可刪除本函式。
+function cleanupDupesToday() {
+  var cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  var date = new Date(todayTaipei() + 'T00:00:00+08:00');
+  var events = cal.getEventsForDay(date).filter(function (e) {
+    return e.getTitle().indexOf(HEAVYRAIN_MARKER) >= 0;
+  });
+  Logger.log('找到 ' + events.length + ' 筆防汛準備事件');
+  for (var i = 1; i < events.length; i++) {  // 留 events[0]、刪其餘
+    events[i].deleteEvent();
+  }
+  Logger.log('已刪除 ' + Math.max(0, events.length - 1) + ' 筆重複，保留 1 筆');
 }
 
 // ── 測試用：手動跑一次（繞過任何時間限制） ──────────
