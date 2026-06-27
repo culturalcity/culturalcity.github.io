@@ -87,6 +87,19 @@
 | `.footer`     | 頁尾灰文字 |
 | `.dp` / `.dn` | 正向／負向強調文字 |
 
+## 單獨頁面（離線單檔・非 11ty build）
+
+少數頁面是「自包式單一 HTML」，不走本 repo 的 11ty build、要能雙擊開啟或離線（例如得獎自評分析頁）。這類頁**吃不到 `base.njk` 與 `global.css`**，必須**自我內含**以下，才能與全站一致：
+
+- **色票／字型／圓角**：把上方 `:root` 變數、`Noto Sans TC`、`--radius:2px` 直接寫進該檔。此處 redeclare 是**必要例外**（與站內頁「不要 redeclare」相反——因為沒有 global 可繼承）。
+- **字級**：`body{font-size:18px; line-height:1.75}`，套上方字級階梯；資料密集表格可酌減但**不低於 13px**。
+- **Header 紋理**：用上方官方那組 `repeating-linear-gradient`（120px／60px・wg1 3%/2%），**勿自創密斜紋**（2px/6px 那種）。
+- **Favicon（最易漏）**：不能用 `/favicon.svg` 絕對路徑（單檔無網站根 → 404）。改把 repo 根 `favicon.svg` 內嵌成 data-URI：
+  ```html
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,…">
+  ```
+  產生：`python -c "import base64;print(base64.b64encode(open('favicon.svg','rb').read()).decode())"`
+
 ## 實作現況（已知差異）
 
 以下是目前 CSS 與本文 spec 的偏離，未來重構時整理：
