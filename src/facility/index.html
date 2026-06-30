@@ -144,8 +144,8 @@ title: 公設使用登記
 
     <div class="row2">
       <div class="field">
-        <label>登記人姓名</label>
-        <input type="text" id="f-name" placeholder="選填">
+        <label>申請人姓名<span class="req">＊</span></label>
+        <input type="text" id="f-name" placeholder="必填">
       </div>
       <div class="field">
         <label>用途／備註</label>
@@ -159,7 +159,7 @@ title: 公設使用登記
 
   <!-- 清單（去敏：只顯示佔用時段） -->
   <h2 class="list-hd">登記紀錄</h2>
-  <div class="list-note">為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>您登記、且還沒開始的，會出現「取消」鈕（限您登記的那台裝置）</strong>；已發生的為使用紀錄、不可自行取消。要修改／延長請於使用前取消重登，或洽管理中心。</div>
+  <div class="list-note" id="list-note">為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>您登記、且還沒開始的，會出現「取消」鈕（限您登記的那台裝置）</strong>；已發生的為使用紀錄、不可自行取消。要修改／延長請於使用前取消重登，或洽管理中心。</div>
   <div class="filter" id="filter">
     <button type="button" data-val="" class="on">全部</button>
     <button type="button" data-val="交誼廳">交誼廳</button>
@@ -213,6 +213,7 @@ title: 公設使用登記
   var entries = [];
   var offline = false;
   var allDay = false;
+  var myLevel = 0;  // 1住戶 / 2保全 / 3總幹事（由 API 回傳；決定看不看得到戶號、能不能取消任何一筆）
   var sel = { facility: "", type: "normal", filter: "" };
 
   function $(id){ return document.getElementById(id); }
@@ -289,16 +290,18 @@ title: 公設使用登記
       .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
       .then(function(data){
         offline = false;
+        myLevel = data.level || 1;
         entries = Array.isArray(data.entries) ? data.entries : [];
         lsSave(entries);
         setSync("synced","● 已同步（管理中心可見）");
-        render(); renderOcc();
+        updateRoleUi(); render(); renderOcc();
       })
       .catch(function(){
         offline = true;
+        myLevel = 0;
         entries = lsLoad();
         setSync("offline","離線模式：暫存本機（連線後同步）");
-        render(); renderOcc();
+        updateRoleUi(); render(); renderOcc();
       });
   }
 
@@ -307,8 +310,10 @@ title: 公設使用登記
     var date = $("f-date").value;
     var ts = readTime("f-th","f-tm"), te = readTime("f-eh","f-em");
 
+    var nm = $("f-name").value.trim();
     if(!sel.facility){ return formErr("請選擇公設項目。"); }
     if(!unit){ return formErr("請選擇戶號。"); }
+    if(!nm){ return formErr("請填寫申請人姓名。"); }
     if(!date){ return formErr("請選擇使用日期。"); }
     if(!allDay && (!ts || !te)){ return formErr("請填寫使用時間（起迄），整段開放請點「整段開放」。"); }
     if(!allDay && te <= ts){ return formErr("結束時間需晚於開始時間。"); }
@@ -321,7 +326,7 @@ title: 公設使用登記
       timeStart: allDay ? "" : ts,
       timeEnd: allDay ? "" : te,
       unit: unit,
-      name: $("f-name").value.trim(),
+      name: nm,
       note: $("f-note").value.trim()
     };
 
@@ -363,9 +368,19 @@ title: 公設使用登記
     setTimeout(function(){ if(msg.className.indexOf("ok")>=0){ msg.textContent=""; } }, 6000);
   }
 
-  // 取消（住戶限自己這台裝置登記的；總幹事在後台另有刪除）
+  // 顯示角色提示：保全/總幹事看完整版；住戶看去敏版
+  function updateRoleUi(){
+    var note = $("list-note"); if(!note) return;
+    if(myLevel >= 2){
+      note.innerHTML = '您具<strong>'+(myLevel>=3?'總幹事':'保全')+'</strong>權限：此處顯示<strong>完整戶號與申請人</strong>，且可代住戶取消任何一筆登記。';
+    } else {
+      note.innerHTML = '為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>您登記、且還沒開始的，會出現「取消」鈕（限您登記的那台裝置）</strong>；已發生的為使用紀錄、不可自行取消。要修改／延長請於使用前取消重登，或洽管理中心。';
+    }
+  }
+
+  // 取消（住戶限自己這台裝置且未開始的；保全/總幹事可代取消任何一筆）
   function cancel(id){
-    if(!confirm("確定取消這筆您登記的紀錄？")) return;
+    if(!confirm("確定取消這筆登記？")) return;
     var isLocal = String(id).indexOf("local-")===0;
     if(offline || isLocal){
       entries = entries.filter(function(e){ return e.id!==id; });
@@ -383,14 +398,24 @@ title: 公設使用登記
   // 去敏的登記卡：只顯示空間＋類型＋時段，不顯示戶號/姓名/備註；自己登記的多一個取消鈕
   function entryHtml(e, owned){
     var typeBadge = e.type==="exclusive" ? '<span class="badge exc">🔒 包場</span>' : '<span class="badge">一般</span>';
+    // 保全/總幹事拿到的是完整版（含戶號/申請人）→ 顯示；住戶拿到去敏版（無 unit）→ 不顯示
+    var who = e.unit ? '<div class="entry-stamp">登記戶：'+esc(e.unit)+(e.name?'（'+esc(e.name)+'）':'')+'</div>' : '';
     var stamp = e.createdAt ? '<div class="entry-stamp">登記於 '+esc(fmtStamp(e.createdAt))+(isPending(e)?'（待同步）':'')+'</div>' : '';
-    var cancelBtn = (owned && notStarted(e)) ? '<button type="button" class="cancel-btn" data-id="'+esc(e.id)+'">取消我的登記</button>'
-                  : (owned ? '<div class="entry-stamp">這是您的登記・已發生為使用紀錄，無法自行取消（如需更正請洽管理中心）</div>' : '');
+    var cancelBtn;
+    if(myLevel >= 2){  // 保全／總幹事：可代取消任何一筆（含已發生）
+      cancelBtn = '<button type="button" class="cancel-btn" data-id="'+esc(e.id)+'">取消此登記</button>';
+    } else if(owned && notStarted(e)){
+      cancelBtn = '<button type="button" class="cancel-btn" data-id="'+esc(e.id)+'">取消我的登記</button>';
+    } else if(owned){
+      cancelBtn = '<div class="entry-stamp">這是您的登記・已發生為使用紀錄，無法自行取消（如需更正請洽管理中心）</div>';
+    } else {
+      cancelBtn = '';
+    }
     return '<div class="entry'+(e.type==="exclusive"?" exc":"")+'">'+
       '<div class="entry-top">'+
         '<span class="badge fac">'+esc(e.facility)+'</span>'+ typeBadge +
         '<span class="entry-when">'+esc(fmtWhen(e))+'</span>'+
-      '</div>'+ stamp + cancelBtn +
+      '</div>'+ who + stamp + cancelBtn +
     '</div>';
   }
 
