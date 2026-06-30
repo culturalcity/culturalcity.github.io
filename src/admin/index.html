@@ -1,0 +1,70 @@
+---
+layout: base.njk
+permalink: /admin/
+title: 總幹事後台
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">STAFF CONSOLE</div>
+    <h1>總幹事後台</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:760px;margin:0 auto;padding:28px 20px 64px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:24px;}
+    .intro strong{color:var(--wg41);}
+    .grp-hd{font-size:14px;font-weight:700;color:var(--wg9);letter-spacing:.1em;margin:26px 0 12px;}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    @media(max-width:560px){.cards{grid-template-columns:1fr;}}
+    .tool{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;text-decoration:none;color:var(--wg41);position:relative;transition:all .15s;overflow:hidden;}
+    .tool::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .tool:hover{background:#F2F0EC;border-color:var(--wg11);}
+    .tool-title{font-size:18px;font-weight:700;letter-spacing:.04em;margin-bottom:6px;}
+    .tool-desc{font-size:15px;color:var(--wg9);line-height:1.7;flex:1;}
+    .tool-cta{font-size:14px;color:var(--wg11);letter-spacing:.06em;margin-top:12px;}
+    .tool:hover .tool-cta{color:var(--wg41);}
+  </style>
+
+  <div class="intro">
+    這裡是<strong>總幹事／主委</strong>專用的工具入口（一般住戶看不到）。各工具的網址都在 <code>/admin/</code> 之下，由社區登入保護自動繼承。
+  </div>
+
+  <div class="grp-hd">日常作業</div>
+  <div class="cards">
+    <a class="tool" href="/admin/utility/">
+      <div class="tool-title">每日水電公告產生器</div>
+      <div class="tool-desc">填昨日水電數字、自動產生住戶端 LINE 公告卡片（一鍵下載 PNG）。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+    <a class="tool" href="/admin/facility/">
+      <div class="tool-title">公設登記後台</div>
+      <div class="tool-desc">查看公設使用登記統計、完整明細（含戶號／登記時間）、匯出 CSV。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+  </div>
+
+  <div class="grp-hd">手冊與紀錄</div>
+  <div class="cards">
+    <a class="tool" href="/admin/staff/pm-wiki/">
+      <div class="tool-title">總幹事 Wiki</div>
+      <div class="tool-desc">作業流程、區權會準備、設備與廠商、緊急應變等彙整手冊。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+    <a class="tool" href="/admin/staff/inspection-osf.html">
+      <div class="tool-title">公安檢查表</div>
+      <div class="tool-desc">公共安全申報的自主檢查表（inspection-osf）。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+    <a class="tool" href="/admin/staff/docs/2026-05-06-fire-shutter-incident/">
+      <div class="tool-title">事件報告</div>
+      <div class="tool-desc">有日期的事件處理報告（首例：防火鐵捲門無火警誤降事件）。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+  </div>
+
+</div>

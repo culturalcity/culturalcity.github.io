@@ -1,0 +1,484 @@
+---
+layout: base.njk
+permalink: /facility/
+title: 公設使用登記
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">FACILITY LOG</div>
+    <h1>公設使用登記</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:760px;margin:0 auto;padding:28px 20px 64px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:22px;}
+    .intro strong{color:var(--wg41);}
+    .intro a{color:var(--dp);}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--wg9);letter-spacing:.04em;margin-bottom:14px;}
+    .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
+    .syncbar.is-saving .syncdot{background:#B8860B;}
+    .syncbar.is-offline .syncdot{background:var(--wg11);}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px;margin-bottom:28px;}
+    .card-hd{font-size:18px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin-bottom:18px;}
+    .field{margin-bottom:18px;}
+    .field > label{display:block;font-size:15px;font-weight:500;color:var(--wg11);letter-spacing:.06em;margin-bottom:8px;}
+    .field .req{color:var(--dn);font-weight:700;margin-left:2px;}
+    .seg{display:flex;flex-wrap:wrap;gap:10px;}
+    .seg button{font-family:inherit;font-size:17px;letter-spacing:.04em;padding:13px 16px;min-height:50px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:120px;}
+    .seg button:hover{background:rgba(60,56,53,0.04);}
+    .seg button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
+    .seg.fac button{min-width:140px;}
+    input[type=text],input[type=date],input[type=time],select{width:100%;font-family:inherit;font-size:17px;padding:13px 14px;min-height:50px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+    input:focus,select:focus{outline:2px solid var(--wg41);outline-offset:-1px;}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:560px){.row2{grid-template-columns:1fr;}}
+    .pair{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    .pair span{color:var(--wg9);font-size:16px;flex-shrink:0;}
+    .pair input[type=time]{flex:1 1 120px;min-width:0;}
+    .allday-btn{font-family:inherit;font-size:16px;padding:0 16px;min-height:50px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;flex-shrink:0;transition:all .15s;}
+    .allday-btn:hover{background:rgba(60,56,53,0.04);}
+    .allday-btn.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
+    input[type=time]:disabled{opacity:.45;background:var(--wg1);cursor:not-allowed;}
+    .hint{font-size:14px;color:var(--wg9);line-height:1.7;margin-top:8px;}
+    .fac-hours{font-size:14px;color:var(--wg11);line-height:1.7;margin-top:8px;display:none;}
+    .fac-hours strong{color:var(--wg41);}
+    .exc-hint{font-size:14px;color:var(--dn);line-height:1.7;margin-top:10px;display:none;}
+    .exc-hint.show{display:block;}
+    /* 當日使用狀況 */
+    .occ-box{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.18);border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:none;}
+    .occ-hd{font-size:15px;font-weight:700;color:var(--wg41);margin-bottom:6px;}
+    .occ-empty{font-size:15px;color:var(--dp);}
+    .occ-sub{font-size:14px;color:var(--wg9);margin-bottom:6px;}
+    .occ-row{font-size:15px;color:var(--wg41);padding:2px 0;}
+    .occ-exc{font-size:12px;background:var(--dn);color:#fff;padding:1px 7px;border-radius:3px;margin-left:4px;}
+    .submit-btn{width:100%;font-family:inherit;font-size:19px;font-weight:700;letter-spacing:.12em;color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:16px;min-height:58px;cursor:pointer;margin-top:6px;transition:background .15s;}
+    .submit-btn:hover{background:#2c2926;}
+    .submit-btn:disabled{opacity:.5;cursor:default;}
+    .form-msg{font-size:15px;line-height:1.7;margin-top:12px;min-height:1px;}
+    .form-msg.err{color:var(--dn);}
+    .form-msg.ok{color:var(--dp);}
+    .filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+    .filter button{font-family:inherit;font-size:15px;letter-spacing:.04em;padding:8px 15px;border:1px solid var(--line);background:var(--white);color:var(--wg9);border-radius:999px;cursor:pointer;transition:all .15s;}
+    .filter button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
+    .list-hd{font-size:18px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:0 0 6px;}
+    .list-note{font-size:14px;color:var(--wg9);line-height:1.7;margin-bottom:14px;}
+    .sub-hd{font-size:14px;font-weight:700;color:var(--wg9);letter-spacing:.1em;margin:24px 0 12px;}
+    .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:13px 16px;margin-bottom:12px;}
+    .entry.exc{border-left-color:var(--dn);background:rgba(140,31,31,0.03);}
+    .entry-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+    .badge{font-size:13px;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--wg1);color:var(--wg11);}
+    .badge.fac{background:var(--wg41);color:var(--wg1);}
+    .badge.exc{background:var(--dn);color:#fff;}
+    .entry-when{font-size:17px;font-weight:500;color:var(--wg41);}
+    .entry-stamp{font-size:13px;color:var(--wg9);margin-top:5px;letter-spacing:.03em;}
+    .occ-stamp{color:var(--wg9);font-size:13px;}
+    .cancel-btn{margin-top:10px;font-family:inherit;font-size:14px;color:var(--wg9);background:none;border:1px solid var(--line);border-radius:var(--radius);padding:6px 13px;cursor:pointer;transition:all .15s;}
+    .cancel-btn:hover{color:#fff;background:var(--dn);border-color:var(--dn);}
+    .empty{font-size:16px;color:var(--wg9);padding:24px 0;text-align:center;}
+  </style>
+
+  <div class="intro">
+    使用社區公設後（或要<strong>包場</strong>前），請在此登記。資料即時同步給管理中心，方便大家彼此錯開、也方便管理委員會掌握使用狀況。<strong>包場屬整場借用，請務必先與管理中心確認後再登記。</strong><br>
+    各空間開放時間、包場費用與使用規定，詳見 <a href="/regulations/regulations-特定公共空間管理辦法.html">特定公共空間管理辦法 →</a>。
+  </div>
+
+  <div class="syncbar" id="syncbar"><span class="syncdot"></span><span id="sync-text">載入中…</span></div>
+
+  <!-- 登記表單 -->
+  <div class="card">
+    <div class="card-hd">＋ 新增登記</div>
+
+    <div class="field">
+      <label>公設項目<span class="req">＊</span></label>
+      <div class="seg fac" id="seg-facility">
+        <button type="button" data-val="交誼廳">交誼廳</button>
+        <button type="button" data-val="健身房">健身房</button>
+        <button type="button" data-val="頂樓室內空間">頂樓室內空間</button>
+        <button type="button" data-val="頂樓室外空間">頂樓室外空間</button>
+      </div>
+      <div class="fac-hours" id="fac-hours"></div>
+    </div>
+
+    <div class="field">
+      <label>類型<span class="req">＊</span></label>
+      <div class="seg" id="seg-type">
+        <button type="button" data-val="normal" class="on">一般使用</button>
+        <button type="button" data-val="exclusive">包場（整場借用）</button>
+      </div>
+      <div class="exc-hint" id="exc-hint">⚠ 包場限<strong>非國定假日 08:00–22:00</strong>，須<strong>三日前</strong>向管理中心登記、繳<strong>押金 3,000 元</strong>（健身房一般使用免費；交誼廳、頂樓室內、室外包場另計維護費）。請先與管理中心確認後再登記。</div>
+    </div>
+
+    <div class="field">
+      <label>戶號<span class="req">＊</span></label>
+      <select id="f-unit"><option value="">選擇戶號…</option></select>
+    </div>
+
+    <div class="field">
+      <label>使用日期<span class="req">＊</span></label>
+      <input type="date" id="f-date">
+    </div>
+
+    <div class="field">
+      <label>使用時間<span class="req">＊</span></label>
+      <div class="pair">
+        <input type="time" id="f-tstart" step="600" aria-label="開始時間"><span>～</span><input type="time" id="f-tend" step="600" aria-label="結束時間">
+        <button type="button" class="allday-btn" id="allday-btn">整段開放</button>
+      </div>
+      <div class="hint">請填實際起迄時間——方便管理中心配合開燈／交接冷氣遙控器，也讓其他住戶知道確切佔用的時段。「整段開放」＝該空間當日全部開放時間。</div>
+    </div>
+
+    <!-- 當日使用狀況（去敏：只顯示時段，不顯示是誰） -->
+    <div class="occ-box" id="occ-box"></div>
+
+    <div class="row2">
+      <div class="field">
+        <label>登記人姓名</label>
+        <input type="text" id="f-name" placeholder="選填">
+      </div>
+      <div class="field">
+        <label>用途／備註</label>
+        <input type="text" id="f-note" placeholder="選填，例：小孩生日聚會">
+      </div>
+    </div>
+
+    <button type="button" class="submit-btn" id="submit-btn">送出登記</button>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+
+  <!-- 清單（去敏：只顯示佔用時段） -->
+  <h2 class="list-hd">登記紀錄</h2>
+  <div class="list-note">為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>你登記的會出現「取消」鈕（限你登記的那台裝置）</strong>；要修改＝先取消再重登，要延長＝直接再登一筆接續時段。</div>
+  <div class="filter" id="filter">
+    <button type="button" data-val="" class="on">全部</button>
+    <button type="button" data-val="交誼廳">交誼廳</button>
+    <button type="button" data-val="健身房">健身房</button>
+    <button type="button" data-val="頂樓室內空間">頂樓室內空間</button>
+    <button type="button" data-val="頂樓室外空間">頂樓室外空間</button>
+  </div>
+  <div id="list-area"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var API = "/facility/api/log";
+  var LS_KEY = "yda_facility_entries";
+  var LS_MINE = "yda_facility_mine";  // 這台裝置登記過的 [{id, token}]
+
+  // 公設清單（名稱比照特定公共空間管理辦法）＋開放時間
+  // 健身房：每日 06:00–24:00（第十九條）；其餘比照包場時段 非國定假日 08:00–22:00（第十六條）
+  var FACILITIES = [
+    { name:"交誼廳",      open:"08:00", close:"22:00", days:"非國定假日" },
+    { name:"健身房",      open:"06:00", close:"24:00", days:"每日" },
+    { name:"頂樓室內空間",    open:"08:00", close:"22:00", days:"非國定假日" },
+    { name:"頂樓室外空間", open:"08:00", close:"22:00", days:"非國定假日" }
+  ];
+  function facCfg(name){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].name===name) return FACILITIES[i]; } return null; }
+
+  // 90 戶名冊（門牌／樓／戶別；來源：第五屆 AGM agm-tools.html 的 ROSTER，
+  // 僅取戶號結構，未含姓名與區權比）。戶別跳「之4」、5/6 樓僅 4 戶為實際現況。
+  var U_FULL = ["本號","之1","之2","之3","之5","之6","之7"]; // 3,4,7–15 樓
+  var U_HALF = ["本號","之1","之2","之3"];                   // 5,6 樓
+  var UNIT_GROUPS = [
+    { door:"83", floor:"1樓", units:["之3","之5","之6","之7","之8"] },
+    { door:"85", floor:"3樓", units:U_FULL },
+    { door:"85", floor:"4樓", units:U_FULL },
+    { door:"85", floor:"5樓", units:U_HALF },
+    { door:"85", floor:"6樓", units:U_HALF },
+    { door:"85", floor:"7樓", units:U_FULL },
+    { door:"85", floor:"8樓", units:U_FULL },
+    { door:"85", floor:"9樓", units:U_FULL },
+    { door:"85", floor:"10樓", units:U_FULL },
+    { door:"85", floor:"11樓", units:U_FULL },
+    { door:"85", floor:"12樓", units:U_FULL },
+    { door:"85", floor:"13樓", units:U_FULL },
+    { door:"85", floor:"14樓", units:U_FULL },
+    { door:"85", floor:"15樓", units:U_FULL }
+  ];
+
+  var entries = [];
+  var offline = false;
+  var allDay = false;
+  var sel = { facility: "", type: "normal", filter: "" };
+
+  function $(id){ return document.getElementById(id); }
+  function todayStr(){
+    var d = new Date();
+    return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  }
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"]/g, function(c){
+      return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[c];
+    });
+  }
+  function fmtDate(s){
+    var m = String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if(!m) return s||"";
+    var d = new Date(+m[1], +m[2]-1, +m[3]);
+    var wk = ["日","一","二","三","四","五","六"][d.getDay()];
+    return (+m[2])+"/"+(+m[3])+"（週"+wk+"）";
+  }
+  function slotText(e){
+    if(e.allDay){ var c=facCfg(e.facility); return c ? ("整段開放 "+c.open+"–"+c.close) : "整段開放"; }
+    if(e.timeStart && e.timeEnd) return e.timeStart+"–"+e.timeEnd;
+    return e.timeStart || "";
+  }
+  function fmtWhen(e){
+    var parts = [fmtDate(e.date)];
+    var t = slotText(e); if(t) parts.push(t);
+    return parts.join("・");
+  }
+  // 存檔時間（伺服器蓋的 createdAt，台北時區由瀏覽器在地化）→ 先後順序依據
+  function fmtStamp(iso){
+    if(!iso) return "";
+    var d = new Date(iso); if(isNaN(d)) return "";
+    return (d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+  }
+  function isPending(e){ return e.id && String(e.id).indexOf("local-")===0; }
+  function isFuture(s){
+    var m = String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if(!m) return false;
+    var d = new Date(+m[1], +m[2]-1, +m[3]); d.setHours(0,0,0,0);
+    var t = new Date(); t.setHours(0,0,0,0);
+    return d >= t;
+  }
+
+  function setSync(state, text){
+    $("syncbar").className = "syncbar" + (state==="saving"?" is-saving":state==="offline"?" is-offline":"");
+    $("sync-text").textContent = text;
+  }
+
+  function lsLoad(){ try { return JSON.parse(localStorage.getItem(LS_KEY)||"[]"); } catch(e){ return []; } }
+  function lsSave(arr){ try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch(e){} }
+
+  // 「這台裝置登記過哪幾筆」＋取消用 token（住戶共用密碼 → 靠 per-entry token 證明是本人登記的）
+  function mineLoad(){ try { return JSON.parse(localStorage.getItem(LS_MINE)||"[]"); } catch(e){ return []; } }
+  function mineSave(a){ try { localStorage.setItem(LS_MINE, JSON.stringify(a)); } catch(e){} }
+  function mineAdd(id, token){ if(!id) return; var a=mineLoad(); a.push({ id:id, token:token||"" }); mineSave(a); }
+  function mineToken(id){ var a=mineLoad(); for(var i=0;i<a.length;i++){ if(a[i].id===id) return a[i].token; } return ""; }
+  function mineRemove(id){ mineSave(mineLoad().filter(function(x){ return x.id!==id; })); }
+  function myIdSet(){ var s={}; mineLoad().forEach(function(x){ s[x.id]=1; }); return s; }
+
+  function load(){
+    setSync("saving","載入中…");
+    fetch(API, { headers:{ "Accept":"application/json" } })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(data){
+        offline = false;
+        entries = Array.isArray(data.entries) ? data.entries : [];
+        lsSave(entries);
+        setSync("synced","● 已同步（管理中心可見）");
+        render(); renderOcc();
+      })
+      .catch(function(){
+        offline = true;
+        entries = lsLoad();
+        setSync("offline","離線模式：暫存本機（連線後同步）");
+        render(); renderOcc();
+      });
+  }
+
+  function submit(){
+    var unit = $("f-unit").value;
+    var date = $("f-date").value;
+    var ts = $("f-tstart").value, te = $("f-tend").value;
+
+    if(!sel.facility){ return formErr("請選擇公設項目。"); }
+    if(!unit){ return formErr("請選擇戶號。"); }
+    if(!date){ return formErr("請選擇使用日期。"); }
+    if(!allDay && (!ts || !te)){ return formErr("請填寫使用時間（起迄），整段開放請點「整段開放」。"); }
+    if(!allDay && te <= ts){ return formErr("結束時間需晚於開始時間。"); }
+
+    var entry = {
+      facility: sel.facility,
+      type: sel.type,
+      date: date,
+      allDay: allDay,
+      timeStart: allDay ? "" : ts,
+      timeEnd: allDay ? "" : te,
+      unit: unit,
+      name: $("f-name").value.trim(),
+      note: $("f-note").value.trim()
+    };
+
+    $("submit-btn").disabled = true;
+    setSync("saving","儲存中…");
+    $("form-msg").className="form-msg"; $("form-msg").textContent="";
+
+    fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(entry) })
+    .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+    .then(function(res){
+      offline = false;
+      var saved = res.entry || entry;
+      entries.push(saved);
+      lsSave(entries);
+      mineAdd(saved.id, res.editToken);  // 記住這台裝置登記的＋取消用 token
+      afterSubmit(true);
+    })
+    .catch(function(){
+      offline = true;
+      entry.id = "local-" + Date.now() + "-" + Math.floor(Math.random()*1e4);
+      entry.createdAt = new Date().toISOString();
+      entries.push(entry); lsSave(entries);
+      mineAdd(entry.id, "");  // 本機暫存筆，無伺服器 token
+      afterSubmit(false);
+    });
+  }
+  function formErr(t){ var m=$("form-msg"); m.className="form-msg err"; m.textContent=t; }
+
+  function afterSubmit(synced){
+    $("submit-btn").disabled = false;
+    var msg = $("form-msg");
+    msg.className = "form-msg ok";
+    msg.textContent = synced ? "✓ 登記完成，已同步管理中心。" : "✓ 已登記（目前離線，暫存本機，連線後會同步）。";
+    setAllDay(false);
+    $("f-tstart").value=""; $("f-tend").value=""; $("f-name").value=""; $("f-note").value="";
+    setSync(synced?"synced":"offline", synced?"● 已同步（管理中心可見）":"離線模式：暫存本機（連線後同步）");
+    render(); renderOcc();
+    setTimeout(function(){ if(msg.className.indexOf("ok")>=0){ msg.textContent=""; } }, 6000);
+  }
+
+  // 取消（住戶限自己這台裝置登記的；總幹事在後台另有刪除）
+  function cancel(id){
+    if(!confirm("確定取消這筆你登記的紀錄？")) return;
+    var isLocal = String(id).indexOf("local-")===0;
+    if(offline || isLocal){
+      entries = entries.filter(function(e){ return e.id!==id; });
+      lsSave(entries); mineRemove(id); render(); renderOcc(); return;
+    }
+    fetch(API + "?id=" + encodeURIComponent(id) + "&token=" + encodeURIComponent(mineToken(id)), { method:"DELETE" })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){
+        entries = entries.filter(function(e){ return e.id!==id; });
+        lsSave(entries); mineRemove(id); render(); renderOcc();
+      })
+      .catch(function(){ alert("取消失敗（需從原登記的裝置操作，或已逾期）。"); });
+  }
+
+  // 去敏的登記卡：只顯示空間＋類型＋時段，不顯示戶號/姓名/備註；自己登記的多一個取消鈕
+  function entryHtml(e, owned){
+    var typeBadge = e.type==="exclusive" ? '<span class="badge exc">🔒 包場</span>' : '<span class="badge">一般</span>';
+    var stamp = e.createdAt ? '<div class="entry-stamp">登記於 '+esc(fmtStamp(e.createdAt))+(isPending(e)?'（待同步）':'')+'</div>' : '';
+    var cancelBtn = owned ? '<button type="button" class="cancel-btn" data-id="'+esc(e.id)+'">取消我的登記</button>' : '';
+    return '<div class="entry'+(e.type==="exclusive"?" exc":"")+'">'+
+      '<div class="entry-top">'+
+        '<span class="badge fac">'+esc(e.facility)+'</span>'+ typeBadge +
+        '<span class="entry-when">'+esc(fmtWhen(e))+'</span>'+
+      '</div>'+ stamp + cancelBtn +
+    '</div>';
+  }
+
+  function render(){
+    var area = $("list-area");
+    var list = entries.slice();
+    if(sel.filter) list = list.filter(function(e){ return e.facility === sel.filter; });
+    function key(e){ return (e.date||"") + " " + (e.timeStart||"") + " " + (e.createdAt||""); }
+    list.sort(function(a,b){ return key(a) < key(b) ? 1 : key(a) > key(b) ? -1 : 0; });
+
+    var upcomingExc = list.filter(function(e){ return e.type==="exclusive" && isFuture(e.date); })
+                          .sort(function(a,b){ return (a.date||"") < (b.date||"") ? -1 : 1; });
+    var rest = list.filter(function(e){ return !(e.type==="exclusive" && isFuture(e.date)); });
+
+    var mine = myIdSet();
+    function rowsOf(arr){ return arr.map(function(e){ return entryHtml(e, !!mine[e.id]); }).join(""); }
+    var html = "";
+    if(upcomingExc.length){
+      html += '<div class="sub-hd">🔒 即將到來的包場</div>' + rowsOf(upcomingExc);
+    }
+    if(rest.length){
+      if(upcomingExc.length) html += '<div class="sub-hd">使用紀錄</div>';
+      html += rowsOf(rest);
+    }
+    if(!list.length){
+      html = '<div class="empty">目前沒有'+(sel.filter?("「"+sel.filter+"」的"):"")+'登記紀錄。</div>';
+    }
+    area.innerHTML = html;
+    var cbs = area.querySelectorAll(".cancel-btn");
+    for(var i=0;i<cbs.length;i++){ (function(b){ b.addEventListener("click", function(){ cancel(b.getAttribute("data-id")); }); })(cbs[i]); }
+  }
+
+  // 當日使用狀況：選好空間＋日期後，列出當天該空間已佔用時段（去敏，不擋登記）
+  function renderOcc(){
+    var box = $("occ-box");
+    var date = $("f-date").value;
+    if(!sel.facility || !date){ box.style.display="none"; return; }
+    var list = entries.filter(function(e){ return e.facility===sel.facility && e.date===date; })
+                      .sort(function(a,b){ return (a.createdAt||"")<(b.createdAt||"")?-1:1; });  // 依登記先後
+    var html = '<div class="occ-hd">'+esc(sel.facility)+'・'+fmtDate(date)+'　當日使用狀況</div>';
+    if(!list.length){
+      html += '<div class="occ-empty">✓ 目前尚無人登記，整段時間都很空。</div>';
+    } else {
+      html += '<div class="occ-sub">已有 '+list.length+' 組登記（依登記先後，僅供參考、不影響你登記）：</div>';
+      html += list.map(function(e){
+        var tag = e.type==="exclusive" ? '<span class="occ-exc">包場</span>' : '';
+        var st = e.createdAt ? '<span class="occ-stamp">（登記 '+esc(fmtStamp(e.createdAt))+'）</span>' : '';
+        return '<div class="occ-row">• '+esc(slotText(e))+' '+tag+' '+st+'</div>';
+      }).join("");
+    }
+    box.innerHTML = html; box.style.display="block";
+  }
+
+  function paintSeg(segId, val){
+    var bs = $(segId).querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){ bs[i].classList.toggle("on", bs[i].getAttribute("data-val") === val); }
+  }
+  function wireSeg(segId, onPick){
+    $(segId).addEventListener("click", function(ev){
+      var b = ev.target.closest("button"); if(!b) return;
+      onPick(b.getAttribute("data-val"));
+    });
+  }
+
+  // 選空間後：顯示該空間開放時間
+  function showFacHours(name){
+    var c = facCfg(name), el = $("fac-hours");
+    if(!c){ el.style.display="none"; return; }
+    el.innerHTML = '📋 <strong>'+esc(name)+'</strong> 開放時間：<strong>'+c.open+'–'+c.close+'</strong>（'+c.days+'）';
+    el.style.display = "block";
+  }
+
+  function buildUnitSelect(){
+    var selEl = $("f-unit");
+    UNIT_GROUPS.forEach(function(g){
+      var og = document.createElement("optgroup");
+      og.label = g.door + "號 " + g.floor;
+      g.units.forEach(function(u){
+        var o = document.createElement("option");
+        o.value = g.door + "號" + g.floor + u;
+        o.textContent = o.value;
+        og.appendChild(o);
+      });
+      selEl.appendChild(og);
+    });
+  }
+  buildUnitSelect();
+
+  function setAllDay(on){
+    allDay = on;
+    $("allday-btn").classList.toggle("on", on);
+    $("f-tstart").disabled = on; $("f-tend").disabled = on;
+    if(on){ $("f-tstart").value=""; $("f-tend").value=""; }
+  }
+
+  $("f-date").value = todayStr();
+  wireSeg("seg-facility", function(v){ sel.facility=v; paintSeg("seg-facility",v); showFacHours(v); renderOcc(); });
+  wireSeg("seg-type", function(v){
+    sel.type=v; paintSeg("seg-type",v);
+    $("exc-hint").classList.toggle("show", v==="exclusive");
+  });
+  $("allday-btn").addEventListener("click", function(){ setAllDay(!allDay); });
+  $("f-date").addEventListener("change", renderOcc);
+  wireSeg("filter", function(v){ sel.filter=v; paintSeg("filter",v); render(); });
+  $("submit-btn").addEventListener("click", submit);
+
+  load();
+})();
+</script>

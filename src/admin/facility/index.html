@@ -1,0 +1,284 @@
+---
+layout: base.njk
+permalink: /admin/facility/
+title: 公設登記後台統計
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/admin/" class="back-link">返回總幹事後台</a>
+    <div class="header-eyebrow">FACILITY STATS</div>
+    <h1>公設登記・後台統計</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:880px;margin:0 auto;padding:28px 20px 64px;}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--wg9);letter-spacing:.04em;margin-bottom:18px;}
+    .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
+    .syncbar.is-offline .syncdot{background:var(--dn);}
+    .sect-hd{font-size:17px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:28px 0 14px;}
+    /* KPI */
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    @media(max-width:640px){.kpi-row{grid-template-columns:1fr 1fr;}}
+    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;position:relative;}
+    .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .kpi.exc::before{background:var(--dn);}
+    .kpi-label{font-size:14px;color:var(--wg9);letter-spacing:.06em;margin-bottom:8px;}
+    .kpi-val{font-size:30px;font-weight:700;color:var(--wg41);line-height:1;}
+    .kpi-unit{font-size:14px;color:var(--wg9);margin-left:3px;font-weight:400;}
+    /* 表格 */
+    .panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:8px;}
+    table{width:100%;border-collapse:collapse;font-size:15px;}
+    th{text-align:left;padding:10px 12px;background:var(--wg1);color:var(--wg9);font-weight:500;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;}
+    td{padding:10px 12px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);}
+    tr:last-child td{border-bottom:none;}
+    td.num,th.num{text-align:right;}
+    .bar-cell{position:relative;}
+    .bar{display:inline-block;height:10px;background:var(--wg11);border-radius:2px;vertical-align:middle;margin-right:8px;min-width:2px;}
+    /* 明細工具列 */
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;}
+    .toolbar select{font-family:inherit;font-size:15px;padding:9px 30px 9px 12px;min-height:42px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 10px center;}
+    .csv-btn{margin-left:auto;font-family:inherit;font-size:15px;letter-spacing:.04em;padding:9px 16px;min-height:42px;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;}
+    .csv-btn:hover{background:var(--wg11);color:var(--wg1);}
+    .detail-table td{white-space:nowrap;color:var(--wg41);}
+    .detail-table td.note{white-space:normal;color:var(--wg9);}
+    .badge{font-size:13px;padding:2px 8px;border-radius:3px;background:var(--wg1);color:var(--wg11);}
+    .badge.exc{background:var(--dn);color:#fff;}
+    .del-btn{font-family:inherit;font-size:13px;color:var(--wg9);background:none;border:1px solid var(--line);border-radius:var(--radius);padding:5px 10px;cursor:pointer;}
+    .del-btn:hover{color:#fff;background:var(--dn);border-color:var(--dn);}
+    .empty{font-size:16px;color:var(--wg9);padding:22px 14px;text-align:center;}
+    .tbl-scroll{overflow-x:auto;}
+  </style>
+
+  <div class="syncbar" id="syncbar"><span class="syncdot"></span><span id="sync-text">載入中…</span></div>
+
+  <!-- KPI -->
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <!-- 各公設次數 -->
+  <div class="sect-hd">各公設使用次數</div>
+  <div class="panel"><div class="tbl-scroll">
+    <table id="fac-table">
+      <thead><tr><th>公設項目</th><th class="num">本月</th><th class="num">全部</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div></div>
+
+  <!-- 時段熱度 -->
+  <div class="sect-hd">時段熱度（依開始時間分類・全部）</div>
+  <div class="panel"><div class="tbl-scroll">
+    <table id="slot-table">
+      <thead><tr><th>時段</th><th>分布</th><th class="num">次數</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div></div>
+
+  <!-- 明細 -->
+  <div class="sect-hd">登記明細</div>
+  <div class="toolbar">
+    <select id="flt-fac"><option value="">全部公設</option>
+      <option value="交誼廳">交誼廳</option>
+      <option value="健身房">健身房</option>
+      <option value="頂樓室內空間">頂樓室內空間</option>
+      <option value="頂樓室外空間">頂樓室外空間</option>
+    </select>
+    <select id="flt-month"><option value="">全部月份</option></select>
+    <button type="button" class="csv-btn" id="csv-btn">⬇ 匯出 CSV</button>
+  </div>
+  <div class="panel"><div class="tbl-scroll">
+    <table class="detail-table" id="detail-table">
+      <thead><tr>
+        <th>日期</th><th>公設</th><th>類型</th><th>時間</th><th>戶號</th><th>登記人</th><th>備註</th><th>登記時間</th><th></th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API = "/facility/api/log";
+  var FACILITIES = ["交誼廳","健身房","頂樓室內空間","頂樓室外空間"];
+  var SLOT_BUCKETS = ["上午","下午","晚上","整段"];
+  // 由實際開始時間推時段桶（取代舊的模糊 enum）
+  function slotBucket(e){
+    if(e.allDay) return "整段";
+    var h = parseInt(String(e.timeStart||"").slice(0,2), 10);
+    if(isNaN(h)) return null;
+    if(h < 12) return "上午";
+    if(h < 18) return "下午";
+    return "晚上";
+  }
+
+  var entries = [];
+  var canDelete = false;
+  var flt = { fac: "", month: "" };
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
+  function ym(s){ var m=String(s||"").match(/^(\d{4})-(\d{2})/); return m?m[1]+"-"+m[2]:""; }
+  function curYM(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"); }
+  function fmtDate(s){
+    var m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return s||"";
+    var d=new Date(+m[1],+m[2]-1,+m[3]); var wk=["日","一","二","三","四","五","六"][d.getDay()];
+    return (+m[2])+"/"+(+m[3])+"（"+wk+"）";
+  }
+  function fmtTime(e){ return e.allDay ? "整段開放" : ((e.timeStart&&e.timeEnd)?(e.timeStart+"–"+e.timeEnd):(e.timeStart||"—")); }
+  // 存檔時間（伺服器 createdAt）→ 先後順序依據
+  function fmtStamp(iso){ if(!iso) return "—"; var d=new Date(iso); if(isNaN(d)) return "—"; return (d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+
+  function setSync(state, text){
+    $("syncbar").className = "syncbar" + (state==="offline"?" is-offline":"");
+    $("sync-text").textContent = text;
+  }
+
+  function load(){
+    setSync("saving","載入中…");
+    fetch(API, { headers:{ "Accept":"application/json" } })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(data){
+        entries = Array.isArray(data.entries)?data.entries:[];
+        canDelete = (data.level||0) >= 2;
+        setSync("synced","● 已連線　共 "+entries.length+" 筆登記");
+        buildMonths(); renderAll();
+      })
+      .catch(function(){
+        setSync("offline","無法連線後台 API（請確認 Cloudflare Worker 已部署 /facility/api/log）");
+        entries = []; renderAll();
+      });
+  }
+
+  function isFuture(s){
+    var m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return false;
+    var d=new Date(+m[1],+m[2]-1,+m[3]); d.setHours(0,0,0,0);
+    var t=new Date(); t.setHours(0,0,0,0); return d>=t;
+  }
+
+  function renderKpi(){
+    var thisMonth = curYM();
+    var total = entries.length;
+    var monthN = entries.filter(function(e){ return ym(e.date)===thisMonth; }).length;
+    var excN = entries.filter(function(e){ return e.type==="exclusive"; }).length;
+    var upExc = entries.filter(function(e){ return e.type==="exclusive" && isFuture(e.date); }).length;
+    var k = [
+      { l:"總登記數", v:total },
+      { l:"本月登記", v:monthN },
+      { l:"包場（全部）", v:excN, exc:true },
+      { l:"即將到來包場", v:upExc, exc:true }
+    ];
+    $("kpi-row").innerHTML = k.map(function(x){
+      return '<div class="kpi'+(x.exc?" exc":"")+'"><div class="kpi-label">'+x.l+'</div>'+
+             '<div class="kpi-val">'+x.v+'<span class="kpi-unit">筆</span></div></div>';
+    }).join("");
+  }
+
+  function renderFacTable(){
+    var thisMonth = curYM();
+    var rows = FACILITIES.map(function(f){
+      var all = entries.filter(function(e){ return e.facility===f; }).length;
+      var mon = entries.filter(function(e){ return e.facility===f && ym(e.date)===thisMonth; }).length;
+      return '<tr><td>'+esc(f)+'</td><td class="num">'+mon+'</td><td class="num">'+all+'</td></tr>';
+    }).join("");
+    $("fac-table").querySelector("tbody").innerHTML = rows;
+  }
+
+  function renderSlotTable(){
+    var counts = SLOT_BUCKETS.map(function(s){ return entries.filter(function(e){ return slotBucket(e)===s; }).length; });
+    var max = Math.max.apply(null, counts.concat([1]));
+    var rows = SLOT_BUCKETS.map(function(s,i){
+      var w = Math.round(counts[i]/max*180);
+      return '<tr><td>'+s+'</td><td class="bar-cell"><span class="bar" style="width:'+w+'px"></span></td><td class="num">'+counts[i]+'</td></tr>';
+    }).join("");
+    $("slot-table").querySelector("tbody").innerHTML = rows;
+  }
+
+  function buildMonths(){
+    var set = {};
+    entries.forEach(function(e){ var m=ym(e.date); if(m) set[m]=1; });
+    var months = Object.keys(set).sort().reverse();
+    var selEl = $("flt-month");
+    months.forEach(function(m){
+      var o=document.createElement("option"); o.value=m; o.textContent=m; selEl.appendChild(o);
+    });
+  }
+
+  function filtered(){
+    return entries.filter(function(e){
+      if(flt.fac && e.facility!==flt.fac) return false;
+      if(flt.month && ym(e.date)!==flt.month) return false;
+      return true;
+    }).sort(function(a,b){
+      var ka=(a.date||"")+(a.createdAt||""), kb=(b.date||"")+(b.createdAt||"");
+      return ka<kb?1:ka>kb?-1:0;
+    });
+  }
+
+  function renderDetail(){
+    var list = filtered();
+    var tb = $("detail-table").querySelector("tbody");
+    if(!list.length){ tb.innerHTML = '<tr><td colspan="9" class="empty">沒有符合條件的登記。</td></tr>'; return; }
+    tb.innerHTML = list.map(function(e){
+      var type = e.type==="exclusive" ? '<span class="badge exc">包場</span>' : '<span class="badge">一般</span>';
+      var del = canDelete ? '<button type="button" class="del-btn" data-id="'+esc(e.id)+'">刪除</button>' : '';
+      return '<tr>'+
+        '<td>'+esc(fmtDate(e.date))+'</td>'+
+        '<td>'+esc(e.facility)+'</td>'+
+        '<td>'+type+'</td>'+
+        '<td>'+esc(fmtTime(e))+'</td>'+
+        '<td>'+esc(e.unit||"—")+'</td>'+
+        '<td>'+esc(e.name||"—")+'</td>'+
+        '<td class="note">'+esc(e.note||"")+'</td>'+
+        '<td>'+esc(fmtStamp(e.createdAt))+'</td>'+
+        '<td>'+del+'</td>'+
+      '</tr>';
+    }).join("");
+    var btns = tb.querySelectorAll(".del-btn");
+    for(var i=0;i<btns.length;i++){
+      (function(b){ b.addEventListener("click",function(){ del(b.getAttribute("data-id")); }); })(btns[i]);
+    }
+  }
+
+  function renderAll(){ renderKpi(); renderFacTable(); renderSlotTable(); renderDetail(); }
+
+  function del(id){
+    if(!confirm("確定刪除這筆登記？此動作無法復原。")) return;
+    fetch(API+"?id="+encodeURIComponent(id), { method:"DELETE" })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){
+        entries = entries.filter(function(e){ return e.id!==id; });
+        setSync("synced","● 已連線　共 "+entries.length+" 筆登記");
+        renderAll();
+      })
+      .catch(function(){ alert("刪除失敗（需總幹事權限，或連線異常）。"); });
+  }
+
+  function exportCsv(){
+    var list = filtered();
+    var head = ["日期","公設","類型","起時間","迄時間","整段開放","戶號","登記人","備註","登記時間"];
+    var rows = list.map(function(e){
+      return [e.date, e.facility, (e.type==="exclusive"?"包場":"一般"), e.timeStart, e.timeEnd, (e.allDay?"是":""), e.unit, e.name, e.note, e.createdAt];
+    });
+    var csv = [head].concat(rows).map(function(r){
+      return r.map(function(c){ var s=String(c==null?"":c); return '"'+s.replace(/"/g,'""')+'"'; }).join(",");
+    }).join("\r\n");
+    var blob = new Blob(["﻿"+csv], { type:"text/csv;charset=utf-8" }); // BOM 讓 Excel 正確顯示中文
+    var a = document.createElement("a");
+    var d = new Date();
+    var stamp = d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
+    a.href = URL.createObjectURL(blob);
+    a.download = "公設登記_"+stamp+".csv";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  $("flt-fac").addEventListener("change", function(){ flt.fac=this.value; renderDetail(); });
+  $("flt-month").addEventListener("change", function(){ flt.month=this.value; renderDetail(); });
+  $("csv-btn").addEventListener("click", exportCsv);
+
+  load();
+})();
+</script>
