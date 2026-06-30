@@ -160,6 +160,8 @@
 | 財務委員 / 司庫 | Treasurer | 会計担当理事 |
 | 監事 | Supervisor | 監事 |
 | 管理中心 | Management Center | 管理センター |
+| 總幹事 | Property Manager | 管理員 |
+| 保全 / 保全人員 | Security | 警備員 |
 | 住戶 | Resident | 入居者 |
 | 區分所有權人 | Unit Owner | 区分所有者 |
 | 管理組合（住戶自治組織） | Owners' Association | 管理組合 |

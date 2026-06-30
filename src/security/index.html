@@ -1,0 +1,51 @@
+---
+layout: base.njk
+permalink: /security/
+title: 保全後台
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">SECURITY CONSOLE</div>
+    <h1>保全後台</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:760px;margin:0 auto;padding:28px 20px 64px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:24px;}
+    .intro strong{color:var(--wg41);}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    @media(max-width:560px){.cards{grid-template-columns:1fr;}}
+    .tool{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;text-decoration:none;color:var(--wg41);position:relative;transition:all .15s;overflow:hidden;}
+    .tool::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .tool:hover{background:#F2F0EC;border-color:var(--wg11);}
+    .tool-title{font-size:18px;font-weight:700;letter-spacing:.04em;margin-bottom:6px;}
+    .tool-desc{font-size:15px;color:var(--wg9);line-height:1.7;flex:1;}
+    .tool-cta{font-size:14px;color:var(--wg11);letter-spacing:.06em;margin-top:12px;}
+    .tool:hover .tool-cta{color:var(--wg41);}
+    .tool.soon{opacity:.6;cursor:default;pointer-events:none;}
+    .tool.soon::before{background:var(--wg9);}
+  </style>
+
+  <div class="intro">
+    這裡是<strong>保全（值班櫃檯）</strong>專用的工具入口。保全可看到公設登記的<strong>完整戶號與申請人</strong>、並可代住戶登記或取消；但看不到總幹事後台（統計、CSV、水電、Wiki）。
+  </div>
+
+  <div class="cards">
+    <a class="tool" href="/facility/">
+      <div class="tool-title">公設使用登記</div>
+      <div class="tool-desc">查看各空間登記（含戶號／申請人）、代住戶登記、取消任何一筆。</div>
+      <div class="tool-cta">開啟 →</div>
+    </a>
+    <div class="tool soon">
+      <div class="tool-title">訪客出入登記</div>
+      <div class="tool-desc">登記與查詢訪客進出（規劃中，之後會掛在這裡）。</div>
+      <div class="tool-cta">規劃中</div>
+    </div>
+  </div>
+
+</div>
