@@ -1,0 +1,208 @@
+---
+layout: base.njk
+permalink: /security/visitors/
+title: 訪客出入紀錄
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/security/" class="back-link">返回保全後台</a>
+    <div class="header-eyebrow">VISITOR LOG</div>
+    <h1>訪客出入紀錄</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:860px;margin:0 auto;padding:28px 20px 64px;}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--wg9);margin-bottom:16px;}
+    .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
+    .syncbar.is-offline .syncdot{background:var(--dn);}
+    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px;}
+    @media(max-width:560px){.kpi-row{grid-template-columns:1fr 1fr;}}
+    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;position:relative;}
+    .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .kpi.live::before{background:var(--dp);}
+    .kpi.book::before{background:#B8860B;}
+    .kpi-label{font-size:13px;color:var(--wg9);margin-bottom:7px;}
+    .kpi-val{font-size:26px;font-weight:700;color:var(--wg41);line-height:1;}
+    .kpi-unit{font-size:14px;color:var(--wg9);margin-left:3px;font-weight:400;}
+    .sect-hd{font-size:17px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:26px 0 12px;}
+    .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:14px 16px;margin-bottom:12px;}
+    .entry.live{border-left-color:var(--dp);background:rgba(31,92,56,0.03);}
+    .entry.book{border-left-color:#B8860B;background:rgba(184,134,11,0.04);}
+    .entry-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+    .badge{font-size:13px;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--wg1);color:var(--wg11);}
+    .badge.reason{background:var(--wg41);color:var(--wg1);}
+    .badge.live{background:var(--dp);color:#fff;}
+    .badge.book{background:#B8860B;color:#fff;}
+    .ename{font-size:18px;font-weight:600;color:var(--wg41);}
+    .emeta{font-size:15px;color:var(--wg9);line-height:1.85;}
+    .emeta b{color:var(--wg41);font-weight:500;}
+    .emeta.note{color:var(--wg41);background:rgba(60,56,53,0.05);border-radius:var(--radius);padding:6px 11px;margin-top:8px;}
+    .erow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;}
+    .erow input,.erow select{font-family:inherit;font-size:14px;padding:8px 10px;min-height:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    .erow select{appearance:none;-webkit-appearance:none;padding-right:26px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 9px center;}
+    .erow .item-in{flex:1;min-width:120px;}
+    .btn{font-family:inherit;font-size:14px;letter-spacing:.04em;padding:8px 13px;min-height:40px;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;}
+    .btn:hover{background:var(--wg11);color:var(--wg1);}
+    .btn.arrive{border-color:#B8860B;color:#8a6608;}
+    .btn.arrive:hover{background:#B8860B;color:#fff;}
+    .btn.out{border-color:var(--dp);color:var(--dp);}
+    .btn.out:hover{background:var(--dp);color:#fff;}
+    .btn.del{border-color:var(--line);color:var(--wg9);margin-left:auto;}
+    .btn.del:hover{background:var(--dn);border-color:var(--dn);color:#fff;}
+    .empty{font-size:16px;color:var(--wg9);padding:22px 0;text-align:center;}
+  </style>
+
+  <div class="syncbar" id="syncbar"><span class="syncdot"></span><span id="sync-text">載入中…</span></div>
+
+  <div class="kpi-row">
+    <div class="kpi book"><div class="kpi-label">預約中（尚未到）</div><div class="kpi-val" id="k-book">0<span class="kpi-unit">組</span></div></div>
+    <div class="kpi live"><div class="kpi-label">目前在館</div><div class="kpi-val" id="k-live">0<span class="kpi-unit">組</span></div></div>
+    <div class="kpi"><div class="kpi-label">今日到訪</div><div class="kpi-val" id="k-today">0<span class="kpi-unit">組</span></div></div>
+  </div>
+
+  <div class="sect-hd">🔖 預約中（住戶預先登記、尚未到場）</div>
+  <div id="book-area"></div>
+
+  <div class="sect-hd">🟢 目前在館（已到、尚未離場）</div>
+  <div id="live-area"></div>
+
+  <div class="sect-hd">今日到訪</div>
+  <div id="log-area"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API = "/visitor/api/log";
+  var ITEM_STATUS = ["", "已借出", "已歸還", "未歸還", "報失", "損壞"];
+  var entries = [];
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
+  function fmtTime(iso){ if(!iso) return ""; var d=new Date(iso); if(isNaN(d)) return String(iso); return (d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+  function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function isToday(iso){ return String(iso||"").slice(0,10)===todayStr(); }
+  function setSync(state, text){ $("syncbar").className="syncbar"+(state==="offline"?" is-offline":""); $("sync-text").textContent=text; }
+
+  function load(){
+    setSync("saving","載入中…");
+    fetch(API, { headers:{ "Accept":"application/json" } })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(data){
+        entries = Array.isArray(data.entries)?data.entries:[];
+        setSync("synced","● 已連線　共 "+entries.length+" 筆");
+        render();
+      })
+      .catch(function(){ setSync("offline","無法連線（請確認 Worker 已部署、且您是保全/總幹事登入）"); entries=[]; render(); });
+  }
+
+  function borrowRow(e){
+    var statusOpts = ITEM_STATUS.map(function(s){ return '<option value="'+s+'"'+(e.itemStatus===s?' selected':'')+'>'+(s||'物品狀態')+'</option>'; }).join("");
+    return '<input type="text" class="item-in" placeholder="借出物品（如門禁磁扣）" value="'+esc(e.lentItem||"")+'" data-id="'+esc(e.id)+'">'+
+      '<select data-id="'+esc(e.id)+'">'+statusOpts+'</select>'+
+      '<button type="button" class="btn" data-act="save" data-id="'+esc(e.id)+'">存借物</button>';
+  }
+
+  function entryHtml(e){
+    var arrived = !!e.enterAt;
+    var inHouse = arrived && !e.leaveAt;
+    var cls = !arrived ? " book" : (inHouse ? " live" : "");
+    var stateBadge = !arrived ? '<span class="badge book">預約中</span>' : (inHouse ? '<span class="badge live">在館</span>' : '');
+    var phone = e.phone ? '・電話 '+esc(e.phone) : '';
+    var carStr = [e.plate, e.carModel].filter(Boolean).join(' ');
+    var car = carStr ? '・車 '+esc(carStr) : '';
+    var org = e.org ? '・'+esc(e.org) : '';
+    var host = e.host ? '（找 '+esc(e.host)+'）' : '';
+    var timeLine = arrived ? ('進 '+esc(fmtTime(e.enterAt)) + (e.leaveAt ? '　出 '+esc(fmtTime(e.leaveAt)) : '')) : ('預計 '+esc(e.expectAt||'—'));
+    var note = e.note ? '<div class="emeta note">📋 給保全：'+esc(e.note)+'</div>' : '';
+
+    var erow = '';
+    if(!arrived){
+      erow = '<div class="erow"><button type="button" class="btn arrive" data-act="arrive" data-id="'+esc(e.id)+'">登記到場</button><button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+    } else {
+      var outBtn = inHouse ? '<button type="button" class="btn out" data-act="out" data-id="'+esc(e.id)+'">登記離場</button>' : '';
+      erow = '<div class="erow">'+ borrowRow(e) + outBtn +'<button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+    }
+    return '<div class="entry'+cls+'">'+
+      '<div class="entry-top">'+
+        '<span class="badge reason">'+esc(e.reason)+'</span>'+ stateBadge +
+        '<span class="ename">'+esc(e.name)+'</span>'+
+        '<span class="emeta">'+esc(e.count||1)+' 人'+phone+car+org+'</span>'+
+      '</div>'+
+      '<div class="emeta">造訪 <b>'+esc(e.unit)+'</b> '+esc(host)+'　・　'+timeLine+'</div>'+
+      note + erow +
+    '</div>';
+  }
+
+  function render(){
+    var book = entries.filter(function(e){ return !e.enterAt; });
+    var live = entries.filter(function(e){ return e.enterAt && !e.leaveAt; });
+    var todayArr = entries.filter(function(e){ return e.enterAt && isToday(e.enterAt); });
+    $("k-book").innerHTML = book.length+'<span class="kpi-unit">組</span>';
+    $("k-live").innerHTML = live.length+'<span class="kpi-unit">組</span>';
+    $("k-today").innerHTML = todayArr.length+'<span class="kpi-unit">組</span>';
+
+    book.sort(function(a,b){ return (a.expectAt||"")<(b.expectAt||"")?-1:1; }); // 預約依預計時間升冪
+    function sortDesc(a,b){ return (a.enterAt||"")<(b.enterAt||"")?1:-1; }
+
+    $("book-area").innerHTML = book.length ? book.map(entryHtml).join("") : '<div class="empty">目前沒有預約。</div>';
+    $("live-area").innerHTML = live.length ? live.slice().sort(sortDesc).map(entryHtml).join("") : '<div class="empty">目前無在館訪客。</div>';
+    $("log-area").innerHTML = todayArr.length ? todayArr.slice().sort(sortDesc).map(entryHtml).join("") : '<div class="empty">今日尚無訪客到訪。</div>';
+    bind();
+  }
+
+  function bind(){
+    var btns = document.querySelectorAll(".btn[data-act]");
+    for(var i=0;i<btns.length;i++){
+      (function(b){
+        b.addEventListener("click", function(){
+          var id=b.getAttribute("data-id"), act=b.getAttribute("data-act");
+          if(act==="arrive") markArrive(id);
+          else if(act==="out") markOut(id);
+          else if(act==="del") del(id);
+          else if(act==="save") saveItem(id);
+        });
+      })(btns[i]);
+    }
+  }
+
+  function post(payload){
+    return fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); });
+  }
+  function markArrive(id){
+    var now = new Date().toISOString();
+    post({ id:id, enterAt: now })
+      .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e) e.enterAt=now; render(); })
+      .catch(function(){ alert("登記到場失敗。"); });
+  }
+  function markOut(id){
+    var now = new Date().toISOString();
+    post({ id:id, leaveAt: now })
+      .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e) e.leaveAt=now; render(); })
+      .catch(function(){ alert("離場登記失敗。"); });
+  }
+  function saveItem(id){
+    var input = document.querySelector('.item-in[data-id="'+CSS.escape(id)+'"]');
+    var sel = document.querySelector('select[data-id="'+CSS.escape(id)+'"]');
+    var item = input ? input.value.trim() : "", st = sel ? sel.value : "";
+    post({ id:id, lentItem:item, itemStatus:st })
+      .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e){ e.lentItem=item; e.itemStatus=st; } setSync("synced","● 已儲存借物資訊"); })
+      .catch(function(){ alert("儲存失敗。"); });
+  }
+  function del(id){
+    if(!confirm("確定刪除這筆訪客紀錄？")) return;
+    fetch(API+"?id="+encodeURIComponent(id), { method:"DELETE" })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){ entries=entries.filter(function(x){return x.id!==id;}); render(); })
+      .catch(function(){ alert("刪除失敗。"); });
+  }
+
+  load();
+})();
+</script>

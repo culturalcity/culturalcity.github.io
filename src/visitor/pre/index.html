@@ -1,0 +1,266 @@
+---
+layout: base.njk
+permalink: /visitor/pre/
+title: 訪客預先登記
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">VISITOR PRE-REGISTRATION</div>
+    <h1>訪客預先登記</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:720px;margin:0 auto;padding:26px 20px 64px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:22px;}
+    .intro strong{color:var(--wg41);}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px;margin-bottom:28px;}
+    .card-hd{font-size:18px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin-bottom:18px;}
+    .field{margin-bottom:18px;}
+    .field > label{display:block;font-size:15px;font-weight:500;color:var(--wg11);letter-spacing:.06em;margin-bottom:8px;}
+    .field .req{color:var(--dn);font-weight:700;margin-left:2px;}
+    .opt{color:var(--wg9);font-size:14px;font-weight:400;margin-left:4px;}
+    .seg{display:flex;flex-wrap:wrap;gap:9px;}
+    .seg button{font-family:inherit;font-size:16px;padding:11px 15px;min-height:48px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:120px;}
+    .seg button:hover{background:rgba(60,56,53,0.04);}
+    .seg button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
+    input,select{width:100%;font-family:inherit;font-size:17px;padding:13px 14px;min-height:52px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+    input:focus,select:focus{outline:2px solid var(--wg41);outline-offset:-1px;}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:560px){.row2{grid-template-columns:1fr;}}
+    .tp{display:flex;align-items:center;gap:8px;}
+    .tp select{width:auto;min-width:78px;}
+    .submit-btn{width:100%;font-family:inherit;font-size:19px;font-weight:700;letter-spacing:.12em;color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:16px;min-height:58px;cursor:pointer;margin-top:6px;}
+    .submit-btn:hover{background:#2c2926;}
+    .submit-btn:disabled{opacity:.5;}
+    .form-msg{font-size:15px;line-height:1.7;margin-top:12px;min-height:1px;}
+    .form-msg.err{color:var(--dn);}
+    .form-msg.ok{color:var(--dp);}
+    .list-hd{font-size:18px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:0 0 6px;}
+    .list-note{font-size:14px;color:var(--wg9);line-height:1.7;margin-bottom:14px;}
+    .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--dp);padding:13px 16px;margin-bottom:12px;}
+    .entry-top{font-size:17px;font-weight:500;color:var(--wg41);}
+    .entry-meta{font-size:15px;color:var(--wg9);line-height:1.7;margin-top:3px;}
+    .cancel-btn{margin-top:10px;font-family:inherit;font-size:14px;color:var(--wg9);background:none;border:1px solid var(--line);border-radius:var(--radius);padding:6px 13px;cursor:pointer;}
+    .cancel-btn:hover{color:#fff;background:var(--dn);border-color:var(--dn);}
+    .empty{font-size:16px;color:var(--wg9);padding:20px 0;text-align:center;}
+  </style>
+
+  <div class="intro">
+    有預期的客人來訪，先在這裡登記，客人抵達時管理中心／保全<strong>對得上名單就能直接放行</strong>，不用臨時打電話跟您確認，更快也更安全。臨時、未預期的訪客則由現場登記處理。
+  </div>
+
+  <div class="card">
+    <div class="card-hd">＋ 登記一位預期訪客</div>
+
+    <div class="field">
+      <label>拜訪事由<span class="req">＊</span></label>
+      <div class="seg" id="seg-reason">
+        <button type="button" data-val="親友探訪">親友探訪</button>
+        <button type="button" data-val="廠商維修">廠商維修</button>
+        <button type="button" data-val="洽公／商務">洽公／商務</button>
+        <button type="button" data-val="房仲帶看">房仲帶看</button>
+        <button type="button" data-val="教學／課程">教學／課程</button>
+        <button type="button" data-val="搬家作業">搬家作業</button>
+        <button type="button" data-val="社區活動">社區活動</button>
+        <button type="button" data-val="其他">其他</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>訪客姓名<span class="req">＊</span></label>
+      <input type="text" id="v-name" placeholder="預期來訪者姓名／稱呼">
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>造訪戶別（您的戶號）<span class="req">＊</span></label>
+        <select id="v-unit"><option value="">選擇戶號…</option></select>
+      </div>
+      <div class="field">
+        <label>受訪住戶<span class="opt">（選填）</span></label>
+        <input type="text" id="v-host" placeholder="受訪者姓名">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>預計來訪日期<span class="req">＊</span></label>
+      <input type="date" id="v-date">
+    </div>
+    <div class="field">
+      <label>預計時間<span class="opt">（選填）</span></label>
+      <div class="tp">
+        <select id="v-th"></select><b>:</b><select id="v-tm"></select>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>訪客人數</label>
+        <input type="number" id="v-count" min="1" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>聯絡電話<span class="opt">（選填）</span></label>
+        <input type="text" id="v-phone" placeholder="訪客手機" inputmode="tel">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>車號<span class="opt">（開車者填）</span></label>
+        <input type="text" id="v-plate" placeholder="例：AAD-3570">
+      </div>
+      <div class="field">
+        <label>車型／顏色<span class="opt">（選填）</span></label>
+        <input type="text" id="v-carmodel" placeholder="例：深灰 Ford Focus">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>單位／公司<span class="opt">（選填）</span></label>
+      <input type="text" id="v-org" placeholder="選填">
+    </div>
+
+    <div class="field" style="margin-bottom:8px;">
+      <label>給保全的交代事項<span class="opt">（選填）</span></label>
+      <input type="text" id="v-note" placeholder="例：請讓他停 B1-43 車位、希望垃圾車來過再進場">
+    </div>
+
+    <button type="button" class="submit-btn" id="submit-btn">送出預約</button>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+
+  <h2 class="list-hd">我的預約</h2>
+  <div class="list-note">此清單只在您這台裝置顯示（保護隱私）。訪客到場前可在這裡取消。</div>
+  <div id="mine-area"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API = "/visitor/api/signin";
+  var CANCEL_API = "/visitor/api/cancel";
+  var LS_MINE = "yda_visitor_prebook";
+
+  var U_FULL = ["本號","之1","之2","之3","之5","之6","之7"];
+  var U_HALF = ["本號","之1","之2","之3"];
+  var UNIT_GROUPS = [
+    { door:"83", floor:"1樓", units:["之3","之5","之6","之7","之8"] },
+    { door:"85", floor:"3樓", units:U_FULL }, { door:"85", floor:"4樓", units:U_FULL },
+    { door:"85", floor:"5樓", units:U_HALF }, { door:"85", floor:"6樓", units:U_HALF },
+    { door:"85", floor:"7樓", units:U_FULL }, { door:"85", floor:"8樓", units:U_FULL },
+    { door:"85", floor:"9樓", units:U_FULL }, { door:"85", floor:"10樓", units:U_FULL },
+    { door:"85", floor:"11樓", units:U_FULL }, { door:"85", floor:"12樓", units:U_FULL },
+    { door:"85", floor:"13樓", units:U_FULL }, { door:"85", floor:"14樓", units:U_FULL },
+    { door:"85", floor:"15樓", units:U_FULL }
+  ];
+
+  var reason = "";
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
+  function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function fmtDate(s){ var m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return s||""; var d=new Date(+m[1],+m[2]-1,+m[3]); var wk=["日","一","二","三","四","五","六"][d.getDay()]; return (+m[2])+"/"+(+m[3])+"（週"+wk+"）"; }
+
+  function mineLoad(){ try { return JSON.parse(localStorage.getItem(LS_MINE)||"[]"); } catch(e){ return []; } }
+  function mineSave(a){ try { localStorage.setItem(LS_MINE, JSON.stringify(a)); } catch(e){} }
+
+  function buildSelects(){
+    var sel = $("v-unit");
+    UNIT_GROUPS.forEach(function(g){
+      var og = document.createElement("optgroup"); og.label = g.door + "號 " + g.floor;
+      g.units.forEach(function(u){ var o=document.createElement("option"); o.value=g.door+"號"+g.floor+u; o.textContent=o.value; og.appendChild(o); });
+      sel.appendChild(og);
+    });
+    function fill(id, n, pad, ph){ var s=$(id); var o0=document.createElement("option"); o0.value=""; o0.textContent=ph; s.appendChild(o0); for(var i=0;i<n;i+=pad){ var o=document.createElement("option"); o.value=String(i).padStart(2,"0"); o.textContent=String(i).padStart(2,"0"); s.appendChild(o); } }
+    fill("v-th", 24, 1, "時"); fill("v-tm", 60, 5, "分");
+  }
+  buildSelects();
+
+  $("seg-reason").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if(!b) return;
+    reason = b.getAttribute("data-val");
+    var bs = $("seg-reason").querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){ bs[i].classList.toggle("on", bs[i]===b); }
+  });
+
+  function renderMine(){
+    var list = mineLoad();
+    var area = $("mine-area");
+    if(!list.length){ area.innerHTML = '<div class="empty">目前沒有預約。</div>'; return; }
+    area.innerHTML = list.slice().reverse().map(function(m){
+      return '<div class="entry">'+
+        '<div class="entry-top">'+esc(m.reason)+'・'+esc(m.name)+'</div>'+
+        '<div class="entry-meta">造訪 '+esc(m.unit)+'　預計 '+esc(m.when)+'</div>'+
+        '<button type="button" class="cancel-btn" data-id="'+esc(m.id)+'">取消預約</button>'+
+      '</div>';
+    }).join("");
+    var bs = area.querySelectorAll(".cancel-btn");
+    for(var i=0;i<bs.length;i++){ (function(b){ b.addEventListener("click", function(){ cancel(b.getAttribute("data-id")); }); })(bs[i]); }
+  }
+
+  function submit(){
+    var name = $("v-name").value.trim();
+    var unit = $("v-unit").value;
+    var date = $("v-date").value;
+    var msg = $("form-msg");
+    if(!reason){ msg.className="form-msg err"; msg.textContent="請選擇拜訪事由。"; return; }
+    if(!name){ msg.className="form-msg err"; msg.textContent="請填寫訪客姓名。"; return; }
+    if(!unit){ msg.className="form-msg err"; msg.textContent="請選擇造訪戶別。"; return; }
+    if(!date){ msg.className="form-msg err"; msg.textContent="請選擇預計來訪日期。"; return; }
+    var th = $("v-th").value, tm = $("v-tm").value;
+    var timeStr = (th!==""&&tm!=="") ? (th+":"+tm) : "";
+    var expectAt = date + (timeStr ? (" " + timeStr) : "");
+
+    var entry = {
+      booked: true, expectAt: expectAt,
+      reason: reason, name: name, unit: unit,
+      host: $("v-host").value.trim(),
+      count: parseInt($("v-count").value,10)||1,
+      phone: $("v-phone").value.trim(),
+      plate: $("v-plate").value.trim(),
+      carModel: $("v-carmodel").value.trim(),
+      org: $("v-org").value.trim(),
+      note: $("v-note").value.trim()
+    };
+
+    $("submit-btn").disabled = true;
+    msg.className="form-msg"; msg.textContent="";
+    fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(entry) })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(res){
+        $("submit-btn").disabled = false;
+        var mine = mineLoad();
+        mine.push({ id: res.id, token: res.editToken, reason: reason, name: name, unit: unit, when: (fmtDate(date)+(timeStr?(" "+timeStr):"")) });
+        mineSave(mine);
+        msg.className="form-msg ok"; msg.textContent="✓ 已預約，管理中心會留意這位訪客。";
+        // 清空可重填
+        reason=""; var bs=$("seg-reason").querySelectorAll("button"); for(var i=0;i<bs.length;i++) bs[i].classList.remove("on");
+        ["v-name","v-host","v-phone","v-plate","v-carmodel","v-org","v-note"].forEach(function(id){ $(id).value=""; });
+        $("v-th").value=""; $("v-tm").value=""; $("v-count").value="1";
+        renderMine();
+        setTimeout(function(){ if(msg.className.indexOf("ok")>=0) msg.textContent=""; }, 6000);
+      })
+      .catch(function(){ $("submit-btn").disabled=false; msg.className="form-msg err"; msg.textContent="預約失敗，請稍後再試或洽管理中心。"; });
+  }
+
+  function cancel(id){
+    if(!confirm("確定取消這筆預約？")) return;
+    var mine = mineLoad();
+    var rec = mine.filter(function(m){ return m.id===id; })[0];
+    fetch(CANCEL_API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ id:id, token: rec?rec.token:"" }) })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){ mineSave(mine.filter(function(m){ return m.id!==id; })); renderMine(); })
+      .catch(function(){ alert("取消失敗：訪客可能已到場（無法取消），或需從原登記裝置操作。"); });
+  }
+
+  $("v-date").value = todayStr();
+  $("submit-btn").addEventListener("click", submit);
+  renderMine();
+})();
+</script>

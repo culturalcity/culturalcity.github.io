@@ -1,0 +1,220 @@
+---
+layout: base.njk
+permalink: /visitor/
+title: 訪客登記
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">VISITOR SIGN-IN</div>
+    <h1>訪客登記</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    /* kiosk：隱藏全站導覽列與搜尋，避免訪客跳離本頁 */
+    .breadcrumb{display:none !important;}
+    .main{max-width:720px;margin:0 auto;padding:26px 20px 64px;position:relative;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:17px;color:var(--wg9);line-height:1.8;margin-bottom:22px;}
+    .intro strong{color:var(--wg41);}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 26px;}
+    .field{margin-bottom:20px;}
+    .field > label{display:block;font-size:16px;font-weight:500;color:var(--wg11);letter-spacing:.04em;margin-bottom:9px;}
+    .field .req{color:var(--dn);font-weight:700;margin-left:3px;}
+    .opt{color:var(--wg9);font-size:14px;font-weight:400;margin-left:4px;}
+    .seg{display:flex;flex-wrap:wrap;gap:10px;}
+    .seg button{font-family:inherit;font-size:17px;letter-spacing:.02em;padding:13px 16px;min-height:52px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:130px;}
+    .seg button:hover{background:rgba(60,56,53,0.04);}
+    .seg button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
+    input,select{width:100%;font-family:inherit;font-size:18px;padding:14px 14px;min-height:54px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+    input:focus,select:focus{outline:2px solid var(--wg41);outline-offset:-1px;}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:560px){.row2{grid-template-columns:1fr;}}
+    .submit-btn{width:100%;font-family:inherit;font-size:21px;font-weight:700;letter-spacing:.14em;color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:18px;min-height:62px;cursor:pointer;margin-top:8px;transition:background .15s;}
+    .submit-btn:hover{background:#2c2926;}
+    .submit-btn:disabled{opacity:.5;cursor:default;}
+    .form-msg{font-size:16px;line-height:1.7;margin-top:12px;min-height:1px;color:var(--dn);}
+    /* 完成畫面（蓋住表單） */
+    .done{position:fixed;inset:0;background:var(--wg1);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;z-index:50;}
+    .done.show{display:flex;}
+    .done-tick{font-size:64px;color:var(--dp);margin-bottom:18px;}
+    .done-hd{font-size:30px;font-weight:700;color:var(--wg41);letter-spacing:.05em;margin-bottom:12px;}
+    .done-sub{font-size:18px;color:var(--wg9);line-height:1.8;}
+  </style>
+
+  <div class="intro">
+    歡迎光臨。請填寫以下資料完成登記，管理中心將為您聯繫受訪住戶。<strong>標 ＊ 為必填。</strong>
+  </div>
+
+  <div class="card" id="form-card">
+
+    <div class="field">
+      <label>拜訪事由<span class="req">＊</span></label>
+      <div class="seg" id="seg-reason">
+        <button type="button" data-val="親友探訪">親友探訪</button>
+        <button type="button" data-val="廠商維修">廠商維修</button>
+        <button type="button" data-val="外送服務">外送服務</button>
+        <button type="button" data-val="洽公／商務">洽公／商務</button>
+        <button type="button" data-val="房仲帶看">房仲帶看</button>
+        <button type="button" data-val="教學／課程">教學／課程</button>
+        <button type="button" data-val="搬家作業">搬家作業</button>
+        <button type="button" data-val="公務巡檢／訪視">公務巡檢／訪視</button>
+        <button type="button" data-val="社區活動">社區活動</button>
+        <button type="button" data-val="其他">其他</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>訪客姓名<span class="req">＊</span></label>
+      <input type="text" id="v-name" placeholder="請輸入您的姓名／稱呼">
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>造訪戶別<span class="req">＊</span></label>
+        <select id="v-unit"><option value="">選擇戶號…</option></select>
+      </div>
+      <div class="field">
+        <label>受訪住戶<span class="opt">（選填）</span></label>
+        <input type="text" id="v-host" placeholder="受訪者姓名">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>訪客人數</label>
+        <input type="number" id="v-count" min="1" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>聯絡電話<span class="opt">（選填）</span></label>
+        <input type="text" id="v-phone" placeholder="手機或市話" inputmode="tel">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>車號<span class="opt">（開車者填）</span></label>
+        <input type="text" id="v-plate" placeholder="例：AAD-3570">
+      </div>
+      <div class="field">
+        <label>車型／顏色<span class="opt">（開車者填）</span></label>
+        <input type="text" id="v-carmodel" placeholder="例：深灰 Ford Focus">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>單位／公司<span class="opt">（選填）</span></label>
+      <input type="text" id="v-org" placeholder="例：黑貓宅配">
+    </div>
+
+    <div class="field" style="margin-bottom:8px;">
+      <label>備註<span class="opt">（選填）</span></label>
+      <input type="text" id="v-note" placeholder="其他需要說明的事項">
+    </div>
+
+    <button type="button" class="submit-btn" id="submit-btn">送出登記</button>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+
+  <!-- 完成畫面 -->
+  <div class="done" id="done">
+    <div class="done-tick">✓</div>
+    <div class="done-hd">登記完成，謝謝！</div>
+    <div class="done-sub">管理中心已收到您的資料，<br>將為您聯繫受訪住戶。</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API = "/visitor/api/signin";
+
+  // 90 戶名冊（同公設登記；門牌/樓/戶別，無個資）
+  var U_FULL = ["本號","之1","之2","之3","之5","之6","之7"];
+  var U_HALF = ["本號","之1","之2","之3"];
+  var UNIT_GROUPS = [
+    { door:"83", floor:"1樓", units:["之3","之5","之6","之7","之8"] },
+    { door:"85", floor:"3樓", units:U_FULL }, { door:"85", floor:"4樓", units:U_FULL },
+    { door:"85", floor:"5樓", units:U_HALF }, { door:"85", floor:"6樓", units:U_HALF },
+    { door:"85", floor:"7樓", units:U_FULL }, { door:"85", floor:"8樓", units:U_FULL },
+    { door:"85", floor:"9樓", units:U_FULL }, { door:"85", floor:"10樓", units:U_FULL },
+    { door:"85", floor:"11樓", units:U_FULL }, { door:"85", floor:"12樓", units:U_FULL },
+    { door:"85", floor:"13樓", units:U_FULL }, { door:"85", floor:"14樓", units:U_FULL },
+    { door:"85", floor:"15樓", units:U_FULL }
+  ];
+
+  var reason = "";
+  function $(id){ return document.getElementById(id); }
+
+  function buildUnitSelect(){
+    var sel = $("v-unit");
+    UNIT_GROUPS.forEach(function(g){
+      var og = document.createElement("optgroup");
+      og.label = g.door + "號 " + g.floor;
+      g.units.forEach(function(u){
+        var o = document.createElement("option");
+        o.value = g.door + "號" + g.floor + u; o.textContent = o.value;
+        og.appendChild(o);
+      });
+      sel.appendChild(og);
+    });
+  }
+  buildUnitSelect();
+
+  $("seg-reason").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if(!b) return;
+    reason = b.getAttribute("data-val");
+    var bs = $("seg-reason").querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){ bs[i].classList.toggle("on", bs[i]===b); }
+  });
+
+  function resetForm(){
+    reason = "";
+    var bs = $("seg-reason").querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){ bs[i].classList.remove("on"); }
+    ["v-name","v-unit","v-host","v-phone","v-plate","v-carmodel","v-org","v-note"].forEach(function(id){ $(id).value=""; });
+    $("v-count").value = "1";
+    $("form-msg").textContent = "";
+  }
+
+  function submit(){
+    var name = $("v-name").value.trim();
+    var unit = $("v-unit").value;
+    var msg = $("form-msg");
+    if(!reason){ msg.textContent="請選擇拜訪事由。"; return; }
+    if(!name){ msg.textContent="請填寫訪客姓名。"; return; }
+    if(!unit){ msg.textContent="請選擇造訪戶別。"; return; }
+
+    var entry = {
+      reason: reason, name: name, unit: unit,
+      host: $("v-host").value.trim(),
+      count: parseInt($("v-count").value, 10) || 1,
+      phone: $("v-phone").value.trim(),
+      plate: $("v-plate").value.trim(),
+      carModel: $("v-carmodel").value.trim(),
+      org: $("v-org").value.trim(),
+      note: $("v-note").value.trim()
+    };
+
+    $("submit-btn").disabled = true;
+    msg.textContent = "";
+    fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(entry) })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){
+        $("submit-btn").disabled = false;
+        resetForm();
+        $("done").classList.add("show");
+        setTimeout(function(){ $("done").classList.remove("show"); }, 4500); // 4.5 秒後換下一位
+      })
+      .catch(function(){
+        $("submit-btn").disabled = false;
+        msg.textContent = "登記失敗，請通知櫃檯人員協助。";
+      });
+  }
+  $("submit-btn").addEventListener("click", submit);
+})();
+</script>
