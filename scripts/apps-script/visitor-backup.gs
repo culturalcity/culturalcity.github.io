@@ -1,5 +1,7 @@
 /**
- * 訪客出入登記 → 每日備份到私有 Google Sheet（累加、以 id 去重）
+ * 訪客出入登記 → 每日備份到私有 Google Sheet（以 id upsert：既有列更新、新列附加）
+ * 註：訪客紀錄會變動（預約→到場→離場→未到），所以用 upsert 讓 Sheet 反映最新實情，
+ *     不是像公設那支純累加。「最後備份」欄記錄該列最後同步時間。
  * ---------------------------------------------------------------------------
  * 與 facility-backup.gs 同一套做法。可以：
  *   (A) 跟公設備份用「同一張 Sheet」——填一樣的 SHEET_ID，本腳本會自動建另一個分頁「訪客登記」；或
@@ -14,7 +16,7 @@
 var V_API = 'https://culturalcity.org/visitor/api/log';
 var V_SHEET_ID = 'PASTE_YOUR_SHEET_ID_HERE';   // ← 可填與公設備份同一張 Sheet 的 ID
 var V_SHEET_NAME = '訪客登記';
-var V_HEADER = ['id', '拜訪事由', '訪客姓名', '造訪戶別', '受訪住戶', '人數', '聯絡電話', '車號', '車型/顏色', '單位', '給保全交代', '預計來訪', '進入時間(UTC)', '離開時間(UTC)', '借出物品', '物品狀態', '首次備份'];
+var V_HEADER = ['id', '拜訪事由', '訪客姓名', '造訪戶別', '受訪住戶', '人數', '聯絡電話', '車號', '車型/顏色', '單位', '給保全交代', '預計來訪', '進入時間(UTC)', '離開時間(UTC)', '未到', '借出物品', '物品狀態', '最後備份'];
 
 function backupVisitorLog() {
   var token = PropertiesService.getScriptProperties().getProperty('STAFF_TOKEN');
@@ -38,26 +40,28 @@ function backupVisitorLog() {
     sh.setFrozenRows(1);
   }
 
-  var seen = {};
+  // ⚠️ 訪客紀錄會變動（預約→到場→離場→未到），故用 upsert：既有 id 更新該列、新 id 才附加。
+  // （公設登記那支是純累加，因為公設紀錄不會事後變動；訪客不同。）
+  var idRow = {};
   var last = sh.getLastRow();
   if (last >= 2) {
     var ids = sh.getRange(2, 1, last - 1, 1).getValues();
-    for (var i = 0; i < ids.length; i++) { seen[ids[i][0]] = true; }
+    for (var i = 0; i < ids.length; i++) { if (ids[i][0]) idRow[ids[i][0]] = i + 2; }
   }
 
   var stamp = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm');
-  var rows = [];
+  var appendRows = [], updated = 0;
   entries.forEach(function (e) {
-    if (seen[e.id]) return;
-    rows.push([
+    var row = [
       e.id, e.reason, e.name, e.unit, (e.host || ''), (e.count || 1),
       (e.phone || ''), (e.plate || ''), (e.carModel || ''), (e.org || ''), (e.note || ''), (e.expectAt || ''),
-      (e.enterAt || ''), (e.leaveAt || ''), (e.lentItem || ''), (e.itemStatus || ''), stamp,
-    ]);
+      (e.enterAt || ''), (e.leaveAt || ''), (e.noShow ? '是' : ''), (e.lentItem || ''), (e.itemStatus || ''), stamp,
+    ];
+    if (idRow[e.id]) { sh.getRange(idRow[e.id], 1, 1, V_HEADER.length).setValues([row]); updated++; }
+    else { appendRows.push(row); }
   });
-
-  if (rows.length) {
-    sh.getRange(sh.getLastRow() + 1, 1, rows.length, V_HEADER.length).setValues(rows);
+  if (appendRows.length) {
+    sh.getRange(sh.getLastRow() + 1, 1, appendRows.length, V_HEADER.length).setValues(appendRows);
   }
-  Logger.log('訪客新增 ' + rows.length + ' 筆（累計備份）');
+  Logger.log('訪客備份：新增 ' + appendRows.length + '、更新 ' + updated + ' 筆');
 }

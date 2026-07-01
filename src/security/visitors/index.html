@@ -32,11 +32,13 @@ title: 訪客出入紀錄
     .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:14px 16px;margin-bottom:12px;}
     .entry.live{border-left-color:var(--dp);background:rgba(31,92,56,0.03);}
     .entry.book{border-left-color:#B8860B;background:rgba(184,134,11,0.04);}
+    .entry.noshow{border-left-color:var(--wg9);background:rgba(60,56,53,0.03);opacity:.9;}
     .entry-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
     .badge{font-size:13px;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--wg1);color:var(--wg11);}
     .badge.reason{background:var(--wg41);color:var(--wg1);}
     .badge.live{background:var(--dp);color:#fff;}
     .badge.book{background:#B8860B;color:#fff;}
+    .badge.noshow{background:var(--wg9);color:#fff;}
     .ename{font-size:18px;font-weight:600;color:var(--wg41);}
     .emeta{font-size:15px;color:var(--wg9);line-height:1.85;}
     .emeta b{color:var(--wg41);font-weight:500;}
@@ -110,23 +112,38 @@ title: 訪客出入紀錄
 
   function entryHtml(e){
     var arrived = !!e.enterAt;
+    var noShow = !arrived && e.noShow;
+    var pending = !arrived && !e.noShow;
     var inHouse = arrived && !e.leaveAt;
-    var cls = !arrived ? " book" : (inHouse ? " live" : "");
-    var stateBadge = !arrived ? '<span class="badge book">預約中</span>' : (inHouse ? '<span class="badge live">在館</span>' : '');
+    var cls = pending ? " book" : (noShow ? " noshow" : (inHouse ? " live" : ""));
+    var stateBadge = pending ? '<span class="badge book">預約中</span>'
+                   : noShow ? '<span class="badge noshow">未到</span>'
+                   : inHouse ? '<span class="badge live">在館</span>' : '';
     var phone = e.phone ? '・電話 '+esc(e.phone) : '';
     var carStr = [e.plate, e.carModel].filter(Boolean).join(' ');
     var car = carStr ? '・車 '+esc(carStr) : '';
     var org = e.org ? '・'+esc(e.org) : '';
     var host = e.host ? '（找 '+esc(e.host)+'）' : '';
-    var timeLine = arrived ? ('進 '+esc(fmtTime(e.enterAt)) + (e.leaveAt ? '　出 '+esc(fmtTime(e.leaveAt)) : '')) : ('預計 '+esc(e.expectAt||'—'));
+    // 預計 vs 實際：預約轉到場後，並排顯示預計時間與實際進出，一眼看出誤差
+    var timeLine;
+    if(arrived){
+      var t = '進 '+esc(fmtTime(e.enterAt)) + (e.leaveAt ? '　出 '+esc(fmtTime(e.leaveAt)) : '');
+      timeLine = (e.expectAt ? ('預計 '+esc(e.expectAt)+'　→　') : '') + t;
+    } else {
+      timeLine = '預計 '+esc(e.expectAt||'—') + (noShow ? '（未到場）' : '');
+    }
     var note = e.note ? '<div class="emeta note">📋 給保全：'+esc(e.note)+'</div>' : '';
 
-    var erow = '';
-    if(!arrived){
-      erow = '<div class="erow"><button type="button" class="btn arrive" data-act="arrive" data-id="'+esc(e.id)+'">登記到場</button><button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+    var del = '<button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button>';
+    var erow;
+    if(pending){
+      erow = '<div class="erow"><button type="button" class="btn arrive" data-act="arrive" data-id="'+esc(e.id)+'">登記到場</button>'+
+             '<button type="button" class="btn" data-act="noshow" data-id="'+esc(e.id)+'">標記未到</button>'+ del +'</div>';
+    } else if(noShow){
+      erow = '<div class="erow"><button type="button" class="btn" data-act="unshow" data-id="'+esc(e.id)+'">改回預約</button>'+ del +'</div>';
     } else {
       var outBtn = inHouse ? '<button type="button" class="btn out" data-act="out" data-id="'+esc(e.id)+'">登記離場</button>' : '';
-      erow = '<div class="erow">'+ borrowRow(e) + outBtn +'<button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+      erow = '<div class="erow">'+ borrowRow(e) + outBtn + del +'</div>';
     }
     return '<div class="entry'+cls+'">'+
       '<div class="entry-top">'+
@@ -140,19 +157,20 @@ title: 訪客出入紀錄
   }
 
   function render(){
-    var book = entries.filter(function(e){ return !e.enterAt; });
-    var live = entries.filter(function(e){ return e.enterAt && !e.leaveAt; });
-    var todayArr = entries.filter(function(e){ return e.enterAt && isToday(e.enterAt); });
+    var book = entries.filter(function(e){ return !e.enterAt && !e.noShow; });      // 預約中（active）
+    var live = entries.filter(function(e){ return e.enterAt && !e.leaveAt; });        // 在館
+    var todayLog = entries.filter(function(e){ return (e.enterAt && isToday(e.enterAt)) || (e.noShow && isToday(e.expectAt)); }); // 今日：到訪＋未到
+    var arrivedToday = todayLog.filter(function(e){ return e.enterAt; });
     $("k-book").innerHTML = book.length+'<span class="kpi-unit">組</span>';
     $("k-live").innerHTML = live.length+'<span class="kpi-unit">組</span>';
-    $("k-today").innerHTML = todayArr.length+'<span class="kpi-unit">組</span>';
+    $("k-today").innerHTML = arrivedToday.length+'<span class="kpi-unit">組</span>';
 
     book.sort(function(a,b){ return (a.expectAt||"")<(b.expectAt||"")?-1:1; }); // 預約依預計時間升冪
-    function sortDesc(a,b){ return (a.enterAt||"")<(b.enterAt||"")?1:-1; }
+    function sortDesc(a,b){ var ka=a.enterAt||a.expectAt||"", kb=b.enterAt||b.expectAt||""; return ka<kb?1:-1; }
 
     $("book-area").innerHTML = book.length ? book.map(entryHtml).join("") : '<div class="empty">目前沒有預約。</div>';
     $("live-area").innerHTML = live.length ? live.slice().sort(sortDesc).map(entryHtml).join("") : '<div class="empty">目前無在館訪客。</div>';
-    $("log-area").innerHTML = todayArr.length ? todayArr.slice().sort(sortDesc).map(entryHtml).join("") : '<div class="empty">今日尚無訪客到訪。</div>';
+    $("log-area").innerHTML = todayLog.length ? todayLog.slice().sort(sortDesc).map(entryHtml).join("") : '<div class="empty">今日尚無訪客紀錄。</div>';
     bind();
   }
 
@@ -164,6 +182,8 @@ title: 訪客出入紀錄
           var id=b.getAttribute("data-id"), act=b.getAttribute("data-act");
           if(act==="arrive") markArrive(id);
           else if(act==="out") markOut(id);
+          else if(act==="noshow") markNoShow(id);
+          else if(act==="unshow") undoNoShow(id);
           else if(act==="del") del(id);
           else if(act==="save") saveItem(id);
         });
@@ -186,6 +206,17 @@ title: 訪客出入紀錄
     post({ id:id, leaveAt: now })
       .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e) e.leaveAt=now; render(); })
       .catch(function(){ alert("離場登記失敗。"); });
+  }
+  function markNoShow(id){
+    if(!confirm("標記這筆預約為『未到場』？（保留紀錄、不刪除）")) return;
+    post({ id:id, noShow:true })
+      .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e) e.noShow=true; render(); })
+      .catch(function(){ alert("標記失敗。"); });
+  }
+  function undoNoShow(id){
+    post({ id:id, noShow:false })
+      .then(function(){ var e=entries.filter(function(x){return x.id===id;})[0]; if(e) e.noShow=false; render(); })
+      .catch(function(){ alert("操作失敗。"); });
   }
   function saveItem(id){
     var input = document.querySelector('.item-in[data-id="'+CSS.escape(id)+'"]');
