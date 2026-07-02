@@ -65,7 +65,7 @@ extraStyles: |
   .footer{border-top:1px solid var(--line);padding-top:18px;margin-top:40px;font-size:15px;color:var(--wg9);letter-spacing:.06em;line-height:1.9;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 ---
 <div class="header">
-  <div class="header-inner">
+  <div class="header-inner">
     <div class="eyebrow">OFFICIAL NOTICES</div>
     <h1>社區公告</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
@@ -121,4 +121,6 @@ function filter(t) {
     list.style.display = visibleCards.length ? '' : 'none';
   });
 }
+// 載入時依網址 hash 預選標籤（例如從淨零頁氣候調適連來的 /notice/#safety）
+(function(){var t=(location.hash||'').replace(/^#/,'');if(/^[a-z]+$/.test(t)&&document.querySelector('.filter-btn[data-filter="'+t+'"]'))filter(t);})();
 </script>
