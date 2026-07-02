@@ -2,6 +2,12 @@
 // 文件: https://www.11ty.dev/docs/config/
 
 module.exports = function(eleventyConfig) {
+  // ── 開發伺服器：關閉 DOM 差異比對、改用整頁重載 ──
+  // 預設的就地 DOM 修補會擾動「JS 動態產生的內容」（如 /about/ 的 Leaflet 互動地圖、
+  // utility 的 Chart.js 圖表），導致改檔熱更新後地圖/圖表「掉了」。整頁重載最穩。
+  // 只影響開發期熱重載行為，不影響 build 產物與正式站。
+  eleventyConfig.setServerOptions({ domDiff: false });
+
   // ── markdown-it 改成 CJK 友善：解決 **中文「夾全形標點」** 不渲染粗體的問題
   // 預設 CommonMark flanking rule 在 CJK 字 + 全形標點交界時會判定 ** 開閉失敗
   const md = require("markdown-it")({ html: true, linkify: true, breaks: false })
@@ -93,21 +99,21 @@ module.exports = function(eleventyConfig) {
 
   // ── 全站警示橫條：找出當前 active 的緊急公告 ──
   // 使用：{% set b = collections.notice | activeBanner %} → 回傳最新一則
-  // banner:true 且 bannerUntil >= 今天 的公告物件；無則 null。
-  // 用於 base.njk <body> 開頭渲染黃條。每日 06:00 build 重跑、過期自動消失。
+  // banner:true 且（bannerFrom <= 今天，選填）且（bannerUntil >= 今天，選填）的公告物件；無則 null。
+  // 用於 base.njk <body> 開頭渲染黃條。每日 06:00 build 重跑，到期自動消失、到 bannerFrom 自動出現。
+  // bannerFrom：選填「排程起始日」（YYYY-MM-DD）。設了它就能「現在填、之後才自動上架」，
+  //   不必到時手動打開；沒填 = 立即生效（與舊行為相同）。
   eleventyConfig.addFilter("activeBanner", function(notices) {
     if (!Array.isArray(notices) || !notices.length) return null;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    // 一律用「台北日期字串（YYYY-MM-DD）」比對，避開 UTC/本地時區的 off-by-one。
+    // build 在 GitHub Actions（UTC）跑，但住戶在台北，故以台北日期為準。
+    const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei' }).format(new Date());
+    const norm = (v) => (v instanceof Date) ? v.toISOString().slice(0, 10)
+                                            : String(v).slice(0, 10).replace(/\//g, '-');
     const active = notices
       .filter(n => n.data && n.data.banner === true)
-      .filter(n => {
-        if (!n.data.bannerUntil) return true; // 無到期日 = 一直顯示（HTML 註解提醒）
-        const u = n.data.bannerUntil;
-        const until = (u instanceof Date) ? u : new Date(String(u).replace(/\//g, '-'));
-        if (isNaN(until)) return true;
-        return until >= today;
-      })
+      .filter(n => !n.data.bannerFrom  || norm(n.data.bannerFrom)  <= todayStr) // 選填起始日；無 = 立即生效
+      .filter(n => !n.data.bannerUntil || norm(n.data.bannerUntil) >= todayStr) // 選填到期日；無 = 一直顯示
       .sort((a, b) => b.date - a.date);
     return active[0] || null;
   });
