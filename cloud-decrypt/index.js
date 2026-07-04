@@ -187,7 +187,8 @@ function parseTelecom(text) {
   }
 
   // 行動上網使用量：mupdf 可能把標籤跟值分在不同 token、允許之間有 whitespace/\n
-  const dataM = text.match(/行動上網使用量約\s*([\d.]+)\s*G\s*B/);
+  // 2026-06 帳單改寫成「約為0.249ＧＢ」（多「為」字＋全形ＧＢ）害舊 regex 漏抓，故兩種都容忍
+  const dataM = text.match(/行動上網使用量約[為为]?\s*([\d.]+)\s*[GＧ]\s*[BＢ]/);
   if (dataM) out.dataGB = parseFloat(dataM[1]);
 
   return out;
