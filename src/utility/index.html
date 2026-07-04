@@ -52,13 +52,23 @@ extraStyles: |
     @media(max-width:700px){.chart-grid{grid-template-columns:1fr;}}
     /* TABLE */
     .tbl-wrap{overflow-x:auto;}
-    table{width:100%;border-collapse:collapse;font-size:15px;}
+    /* separate+spacing 0：視覺同 collapse，但 sticky 凍結欄的背景才能畫滿不漏縫 */
+    table{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;}
     th{text-align:left;padding:8px 10px;background:var(--wg1);color:var(--wg9);font-weight:500;font-size:15px;letter-spacing:.06em;border-bottom:1px solid var(--line);white-space:nowrap;}
     th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
     td{padding:8px 10px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);white-space:nowrap;}
     td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
     tr:last-child td{border-bottom:none;}
     tr.latest td{font-weight:500;color:var(--wg41);background:rgba(60,56,53,0.03);}
+    /* 凍結前兩欄（年度＋帳期）：橫向捲動時固定在左緣，同 Excel 凍結窗格。
+       --c1 = 第一欄實寬，由 stickyCols() 量測後設定 */
+    /* left 取負值/減 2px：欄寬常是小數，凍結格彼此重疊 1-2px 吃掉次像素縫隙，
+       否則捲動內容會從縫隙透出 1px 殘影（重疊處是儲存格內距，無視覺影響） */
+    .tbl-wrap th:first-child,.tbl-wrap td:first-child{position:sticky;left:-1px;z-index:1;}
+    .tbl-wrap th:nth-child(2),.tbl-wrap td:nth-child(2){position:sticky;left:calc(var(--c1,96px) - 2px);z-index:1;border-right:1px solid var(--line);}
+    .tbl-wrap td:first-child,.tbl-wrap td:nth-child(2){background:var(--white);}
+    .tbl-wrap th:first-child,.tbl-wrap th:nth-child(2){z-index:2;}
+    .tbl-wrap tr.latest td:first-child,.tbl-wrap tr.latest td:nth-child(2){background:#F1EFEC;} /* rgba(60,56,53,.03) 疊 --white 的不透明等值 */
     .dp{color:var(--dp);font-weight:500;}
     .dn{color:var(--dn);font-weight:500;}
     /* NOTICE */
@@ -377,7 +387,7 @@ extraStyles: |
           <table>
             <thead>
               <tr>
-                <th>帳單年月</th><th>計費期間</th>
+                <th>年度</th><th>帳期</th><th>使用期間</th>
                 <th>市話 (元)</th><th>行動 (元)</th><th>合計 (元)</th>
                 <th>行動上網 (GB)</th><th>備註</th>
               </tr>
@@ -704,6 +714,15 @@ function buildElecTable(){
     }
   }
   document.getElementById('elec-tbody').innerHTML = html;
+  stickyCols('elec-tbody');
+}
+
+// 凍結欄定位：量第一欄實寬，寫進該表的 --c1 供第二欄 sticky left 用。
+// 隱藏分頁量到 0 就先不設（CSS 有 fallback），切到該分頁時 initX 會重建再量一次。
+function stickyCols(tbodyId){
+  const table = document.getElementById(tbodyId).closest('table');
+  const th = table.querySelector('thead th');
+  if (th && th.offsetWidth > 0) table.style.setProperty('--c1', th.offsetWidth + 'px');
 }
 
 function latestWaterKpi(){
@@ -789,6 +808,7 @@ function buildWaterTable(){
     }
   }
   document.getElementById('water-tbody').innerHTML = html;
+  stickyCols('water-tbody');
 }
 
 // ── 中華電信 ──
@@ -863,8 +883,11 @@ function initTelecom(){
   const fmt = v => (v == null ? '—' : v.toLocaleString());
   tbody.innerHTML = TELECOM_ROWS.slice().reverse().map(r => {
     const cls = r.rocYearMonth.startsWith('115/') ? ' class="latest"' : '';
+    // rocYearMonth "115/05" 拆成 年度「115（2026）」＋帳期「5月」，與電力/自來水表格式統一
+    const [ry, rm] = r.rocYearMonth.split('/');
     return `<tr${cls}>
-      <td>${r.rocYearMonth}</td>
+      <td>${ry}（${parseInt(ry, 10) + 1911}）</td>
+      <td>${parseInt(rm, 10)}月</td>
       <td>${r.period || '—'}</td>
       <td>${fmt(r.phone)}</td>
       <td>${fmt(r.mobile)}</td>
@@ -873,6 +896,7 @@ function initTelecom(){
       <td style="white-space:normal;font-size:15px;color:var(--wg9)">${r.note||''}</td>
     </tr>`;
   }).join('');
+  stickyCols('telecom-tbody');
 }
 
 // Init is called by Promise.all above after JSON data loads
