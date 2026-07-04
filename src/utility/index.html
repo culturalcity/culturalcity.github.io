@@ -554,13 +554,15 @@ function freezeYAxis(canvasId, innerId) {
   // 要用 renderDaily 明確設定的 style 寬度。
   const cssW = parseFloat(main.style.width);
   const ratio = cssW > 0 ? main.width / cssW : 1;
-  // 只蓋到圖表區底部（縱軸範圍），不蓋橫軸日期帶，日期才能自然捲動不疊字
+  // 遮罩蓋滿全高（捲過來的日期標籤到凍結區即隱沒，同 Excel），
+  // 但只拷貝圖表區高度內的縱軸（axH 以下不拷貝，避免凍結到舊日期標籤造成疊字）
   const axH = Math.ceil(chart.scales.y.bottom) + 2;
+  const cssH = parseFloat(main.style.height) || main.height / ratio;
   const ov = wrap.firstChild;
   ov.width = Math.round((pad + axW) * ratio);
-  ov.height = Math.round(axH * ratio);
+  ov.height = main.height;
   ov.style.width = (pad + axW) + 'px';
-  ov.style.height = axH + 'px';
+  ov.style.height = cssH + 'px';
   ov.style.display = 'block';
   ov.style.marginLeft = -pad + 'px';   // 往左補滿 scroller 的內距，凍結時才不會漏縫
   const ctx = ov.getContext('2d');
