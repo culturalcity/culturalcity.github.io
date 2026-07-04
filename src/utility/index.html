@@ -88,6 +88,9 @@ extraStyles: |
     /* SCROLLABLE CHART */
     .chart-scroll{overflow-x:auto;width:100%;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
     .chart-scroll-inner{position:relative;height:280px;}
+    /* 凍結縱軸（Excel 凍結窗格效果）：sticky 小畫布黏在可視左緣，蓋住捲過去的長條 */
+    .axis-freeze{position:sticky;left:0;width:0;height:0;z-index:2;pointer-events:none;}
+    .axis-freeze canvas{display:block;}
     .chart-meta{font-size:13px;color:var(--wg9);margin-top:6px;}
     /* TOOL CARDS */
     .tool-section{margin-bottom:28px;}
@@ -527,6 +530,43 @@ function renderDaily(canvasId, innerId, rows, key, grain, color, unit) {
   // 預設捲動到最右（看最近資料）：用 requestAnimationFrame 等 Chart.js render 完
   const scroller = inner.parentElement;
   requestAnimationFrame(() => { scroller.scrollLeft = scroller.scrollWidth; });
+  freezeYAxis(canvasId, innerId);
+}
+
+// 凍結縱軸：把主圖最左的 Y 軸區域拷貝到一個 sticky 小畫布上，
+// 水平捲動時它黏在可視範圍左緣（同 Excel 凍結窗格）。每次 renderDaily 重畫。
+function freezeYAxis(canvasId, innerId) {
+  const chart = charts[canvasId];
+  const main = document.getElementById(canvasId);
+  const inner = document.getElementById(innerId);
+  const scroller = inner.parentElement;
+  const pad = parseFloat(getComputedStyle(scroller).paddingLeft) || 0;
+  const axW = Math.ceil(chart.scales.y.right) + 1;   // Y 軸（含刻度文字）佔的寬度
+  let wrap = scroller.querySelector('.axis-freeze');
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.className = 'axis-freeze';
+    wrap.appendChild(document.createElement('canvas'));
+    scroller.insertBefore(wrap, inner);
+  }
+  // Chart.js 會依螢幕像素密度放大畫布（物理 px = CSS px × ratio），拷貝時要換算。
+  // 注意不能用 getBoundingClientRect（隱藏分頁中的圖表會量到 0），
+  // 要用 renderDaily 明確設定的 style 寬度。
+  const cssW = parseFloat(main.style.width);
+  const ratio = cssW > 0 ? main.width / cssW : 1;
+  // 只蓋到圖表區底部（縱軸範圍），不蓋橫軸日期帶，日期才能自然捲動不疊字
+  const axH = Math.ceil(chart.scales.y.bottom) + 2;
+  const ov = wrap.firstChild;
+  ov.width = Math.round((pad + axW) * ratio);
+  ov.height = Math.round(axH * ratio);
+  ov.style.width = (pad + axW) + 'px';
+  ov.style.height = axH + 'px';
+  ov.style.display = 'block';
+  ov.style.marginLeft = -pad + 'px';   // 往左補滿 scroller 的內距，凍結時才不會漏縫
+  const ctx = ov.getContext('2d');
+  ctx.fillStyle = getComputedStyle(scroller).backgroundColor;
+  ctx.fillRect(0, 0, ov.width, ov.height);
+  ctx.drawImage(main, 0, 0, axW * ratio, axH * ratio, pad * ratio, 0, axW * ratio, axH * ratio);
 }
 
 function initDailyElec() {
