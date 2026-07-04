@@ -371,6 +371,13 @@ async function updateWaterChart(info) {
   if (info.fee == null || info.tonnes == null) return { skipped: '無金額/度數' };
   const adYear = parseInt(info.rocYearMonth.split('/')[0]) + 1911;
   const monthStr = info.rocYearMonth.split('/')[1];
+  // 使用期間 "MM/DD-MM/DD"（歷史明細表顯示用；抽不到就 null、不覆蓋既有值）
+  let usagePeriod = null;
+  const perS = info.periodStart ? rocFullDateToYmd(info.periodStart) : null;
+  const perE = info.periodEnd ? rocFullDateToYmd(info.periodEnd) : null;
+  if (perS && perE) {
+    usagePeriod = `${perS.slice(4, 6)}/${perS.slice(6, 8)}-${perE.slice(4, 6)}/${perE.slice(6, 8)}`;
+  }
   const { content, sha } = await ghGetFile('utility/data/water-chart.json');
   const chart = JSON.parse(content);
   const slot = chart.periods.indexOf(monthStr);
@@ -381,15 +388,19 @@ async function updateWaterChart(info) {
       label: `${adYear - 1911}年（${adYear}）`,
       data: new Array(chart.periods.length).fill(null),
       tonnes: new Array(chart.periods.length).fill(null),
+      usagePeriods: new Array(chart.periods.length).fill(null),
       backgroundColor: 'rgba(105,100,96,0.65)'
     };
     chart.datasets.push(ds);
   }
-  if (ds.data[slot] === info.fee && ds.tonnes[slot] === info.tonnes) {
+  if (!ds.usagePeriods) ds.usagePeriods = new Array(chart.periods.length).fill(null);
+  if (ds.data[slot] === info.fee && ds.tonnes[slot] === info.tonnes &&
+      (usagePeriod == null || ds.usagePeriods[slot] === usagePeriod)) {
     return { unchanged: true };
   }
   ds.data[slot] = info.fee;
   ds.tonnes[slot] = info.tonnes;
+  if (usagePeriod != null) ds.usagePeriods[slot] = usagePeriod;
   const msg = `data: 自來水 ${adYear}-${monthStr} 自動更新（${info.tonnes} 度 / ${info.fee.toLocaleString()} 元）`;
   await ghPutFile('utility/data/water-chart.json', JSON.stringify(chart, null, 2) + '\n', sha, msg);
   return { updated: true, slot, fee: info.fee, tonnes: info.tonnes };
