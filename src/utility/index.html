@@ -389,7 +389,7 @@ extraStyles: |
               <tr>
                 <th>年度</th><th>帳期</th><th>使用期間</th>
                 <th>市話 (元)</th><th>行動 (元)</th><th>合計 (元)</th>
-                <th>行動上網 (GB)</th><th>備註</th>
+                <th>行動上網 (GB)</th><th style="text-align:left">備註</th>
               </tr>
             </thead>
             <tbody id="telecom-tbody">
@@ -893,7 +893,7 @@ function initTelecom(){
       <td>${fmt(r.mobile)}</td>
       <td>${fmt(r.total)}</td>
       <td>${r.dataGB!=null ? r.dataGB.toFixed(3) : '—'}</td>
-      <td style="white-space:normal;min-width:220px;font-size:15px;color:var(--wg9)">${r.note||''}</td>
+      <td style="white-space:normal;min-width:220px;text-align:left;font-size:15px;color:var(--wg9)">${r.note||''}</td>
     </tr>`;
   }).join('');
   stickyCols('telecom-tbody');
