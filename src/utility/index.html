@@ -893,7 +893,7 @@ function initTelecom(){
       <td>${fmt(r.mobile)}</td>
       <td>${fmt(r.total)}</td>
       <td>${r.dataGB!=null ? r.dataGB.toFixed(3) : '—'}</td>
-      <td style="white-space:normal;font-size:15px;color:var(--wg9)">${r.note||''}</td>
+      <td style="white-space:normal;min-width:220px;font-size:15px;color:var(--wg9)">${r.note||''}</td>
     </tr>`;
   }).join('');
   stickyCols('telecom-tbody');
