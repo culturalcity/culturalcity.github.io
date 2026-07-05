@@ -43,6 +43,16 @@ body {
   pointer-events: none;
 }
 .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
+
+/* ── 標準內文容器（單一來源）──────────────────────────────
+   新頁面直接用 <div class="main">，「不要」在頁內重寫置中容器！
+   歷史教訓（2026-07-05）：容器一頁一份複製貼上，導致「側距只到 600px」的缺陷
+   複製到 26 頁——視窗 600–840px（平板直立）內文全站貼邊。以下三段是完整規格：
+   桌面置中、600–840 帶側距對齊 header 的 40px、手機 20px。
+   若頁面需要更寬容器（覆寫 --page-max-width 至 W），帶斷點須自行補至 W+80px。 */
+.main { max-width: var(--page-max-width); margin: 0 auto; padding: 36px 0 64px; }
+@media (max-width: 840px) { .main { padding-left: 40px; padding-right: 40px; } }
+@media (max-width: 600px) { .main { padding: 28px 20px 48px; } }
 .header-eyebrow { font-size:15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
 .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
 .header-sub { font-size:15px; color: var(--wg7); letter-spacing: 0.16em; }
