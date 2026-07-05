@@ -6,6 +6,7 @@ eleventyExcludeFromCollections: true
 trilingual: true
 extraStyles: |
   .wrap{max-width:var(--page-max-width);margin:0 auto;padding:40px 0 64px;}
+  @media(max-width:840px){.wrap{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.wrap{padding:28px 24px 48px;}}
   .lede{font-size:17px;color:var(--wg11);line-height:1.9;margin-bottom:22px;}
   .lede strong{color:var(--wg41);}

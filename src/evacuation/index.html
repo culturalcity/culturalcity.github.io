@@ -32,6 +32,7 @@ extraStyles: |
   /* 日文內容以 Noto Sans JP 優先，避免「図」「経」等日文字形 fallback 不一致（中文不受影響） */
   .lang-block[data-lang="ja"],[data-lang-text="ja"]{font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic UI','Meiryo','Noto Sans TC',sans-serif;}
   .main{max-width:var(--page-max-width);margin:0 auto;padding:32px 0 64px;}
+  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.header{padding:28px 20px 22px;}.lang-bar{padding:0 20px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
   /* 說明 */
   .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-left:3px solid var(--exit);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.85;margin-bottom:22px;}

@@ -17,6 +17,7 @@ extraStyles: |
   .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
   .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;}
   .main{max-width:760px;margin:0 auto;padding:36px 0 64px;}
+  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}}
   .sec-label{font-size:13px;letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}

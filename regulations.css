@@ -115,3 +115,8 @@ body {
   border-top: 1px solid var(--line); padding-top: 18px;
   font-size:15px; color: var(--wg9);
 }
+
+/* 601–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
+@media (min-width: 601px) and (max-width: 840px) {
+  .main { padding-left: 40px; padding-right: 40px; }
+}

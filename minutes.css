@@ -344,3 +344,8 @@ body {
 .alloc-table .text-right { text-align:right;font-variant-numeric:tabular-nums; }
 .alloc-table .row-total { background:rgba(60,56,53,0.04);font-weight:600;color:var(--wg41); }
 .alloc-table tbody tr:last-child td { border-bottom:none; }
+
+/* 641–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
+@media (min-width: 641px) and (max-width: 840px) {
+  .main, .m-nav { padding-left: 40px; padding-right: 40px; }
+}

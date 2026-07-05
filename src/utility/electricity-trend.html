@@ -24,6 +24,7 @@ extraStyles: |
   .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
   .header-sub{font-size:15px;color:var(--wg9);letter-spacing:.14em;}
   .main{max-width:var(--page-max-width);margin:0 auto;padding:32px 0 64px;}
+  @media(max-width:1080px){.main{padding-left:40px;padding-right:40px;}} /* 600–1080px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
   .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:11px 15px;font-size:15px;color:var(--wg9);line-height:1.8;margin-bottom:24px;}
   .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}

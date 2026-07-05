@@ -231,3 +231,8 @@ tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04
   background: transparent; color: var(--ink2);
 }
 .btn:hover { background: var(--paper2); }
+
+/* 601–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
+@media (min-width: 601px) and (max-width: 840px) {
+  .main { padding-left: 40px; padding-right: 40px; }
+}

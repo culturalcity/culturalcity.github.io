@@ -17,6 +17,7 @@ extraStyles: |
   .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
   .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;}
   .main{max-width:760px;margin:0 auto;padding:36px 0 64px;}
+  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}}
   /* 時點 + 性質說明 */
   .disclaimer{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:13px 16px;font-size:15px;color:var(--wg9);line-height:1.8;margin-bottom:16px;}
