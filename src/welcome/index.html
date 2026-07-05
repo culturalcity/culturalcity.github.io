@@ -55,7 +55,7 @@ extraStyles: |
   .info-card.blue::before{background:var(--blue);}
   .info-card.green::before{background:var(--dp);}
   .info-card.warn::before{background:var(--warn);}
-  .card-icon{font-size:19px;margin-bottom:10px;display:block;}
+  .card-illus{display:block;width:100%;max-width:250px;margin:2px auto 12px;}
   .card-title{font-size:16px;font-weight:700;color:var(--wg41);margin-bottom:8px;letter-spacing:.03em;}
   .card-body{font-size:15px;color:var(--wg11);line-height:1.85;}
   .card-body strong{color:var(--wg41);}
@@ -69,7 +69,7 @@ extraStyles: |
   .detail-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s;}
   .detail-head:hover{background:#F2F0EC;}
   .detail-head-left{display:flex;align-items:center;gap:10px;}
-  .detail-icon{font-size:18px;}
+  .detail-illus{display:block;width:100%;max-width:300px;margin:8px auto 14px;}
   .detail-title{font-size:16px;font-weight:600;color:var(--wg41);}
   .detail-chevron{font-size:15px;color:var(--wg9);transition:transform .2s;}
   .detail-block.open .detail-chevron{transform:rotate(90deg);}
@@ -154,7 +154,7 @@ extraScripts: |
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; 馬上要知道</div>
   <div class="card-grid">
     <div class="info-card blue">
-      <span class="card-icon">💳</span>
+      <img class="card-illus" src="/images/welcome-fee.svg" alt="" loading="lazy">
       <div class="card-title">管理費</div>
       <div class="card-body">
         <span class="amount">每坪 $150／月</span>
@@ -164,7 +164,7 @@ extraScripts: |
       <a href="../regulations/regulations-管理費收繳辦法.html" class="card-link">管理費收繳辦法</a>
     </div>
     <div class="info-card">
-      <span class="card-icon">🔑</span>
+      <img class="card-illus" src="/images/welcome-access.svg" alt="" loading="lazy">
       <div class="card-title">門禁磁扣</div>
       <div class="card-body">
         磁扣可開啟前後大門、電梯、信箱及地下室各層。每個磁扣有唯一編碼，<strong>不得私自複製</strong>。<br>
@@ -174,7 +174,7 @@ extraScripts: |
       <a href="../regulations/regulations-門禁管理辦法.html" class="card-link">門禁管理辦法</a>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🗑️</span>
+      <img class="card-illus" src="/images/welcome-waste.svg" alt="" loading="lazy">
       <div class="card-title">垃圾投放</div>
       <div class="card-body">
         一般垃圾與廚餘投入 <strong>B1環保室冷藏室</strong>。廢紙→環保室紙類回收箱；廢紙箱攤平放 <strong>B1電表箱走道紙箱區</strong>；1號PET與2號HDPE塑膠容器→環保室塑膠類回收箱。<br>
@@ -183,7 +183,7 @@ extraScripts: |
       <a href="../regulations/regulations-垃圾分類回收指引.html" class="card-link">垃圾分類回收指引</a>
     </div>
     <div class="info-card">
-      <span class="card-icon">📱</span>
+      <img class="card-illus" src="/images/welcome-app.svg" alt="" loading="lazy">
       <div class="card-title">智生活 APP</div>
       <div class="card-body">
         社區主要通訊與服務平台。用於繳納管理費、接收公告、申請設施使用等。可於 Google Play 或 App Store 搜尋「智生活」下載。<br>
@@ -191,7 +191,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card warn">
-      <span class="card-icon">🐾</span>
+      <img class="card-illus" src="/images/welcome-pets.svg" alt="" loading="lazy">
       <div class="card-title">飼養寵物</div>
       <div class="card-body">
         攜帶寵物進出公共空間時，應以外出籠、推車或牽繩控管。搭乘電梯如遇其他住戶已在搭乘或等候，應禮讓先行，改搭下一趟。<br>
@@ -200,7 +200,7 @@ extraScripts: |
       <a href="../regulations/regulations-飼養動物管理辦法.html" class="card-link">飼養動物管理辦法</a>
     </div>
     <div class="info-card blue">
-      <span class="card-icon">🏋️</span>
+      <img class="card-illus" src="/images/welcome-facilities.svg" alt="" loading="lazy">
       <div class="card-title">公共設施</div>
       <div class="card-body">
         <strong>健身房</strong>（2樓）：06:00–24:00，使用前請通知管理中心開燈。著運動服裝、運動鞋入場。<br>
@@ -209,7 +209,7 @@ extraScripts: |
       <a href="../regulations/regulations-特定公共空間管理辦法.html" class="card-link">特定公共空間管理辦法</a>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🚇</span>
+      <img class="card-illus" src="/images/netzero-transport.svg" alt="" loading="lazy">
       <div class="card-title">周邊交通</div>
       <div class="card-body">
         緊鄰<strong>古亭捷運站</strong>（步行 2 分鐘），門口有 YouBike，地下室設電動車充電樁。捷運、公車、YouBike、河濱自行車道資訊都整理好了。<br>
@@ -233,10 +233,11 @@ extraScripts: |
   <div class="sec-label">DETAILS &nbsp;·&nbsp; 進一步了解</div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">停車場使用規則</span></div>
+      <div class="detail-head-left"><span class="detail-title">停車場使用規則</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-parking.svg" alt="" loading="lazy">
       <p>地下室停車場限高 <strong>2.1 公尺</strong>，車輛進出須持有效門禁憑證。停車場僅供停放車輛，管理單位僅負善良管理人責任，住戶應自行投保車險，發生事故、毀損、失竊不得向管委會求償。</p>
       <p>電動車充電樁設置於 B1–B4，採度數計費，另有每個充電樁每月 $50 公用線路維護費。B3/B4 已採時間電價，建議於離峰時間（夜間）充電可節省費用。</p>
       <p><strong>訪客停車：</strong>本社區<strong>未提供訪客專用車位</strong>。住戶如有空置車位，可事先提供訪客的車型、顏色、車牌號碼予管理中心，由管理中心協助手動開關車庫門。<br>一樓無障礙車位<strong>不接受外車臨停</strong>——依《停車空間管理辦法》第 28 條，第一順位為持身障證者（絕對優先）；社區廠商與住戶裝潢卸貨廠商在不影響第一順位之前提下方得短期使用，須事先向管理中心登記。詳見 <a href="../notice/2026-05-12-無障礙停車位規定重申.html" class="ref-link" style="display:inline;color:var(--blue);text-decoration:underline;">2026/05/12 公告</a>。</p>
@@ -245,10 +246,11 @@ extraScripts: |
   </div>
   <div class="detail-block" id="detail-renovation">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">裝潢施工申請流程</span></div>
+      <div class="detail-head-left"><span class="detail-title">裝潢施工申請流程</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-renovation.svg" alt="" loading="lazy">
       <p>裝潢施工須通過<strong>兩道關卡</strong>：① 社區內部的施工申請（向管委會）；② 政府核發的<strong>室內裝修許可</strong>（依《建築法》第 77-2 條）。兩者並行不悖、各自獨立。</p>
 
       <p><strong>① 社區內部施工申請</strong></p>
@@ -267,10 +269,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛗</span><span class="detail-title">大型物件搬運（家電、家具、購物大件）</span></div>
+      <div class="detail-head-left"><span class="detail-title">大型物件搬運（家電、家具、購物大件）</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-moving.svg" alt="" loading="lazy">
       <p>裝潢期間有保證金與裝潢保護板把貨梯包起來——但平時搬大型家電、家具、購物大件，<strong>同樣只能走貨梯</strong>，且需要事先做好保護，避免造成住戶共同承擔的修復成本。</p>
       <div class="highlight"><strong>搬運前一天</strong>請聯繫管理中心，告知預計搬運時間與物件尺寸，由管理中心預先將<strong>貨梯掛毯</strong>掛上。當天請搬運工人配合走貨梯路線，禁止使用客梯。</div>
       <p>掛毯能保護貨梯內部大部分區域，但<strong>地面與貨梯門側仍有機會被工具或家具角磨損</strong>，仍須提醒搬運工人謹慎操作。任何損壞的修復屬全棟住戶共同承擔的成本。</p>
@@ -279,10 +282,11 @@ extraScripts: |
   </div>
   <div class="detail-block" id="detail-appearance">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">陽台、外牆與建物使用限制</span></div>
+      <div class="detail-head-left"><span class="detail-title">陽台、外牆與建物使用限制</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-facade.svg" alt="" loading="lazy">
       <p>外牆與陽台外側雖然「位置上是您家」，但<strong>所有權屬全體共有</strong>，個別住戶不得單方變更。以下是常見項目的處理原則：</p>
 
       <p><strong>禁止項目：</strong></p>
@@ -307,10 +311,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛎️</span><span class="detail-title">管理中心提供的服務</span></div>
+      <div class="detail-head-left"><span class="detail-title">管理中心提供的服務</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-services.svg" alt="" loading="lazy">
       <p>管理中心日常提供以下服務，需要時請直接洽詢：</p>
 
       <p><strong>代收與通訊</strong></p>
@@ -350,10 +355,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">管委會是什麼？如何參與社區事務？</span></div>
+      <div class="detail-head-left"><span class="detail-title">管委會是什麼？如何參與社區事務？</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-committee.svg" alt="" loading="lazy">
       <p>管理委員會（管委會）由區分所有權人選出，任期一年，負責社區日常管理與重大事項決策。委員職務為無給職。</p>
       <p>管委會每月召開一次例會，歡迎住戶列席旁聽，如有意願請洽管理中心。每次會議的開會通知與會議紀錄均會公告於社區網站。</p>
       <p>社區最高決策機構為<strong>區分所有權人會議</strong>（區權會），每年召開一次，重大事項須經區權會決議。每位區分所有權人均有提案與投票權。</p>
@@ -398,7 +404,7 @@ extraScripts: |
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; What You Need to Know</div>
   <div class="card-grid">
     <div class="info-card blue">
-      <span class="card-icon">💳</span>
+      <img class="card-illus" src="/images/welcome-fee.svg" alt="" loading="lazy">
       <div class="card-title">Management Fee</div>
       <div class="card-body">
         <span class="amount">NT$150 per ping / month</span>
@@ -407,7 +413,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card">
-      <span class="card-icon">🔑</span>
+      <img class="card-illus" src="/images/welcome-access.svg" alt="" loading="lazy">
       <div class="card-title">Access Tag</div>
       <div class="card-body">
         Your access tag unlocks the front/rear entrance, elevator, mailbox, and all basement levels. Each tag has a unique code and <strong>must not be duplicated</strong>.<br>
@@ -416,7 +422,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🗑️</span>
+      <img class="card-illus" src="/images/welcome-waste.svg" alt="" loading="lazy">
       <div class="card-title">Waste Disposal</div>
       <div class="card-body">
         General waste &amp; food scraps: <strong>B1 Garbage Room cold storage</strong>. Paper: paper recycling bin in Garbage Room. Flattened cardboard boxes: <strong>B1 Meter-Box Corridor</strong>. PET (#1) &amp; HDPE (#2) plastic containers: plastic recycling bin in Garbage Room.<br>
@@ -424,7 +430,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card">
-      <span class="card-icon">📱</span>
+      <img class="card-illus" src="/images/welcome-app.svg" alt="" loading="lazy">
       <div class="card-title">Zhishenghuo App</div>
       <div class="card-body">
         The community's main platform for paying fees, receiving announcements, and booking facilities. Search "智生活" on Google Play or the App Store.<br>
@@ -432,7 +438,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card warn">
-      <span class="card-icon">🐾</span>
+      <img class="card-illus" src="/images/welcome-pets.svg" alt="" loading="lazy">
       <div class="card-title">Pets</div>
       <div class="card-body">
         Pets must be in a carrier, stroller, or on a leash when in common areas. If another resident is already in or waiting for the elevator, please wait for the next one.<br>
@@ -440,7 +446,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card blue">
-      <span class="card-icon">🏋️</span>
+      <img class="card-illus" src="/images/welcome-facilities.svg" alt="" loading="lazy">
       <div class="card-title">Communal Facility</div>
       <div class="card-body">
         <strong>Gym</strong> (2F): 06:00–24:00. Notify Management Center to turn on lights before use. Sports attire and shoes required.<br>
@@ -448,7 +454,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🚇</span>
+      <img class="card-illus" src="/images/netzero-transport.svg" alt="" loading="lazy">
       <div class="card-title">Getting Around</div>
       <div class="card-body">
         Right beside <strong>Guting MRT Station</strong> (2-min walk), with YouBike at the door and EV charging in the basement. MRT, bus, YouBike and riverside bikeway info all in one place.<br>
@@ -472,10 +478,11 @@ extraScripts: |
   <div class="sec-label">DETAILS &nbsp;·&nbsp; Learn More</div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">Parking Regulations</span></div>
+      <div class="detail-head-left"><span class="detail-title">Parking Regulations</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-parking.svg" alt="" loading="lazy">
       <p>The basement parking garage has a <strong>height limit of 2.1 meters</strong>. Access requires a valid access tag or registration. The management assumes general custodial responsibility only — residents must carry their own vehicle insurance. The Management Committee is not liable for accidents, damage, or theft.</p>
       <p>EV charging stations are available on B1–B4, billed by kilowatt-hour plus a NT$50/month shared line maintenance fee per charger. B3/B4 use time-of-use pricing — overnight charging is more economical.</p>
       <p><strong>Visitor parking:</strong> No designated visitor parking is provided. If you have a vacant parking space, provide your visitor's vehicle make, color, and plate number to the Management Center, who will manually open the garage gate (the gate uses eTag recognition and cannot be accessed by unregistered vehicles).<br>The 1F accessible parking space is <strong>not open to visiting vehicles</strong> — per Article 28 of the Parking Space Management Rules, first priority goes to disability permit holders (absolute precedence); community contractors and resident unloading / delivery vehicles may use it only short-term and only when not interfering with first-priority use, with prior registration at the Management Center. See <a href="../notice/2026-05-12-無障礙停車位規定重申.html" class="ref-link" style="display:inline;color:var(--blue);text-decoration:underline;">announcement of 2026/05/12</a>.</p>
@@ -483,10 +490,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">Renovation Application Process</span></div>
+      <div class="detail-head-left"><span class="detail-title">Renovation Application Process</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-renovation.svg" alt="" loading="lazy">
       <p>Renovation work must pass <strong>two separate approvals</strong>: ① the community's internal construction application (to the Management Committee); ② the government-issued <strong>Interior Renovation Permit</strong> (under Article 77-2 of the Building Act). Both are required and operate independently.</p>
 
       <p><strong>① Community Construction Application</strong></p>
@@ -505,10 +513,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛗</span><span class="detail-title">Moving Large Items (Appliances, Furniture, Bulk Purchases)</span></div>
+      <div class="detail-head-left"><span class="detail-title">Moving Large Items (Appliances, Furniture, Bulk Purchases)</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-moving.svg" alt="" loading="lazy">
       <p>During renovation, the deposit and protective panels keep the freight elevator covered — but moving large appliances, furniture, or bulk online purchases at any other time <strong>still requires using the freight elevator only</strong>, with protection arranged in advance to avoid damage that all residents would share the cost of repairing.</p>
       <div class="highlight"><strong>One day in advance</strong>, contact the Management Center with your expected delivery time and item dimensions; they will hang the <strong>Protective Drape</strong> in the freight elevator beforehand. On the day, ensure movers use the freight elevator route only — passenger elevators are prohibited for this purpose.</div>
       <p>The Protective Drape covers most of the freight elevator's interior, but <strong>the floor and the door side may still be scratched by tools or furniture corners</strong>. Please remind movers to handle items carefully. Any damage incurred is repaired at the cost of all residents collectively.</p>
@@ -517,10 +526,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">Balcony, Exterior Wall & Structural Restrictions</span></div>
+      <div class="detail-head-left"><span class="detail-title">Balcony, Exterior Wall & Structural Restrictions</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-facade.svg" alt="" loading="lazy">
       <p>Although your balcony and the exterior wall around it are physically attached to your unit, their <strong>ownership belongs to all residents collectively</strong>; individual residents cannot alter them unilaterally. Common items handled below:</p>
 
       <p><strong>Prohibited:</strong></p>
@@ -545,10 +555,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛎️</span><span class="detail-title">Services Offered by the Management Center</span></div>
+      <div class="detail-head-left"><span class="detail-title">Services Offered by the Management Center</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-services.svg" alt="" loading="lazy">
       <p>The Management Center provides the following services on a daily basis. Please contact us directly whenever you need any of them:</p>
 
       <p><strong>Receiving &amp; Communications</strong></p>
@@ -588,10 +599,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">What is the Management Committee? How to participate?</span></div>
+      <div class="detail-head-left"><span class="detail-title">What is the Management Committee? How to participate?</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-committee.svg" alt="" loading="lazy">
       <p>The Management Committee is elected by unit owners and serves a one-year term. All committee positions are voluntary and unpaid.</p>
       <p>The committee holds a monthly meeting. Residents are welcome to attend as observers — please contact the Management Center if interested. Meeting notices and minutes are posted on the community website.</p>
       <p>The highest governing body is the <strong>Owners' General Meeting</strong>, held annually. Major decisions (such as regulation changes or large expenditures) require a vote. All unit owners have the right to propose motions and vote.</p>
@@ -636,7 +648,7 @@ extraScripts: |
   <div class="sec-label">ESSENTIALS &nbsp;·&nbsp; まず知っておくこと</div>
   <div class="card-grid">
     <div class="info-card blue">
-      <span class="card-icon">💳</span>
+      <img class="card-illus" src="/images/welcome-fee.svg" alt="" loading="lazy">
       <div class="card-title">管理費</div>
       <div class="card-body">
         <span class="amount">NT$150 / 坪 / 月</span>
@@ -645,7 +657,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card">
-      <span class="card-icon">🔑</span>
+      <img class="card-illus" src="/images/welcome-access.svg" alt="" loading="lazy">
       <div class="card-title">入退館用タグ</div>
       <div class="card-body">
         タグで正面・裏口、エレベーター、郵便受け、地下各フロアへの入室が可能です。各タグは固有のコードを持ち、<strong>複製は禁止</strong>されています。<br>
@@ -654,7 +666,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🗑️</span>
+      <img class="card-illus" src="/images/welcome-waste.svg" alt="" loading="lazy">
       <div class="card-title">ゴミの出し方</div>
       <div class="card-body">
         一般ゴミ・生ゴミ：<strong>B1ゴミ置き場冷蔵室</strong>へ。古紙：ゴミ置き場紙類回収箱へ。ダンボール（折り畳んで）：<strong>B1電気メーターボックス廊下の段ボール置き場</strong>へ。PET（#1）・HDPE（#2）プラスチック容器：ゴミ置き場プラスチック回収箱へ。<br>
@@ -662,7 +674,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card">
-      <span class="card-icon">📱</span>
+      <img class="card-illus" src="/images/welcome-app.svg" alt="" loading="lazy">
       <div class="card-title">智生活アプリ</div>
       <div class="card-body">
         管理費の支払い、お知らせの受信、施設予約などに使用するコミュニティの主要プラットフォームです。Google Play または App Store で「智生活」と検索してダウンロードしてください。<br>
@@ -670,7 +682,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card warn">
-      <span class="card-icon">🐾</span>
+      <img class="card-illus" src="/images/welcome-pets.svg" alt="" loading="lazy">
       <div class="card-title">ペット</div>
       <div class="card-body">
         共用スペースでのペット同伴時は、ペットキャリー、ペットカート、またはリードを使用してください。エレベーターに他の入居者がいる場合や待っている場合は、次のエレベーターをご利用ください。<br>
@@ -678,7 +690,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card blue">
-      <span class="card-icon">🏋️</span>
+      <img class="card-illus" src="/images/welcome-facilities.svg" alt="" loading="lazy">
       <div class="card-title">公共施設</div>
       <div class="card-body">
         <strong>ジム</strong>（2F）：06:00–24:00。使用前に管理センターに照明オンを依頼。スポーツウェア・運動靴必須。<br>
@@ -686,7 +698,7 @@ extraScripts: |
       </div>
     </div>
     <div class="info-card green">
-      <span class="card-icon">🚇</span>
+      <img class="card-illus" src="/images/netzero-transport.svg" alt="" loading="lazy">
       <div class="card-title">周辺交通</div>
       <div class="card-body">
         <strong>古亭MRT駅</strong>のすぐそば（徒歩2分）。玄関前にYouBike、地下にEV充電器。MRT・バス・YouBike・リバーサイド自転車道の情報をまとめています。<br>
@@ -710,10 +722,11 @@ extraScripts: |
   <div class="sec-label">DETAILS &nbsp;·&nbsp; 詳細情報</div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🚗</span><span class="detail-title">駐車場利用規則</span></div>
+      <div class="detail-head-left"><span class="detail-title">駐車場利用規則</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-parking.svg" alt="" loading="lazy">
       <p>地下駐車場の<strong>高さ制限は2.1メートル</strong>です。入出庫には有効なアクセス認証が必要です。理事会は善良な管理者としての責任を負うのみで、事故・損傷・盗難に対する賠償責任は負いません。入居者は自身で車両保険に加入してください。</p>
       <p>EV充電器はB1〜B4に設置されており、使用量（kWh）単位での課金に加え、共用線路の維持費として月額NT$50がかかります。B3・B4は時間帯別料金制のため、夜間充電が経済的です。</p>
       <p><strong>来客用駐車：</strong>当コミュニティでは<strong>来客専用駐車スペースはご用意しておりません</strong>。空いている駐車スペースがある場合、来客の車種・色・ナンバープレートを管理センターに事前連絡すれば、センターが車庫ゲートを手動で開閉します（ゲートはeTagで管理されており、未登録車両は自動入場できません）。<br>1階バリアフリー駐車スペースは<strong>コミュニティ外の車両の一時駐車には開放しておりません</strong>——駐車場管理規程第28条により、第一順位は障害者用駐車証をお持ちの方（絶対的優先権）、共用設備のメンテナンス業者および居住者の搬出入車両は、第一順位の即時利用を妨げない場合に限り、事前に管理センターへ登録のうえ短期間利用可能です。詳細は <a href="../notice/2026-05-12-無障礙停車位規定重申.html" class="ref-link" style="display:inline;color:var(--blue);text-decoration:underline;">2026/05/12のお知らせ</a> をご参照ください。</p>
@@ -721,10 +734,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🔨</span><span class="detail-title">リノベーション申請の流れ</span></div>
+      <div class="detail-head-left"><span class="detail-title">リノベーション申請の流れ</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-renovation.svg" alt="" loading="lazy">
       <p>リノベーション工事は<strong>2段階の許可</strong>を取得する必要があります：① コミュニティ内部の工事申請（理事会へ）；② 政府発行の<strong>室内リフォーム許可</strong>（建築法第77-2条による）。両者は独立しており、いずれも必須です。</p>
 
       <p><strong>① コミュニティ内部の工事申請</strong></p>
@@ -743,10 +757,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛗</span><span class="detail-title">大型物の搬入・搬出（家電・家具・大型購入品）</span></div>
+      <div class="detail-head-left"><span class="detail-title">大型物の搬入・搬出（家電・家具・大型購入品）</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-moving.svg" alt="" loading="lazy">
       <p>リノベーション期間中は保証金と養生板により荷物用エレベーターが保護されますが、それ以外の時期に大型家電・家具・大型購入品を搬入・搬出する場合も<strong>荷物用エレベーターのみのご利用</strong>となります。事前に保護を行うことで、入居者全員が共同で負担する修繕費用の発生を防ぎます。</p>
       <div class="highlight"><strong>前日までに</strong>管理センターへご連絡ください。予定搬入時間と物品の寸法をお伝えいただければ、事前に<strong>保護シート</strong>を荷物用エレベーターに設置します。当日は搬入業者に荷物用エレベーター経路の使用をご案内ください。乗用エレベーターでの搬入は禁止されています。</div>
       <p>保護シートは荷物用エレベーター内部の大部分を保護しますが、<strong>床面とエレベーター扉側面は工具や家具の角で傷つく可能性が残ります</strong>。搬入業者へ慎重な作業をご依頼ください。万が一の破損による修繕費用は、入居者全員で共同負担となります。</p>
@@ -755,10 +770,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">📋</span><span class="detail-title">バルコニー・外壁・建物の使用制限</span></div>
+      <div class="detail-head-left"><span class="detail-title">バルコニー・外壁・建物の使用制限</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-facade.svg" alt="" loading="lazy">
       <p>バルコニーとその外周の外壁は、お部屋に物理的につながっていますが、<strong>所有権は入居者全員の共有</strong>です。個別の入居者が単独で変更することはできません。よくある項目を以下にまとめます：</p>
 
       <p><strong>禁止項目：</strong></p>
@@ -783,10 +799,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🛎️</span><span class="detail-title">管理センターで提供しているサービス</span></div>
+      <div class="detail-head-left"><span class="detail-title">管理センターで提供しているサービス</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-services.svg" alt="" loading="lazy">
       <p>管理センターでは日常的に下記のサービスをご提供しております。必要な際はお気軽にお声がけください：</p>
 
       <p><strong>受け取り・連絡</strong></p>
@@ -826,10 +843,11 @@ extraScripts: |
   </div>
   <div class="detail-block">
     <div class="detail-head" onclick="toggleDetail(this)">
-      <div class="detail-head-left"><span class="detail-icon">🏛️</span><span class="detail-title">理事会とは？コミュニティへの参加方法</span></div>
+      <div class="detail-head-left"><span class="detail-title">理事会とは？コミュニティへの参加方法</span></div>
       <span class="detail-chevron">›</span>
     </div>
     <div class="detail-body">
+      <img class="detail-illus" src="/images/welcome-committee.svg" alt="" loading="lazy">
       <p>理事会は区分所有者による選挙で選出され、任期は1年です。日常的な管理業務と重要事項の決定を担います。委員の役職はすべてボランティアです。</p>
       <p>理事会は月1回の定例会議を開催しています。入居者はオブザーバーとして傍聴歓迎です。ご希望の方は管理センターまでご連絡ください。会議通知と議事録はコミュニティウェブサイトで公開されます。</p>
       <p>コミュニティの最高意思決定機関は<strong>管理組合の総会</strong>で、年1回開催されます。規約変更や大規模工事などの重要事項は総会での決議が必要です。すべての区分所有者に議案提出権と投票権があります。</p>
