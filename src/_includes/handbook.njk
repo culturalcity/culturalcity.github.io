@@ -52,7 +52,8 @@ extraStyles: |
   .hb-main li > ul, .hb-main li > ol { margin-top: 6px; margin-bottom: 6px; }
   .hb-main strong { color: var(--wg41); font-weight: 700; }
   .hb-main a { color: var(--dp); text-decoration: underline;
-    text-decoration-color: rgba(31,92,56,0.3); text-underline-offset: 2px; }
+    text-decoration-color: rgba(31,92,56,0.3); text-underline-offset: 2px;
+    overflow-wrap: anywhere; /* 長網址在窄螢幕可斷行，不撐破版面 */ }
   .hb-main a:hover { text-decoration-color: var(--dp); }
   .hb-main code { background: var(--white); border: 1px solid var(--line);
     border-radius: 1px; padding: 1px 6px; font-size: 14px;
@@ -68,7 +69,8 @@ extraStyles: |
 
   /* 表格 */
   .hb-main table { width: 100%; border-collapse: collapse;
-    margin: 12px 0 20px; font-size: 14px; line-height: 1.6; }
+    margin: 12px 0 20px; font-size: 14px; line-height: 1.6;
+    display: block; overflow-x: auto; /* markdown 表格窄螢幕自帶橫向捲動，不撐破版面 */ }
   .hb-main th, .hb-main td { padding: 8px 12px; border: 1px solid var(--line);
     text-align: left; vertical-align: top; }
   .hb-main th { background: rgba(60,56,53,0.05); font-weight: 700;
