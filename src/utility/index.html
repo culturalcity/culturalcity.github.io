@@ -100,7 +100,7 @@ extraStyles: |
     .chart-scroll-inner{position:relative;height:280px;}
     /* 凍結縱軸（Excel 凍結窗格效果）：sticky 小畫布黏在可視左緣，蓋住捲過去的長條 */
     .axis-freeze{position:sticky;left:0;width:0;height:0;z-index:2;pointer-events:none;}
-    .axis-freeze canvas{display:block;}
+    .axis-freeze canvas{display:block;background:var(--white);}
     .chart-meta{font-size:13px;color:var(--wg9);margin-top:6px;}
     /* TOOL CARDS */
     .tool-section{margin-bottom:28px;}
@@ -575,9 +575,10 @@ function freezeYAxis(canvasId, innerId) {
   ov.style.height = cssH + 'px';
   ov.style.display = 'block';
   ov.style.marginLeft = -pad + 'px';   // 往左補滿 scroller 的內距，凍結時才不會漏縫
+  // 背景不烤進畫布像素（深色模式擴充功能會在載入瞬間改寫計算色，烤進去就永久變黑塊）。
+  // 遮罩效果由元素的 CSS background 承擔（見 .axis-freeze canvas 樣式），跟著頁面環境即時變化。
   const ctx = ov.getContext('2d');
-  ctx.fillStyle = getComputedStyle(scroller).backgroundColor;
-  ctx.fillRect(0, 0, ov.width, ov.height);
+  ctx.clearRect(0, 0, ov.width, ov.height);
   ctx.drawImage(main, 0, 0, axW * ratio, axH * ratio, pad * ratio, 0, axW * ratio, axH * ratio);
 }
 
