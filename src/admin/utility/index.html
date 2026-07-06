@@ -156,7 +156,7 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
     </div>
     <div class="header-eyebrow">DAILY UTILITY REPORT</div>
     <h1>閱大安・每日水電公告</h1>
-    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
   </div>
 </div>
 
@@ -319,12 +319,12 @@ async function loadFromServer(){
     _cache=normalizeStore(data);
     writeLocalCache(_cache);
     _lastSyncedAt=new Date();
-    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    setSyncState('saved','已同步・'+fmtTime(_lastSyncedAt));
     return _cache;
   }catch(e){
     console.warn('雲端載入失敗，使用本機備份：',e.message);
     _cache=loadLocalCache();
-    setSyncState('offline','離線模式 · 雲端讀取失敗');
+    setSyncState('offline','離線模式・雲端讀取失敗');
     return _cache;
   }
 }
@@ -340,11 +340,11 @@ async function saveToServer(){
     });
     if(!res.ok)throw new Error('HTTP '+res.status);
     _lastSyncedAt=new Date();
-    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    setSyncState('saved','已同步・'+fmtTime(_lastSyncedAt));
     return true;
   }catch(e){
     console.warn('雲端儲存失敗：',e.message);
-    setSyncState('error','雲端同步失敗 · 本機已存');
+    setSyncState('error','雲端同步失敗・本機已存');
     return false;
   }
 }
@@ -355,10 +355,10 @@ async function deleteOnServer(){
     var res=await fetch(API_URL,{method:'DELETE',credentials:'same-origin'});
     if(!res.ok)throw new Error('HTTP '+res.status);
     _lastSyncedAt=new Date();
-    setSyncState('saved','已同步 · '+fmtTime(_lastSyncedAt));
+    setSyncState('saved','已同步・'+fmtTime(_lastSyncedAt));
     return true;
   }catch(e){
-    setSyncState('error','雲端清除失敗 · 本機已清');
+    setSyncState('error','雲端清除失敗・本機已清');
     return false;
   }
 }

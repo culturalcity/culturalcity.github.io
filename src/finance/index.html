@@ -50,7 +50,7 @@ extraStyles: |
   <div style="max-width:760px;margin:0 auto;position:relative;">
     <div class="header-eyebrow" style="font-size:13px;letter-spacing:.25em;color:var(--wg9);margin-bottom:8px;">MONTHLY FINANCIAL REPORT</div>
     <h1>財務月報</h1>
-    <p>CULTURAL CITY COMMUNITY · 閱大安管理委員會</p>
+    <p>CULTURAL CITY COMMUNITY・閱大安管理委員會</p>
     <div class="header-badge">住戶公告專區</div>
   </div>
 </div>
@@ -96,7 +96,7 @@ extraStyles: |
       <div class="card-month">{{ item.date | monthOnly }}月</div>
       <div class="card-meta">
         <div class="card-title">{{ item.data.title | replace(' 財務月報', '財務月報') }}</div>
-        <div class="card-period">{{ item.date | dateYM }}-01 ～ {{ item.date | dateYMD | replace('/', '-') }}{% if item.data.publishDate %} ・ 發布：{{ item.data.publishDate }}{% endif %}</div>
+        <div class="card-period">{{ item.date | dateYM }}-01 ～ {{ item.date | dateYMD | replace('/', '-') }}{% if item.data.publishDate %}・發布：{{ item.data.publishDate }}{% endif %}</div>
 {%- if item.data.pdfUrl %}
               <span class="pdf-link" onclick="event.stopPropagation();window.open('{{ item.data.pdfUrl }}','_blank')">↓ 原始財報 PDF</span>
 {%- endif %}
@@ -110,7 +110,7 @@ extraStyles: |
 
 
   <div class="footer">
-    閱大安管理委員會 · 財務資料僅供本社區住戶參考<br>
+    閱大安管理委員會・財務資料僅供本社區住戶參考<br>
     如發現資料有誤請聯繫管委會財務委員
   </div>
 
