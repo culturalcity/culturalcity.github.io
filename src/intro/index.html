@@ -1,0 +1,87 @@
+---
+layout: base.njk
+permalink: /intro/index.html
+title: 認識閱大安・給潛在住戶與房屋仲介
+eleventyExcludeFromCollections: true
+hideSiteNav: true
+extraStyles: |
+  .lede{font-size:17px;color:var(--wg11);line-height:1.9;margin-bottom:28px;}
+  .lede strong{color:var(--wg41);}
+  .sec-label{font-size:13px;letter-spacing:.28em;color:var(--wg9);margin:36px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+  .fact-table{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;}
+  .fact-table th{width:92px;text-align:left;padding:11px 14px;background:rgba(60,56,53,0.04);color:var(--wg9);font-weight:600;letter-spacing:.06em;vertical-align:top;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .fact-table td{padding:11px 14px;color:var(--wg41);line-height:1.75;border-bottom:1px solid var(--line);}
+  .fact-table tr:last-child th,.fact-table tr:last-child td{border-bottom:none;}
+  .gov-intro{font-size:16px;color:var(--wg41);line-height:1.85;margin-bottom:14px;}
+  .gov-list{list-style:none;padding:0;margin:0 0 8px;}
+  .gov-list li{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:12px 16px;margin-bottom:10px;font-size:15px;color:var(--wg11);line-height:1.8;}
+  .gov-list li strong{color:var(--wg41);}
+  .rule-note{font-size:15px;color:var(--wg9);line-height:1.8;margin-bottom:16px;font-style:italic;}
+  .rule-list{list-style:none;padding:0;margin:0;counter-reset:rule;}
+  .rule-list li{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 14px 52px;margin-bottom:10px;font-size:15px;color:var(--wg11);line-height:1.85;position:relative;counter-increment:rule;}
+  .rule-list li::before{content:counter(rule);position:absolute;left:16px;top:15px;width:24px;height:24px;background:var(--wg41);color:var(--wg1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .rule-list li strong{color:var(--wg41);}
+  .agent-box{background:rgba(43,74,107,0.05);border:1px solid rgba(43,74,107,0.18);border-left:3px solid var(--blue, #2B4A6B);border-radius:var(--radius);padding:16px 18px;font-size:15px;color:var(--wg41);line-height:1.9;margin-bottom:8px;}
+  .doc-links{list-style:none;padding:0;margin:0 0 16px;}
+  .doc-links li{margin-bottom:8px;font-size:15px;line-height:1.7;}
+  .doc-links a{color:var(--dp);text-decoration:underline;text-underline-offset:2px;}
+  .doc-links .doc-sub{color:var(--wg9);font-size:14px;}
+  .closing{font-size:15px;color:var(--wg9);line-height:1.85;margin-top:28px;padding-top:16px;border-top:1px solid var(--line);}
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">BEFORE YOU BUY</div>
+    <h1>認識閱大安・給潛在住戶與房屋仲介</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY · 閱大安管理委員會</div>
+  </div>
+</div>
+<div class="main">
+
+  <p class="lede">買房子是人生大事，而買進一個社區，買的不只是室內的坪數，還有一整套共同生活的方式。我們準備了這一頁，讓正在評估閱大安的您——以及協助您的房屋仲介——在決定之前，就能認識這個社區的樣貌與規範。我們相信，<strong>先講清楚，是對買賣雙方最基本的尊重</strong>；清楚之後仍然選擇這裡的鄰居，往往也是最適合這裡的鄰居。</p>
+
+  <div class="sec-label">COMMUNITY&nbsp;&nbsp;·&nbsp;&nbsp;社區概況</div>
+  <table class="fact-table">
+    <tr><th>位置</th><td>台北市大安區羅斯福路二段 85 號（住宅專用門牌；一樓 5 間店面為 83 號，住商出入口分離）</td></tr>
+    <tr><th>交通</th><td>古亭捷運站步行約 2 分鐘（綠線・橘線雙線）；門口設 YouBike 站</td></tr>
+    <tr><th>規模</th><td>地上 15 層、地下 4 層；住宅 85 戶＋一樓店面 5 間</td></tr>
+    <tr><th>完工</th><td>2021 年 10 月取得使用執照</td></tr>
+    <tr><th>管理</th><td>管理委員會＋潤泰維護物業駐點，24 小時保全聯絡</td></tr>
+    <tr><th>停車</th><td>地下停車場（車道鐵捲門門禁）；設 34 支電動車充電樁</td></tr>
+  </table>
+
+  <p class="gov-intro"><strong>我們引以為傲的治理</strong>——閱大安第一屆管理委員會於 2022 年 6 月成立，現為第五屆；四年來我們把社區治理做成了可以驗證的系統：</p>
+  <ul class="gov-list">
+    <li><strong>財務透明</strong>——每月財務月報對全體住戶公開，收支可追溯</li>
+    <li><strong>能源管理</strong>——公共用電每日追蹤，依氣溫設定科學化的用電目標，逐年節電（今年上半年較去年同期約 −9%）</li>
+    <li><strong>制度化維養</strong>——電梯、消防、水塔、公共設施依排程保養並留存紀錄；建築公共安全檢查依法申報</li>
+    <li><strong>數位化溝通</strong>——公告、會議紀錄、規約全部上網，繳費走手機</li>
+  </ul>
+
+  <div class="sec-label">KNOW BEFORE YOU BUY&nbsp;&nbsp;·&nbsp;&nbsp;買下來之前，這些規範請先知道</div>
+  <p class="rule-note">以下是最常影響購屋與裝潢決策的規定摘要，完整條文見文末的公開全文。</p>
+  <ol class="rule-list">
+    <li><strong>陽台不可外推、外牆不可加裝鐵窗</strong>——《建築法》與《公寓大廈管理條例》層級的禁止，不是社區可以通融的項目。家有幼兒或寵物，可申請經核定樣式的防墜措施。</li>
+    <li><strong>裝潢要過兩道關卡</strong>——社區施工申請（裝潢保證金 $50,000 等費用合計約 $71,000，完工退還保證金）＋政府核發的室內裝修許可（本棟為 15 層建築，涉及隔間等變更依法必辦，委辦行情約 4–8 萬元）。施工限平日日間。</li>
+    <li><strong>住的固定費用</strong>——管理費每坪 $150／月；汽車位停車場清潔費 $800／月、機車位 $200／年（機車位以抽籤分配）；使用充電樁者另有每樁每月 $50 公用線路維護費（充電度數計費另計）。均透過智生活 APP 繳納。</li>
+    <li><strong>寵物</strong>——公共空間須以牽繩、外出籠或推車控管；部分犬種依法禁止飼養，飼養前請先查閱辦法。</li>
+    <li><strong>訪客停車</strong>——本社區未提供訪客專用車位，訪客車輛須事先透過住戶向管理中心登記協調。</li>
+    <li><strong>全棟共用部分禁菸</strong>；樓梯間與走廊（消防通道）不得放置鞋櫃等私人物品。</li>
+    <li><strong>公共設施</strong>——健身房免費（06:00–24:00）；交誼廳與頂樓空間採付費包場制（每 2 小時 $1,000、押金 $3,000）。</li>
+    <li><strong>垃圾處理很省事</strong>——不必追垃圾車：B1 環保室冷藏儲存室每日可投放，資源回收六分類、每週定期清運，無須使用專用垃圾袋。</li>
+  </ol>
+
+  <div class="sec-label">FOR AGENTS&nbsp;&nbsp;·&nbsp;&nbsp;給房屋仲介的話</div>
+  <div class="agent-box">歡迎您在帶看與說明時<strong>直接引用本頁與下方連結</strong>——這些是管理委員會維護的官方資訊，能幫助您避免因資訊落差造成的交易糾紛（「陽台能不能外推」這類問題，答錯的代價由買方和您承擔）。本頁不替代物件說明——房子本身的事屬於您的專業，我們負責講清楚「住進來之後」的部分。</div>
+
+  <div class="sec-label">READ MORE&nbsp;&nbsp;·&nbsp;&nbsp;深入閱讀（全文公開）</div>
+  <ul class="doc-links">
+    <li><a href="/regulations/">社區規約與管理辦法總覽</a> <span class="doc-sub">——含社區規約、裝潢修繕施工、停車空間、飼養動物、門禁、特定公共空間等辦法全文</span></li>
+    <li><a href="/welcome/">新住戶須知</a> <span class="doc-sub">——入住後的實務指南（中／英／日）</span></li>
+    <li><a href="/welcome/transition.html">從老社區搬來的觀念更新</a> <span class="doc-sub">——如果您住慣了老公寓，這頁談新舊制度的差異（中／英／日）</span></li>
+  </ul>
+  <p class="rule-note">條文如有修訂以最新版本為準。想實地了解，管理中心（(02) 2367-7065）樂意為您與您的仲介安排。</p>
+
+  <p class="closing">閱大安管理委員會・本頁資訊供購屋評估參考・以規約及管理辦法正本為準</p>
+
+</div>

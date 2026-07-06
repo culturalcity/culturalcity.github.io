@@ -47,7 +47,10 @@
 {%- elif '/green-labels/' in pageUrl %}{% set bcUrl = '/net-zero/' %}{% set bcLabel = '淨零新生活' %}
 {%- elif pageUrl == '/search.html' %}{% set bcUrl = '/search.html' %}{% set bcLabel = '全站搜尋' %}
 {%- endif -%}
-{#- 全站頂部導覽帶：左側 breadcrumb（無區段時為空）+ 右側搜尋 icon。一律渲染、所有頁面都有 -#}
+{#- 全站頂部導覽帶：左側 breadcrumb（無區段時為空）+ 右側搜尋 icon。
+    預設一律渲染；「公開頁」（frontmatter hideSiteNav: true，如 /intro/）不渲染——
+    外部訪客沒有登入權限，麵包屑與站內搜尋只會把人帶去登入牆。 -#}
+{%- if not hideSiteNav %}
 <nav class="breadcrumb" aria-label="頂部導覽">
   <div class="breadcrumb-inner">
     <div class="breadcrumb-path">
@@ -110,6 +113,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 </script>
+{%- endif %}
 
 {{ content | safe }}
 {% if extraScripts %}<script>{{ extraScripts | safe }}</script>{% endif %}
