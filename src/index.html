@@ -152,6 +152,9 @@ extraStyles: |
       transition: background 0.15s;
     }
     .tl-more-btn:hover { background: #E8E5E0; color: var(--wg3); }
+    .tl-archive { font-size:15px; color: var(--wg9); margin: 12px 2px 0; letter-spacing: 0.04em; }
+    .tl-archive a { color: var(--wg11); text-decoration: underline; text-underline-offset: 2px; }
+    .tl-archive a:hover { color: var(--wg41); }
     @media(max-width:500px) {
       .tl-left { width: 76px; padding-right: 12px; }
       .tl-date { font-size:13px; }
@@ -321,7 +324,8 @@ extraStyles: |
   <div class="sec-label">UPDATES・最新動態</div>
 
       <div class="timeline">
-{% for item in collections.recentUpdates | sortByPublishDate -%}
+{# 首頁時間軸只輸出最近 30 筆（≈一季）；完整歷史在各列表頁，避免上百筆歷史公告灌爆首頁 HTML #}
+{% for item in (collections.recentUpdates | sortByPublishDate).slice(0, 30) -%}
 {%- set url = item.url -%}
 {%- if "/notice/" in url %}{% set cat = "notice" %}{% set catLabel = "社區公告" %}{% set displayDate = item.data.displayDate %}{% set title = item.data.titleZh or item.data.title -%}
 {%- elif "/finance/" in url %}{% set cat = "finance" %}{% set catLabel = "財務月報" %}{% set displayDate = item.data.publishDate or (item.date | dateYMD) %}{% set title = item.data.title -%}
@@ -335,13 +339,14 @@ extraStyles: |
       </div>
       <div class="tl-right">
         <div class="tl-title">{{ title }}</div>
-{%- if item.data.summary %}
+{%- if item.data.summary and cat != "notice" %}{# 公告標題已自描述；摘要保留給編號制標題的會議紀錄/財報 #}
         <div class="tl-desc">{{ item.data.summary }}</div>
 {%- endif %}
       </div>
     </a>
 {% endfor %}
   </div>
+  <div class="tl-archive">更早的內容請至：<a href="./notice/">公告列表</a>・<a href="./finance/">財務月報</a>・<a href="./minutes/">會議紀錄</a></div>
 
   <!-- ── 聯絡資訊 ── -->
   <div class="sec-label">CONTACT・聯絡資訊</div>
