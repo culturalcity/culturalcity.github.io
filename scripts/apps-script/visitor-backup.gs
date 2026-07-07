@@ -16,7 +16,7 @@
 var V_API = 'https://culturalcity.org/visitor/api/log';
 var V_SHEET_ID = 'PASTE_YOUR_SHEET_ID_HERE';   // ← 可填與公設備份同一張 Sheet 的 ID
 var V_SHEET_NAME = '訪客登記';
-var V_HEADER = ['id', '拜訪事由', '訪客姓名', '造訪戶別', '受訪住戶', '人數', '聯絡電話', '車號', '車型/顏色', '單位', '給保全交代', '預計來訪', '進入時間(UTC)', '離開時間(UTC)', '未到', '借出物品', '物品狀態', '最後備份'];
+var V_HEADER = ['id', '拜訪事由', '訪客姓名', '造訪戶別', '受訪住戶', '人數', '聯絡電話', '車號', '車型/顏色', '單位', '給保全交代', '預計來訪', '進入時間(UTC)', '離開時間(UTC)', '保全簽名', '未到', '現場自助', '借出物品', '物品狀態', '最後備份'];
 
 function backupVisitorLog() {
   var token = PropertiesService.getScriptProperties().getProperty('STAFF_TOKEN');
@@ -55,7 +55,7 @@ function backupVisitorLog() {
     var row = [
       e.id, e.reason, e.name, e.unit, (e.host || ''), (e.count || 1),
       (e.phone || ''), (e.plate || ''), (e.carModel || ''), (e.org || ''), (e.note || ''), (e.expectAt || ''),
-      (e.enterAt || ''), (e.leaveAt || ''), (e.noShow ? '是' : ''), (e.lentItem || ''), (e.itemStatus || ''), stamp,
+      (e.enterAt || ''), (e.leaveAt || ''), (e.signedBy || ''), (e.noShow ? '是' : ''), (e.kiosk ? '是' : ''), (e.lentItem || ''), (e.itemStatus || ''), stamp,
     ];
     if (idRow[e.id]) { sh.getRange(idRow[e.id], 1, 1, V_HEADER.length).setValues([row]); updated++; }
     else { appendRows.push(row); }

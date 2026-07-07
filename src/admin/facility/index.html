@@ -91,7 +91,7 @@ title: 公設登記後台統計
   <div class="panel"><div class="tbl-scroll">
     <table class="detail-table" id="detail-table">
       <thead><tr>
-        <th>日期</th><th>公設</th><th>類型</th><th>時間</th><th>戶號</th><th>登記人</th><th>備註</th><th>登記時間</th><th></th>
+        <th>日期</th><th>公設</th><th>類型</th><th>時間</th><th>實際結束</th><th>戶號</th><th>登記人</th><th>簽名</th><th>備註</th><th>登記時間</th><th></th>
       </tr></thead>
       <tbody></tbody>
     </table>
@@ -221,7 +221,7 @@ title: 公設登記後台統計
   function renderDetail(){
     var list = filtered();
     var tb = $("detail-table").querySelector("tbody");
-    if(!list.length){ tb.innerHTML = '<tr><td colspan="9" class="empty">沒有符合條件的登記。</td></tr>'; return; }
+    if(!list.length){ tb.innerHTML = '<tr><td colspan="11" class="empty">沒有符合條件的登記。</td></tr>'; return; }
     tb.innerHTML = list.map(function(e){
       var type = e.type==="exclusive" ? '<span class="badge exc">包場</span>' : '<span class="badge">一般</span>';
       var del = canDelete ? '<button type="button" class="del-btn" data-id="'+esc(e.id)+'">刪除</button>' : '';
@@ -230,8 +230,10 @@ title: 公設登記後台統計
         '<td>'+esc(e.facility)+'</td>'+
         '<td>'+type+'</td>'+
         '<td>'+esc(fmtTime(e))+'</td>'+
+        '<td>'+esc(e.endAt||"—")+'</td>'+
         '<td>'+esc(e.unit||"—")+'</td>'+
         '<td>'+esc(e.name||"—")+'</td>'+
+        '<td>'+esc(e.signedBy||"—")+'</td>'+
         '<td class="note">'+esc(e.note||"")+'</td>'+
         '<td>'+esc(fmtStamp(e.createdAt))+'</td>'+
         '<td>'+del+'</td>'+
@@ -259,9 +261,9 @@ title: 公設登記後台統計
 
   function exportCsv(){
     var list = filtered();
-    var head = ["日期","公設","類型","起時間","迄時間","整段開放","戶號","登記人","備註","登記時間"];
+    var head = ["日期","公設","類型","起時間","迄時間(預計)","實際結束","保全簽名","整段開放","戶號","登記人","備註","登記時間","結束登記"];
     var rows = list.map(function(e){
-      return [e.date, e.facility, (e.type==="exclusive"?"包場":"一般"), e.timeStart, e.timeEnd, (e.allDay?"是":""), e.unit, e.name, e.note, e.createdAt];
+      return [e.date, e.facility, (e.type==="exclusive"?"包場":"一般"), e.timeStart, e.timeEnd, e.endAt, e.signedBy, (e.allDay?"是":""), e.unit, e.name, e.note, e.createdAt, e.endStamp];
     });
     var csv = [head].concat(rows).map(function(r){
       return r.map(function(c){ var s=String(c==null?"":c); return '"'+s.replace(/"/g,'""')+'"'; }).join(",");

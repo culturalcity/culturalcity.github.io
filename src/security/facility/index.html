@@ -1,0 +1,257 @@
+---
+layout: base.njk
+permalink: /security/facility/
+title: 公設使用台
+---
+<div class="header">
+  <div class="header-inner">
+    <a href="/security/" class="back-link">返回保全後台</a>
+    <div class="header-eyebrow">FACILITY DESK</div>
+    <h1>公設使用台</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <style>
+    .main{max-width:860px;margin:0 auto;padding:28px 20px 64px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;font-size:15px;color:var(--wg9);line-height:1.8;margin-bottom:16px;}
+    .intro strong{color:var(--wg41);}
+    .intro a{color:var(--dp);}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--wg9);margin-bottom:16px;}
+    .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
+    .syncbar.is-offline .syncdot{background:var(--dn);}
+    .refresh{margin-left:auto;font-family:inherit;font-size:13px;letter-spacing:.04em;padding:6px 12px;min-height:34px;border:1px solid var(--line);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;}
+    .refresh:hover{background:var(--wg11);color:var(--wg1);}
+    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px;}
+    @media(max-width:560px){.kpi-row{grid-template-columns:1fr;}}
+    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;position:relative;}
+    .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+    .kpi.live::before{background:var(--dp);}
+    .kpi.exc::before{background:var(--dn);}
+    .kpi-label{font-size:13px;color:var(--wg9);margin-bottom:7px;}
+    .kpi-val{font-size:26px;font-weight:700;color:var(--wg41);line-height:1;}
+    .kpi-unit{font-size:14px;color:var(--wg9);margin-left:3px;font-weight:400;}
+    .sect-hd{font-size:17px;font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:26px 0 12px;}
+    .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:14px 16px;margin-bottom:12px;}
+    .entry.live{border-left-color:var(--dp);background:rgba(31,92,56,0.03);}
+    .entry.exc{border-left-color:var(--dn);background:rgba(140,31,31,0.03);}
+    .entry.done{border-left-color:var(--wg9);}
+    .entry.stale{border-left-color:#B8860B;background:rgba(184,134,11,0.05);}
+    .entry-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+    .badge{font-size:13px;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--wg1);color:var(--wg11);}
+    .badge.fac{background:var(--wg41);color:var(--wg1);}
+    .badge.live{background:var(--dp);color:#fff;}
+    .badge.exc{background:var(--dn);color:#fff;}
+    .badge.stale{background:#B8860B;color:#fff;}
+    .ename{font-size:18px;font-weight:600;color:var(--wg41);}
+    .emeta{font-size:15px;color:var(--wg9);line-height:1.85;}
+    .emeta b{color:var(--wg41);font-weight:500;}
+    .emeta.note{color:var(--wg41);background:rgba(60,56,53,0.05);border-radius:var(--radius);padding:6px 11px;margin-top:8px;}
+    .erow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
+    .erow .lbl{font-size:14px;color:var(--wg9);}
+    .erow select,.erow input{font-family:inherit;font-size:15px;padding:8px 10px;min-height:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    .erow select{appearance:none;-webkit-appearance:none;min-width:66px;padding-right:24px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 8px center;}
+    .erow .sign-in{flex:1;min-width:120px;}
+    .btn{font-family:inherit;font-size:14px;letter-spacing:.04em;padding:8px 13px;min-height:40px;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;}
+    .btn:hover{background:var(--wg11);color:var(--wg1);}
+    .btn.out{border-color:var(--dp);color:var(--dp);}
+    .btn.out:hover{background:var(--dp);color:#fff;}
+    .btn.del{border-color:var(--line);color:var(--wg9);margin-left:auto;}
+    .btn.del:hover{background:var(--dn);border-color:var(--dn);color:#fff;}
+    .done-line{font-size:15px;color:var(--wg41);margin-top:4px;}
+    .done-line b{font-weight:600;}
+    .empty{font-size:16px;color:var(--wg9);padding:22px 0;text-align:center;}
+  </style>
+
+  <div class="intro">
+    住戶用畢公設後，在這裡登記<strong>實際結束時間並簽名</strong>。要代住戶新登記一筆，請至 <a href="/facility/">公設登記頁</a>（您已登入，會看到完整戶號）。此台每 25 秒自動更新。
+  </div>
+
+  <div class="syncbar" id="syncbar"><span class="syncdot"></span><span id="sync-text">載入中…</span>
+    <button type="button" class="refresh" id="refresh-btn">↻ 重新整理</button>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi live"><div class="kpi-label">使用中（待結束）</div><div class="kpi-val" id="k-live">0<span class="kpi-unit">筆</span></div></div>
+    <div class="kpi"><div class="kpi-label">今日已結束</div><div class="kpi-val" id="k-done">0<span class="kpi-unit">筆</span></div></div>
+    <div class="kpi exc"><div class="kpi-label">即將到來包場</div><div class="kpi-val" id="k-exc">0<span class="kpi-unit">筆</span></div></div>
+  </div>
+
+  <div class="sect-hd">🟢 使用中（待登記結束＋簽名）</div>
+  <div id="live-area"></div>
+
+  <div class="sect-hd">🔒 即將到來的包場</div>
+  <div id="exc-area"></div>
+
+  <div class="sect-hd">今日已結束</div>
+  <div id="done-area"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API = "/facility/api/log";
+  var LS_SIGN = "yda_guard_sign";   // 這台裝置上次的保全簽名（值班共用登入、流動率高 → 記住免每次重打）
+  var entries = [];
+  var timer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function isToday(s){ return String(s||"").slice(0,10)===todayStr(); }
+  function fmtDate(s){
+    var m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return s||"";
+    var d=new Date(+m[1],+m[2]-1,+m[3]); var wk=["日","一","二","三","四","五","六"][d.getDay()];
+    return (+m[2])+"/"+(+m[3])+"（"+wk+"）";
+  }
+  function loadSign(){ try { return localStorage.getItem(LS_SIGN)||""; } catch(e){ return ""; } }
+  function saveSign(v){ try { localStorage.setItem(LS_SIGN, v); } catch(e){} }
+  function byId(id){ for(var i=0;i<entries.length;i++){ if(entries[i].id===id) return entries[i]; } return null; }
+
+  function setSync(state, text){ $("syncbar").className="syncbar"+(state==="offline"?" is-offline":""); $("sync-text").textContent=text; }
+
+  function load(manual){
+    if(manual) setSync("saving","更新中…");
+    fetch(API, { headers:{ "Accept":"application/json" } })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(data){
+        entries = Array.isArray(data.entries)?data.entries:[];
+        var d=new Date();
+        setSync("synced","● 已連線・更新於 "+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds()));
+        render();
+      })
+      .catch(function(){ setSync("offline","無法連線（請確認 Worker 已部署、且您是保全／總幹事登入）"); });
+  }
+
+  // 時/分下拉（結束時間預設現在，可改）
+  function timeOpts(kind, nowH, nowM5){
+    var out='<option value="">'+(kind==="h"?"時":"分")+'</option>', v, i;
+    if(kind==="h"){ for(i=0;i<24;i++){ v=pad(i); out+='<option value="'+v+'"'+(i===nowH?" selected":"")+'>'+v+'</option>'; } }
+    else { for(i=0;i<60;i+=5){ v=pad(i); out+='<option value="'+v+'"'+(i===nowM5?" selected":"")+'>'+v+'</option>'; } }
+    return out;
+  }
+
+  function entryHtml(e, kind){
+    var typeBadge = e.type==="exclusive" ? '<span class="badge exc">🔒 包場</span>' : '<span class="badge">一般</span>';
+    var stale = (kind==="live" && !isToday(e.date));  // 跨日還沒結束＝提醒保全
+    var stateBadge = kind==="live" ? (stale?'<span class="badge stale">跨日未結束</span>':'<span class="badge live">使用中</span>')
+                   : kind==="exc" ? '<span class="badge exc">預約</span>' : '';
+    var planned = "";
+    if(e.allDay){ planned = "整段開放"; }
+    else if(e.type==="exclusive"){ planned = (e.timeStart||"")+(e.timeEnd?("–"+e.timeEnd):""); }
+    else { planned = (e.timeStart||"")+" 起" + (e.timeEnd?("（住戶預計 ~"+e.timeEnd+"）"):""); }
+    var note = e.note ? '<div class="emeta note">📋 '+esc(e.note)+'</div>' : '';
+
+    var body =
+      '<div class="entry-top">'+
+        '<span class="badge fac">'+esc(e.facility)+'</span>'+ typeBadge + stateBadge +
+        '<span class="ename">'+esc(e.unit||"—")+'</span>'+
+        '<span class="emeta">'+esc(e.name||"")+'</span>'+
+      '</div>'+
+      '<div class="emeta">'+esc(fmtDate(e.date))+'・'+esc(planned)+'</div>'+ note;
+
+    var erow;
+    if(kind==="live"){
+      var now=new Date(), nowH=now.getHours(), nowM5=Math.floor(now.getMinutes()/5)*5;
+      erow = '<div class="erow">'+
+        '<span class="lbl">結束</span>'+
+        '<select class="eh" data-id="'+esc(e.id)+'">'+timeOpts("h",nowH,nowM5)+'</select>'+
+        '<select class="em" data-id="'+esc(e.id)+'">'+timeOpts("m",nowH,nowM5)+'</select>'+
+        '<input type="text" class="sign-in" data-id="'+esc(e.id)+'" placeholder="保全簽名" value="'+esc(loadSign())+'">'+
+        '<button type="button" class="btn out" data-act="close" data-id="'+esc(e.id)+'">登記結束＋簽名</button>'+
+        '<button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button>'+
+      '</div>';
+    } else if(kind==="exc"){
+      erow = '<div class="erow"><button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+    } else { // done
+      body += '<div class="done-line">✓ 實際結束 <b>'+esc(e.endAt||"—")+'</b>　簽名 <b>'+esc(e.signedBy||"—")+'</b></div>';
+      erow = '<div class="erow"><button type="button" class="btn" data-act="reopen" data-id="'+esc(e.id)+'">改回使用中</button>'+
+             '<button type="button" class="btn del" data-act="del" data-id="'+esc(e.id)+'">刪除</button></div>';
+    }
+    var cls = kind==="live" ? (stale?" stale":" live") : kind==="exc" ? " exc" : " done";
+    return '<div class="entry'+cls+'">'+ body + erow +'</div>';
+  }
+
+  function isFutureDate(s){
+    var m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return false;
+    var d=new Date(+m[1],+m[2]-1,+m[3]); d.setHours(0,0,0,0);
+    var t=new Date(); t.setHours(0,0,0,0); return d>t;
+  }
+
+  function render(){
+    // 使用中＝尚未補結束、且日期非未來（今天或更早）；即將包場＝未結束的未來包場；已結束＝今日補了結束
+    var live = entries.filter(function(e){ return !e.endAt && !isFutureDate(e.date); });
+    var exc  = entries.filter(function(e){ return !e.endAt && e.type==="exclusive" && isFutureDate(e.date); });
+    var done = entries.filter(function(e){ return e.endAt && (isToday(e.date) || isToday(e.endStamp)); });
+
+    $("k-live").innerHTML = live.length+'<span class="kpi-unit">筆</span>';
+    $("k-done").innerHTML = done.length+'<span class="kpi-unit">筆</span>';
+    $("k-exc").innerHTML = exc.length+'<span class="kpi-unit">筆</span>';
+
+    live.sort(function(a,b){ var ka=(a.date||"")+(a.timeStart||""), kb=(b.date||"")+(b.timeStart||""); return ka<kb?-1:1; });
+    exc.sort(function(a,b){ return (a.date||"")<(b.date||"")?-1:1; });
+    done.sort(function(a,b){ return (a.endStamp||"")<(b.endStamp||"")?1:-1; });
+
+    $("live-area").innerHTML = live.length ? live.map(function(e){ return entryHtml(e,"live"); }).join("") : '<div class="empty">目前沒有使用中的公設。</div>';
+    $("exc-area").innerHTML  = exc.length  ? exc.map(function(e){ return entryHtml(e,"exc"); }).join("")  : '<div class="empty">沒有即將到來的包場。</div>';
+    $("done-area").innerHTML = done.length ? done.map(function(e){ return entryHtml(e,"done"); }).join("") : '<div class="empty">今日尚無已結束紀錄。</div>';
+    bind();
+  }
+
+  function bind(){
+    var btns = document.querySelectorAll(".btn[data-act]");
+    for(var i=0;i<btns.length;i++){
+      (function(b){
+        b.addEventListener("click", function(){
+          var id=b.getAttribute("data-id"), act=b.getAttribute("data-act");
+          if(act==="close") closeEntry(id);
+          else if(act==="reopen") reopen(id);
+          else if(act==="del") del(id);
+        });
+      })(btns[i]);
+    }
+  }
+
+  function post(payload){
+    return fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); });
+  }
+
+  function closeEntry(id){
+    var eh=document.querySelector('select.eh[data-id="'+CSS.escape(id)+'"]');
+    var em=document.querySelector('select.em[data-id="'+CSS.escape(id)+'"]');
+    var si=document.querySelector('input.sign-in[data-id="'+CSS.escape(id)+'"]');
+    var h=eh?eh.value:"", m=em?em.value:"", sign=si?si.value.trim():"";
+    if(!h||!m){ alert("請選擇結束時間。"); return; }
+    if(!sign){ alert("請簽名（保全姓名／工號）。"); return; }
+    var endAt=h+":"+m;
+    post({ id:id, endAt:endAt, signedBy:sign })
+      .then(function(){ saveSign(sign); var e=byId(id); if(e){ e.endAt=endAt; e.signedBy=sign; e.endStamp=new Date().toISOString(); } render(); })
+      .catch(function(){ alert("登記結束失敗。"); });
+  }
+  function reopen(id){
+    if(!confirm("改回「使用中」？（清掉已登記的結束時間與簽名）")) return;
+    post({ id:id, endAt:"", signedBy:"" })
+      .then(function(){ var e=byId(id); if(e){ e.endAt=""; e.signedBy=""; e.endStamp=""; } render(); })
+      .catch(function(){ alert("操作失敗。"); });
+  }
+  function del(id){
+    if(!confirm("確定刪除這筆公設登記？此動作無法復原。")) return;
+    fetch(API+"?id="+encodeURIComponent(id), { method:"DELETE" })
+      .then(function(r){ if(!r.ok) throw new Error("api "+r.status); return r.json(); })
+      .then(function(){ entries=entries.filter(function(x){ return x.id!==id; }); render(); })
+      .catch(function(){ alert("刪除失敗。"); });
+  }
+
+  $("refresh-btn").addEventListener("click", function(){ load(true); });
+  // 自動刷新：把後台當即時看板；分頁隱藏時不打，回到前景立即抓一次
+  timer = setInterval(function(){ if(!document.hidden) load(false); }, 25000);
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden) load(false); });
+
+  load(true);
+})();
+</script>

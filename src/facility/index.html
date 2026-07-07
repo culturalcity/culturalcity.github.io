@@ -88,7 +88,7 @@ title: 公設使用登記
   </style>
 
   <div class="intro">
-    使用社區公設後（或要<strong>包場</strong>前），請在此登記。資料即時同步給管理中心，方便大家彼此錯開、也方便管理委員會掌握使用狀況。<strong>包場屬整場借用，請務必先與管理中心確認後再登記。</strong><br>
+    <strong>開始使用</strong>社區公設時（或要<strong>包場</strong>前），請在此登記。一般使用只要填開始時間，<strong>實際結束由管理中心於您用畢後補登</strong>；資料即時同步，方便大家彼此錯開、也方便管委會掌握使用狀況。<strong>包場屬整場借用，請務必先與管理中心確認後再登記。</strong><br>
     各空間開放時間、包場費用與使用規定，詳見 <a href="/regulations/regulations-特定公共空間管理辦法.html">特定公共空間管理辦法 →</a>。
   </div>
 
@@ -129,14 +129,14 @@ title: 公設使用登記
     </div>
 
     <div class="field">
-      <label>使用時間<span class="req">＊</span></label>
+      <label id="time-label">開始時間<span class="req">＊</span></label>
       <div class="pair">
         <span class="tp"><select id="f-th" aria-label="開始時"></select><b>:</b><select id="f-tm" aria-label="開始分"></select></span>
-        <span>～</span>
-        <span class="tp"><select id="f-eh" aria-label="結束時"></select><b>:</b><select id="f-em" aria-label="結束分"></select></span>
+        <span id="time-sep">～</span>
+        <span class="tp" id="end-wrap"><select id="f-eh" aria-label="結束時"></select><b>:</b><select id="f-em" aria-label="結束分"></select></span>
         <button type="button" class="allday-btn" id="allday-btn">整段開放</button>
       </div>
-      <div class="hint">24 小時制，請填實際起迄時間——方便管理中心配合開燈／交接冷氣遙控器，也讓其他住戶知道確切佔用的時段。「整段開放」＝該空間當日全部開放時間。</div>
+      <div class="hint" id="time-hint"></div>
     </div>
 
     <!-- 當日使用狀況（去敏：只顯示時段，不顯示是誰） -->
@@ -159,7 +159,7 @@ title: 公設使用登記
 
   <!-- 清單（去敏：只顯示佔用時段） -->
   <h2 class="list-hd">登記紀錄</h2>
-  <div class="list-note" id="list-note">為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>您登記、且還沒開始的，會出現「取消」鈕（限您登記的那台裝置）</strong>；已發生的為使用紀錄、不可自行取消。要修改／延長請於使用前取消重登，或洽管理中心。</div>
+  <div class="list-note" id="list-note">為保護隱私，此處只顯示「哪個空間、什麼時段被登記／使用中」，不顯示是哪一戶。<strong>結束時間由管理中心於您用畢後補登。</strong>您登記、且還沒開始的會出現「取消」鈕（限原登記裝置）；已開始的為使用中紀錄、不可自行取消。</div>
   <div class="filter" id="filter">
     <button type="button" data-val="" class="on">全部</button>
     <button type="button" data-val="交誼廳">交誼廳</button>
@@ -235,8 +235,12 @@ title: 公設使用登記
   }
   function slotText(e){
     if(e.allDay){ var c=facCfg(e.facility); return c ? ("整段開放 "+c.open+"–"+c.close) : "整段開放"; }
-    if(e.timeStart && e.timeEnd) return e.timeStart+"–"+e.timeEnd;
-    return e.timeStart || "";
+    if(e.type==="exclusive"){ return (e.timeStart&&e.timeEnd) ? (e.timeStart+"–"+e.timeEnd) : (e.timeStart||""); }
+    // 一般使用：保全已補實際結束 → 起–迄；否則顯示「起（預計~x）・使用中」
+    if(e.endAt) return e.timeStart+"–"+e.endAt;
+    var base = (e.timeStart||"")+" 起";
+    if(e.timeEnd) base += "（預計 ~"+e.timeEnd+"）";
+    return base + (notStarted(e) ? "" : "・使用中");
   }
   function fmtWhen(e){
     var parts = [fmtDate(e.date)];
@@ -315,8 +319,13 @@ title: 公設使用登記
     if(!unit){ return formErr("請選擇戶號。"); }
     if(!nm){ return formErr("請填寫申請人姓名。"); }
     if(!date){ return formErr("請選擇使用日期。"); }
-    if(!allDay && (!ts || !te)){ return formErr("請填寫使用時間（起迄），整段開放請點「整段開放」。"); }
-    if(!allDay && te <= ts){ return formErr("結束時間需晚於開始時間。"); }
+    if(sel.type==="exclusive"){
+      if(!allDay && (!ts || !te)){ return formErr("包場請填起迄時間，或點「整段開放」。"); }
+      if(!allDay && te <= ts){ return formErr("結束時間需晚於開始時間。"); }
+    } else {
+      if(!ts){ return formErr("請填開始時間。"); }
+      if(te && te <= ts){ return formErr("預計結束需晚於開始時間。"); }
+    }
 
     var entry = {
       facility: sel.facility,
@@ -372,9 +381,9 @@ title: 公設使用登記
   function updateRoleUi(){
     var note = $("list-note"); if(!note) return;
     if(myLevel >= 2){
-      note.innerHTML = '您具<strong>'+(myLevel>=3?'總幹事':'保全')+'</strong>權限：此處顯示<strong>完整戶號與申請人</strong>，且可代住戶取消任何一筆登記。';
+      note.innerHTML = '您具<strong>'+(myLevel>=3?'總幹事':'保全')+'</strong>權限：此處顯示<strong>完整戶號與申請人</strong>，可代住戶登記或取消。<strong>住戶用畢後登記結束時間＋簽名請至 <a href="/security/facility/">公設使用台 →</a></strong>。';
     } else {
-      note.innerHTML = '為保護隱私，此處只顯示「哪個空間、什麼時段被登記」，不顯示是哪一戶。<strong>您登記、且還沒開始的，會出現「取消」鈕（限您登記的那台裝置）</strong>；已發生的為使用紀錄、不可自行取消。要修改／延長請於使用前取消重登，或洽管理中心。';
+      note.innerHTML = '為保護隱私，此處只顯示「哪個空間、什麼時段被登記／使用中」，不顯示是哪一戶。<strong>結束時間由管理中心於您用畢後補登。</strong>您登記、且還沒開始的會出現「取消」鈕（限原登記裝置）；已開始的為使用中紀錄、不可自行取消。';
     }
   }
 
@@ -524,12 +533,27 @@ title: 公設使用登記
     ["f-th","f-tm","f-eh","f-em"].forEach(function(id){ $(id).disabled = on; if(on) $(id).value=""; });
   }
 
+  // 依類型切換時間欄：一般使用只填開始（迄＝選填的預計結束、隱藏整段開放）；包場填起迄
+  function applyTypeUi(type){
+    var exc = (type==="exclusive");
+    $("time-label").innerHTML = exc
+      ? '使用時間<span class="req">＊</span>'
+      : '開始時間<span class="req">＊</span>　<span style="font-weight:400;color:var(--wg9);font-size:13px;">（結束由管理中心補登）</span>';
+    $("allday-btn").style.display = exc ? "" : "none";
+    $("time-hint").innerHTML = exc
+      ? '24 小時制，填包場<strong>起迄時間</strong>（預約時段、也是收費依據）。「整段開放」＝該空間當日全部開放時間。'
+      : '24 小時制。<strong>只需填開始時間</strong>，右邊「預計結束」可留空；實際結束由管理中心於您用畢後補登。';
+    if(!exc) setAllDay(false);
+  }
+
   $("f-date").value = todayStr();
   wireSeg("seg-facility", function(v){ sel.facility=v; paintSeg("seg-facility",v); showFacHours(v); renderOcc(); });
   wireSeg("seg-type", function(v){
     sel.type=v; paintSeg("seg-type",v);
     $("exc-hint").classList.toggle("show", v==="exclusive");
+    applyTypeUi(v);
   });
+  applyTypeUi(sel.type);
   $("allday-btn").addEventListener("click", function(){ setAllDay(!allDay); });
   $("f-date").addEventListener("change", renderOcc);
   wireSeg("filter", function(v){ sel.filter=v; paintSeg("filter",v); render(); });
