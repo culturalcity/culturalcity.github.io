@@ -22,6 +22,8 @@
 | 頂樓 / RF | RF (Roof Floor) | RF（屋上階） |
 | 梯廳 / 電梯廳 | Elevator Hall | エレベーターホール |
 | 樓梯間 | Stairwell | 階段ホール |
+| A梯／B梯（樓梯編號） | Staircase A / Staircase B | A階段／B階段 |
+| 五府宮（羅斯福路二段81巷宮廟） | Wufu Temple | 五府宮 |
 | 共用走廊 | Corridor | 共用廊下 |
 | 後門 | Rear Door | バックドア |
 | 女兒牆 | Parapet | パラペット |
@@ -189,6 +191,10 @@
 | 信創營造 | Trust Creating Co. | 信創建設 |
 | 新美齊（物業/清潔） | Jean Property Management Co. | 新美齊 |
 | 潤泰維護（現任物業） | Ruentex Maintenance | 潤泰維護 |
+| 敦寶建設（建設公司；首屆副主委、2025 外牆修繕施工方） | Dunbao Construction | 敦寶建設 |
+| 今網寬頻（智生活母公司） | Kingnet | 今網（Kingnet） |
+| 凱擘（有線電視） | Kbro | 凱擘（Kbro） |
+| 中嘉（有線電視） | Homeplus Digital | 中嘉（Homeplus Digital） |
 
 ## K. 裝潢・施工・外觀變更
 | 中文 | English | 日本語 |
@@ -294,6 +300,8 @@
 **2026-06-30 修訂（公設空間名稱統一）**：1F 改回「**交誼廳**」、RF 室內統一為「**頂樓室內空間**」（皆比照《特定公共空間管理辦法》第二／四章與公設登記頁；2026-06-15「棄用交誼廳、1F/RF 採閱覽室」之決議**作廢**，以管理辦法為準）。英日不變（1F Lounge／1階ラウンジ、RF Lounge／RF ラウンジ）。歷史會議紀錄與舊公告**保留當時用語、不回改**；管理辦法第四章標題的「（RF閱覽室）」括號為正式文件原文，未動。新增角色詞：總幹事（Property Manager／管理員）、保全（Security／警備員）。同步狀態：① 本檔、② Notion **已同步（2026-06-30）**；③ Obsidian 副本本次新建於 vault。
 
 **2026-07-01 修訂（7月保養公告新增「高壓沖洗」）**：新增／確認專有詞——高壓沖洗（High-Pressure Washing／高圧洗浄）、**廠商正式列名**採「潤泰公寓大廈管理維護／Ruentex Management & Maintenance／潤泰マンション管理・メンテナンス」（規則：各語言用登記全名、只去法人後綴 股份有限公司／Co., Ltd.；英文即官方全寫）——內文一般指「現任物業」仍可用短稱 潤泰維護（B 區保留）、1F 前門公共區域（1F Front Entrance Common Area／1階 正面エントランス共用エリア）、1F 後門、車道區域（1F Rear Door & Driveway Area／1階 バックドア・車道エリア）、頂樓室外空間（RF Outdoor Area／RF 屋外エリア，已列入 B 區）。電梯保養項目確認採「**曳引鋼索**」（Word 檔「昇降線路板」為不精確用語，比照上方 巻上ロープ 修訂）。同步狀態：① repo canonical、② Notion、③ Obsidian **皆已同步（2026-07-01）**。
+
+**2026-07-07 修訂（Notion 歷史公告回填 2022-07～2025-06）**：新增——A梯／B梯（Staircase A / Staircase B／A階段／B階段，沿任內舊譯）、五府宮（Wufu Temple／五府宮）、敦寶建設（Dunbao Construction，**暫定**音譯，主委尚未確認官方英名）、今網寬頻（**Kingnet**／今網（Kingnet），主委定案）、凱擘（Kbro）、中嘉（**Homeplus Digital**，主委定案）。歷史公告翻譯原則：任內（2023/07–2024/06）公告內文既有三語＝權威來源可沿用；歷史公告中文保留當時用語（如「閱覽室」），英日文採本表現行 canonical。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（待同步）。
 
 **待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
 - 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
