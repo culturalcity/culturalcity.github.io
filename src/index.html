@@ -340,7 +340,7 @@ extraStyles: |
       </div>
       <div class="tl-right">
         <div class="tl-title">{{ title }}</div>
-{%- if item.data.summary and cat != "notice" %}{# 公告標題已自描述；摘要保留給編號制標題的會議紀錄/財報 #}
+{%- if item.data.summary %}
         <div class="tl-desc">{{ item.data.summary }}</div>
 {%- endif %}
       </div>
