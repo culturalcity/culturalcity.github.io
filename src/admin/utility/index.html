@@ -50,9 +50,12 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .sync-state.saved{color:var(--dp);background:rgba(31,92,56,0.05);border-color:rgba(31,92,56,0.2);}
 .sync-state.offline,.sync-state.error{color:var(--dn);background:rgba(140,31,31,0.05);border-color:rgba(140,31,31,0.25);}
 
-/* ── 主版型左右並排 ───────────────────────────── */
-.main{display:grid;grid-template-columns:minmax(0,1fr) 670px;gap:14px;align-items:start;}
-@media(max-width:1100px){.main{grid-template-columns:1fr;}}
+/* ── 主版型左右並排 ─────────────────────────────
+   ⚠️ 用 .util-main 不用 .main：global.css 的 .main 有 max-width:760px 置中規格
+   （2026-07 全站容器標準化），會把本頁的 grid 夾進 760px 盒子、左欄塌成一字寬。
+   本頁要走 .app 的 1600px 寬版，故自用不撞名的 class。 */
+.util-main{display:grid;grid-template-columns:minmax(0,1fr) 670px;gap:14px;align-items:start;}
+@media(max-width:1100px){.util-main{grid-template-columns:1fr;}}
 
 .pane{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
 .pane-head{padding:10px 16px;background:#F0EDE8;border-bottom:1px solid var(--line);font-size:var(--ts-sm);font-weight:600;color:var(--wg11);letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
@@ -165,7 +168,7 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
   <div id="pending-bar" style="display:none"></div>
 
   <!-- ── 主版型左右並排 ───────────────────────────── -->
-  <div class="main">
+  <div class="util-main">
     <!-- 左：資料表 -->
     <div class="pane">
       <div class="dt-toolbar">
