@@ -73,11 +73,17 @@ gcloud run deploy yda-cloud-decrypt \
   --source . \
   --region asia-east1 \
   --platform managed \
-  --no-allow-unauthenticated \
+  --allow-unauthenticated \
   --memory 1Gi \
   --timeout 60s \
   --max-instances 3
 ```
+
+> ⚠️ **一定是 `--allow-unauthenticated`（大門公開）**。實際擋人的是 app 層的
+> `X-Auth-Secret` 共享密鑰（index.js 對 /health 以外所有路徑驗證）。
+> Apps Script 沒有辦法產生 Cloud Run 認得的 OIDC token，所以大門一鎖
+> （`--no-allow-unauthenticated`）整條管線就斷。2026-07-04 曾因照舊版
+> README 用錯參數部署，導致 07/06 永豐、07/08 台電兩筆歸檔 403 失敗。
 
 第一次 build & deploy 約 3-5 分鐘。完成會印出 service URL，譬如：
 ```
@@ -88,30 +94,30 @@ Service URL: https://yda-cloud-decrypt-abcdef123-de.a.run.app
 
 ### 4. 授權 Apps Script 呼叫
 
-Cloud Run 部署設 `--no-allow-unauthenticated`，必須讓 Apps Script 帶 OIDC token 才能呼叫。
+**兩層門禁**：Cloud Run 大門公開（allUsers 可呼叫），app 層自驗 `X-Auth-Secret`
+共享密鑰——Apps Script 的 Script Properties `SHARED_SECRET` 必須跟 Cloud Run
+環境變數 `SHARED_SECRET` 一致。
 
-Apps Script 跑在 `culturalcity85@gmail.com` 身分下；只要該帳號在 Cloud Run service 有 **Cloud Run Invoker** 角色就行：
+若大門被鎖回去（症狀：日誌全是 403、連不到 app 層），用這行恢復公開呼叫：
 
 ```bash
 gcloud run services add-iam-policy-binding yda-cloud-decrypt \
   --region asia-east1 \
-  --member="user:culturalcity85@gmail.com" \
+  --member="allUsers" \
   --role="roles/run.invoker"
 ```
 
 ### 5. 測試
 
-從本機：
+從本機（不需 gcloud token，帶共享密鑰即可；密鑰值見 Apps Script Properties）：
 ```bash
-TOKEN=$(gcloud auth print-identity-token)
-curl -X GET "https://yda-cloud-decrypt-xxx.run.app/health" \
-  -H "Authorization: Bearer $TOKEN"
-# 應回 "ok"
+curl -X GET "https://yda-cloud-decrypt-xxx.run.app/health"
+# 應回 "ok"（/health 不驗密鑰；若這裡就 403，代表大門被鎖、回去看第 4 節）
 
 # 用一份本地測試 PDF
 BASE64=$(base64 -w0 < some-bill.pdf)
 curl -X POST "https://yda-cloud-decrypt-xxx.run.app/decrypt-bill" \
-  -H "Authorization: Bearer $TOKEN" \
+  -H "X-Auth-Secret: <SHARED_SECRET值>" \
   -H "Content-Type: application/json" \
   -d "{\"pdf_b64\":\"$BASE64\"}"
 ```
