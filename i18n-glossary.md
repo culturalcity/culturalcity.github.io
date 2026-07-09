@@ -258,7 +258,7 @@
 ## 防災・颱風
 | 中文 | English | 日本語 |
 |---|---|---|
-| 颱風防颱注意事項 | Typhoon [Name] Preparedness Guidelines | 台風[名]への備え |
+| 颱風防颱注意事項 | Typhoon [Name] Preparedness Guidelines | 台風N号（[名]）への備え |
 | 颱風前完成陽台收納 | Secure your balcony before typhoons | 台風前にバルコニーを片付ける |
 
 ## 制式結尾・問候
@@ -302,6 +302,8 @@
 **2026-07-01 修訂（7月保養公告新增「高壓沖洗」）**：新增／確認專有詞——高壓沖洗（High-Pressure Washing／高圧洗浄）、**廠商正式列名**採「潤泰公寓大廈管理維護／Ruentex Management & Maintenance／潤泰マンション管理・メンテナンス」（規則：各語言用登記全名、只去法人後綴 股份有限公司／Co., Ltd.；英文即官方全寫）——內文一般指「現任物業」仍可用短稱 潤泰維護（B 區保留）、1F 前門公共區域（1F Front Entrance Common Area／1階 正面エントランス共用エリア）、1F 後門、車道區域（1F Rear Door & Driveway Area／1階 バックドア・車道エリア）、頂樓室外空間（RF Outdoor Area／RF 屋外エリア，已列入 B 區）。電梯保養項目確認採「**曳引鋼索**」（Word 檔「昇降線路板」為不精確用語，比照上方 巻上ロープ 修訂）。同步狀態：① repo canonical、② Notion、③ Obsidian **皆已同步（2026-07-01）**。
 
 **2026-07-07 修訂（Notion 歷史公告回填 2022-07～2025-06）**：新增——A梯／B梯（Staircase A / Staircase B／A階段／B階段，沿任內舊譯）、五府宮（Wufu Temple／五府宮）、敦寶建設（Dunbao Construction，**暫定**音譯，主委尚未確認官方英名）、今網寬頻（**Kingnet**／今網（Kingnet），主委定案）、凱擘（Kbro）、中嘉（**Homeplus Digital**，主委定案）。歷史公告翻譯原則：任內（2023/07–2024/06）公告內文既有三語＝權威來源可沿用；歷史公告中文保留當時用語（如「閱覽室」），英日文採本表現行 canonical。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（待同步）。
+
+**2026-07-10 修訂（巴威颱風公告）**：日文稱呼颱風改採**編號優先**慣例（主委指示）——寫法「台風N号（カタカナ名）」，N＝日本気象庁當年編號（例：2026 巴威＝台風9号（バービー）；2025 丹娜絲前例已用 台風4号ダナス）。標題句型「台風[名]への備え」改為「台風N号（[名]）への備え」。歷史公告（小犬 台風コイヌへの備え 等）保留不回改。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（見當日同步紀錄）。
 
 **待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
 - 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
