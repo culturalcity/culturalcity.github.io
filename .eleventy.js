@@ -181,6 +181,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("term2Board", makeTermCollection(2));
   eleventyConfig.addCollection("term3Board", makeTermCollection(3));
   eleventyConfig.addCollection("term4Board", makeTermCollection(4));
+  eleventyConfig.addCollection("term5Board", makeTermCollection(5));
 
   // ── 給單篇管委會議紀錄頁的 prev/next 導航 ──
   // 從 currentUrl 解出屆/次，到對應的 termNBoard collection 找前後一次。
@@ -192,7 +193,7 @@ module.exports = function(eleventyConfig) {
     const seq = parseInt(m[2]);
     // 把所有屆合併成一條時間線，跨屆連續
     const all = [];
-    for (const t of [1, 2, 3, 4]) {
+    for (const t of [1, 2, 3, 4, 5]) {
       const coll = (allCollections && allCollections[`term${t}Board`]) || [];
       coll.forEach(item => {
         const mm = (item.url || '').match(/-(\d+)\.html$/);
