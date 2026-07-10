@@ -26,6 +26,8 @@ const https = require('https');
 const CWA_URL = 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/W-C0033-001';
 const TARGET_CITY = '臺北市';
 const LAND_TYPHOON_KEYWORD = '陸上颱風警報';   // 「海上陸上颱風警報」也含此 substring
+// ⚠ 2026-07-10 巴威颱風實測：CWA 把警報拆成 phenomena=「海上陸上颱風」+ significance=「警報」
+// 兩個欄位，比對時必須把兩欄串起來才含得住關鍵字（當天因此漏觸發，人工補發現此 bug）。
 
 const STATE_PATH = path.resolve(__dirname, '..', 'utility', 'data', 'typhoon-state.json');
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -143,13 +145,16 @@ function saveState(state) {
 
   const hazards = (city.hazardConditions && city.hazardConditions.hazards) || [];
   const landTyphoon = hazards.find(h => {
-    const phen = (h.info && h.info.phenomena) || '';
+    const info = (h && h.info) || {};
+    const phen = (info.phenomena || '') + (info.significance || '');   // 兩欄串接，新舊格式都吃
     return phen.includes(LAND_TYPHOON_KEYWORD);
   });
 
   const prevState = loadState();
   const currentlyActive = !!landTyphoon;
-  const currentPhenomena = landTyphoon ? (landTyphoon.info.phenomena || '') : null;
+  const currentPhenomena = landTyphoon
+    ? ((landTyphoon.info.phenomena || '') + (landTyphoon.info.significance || ''))
+    : null;
 
   console.log(`📡 CWA 查詢結果：${TARGET_CITY} ${currentlyActive ? `「${currentPhenomena}」` : '無陸上颱風警報'}`);
   console.log(`📂 上次狀態：${prevState.active ? `active 自 ${prevState.activeSince}` : 'inactive'}`);
