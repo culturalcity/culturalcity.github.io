@@ -90,6 +90,18 @@ function postJson(url, payload) {
       let buf = '';
       res.on('data', c => (buf += c));
       res.on('end', () => {
+        // ⚠ Apps Script 對 POST 一律回 302 轉址到結果頁（此時 doPost 已執行完、事件已建立），
+        // 必須跟隨轉址 GET 一次才拿得到 JSON 回應。2026-07-11 巴威颱風實測：不跟隨會誤判失敗、
+        // 跳過 state commit，下一輪重複觸發事件。
+        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          get(res.headers.location)
+            .then(parsed => {
+              if (parsed && parsed.ok) resolve(parsed);
+              else reject(new Error(`Webhook redirect result not ok: ${JSON.stringify(parsed).slice(0, 300)}`));
+            })
+            .catch(reject);
+          return;
+        }
         try {
           const parsed = JSON.parse(buf);
           if (res.statusCode >= 200 && res.statusCode < 300 && parsed.ok) resolve(parsed);
