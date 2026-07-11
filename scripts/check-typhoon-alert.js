@@ -32,30 +32,13 @@ const LAND_TYPHOON_KEYWORD = '陸上颱風警報';   // 「海上陸上颱風警
 const STATE_PATH = path.resolve(__dirname, '..', 'utility', 'data', 'typhoon-state.json');
 const DRY_RUN = process.argv.includes('--dry-run');
 
-const POST_TYPHOON_CHECKLIST = [
-  '地下室排水溝、機房地坪是否積水',
-  '頂樓植栽倒伏、盆器破損狀況',
-  '外牆磁磚剝落（從對街用望遠鏡或無人機檢查）',
-  '招牌、廣告物、頂樓設備固定情況',
-  '停車場入口擋水閘門 / 抽水馬達回復狀態',
-  '電梯機房積水、電梯運作測試',
-  '緊急照明、逃生燈是否正常',
-  '信箱區 / 公佈欄漏水',
-  '中庭排水孔阻塞（落葉、塑膠袋）',
-  '對講機、門禁系統運作正常',
-];
-
-const PRE_TYPHOON_CHECKLIST = [
-  '水塔加滿水（停水備援）',
-  '頂樓盆栽、雜物移至遮蔽處或固定',
-  '清除中庭、頂樓、騎樓排水孔阻塞物',
-  '檢查並確認停車場擋水閘門可正常下放',
-  '通知 13-15 樓住戶確認加壓馬達電源狀態',
-  '備齊手電筒、緊急照明、發電機（如有）',
-  '通知保全強化夜間巡邏頻率',
-  '公告住戶：颱風期間注意事項（門窗、陽台物品）',
-  '緊急聯絡人清單、急救包位置再確認',
-];
+// 2026-07-11 方案A（單一資料源）：事件不再內嵌施作清單，改連到主委親撰的 canonical SOP。
+// 防颱準備＝Notion「颱風公設防颱準備施作項目」（12 項、每項含現場照片，公開分享連結）；
+// 災後巡查＝總幹事 Wiki 第五章 §1.2.2。改清單內容一律改該兩處，不要回頭在這裡加項目
+// ——本檔曾內嵌一份 AI 代擬、未經主委審核的 9 項清單，2026-07-10 巴威颱風實戰時發現與
+// 實際 SOP 不符（閘門是手動組裝式、非「下放」式），故廢除內嵌清單。
+const PREP_SOP_URL = 'https://dynamic-jaw-6be.notion.site/227a3786c38980e08baade2670e06396';
+const PM_WIKI_URL = 'https://culturalcity.org/admin/staff/pm-wiki/';
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -182,8 +165,11 @@ function saveState(state) {
       title: `🌀 颱風陸上警報・防颱準備清單（${currentPhenomena}）`,
       description:
         `中央氣象署發布陸上颱風警報，臺北市在警戒區。\n\n` +
-        `**防颱準備清單**：\n` +
-        PRE_TYPHOON_CHECKLIST.map((x, i) => `  ${i + 1}. ${x}`).join('\n') + '\n\n' +
+        `**防颱準備施作項目（12 項，含現場照片）**：\n${PREP_SOP_URL}\n\n` +
+        `⏱ 時效提醒（詳細步驟見上方連結）：\n` +
+        `  ・前後門防水閘門「支柱」趁風雨未明顯時先裝好（前後門各約 40 分鐘，門片可先暫放定位）\n` +
+        `  ・沙包平時收在 B4 消防機房，先運上頂樓室內空間出入口\n` +
+        `  ・1F/B1F 排水溝清淤、A 梯各樓層地排蓋拔除\n\n` +
         `**警報資訊**：${currentPhenomena}\n` +
         `**生效時間**：${(landTyphoon.validTime && landTyphoon.validTime.startTime) || '（未標示）'}\n` +
         `**預計結束**：${(landTyphoon.validTime && landTyphoon.validTime.endTime) || '（未標示）'}\n\n` +
@@ -202,8 +188,7 @@ function saveState(state) {
       title: `🔍 颱風後巡查清單（${prevState.phenomena || '陸上警報'} 解除後）`,
       description:
         `陸上颱風警報已解除。建議於今日視天氣狀況、明日全面執行災後巡查。\n\n` +
-        `**災後巡查清單**：\n` +
-        POST_TYPHOON_CHECKLIST.map((x, i) => `  ${i + 1}. ${x}`).join('\n') + '\n\n' +
+        `**災後巡查清單**：見總幹事 Wiki 第五章 §1.2.2\n${PM_WIKI_URL}\n\n` +
         `巡查發現異常處請拍照記錄、通知主委、視損害程度決定是否動用社區公基金修繕。\n\n` +
         `**本次警報期間**：${prevState.activeSince || '?'} ~ ${nowTaipeiISO()}\n\n` +
         `📌 由 typhoon-alert 系統自動建立\n` +
