@@ -19,6 +19,7 @@ on:
 
 permissions:
   contents: write
+  actions: write    # 轉換時 gh workflow run deploy.yml（颱風橫條隨警報自動上/下架）
 
 concurrency:
   group: typhoon-alert
@@ -36,6 +37,7 @@ jobs:
           node-version: '22'
 
       - name: Run typhoon alert check
+        id: check
         env:
           CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
           APPS_SCRIPT_WEBHOOK_URL: ${{ secrets.APPS_SCRIPT_WEBHOOK_URL }}
@@ -53,3 +55,13 @@ jobs:
             git commit -m "data: typhoon-state 自動更新"
             git push
           fi
+
+      # 警報「進入/解除」轉換時觸發網站重建：首頁颱風橫條（frontmatter
+      # bannerWhileTyphoon: true）在 build 時認 typhoon-state.json 的 active，
+      # 重建後橫條隨警報自動上/下架，不再依賴 bannerUntil 猜日期。
+      # 必須排在 state commit+push 之後，deploy checkout 才拿得到新 state。
+      - name: Rebuild site on transition (typhoon banner)
+        if: steps.check.outputs.transition == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml

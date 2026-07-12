@@ -222,6 +222,12 @@ function saveState(state) {
   saveState(newState);
   console.log(`💾 typhoon-state.json 已更新（active=${newState.active}）`);
 
+  // 供 GitHub Actions 後續步驟判斷：有「進入/解除」轉換 → 觸發網站重建
+  // （首頁颱風橫條認 typhoon-state 的 active，重建後即時上/下架；2026-07-12 全自動化）
+  if (process.env.GITHUB_OUTPUT) {
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `transition=${events.length > 0}\n`);
+  }
+
   if (events.length === 0) return;
 
   const webhookUrl = process.env.APPS_SCRIPT_WEBHOOK_URL;

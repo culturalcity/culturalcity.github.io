@@ -103,6 +103,10 @@ module.exports = function(eleventyConfig) {
   // 用於 base.njk <body> 開頭渲染黃條。每日 06:00 build 重跑，到期自動消失、到 bannerFrom 自動出現。
   // bannerFrom：選填「排程起始日」（YYYY-MM-DD）。設了它就能「現在填、之後才自動上架」，
   //   不必到時手動打開；沒填 = 立即生效（與舊行為相同）。
+  // bannerWhileTyphoon：選填（颱風公告專用，2026-07-12）。設 true 後「額外」要求
+  //   utility/data/typhoon-state.json 的 active === true 才顯示。typhoon-alert 排程偵測到
+  //   警報進入/解除會自動觸發重建（見 typhoon-alert.yml 最後一步），橫條隨警報上/下架，
+  //   不必猜 bannerUntil。建議仍設寬鬆 bannerUntil（如 +14 天）當保險，state 卡住時不至於永遠掛著。
   eleventyConfig.addFilter("activeBanner", function(notices) {
     if (!Array.isArray(notices) || !notices.length) return null;
     // 一律用「台北日期字串（YYYY-MM-DD）」比對，避開 UTC/本地時區的 off-by-one。
@@ -114,6 +118,13 @@ module.exports = function(eleventyConfig) {
       .filter(n => n.data && n.data.banner === true)
       .filter(n => !n.data.bannerFrom  || norm(n.data.bannerFrom)  <= todayStr) // 選填起始日；無 = 立即生效
       .filter(n => !n.data.bannerUntil || norm(n.data.bannerUntil) >= todayStr) // 選填到期日；無 = 一直顯示
+      .filter(n => {
+        if (!n.data.bannerWhileTyphoon) return true;
+        try {   // 每次呼叫重讀，dev server 增量重建也拿得到最新 state
+          const st = JSON.parse(require("fs").readFileSync("utility/data/typhoon-state.json", "utf8"));
+          return st.active === true;
+        } catch (e) { return false; }   // state 檔缺失/壞掉 → 寧可不顯示
+      })
       .sort((a, b) => b.date - a.date);
     return active[0] || null;
   });
