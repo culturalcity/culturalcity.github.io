@@ -70,7 +70,7 @@
         475,
         513,
         520,
-        null,
+        474,
         null,
         null,
         null,
@@ -84,7 +84,7 @@
         499,
         499,
         499,
-        null,
+        499,
         null,
         null,
         null,
@@ -98,7 +98,7 @@
         974,
         1012,
         1019,
-        null,
+        973,
         null,
         null,
         null,
@@ -173,6 +173,14 @@
       "mobile": 499,
       "total": 1019,
       "dataGB": 0.249
+    },
+    {
+      "rocYearMonth": "115/07",
+      "period": "115/06/01-115/06/30",
+      "phone": 474,
+      "mobile": 499,
+      "total": 973,
+      "dataGB": 0.156
     }
   ]
 }
