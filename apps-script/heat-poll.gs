@@ -2,8 +2,12 @@
 // 閱大安 Heat Alert Polling（Apps Script）
 // ═══════════════════════════════════════════════════════════════
 //
-// 每 5 分鐘 trigger：07:30-09:00 台北 window 內偵測 CWA W29 高溫資訊，
+// 每 5 分鐘 trigger：07:30-15:00 台北 window 內偵測 CWA W29 高溫資訊，
 // 若臺北今日有 advisory，建立 Google Calendar 全天事件給總幹事。
+// （2026-07-20 視窗從 07:30-09:00 拉長到 15:00：當日 CWA 11:35 才把臺北
+//   納入橘燈，落在舊視窗外而漏建。15:00 後才發的燈號離 17:00 失效太近，
+//   不再提醒。一天只建一筆由「高溫圖卡」去重標記保證；若盤中燈色升級
+//   （黃→橙/紅、橙→紅），就地更新既有事件的標題/說明/顏色，不另建。）
 //
 // 取代 GitHub Actions heat-alert.yml（GH Actions cron 不可靠：51-60min
 // 延遲 + silently skip）。
@@ -87,18 +91,35 @@ function detectTaipeiLevel() {
 
 // ── Calendar Event ────────────────────────────────
 
+// 從既有事件標題讀出燈色等級（0=讀不到）
+function titleLevelNum(title) {
+  if (title.indexOf('紅燈') >= 0) return 3;
+  if (title.indexOf('橙燈') >= 0) return 2;
+  if (title.indexOf('黃燈') >= 0) return 1;
+  return 0;
+}
+
 function ensureCalendarEvent(level, today) {
   var cal = CalendarApp.getCalendarById(CALENDAR_ID);
   if (!cal) { Logger.log('Calendar not found: ' + CALENDAR_ID); return; }
 
   var date = new Date(today + 'T00:00:00+08:00');
   var events = cal.getEventsForDay(date);
+  var existing = null;
   for (var i = 0; i < events.length; i++) {
     // 用「高溫圖卡」當去重標記（不隨待辦措辭微調而失效；與 cold-poll 對稱）
     if (events[i].getTitle().indexOf('高溫圖卡') >= 0) {
-      Logger.log('Calendar event exists: ' + events[i].getTitle());
-      return;
+      existing = events[i];
+      break;
     }
+  }
+
+  // 盤中升級：既有事件燈色 >= 新燈色 → 不動；比較低（黃→橙/紅、橙→紅）→ 就地升級。
+  // 黃→橙盤中升級結構上罕見（預報須從36跳升跨38），但納入處理求完整。
+  var oldNum = existing ? titleLevelNum(existing.getTitle()) : 0;
+  if (existing && oldNum >= Number(level.num)) {
+    Logger.log('Calendar event exists: ' + existing.getTitle());
+    return;
   }
 
   // 待辦字面＝明確動作（總幹事一看就能照做），與 cold-poll.gs 對稱
@@ -116,20 +137,30 @@ function ensureCalendarEvent(level, today) {
     '--- CWA 原文 ---\n' + level.content + '\n\n' +
     '📌 由 Apps Script heat-poll 自動建立';
 
-  var event = cal.createAllDayEvent(title, date, { description: desc });
+  var LEVEL_ZH = { 1: '黃', 2: '橙', 3: '紅' };
+  var event;
+  if (existing) {
+    desc += '\n📌 盤中升級自動更新（' + (LEVEL_ZH[oldNum] || '?') + '燈→' + level.zh + '燈）';
+    existing.setTitle(title);
+    existing.setDescription(desc);
+    event = existing;
+    Logger.log('Upgraded: ' + title);
+  } else {
+    event = cal.createAllDayEvent(title, date, { description: desc });
+    Logger.log('Created: ' + title);
+  }
   if (level.num === '3') {
     event.setColor(CalendarApp.EventColor.RED);
   } else {
     event.setColor(CalendarApp.EventColor.ORANGE);
   }
-  Logger.log('Created: ' + title);
 }
 
 // ── 主函數（trigger 呼叫） ────────────────────────
 
 function checkHeatAlert() {
   var hm = taipeiHourMin();
-  var inWindow = (hm.h === 7 && hm.m >= 30) || hm.h === 8 || (hm.h === 9 && hm.m <= 5);
+  var inWindow = (hm.h === 7 && hm.m >= 30) || (hm.h >= 8 && hm.h < 15) || (hm.h === 15 && hm.m <= 5);
   if (!inWindow) return;
 
   var today = todayTaipei();
