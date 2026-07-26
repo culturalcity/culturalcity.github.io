@@ -567,7 +567,9 @@ function calcEStatus(eYd,tmax){
   if(eYd<=warn)return{s:'warn',label:'接近警戒',detail:'預期 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度'};
   return{s:'over',label:'超出警戒',detail:'目標 '+target.toFixed(0)+' 度，警戒 '+warn.toFixed(0)+' 度，實際 '+eYd+' 度'};
 }
-// 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌每分鐘 +0.2（0~15 分）
+// 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌每分鐘 +0.25（0~15 分）
+// 澆灌係數 0.25 = 頂樓+1樓同澆（實測合計 0.2165 度/分：頂樓 0.14 + 1樓 0.0765，
+// 1樓 2026-07-26 實測 12 分鐘 0.91837 度），buffer +15.5%。兩區一律澆相同分鐘數。
 function normIrrigMin(m){var n=Number(m)||0;if(n<0)n=0;if(n>15)n=15;return Math.round(n);}
 function dayTypeLabel(isClean,irrigMin){
   var m=normIrrigMin(irrigMin);
@@ -577,7 +579,7 @@ function dayTypeLabel(isClean,irrigMin){
   return'一般日';
 }
 function dayTypeMax(isClean,irrigMin){
-  return Math.round((0.2+(isClean?0.3:0)+normIrrigMin(irrigMin)*0.2)*10)/10;
+  return Math.round((0.2+(isClean?0.3:0)+normIrrigMin(irrigMin)*0.25)*100)/100;
 }
 function calcWStatus(wYd,isClean,irrigMin){
   if(wYd===null)return null;
@@ -780,7 +782,7 @@ function genCard(){
     if(wFixSt&&wFixSt.s==='over'){wChipBg='rgba(140,31,31,0.08)';wChipBd='rgba(140,31,31,0.25)';wChipFg='#8C1F1F';}
     else if(wFixSt&&wFixSt.s==='good'){wChipFg='#1F5C38';}
 
-    // 今日類型對應的正常上限（基底 0.2 + 清潔 +0.3 + 澆灌每分鐘 +0.2）
+    // 今日類型對應的正常上限（基底 0.2 + 清潔 +0.3 + 澆灌每分鐘 +0.25）
     var normalMax=dayTypeMax(isClean,irrigMin);
     var typeText=dayTypeLabel(isClean,irrigMin);
 
