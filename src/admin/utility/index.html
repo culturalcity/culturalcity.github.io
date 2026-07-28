@@ -110,6 +110,27 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 .diff-summary .cell.add .num{color:var(--dp);}
 .diff-summary .cell.upd .num{color:var(--warn);}
 
+/* ── 快速發布面板（手機版主要輸入介面；桌面隱藏，桌面走完整表格） ── */
+.quick-pane{display:none;}
+.tbl-toggle{display:none;}
+.quick-date{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:#F8F6F2;}
+.quick-date .ms-arrow{padding:10px 16px;font-size:var(--ts-base);border:1px solid var(--line);background:var(--white);cursor:pointer;border-radius:1px;color:var(--wg11);}
+.quick-date .ms-arrow:disabled{opacity:0.35;cursor:not-allowed;}
+.quick-date-text{flex:1;text-align:center;font-size:var(--ts-base);font-weight:700;color:var(--wg41);}
+/* minmax(0,1fr)＋min-width:0：number input 有內建最小寬度，純 1fr 壓不下去會把頁面撐寬 */
+.quick-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:14px;}
+.quick-grid label{display:flex;flex-direction:column;gap:6px;font-size:var(--ts-sm);color:var(--wg11);font-weight:600;min-width:0;}
+.quick-grid input[type=number],.quick-grid input[type=text]{padding:12px;font-size:var(--ts-md);border:1px solid var(--line);border-radius:2px;font-family:inherit;width:100%;min-width:0;background:var(--white);color:var(--wg41);}
+.quick-grid input:focus{outline:none;border-color:var(--wg11);background:#FFFEF7;}
+.quick-grid input.is-empty{background:rgba(140,31,31,0.04);border-color:rgba(140,31,31,0.18);}
+.quick-check{flex-direction:row!important;align-items:center;gap:10px!important;font-size:var(--ts-base)!important;cursor:pointer;}
+.quick-check input[type=checkbox]{width:24px;height:24px;cursor:pointer;}
+.quick-note{grid-column:1/-1;}
+.quick-actions{padding:0 14px 16px;display:flex;justify-content:flex-end;}
+
+/* ── 預覽縮放容器：卡片凍結 640px，容器不夠寬時等比縮小（fitPreview 控制） ── */
+.pf-wrap{overflow:hidden;}
+
 /* ── 手機版（max-width 768px） ──────────────────── */
 @media (max-width:768px){
   :root{--ts-xs:15px;--ts-sm:17px;--ts-base:19px;--ts-md:21px;}
@@ -145,6 +166,15 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
   .pane-title-text{font-size:var(--ts-md);}
   /* pending bar 放大 */
   .pending-bar{padding:11px 14px;font-size:var(--ts-base);}
+  /* ── 手機版重排：快速發布 → 預覽 → 完整表格（收合） ──
+     align-items:stretch 必留：蓋掉桌面 grid 規則的 align-items:start，
+     否則 pane 會用「內容最小寬」（含 640px 預覽 iframe）把頁面撐寬 */
+  .util-main{display:flex;flex-direction:column;align-items:stretch;}
+  .quick-pane{display:block;order:1;}
+  #preview-pane{order:2;}
+  .tbl-toggle{display:block;order:3;width:100%;padding:13px;font-size:var(--ts-base);font-family:inherit;border:1px dashed var(--line);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;}
+  #table-pane{order:4;display:none;}
+  #table-pane.is-open{display:block;}
 }
 </style>
 </head>
@@ -169,15 +199,40 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 
   <!-- ── 主版型左右並排 ───────────────────────────── -->
   <div class="util-main">
+
+    <!-- 快速發布（僅手機顯示；只操作報告日一天，欄位與完整表格同一套 pending 機制） -->
+    <div class="pane quick-pane" id="quick-pane">
+      <div class="pane-head">
+        <div class="pane-title"><span class="pane-title-text">⚡ 快速發布</span></div>
+        <span class="sync-state loading">載入中…</span>
+      </div>
+      <div class="quick-date">
+        <button class="ms-arrow" onclick="quickShiftDay(-1)" title="前一天">◀</button>
+        <div class="quick-date-text" id="q-date"></div>
+        <button class="ms-arrow" id="q-next" onclick="quickShiftDay(1)" title="後一天">▶</button>
+      </div>
+      <div class="quick-grid">
+        <label>⚡ 電（度）<input type="number" step="0.01" inputmode="decimal" id="q-electric" oninput="quickChange('electric',this.value)"></label>
+        <label>💧 水（度）<input type="number" step="0.01" inputmode="decimal" id="q-water" oninput="quickChange('water',this.value)"></label>
+        <label>🌡 高溫（°C）<input type="number" step="0.1" inputmode="decimal" id="q-temperature" oninput="quickChange('temperature',this.value)"></label>
+        <label>🌿 澆灌（分）<input type="number" min="0" max="15" step="1" inputmode="numeric" id="q-irrigationMin" oninput="quickChange('irrigationMin',this.value)"></label>
+        <label class="quick-check"><input type="checkbox" id="q-cleanDay" onchange="quickChange('cleanDay',this.checked)">🧹 清潔日</label>
+        <label class="quick-note">📝 備註<input type="text" id="q-note" oninput="quickChange('note',this.value)"></label>
+      </div>
+      <div class="quick-actions">
+        <button class="btn btn-save" id="q-btn-commit" onclick="commitPending()" disabled>💾 儲存</button>
+      </div>
+    </div>
+
     <!-- 左：資料表 -->
-    <div class="pane">
+    <div class="pane" id="table-pane">
       <div class="dt-toolbar">
         <div class="dt-toolbar-row">
           <button class="ms-arrow" onclick="histPrevMonth()">◀</button>
           <select id="hist-month" onchange="renderHistTable()"></select>
           <button class="ms-arrow" onclick="histNextMonth()">▶</button>
           <label class="chk"><input type="checkbox" id="hist-only-missing" onchange="renderHistTable()">只看缺資料</label>
-          <span id="sync-state" class="sync-state loading">●  載入中…</span>
+          <span class="sync-state loading">載入中…</span>
           <div class="dt-spacer"></div>
           <button class="btn btn-save" id="btn-commit" onclick="commitPending()" disabled>💾 儲存</button>
         </div>
@@ -196,15 +251,21 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
       <div class="htbl-wrap" id="htbl-wrap"></div>
     </div>
 
+    <!-- 手機版：完整表格收合開關（桌面隱藏） -->
+    <button class="tbl-toggle" id="tbl-toggle" onclick="toggleTable()">📋 完整月份表格 ▾</button>
+
     <!-- 右：公告預覽 -->
-    <div class="pane">
+    <div class="pane" id="preview-pane">
       <div class="pane-head">
         <div class="pane-title">
           <span class="pane-title-text">📱 公告預覽</span>
         </div>
-        <button class="btn btn-png" onclick="dlPNG()" id="btn-png">📥 下載</button>
+        <div class="preview-head-actions">
+          <button class="btn btn-save" onclick="sharePNG()" id="btn-share" style="display:none">📤 分享</button>
+          <button class="btn btn-png" onclick="dlPNG()" id="btn-png">📥 下載</button>
+        </div>
       </div>
-      <iframe id="pf-card" class="pf"></iframe>
+      <div class="pf-wrap" id="pf-wrap"><iframe id="pf-card" class="pf" onload="fitPreview()"></iframe></div>
     </div>
   </div>
 
@@ -370,12 +431,12 @@ async function deleteOnServer(){
 function getStore(){if(!_cache)_cache=loadLocalCache();return _cache;}
 function setStore(s){_cache=normalizeStore(s);writeLocalCache(_cache);}
 
-// 顯示同步狀態
+// 顯示同步狀態（頁面上有兩顆指示燈：表格 toolbar ＋ 快速發布 pane，一起更新）
 function setSyncState(state,text){
-  var el=document.getElementById('sync-state');
-  if(!el)return;
-  el.className='sync-state '+state;
-  el.textContent=text;
+  document.querySelectorAll('.sync-state').forEach(function(el){
+    el.className='sync-state '+state;
+    el.textContent=text;
+  });
 }
 function fmtTime(d){return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');}
 
@@ -439,19 +500,18 @@ function discardPending(){
 
 function updatePendingBar(){
   var bar=document.getElementById('pending-bar');
-  var btnSave=document.getElementById('btn-commit');
+  // 儲存鈕有兩顆：表格 toolbar ＋ 快速發布 pane，一起同步
+  var btns=[document.getElementById('btn-commit'),document.getElementById('q-btn-commit')];
   if(hasPending()){
     bar.style.display='';
     bar.className='pending-bar';
     bar.innerHTML='<div>📝 有 <strong>'+pendingCount()+'</strong> 筆未儲存的變更</div>'
       +'<div style="display:flex;gap:6px"><button class="btn btn-sm btn-save" onclick="commitPending()">💾 儲存</button>'
       +'<button class="btn btn-sm" onclick="discardPending()">✕ 放棄</button></div>';
-    btnSave.disabled=false;
-    btnSave.textContent='💾 儲存 ('+pendingCount()+')';
+    btns.forEach(function(b){if(b){b.disabled=false;b.textContent='💾 儲存 ('+pendingCount()+')';}});
   }else{
     bar.style.display='none';
-    btnSave.disabled=true;
-    btnSave.textContent='💾 儲存';
+    btns.forEach(function(b){if(b){b.disabled=true;b.textContent='💾 儲存';}});
   }
 }
 
@@ -621,10 +681,84 @@ function updateRowHighlight(){
 // ────────────────────────────────────────────────────────────────────
 function render(){
   refreshPreviews();
+  syncQuickForm();
 }
 
 function refreshPreviews(){
   document.getElementById('pf-card').srcdoc=genCard();
+}
+
+// ── 預覽縮放：卡片凍結 640px，容器不夠寬（手機）時等比縮小整張看 ──
+function fitPreview(){
+  var f=document.getElementById('pf-card');
+  var wrap=document.getElementById('pf-wrap');
+  if(!f||!wrap)return;
+  var w=wrap.clientWidth;
+  if(w>=648){
+    // 桌面：清掉縮放，回到 CSS 的原生高度＋內部捲動
+    f.style.transform='';f.style.width='';f.style.height='';
+    wrap.style.height='';
+    return;
+  }
+  var s=w/640;
+  var doc=f.contentDocument;
+  var h=(doc&&doc.body)?doc.body.scrollHeight:1200;
+  f.style.width='640px';
+  f.style.height=h+'px';
+  f.style.transform='scale('+s+')';
+  f.style.transformOrigin='top left';
+  wrap.style.height=Math.ceil(h*s)+'px';
+}
+window.addEventListener('resize',fitPreview);
+
+// ── 快速發布（手機版）：只操作報告日一天，走同一套 pending／儲存機制 ──
+function quickChange(type,val){
+  histCellChange(currentReportDate,type,val);
+}
+function quickShiftDay(delta){
+  var next=isoMinus(currentReportDate,-delta);
+  if(next>todayISO())return;
+  setReportTo(next);
+}
+function syncQuickForm(){
+  var dEl=document.getElementById('q-date');
+  if(!dEl)return;
+  dEl.textContent=fmtDate(currentReportDate);
+  var nextBtn=document.getElementById('q-next');
+  if(nextBtn)nextBtn.disabled=(currentReportDate>=todayISO());
+  // 數值欄位：正在輸入中的欄位不覆寫（避免打字打到一半被搶走）
+  ['electric','water','temperature'].forEach(function(k){
+    var el=document.getElementById('q-'+k);
+    if(!el||el===document.activeElement)return;
+    var v=getValue(k,currentReportDate);
+    var empty=(v===null||v===undefined);
+    el.value=empty?'':v;
+    el.classList.toggle('is-empty',empty);
+  });
+  var irrigEl=document.getElementById('q-irrigationMin');
+  if(irrigEl&&irrigEl!==document.activeElement){
+    var raw=(pending.irrigationMin[currentReportDate]!==undefined?pending.irrigationMin[currentReportDate]:(getStore().irrigationMin||{})[currentReportDate]);
+    var n=normIrrigMin(raw);
+    var irrigEmpty=(raw===undefined||raw===null||raw===''||n===0);
+    irrigEl.value=irrigEmpty?'':n;
+    irrigEl.classList.toggle('is-empty',irrigEmpty);
+  }
+  var cEl=document.getElementById('q-cleanDay');
+  if(cEl&&cEl!==document.activeElement){
+    cEl.checked=!!(pending.cleanDay[currentReportDate]!==undefined?pending.cleanDay[currentReportDate]:(getStore().cleanDay||{})[currentReportDate]);
+  }
+  var nEl=document.getElementById('q-note');
+  if(nEl&&nEl!==document.activeElement){
+    nEl.value=getValue('note',currentReportDate)||'';
+  }
+}
+
+// 手機版：完整月份表格收合開關
+function toggleTable(){
+  var t=document.getElementById('table-pane');
+  var open=t.classList.toggle('is-open');
+  document.getElementById('tbl-toggle').textContent=open?'📋 完整月份表格 ▴':'📋 完整月份表格 ▾';
+  if(open)renderHistTable();  // 展開時重畫，把快速表單的編輯同步進表格
 }
 
 function sc(s){return {good:'#1F5C38',warn:'#8C5A00',over:'#8C1F1F',ok:'#696460'}[s]||'#696460';}
@@ -986,24 +1120,12 @@ function histCellChange(iso,type,val){
 }
 
 // ────────────────────────────────────────────────────────────────────
-// PNG 下載
+// PNG 下載／分享（共用同一段產圖流程）
 // ────────────────────────────────────────────────────────────────────
-function dlPNG(){
-  var btn=document.getElementById('btn-png');
-  var origTxt=btn.textContent;
-  btn.textContent='⏳ 下載中';btn.disabled=true;
-  var rep=currentReportDate;
-  var ymd=(rep||'').replace(/-/g,'');
-  var fname=ymd+' 每日水電公告.png';
-
-  function finish(blob){
-    var url=URL.createObjectURL(blob);
-    var a=document.createElement('a');
-    a.href=url;a.download=fname;document.body.appendChild(a);a.click();document.body.removeChild(a);
-    URL.revokeObjectURL(url);btn.textContent=origTxt;btn.disabled=false;
-  }
-  function fail(err){console.error(err);btn.textContent=origTxt;btn.disabled=false;alert('PNG 產生失敗：'+(err&&err.message||err));}
-
+function pngFilename(){
+  return (currentReportDate||'').replace(/-/g,'')+' 每日水電公告.png';
+}
+function makeCardPNG(done,fail){
   var html=genCard();
   var parser=new DOMParser();
   var doc=parser.parseFromString(html,'text/html');
@@ -1013,9 +1135,43 @@ function dlPNG(){
   document.body.appendChild(wrap);
   setTimeout(function(){
     html2canvas(wrap,{scale:2,width:640,height:wrap.scrollHeight,windowWidth:640,useCORS:true,backgroundColor:'#EAE7E1'}).then(function(canvas){
-      canvas.toBlob(function(blob){document.body.removeChild(wrap);finish(blob);},'image/png');
+      canvas.toBlob(function(blob){document.body.removeChild(wrap);done(blob);},'image/png');
     }).catch(function(err){document.body.removeChild(wrap);fail(err);});
   },800);
+}
+function triggerDownload(blob){
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=pngFilename();document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function dlPNG(){
+  var btn=document.getElementById('btn-png');
+  var origTxt=btn.textContent;
+  btn.textContent='⏳ 下載中';btn.disabled=true;
+  function restore(){btn.textContent=origTxt;btn.disabled=false;}
+  makeCardPNG(function(blob){triggerDownload(blob);restore();},
+    function(err){console.error(err);restore();alert('PNG 產生失敗：'+(err&&err.message||err));});
+}
+// 直接分享（Android Chrome 等支援 Web Share 的環境；產好圖直接跳系統分享面板到 LINE）
+function sharePNG(){
+  var btn=document.getElementById('btn-share');
+  var origTxt=btn.textContent;
+  btn.textContent='⏳ 產圖中';btn.disabled=true;
+  function restore(){btn.textContent=origTxt;btn.disabled=false;}
+  makeCardPNG(function(blob){
+    var file=new File([blob],pngFilename(),{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:'閱大安 每日水電公告'})
+        .catch(function(err){
+          if(err&&err.name==='AbortError')return;  // 使用者取消分享，不算錯
+          triggerDownload(blob);                   // 分享被擋（逾時等）→ 降級成下載
+        })
+        .then(restore,restore);
+    }else{
+      triggerDownload(blob);restore();
+    }
+  },function(err){console.error(err);restore();alert('PNG 產生失敗：'+(err&&err.message||err));});
 }
 
 // ────────────────────────────────────────────────────────────────────
@@ -1230,6 +1386,12 @@ async function clearUserData(){
 // 初始化：先從雲端載入共用資料，再 render
 // ────────────────────────────────────────────────────────────────────
 (async function(){
+  // 支援 Web Share（分享檔案）的環境才顯示「分享」鈕（主要是 Android/iOS 的行動瀏覽器）
+  try{
+    if(navigator.canShare&&navigator.canShare({files:[new File([''],'t.png',{type:'image/png'})]})){
+      document.getElementById('btn-share').style.display='';
+    }
+  }catch(e){}
   // 先吃本機快取（KV ＋ daily json），讓開頁第一次 render 就有資料、不空白
   loadDailyCache();
   populateMonthSelect();
