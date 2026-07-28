@@ -131,6 +131,10 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
 /* ── 預覽縮放容器：卡片凍結 640px，容器不夠寬時等比縮小（fitPreview 控制） ── */
 .pf-wrap{overflow:hidden;}
 
+/* ── 分享鈕：桌面隱藏（Windows 分享面板沒有 LINE，用處低易混淆），手機版 media query 才顯示。
+   顯示與否還有第二道 JS 偵測：瀏覽器不支援分享檔案時 inline display:none 永遠不會被清掉 ── */
+#btn-share{display:none;}
+
 /* ── 手機版（max-width 768px） ──────────────────── */
 @media (max-width:768px){
   :root{--ts-xs:15px;--ts-sm:17px;--ts-base:19px;--ts-md:21px;}
@@ -175,6 +179,8 @@ body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(-
   .tbl-toggle{display:block;order:3;width:100%;padding:13px;font-size:var(--ts-base);font-family:inherit;border:1px dashed var(--line);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;}
   #table-pane{order:4;display:none;}
   #table-pane.is-open{display:block;}
+  /* 分享鈕只在手機寬度出現（還要過 JS 的支援偵測：inline display:none 未被清掉就仍隱藏） */
+  #btn-share{display:inline-flex;}
 }
 </style>
 </head>
