@@ -71,14 +71,8 @@ extraStyles: |
     <span class="ac-arrow">›</span>
   </a>
 
-{# 從 collections.financeByYear 自動產生 #}
-{%- for group in collections.financeByYear %}
-  <div class="year-label">{{ group.year }} 年度</div>
-  <div class="report-list">
-{%- for item in group.items %}
-{%- set isAnnual = "annual" in (item.data.permalink or "") -%}
-{%- if isAnnual %}
-  </div>
+  <div class="year-label">📖 年度財務報告</div>
+{%- for item in collections.financeAnnuals %}
   <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="analysis-card">
     <span class="ac-icon">📊</span>
     <div>
@@ -89,10 +83,15 @@ extraStyles: |
     </div>
     <span class="ac-arrow">›</span>
   </a>
+{%- endfor %}
+
+{# 從 collections.financeByYear 自動產生 #}
+{%- for group in collections.financeByYear %}
+  <div class="year-label">{{ group.year }} 年度</div>
   <div class="report-list">
-{%- else -%}
-{%- set latestMonthly = collections.financeByYear[0].items | firstMonthlyPermalink %}
-    <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="report-card{% if item.data.permalink == latestMonthly %} latest{% endif %}">
+{%- for item in group.items %}
+{%- set isFirstYear = (group.year == collections.financeByYear[0].year) %}
+    <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="report-card{% if loop.first and isFirstYear %} latest{% endif %}">
       <div class="card-month">{{ item.date | monthOnly }}月</div>
       <div class="card-meta">
         <div class="card-title">{{ item.data.title | replace(' 財務月報', '財務月報') }}</div>
@@ -103,7 +102,6 @@ extraStyles: |
       </div>
       <div class="card-arrow">›</div>
     </a>
-{%- endif -%}
 {%- endfor %}
   </div>
 {%- endfor %}
@@ -111,7 +109,7 @@ extraStyles: |
 
   <div class="footer">
     閱大安管理委員會・財務資料僅供本社區住戶參考<br>
-    如發現資料有誤請聯繫管委會財務委員
+    如發現資料有誤請聯繫管理委員會
   </div>
 
 </div>

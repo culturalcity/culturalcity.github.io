@@ -57,13 +57,6 @@ module.exports = function(eleventyConfig) {
     });
   });
 
-  // ── 財報列表：取第一個「非年報」項目的 permalink（月報卡的 latest 標記用，
-  //    年報 analysis-card 插在最前面時月報的最新強調不能跟著消失）──
-  eleventyConfig.addFilter("firstMonthlyPermalink", function(items) {
-    const it = (items || []).find(i => !String((i.data && i.data.permalink) || "").includes("annual"));
-    return it ? it.data.permalink : "";
-  });
-
   // ── 日期格式化：YYYY-MM ──
   eleventyConfig.addFilter("dateYM", function(d) {
     if (!d) return "";
@@ -174,16 +167,25 @@ module.exports = function(eleventyConfig) {
 
   // ── 自訂 collection：把財報依年份分組 ──
   eleventyConfig.addCollection("financeByYear", function(collectionApi) {
-    const items = collectionApi.getFilteredByTag("finance").reverse();
+    // 只收月報；年報（permalink 含 annual）另走 financeAnnuals，
+    // 因為會計年度年報橫跨兩個曆年，不適合塞進任何曆年群組
+    const items = collectionApi.getFilteredByTag("finance").reverse()
+      .filter(n => !String(n.data.permalink || '').includes('annual'));
     const byYear = {};
     items.forEach(n => {
-      // 從 permalink 抓 YYYY（例：/finance/2026-03.html → 2026, /finance/2025-annual.html → 2025）；
-      // 檔名沒有年份的（例：fy4-annual.html）改用頁面 date 的年份歸組
+      // 從 permalink 抓 YYYY（例：/finance/2026-03.html → 2026）
       const m = (n.data.permalink || '').match(/\/finance\/(\d{4})/);
-      const y = m ? m[1] : (n.date ? String(n.date.getFullYear()) : 'other');
+      const y = m ? m[1] : 'other';
       (byYear[y] = byYear[y] || []).push(n);
     });
     return Object.keys(byYear).sort().reverse().map(y => ({ year: y, items: byYear[y] }));
+  });
+
+  // ── 自訂 collection：年度財務報告（曆年版與會計年度版），新的在前 ──
+  eleventyConfig.addCollection("financeAnnuals", function(collectionApi) {
+    return collectionApi.getFilteredByTag("finance")
+      .filter(n => String(n.data.permalink || '').includes('annual'))
+      .sort((a, b) => b.date - a.date);
   });
 
   // ── 自訂 collection：規約按分類（charter/rule/guide）──
