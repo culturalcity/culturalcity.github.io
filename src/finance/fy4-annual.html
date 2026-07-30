@@ -1,0 +1,401 @@
+---
+layout: finance.njk
+permalink: /finance/fy4-annual.html
+title: 第四會計年度財務年報（2025/07–2026/06）
+date: 2026-06-30
+publishDate: 2026/07/30
+extraStyles: |
+  :root{--page-max-width:1060px;}
+  .header-inner{max-width:1060px;margin:0 auto;position:relative;}
+  .header-eyebrow{font-size:13px;letter-spacing:.28em;color:var(--wg9);margin-bottom:12px;}
+  .header-sub{font-size:15px;color:var(--wg9);letter-spacing:.14em;}
+  .header-rule{width:36px;height:1px;background:var(--wg9);margin:18px 0;}
+  .header-badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .hb{font-size:13px;letter-spacing:.06em;padding:3px 10px;border-radius:1px;border:1px solid;}
+  .hb-d{color:var(--wg1);border-color:rgba(234,231,225,0.25);background:rgba(234,231,225,0.08);}
+  .hb-g{color:#7ECFA0;border-color:rgba(126,207,160,0.3);background:rgba(126,207,160,0.08);}
+  .hb-r{color:#E09090;border-color:rgba(224,144,144,0.3);background:rgba(224,144,144,0.08);}
+  .hb-b{color:#90B0D0;border-color:rgba(144,176,208,0.3);background:rgba(144,176,208,0.08);}
+  .section{margin-bottom:52px;}
+  .sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .sec-num{font-size:13px;letter-spacing:.2em;color:var(--wg9);}
+  .sec-title{font-size:16px;font-weight:700;letter-spacing:.12em;}
+  .sec-rule{flex:1;height:1px;background:var(--line);}
+  .kpi4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
+  .kc{background:var(--white);border:1px solid var(--line);padding:16px 18px 14px;position:relative;overflow:hidden;}
+  .kc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+  .kc.g::before{background:var(--green);}
+  .kc.r::before{background:var(--red);}
+  .kc.b::before{background:var(--blue);}
+  .kc.a::before{background:var(--amber);}
+  .kc.n::before{background:var(--wg11);}
+  .kl{font-size:13px;letter-spacing:.1em;color:var(--wg9);margin-bottom:6px;}
+  .kv{font-size:21px;font-weight:700;}
+  .kv.pos{color:var(--green);}
+  .kv.neg{color:var(--red);}
+  .ks{font-size:15px;color:var(--wg9);margin-top:3px;}
+  .tbl-wrap{overflow-x:auto;}
+  th:first-child{text-align:left;}
+  td:first-child{text-align:left;color:var(--wg41);font-weight:500;}
+  tr:nth-child(even) td{background:rgba(60,56,53,0.02);}
+  tr:hover td{background:rgba(60,56,53,0.05);}
+  .tp{color:var(--green);font-weight:700;}
+  .tn{color:var(--red);font-weight:700;}
+  .tr-tot td{background:var(--wg3)!important;font-weight:700;border-top:2px solid var(--wg11);}
+  .tr-note td{background:rgba(122,92,0,0.06)!important;font-size:15px;}
+  .card{background:var(--white);border:1px solid var(--line);padding:20px 22px;}
+  .card-type{font-size:13px;letter-spacing:.2em;color:var(--wg9);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+  .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+  .dot.g{background:var(--green);}
+  .dot.r{background:var(--red);}
+  .dot.b{background:var(--blue);}
+  .dot.a{background:var(--amber);}
+  .card h3{font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.4;}
+  .card p{font-size:15px;color:var(--wg11);line-height:1.8;}
+  .card-big{font-size:22px;font-weight:700;margin-bottom:4px;}
+  .note{padding:12px 16px;font-size:15px;line-height:1.8;margin-top:12px;border-left:3px solid;}
+  .note.info{background:rgba(43,74,107,0.06);border-color:var(--blue);color:var(--wg11);}
+  .note.warn{background:rgba(140,31,31,0.05);border-color:var(--red);color:var(--wg11);}
+  .note.tip{background:rgba(31,92,56,0.05);border-color:var(--green);color:var(--wg11);}
+  .note.amber{background:rgba(122,92,0,0.06);border-color:var(--amber);color:var(--wg11);}
+  .footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;font-size:15px;color:var(--wg9);letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+summary: '第四會計年度帳列損益 −19,250・含維修基金提撥實質累積 +700,750・維修基金達 144 萬'
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">CULTURAL CITY COMMUNITY · ANNUAL FINANCIAL REPORT</div>
+    <h1>閱大安・第四會計年度財務年報</h1>
+    <div class="header-sub">會計年度 2025/07/01 ～ 2026/06/30・數字均依各月簽核版損益表與資產負債表直接讀取・不含推算</div>
+    <div class="header-rule"></div>
+    <div class="header-badges">
+      <span class="hb hb-d">2025/07 ～ 2026/06</span>
+      <span class="hb hb-r">帳列損益 −19,250</span>
+      <span class="hb hb-g">含維修基金提撥・實質累積 +700,750</span>
+      <span class="hb hb-b">維修基金年增 72 萬・達 144 萬</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- 01 全年度損益總覽 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">01</span><span class="sec-title">第四會計年度損益月報總覽</span><span class="sec-rule"></span></div>
+  <div class="kpi4">
+    <div class="kc r"><div class="kl">年度本期損益合計</div><div class="kv neg">−19,250</div><div class="ks">元・12個月加總（帳列）</div></div>
+    <div class="kc b"><div class="kl">月均收入</div><div class="kv">440,364</div><div class="ks">年度收入 5,284,366</div></div>
+    <div class="kc a"><div class="kl">月均費用</div><div class="kv">441,968</div><div class="ks">年度費用 5,303,616</div></div>
+    <div class="kc n"><div class="kl">虧損月份數</div><div class="kv">6 個月</div><div class="ks">8、11、12、4、5、6月</div></div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>月份</th><th>營業收入</th><th>營業費用</th><th>本期損益</th><th>維修基金提撥</th><th>損益率</th><th>重大事項</th></tr></thead>
+      <tbody>
+        <tr><td>2025-07</td><td>424,001</td><td>418,761</td><td class="tp">+5,240</td><td>60,000</td><td>1.24%</td><td>園藝費15,000（含上月遞延）</td></tr>
+        <tr><td>2025-08</td><td>432,052</td><td>498,565</td><td class="tn">−66,513</td><td>60,000</td><td>−15.40%</td><td>社區維護42,000＋修繕41,299，年度最大虧損月</td></tr>
+        <tr><td>2025-09</td><td>452,339</td><td>397,751</td><td class="tp">+54,588</td><td>60,000</td><td>12.07%</td><td>裝潢清潔費22,600＋回饋金5,000（非常規）</td></tr>
+        <tr><td>2025-10</td><td>444,378</td><td>433,938</td><td class="tp">+10,440</td><td>60,000</td><td>2.35%</td><td>社區維護19,350</td></tr>
+        <tr><td>2025-11</td><td>424,622</td><td>441,222</td><td class="tn">−16,600</td><td>60,000</td><td>−3.91%</td><td>社區維護24,000＋雜項10,371</td></tr>
+        <tr><td>2025-12</td><td>444,974</td><td>472,657</td><td class="tn">−27,683</td><td>60,000</td><td>−6.22%</td><td>空調年保51,000＋年度保險11,030</td></tr>
+        <tr><td>2026-01</td><td>514,166</td><td>420,880</td><td class="tp">+93,286</td><td>60,000</td><td>18.14%</td><td>氣候行動獎勵金90,000入帳；AED年租15,120；管服費調漲至126,000</td></tr>
+        <tr><td>2026-02</td><td>431,539</td><td>416,213</td><td class="tp">+15,326</td><td>60,000</td><td>3.55%</td><td>垃圾清運費調漲至10,500；春節簽核遞延（現金面）</td></tr>
+        <tr><td>2026-03</td><td>429,881</td><td>426,292</td><td class="tp">+3,589</td><td>60,000</td><td>0.83%</td><td>2月遞延費用付清，現金回歸真實水位</td></tr>
+        <tr><td>2026-04</td><td>426,633</td><td>443,000</td><td class="tn">−16,367</td><td>60,000</td><td>−3.84%</td><td>一次性工程支出合計24,810</td></tr>
+        <tr><td>2026-05</td><td>432,402</td><td>493,553</td><td class="tn">−61,151</td><td>60,000</td><td>−14.14%</td><td>修繕46,452＋消防缺失改善15,500</td></tr>
+        <tr><td>2026-06</td><td>427,379</td><td>440,784</td><td class="tn">−13,405</td><td>60,000</td><td>−3.14%</td><td>公安檢查14,390（三年一次）＋消防改善7,580</td></tr>
+        <tr class="tr-tot"><td>第四會計年度</td><td>5,284,366</td><td>5,303,616</td><td class="tn">−19,250</td><td>720,000</td><td>−0.36%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note info">
+    📌 <strong>維修基金視角：</strong>每月 60,000 維修基金提撥已計入費用，全年 72 萬是帳面虧損的最大緩衝。若以「現金實質累積」計算（損益＋維修提撥），本年度實際累積 <strong>+700,750 元</strong>，財務健康程度遠優於帳列損益 −19,250。
+  </div>
+  <div class="note amber">
+    🔍 <strong>獎勵金的一次性效果：</strong>2026年1月入帳的環保局氣候行動獎勵金 90,000 元為一次性收入。若排除此筆，本年度帳列損益為 −109,250 元——這才是評估「常態收支結構」時應看的基準。對照支出面，本年度一次性／年度集中支出（空調年保 51,000、公安檢查 14,390、消防改善 30,790、AED 年租 15,120 等）合計亦逾 11 萬，兩相對照，常態營運大致在損益兩平邊緣。
+  </div>
+</div>
+
+<!-- 02 損益走勢圖 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">02</span><span class="sec-title">損益月份走勢・雙軸視覺化</span><span class="sec-rule"></span></div>
+  <div style="background:var(--white);border:1px solid var(--line);padding:20px;">
+    <div style="font-size:13px;letter-spacing:.14em;color:var(--wg9);margin-bottom:4px;">長條：本期損益（左軸）／折線：收入與費用（右軸）</div>
+    <div class="ch"><canvas id="trend-chart"></canvas></div>
+  </div>
+  <div class="note info">
+    📊 收入線全年平穩（42.4～45.2 萬），僅 2026/01 因獎勵金跳高至 51.4 萬。費用線的三個高峰：2025/08（49.9 萬，設備集中維修）、2025/12（47.3 萬，空調年保＋保險）、2026/05（49.4 萬，修繕＋消防改善）——皆為可預期或事件性支出，非固定費失控。
+  </div>
+</div>
+
+<!-- 03 收入結構 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">03</span><span class="sec-title">收入結構分析・經常性 vs. 非常規 vs. 代收代付</span><span class="sec-rule"></span></div>
+  <div class="grid2">
+    <div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>收入科目</th><th>年度合計</th><th>月均</th><th>佔比</th><th>性質</th></tr></thead>
+          <tbody>
+            <tr><td>管理費收入</td><td>4,529,028</td><td>377,419</td><td>85.7%</td><td>固定</td></tr>
+            <tr><td>平面車位清潔費</td><td>470,400</td><td>39,200</td><td>8.9%</td><td>固定</td></tr>
+            <tr><td>利息收入</td><td>44,298</td><td>3,692</td><td>0.8%</td><td>固定</td></tr>
+            <tr><td>機車清潔費</td><td>36,000</td><td>3,000</td><td>0.7%</td><td>固定</td></tr>
+            <tr><td>充電樁收入（服務費）</td><td>19,800</td><td>1,650</td><td>0.4%</td><td>固定</td></tr>
+            <tr class="tr-note"><td>充電樁電費收入 ⚠</td><td>36,132</td><td>不定</td><td>0.7%</td><td>代收代付</td></tr>
+            <tr><td>回饋金收入</td><td>98,200</td><td>不定</td><td>1.9%</td><td>一次性為主（含獎勵金 90,000）</td></tr>
+            <tr><td>裝潢清潔費收入</td><td>34,500</td><td>不定</td><td>0.7%</td><td>非常規↓退場中</td></tr>
+            <tr><td>電梯/梯廳保護費</td><td>13,000</td><td>不定</td><td>0.2%</td><td>非常規↓退場中</td></tr>
+            <tr><td>公設/臨停/E-tag/影印</td><td>3,008</td><td>不定</td><td>0.1%</td><td>非常規</td></tr>
+            <tr class="tr-tot"><td>合計</td><td>5,284,366</td><td>440,364</td><td>100%</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-type"><span class="dot a"></span>充電樁電費：代收代付，不影響財報健康度</div>
+        <h3>不應與一般收入混合解讀</h3>
+        <p>充電樁電費收入是「向使用住戶收費後轉繳台電」的代收代付項目，對社區財務的實質盈虧<strong>不構成正向影響</strong>。<br><br>
+        本年度電費收入 36,132 元，對應的充電座電費支出計入「公共電費」科目（年度合計 40,336 元，其中絕大部分為充電座電費），兩者大致對沖。<br><br>
+        因台電結帳週期與社區向住戶收費時間不同步，月度損益中兩者金額不會完全對等，分析財報時應將此科目單獨觀察。</p>
+      </div>
+      <div class="note warn" style="margin-top:12px;">
+        ⚠ <strong>非常規收入持續退場：</strong>裝潢清潔費＋電梯/梯廳保護費本年度合計僅 47,500 元（上一曆年約 14.3 萬），退場趨勢如預期。常態收入結構已高度集中於管理費＋車位清潔費（合計 94.6%），收入可預測性提高，但也表示「靠零星收入補虧損」的空間已不存在。
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--white);border:1px solid var(--line);padding:20px;margin-top:12px;">
+    <div style="font-size:13px;letter-spacing:.14em;color:var(--wg9);margin-bottom:4px;">收入結構佔比（剔除充電樁電費代收代付）</div>
+    <div class="ch"><canvas id="income-pie"></canvas></div>
+  </div>
+</div>
+
+<!-- 04 費用結構 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">04</span><span class="sec-title">費用結構・固定費用壓力與年度集中支出</span><span class="sec-rule"></span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>費用科目</th><th>月標準</th><th>全年合計</th><th>類型</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>保全服務費</td><td>189,000</td><td>2,268,000</td><td>固定・每月</td><td>—</td></tr>
+        <tr><td>管理服務費</td><td>116,000→126,000</td><td>1,452,000</td><td>固定・每月</td><td>2026/01 起調漲 +10,000/月</td></tr>
+        <tr><td>維修基金提撥</td><td>60,000</td><td>720,000</td><td>固定・每月（計入費用）</td><td>—</td></tr>
+        <tr><td>電梯維護費</td><td>12,870</td><td>154,440</td><td>固定・每月</td><td>—</td></tr>
+        <tr><td>垃圾清運費</td><td>9,450→10,500</td><td>118,650</td><td>固定・每月</td><td>2026/02 起調漲 +1,050/月</td></tr>
+        <tr><td>機電保養費</td><td>4,600</td><td>55,200</td><td>固定・每月</td><td>—</td></tr>
+        <tr><td>修繕費</td><td>不定</td><td>116,530</td><td>變動・無規律</td><td>高峰：2025/08 41,299・2026/05 46,452</td></tr>
+        <tr><td>社區維護</td><td>不定</td><td>92,450</td><td>變動・無規律</td><td>高峰：2025/08 42,000</td></tr>
+        <tr><td>園藝維護費</td><td>7,500</td><td>67,500</td><td>近固定（部分月份遞延）</td><td>—</td></tr>
+        <tr><td>空調年度保養</td><td>—</td><td>51,000</td><td>年度一次・12月</td><td>12月集中</td></tr>
+        <tr><td>公共電費</td><td>不定</td><td>40,336</td><td>變動</td><td>絕大部分為充電座電費（代收代付對應）</td></tr>
+        <tr><td>消防申報/缺失改善</td><td>—</td><td>30,790</td><td>年度法定＋事件</td><td>集中於 2026/05–06</td></tr>
+        <tr><td>AED租賃</td><td>—</td><td>15,120</td><td>年度一次・1月</td><td>1月集中</td></tr>
+        <tr><td>公安申報/缺失改善</td><td>—</td><td>14,390</td><td>三年一次・法定</td><td>2026/06；下次 2029 年 Q1</td></tr>
+        <tr><td>保險費</td><td>—</td><td>12,878</td><td>年度集中</td><td>12月為主</td></tr>
+        <tr><td>其他（清潔/文具/電信/雜項等）</td><td>不定</td><td>94,332</td><td>變動小額</td><td>清潔用品 22,885・雜項 20,020・電信 13,165 等</td></tr>
+        <tr class="tr-tot"><td>六大固定費小計（調漲後）</td><td>402,970/月</td><td>4,768,290</td><td>—</td><td>保全＋管服＋提撥＋電梯＋垃圾＋機電</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note warn">
+    ⚠ <strong>固定費用壓力評估：</strong>經過本年度兩次調漲（管服費 +10,000/月、垃圾費 +1,050/月），六大固定費已達每月 <strong>402,970 元</strong>；月均經常性收入（管理費＋車位＋機車＋充電樁服務費＋利息，剔除代收代付與一次性）約 <strong>425,000 元</strong>，固定費後的緩衝空間僅約 <strong>22,000 元／月</strong>——較上一曆年報告估算的 5.2～6.2 萬元明顯縮減。任何單月超過此金額的臨時支出（修繕、維護、年度費用）必然造成帳面虧損；本年度 6 個虧損月全數屬於此類，是結構使然而非管理失當，但緩衝變薄的趨勢應在費率檢討時正面面對。
+  </div>
+</div>
+
+<!-- 05 資產負債走勢 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">05</span><span class="sec-title">資產負債表走勢・現金與維修基金</span><span class="sec-rule"></span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>月底</th><th>資產總計</th><th>銀行活存</th><th>定期存款</th><th>維修基金</th><th>業主權益</th></tr></thead>
+      <tbody>
+        <tr><td>2025-06底（期初）</td><td>5,770,467</td><td>931,824</td><td>4,750,000</td><td>720,000</td><td>5,444,022</td></tr>
+        <tr><td>2025-07底</td><td>5,911,455</td><td>1,137,957</td><td>4,750,000</td><td>780,000</td><td>5,506,262</td></tr>
+        <tr><td>2025-08底</td><td>5,878,274</td><td>1,118,274</td><td>4,750,000</td><td>840,000</td><td>5,499,749</td></tr>
+        <tr><td>2025-09底</td><td>5,898,585</td><td>1,105,062</td><td>4,750,000</td><td>900,000</td><td>5,614,337</td></tr>
+        <tr><td>2025-10底</td><td>6,001,958</td><td>1,241,928</td><td>4,750,000</td><td>960,000</td><td>5,684,777</td></tr>
+        <tr><td>2025-11底</td><td>6,393,701</td><td>1,598,992</td><td>4,750,000</td><td>1,020,000</td><td>5,728,177</td></tr>
+        <tr><td>2025-12底</td><td>5,963,317</td><td>1,203,317</td><td>4,750,000</td><td>1,080,000</td><td>5,760,494</td></tr>
+        <tr><td>2026-01底</td><td>6,345,836</td><td>1,032,060</td><td>5,300,000</td><td>1,140,000</td><td>5,913,780</td></tr>
+        <tr><td>2026-02底</td><td>6,709,907</td><td>1,335,910</td><td>5,300,000</td><td>1,200,000</td><td>5,989,106</td></tr>
+        <tr><td>2026-03底</td><td>6,396,711</td><td>1,060,517</td><td>5,300,000</td><td>1,260,000</td><td>6,052,695</td></tr>
+        <tr><td>2026-04底</td><td>6,377,835</td><td>1,051,203</td><td>5,300,000</td><td>1,320,000</td><td>6,096,328</td></tr>
+        <tr><td>2026-05底</td><td>6,751,207</td><td>1,879,146</td><td>4,850,000</td><td>1,380,000</td><td>6,095,177</td></tr>
+        <tr><td>2026-06底（期末）</td><td>6,327,058</td><td>914,770</td><td>5,350,000</td><td>1,440,000</td><td>6,141,772</td></tr>
+        <tr class="tr-tot"><td>年度變化</td><td>▲+556,591</td><td>▼−17,054</td><td>▲+600,000</td><td>▲+720,000</td><td>▲+697,750</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note tip">
+    ✓ <strong>業主權益變動全額勾稽相符：</strong>期初 5,444,022 → 期末 6,141,772，增加 697,750 元 ＝ 帳列損益 −19,250 ＋ 維修基金提撥 +720,000 ＋ 期初開帳調整 −3,000（2024/12/24 場地押金退款，開帳時未列入，2025/07 補調整）。每一塊錢的來源都對得上。
+  </div>
+  <div class="grid2" style="margin-top:18px;">
+    <div class="card">
+      <div class="card-type"><span class="dot g"></span>業主權益成長</div>
+      <div class="card-big">+697,750 元</div>
+      <p>業主權益從 544 萬增至 614 萬。成長全數來自維修基金提撥的紀律性累積（+72 萬），帳列損益近乎打平（−19,250）。財務體質持續改善，但動力單一來源化。</p>
+    </div>
+    <div class="card">
+      <div class="card-type"><span class="dot b"></span>定存與現金配置</div>
+      <div class="card-big">定存 475萬 → 535萬</div>
+      <p>年度內定存淨增 60 萬（2026/01 轉入 55 萬、05 到期回轉 45 萬、06 再轉入 50 萬），閒置資金持續轉入定存生息，全年利息收入 44,298 元。活存維持在 90～190 萬區間週期波動（雙月付款節奏），無流動性疑慮。</p>
+    </div>
+  </div>
+  <div style="background:var(--white);border:1px solid var(--line);padding:20px;margin-top:18px;">
+    <div style="font-size:13px;letter-spacing:.14em;color:var(--wg9);margin-bottom:4px;">銀行活存 vs 維修基金累積走勢</div>
+    <div class="ch"><canvas id="cash-chart"></canvas></div>
+  </div>
+</div>
+
+<!-- 06 半期與季度分析 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">06</span><span class="sec-title">季度分析・可預測的壓力規律</span><span class="sec-rule"></span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>季度</th><th>合計損益</th><th>季均損益</th><th>最佳月</th><th>最差月</th><th>主要特徵</th></tr></thead>
+      <tbody>
+        <tr><td>Q1（2025/07-09）</td><td class="tn">−6,685</td><td class="tn">−2,228</td><td>09月 +54,588</td><td>08月 −66,513</td><td>8月設備集中維修造成年度最大虧損</td></tr>
+        <tr><td>Q2（2025/10-12）</td><td class="tn">−33,843</td><td class="tn">−11,281</td><td>10月 +10,440</td><td>12月 −27,683</td><td>空調年保＋年度保險集中12月</td></tr>
+        <tr><td>Q3（2026/01-03）</td><td class="tp">+112,201</td><td class="tp">+37,400</td><td>01月 +93,286</td><td>03月 +3,589</td><td>獎勵金 9 萬拉高1月；扣除後季損益 +22,201</td></tr>
+        <tr><td>Q4（2026/04-06）</td><td class="tn">−90,923</td><td class="tn">−30,308</td><td>06月 −13,405</td><td>05月 −61,151</td><td>修繕＋消防＋公安三類支出連續三個月</td></tr>
+        <tr class="tr-tot"><td>第四會計年度</td><td class="tn">−19,250</td><td class="tn">−1,604</td><td>2026/01 +93,286</td><td>2025/08 −66,513</td><td>近乎打平，波動顯著</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2" style="margin-top:16px;">
+    <div class="card">
+      <div class="card-type"><span class="dot r"></span>結構性壓力月（年年重複）</div>
+      <h3>可預測、可預備</h3>
+      <p><strong>8月</strong>：暑期設備維修集中（本年度 −66,513，與上年同月同為全年最差）<br>
+      <strong>12月</strong>：空調年保 5.1 萬 ＋ 年度保險 1.1 萬<br>
+      <strong>5–6月</strong>：消防申報改善為年度法定；本年度另遇三年一次公安檢查（下次 2029 年 Q1）<br><br>
+      建議做法：於盈餘月份（1–3月）記錄「壓力月預備額」，以盈補虧，避免對單月虧損過度反應。</p>
+    </div>
+    <div class="card">
+      <div class="card-type"><span class="dot a"></span>Q3 高盈餘的一次性成分</div>
+      <h3>獎勵金不會年年有</h3>
+      <p>Q3 盈餘 +112,201 中，氣候行動獎勵金 90,000 元佔 80.2%。扣除後 Q3 實質盈餘 +22,201，與其他季度的虧損相抵後，常態年度損益約 −109,250。<br><br>
+      下一年度若無同級獎勵金收入，全年帳列虧損將直接浮現——這不是惡化，而是本年度被一次性收入遮蓋的既有結構。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 07 重大支出事件 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">07</span><span class="sec-title">重大支出事件・逐月追蹤</span><span class="sec-rule"></span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>時間</th><th>事項</th><th>金額</th><th>科目</th><th>影響</th></tr></thead>
+      <tbody>
+        <tr><td>2025-08</td><td>信盛 9F金屬欄杆/1F不鏽鋼蓋板</td><td>35,000</td><td>社區維護</td><td style="color:var(--red)">8月虧損主因之一</td></tr>
+        <tr><td>2025-08</td><td>潤泰物業 B2F2 定位水閥更換</td><td>25,200</td><td>修繕費</td><td style="color:var(--red)">8月虧損主因之一</td></tr>
+        <tr><td>2025-08</td><td>詮越 UPS電池更換及檢修</td><td>11,500</td><td>修繕費</td><td style="color:var(--red)">8月虧損主因之一</td></tr>
+        <tr><td>2025-10</td><td>信盛 R3電梯機房百葉窗更換</td><td>17,850</td><td>社區維護</td><td>壓低10月盈餘</td></tr>
+        <tr><td>2025-11</td><td>梯廳保護板移設、大廳修繕</td><td>24,000</td><td>社區維護</td><td style="color:var(--amber)">11月虧損主因</td></tr>
+        <tr><td>2025-11</td><td>公務機採購（9,790）＋手機配件（581）</td><td>10,371</td><td>雜項支出</td><td>一次性採購</td></tr>
+        <tr><td>2025-12</td><td>君穎 114年度空調年保</td><td>51,000</td><td>空調保養費用</td><td style="color:var(--red)">12月虧損最大主因</td></tr>
+        <tr><td>2025-12</td><td>年度保險費（公意6,380＋商火4,650）</td><td>11,030</td><td>保險費</td><td style="color:var(--red)">12月虧損次因</td></tr>
+        <tr><td>2026-01</td><td>AED 年租費（115年度）</td><td>15,120</td><td>AED租賃</td><td>年度一次性</td></tr>
+        <tr><td>2026-01</td><td>環保局氣候行動獎勵金入帳</td><td style="color:var(--green)">+90,000</td><td>回饋金收入</td><td style="color:var(--green)">一次性收入，1月大幅盈餘主因</td></tr>
+        <tr><td>2026-04</td><td>一次性工程支出（兩筆）</td><td>24,810</td><td>修繕/維護</td><td style="color:var(--amber)">4月轉虧主因</td></tr>
+        <tr><td>2026-05</td><td>修繕工程（含 B4 風機零件等）</td><td>46,452</td><td>修繕費</td><td style="color:var(--red)">5月虧損主因之一</td></tr>
+        <tr><td>2026-05</td><td>太古工程 115年消防缺失改善</td><td>15,500</td><td>消防申報/缺失改善</td><td style="color:var(--red)">5月虧損主因之一</td></tr>
+        <tr><td>2026-06</td><td>大台北建築物 115年度公安檢查</td><td>14,390</td><td>公安申報/缺失改善</td><td style="color:var(--amber)">三年一次法定費用，下次 2029</td></tr>
+        <tr><td>2026-06</td><td>太古工程 消防缺失改善（續）</td><td>7,580</td><td>消防申報/缺失改善</td><td style="color:var(--amber)">6月虧損主因之一</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 08 下一年度展望 -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">08</span><span class="sec-title">第五會計年度展望・供區權會意見交流</span><span class="sec-rule"></span></div>
+  <div class="grid2">
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="card-type"><span class="dot g"></span>正面成果</div>
+      <h3>本年度的財務亮點</h3>
+      <p>
+        ① 維修基金累積達 <strong>144 萬元</strong>（年增 72 萬，紀律性提撥不中斷）。<br>
+        ② 業主權益從 544 萬增至 614 萬，<strong>增加 69.8 萬</strong>，且變動全額勾稽相符。<br>
+        ③ 定存增至 535 萬，年利息收入 44,298 元，閒置資金有效運用。<br>
+        ④ 收入結構高度穩定（管理費＋車位費佔 94.6%），可預測性提高。<br>
+        ⑤ 獲環保局氣候行動獎勵金 9 萬元肯定。
+      </p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card-type"><span class="dot r"></span>需正面面對</div>
+      <h3>坦誠揭露的財務挑戰</h3>
+      <p>
+        ① 帳列年度損益 <strong>−19,250 元</strong>（上一曆年 +44,570）；排除一次性獎勵金後常態結構約 <strong>−109,250 元</strong>。<br>
+        ② 固定費用經兩次調漲後達 402,970 元/月，經常性收入後緩衝僅約 <strong>2.2 萬元/月</strong>（上一曆年報告估算 5.2～6.2 萬）。<br>
+        ③ 非常規收入（裝潢相關）已如預期退場，靠零星收入補虧損的時代結束。<br>
+        ④ 6 個虧損月皆因臨時／年度集中支出，屬結構使然，但頻率已達一半月份。
+      </p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue);">
+      <div class="card-type"><span class="dot b"></span>費率策略</div>
+      <h3>2027 年費率調整的數字基礎</h3>
+      <p>
+        本年報提供費率檢討最直接的依據：常態年度損益約 −11 萬、月緩衝僅 2.2 萬。依長期財務模型的既有規劃（費率由每坪約 155 元調至 170 元），月管理費收入可增加約 37,000 元，緩衝空間回到接近 6 萬元水位。建議於下次區權人會議完成預告與意見交流，讓住戶有充足預期時間。
+      </p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--amber);">
+      <div class="card-type"><span class="dot a"></span>管委會優先行動</div>
+      <h3>第五會計年度待辦</h3>
+      <p>
+        ① 電梯主鋼纜等大型設備更新：以維修基金 144 萬為基礎評估資金規劃。<br>
+        ② 建立壓力月（8月、12月、5-6月）提前預備機制。<br>
+        ③ 2027 年費率調整於區權人會議完成預告。<br>
+        ④ 公安檢查三年週期（下次 2029 年 Q1）納入年度預算備忘。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span>閱大安管理委員會・第四會計年度財務年報（2025/07–2026/06）・資料依各月簽核版財報直接讀取</span>
+  <span>如有疑問請洽財務委員</span>
+</div>
+
+</div>
+
+<script>
+const FONT='Noto Sans TC';
+const months=['25/07','25/08','25/09','25/10','25/11','25/12','26/01','26/02','26/03','26/04','26/05','26/06'];
+const inc=[424001,432052,452339,444378,424622,444974,514166,431539,429881,426633,432402,427379];
+const exp=[418761,498565,397751,433938,441222,472657,420880,416213,426292,443000,493553,440784];
+const pft=[5240,-66513,54588,10440,-16600,-27683,93286,15326,3589,-16367,-61151,-13405];
+const cash=[1137957,1118274,1105062,1241928,1598992,1203317,1032060,1335910,1060517,1051203,1879146,914770];
+const maint=[780000,840000,900000,960000,1020000,1080000,1140000,1200000,1260000,1320000,1380000,1440000];
+
+new Chart(document.getElementById('trend-chart'),{
+  type:'bar',
+  data:{labels:months,datasets:[
+    {type:'bar',label:'本期損益',data:pft,backgroundColor:pft.map(v=>v>=0?'rgba(31,92,56,.75)':'rgba(140,31,31,.75)'),borderColor:pft.map(v=>v>=0?'rgba(31,92,56,1)':'rgba(140,31,31,1)'),borderWidth:1,yAxisID:'y'},
+    {type:'line',label:'收入',data:inc,borderColor:'rgba(43,74,107,.9)',backgroundColor:'transparent',tension:.3,pointRadius:3,yAxisID:'y2'},
+    {type:'line',label:'費用',data:exp,borderColor:'rgba(140,31,31,.7)',backgroundColor:'transparent',tension:.3,pointRadius:3,borderDash:[4,3],yAxisID:'y2'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},scales:{
+    y:{position:'left',ticks:{font:{family:FONT,size:10},callback:v=>v>=0?'+'+v.toLocaleString():v.toLocaleString()}},
+    y2:{position:'right',ticks:{font:{family:FONT,size:10},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{drawOnChartArea:false}}
+  }}
+});
+
+new Chart(document.getElementById('income-pie'),{
+  type:'doughnut',
+  data:{
+    labels:['管理費 86.3%','車位清潔費 9.0%','回饋金(含獎勵金) 1.9%','利息收入 0.8%','機車清潔費 0.7%','裝潢清潔費 0.7%','充電樁服務費 0.4%','其他 0.3%'],
+    datasets:[{data:[4529028,470400,98200,44298,36000,34500,19800,16008],backgroundColor:['rgba(26,74,107,.8)','rgba(184,134,11,.7)','rgba(26,107,60,.7)','rgba(100,60,180,.6)','rgba(122,118,112,.6)','rgba(200,100,50,.6)','rgba(26,107,60,.45)','rgba(150,150,150,.5)'],borderWidth:1}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}}}}
+});
+
+new Chart(document.getElementById('cash-chart'),{
+  type:'line',
+  data:{labels:months,datasets:[
+    {label:'銀行活存',data:cash,borderColor:'rgba(43,74,107,.9)',backgroundColor:'rgba(43,74,107,.08)',tension:.3,pointRadius:4,fill:true},
+    {label:'維修基金累積',data:maint,borderColor:'rgba(31,92,56,.9)',backgroundColor:'rgba(31,92,56,.08)',tension:.3,pointRadius:4,fill:true}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},scales:{y:{ticks:{font:{family:FONT,size:10},callback:v=>(v/10000).toFixed(0)+'萬'}}}}
+});
+</script>
