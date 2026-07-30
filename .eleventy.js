@@ -48,7 +48,20 @@ module.exports = function(eleventyConfig) {
       const pd = i.data && i.data.publishDate;
       return pd ? new Date(String(pd).replace(/\//g, '-')) : i.date;
     };
-    return [...items].sort((a, b) => effDate(b) - effDate(a));
+    // 同日發布多篇時（例：6月月報與年度年報同天上線），用 frontmatter 的
+    // publishOrder 決勝：數字大的排前面（視為較晚發布），未填視為 0
+    return [...items].sort((a, b) => {
+      const d = effDate(b) - effDate(a);
+      if (d) return d;
+      return ((b.data && b.data.publishOrder) || 0) - ((a.data && a.data.publishOrder) || 0);
+    });
+  });
+
+  // ── 財報列表：取第一個「非年報」項目的 permalink（月報卡的 latest 標記用，
+  //    年報 analysis-card 插在最前面時月報的最新強調不能跟著消失）──
+  eleventyConfig.addFilter("firstMonthlyPermalink", function(items) {
+    const it = (items || []).find(i => !String((i.data && i.data.permalink) || "").includes("annual"));
+    return it ? it.data.permalink : "";
   });
 
   // ── 日期格式化：YYYY-MM ──
@@ -164,9 +177,10 @@ module.exports = function(eleventyConfig) {
     const items = collectionApi.getFilteredByTag("finance").reverse();
     const byYear = {};
     items.forEach(n => {
-      // 從 permalink 抓 YYYY（例：/finance/2026-03.html → 2026, /finance/2025-annual.html → 2025）
+      // 從 permalink 抓 YYYY（例：/finance/2026-03.html → 2026, /finance/2025-annual.html → 2025）；
+      // 檔名沒有年份的（例：fy4-annual.html）改用頁面 date 的年份歸組
       const m = (n.data.permalink || '').match(/\/finance\/(\d{4})/);
-      const y = m ? m[1] : 'other';
+      const y = m ? m[1] : (n.date ? String(n.date.getFullYear()) : 'other');
       (byYear[y] = byYear[y] || []).push(n);
     });
     return Object.keys(byYear).sort().reverse().map(y => ({ year: y, items: byYear[y] }));
