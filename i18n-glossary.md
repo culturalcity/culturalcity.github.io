@@ -189,6 +189,7 @@
 | 冠駿潔境（洗水塔） | Crownjun Cleaning Services | 冠駿潔境 |
 | 綠石園藝 | Emerald Co. | 綠石園芸 |
 | 信創營造 | Trust Creating Co. | 信創建設 |
+| 信盛工程（2026-08 B4F 複壁修繕施工方） | Trust Same Construction | 信盛工程 |
 | 新美齊（物業/清潔） | Jean Property Management Co. | 新美齊 |
 | 潤泰維護（現任物業） | Ruentex Maintenance | 潤泰維護 |
 | 敦寶建設（建設公司；首屆副主委、2025 外牆修繕施工方） | Dunbao Construction | 敦寶建設 |
@@ -213,6 +214,8 @@
 | 一樓店面招牌位 | Designated Signage Zone | 指定看板エリア |
 | 室內隔間 / 輕隔間 | Interior Partition / Lightweight Partition | 室内間仕切り／軽量間仕切り |
 | 承重牆 | Load-Bearing Wall | 耐力壁 |
+| 連續壁（地下室擋土結構牆） | Diaphragm Wall | 連続壁 |
+| 複壁（連續壁室內側裝飾牆，牆後有排水溝） | Double Wall | 二重壁 |
 | 建築法 | Building Act | 建築法 |
 | 建築法第 77-2 條 | Article 77-2 of the Building Act | 建築法第77-2条 |
 | 建築法第 95-1 條 | Article 95-1 of the Building Act | 建築法第95-1条 |
@@ -304,6 +307,8 @@
 **2026-07-07 修訂（Notion 歷史公告回填 2022-07～2025-06）**：新增——A梯／B梯（Staircase A / Staircase B／A階段／B階段，沿任內舊譯）、五府宮（Wufu Temple／五府宮）、敦寶建設（Dunbao Construction，**暫定**音譯，主委尚未確認官方英名）、今網寬頻（**Kingnet**／今網（Kingnet），主委定案）、凱擘（Kbro）、中嘉（**Homeplus Digital**，主委定案）。歷史公告翻譯原則：任內（2023/07–2024/06）公告內文既有三語＝權威來源可沿用；歷史公告中文保留當時用語（如「閱覽室」），英日文採本表現行 canonical。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（待同步）。
 
 **2026-07-10 修訂（巴威颱風公告）**：日文稱呼颱風改採**編號優先**慣例（主委指示）——寫法「台風N号（カタカナ名）」，N＝日本気象庁當年編號（例：2026 巴威＝台風9号（バービー）；2025 丹娜絲前例已用 台風4号ダナス）。標題句型「台風[名]への備え」改為「台風N号（[名]）への備え」。歷史公告（小犬 台風コイヌへの備え 等）保留不回改。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（見當日同步紀錄）。
+
+**2026-07-31 修訂（8月保養公告・B4F 複壁修繕）**：新增——信盛工程（**Trust Same Construction**，主委提供官方英名 trustsame.com.tw／日文保留漢字 信盛工程）、複壁（**Double Wall**／**二重壁**，主委定案；日文「二重壁」為日本地下室排水工法標準用語，英文候選 drained cavity wall 未採、取平易直譯）、連續壁（Diaphragm Wall／連続壁，通用工程詞）。語境：複壁＝連續壁室內側裝飾牆，兩牆間排水溝導引連續壁滲水。同步狀態：① repo canonical ✅、② Notion、③ Obsidian（見當日同步紀錄）。
 
 **待最後統一回改全站（含 src/notice 公告）**，使其與本表一致，重點：
 - 環保室日文 エコルーム／環境室 → ゴミ置き場；英文 → Garbage Room
