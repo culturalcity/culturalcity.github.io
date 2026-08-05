@@ -5,7 +5,7 @@ title: 地下停車場防火鐵捲門「無火警誤降」事件
 docTitle: 事件記錄
 eyebrow: CULTURAL CITY · INCIDENT LOG
 headerSub: 閱大安管理委員會・委員與總幹事參考　｜　根本原因追蹤中
-lastUpdate: 2026-06-08
+lastUpdate: '2026-06-08'
 eleventyExcludeFromCollections: true
 ---
 

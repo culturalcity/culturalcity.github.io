@@ -3,7 +3,7 @@ layout: handbook.njk
 permalink: /admin/staff/pm-wiki/index.html
 title: 閱大安總幹事 Wiki
 docTitle: 總幹事 Wiki
-lastUpdate: 2026-05-21
+lastUpdate: '2026-05-21'
 eleventyExcludeFromCollections: true
 ---
 # 前言

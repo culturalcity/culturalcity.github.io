@@ -5,7 +5,7 @@ title: 防空演習門禁戒護 SOP（8/13 城鎮韌性演習）
 docTitle: 當天作業程序
 eyebrow: CULTURAL CITY · STAFF SOP
 headerSub: 閱大安管理委員會・總幹事與保全作業　｜　2026/08/13 城鎮韌性（全民防空）演習
-lastUpdate: 2026-07-02
+lastUpdate: '2026-07-02'
 eleventyExcludeFromCollections: true
 ---
 
