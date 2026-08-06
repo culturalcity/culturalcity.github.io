@@ -1,0 +1,573 @@
+---
+layout: finance.njk
+permalink: /finance/2026-07.html
+title: 2026年7月 財務月報
+date: 2026-07-31
+draft: true
+eleventyExcludeFromCollections: true
+summary: '本期損益 −34,496 元（修繕 5 筆與燈管汰換集中入帳；排除後接近損益兩平）'
+---
+<div class="header">
+  <div class="header-row">
+    <div>
+      <h1>閱大安・財務月報分析</h1>
+      <div class="period">2026年7月 ／ 2026-07-01 ～ 2026-07-31</div>
+    </div>
+    <div class="header-right">
+      繁體中文 ／ 新台幣 NTD<br>
+      內部審閱版（尚待簽核）
+    </div>
+  </div>
+</div>
+
+
+<div class="tabs no-print">
+  <div class="tab active" onclick="sw('overview')">📊 總覽</div>
+  <div class="tab" onclick="sw('mom')">📈 環比分析</div>
+  <div class="tab" onclick="sw('yoy')">📅 同比分析</div>
+  <div class="tab" onclick="sw('bs')">🏦 資產負債</div>
+  <div class="tab" onclick="sw('summary')">📋 財務總結</div>
+</div>
+
+<div class="main">
+
+<div style="margin:0 0 26px;padding:14px 18px;background:#FDF6E3;border:1px solid #E0C97F;border-left:4px solid #B8860B;border-radius:8px;font-size:14.5px;line-height:1.8;color:#6B5A2E">
+  🔍 <strong>內部審閱版・尚待簽核</strong>——本頁僅供管理委員會內部瀏覽（不在網站列表顯示），
+  數字以簽核完成之正式報表為準；簽核完成後將正式發布並列入財務月報列表。
+</div>
+
+<!-- ══ TAB: 總覽 ══ -->
+<div id="tab-overview" class="tab-content active">
+
+  <div class="kpi-row">
+    <div class="kpi-card g">
+      <div class="kpi-title">本月損益</div>
+      <div class="kpi-val neg">−34,496</div>
+      <div class="badge dn">▼ 較上月 −21,091（虧損擴大）</div>
+    </div>
+    <div class="kpi-card b">
+      <div class="kpi-title">總收入</div>
+      <div class="kpi-val">427,269</div>
+      <div class="badge nt">≈ 環比持平（−110）</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">總支出</div>
+      <div class="kpi-val">461,765</div>
+      <div class="badge dn">▲ 增加 +4.8%</div>
+    </div>
+    <div class="kpi-card gd">
+      <div class="kpi-title">現金+存款</div>
+      <div class="kpi-val">6,491,066</div>
+      <div class="badge up">▲ +2.9%（管理費入帳回升）</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">本月收入結構 <span class="tag">2026/07</span></div>
+      <div class="pb"><div class="ch"><canvas id="pie-income"></canvas></div></div>
+    </div>
+    <div class="panel">
+      <div class="ph">本月支出結構 <span class="tag">2026/07</span></div>
+      <div class="pb"><div class="ch"><canvas id="pie-expense"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">三期損益對比（2025/07 同期・2026/06 上月・2026/07 本月）</div>
+    <div class="pb"><div class="ch"><canvas id="bar-3period"></canvas></div></div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">現金及存款餘額趨勢</div>
+    <div class="pb"><div class="ch-sm"><canvas id="line-cash"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ══ TAB: 環比 ══ -->
+<div id="tab-mom" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card g">
+      <div class="kpi-title">損益環比</div>
+      <div class="kpi-val neg">−34,496</div>
+      <div class="badge dn">▼ −21,091 (虧損擴大)</div>
+    </div>
+    <div class="kpi-card b">
+      <div class="kpi-title">收入環比</div>
+      <div class="kpi-val">427,269</div>
+      <div class="badge nt">≈ −110 (−0.03%)</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">支出環比</div>
+      <div class="kpi-val">461,765</div>
+      <div class="badge dn">▲ 多支出 20,981 (+4.8%)</div>
+    </div>
+    <div class="kpi-card gd">
+      <div class="kpi-title">現金+存款</div>
+      <div class="kpi-val">6,491,066</div>
+      <div class="badge up">▲ +181,919 (+2.9%)</div>
+    </div>
+  </div>
+
+  <div class="sl">損益表環比明細</div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">收入項目環比 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2026/06</th><th>2026/07</th><th>差異</th><th>環比</th></tr></thead>
+          <tbody>
+            <tr><td>管理費收入</td><td>377,419</td><td>377,419</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>平面車位清潔費</td><td>39,200</td><td>39,200</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電樁收入</td><td>1,650</td><td>1,650</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電樁電費收入</td><td>2,406</td><td>3,103</td><td class="dp">+697</td><td class="dp">▲ +29.0%</td></tr>
+            <tr><td>機車清潔費</td><td>2,800</td><td>2,800</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>利息收入</td><td>3,304</td><td>2,997</td><td class="dn2">−307</td><td class="dn2">▼ −9.3%</td></tr>
+            <tr><td>回饋金收入</td><td>600</td><td>—</td><td class="dn2">−600</td><td class="dn2">消除</td></tr>
+            <tr><td>E-tag收入</td><td>—</td><td>100</td><td class="dp">+100</td><td class="dp">新增</td></tr>
+            <tr class="tot"><td>收入合計</td><td>427,379</td><td>427,269</td><td class="dz">−110</td><td class="dz">≈ 持平</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">支出項目環比 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2026/06</th><th>2026/07</th><th>差異</th><th>環比</th></tr></thead>
+          <tbody>
+            <tr><td>保全服務費</td><td>189,000</td><td>189,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>管理服務費</td><td>126,000</td><td>126,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>電梯維護費</td><td>12,870</td><td>12,870</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>垃圾清運費</td><td>10,500</td><td>10,500</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>機電保養費</td><td>4,600</td><td>4,600</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>園藝維護費</td><td>7,500</td><td>7,500</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>公共電費</td><td>3,465</td><td>2,479</td><td class="dp">−986</td><td class="dp">▼ −28.5%</td></tr>
+            <tr><td>公共水費</td><td>—</td><td>648</td><td class="dn2">+648</td><td class="dn2">雙月週期</td></tr>
+            <tr><td>修繕費</td><td>—</td><td>29,965</td><td class="dn2">+29,965</td><td class="dn2">新增</td></tr>
+            <tr><td>電信費</td><td>1,019</td><td>973</td><td class="dp">−46</td><td class="dp">▼ −4.5%</td></tr>
+            <tr><td>文具用品</td><td>266</td><td>—</td><td class="dp">−266</td><td class="dp">消除</td></tr>
+            <tr><td>郵電費</td><td>—</td><td>30</td><td class="dn2">+30</td><td class="dn2">新增</td></tr>
+            <tr><td>雜項支出</td><td>54</td><td>2,088</td><td class="dn2">+2,034</td><td class="dn2">▲ 大幅增加</td></tr>
+            <tr><td>手續費</td><td>320</td><td>520</td><td class="dn2">+200</td><td class="dn2">▲ +62.5%</td></tr>
+            <tr><td>機電耗材</td><td>3,220</td><td>14,592</td><td class="dn2">+11,372</td><td class="dn2">▲ +353.2%</td></tr>
+            <tr><td>消防申報/缺失改善</td><td>7,580</td><td>—</td><td class="dp">−7,580</td><td class="dp">消除</td></tr>
+            <tr><td>公安申報/缺失改善</td><td>14,390</td><td>—</td><td class="dp">−14,390</td><td class="dp">消除</td></tr>
+            <tr><td>維修基金提撥</td><td>60,000</td><td>60,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr class="tot"><td>支出合計</td><td>440,784</td><td>461,765</td><td class="dn2">+20,981</td><td class="dn2">▲ +4.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">收支環比視覺化</div>
+    <div class="pb"><div class="ch"><canvas id="mom-bar"></canvas></div></div>
+  </div>
+
+  <div class="sl">說明</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:15px;line-height:2;color:var(--ink2)">
+      <p>• <strong>本月損益 −34,496 元（環比虧損擴大 21,091）</strong>：上月的公安檢查與消防改善兩筆法定費用（合計 21,970 元）本月歸零，但新增修繕費 29,965 元與機電耗材 14,592 元兩塊集中支出，支出合計增至 461,765 元（+4.8%）。</p>
+      <p>• <strong>修繕費 29,965 元共 5 筆，全數為設備故障維修</strong>：B4F 揚水泵浦防震軟管故障更新 13,440（太古機電）、貨梯攝影機纜線更換施工 7,500、攝影機移機螢幕重新設定 6,000、陽極鎖更新 2,500（以上詮越）、6F 梯間火警探測器故障更新 525（太古機電）。單筆金額不大、筆數較多。</p>
+      <p>• <strong>機電耗材 14,592 元</strong>：主體為舞光 T5 支架燈批次汰換採購——二尺 25 支 4,000 元＋四尺 50 支 9,000 元（福昱國際，合計 13,000）；另有水管工具組 1,072 元與微波感應器 520 元。</p>
+      <p>• <strong>公共電費 2,479 元（環比 −28.5%）</strong>：本月僅入帳一筆 B3 公共電動車充電座電費；充電樁電費收入 3,103 元已完全覆蓋本筆支出（收大於支 +624 元）。</p>
+      <p>• <strong>公共水費 648 元（雙月週期）</strong>：計費期間 5/05～6/29，與去年同期 638 元相當，維持極低水準。</p>
+      <p>• <strong>雜項支出 2,088 元</strong>：櫃台監視器螢幕 1,988 元＋管委會印鑑變更手續費 100 元。郵電費 30 元為年度氣候行動獎參賽郵資。</p>
+      <p>• <strong>收入端幾近持平（−110 元）</strong>：管理費 377,419、車位清潔費 39,200、充電樁收入 1,650、機車清潔費 2,800 全數不變；充電樁電費收入 +697、利息收入 −307、上月的年度回饋金 600 歸零、新增 E-tag 收入 100。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 同比 ══ -->
+<div id="tab-yoy" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card r">
+      <div class="kpi-title">損益同比</div>
+      <div class="kpi-val neg">−34,496</div>
+      <div class="badge dn">▼ −39,736 (去年同期為盈餘)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">收入同比</div>
+      <div class="kpi-val">427,269</div>
+      <div class="badge up">▲ +3,268 (+0.8%)</div>
+    </div>
+    <div class="kpi-card r">
+      <div class="kpi-title">支出同比</div>
+      <div class="kpi-val">461,765</div>
+      <div class="badge dn">▲ 多支出 43,004 (+10.3%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">現金+存款同比</div>
+      <div class="kpi-val">6,491,066</div>
+      <div class="badge up">▲ +588,483 (+10.0%)</div>
+    </div>
+  </div>
+
+  <div class="sl">損益表同比明細</div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">收入項目同比 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2025/07</th><th>2026/07</th><th>差異</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>管理費收入</td><td>377,419</td><td>377,419</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>平面車位清潔費</td><td>39,200</td><td>39,200</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電樁收入</td><td>1,650</td><td>1,650</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>充電樁電費收入</td><td>—</td><td>3,103</td><td class="dp">+3,103</td><td class="dp">新增</td></tr>
+            <tr><td>機車清潔費</td><td>2,600</td><td>2,800</td><td class="dp">+200</td><td class="dp">▲ +7.7%</td></tr>
+            <tr><td>利息收入</td><td>2,844</td><td>2,997</td><td class="dp">+153</td><td class="dp">▲ +5.4%</td></tr>
+            <tr><td>E-tag收入</td><td>—</td><td>100</td><td class="dp">+100</td><td class="dp">新增</td></tr>
+            <tr><td>臨停清潔費收入</td><td>280</td><td>—</td><td class="dn2">−280</td><td class="dn2">消除</td></tr>
+            <tr><td>影印收入</td><td>8</td><td>—</td><td class="dn2">−8</td><td class="dn2">消除</td></tr>
+            <tr class="tot"><td>收入合計</td><td>424,001</td><td>427,269</td><td class="dp">+3,268</td><td class="dp">▲ +0.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">支出項目同比 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>2025/07</th><th>2026/07</th><th>差異</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>保全服務費</td><td>189,000</td><td>189,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>管理服務費</td><td>116,000</td><td>126,000</td><td class="dn2">+10,000</td><td class="dn2">▲ +8.6%</td></tr>
+            <tr><td>電梯維護費</td><td>12,870</td><td>12,870</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>垃圾清運費</td><td>9,450</td><td>10,500</td><td class="dn2">+1,050</td><td class="dn2">▲ +11.1%</td></tr>
+            <tr><td>機電保養費</td><td>4,600</td><td>4,600</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr><td>園藝維護費</td><td>15,000</td><td>7,500</td><td class="dp">−7,500</td><td class="dp">▼ −50.0%</td></tr>
+            <tr><td>公共電費</td><td>—</td><td>2,479</td><td class="dn2">+2,479</td><td class="dn2">新增</td></tr>
+            <tr><td>公共水費</td><td>638</td><td>648</td><td class="dn2">+10</td><td class="dn2">▲ +1.6%</td></tr>
+            <tr><td>修繕費</td><td>4,079</td><td>29,965</td><td class="dn2">+25,886</td><td class="dn2">▲ +634.6%</td></tr>
+            <tr><td>電信費</td><td>1,182</td><td>973</td><td class="dp">−209</td><td class="dp">▼ −17.7%</td></tr>
+            <tr><td>郵電費</td><td>—</td><td>30</td><td class="dn2">+30</td><td class="dn2">新增</td></tr>
+            <tr><td>雜項支出</td><td>—</td><td>2,088</td><td class="dn2">+2,088</td><td class="dn2">新增</td></tr>
+            <tr><td>手續費</td><td>545</td><td>520</td><td class="dp">−25</td><td class="dp">▼ −4.6%</td></tr>
+            <tr><td>機電耗材</td><td>—</td><td>14,592</td><td class="dn2">+14,592</td><td class="dn2">新增</td></tr>
+            <tr><td>清潔用品</td><td>5,397</td><td>—</td><td class="dp">−5,397</td><td class="dp">消除</td></tr>
+            <tr><td>維修基金提撥</td><td>60,000</td><td>60,000</td><td class="dz">0</td><td class="dz">—</td></tr>
+            <tr class="tot"><td>支出合計</td><td>418,761</td><td>461,765</td><td class="dn2">+43,004</td><td class="dn2">▲ +10.3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">同比視覺化對比</div>
+    <div class="pb"><div class="ch"><canvas id="yoy-bar"></canvas></div></div>
+  </div>
+
+  <div class="sl">說明</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:15px;line-height:2;color:var(--ink2)">
+      <p>• <strong>去年同期為盈餘 +5,240，本月轉為 −34,496（同比 −39,736）</strong>，差異來自三塊：① 結構性費用調漲——管理服務費 +10,000/月（2025/12 起）、垃圾清運費 +1,050/月（2026/02 起）；② 修繕費 +25,886——去年同期僅 4,079 元，本月 5 筆故障維修合計 29,965 元；③ 機電耗材 14,592 元——T5 支架燈批次汰換，去年同期無此採購。</p>
+      <p>• <strong>收入同比 +0.8%</strong>：核心收入完全持平，增量來自充電樁電費收入 3,103 元（去年 7 月尚未開始收取）；去年的臨停清潔費、影印等零星收入已歸零。</p>
+      <p>• <strong>園藝維護費 7,500 元，較去年同期 15,000 元減半</strong>：本月為常態月費水準。</p>
+      <p>• <strong>財務儲備同比持續成長</strong>：現金+存款 6,491,066 元，較去年同期增加 588,483 元（+10.0%）；維修基金累計 1,500,000 元，較去年同期 780,000 元增加 +92.3%，中長期財務韌性持續提升。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 資產負債 ══ -->
+<div id="tab-bs" class="tab-content">
+
+  <div class="kpi-row">
+    <div class="kpi-card b">
+      <div class="kpi-title">資產總計</div>
+      <div class="kpi-val">6,491,066</div>
+      <div class="badge up">▲ +164,008 (+2.6%)</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">流動負債</div>
+      <div class="kpi-val">323,790</div>
+      <div class="badge dn">▲ +138,504（預收款增加）</div>
+    </div>
+    <div class="kpi-card g">
+      <div class="kpi-title">業主權益</div>
+      <div class="kpi-val">6,167,276</div>
+      <div class="badge up">▲ +25,504 (+0.4%)</div>
+    </div>
+    <div class="kpi-card gd">
+      <div class="kpi-title">維修基金累計</div>
+      <div class="kpi-val">1,500,000</div>
+      <div class="badge up">▲ +60,000（月提撥）</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">資產結構 <span class="tag g">2026/07</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>金額</th><th>比率</th><th>vs 上月</th></tr></thead>
+          <tbody>
+            <tr><td>零用金</td><td>10,000</td><td>0.15%</td><td class="dz">—</td></tr>
+            <tr><td>在途未入帳-智生活</td><td>—</td><td>—</td><td class="dp">−34,377（已入帳）</td></tr>
+            <tr><td>應收帳款</td><td>—</td><td>—</td><td class="dp">−17,911（已收回）</td></tr>
+            <tr><td>銀行存款（活存）</td><td>1,131,066</td><td>17.42%</td><td class="dp">+216,296</td></tr>
+            <tr><td>　永豐#31219</td><td>553,220</td><td>8.52%</td><td class="dp">+154,335</td></tr>
+            <tr><td>　永豐#31202(公共)</td><td>531,642</td><td>8.19%</td><td class="dp">+60,287</td></tr>
+            <tr><td>　永豐#33932(充電樁)</td><td>46,204</td><td>0.71%</td><td class="dp">+1,674</td></tr>
+            <tr><td>定期存款</td><td>5,350,000</td><td>82.42%</td><td class="dz">—</td></tr>
+            <tr><td>　永豐#31219</td><td>1,700,000</td><td>26.19%</td><td class="dz">—</td></tr>
+            <tr><td>　永豐#31202</td><td>3,650,000</td><td>56.23%</td><td class="dz">—</td></tr>
+            <tr class="tot"><td>資產總計</td><td>6,491,066</td><td>100%</td><td class="dp">+164,008</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">負債與業主權益 <span class="tag g">2026/07</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>科目</th><th>金額</th><th>比率</th></tr></thead>
+          <tbody>
+            <tr><td>預收款項</td><td>196,590</td><td>3.03%</td></tr>
+            <tr><td>存入-裝潢保證金</td><td>100,000</td><td>1.54%</td></tr>
+            <tr><td>存入-裝潢清潔費</td><td>24,000</td><td>0.37%</td></tr>
+            <tr><td>存入-機車押金</td><td>3,200</td><td>0.05%</td></tr>
+            <tr class="tot"><td>負債總計</td><td>323,790</td><td>4.99%</td></tr>
+            <tr><td>公共管理基金</td><td>1,920,799</td><td>29.59%</td></tr>
+            <tr><td>維修基金提撥</td><td>1,500,000</td><td>23.11%</td></tr>
+            <tr><td>累積盈虧</td><td>2,780,973</td><td>42.84%</td></tr>
+            <tr><td>本期損益</td><td class="dn2">−34,496</td><td>−0.53%</td></tr>
+            <tr class="tot"><td>業主權益總計</td><td>6,167,276</td><td>95.01%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mb">
+    <div class="ph">三期資產規模趨勢</div>
+    <div class="pb"><div class="ch-sm"><canvas id="bs-trend"></canvas></div></div>
+  </div>
+
+  <div class="panel mb">
+    <div class="pb" style="font-size:15px;line-height:2;color:var(--ink2)">
+      <p>• <strong>應收與在途全數歸零，資產品質乾淨</strong>：上月的應收帳款 17,911 元（住戶未繳款）本月全數收回，在途未入帳-智生活 34,377 元亦於月初入帳。本月資產總計 6,491,066 元全數為現金與存款，無任何應收掛帳。</p>
+      <p>• <strong>活存回升至 113.1 萬（+216,296）</strong>：驗證上月的預期——6 月底活存 91.5 萬為雙月付款集中的季節性低點，7 月管理費入帳後回升。本月現金實付僅 401,765 元（單月常態帳款，無上月的雙月集中支付），收入現金流入 583,684 元（含住戶預繳）。</p>
+      <p>• <strong>預收款項由 58,086 增至 196,590 元（+138,504）</strong>：本月住戶預繳管理費 146,386 元（10 筆）、沖抵 7,882 元。流動負債 +74.8% 全數來自預收款——這是住戶提前繳費形成的帳面負債，不是對外欠款。</p>
+      <p>• <strong>業主權益 +25,504 元的組成</strong>：本月損益 −34,496 ＋ 維修基金月提撥 +60,000 ＝ +25,504。權益 6,167,276 元（占總資產 95.01%）。</p>
+      <p>• <strong>「現金+存款」口徑說明</strong>：本站現金+存款＝零用金＋在途未入帳＋活存＋定存＝ 6,491,066 元；本月應收與在途皆為零，故與資產總計相同。</p>
+      <p>• <strong>維修基金累計達 150 萬</strong>：本月再提撥 6 萬，較去年同期 78 萬增加 +92.3%，中長期財務儲備持續累積。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 財務總結 ══ -->
+<div id="tab-summary" class="tab-content">
+
+  <div class="sumbox">
+    <h3>▌ 閱大安・2026年7月財務月報總結（內部審閱版）</h3>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>收入表現：</strong>本月總收入 427,269 元，較上月僅減少 110 元（幾近持平），較去年同期增加 3,268 元（+0.8%）。核心收入（管理費 377,419 + 車位清潔費 39,200 + 充電樁 1,650）合計 418,269 元、佔總收入 97.9%，連續多月完全穩定；同比增量主要來自去年尚未開收的充電樁電費收入 3,103 元。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>支出控管：</strong>本月總支出 461,765 元，較上月增加 20,981 元（+4.8%），較去年同期增加 43,004 元（+10.3%）。增加主因兩塊：修繕費 29,965 元（5 筆設備故障維修）與機電耗材 14,592 元（T5 支架燈批次汰換為主）；上月的公安檢查與消防改善（合計 21,970 元）本月歸零。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>財務結果：</strong>本月損益 <strong style="color:#B3261E">−34,496 元</strong>。若排除修繕費 29,965 元（5 筆皆為故障維修、非常態支出），營運為 −4,531 元；若再排除 T5 燈管批次汰換 13,000 元，則為 <strong style="color:#1F5C38">+8,469 元</strong>，常態收支結構仍接近損益兩平。期末現金+存款 6,491,066 元，環比 +2.9%（管理費入帳回升）、同比 +10.0%。</span>
+    </div>
+    <div class="si"><span class="bul">◆</span>
+      <span><strong>資產負債：</strong>資產總計 6,491,066 元，業主權益 6,167,276 元（佔比 95.01%），負債 323,790 元（4.99%，其中預收款項 196,590 元屬住戶提前繳費）。應收帳款與在途款全數歸零，資產全數為現金與存款；定期存款 535 萬持平，維修基金累計 1,500,000 元（同比 +92.3%），中長期儲備充裕。</span>
+    </div>
+    <div class="ok">✓ 整體評估：本月帳列虧損 −34,496 元，主要係 5 筆設備故障維修與燈管批次汰換集中入帳；剔除後常態營運接近損益兩平。收入端完全穩定、應收全數收回、現金部位同比 +10.0%，整體財務體質穩健。</div>
+    <div class="alert">⚠ 注意事項：(1) 結構性費用（管服費 +10,000/月、垃圾費 +1,050/月）持續墊高每月固定支出，常態月份損益兩平空間變薄；(2) 本月修繕 5 筆皆為設備故障更新（泵浦軟管、火警探測器、監視設備、陽極鎖），單筆不大但筆數較多，後續維修頻率值得觀察；(3) 預收款項 196,590 元將於後續月份按月沖抵，屬正常週期。</div>
+  </div>
+
+  <div class="sl">詳細版</div>
+  <div class="grid3">
+    <div class="panel">
+      <div class="ph">環比重點 <span class="tag">MoM</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>指標</th><th>上月</th><th>本月</th><th>變動</th></tr></thead>
+          <tbody>
+            <tr><td>總收入</td><td>427,379</td><td>427,269</td><td class="dz">≈ 持平</td></tr>
+            <tr><td>總支出</td><td>440,784</td><td>461,765</td><td class="dn2">▲ +4.8%</td></tr>
+            <tr><td>本期損益</td><td class="dn2">−13,405</td><td class="dn2">−34,496</td><td class="dn2">▼ 虧損擴大</td></tr>
+            <tr><td>現金+存款</td><td>6,309,147</td><td>6,491,066</td><td class="dp">▲ +2.9%</td></tr>
+            <tr><td>資產總計</td><td>6,327,058</td><td>6,491,066</td><td class="dp">▲ +2.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">同比重點 <span class="tag b">YoY</span></div>
+      <div class="pb">
+        <table>
+          <thead><tr><th>指標</th><th>去年同期</th><th>本月</th><th>同比</th></tr></thead>
+          <tbody>
+            <tr><td>總收入</td><td>424,001</td><td>427,269</td><td class="dp">▲ +0.8%</td></tr>
+            <tr><td>總支出</td><td>418,761</td><td>461,765</td><td class="dn2">▲ +10.3%</td></tr>
+            <tr><td>本期損益</td><td class="dp">+5,240</td><td class="dn2">−34,496</td><td class="dn2">▼ 轉虧</td></tr>
+            <tr><td>現金+存款</td><td>5,902,583</td><td>6,491,066</td><td class="dp">▲ +10.0%</td></tr>
+            <tr><td>資產總計</td><td>5,911,455</td><td>6,491,066</td><td class="dp">▲ +9.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph">重大項目說明</div>
+      <div class="pb" style="font-size:15px;line-height:1.9;color:var(--ink2)">
+        <p>① 修繕費 29,965（5 筆故障維修：揚水泵浦軟管 13,440、詮越弱電三筆 16,000、火警探測器 525）</p>
+        <p>② 機電耗材 14,592（T5 支架燈批次汰換 13,000 為主）</p>
+        <p>③ 排除修繕後本月營運 −4,531；再排除燈管汰換為 +8,469</p>
+        <p>④ 應收帳款與在途款全數歸零，資產全數為現金與存款</p>
+        <p>⑤ 預收款項 +138,504（住戶預繳）；維修基金累計 150 萬（同比 +92.3%）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sl" style="margin-top:20px">精簡版</div>
+  <div class="panel mb">
+    <div class="pb" style="font-size:18px;line-height:2.2;color:var(--ink2)">
+      <p>📅 <strong>2026年7月・閱大安 財務摘要</strong></p>
+      <p>• 本月收入：<strong>427,269 元</strong>（管理費 377,419 / 車位清潔費 39,200 / 其他 10,650）</p>
+      <p>• 本月支出：<strong>461,765 元</strong>（保全 189,000 / 管服 126,000 / 維修基金提撥 60,000 / 修繕費 29,965 / 其他 56,800）</p>
+      <p>• 本月損益：<strong style="color:#c0392b">−34,496 元</strong>（排除 5 筆故障維修 29,965 後為 −4,531）</p>
+      <p>• 帳戶現金及存款餘額：<strong>6,491,066 元</strong>（環比 +2.9%，同比 +10.0%；應收與在途皆歸零）</p>
+      <p>• 維修基金累計：<strong>1,500,000 元</strong>（同比 +92.3%）</p>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+function sw(name){
+  const names=['overview','mom','yoy','bs','summary'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='overview')drawOverview();
+  if(name==='mom')drawMoM();
+  if(name==='yoy')drawYoY();
+  if(name==='bs')drawBS();
+}
+Chart.unregister(ChartDataLabels);
+
+const charts={};
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+const FONT='Noto Sans TC';
+const tickCb=v=>(v/10000).toFixed(0)+'萬';
+
+const pieLabel={
+  plugins:[ChartDataLabels],
+  responsive:true,maintainAspectRatio:false,
+  plugins:{
+    legend:{position:'right',labels:{font:{family:FONT,size:10},boxWidth:10}},
+    datalabels:{
+      color:'#fff',
+      font:{family:FONT,size:10,weight:'600'},
+      formatter:(val,ctx)=>{
+        const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+        const pct=(val/total*100);
+        return pct>=4?pct.toFixed(1)+'%':'';
+      },
+      anchor:'center',align:'center',
+      textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)'
+    }
+  }
+};
+
+function drawOverview(){
+  // Pie income
+  dc('pie-income');
+  charts['pie-income']=new Chart(document.getElementById('pie-income'),{
+    type:'doughnut',
+    plugins:[ChartDataLabels],
+    data:{labels:['管理費收入','車位清潔費','充電樁電費收入','利息收入','機車清潔費','充電樁收入','E-tag收入'],
+      datasets:[{data:[377419,39200,3103,2997,2800,1650,100],
+        backgroundColor:['rgba(26,74,107,.85)','rgba(184,134,11,.85)','rgba(192,57,43,.75)','rgba(100,60,180,.75)','rgba(122,118,112,.75)','rgba(26,107,60,.85)','rgba(60,120,180,.7)'],borderWidth:1}]},
+    options:pieLabel
+  });
+  // Pie expense
+  dc('pie-expense');
+  charts['pie-expense']=new Chart(document.getElementById('pie-expense'),{
+    type:'doughnut',
+    plugins:[ChartDataLabels],
+    data:{labels:['保全服務費','管理服務費','維修基金提撥','修繕費','機電耗材','電梯維護費','垃圾清運費','園藝維護費','機電保養費','公共電費','雜項支出','電信費','公共水費','手續費','郵電費'],
+      datasets:[{data:[189000,126000,60000,29965,14592,12870,10500,7500,4600,2479,2088,973,648,520,30],
+        backgroundColor:['rgba(192,57,43,.85)','rgba(192,57,43,.7)','rgba(26,74,107,.5)','rgba(150,90,40,.8)','rgba(140,100,60,.6)','rgba(184,134,11,.8)','rgba(26,107,60,.7)','rgba(100,160,60,.75)','rgba(26,74,107,.7)','rgba(100,60,180,.65)','rgba(180,160,50,.5)','rgba(122,118,112,.65)','rgba(60,120,180,.6)','rgba(150,150,150,.6)','rgba(140,140,60,.55)'],borderWidth:1}]},
+    options:pieLabel
+  });
+  // 3-period bar
+  dc('bar-3period');
+  charts['bar-3period']=new Chart(document.getElementById('bar-3period'),{
+    type:'bar',
+    data:{labels:['2025/07 同期','2026/06 上月','2026/07 本月'],
+      datasets:[
+        {label:'收入',data:[424001,427379,427269],backgroundColor:['rgba(26,74,107,.5)','rgba(26,74,107,.5)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
+        {label:'支出',data:[418761,440784,461765],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
+        {label:'盈虧',data:[5240,-13405,-34496],backgroundColor:['rgba(26,107,60,.5)','rgba(192,57,43,.4)','rgba(192,57,43,.85)'],borderColor:'rgba(122,118,112,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+  // Cash line
+  dc('line-cash');
+  charts['line-cash']=new Chart(document.getElementById('line-cash'),{
+    type:'line',
+    data:{labels:['2025/07','2026/06','2026/07'],
+      datasets:[{label:'現金+存款',data:[5902583,6309147,6491066],
+        borderColor:'#b8860b',backgroundColor:'rgba(184,134,11,.12)',tension:.3,pointRadius:5,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawMoM(){
+  dc('mom-bar');
+  charts['mom-bar']=new Chart(document.getElementById('mom-bar'),{
+    type:'bar',
+    data:{labels:['修繕費','機電耗材','公安/缺失改善','消防/缺失改善','雜項支出','公共電費','支出合計','盈虧'],
+      datasets:[
+        {label:'2026/06',data:[0,3220,14390,7580,54,3465,440784,-13405],backgroundColor:'rgba(122,118,112,.4)',borderColor:'rgba(122,118,112,.8)',borderWidth:1},
+        {label:'2026/07',data:[29965,14592,0,0,2088,2479,461765,-34496],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawYoY(){
+  dc('yoy-bar');
+  charts['yoy-bar']=new Chart(document.getElementById('yoy-bar'),{
+    type:'bar',
+    data:{labels:['管理服務費','垃圾清運費','園藝維護費','修繕費','機電耗材','清潔用品','支出合計','盈虧'],
+      datasets:[
+        {label:'2025/07',data:[116000,9450,15000,4079,0,5397,418761,5240],backgroundColor:'rgba(184,134,11,.45)',borderColor:'rgba(184,134,11,.8)',borderWidth:1},
+        {label:'2026/07',data:[126000,10500,7500,29965,14592,0,461765,-34496],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+function drawBS(){
+  dc('bs-trend');
+  charts['bs-trend']=new Chart(document.getElementById('bs-trend'),{
+    type:'bar',
+    data:{labels:['2025/07 同期','2026/06 上月','2026/07 本月'],
+      datasets:[
+        {label:'資產總計',data:[5911455,6327058,6491066],backgroundColor:['rgba(26,74,107,.4)','rgba(26,74,107,.4)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
+        {label:'流動負債',data:[405193,185286,323790],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
+        {type:'line',label:'業主權益',data:[5506262,6141772,6167276],borderColor:'#b8860b',backgroundColor:'transparent',tension:.3,pointRadius:5}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
+      scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
+  });
+}
+
+// Init overview on load
+drawOverview();
+</script>
