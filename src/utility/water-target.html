@@ -1,0 +1,102 @@
+---
+layout: base.njk
+permalink: /utility/water-target.html
+title: 每日用水目標訂定
+extraStyles: |
+  :root{
+    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
+    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
+    --c-target:#1C6B3A;--c-warn:#A8481F;--c-blue:#2B4A6B;
+  }
+  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:18px;line-height:1.75;min-height:100vh;}
+  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
+  .header-inner{max-width:760px;margin:0 auto;position:relative;}
+  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:6px;margin-right:14px;transition:color .18s;}
+  .back-link:hover{color:var(--wg1);}
+  .back-link::before{content:'←';}
+  .header-eyebrow{font-size:15px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;margin-top:10px;}
+  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
+  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
+  .main{max-width:760px;margin:0 auto;padding:32px 0 64px;}
+  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}}
+  @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
+  .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:24px;}
+  .notice-box strong{color:var(--wg41);}
+  /* 段落標籤 */
+  .sl{font-size:13px;letter-spacing:.22em;color:var(--wg11);margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+  .sl::before{content:attr(data-num);font-weight:700;color:var(--wg7);}
+  .sl::after{content:'';flex:1;height:1px;background:var(--line);}
+  h2.pt{font-size:21px;font-weight:700;letter-spacing:.04em;margin-bottom:10px;}
+  p{margin-bottom:14px;}
+  /* 公式卡 */
+  .formula-card{background:var(--wg41);color:var(--wg1);border-radius:var(--radius);padding:22px 24px;margin:18px 0 22px;}
+  .formula-card .f-label{font-size:14px;letter-spacing:.18em;color:var(--wg7);margin-bottom:10px;}
+  .formula-card .f-body{font-size:20px;font-weight:500;line-height:1.9;letter-spacing:.02em;}
+  .formula-card .f-body b{color:#D4C48A;font-weight:700;}
+  /* 查詢卡 */
+  .query-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;}
+  .query-card .q-title{font-size:15px;letter-spacing:.1em;color:var(--wg9);margin-bottom:14px;}
+  .q-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .q-row label{display:flex;align-items:center;gap:8px;font-size:17px;cursor:pointer;}
+  .q-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--c-target);}
+  .q-row input[type=number]{font-family:inherit;font-size:18px;font-weight:500;color:var(--wg41);background:var(--wg1);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;width:88px;outline:none;}
+  .q-result{margin-left:auto;background:rgba(31,92,56,0.08);border:1px solid rgba(31,92,56,0.25);border-radius:var(--radius);padding:10px 18px;font-size:16px;color:var(--wg9);}
+  .q-result strong{color:var(--c-target);font-size:24px;font-weight:700;margin-left:6px;}
+  /* 對照表 */
+  .rule-table{width:100%;border-collapse:collapse;font-size:16.5px;margin:14px 0 6px;}
+  .rule-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:15px;letter-spacing:.06em;}
+  .rule-table td{padding:11px 14px;border-bottom:1px solid var(--line);background:var(--white);font-variant-numeric:tabular-nums;}
+  .rule-table tr:last-child td{border-bottom:none;}
+  .rule-table .num{text-align:right;font-weight:600;}
+  .ok-box{background:rgba(31,92,56,0.06);border-left:3px solid var(--c-target);border-radius:var(--radius);padding:14px 18px;font-size:16.5px;line-height:1.85;margin:18px 0;}
+  .ok-box strong{color:var(--c-target);}
+  .warn-box{background:rgba(168,72,31,0.06);border-left:3px solid var(--c-warn);border-radius:var(--radius);padding:14px 18px;font-size:16.5px;line-height:1.85;margin:18px 0;}
+  .warn-box strong{color:var(--c-warn);}
+  .footer{border-top:1px solid var(--line);padding-top:18px;margin-top:44px;font-size:15px;color:var(--wg9);letter-spacing:.06em;line-height:1.9;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+---
+<div class="header">
+  <div class="header-inner">
+    <a class="back-link" href="/utility/">返回水電資訊</a>
+    <div class="header-eyebrow">WATER TARGET METHODOLOGY</div>
+    <h1>每日用水目標訂定</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+  </div>
+</div>
+<div class="main">
+
+  <div class="notice-box">
+    每日水電公告的「💧 上限 ≤X 度」，來自 <strong>4 年、1,549 筆</strong>日用水資料的分析，與兩處澆灌管線的<strong>實地流量測定</strong>。
+  </div>
+
+  <div class="sl" data-num="01">基線與教訓</div>
+  <p>斷開澆灌系統實測，社區日常基載僅約 <strong>0.2 度／日</strong>。回頭檢視 4 年資料，日用水的大幅波動幾乎都來自澆灌系統「<strong>有沒有開、開了幾分鐘</strong>」——但過去澆灌沒有留下紀錄，高用水期只能事後猜測。這確立了兩個原則：<strong>澆灌分鐘數必須被記錄</strong>，且<strong>每天的用水量都要有「當日應有的上限」可比對</strong>——當天發現異常，不等兩個月後的水費單。</p>
+
+  <div class="sl" data-num="02">動態上限公式</div>
+  <div class="formula-card">
+    <div class="f-label">DAILY WATER CAP</div>
+    <div class="f-body">當日上限 = <b>0.2</b>（基載） + <b>0.3</b>（清潔日才加） + <b>0.25 × 澆灌分鐘數</b></div>
+  </div>
+  <p style="font-size:16px;color:var(--wg9)">澆灌係數為實測值：兩區同澆合計 0.2165 度／分（2026-07-26 實測），加約 15% 餘裕訂為 0.25。</p>
+  <table class="rule-table">
+    <thead><tr><th>當日類型</th><th style="text-align:right">上限（度）</th></tr></thead>
+    <tbody>
+      <tr><td>一般日</td><td class="num">0.2</td></tr>
+      <tr><td>清潔日</td><td class="num">0.5</td></tr>
+      <tr><td>澆灌 12 分</td><td class="num">3.2</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sl" data-num="03">讓雨量決定澆不澆</div>
+  <p>台北年雨量逾 2,000 mm，植栽大量靠天吃飯。澆灌分鐘數由「每日澆水預告」規則引擎自動產生（氣象署 CODiS 雨量＋預報：雨後跳過、連日少雨必澆、高溫加時），<strong>只補老天沒下的部分</strong>。每日公告將水表讀數對上當日上限——<span style="color:var(--c-target);font-weight:700">≤上限＝用水正常</span>；<span style="color:var(--c-warn);font-weight:700">＞上限＝當天查原因</span>（未登記的清潔或澆灌、設備異常）。</p>
+
+  <div class="sl" data-num="04">三個洞見</div>
+  <p><strong>一、日常用水很小</strong>——保全與清潔合計不過 0.2–0.5 度／日，不是主角。</p>
+  <p><strong>二、大宗是澆灌</strong>——澆一次 12 分鐘約 3 度，等於 15 天基載；年用水量幾乎就是「澆了幾次」的函數。</p>
+  <p><strong>三、未來用水量是「看天」的</strong>——雨多的年份自動少澆、用水低；乾熱年份必澆日多、用水高。無效澆灌等人為可壓縮空間已壓完，年用水量將隨天候波動，難再靠自力持續下降；但每個因雨跳過的澆灌日就是省下 2–3 度自來水——<strong>「讓老天爺澆的交給老天爺」本身就是最大的省水</strong>。讀年度數字時，請搭配當年降雨量。</p>
+
+  <div class="footer">
+    <span>閱大安管理委員會</span>
+    <span>資料基礎：2022-02 – 2026-04 共 1,549 筆日用水紀錄</span>
+  </div>
+</div>
