@@ -1,0 +1,140 @@
+---
+layout: base.njk
+permalink: /about/index.html
+title: 社區身世
+extraHead: |
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+extraStyles: |
+  .about-main{max-width:var(--page-max-width);margin:0 auto;padding:36px 0 60px;}
+  @media(max-width:840px){.about-main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
+  @media(max-width:600px){.about-main{padding:26px 16px 44px;}}
+  .about-main .lead{font-size:18px;line-height:1.95;color:var(--wg11);margin:0 0 6px;}
+  .about-main p{font-size:17px;line-height:1.95;color:var(--wg41);margin:16px 0 0;}
+  /* 歷史地圖 */
+  .histmap-fig{margin:26px 0 4px;}
+  .histmap{height:440px;width:100%;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);}
+  @media(max-width:600px){.histmap{height:340px;}}
+  .histmap-cap{font-size:14px;color:var(--wg9);line-height:1.75;margin:9px 2px 0;}
+  .histmap-cap b{color:var(--dn);}
+  .leaflet-container{font-family:inherit;}
+  .leaflet-control-layers{font-size:14px;}
+  .coord{font-size:14px;color:var(--wg9);letter-spacing:.02em;margin:12px 2px 0;}
+  .coord a{color:var(--wg11);}
+  .sec{font-size:20px;font-weight:700;color:var(--wg41);letter-spacing:.05em;margin:40px 0 4px;padding-top:14px;border-top:1px solid var(--line);}
+  /* 詞源 aside */
+  .etym{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin:16px 0 0;}
+  .etym .etym-label{font-size:13px;letter-spacing:.18em;color:var(--wg9);margin-bottom:10px;}
+  .etym ul{margin:0;padding-left:20px;}
+  .etym li{font-size:16px;line-height:1.85;color:var(--wg11);margin:7px 0;}
+  .etym li b{color:var(--wg41);}
+  .etym .etym-end{font-size:16px;line-height:1.85;color:var(--wg41);margin:12px 0 0;}
+  /* 名字時間軸 */
+  .timeline{margin:24px 0 8px;border-left:2px solid var(--line);}
+  .tl-item{position:relative;padding:0 0 28px 26px;}
+  .tl-item:last-child{padding-bottom:4px;}
+  .tl-item::before{content:'';position:absolute;left:-8px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--wg41);border:3px solid var(--wg1);}
+  .tl-era{font-size:14px;letter-spacing:.1em;color:var(--wg9);margin-bottom:2px;}
+  .tl-name{font-size:19px;font-weight:700;color:var(--wg41);margin-bottom:7px;letter-spacing:.05em;}
+  .tl-item p{font-size:16px;line-height:1.85;margin:0;color:var(--wg11);}
+  /* footer */
+  .about-foot{max-width:var(--page-max-width);margin:34px auto 0;border-top:1px solid var(--line);padding:16px 0 0;font-size:14px;color:var(--wg9);line-height:1.85;}
+  @media(max-width:600px){.about-foot{padding:16px 16px 0;}}
+extraScripts: |
+  (function(){
+    if (typeof L === 'undefined') return;
+    var el = document.getElementById('histmap');
+    if (!el || el._leaflet_id) return;   // 防呆：已初始化過就不重跑（避免熱重載 / 重複載入卡死）
+    var lat = 25.0257185, lon = 121.5241599;
+    function sinica(id){
+      return L.tileLayer('https://gis.sinica.edu.tw/tileserver/file-exists.php?img=' + id + '-png-{z}-{x}-{y}',
+        { minZoom:12, maxZoom:18, attribution:'中央研究院 臺灣百年歷史地圖' });
+    }
+    function taipei(id){
+      return L.tileLayer('https://gis.sinica.edu.tw/taipei/file-exists.php?img=' + id + '-png-{z}-{x}-{y}',
+        { minZoom:12, maxZoom:18, attribution:'中央研究院 臺北市百年歷史地圖' });
+    }
+    var t1921 = sinica('JM25K_1921'), t1945 = sinica('AMCityPlan_1945'), t1980 = taipei('Taipei_aerialphoto_1980');
+    var modern = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { maxZoom:19, attribution:'© OpenStreetMap' });
+    var map = L.map('histmap', { center:[lat,lon], zoom:16, layers:[t1921], scrollWheelZoom:false });
+    L.control.layers({
+      '日本時代・臺灣堡圖 1921': t1921,
+      '美軍地圖 1945': t1945,
+      '空照 1980': t1980,
+      '現代地圖': modern
+    }, null, { collapsed:false }).addTo(map);
+    L.circleMarker([lat,lon], { radius:8, color:'#8C1F1F', weight:2, fillColor:'#8C1F1F', fillOpacity:0.55 })
+      .addTo(map).bindPopup('閱大安・今日位置');
+  })();
+---
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="back-link">返回社區主頁</a>
+    <div class="header-eyebrow">ABOUT・社區身世</div>
+    <h1>社區身世</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+  </div>
+</header>
+
+<main class="about-main">
+  <p class="lead">今日「閱大安」所在之地，從清代到今天，地名換過好幾輪；這塊地腳下的故事，比這棟樓長得多。先看一眼它的前世——</p>
+
+  <figure class="histmap-fig">
+    <div id="histmap" class="histmap"></div>
+    <figcaption class="histmap-cap">日本時代「臺灣堡圖」（1921）上的這塊地——當年城南古亭的住宅街廓，一整片日式木造房舍。<b>紅點</b>為今日社區位置。右上角可切換 <b>1921 ／ 美軍 1945 ／ 空照 1980 ／ 現代</b>，看這塊地的百年變化。</figcaption>
+  </figure>
+  <p class="coord">座標　25.0257° N，121.5242° E・<a href="https://www.google.com/maps/search/?api=1&query=25.0257185,121.5241599" target="_blank" rel="noopener">在 Google 地圖開啟</a></p>
+
+  <h2 class="sec">「古亭」這名字，其實沒有定論</h2>
+  <p>這塊地最早的地名是「古亭」，從清代就有了。但「古亭」二字從何而來，至今眾說紛紜：</p>
+  <div class="etym">
+    <div class="etym-label">地名詞源・三種說法</div>
+    <ul>
+      <li><b>鼓亭防番說</b>——先民為防新店一帶原住民出草，設「鼓亭」擊鼓示警（閩南語「古」「鼓」同音）。《乾隆臺灣輿圖》已載「鼓亭村」；臺北市文獻會 1983 年於古亭長慶廟前立「鼓亭庄舊址碑」即採此說。</li>
+      <li><b>罟亭說</b>——新店溪昔以漁業聞名，「古」或來自漁網的「罟」，「罟亭」即先民對「罟寮」的別稱。</li>
+      <li><b>孤壇說</b>——由祭祀無名孤魂的「孤壇」雅化而來。</li>
+    </ul>
+    <p class="etym-end">（至於「穀倉」說，則因台語「古」「穀」不同音而被否定。）一個天天經過的地名，底下藏著三種說不準的來歷。</p>
+  </div>
+
+  <h2 class="sec">「城南」——日本人往南邊蓋的住宅區</h2>
+  <p>清代的古亭，到了日本時代被疊上一層新身份：「城南」。這詞始於日本時代，指台北城門以南、到古亭一帶。當年日本政府為了安頓在台日人，選了這片開發較少、又緊鄰城內的南緣，沿路興建住宅、學校與機關，把城南打造成日本人的通勤住宅地帶。這也正是為什麼——這塊地當年，會是一整片日式木造房舍。</p>
+
+  <h2 class="sec">門前這條路：羅斯福路的身世</h2>
+  <p>這塊地門前的羅斯福路，是台北市唯一以外國人命名的道路——而且日本時代根本還沒有它。</p>
+  <p>日本時代，由城內往南通到古亭、富田町一帶的，是一條文獻稱作「富田町街道」的路。戰後，國民政府為了紀念二戰時居中促成開羅會議、對中華民國友善的美國羅斯福總統，把這條城南的路命名為「羅斯福路」，甚至在政府播遷來台之前就先定了名。</p>
+  <p>1950 年代，高玉樹市長任內拆除沿線違建，把它拓寬成今日的四十米大道；更南端的五、六段，則是 1965 年台鐵新店線停駛、鐵軌拆除後，就著原本的路廊蓋出來的。一條看似理所當然的大馬路，其實是戰後台北一段段改出來的。</p>
+
+  <h2 class="sec">這塊地的名字，從清代到今天</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-era">清代</div>
+      <div class="tl-name">古亭庄</div>
+      <p>清代，這裡是「古亭庄」（又作古亭村庄）的一部分——台北城南的農墾聚落。古亭這個地名，就是從這裡傳下來的。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-era">日本時代</div>
+      <div class="tl-name">古亭町</div>
+      <p>日本時代「町名改正」，古亭庄一帶劃為「古亭町」，成為日本人往城南開發的住宅街廓，一整片日式木造房舍。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-era">戰後　1946–1990</div>
+      <div class="tl-name">古亭區・亭東里</div>
+      <p>1946 年，戰後把古亭町等十一個舊町合併為「古亭區」。這裡的門牌，曾是臺北市古亭區亭東里羅斯福路二段。</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-era">1990 至今</div>
+      <div class="tl-name">大安區</div>
+      <p>1990 年臺北市行政區重劃，古亭區裁撤，羅斯福路以東劃入大安區——這塊地就此屬於大安。</p>
+    </div>
+  </div>
+
+  <h2 class="sec">從日式老屋，到今日</h2>
+  <p>後來，幾戶在地的原地主，看著日式老屋該換了，便聯合起來把它改建——日式老屋落幕，今日的住宅大樓在原地長出。從城南古亭的日式住宅，到一棟由原住戶共同促成的住宅大樓，這塊地，是大安／古亭百年都市紋理變遷的一個小小縮影。</p>
+</main>
+
+<footer class="about-foot">
+  歷史地圖：中央研究院人社中心 GIS 專題中心「臺灣百年歷史地圖」（臺灣堡圖 1921、美軍地圖 1945、空照 1980）。<br>
+  史料：維基百科「羅斯福路（臺北市）」「古亭」「古亭區」「城南」；地理座標 OpenStreetMap。地名詞源眾說並存、史學界尚無定論，本頁並陳主要說法。建築設計與起造細節非屬公開史料，僅就可查證者記述；歡迎知情住戶提供老照片或史料，向管理委員會補充。
+</footer>
