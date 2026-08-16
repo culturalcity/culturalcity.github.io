@@ -1,0 +1,210 @@
+---
+layout: handbook.njk
+permalink: /admin/staff/fire-alarm-sop/index.html
+title: 消防警報值勤流程
+docTitle: 值勤程序
+eyebrow: CULTURAL CITY · SECURITY SOP
+headerSub: 閱大安管理委員會・內部文件　｜　草案・待物業與廠商確認
+lastUpdate: '2026-08-16'
+eleventyExcludeFromCollections: true
+---
+
+<style>
+  /* ── 消防警報值勤流程 專用樣式（fa- 前綴，避免與 handbook 版型衝突）── */
+  .fa-flow { display: flex; flex-direction: column; align-items: center; margin: 24px 0 8px; }
+  .fa-step { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 12px 18px; width: min(430px, 100%); }
+  .fa-step .fa-t { font-weight: 700; font-size: 15px; color: var(--wg41); }
+  .fa-step .fa-t small { font-weight: 400; font-size: 12.5px; color: var(--wg9); margin-left: 8px; }
+  .fa-step .fa-d { font-size: 13px; color: var(--wg9); margin-top: 2px; }
+  .fa-alarm { background: var(--wg41); color: var(--wg1); border-radius: var(--radius);
+    text-align: center; font-weight: 700; font-size: 15.5px; letter-spacing: 0.06em;
+    padding: 10px 34px; }
+  .fa-num { display: inline-block; width: 20px; height: 20px; line-height: 20px; text-align: center;
+    background: var(--wg41); color: var(--wg1); border-radius: 50%;
+    font-size: 12px; font-weight: 700; margin-right: 8px; vertical-align: 2px; }
+  .fa-conn { width: 2px; height: 20px; background: var(--wg9); opacity: 0.5; position: relative; }
+  .fa-conn::after { content: ""; position: absolute; bottom: -1px; left: 50%;
+    transform: translateX(-50%); border: 5px solid transparent;
+    border-top: 7px solid var(--wg9); border-bottom: 0; }
+  .fa-decide { border: 2px solid var(--wg41); background: var(--white); border-radius: var(--radius);
+    font-weight: 700; font-size: 15px; color: var(--wg41); padding: 8px 30px; letter-spacing: 0.1em; }
+
+  .fa-fork { width: 100%; display: block; color: var(--wg9); opacity: 0.6; }
+
+  .fa-branches { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; align-items: start; }
+  .fa-panel { border-radius: var(--radius); padding: 14px 12px 16px; border: 1px solid; break-inside: avoid; }
+  .fa-panel h2 { margin: 0 0 2px; padding: 0; border: 0; font-size: 13px;
+    letter-spacing: 0.14em; font-weight: 700; }
+  .fa-panel .fa-cond { font-size: 12.5px; margin: 0 0 12px; }
+  .fa-ok   { background: rgba(31,92,56,0.06); border-color: rgba(31,92,56,0.45); }
+  .fa-ok h2, .fa-ok .fa-cond { color: var(--dp); }
+  .fa-fire { background: rgba(140,31,31,0.06); border-color: rgba(140,31,31,0.45); }
+  .fa-fire h2, .fa-fire .fa-cond { color: var(--dn); }
+  .fa-hold { background: rgba(138,106,31,0.08); border-color: rgba(138,106,31,0.5); }
+  .fa-hold h2, .fa-hold .fa-cond { color: #6B5314; }
+  .fa-mini { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 9px 12px; font-size: 13.5px; color: var(--wg41); }
+  .fa-mini b { font-size: 14px; }
+  .fa-mini .fa-d { display: block; font-size: 12.5px; color: var(--wg9); margin-top: 1px; }
+  .fa-mconn { width: 2px; height: 13px; margin: 0 auto; background: var(--wg9); opacity: 0.4; }
+
+  .fa-valve { margin: 22px 0 8px; border: 2px dashed var(--dn); background: rgba(140,31,31,0.05);
+    color: var(--dn); border-radius: var(--radius); padding: 12px 18px;
+    font-size: 14.5px; font-weight: 700; text-align: center; letter-spacing: 0.03em; }
+  .fa-valve small { display: block; font-weight: 400; font-size: 12.5px; margin-top: 2px; }
+
+  .fa-script { background: var(--white); border: 1px solid var(--line); border-left-width: 4px;
+    border-radius: var(--radius); padding: 12px 18px 13px; margin-bottom: 14px; break-inside: avoid; }
+  .fa-script h3 { margin: 0 0 4px; font-size: 14px; letter-spacing: 0.06em; color: var(--wg41); }
+  .fa-script h3 .fa-when { font-weight: 400; font-size: 12.5px; color: var(--wg9);
+    margin-left: 10px; letter-spacing: 0.02em; }
+  .fa-script p { margin: 0; font-size: 14.5px; line-height: 1.85; }
+  .fa-s1 { border-left-color: var(--wg9); }
+  .fa-s2 { border-left-color: var(--dp); }
+  .fa-s3 { border-left-color: var(--dn); }
+  .fa-s4 { border-left-color: #B08F3C; }
+  .fa-blank { background: rgba(176,143,60,0.22); color: #6B5314; border-radius: var(--radius);
+    padding: 0 5px; font-weight: 700; }
+
+  @media (max-width: 719px) {
+    .fa-fork { display: none; }
+    .fa-branches { grid-template-columns: 1fr; margin-top: 18px; }
+  }
+  @media print {
+    .fa-panel, .fa-script, .fa-step { break-inside: avoid; }
+  }
+</style>
+
+<h1>處理流程圖</h1>
+
+<p>本流程適用於<strong>值勤保全（含深夜單人值勤）</strong>遇消防警報鳴動時的處置與住戶通報。
+設計原則：值勤人員只做「讀總機、照稿念、填空」，判斷句都預先寫死；
+第一報廣播在<strong>離開管理室之前</strong>完成，目標為警報響起兩分鐘內，
+讓住戶在現場確認的空窗期間就知道訊號位置與處理狀態。</p>
+
+<div class="fa-flow">
+  <div class="fa-alarm">🔔 消防警報響起（全棟自動廣播鳴動）</div>
+  <div class="fa-conn"></div>
+  <div class="fa-step">
+    <div class="fa-t"><span class="fa-num">1</span>讀受信總機</div>
+    <div class="fa-d">記下：顯示分區（例：B4）＋亮的是哪種訊號燈</div>
+  </div>
+  <div class="fa-conn"></div>
+  <div class="fa-step">
+    <div class="fa-t"><span class="fa-num">2</span>📢 第一報廣播<small>目標：2 分鐘內・照卡念</small></div>
+    <div class="fa-d">「火警訊號來自＿樓，正前往確認」　＋LINE 第一報（可選・貼模板）</div>
+  </div>
+  <div class="fa-conn"></div>
+  <div class="fa-step">
+    <div class="fa-t"><span class="fa-num">3</span>帶裝備下樓</div>
+    <div class="fa-d">手機・機房鑰匙・手電筒　※確認期間警報持續鳴響屬正常</div>
+  </div>
+  <div class="fa-conn"></div>
+  <div class="fa-step">
+    <div class="fa-t"><span class="fa-num">4</span>現場確認</div>
+    <div class="fa-d">先查對照卡上該分區高嫌疑裝置 → 找本體指示燈亮著的那顆</div>
+  </div>
+  <div class="fa-conn"></div>
+  <div class="fa-decide">確認結果？</div>
+</div>
+
+<svg class="fa-fork" viewBox="0 0 900 58" aria-hidden="true">
+  <line x1="450" y1="0"  x2="450" y2="16" stroke="currentColor" stroke-width="2"/>
+  <line x1="150" y1="16" x2="750" y2="16" stroke="currentColor" stroke-width="2"/>
+  <line x1="150" y1="16" x2="150" y2="46" stroke="currentColor" stroke-width="2"/>
+  <line x1="450" y1="16" x2="450" y2="46" stroke="currentColor" stroke-width="2"/>
+  <line x1="750" y1="16" x2="750" y2="46" stroke="currentColor" stroke-width="2"/>
+  <polygon points="150,56 144,46 156,46" fill="currentColor"/>
+  <polygon points="450,56 444,46 456,46" fill="currentColor"/>
+  <polygon points="750,56 744,46 756,46" fill="currentColor"/>
+</svg>
+
+<div class="fa-branches">
+  <section class="fa-panel fa-ok">
+    <h2>誤　報</h2>
+    <p class="fa-cond">查無火煙，且找到誤動作的裝置</p>
+    <div class="fa-mini"><b>裝置復位</b><span class="fa-d">話筒掛回／依廠商指導</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>回管理室・總機復舊</b><span class="fa-d">確認警報停止</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>📢 解除廣播＋💬 LINE 解除報</b><span class="fa-d">LINE 必發・貼模板</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>記錄・通知</b><span class="fa-d">值勤日誌＋通知總幹事／主委</span></div>
+  </section>
+
+  <section class="fa-panel fa-fire">
+    <h2>發現火煙</h2>
+    <p class="fa-cond">任何火光、煙、燒焦味</p>
+    <div class="fa-mini"><b>📞 立即撥 119</b><span class="fa-d">報地址＋起火樓層</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>📢 疏散廣播</b><span class="fa-d">照卡念（見下方疏散報）</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>至大門引導消防隊</b><span class="fa-d">告知起火樓層＋設備位置</span></div>
+  </section>
+
+  <section class="fa-panel fa-hold">
+    <h2>查無原因</h2>
+    <p class="fa-cond">無火煙，也找不到動作裝置</p>
+    <div class="fa-mini"><b>📞 通報廠商</b><span class="fa-d">太古華電緊急電話（<span class="fa-blank">待填</span>）＋通知總幹事／主委</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>📢 續查廣播</b><span class="fa-d">照卡念（見下方續查報）</span></div>
+    <div class="fa-mconn"></div>
+    <div class="fa-mini"><b>管理室待命</b><span class="fa-d">依廠商電話指示處理</span></div>
+  </section>
+</div>
+
+<div class="fa-valve">
+  ⚠ 任何情況拿不準：一律當作真火警，直接撥 119
+  <small>寧可誤跑一趟，不可漏跑一次</small>
+</div>
+
+<h1>廣播與 LINE 定型稿</h1>
+
+<p>定型稿與本頁一同護貝，貼於受信總機旁；LINE 模板另存於值勤手機的 LINE 記事本。
+<span class="fa-blank">＿＿</span>為現場填空處。</p>
+
+<div class="fa-script fa-s1">
+  <h3>第一報<span class="fa-when">警報響起 2 分鐘內・離開管理室之前</span></h3>
+  <p>「這裡是管理中心。火警訊號來自<span class="fa-blank">＿＿樓</span>，值勤人員正前往確認，請住戶留意後續廣播。再重複一次：火警訊號來自<span class="fa-blank">＿＿樓</span>，正在確認中，請留意後續廣播。」</p>
+</div>
+
+<div class="fa-script fa-s2">
+  <h3>解除報<span class="fa-when">總機復舊完成後</span></h3>
+  <p>「這裡是管理中心。剛才的火警訊號經現場確認為設備誤發，並無火災，警報已解除，造成打擾非常抱歉。再重複一次：經確認並無火災，警報已解除。」</p>
+</div>
+
+<div class="fa-script fa-s3">
+  <h3>疏散報<span class="fa-when">發現火煙・撥完 119 後・重複播放</span></h3>
+  <p>「這裡是管理中心，<span class="fa-blank">＿＿樓</span>發生火災，消防隊已在途中。起火樓層與其上一層住戶請立即避難。其他樓層住戶開門前請先確認樓梯間狀況：樓梯間無煙，請鎮定由樓梯避難，勿搭電梯；樓梯間有濃煙，請留在屋內、關門、以濕布塞住門縫等待救援。」</p>
+</div>
+
+<div class="fa-script fa-s4">
+  <h3>續查報<span class="fa-when">查無原因・通報廠商後</span></h3>
+  <p>「這裡是管理中心。經現場初步確認目前並無火災跡象，詳細原因仍在查明中，請住戶放心，有進一步結果會再廣播。」</p>
+</div>
+
+<div class="fa-script fa-s1">
+  <h3>💬 LINE 第一報<span class="fa-when">可選・廣播完下樓前</span></h3>
+  <p>🔔 火警訊號通報：訊號位於<span class="fa-blank">＿＿樓</span>，管理中心已廣播並前往確認中，請住戶留意廣播。確認結果會再回報。</p>
+</div>
+
+<div class="fa-script fa-s2">
+  <h3>💬 LINE 解除報<span class="fa-when">必發・解除廣播播完後</span></h3>
+  <p>✅ 火警警報解除：經現場確認為設備誤發訊號（<span class="fa-blank">原因</span>），並無火災，警報已於<span class="fa-blank">＿＿:＿＿</span>解除。造成打擾非常抱歉。</p>
+</div>
+
+<h1>待確認與待填事項</h1>
+
+<p>本頁目前為<strong>草案</strong>，下列事項定案後轉正式版：</p>
+
+<ul>
+  <li><strong>119 報案用完整地址</strong>——填入疏散報流程（值勤卡上直接印出）。</li>
+  <li><strong>太古華電緊急聯絡電話</strong>——填入「查無原因」分支。</li>
+  <li><strong>裝置復位方式</strong>——待太古華電確認：話筒掛回即可？探測器復位保全可否自行操作？</li>
+  <li><strong>受信總機靜音限制</strong>——現況為須持續壓住發話器按鈕才能中斷自動廣播，待太古華電確認有無正規的音響停止／連動停止模式。</li>
+  <li><strong>物業公司背書</strong>——本流程送潤泰確認為保全標準程序（含第一報廣播納入正式 SOP），並安排實際演練一次。</li>
+</ul>
+
+<p>背景：2026-08-12 深夜 B4 緊急廣播啟動用緊急電話話筒鬆脫誤觸全棟警報（自 2026 年 3 月以來已發生數次），
+住戶建議縮短警報後的資訊空窗，經討論後定此流程。話筒固定方式另與太古華電研議中。</p>
