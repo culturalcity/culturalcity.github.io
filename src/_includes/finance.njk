@@ -13,6 +13,37 @@ extraScripts: |
       header.parentNode.insertBefore(nav, header.nextSibling);
     }
   })();
+  // 頁籤無障礙漸進增強：各月報內容檔的 .tab 是 <div onclick>，鍵盤搆不到也沒有語意。
+  // 統一在模板層補 role／aria-selected／aria-controls／鍵盤操作，新舊月報一次全套用，
+  // 內容檔不用改（skill 產新月報照舊格式即可）。
+  (function a11yTabs(){
+    var bar = document.querySelector('.tabs');
+    if (!bar) return;
+    bar.setAttribute('role', 'tablist');
+    var tabs = Array.prototype.slice.call(bar.querySelectorAll('.tab'));
+    tabs.forEach(function(t){
+      t.setAttribute('role', 'tab');
+      t.setAttribute('tabindex', '0');
+      var m = (t.getAttribute('onclick') || '').match(/sw\('([\w-]+)'\)/);
+      if (m && document.getElementById('tab-' + m[1])) {
+        t.setAttribute('aria-controls', 'tab-' + m[1]);
+        document.getElementById('tab-' + m[1]).setAttribute('role', 'tabpanel');
+      }
+      t.addEventListener('click', sync);
+      t.addEventListener('keydown', function(e){
+        var i = tabs.indexOf(t);
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+      });
+    });
+    function sync(){
+      tabs.forEach(function(t){
+        t.setAttribute('aria-selected', t.classList.contains('active') ? 'true' : 'false');
+      });
+    }
+    sync();
+  })();
 ---
 {%- set fnav = collections | getFinancePager(page.url) %}
 {%- if fnav %}

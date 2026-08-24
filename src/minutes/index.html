@@ -99,7 +99,11 @@ extraStyles: |
   .footer{border-top:1px solid var(--line);padding-top:18px;font-size:15px;color:var(--wg9);letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 extraScripts: |
   function switchTab(tab){
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+    document.querySelectorAll('.tab-btn').forEach(b=>{
+      const on = b.dataset.tab===tab;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-selected',on);  // 螢幕報讀器同步頁籤狀態
+    });
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
   }
   function toggleTerm(el){
@@ -111,9 +115,9 @@ extraScripts: |
     <div class="eyebrow">MINUTES OF MEETING</div>
     <h1>會議紀錄</h1>
     <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="board" onclick="switchTab('board')">管委會議</button>
-      <button class="tab-btn" data-tab="agm" onclick="switchTab('agm')">區權人會議</button>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-board" data-tab="board" onclick="switchTab('board')">管委會議</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-agm" data-tab="agm" onclick="switchTab('agm')">區權人會議</button>
     </div>
   </div>
 </div>
@@ -121,7 +125,7 @@ extraScripts: |
 <div class="main">
 
 <!-- ══ 管委會議 ══ -->
-<div id="tab-board" class="tab-content active">
+<div id="tab-board" class="tab-content active" role="tabpanel">
   <div class="notice">
     每次管委會會議頁面包含兩個部分：<strong>開會通知</strong>（會議前公告的議程）與<strong>會議紀錄</strong>（會議後記錄的討論與決議）。歡迎住戶列席旁聽，如有意願請洽管理中心。
   </div>
@@ -204,7 +208,7 @@ extraScripts: |
 </div>
 
 <!-- ══ 區權人會議 ══ -->
-<div id="tab-agm" class="tab-content">
+<div id="tab-agm" class="tab-content" role="tabpanel">
   <div class="notice">
     區分所有權人會議為社區最高決策機構，依公寓大廈管理條例每年至少召開一次，重大事項須經區權會決議方可執行。
   </div>

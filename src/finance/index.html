@@ -9,7 +9,7 @@ extraStyles: |
   .header{background:var(--ink);color:#f8f5f0;padding:36px 32px 28px;border-bottom:3px solid var(--wg11);position:relative;overflow:hidden;}
   .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
   .header h1{font-size:24px;font-weight:700;letter-spacing:.06em;margin-bottom:4px;}
-  .header p{font-size:15px;color:rgba(248,245,240,0.45);letter-spacing:.1em;}
+  .header p{font-size:15px;color:var(--wg7);letter-spacing:.1em;} /* 深底次要文字用 wg7 過 AA；rgba .45 僅 3.5:1 */
   .header-badge{display:inline-block;margin-top:12px;background:rgba(234,231,225,.12);border:1px solid rgba(234,231,225,.25);color:var(--wg1);font-size:15px;padding:3px 10px;border-radius:10px;letter-spacing:.06em;}
   .main{max-width:760px;margin:0 auto;padding:32px 0 60px;}
   @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
@@ -61,16 +61,6 @@ extraStyles: |
     📋 本頁為閱大安社區每月財務月報公告。點擊月份卡片查閱完整分析報告，包含損益分析、資產負債、環比說明。如有疑問請洽管委會。
   </div>
 
-  <div class="year-label">📊 互動工具 ／ 長期分析</div>
-  <a href="長期財務模型.html" class="analysis-card">
-    <span class="ac-icon">🔮</span>
-    <div>
-      <div class="ac-title">長期財務模型（互動式）</div>
-      <div class="ac-sub">46 年現金流規劃・費率方案・壓力測試</div>
-    </div>
-    <span class="ac-arrow">›</span>
-  </a>
-
   <div class="year-label">📖 年度財務報告</div>
 {%- for item in collections.financeAnnuals %}
   <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="analysis-card">
@@ -106,6 +96,16 @@ extraStyles: |
   </div>
 {%- endfor %}
 
+  {# 進階工具殿後：一般住戶最常找的是最新月報，互動模型屬進階分析（2026-08 設計 review 調序） #}
+  <div class="year-label">📊 進階工具 ／ 長期分析</div>
+  <a href="長期財務模型.html" class="analysis-card">
+    <span class="ac-icon">🔮</span>
+    <div>
+      <div class="ac-title">長期財務模型（互動式）</div>
+      <div class="ac-sub">46 年現金流規劃・費率方案・壓力測試</div>
+    </div>
+    <span class="ac-arrow">›</span>
+  </a>
 
   <div class="footer">
     閱大安管理委員會・財務資料僅供本社區住戶參考<br>

@@ -24,7 +24,7 @@ extraStyles: |
   @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:22px;}}
   .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);}
-  .filter-btn{padding:5px 14px;font-size:15px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
+  .filter-btn{display:inline-flex;align-items:center;min-height:44px;padding:5px 14px;font-size:15px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
   .filter-btn:hover{border-color:var(--wg11);color:var(--wg41);}
   .filter-btn.active{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
   .filter-btn[data-filter="meeting"].active{background:var(--c-meeting);border-color:var(--c-meeting);}
@@ -74,13 +74,13 @@ extraStyles: |
 </div>
 <div class="main">
   <div class="filter-row">
-    <button class="filter-btn active" data-filter="all"     onclick="filter('all')">全部</button>
-    <button class="filter-btn"        data-filter="meeting" onclick="filter('meeting')">會議通知</button>
-    <button class="filter-btn"        data-filter="rule"    onclick="filter('rule')">規約規範</button>
-    <button class="filter-btn"        data-filter="work"    onclick="filter('work')">設備保養</button>
-    <button class="filter-btn"        data-filter="equip"   onclick="filter('equip')">工程通知</button>
-    <button class="filter-btn"        data-filter="safety"  onclick="filter('safety')">安全警示</button>
-    <button class="filter-btn"        data-filter="event"   onclick="filter('event')">節日活動</button>
+    <button class="filter-btn active" data-filter="all"     aria-pressed="true"  onclick="filter('all')">全部</button>
+    <button class="filter-btn"        data-filter="meeting" aria-pressed="false" onclick="filter('meeting')">會議通知</button>
+    <button class="filter-btn"        data-filter="rule"    aria-pressed="false" onclick="filter('rule')">規約規範</button>
+    <button class="filter-btn"        data-filter="work"    aria-pressed="false" onclick="filter('work')">設備保養</button>
+    <button class="filter-btn"        data-filter="equip"   aria-pressed="false" onclick="filter('equip')">工程通知</button>
+    <button class="filter-btn"        data-filter="safety"  aria-pressed="false" onclick="filter('safety')">安全警示</button>
+    <button class="filter-btn"        data-filter="event"   aria-pressed="false" onclick="filter('event')">節日活動</button>
   </div>
   <div id="container">
 {% for group in collections.noticeByYear %}
@@ -108,7 +108,11 @@ extraStyles: |
 <script>
 // 純 client-side 篩選：show/hide 既有卡片，不重新渲染
 function filter(t) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === t));
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    const on = b.dataset.filter === t;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on);  // 螢幕報讀器同步篩選狀態
+  });
   document.querySelectorAll('.notice-card').forEach(card => {
     const match = (t === 'all') || card.classList.contains(t);
     card.style.display = match ? '' : 'none';

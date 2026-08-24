@@ -3,7 +3,7 @@
 :root {
   --ink: #3C3835;
   --ink2: #696460;
-  --ink3: #898480;
+  --ink3: var(--wg9);  /* 對接 global.css 無障礙修正後的次要文字色（舊值 #898480 淺底僅 3.0:1 不過 AA） */
   --paper: #EAE7E1;
   --paper2: #F0EDE8;
   --paper3: #E8E4DD;
@@ -68,10 +68,10 @@ body {
   font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
 }
 .header .period {
-  font-size:15px; color: rgba(248,245,240,0.5);
+  font-size:15px; color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
   letter-spacing: 0.12em; margin-top: 3px;
 }
-.header-right { text-align: right; font-size:15px; color: rgba(248,245,240,0.5); }
+.header-right { text-align: right; font-size:15px; color: var(--wg7); }
 .header-right strong { color: var(--wg1); font-size:16px; display: block; }
 
 /* ── 月份導覽 ── */
@@ -94,15 +94,18 @@ body {
 /* ── 分頁 ── */
 .tabs {
   display: flex; flex-wrap: wrap; /* 窄螢幕頁籤換行全顯示，不藏在右邊要人橫向滑 */
-  background: var(--ink2);
+  background: var(--ink);  /* 原 --ink2 中灰底上未選頁籤文字無法達 AA 對比；改與 header 同深底，wg7 可過 4.9:1 */
   padding: 0 40px; overflow-x: auto;
 }
 .tab {
   padding: 11px 18px; font-size:16px;
-  color: rgba(248,245,240,0.5); cursor: pointer;
+  color: var(--wg7); cursor: pointer;
   border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
+  background: none; border-top: none; border-left: none; border-right: none;  /* 供 <button> 版頁籤 reset */
+  font-family: inherit;
 }
-.tab:hover { color: rgba(248,245,240,0.8); }
+.tab:hover { color: var(--wg1); }
+.tab:focus-visible { outline: 2px solid var(--wg7); outline-offset: -2px; }
 .tab.active { color: var(--wg1); border-bottom-color: var(--wg1); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
