@@ -69,11 +69,11 @@ body {
 .tab-btn {
   padding: 11px 22px; font-size:15px;
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  letter-spacing: .08em; color: rgba(234,231,225,0.45);
+  letter-spacing: .08em; color: var(--wg7);  /* 深底未選頁籤 wg7 過 AA（rgba .45 僅 3.2:1） */
   background: transparent; border: none; border-bottom: 2px solid transparent;
   cursor: pointer; transition: all .18s; white-space: nowrap;
 }
-.tab-btn:hover { color: rgba(234,231,225,0.8); }
+.tab-btn:hover { color: var(--wg1); }
 .tab-btn.active { color: var(--wg1); border-bottom-color: var(--wg1); }
 
 /* ── MAIN ── */

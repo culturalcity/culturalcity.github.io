@@ -29,7 +29,7 @@ extraStyles: |
   .tab-btn{
     padding:12px 24px;font-size:15px;
     font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
-    letter-spacing:.08em;color:rgba(234,231,225,0.45);
+    letter-spacing:.08em;color:var(--wg7); /* 深底未選頁籤 wg7 過 AA（rgba .45 僅 3.2:1） */
     background:transparent;border:none;border-bottom:2px solid transparent;
     cursor:pointer;transition:all .18s;white-space:nowrap;
   }
@@ -107,8 +107,14 @@ extraScripts: |
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
   }
   function toggleTerm(el){
-    el.closest('.term-block').classList.toggle('open');
+    const block = el.closest('.term-block');
+    block.classList.toggle('open');
+    el.setAttribute('aria-expanded', block.classList.contains('open'));  // 螢幕報讀器同步收合狀態
   }
+  // 載入時依預設開合狀態初始化各屆次的 aria-expanded（markup 免逐塊維護）
+  document.querySelectorAll('.term-toggle').forEach(el=>{
+    el.setAttribute('aria-expanded', el.closest('.term-block').classList.contains('open'));
+  });
 ---
 <div class="header">
   <div class="header-inner">

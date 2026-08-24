@@ -26,8 +26,11 @@ extraScripts: |
       t.setAttribute('tabindex', '0');
       var m = (t.getAttribute('onclick') || '').match(/sw\('([\w-]+)'\)/);
       if (m && document.getElementById('tab-' + m[1])) {
+        t.id = 'tab-btn-' + m[1];
         t.setAttribute('aria-controls', 'tab-' + m[1]);
-        document.getElementById('tab-' + m[1]).setAttribute('role', 'tabpanel');
+        var panel = document.getElementById('tab-' + m[1]);
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', t.id);  // 讓 tabpanel 有 accessible name
       }
       t.addEventListener('click', sync);
       t.addEventListener('keydown', function(e){
