@@ -5,24 +5,15 @@ title: 社區公告
 eleventyExcludeFromCollections: true
 extraStyles: |
   :root{
-    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
     --c-meeting:#2B4A6B;--c-work:#8C4800;--c-equip:#8C1F1F;
     --c-rule:#3C3835;--c-event:#1F5C38;--c-safety:#5C3A1F;
   }
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:18px;line-height:1.7;}
-  .header{background:var(--wg41);color:var(--wg1);padding:40px 40px 32px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
-  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-  .header-inner{max-width:760px;margin:0 auto;position:relative;}
-  .back-link{display:inline-flex;align-items:center;gap:6px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:18px;transition:color .18s;}
-  .back-link::before{content:'←';}
-  .back-link:hover{color:var(--wg1);}
+  /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
+  body{font-size:18px;line-height:1.7;}
+  .header{padding:40px 40px 32px;border-bottom:2px solid var(--wg11);}
   .eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
-  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;}
-  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;}
-  .main{max-width:760px;margin:0 auto;padding:36px 0 64px;}
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
-  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}.header h1{font-size:22px;}}
+  .header h1{letter-spacing:.08em;}
+  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 48px;}}
   .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);}
   .filter-btn{display:inline-flex;align-items:center;min-height:44px;padding:5px 14px;font-size:15px;letter-spacing:.06em;font-family:'Noto Sans TC',sans-serif;border-radius:1px;border:1px solid var(--line);background:var(--white);color:var(--wg9);cursor:pointer;transition:all .18s;white-space:nowrap;}
   .filter-btn:hover{border-color:var(--wg11);color:var(--wg41);}

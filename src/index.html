@@ -4,55 +4,18 @@ permalink: /index.html
 title: 
 extraStyles: |
   :root {
-      --wg1:  #EAE7E1;
-      --wg9:  #5F5A55;
-      --wg7:  #ADA8A2;
-      --wg11: #696460;
-      --wg41: #3C3835;
-      --white: #F7F5F2;
-      --line:  rgba(60,56,53,0.12);
-      --radius: 2px;
       --c-finance: #2B4A6B;
       --c-minutes: #3C3835;
       --c-notice:  #6B3A1F;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-      background: var(--wg1);
-      color: var(--wg41);
-      font-size:18px;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-    /* ── HEADER ── */
-    .header {
-      background: var(--wg41);
-      color: var(--wg1);
-      padding: 48px 40px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-        repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
-      pointer-events: none;
-    }
-    .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
-    .header-eyebrow { font-size:15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
-    .header h1 { font-size:32px; font-weight: 700; letter-spacing: 0.12em; color: var(--white); margin-bottom: 6px; line-height: 1.2; }
-    .header-sub { font-size:15px; color: var(--wg7); letter-spacing: 0.18em; }
-    .header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
-    .header-desc { font-size:16px; color: var(--wg7); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; } /* 深底描述文字 wg7 過 AA */
-    /* ── MAIN ── */
-    .main { max-width: 760px; margin: 0 auto; padding: 48px 0 72px; }
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
+    /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器一律沿用 global。
+       .main 只覆寫上下 padding（longhand），左右交給 global 的 600–840 平板帶側距規則。 */
+    body { font-size:18px; line-height: 1.7; }
+    .header h1 { font-size:32px; letter-spacing: 0.12em; line-height: 1.2; }
+    .header-sub { letter-spacing: 0.18em; }
+    .header-desc { font-size:16px; }
+    .main { padding-top: 48px; padding-bottom: 72px; }
     @media(max-width:600px) {
-      .header { padding: 36px 24px 30px; }
       .main { padding: 32px 20px 56px; }
       .header h1 { font-size:24px; }
     }

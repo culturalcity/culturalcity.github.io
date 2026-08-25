@@ -4,26 +4,14 @@ permalink: /minutes/index.html
 title: 會議紀錄
 eleventyExcludeFromCollections: true
 extraStyles: |
-  :root{
-    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;--blue:#2B4A6B;
-    --orange:#6B3A1F;
-    --page-max-width: 760px;
-  }
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:18px;line-height:1.7;}
+  :root{--blue:#2B4A6B;--orange:#6B3A1F;}
+  /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
+  body{font-size:18px;line-height:1.7;}
   /* ── HEADER ── */
-  .header{background:var(--wg41);color:var(--wg1);padding:40px 40px 0;position:relative;overflow:hidden;}
-  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-  .header-inner{max-width:760px;margin:0 auto;position:relative;}
-  .nav-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px;flex-wrap:wrap;}
-  .back{display:inline-flex;align-items:center;gap:6px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;transition:color .18s;}
-  .back::before{content:'←';}.back:hover{color:var(--wg1);}
-  .search-link{display:inline-flex;align-items:center;gap:6px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;transition:color .18s;padding:6px 12px;border:1px solid rgba(234,231,225,0.15);border-radius:var(--radius);}
-  .search-link::before{content:'🔍';font-size:13px;}
-  .search-link:hover{color:var(--wg1);border-color:rgba(234,231,225,0.3);background:rgba(234,231,225,0.04);}
+  .header{padding:40px 40px 0;}
   .eyebrow{font-size:13px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
-  .header h1{font-size:24px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;}
-  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;margin-bottom:24px;}
+  .header h1{font-size:24px;letter-spacing:.08em;margin-bottom:4px;}
+  .header-sub{margin-bottom:24px;}
   /* ── TABS ── */
   .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
   .tab-btn{
@@ -33,11 +21,8 @@ extraStyles: |
     background:transparent;border:none;border-bottom:2px solid transparent;
     cursor:pointer;transition:all .18s;white-space:nowrap;
   }
-  .tab-btn:hover{color:rgba(234,231,225,0.8);}
+  .tab-btn:hover{color:var(--wg1);}
   .tab-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
-  /* ── MAIN ── */
-  .main{max-width:760px;margin:0 auto;padding:36px 0 64px;}
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
   @media(max-width:600px){
     .header{padding:28px 20px 0;}.main{padding:24px 20px 48px;}.header h1{font-size:20px;}
     .tab-btn{padding:10px 16px;font-size:15px;}
