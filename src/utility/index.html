@@ -5,24 +5,15 @@ title: 公共事業
 extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 extraStyles: |
-  :root{
-      --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-      --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
-      --dp:#1F5C38;--dn:#8C1F1F;
-    --page-max-width: 1060px;
-    }
-    body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:18px;line-height:1.75;min-height:100vh;}
-    .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
-    .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-    .header-inner{max-width:1060px;margin:0 auto;position:relative;}
-    .back-link{display:inline-flex;align-items:center;gap:5px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:16px;transition:color .18s;}
-    .back-link:hover{color:var(--wg1);}
-    .back-link::before{content:'←';}
-    .header-eyebrow{font-size:15px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
-    .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
-    .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
-    .main{max-width:1060px;margin:0 auto;padding:32px 0 64px;}
-  @media(max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 600–1140px 帶：對齊 header 40px 內距，避免內文貼邊 */
+  :root{--page-max-width:1060px;} /* 寬內容頁（兩級制 1060）；header-inner／main 由 global 讀此變數 */
+    /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
+    body{font-size:18px;}
+    .header{padding:36px 40px 28px;border-bottom:2px solid var(--wg11);}
+    .header-eyebrow{margin-bottom:8px;}
+    .header h1{letter-spacing:.08em;line-height:1.35;}
+    .header-sub{letter-spacing:.14em;}
+    .main{padding-top:32px;}
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 寬版容器 1060 的平板帶側距（＝寬＋80）；601 起算，手機交給 global 的 20px */
     /* TABS */
     .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
     .tab{padding:10px 22px;font-size:17px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;background:none;}

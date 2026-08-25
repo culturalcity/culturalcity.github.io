@@ -3,26 +3,17 @@ layout: base.njk
 permalink: /utility/water-target.html
 title: 每日用水目標訂定
 extraStyles: |
-  :root{
-    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
-    --c-target:#1C6B3A;--c-warn:#A8481F;--c-blue:#2B4A6B;
-  }
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:18px;line-height:1.75;min-height:100vh;}
-  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 28px;border-bottom:2px solid var(--wg11);position:relative;overflow:hidden;}
-  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-  .header-inner{max-width:760px;margin:0 auto;position:relative;}
-  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:15px;letter-spacing:.1em;color:var(--wg7);text-decoration:none;margin-bottom:6px;margin-right:14px;transition:color .18s;}
-  .back-link:hover{color:var(--wg1);}
-  .back-link::before{content:'←';}
-  .header-eyebrow{font-size:15px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;margin-top:10px;}
-  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;line-height:1.35;}
-  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
-  .main{max-width:760px;margin:0 auto;padding:32px 0 64px;}
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}}
-  @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
-  .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.8;margin-bottom:24px;}
-  .notice-box strong{color:var(--wg41);}
+  :root{--c-target:#1C6B3A;--c-warn:#A8481F;--c-blue:#2B4A6B;}
+  /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器／notice-box 沿用 global */
+  body{font-size:18px;}
+  .header{padding:36px 40px 28px;border-bottom:2px solid var(--wg11);}
+  .back-link{margin-bottom:6px;margin-right:14px;}
+  .header-eyebrow{margin-bottom:8px;margin-top:10px;}
+  .header h1{letter-spacing:.08em;line-height:1.35;}
+  .header-sub{letter-spacing:.14em;}
+  .main{padding-top:32px;}
+  @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}}
+  .notice-box{line-height:1.8;}
   /* 段落標籤 */
   .sl{font-size:13px;letter-spacing:.22em;color:var(--wg11);margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
   .sl::before{content:attr(data-num);font-weight:700;color:var(--wg7);}

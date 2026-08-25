@@ -4,31 +4,23 @@ permalink: /welcome/transition.html
 title: 從老社區搬來的觀念更新
 trilingual: true
 extraStyles: |
-  :root{
-    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
-    --blue:#2B4A6B;--dp:#1F5C38;--warn:#8C5A00;--old:#8C5A00;
-  }
-  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);font-size:18px;line-height:1.8;min-height:100vh;}
+  :root{--blue:#2B4A6B;--warn:#8C5A00;--old:#8C5A00;}
+  /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／header 織紋／main 容器沿用 global */
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:18px;line-height:1.8;}
   /* ── HEADER ── */
-  .header{background:var(--wg41);color:var(--wg1);padding:36px 40px 32px;position:relative;overflow:hidden;}
-  .header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(234,231,225,0.03) 120px,rgba(234,231,225,0.03) 121px),repeating-linear-gradient(178deg,transparent,transparent 60px,rgba(234,231,225,0.02) 60px,rgba(234,231,225,0.02) 61px);pointer-events:none;}
-  .header-inner{max-width:760px;margin:0 auto;position:relative;}
+  .header{padding:36px 40px 32px;}
   .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-  .back{display:inline-flex;align-items:center;gap:5px;font-size:15px;letter-spacing:.08em;color:var(--wg7);text-decoration:none;margin-bottom:16px;transition:color .18s;}
-  .back::before{content:'←';}.back:hover{color:var(--wg1);}
   .eyebrow{font-size:13px;letter-spacing:.28em;color:var(--wg7);margin-bottom:10px;}
-  .header h1{font-size:24px;font-weight:700;letter-spacing:.06em;margin-bottom:6px;line-height:1.35;}
-  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
+  .header h1{font-size:24px;letter-spacing:.06em;line-height:1.35;}
+  .header-sub{letter-spacing:.14em;}
   /* ── LANG SWITCHER ── */
   .lang-switcher{display:flex;gap:6px;flex-shrink:0;margin-top:4px;}
   .lang-btn{padding:4px 10px;font-size:13px;letter-spacing:.06em;border:1px solid rgba(234,231,225,0.25);background:transparent;color:var(--wg7);cursor:pointer;border-radius:1px;transition:all .18s;font-family:inherit;} /* 深底未選語言鈕 wg7 過 AA */
   .lang-btn:hover{color:var(--wg1);border-color:rgba(234,231,225,0.6);}
   .lang-btn.active{color:var(--wg1);border-color:var(--wg1);background:rgba(234,231,225,0.1);}
   /* ── MAIN ── */
-  .main{max-width:760px;margin:0 auto;padding:36px 0 72px;}
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
-  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding:24px 20px 56px;}.header h1{font-size:19px;}}
+  .main{padding-bottom:72px;}
+  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding-top:24px;padding-bottom:56px;}.header h1{font-size:19px;}}
   /* ── SECTION LABEL ── */
   .sec-label{font-size:13px;letter-spacing:.28em;color:var(--wg9);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}

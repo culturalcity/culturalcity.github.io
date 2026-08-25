@@ -5,18 +5,14 @@ title: 全站搜尋
 eleventyExcludeFromCollections: true
 extraStyles: |
   :root{
-    --wg1:#EAE7E1;--wg9:#5F5A55;--wg7:#ADA8A2;--wg11:#696460;--wg41:#3C3835;
-    --white:#F7F5F2;--line:rgba(60,56,53,0.12);--radius:2px;
     --c-notice:#6B3A1F;--c-minutes:#3C3835;--c-finance:#2B4A6B;
     --c-regulation:#1F5C38;--c-guide:#8C5A00;--c-other:#5F5A55;
-    --page-max-width:760px;
   }
-  body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--wg1);color:var(--wg41);min-height:100vh;font-size:18px;line-height:1.7;}
-  .header h1{font-size:26px;font-weight:700;letter-spacing:.08em;color:var(--wg1);margin-bottom:4px;}
-  .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.16em;}
-  .main{max-width:760px;margin:0 auto;padding:32px 0 64px;}
-  @media(max-width:840px){.main{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
-  @media(max-width:600px){.main{padding:24px 20px 48px;}}
+  /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header／main 容器沿用 global */
+  body{font-size:18px;line-height:1.7;}
+  .header h1{letter-spacing:.08em;color:var(--wg1);margin-bottom:4px;}
+  .main{padding-top:32px;}
+  @media(max-width:600px){.main{padding-top:24px;}}
   /* 搜尋框 */
   .search-bar{margin-bottom:20px;}
   .search-input{width:100%;padding:14px 18px;font-size:17px;font-family:inherit;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);color:var(--wg41);box-sizing:border-box;}
