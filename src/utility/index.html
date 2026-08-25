@@ -13,7 +13,7 @@ extraStyles: |
     .header h1{letter-spacing:.08em;line-height:1.35;}
     .header-sub{letter-spacing:.14em;}
     .main{padding-top:32px;}
-  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 寬版容器 1060 的平板帶側距（＝寬＋80）；601 起算，手機交給 global 的 20px */
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 寬版容器 1060 的平板帶側距（＝寬＋80）；601 起算，手機側距由下方 600px 規則設 16px（公共事業系列頁規格） */
     /* TABS */
     .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
     .tab{padding:10px 22px;font-size:17px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;background:none;}
@@ -33,7 +33,6 @@ extraStyles: |
     .kpi-label{font-size:15px;color:var(--wg9);letter-spacing:.06em;margin-bottom:7px;}
     .kpi-val{font-size:22px;font-weight:700;color:var(--wg41);}
     .kpi-sub{font-size:15px;margin-top:5px;}
-    .dp{color:var(--dp);}.dn{color:var(--dn);}
     /* CHART */
     .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
     .panel-hd{padding:11px 18px;border-bottom:1px solid var(--line);font-size:15px;font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:.04em;}
@@ -61,11 +60,9 @@ extraStyles: |
     .tbl-wrap td:first-child,.tbl-wrap td:nth-child(2){background:var(--white);}
     .tbl-wrap th:first-child,.tbl-wrap th:nth-child(2){z-index:2;}
     .tbl-wrap tr.latest td:first-child,.tbl-wrap tr.latest td:nth-child(2){background:#F1EFEC;} /* rgba(60,56,53,.03) 疊 --white 的不透明等值 */
-    .dp{color:var(--dp);font-weight:500;}
-    .dn{color:var(--dn);font-weight:500;}
-    /* NOTICE */
-    .notice-box{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:16px;color:var(--wg9);line-height:1.85;margin-bottom:20px;}
-    @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}.header h1{font-size:22px;}}
+    /* .dp／.dn 與 .notice-box 沿用 global，只留差異 */
+    .notice-box{margin-bottom:20px;}
+    @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}}
     /* DRIVE LINK */
     .drive-link{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
     .drive-link:hover{background:#F2F0EC;border-color:var(--wg11);}
