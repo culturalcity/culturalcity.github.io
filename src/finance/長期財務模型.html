@@ -19,8 +19,8 @@ eleventyExcludeFromCollections: true
 .tabs{background:var(--wg41);display:flex;flex-wrap:wrap;padding:0 40px;overflow-x:auto;border-bottom:1px solid rgba(60,56,53,0.4);}  /* flex-wrap：窄螢幕頁籤換行全顯示，不藏在右邊 */
 .tab{padding:9px 16px;font-size:15px;color:var(--wg7);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:.04em;}  /* 深底用 wg7（wg9 在深底不過無障礙對比） */
 .tab:hover{color:var(--wg1);}.tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
-.main{max-width:var(--page-max-width);margin:0 auto;padding:20px 0 60px;}
-  @media(max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 600–1140px 帶：對齊 header 40px 內距，避免內文貼邊 */
+.main{padding-top:20px;padding-bottom:60px;}  /* 容器寬度與置中沿用 global（讀 --page-max-width），只覆寫上下 */
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 寬版容器 1060 的平板帶側距（＝寬＋80）；手機交給 global 20px */
 .tab-content{display:none;}.tab-content.active{display:block;}
 .sl{font-size:13px;letter-spacing:.2em;color:var(--wg11);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;}
 .sl::after{content:'';flex:1;height:1px;background:var(--line);}
@@ -90,7 +90,6 @@ tr.peak-row td{background:rgba(140,90,0,0.06);}
 .rate-row-del{margin-left:auto;flex-shrink:0;}
 
 /* ── 對齊全站字級規範（覆蓋上方工具預設） ── */
-.header-inner{max-width:1060px;}
 .tabs{padding:0 max(20px,calc((100vw - 1060px)/2 + 20px));}
 .kpi-val{font-size:22px;}
 table{font-size:15px;}

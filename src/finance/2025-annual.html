@@ -5,8 +5,7 @@ title: 財務深度分析報告 2025
 date: 2025-12-31
 eleventyExcludeFromCollections: true   # 2026-07-30 主委決定自列表下架（歷史文件，僅憑網址可達；年報已改依會計年度）
 extraStyles: |
-  :root{--page-max-width:1060px;}
-  .header-inner{max-width:1060px;margin:0 auto;position:relative;}
+  /* 頁寬 1060 與 .header-inner 由 finance.css 提供（2026-08 收斂） */
   .header-eyebrow{font-size:13px;letter-spacing:.28em;color:var(--wg7);margin-bottom:12px;} /* 深底次要文字用 wg7 才過 AA（wg9 深底僅 1.7:1） */
   .header-sub{font-size:15px;color:var(--wg7);letter-spacing:.14em;}
   .header-rule{width:36px;height:1px;background:var(--wg7);margin:18px 0;}
@@ -58,7 +57,7 @@ extraStyles: |
   .note.warn{background:rgba(140,31,31,0.05);border-color:var(--red);color:var(--wg11);}
   .note.tip{background:rgba(31,92,56,0.05);border-color:var(--green);color:var(--wg11);}
   .note.amber{background:rgba(122,92,0,0.06);border-color:var(--amber);color:var(--wg11);}
-  .footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;font-size:15px;color:var(--wg9);letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  .footer{margin-top:40px;font-size:15px;color:var(--wg9);letter-spacing:.06em;gap:6px;}
 summary: '全年損益 +44,570・季度分析・區權會準備'
 ---
 <div class="header">
