@@ -40,7 +40,17 @@
 .main { padding: 32px 0 72px; }                      /* ❌ 四向縮寫會把 global 的平板帶側距蓋成 0 */
 ```
 
-原因：頁面樣式載於 global 之後，同 specificity 的非 media 縮寫規則會壓過 global 的 `@media` 側距——這正是 2026-07「26 頁平板直立貼邊」歷史 bug 的根源。寬版頁只覆寫 `--page-max-width` 並自補 `@media(min-width:601px) and (max-width:寬+80px)` 的側距帶（**601 起算**，別讓它涵蓋手機）。例外：admin／保全機台系列頁刻意「全寬度一律 20px 側距」，那是不同容器規格，保留 shorthand 並加註解。
+原因：頁面樣式載於 global 之後，同 specificity 的非 media 縮寫規則會壓過 global 的 `@media` 側距——這正是 2026-07「26 頁平板直立貼邊」歷史 bug 的根源。
+
+寬版頁（容器寬 W ≠ 760）只覆寫 `--page-max-width: Wpx`，並自補側距帶：
+
+```css
+@media (min-width: 601px) and (max-width: W+80px) {
+  .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); }
+}
+```
+
+三個細節都有理由：**601 起算**（600 以下由 global 手機規則接管，帶若涵蓋手機會把側距壓成 40）；上限 **W+80**（視窗比這窄時容器才會碰到邊）；**帶內 max-width 放寬 80px**——全站是 `box-sizing: border-box`，只加 padding 會把 80px 吃進 W 裡（內容縮成 W−80），跨過斷點又跳回 W，多 40px 的跳動；放寬後內容寬連續。例外：admin／保全機台系列頁刻意「全寬度一律 20px 側距」，那是不同容器規格，保留 shorthand 並加註解。
 
 ## 字型
 
@@ -118,5 +128,5 @@
 - **`minutes.css :root` 重新宣告 `--dp` / `--dn`**——違反「不要 redeclare 基底變數」原則，屬歷史遺留
 - **`minutes.css` 額外變數**：`--warn: #8C5A00`（警示棕黃）、`--blue: #2B4A6B`（會議紀錄專用藍）
 - **`finance.css` 自帶財報命名系統**：`--ink` / `--ink2` / `--paper` / `--red` / `--green` / `--blue` / `--border`。2026-08 起 `--ink3` 已改為 `var(--wg9)` 別名、未用的 `--gold` 已刪；其餘仍是各自存值（色值與 `--wg*` 對應）。完整對接到 `--wg*` 家族是下一步，改動時以 `--ink3` 的別名寫法為範本
-- **頁籤無障礙**：內容檔的頁籤是 `<div class="tab" onclick="sw('key')">` 極簡寫法，role／aria／鍵盤操作由共用 `tabs-a11y.js` 在載入後補上（finance.njk 與長期財務模型共用）；要改頁籤行為只改那一檔
+- **頁籤無障礙**：內容檔的頁籤是 `<div class="tab" onclick="sw('key')">` 極簡寫法，role／aria／roving tabindex／鍵盤操作由共用 `tabs-a11y.js` 在載入後補上；要改頁籤行為只改那一檔。**它不會自動套用到所有 `.tabs`**——啟用方式：套 `base.njk` 的頁在 frontmatter 加 `tabsA11y: true`（finance.njk 已加，所有財報月報自動有）；不套 base 的獨立 HTML 自行在 `<head>` 加 `<script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>`（長期財務模型即此例）
 - **`notice.css` / `regulations.css`**：依規範使用 `--wg*` 家族，符合本文 spec

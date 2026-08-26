@@ -11,7 +11,6 @@
   var tabs = Array.prototype.slice.call(bar.querySelectorAll('.tab'));
   tabs.forEach(function(t){
     t.setAttribute('role', 'tab');
-    t.setAttribute('tabindex', '0');
     var m = (t.getAttribute('onclick') || '').match(/sw\('([\w-]+)'\)/);
     if (m && document.getElementById('tab-' + m[1])) {
       t.id = 'tab-btn-' + m[1];
@@ -28,9 +27,13 @@
       if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
     });
   });
+  // roving tabindex：Tab 鍵只停在「目前選中」的頁籤（tabindex 0），其餘 -1；頁籤之間用方向鍵移動。
+  // 否則 Tab 會逐一停在每個頁籤，且進入時停在第一個而非選中的那個（長期財務模型預設選第 6 個）。
   function sync(){
     tabs.forEach(function(t){
-      t.setAttribute('aria-selected', t.classList.contains('active') ? 'true' : 'false');
+      var on = t.classList.contains('active');
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
     });
   }
   sync();

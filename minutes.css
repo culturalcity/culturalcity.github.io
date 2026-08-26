@@ -348,4 +348,5 @@ body {
 /* 641–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
 @media (min-width: 641px) and (max-width: 840px) {
   .main, .m-nav { padding-left: 40px; padding-right: 40px; }
+  .main { max-width: calc(var(--page-max-width) + 80px); }  /* 同 global：帶內放寬 80px 免得 padding 吃內容寬 */
 }

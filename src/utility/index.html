@@ -13,7 +13,7 @@ extraStyles: |
     .header h1{letter-spacing:.08em;line-height:1.35;}
     .header-sub{letter-spacing:.14em;}
     .main{padding-top:32px;}
-  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;}} /* 寬版容器 1060 的平板帶側距（＝寬＋80）；601 起算，手機側距由下方 600px 規則設 16px（公共事業系列頁規格） */
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;max-width:calc(var(--page-max-width) + 80px);}} /* 寬版容器 1060 的平板帶側距（＝寬＋80，帶內放寬 80px 免得 padding 吃內容寬）；601 起算，手機側距由下方 600px 規則設 16px（公共事業系列頁規格） */
     /* TABS */
     .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
     .tab{padding:10px 22px;font-size:17px;font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;background:none;}
