@@ -23,10 +23,16 @@
     t.addEventListener('keydown', function(e){
       var i = tabs.indexOf(t);
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); moveFocus((i + 1) % tabs.length); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); moveFocus((i - 1 + tabs.length) % tabs.length); }
     });
   });
+  // 方向鍵移焦（manual activation：只移焦，Enter/Space 才切換）——roving tab stop 要跟著焦點走，
+  // 否則移焦後按 Tab 會彈回原選中頁籤而不是離開 tablist。aria-selected 不動，由 sync() 在切換時處理。
+  function moveFocus(idx){
+    tabs.forEach(function(x, k){ x.setAttribute('tabindex', k === idx ? '0' : '-1'); });
+    tabs[idx].focus();
+  }
   // roving tabindex：Tab 鍵只停在「目前選中」的頁籤（tabindex 0），其餘 -1；頁籤之間用方向鍵移動。
   // 否則 Tab 會逐一停在每個頁籤，且進入時停在第一個而非選中的那個（長期財務模型預設選第 6 個）。
   function sync(){

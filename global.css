@@ -52,7 +52,7 @@ body {
    若頁面需要更寬容器（覆寫 --page-max-width 至 W），帶斷點須自行補至 W+80px。 */
 .main { max-width: var(--page-max-width); margin: 0 auto; padding: 36px 0 64px; }
 /* 平板帶：全站 box-sizing:border-box，若只加 padding 會把 80px 吃進 max-width 內、內容縮成 680，
-   跨過 840 斷點又跳回 760（跳 40px）。帶內把 max-width 放寬 80px，內容寬才連續。 */
+   跨過 840 斷點又跳回 760（內容寬跳 80px、左右邊界各移 40px）。帶內把 max-width 放寬 80px，內容寬才連續。 */
 @media (max-width: 840px) { .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); } }
 @media (max-width: 600px) { .main { padding: 28px 20px 48px; } }
 .header-eyebrow { font-size:15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
