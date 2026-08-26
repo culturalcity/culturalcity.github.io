@@ -29,7 +29,7 @@ extraStyles: |
   .result-box.warn{background:rgba(196,90,48,0.18);}
   .rl{font-size:15px;letter-spacing:.06em;color:rgba(234,231,225,0.82);margin-bottom:3px;}
   .rv{font-size:24px;font-weight:700;color:var(--wg1);}
-  .rv .ru{font-size:15px;color:var(--wg7);margin-left:4px;font-weight:400;} /* 深底 15px 單位字：rgba .6 僅 4.4:1，wg7 過 AA */
+  .rv .ru{font-size:15px;color:rgba(234,231,225,0.82);margin-left:4px;font-weight:400;} /* 單位字疊在半透明 .result-box 上（合成底色比 wg41 淺），wg7 在此只有 ~3.7–4.2:1；改用與 .rl 同的 .82 白（合成後 ~5.3:1，一般／警示兩種卡片底皆過 AA） */
   .warn .rv{color:#E8996E;}
   .ac-note{margin-top:12px;font-size:15px;padding:8px 12px;border-radius:var(--radius);}
   .ac-note.no-ac{background:rgba(234,231,225,0.07);color:rgba(234,231,225,0.7);}
