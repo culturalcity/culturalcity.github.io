@@ -139,6 +139,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("*.css");
   // 三語切換共用機制（trilingual:true 頁面由 base.njk 載入）
   eleventyConfig.addPassthroughCopy("lang.js");
+  // 頁籤無障礙漸進增強共用檔（finance.njk 與長期財務模型以 defer 載入）
+  eleventyConfig.addPassthroughCopy("tabs-a11y.js");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");

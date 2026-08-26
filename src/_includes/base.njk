@@ -11,6 +11,7 @@
 {% if extraStyles %}<style>{{ extraStyles | safe }}</style>{% endif %}
 {% if extraHead %}{{ extraHead | safe }}{% endif %}
 {% if trilingual %}<script src="{{ '/lang.js' | cssBust }}" defer></script>{% endif %}
+{% if tabsA11y %}<script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>{% endif %}
 </head>
 <body>
 {%- set alertBanner = collections.notice | activeBanner -%}

@@ -18,6 +18,12 @@ extraStyles: |
   .year-label::after{content:'';flex:1;height:1px;background:var(--border);}
   .report-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
   .report-card{display:flex;align-items:center;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--ink);transition:all .18s;position:relative;overflow:hidden;}
+  /* 卡片改「外層 div＋標題 <a> 撐滿整卡」結構：PDF 才能是真正的 <a>（保留右鍵複製、長按下載），不再是 <a> 內嵌 button */
+  .card-link{color:inherit;text-decoration:none;}
+  .card-link::after{content:'';position:absolute;inset:0;}
+  .card-link:focus-visible{outline:none;}
+  .report-card:focus-within{outline:2px solid var(--wg41);outline-offset:2px;}
+  .pdf-link{position:relative;z-index:1;}
   .report-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background .18s;}
   .report-card:hover{border-color:var(--wg11);background:#F2F0EC;transform:translateX(2px);}
   .report-card:hover::before{background:var(--wg11);}
@@ -81,18 +87,17 @@ extraStyles: |
   <div class="report-list">
 {%- for item in group.items %}
 {%- set isFirstYear = (group.year == collections.financeByYear[0].year) %}
-    <a href="{{ item.data.permalink | replace('/finance/', '') }}" class="report-card{% if loop.first and isFirstYear %} latest{% endif %}">
+    <div class="report-card{% if loop.first and isFirstYear %} latest{% endif %}">
       <div class="card-month">{{ item.date | monthOnly }}月</div>
       <div class="card-meta">
-        <div class="card-title">{{ item.data.title | replace(' 財務月報', '財務月報') }}</div>
+        <div class="card-title"><a class="card-link" href="{{ item.data.permalink | replace('/finance/', '') }}">{{ item.data.title | replace(' 財務月報', '財務月報') }}</a></div>
         <div class="card-period">{{ item.date | dateYM }}-01 ～ {{ item.date | dateYMD | replace('/', '-') }}{% if item.data.publishDate %}・發布：{{ item.data.publishDate }}{% endif %}</div>
 {%- if item.data.pdfUrl %}
-              {# role/tabindex 讓鍵盤搆得到；preventDefault 擋外層 <a> 的預設導航（否則開 PDF 同時也會跳進月報頁） #}
-              <span class="pdf-link" role="button" tabindex="0" onclick="event.preventDefault();event.stopPropagation();window.open('{{ item.data.pdfUrl }}','_blank')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();window.open('{{ item.data.pdfUrl }}','_blank')}">↓ 原始財報 PDF</span>
+              <a class="pdf-link" href="{{ item.data.pdfUrl }}" target="_blank" rel="noopener">↓ 原始財報 PDF</a>
 {%- endif %}
       </div>
       <div class="card-arrow">›</div>
-    </a>
+    </div>
 {%- endfor %}
   </div>
 {%- endfor %}

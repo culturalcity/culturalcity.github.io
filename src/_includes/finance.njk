@@ -4,6 +4,7 @@ pageCss: finance.css
 extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+tabsA11y: true   # base.njk 據此以 cssBust 載入 /tabs-a11y.js（extraHead 是純字串，寫在這裡的 {{ }} 不會展開）
 extraScripts: |
   // 把 .month-nav 搬到 .header 之後（nav 在模板渲染於 content 前，需移到 header 下方）
   (function relocateNav(){
@@ -13,40 +14,7 @@ extraScripts: |
       header.parentNode.insertBefore(nav, header.nextSibling);
     }
   })();
-  // 頁籤無障礙漸進增強：各月報內容檔的 .tab 是 <div onclick>，鍵盤搆不到也沒有語意。
-  // 統一在模板層補 role／aria-selected／aria-controls／鍵盤操作，新舊月報一次全套用，
-  // 內容檔不用改（skill 產新月報照舊格式即可）。
-  (function a11yTabs(){
-    var bar = document.querySelector('.tabs');
-    if (!bar) return;
-    bar.setAttribute('role', 'tablist');
-    var tabs = Array.prototype.slice.call(bar.querySelectorAll('.tab'));
-    tabs.forEach(function(t){
-      t.setAttribute('role', 'tab');
-      t.setAttribute('tabindex', '0');
-      var m = (t.getAttribute('onclick') || '').match(/sw\('([\w-]+)'\)/);
-      if (m && document.getElementById('tab-' + m[1])) {
-        t.id = 'tab-btn-' + m[1];
-        t.setAttribute('aria-controls', 'tab-' + m[1]);
-        var panel = document.getElementById('tab-' + m[1]);
-        panel.setAttribute('role', 'tabpanel');
-        panel.setAttribute('aria-labelledby', t.id);  // 讓 tabpanel 有 accessible name
-      }
-      t.addEventListener('click', sync);
-      t.addEventListener('keydown', function(e){
-        var i = tabs.indexOf(t);
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
-        if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
-      });
-    });
-    function sync(){
-      tabs.forEach(function(t){
-        t.setAttribute('aria-selected', t.classList.contains('active') ? 'true' : 'false');
-      });
-    }
-    sync();
-  })();
+  // 頁籤無障礙漸進增強由共用 /tabs-a11y.js 處理（extraHead 以 defer 載入；長期財務模型也用同一份）
 ---
 {%- set fnav = collections | getFinancePager(page.url) %}
 {%- if fnav %}

@@ -29,7 +29,18 @@
 
 > `--wg9` 2026-06 由舊值 `#898480` 調深至 `#5F5A55`；`--wg7` 為同次無障礙修正新增。詳見 axe 體檢結論（全站 0 對比違規）。
 
-獨立頁面／工具新增時**不要 redeclare** 上述基底變數；只在需要新顏色時補新變數（譬如 `--warn`、`--blue`）。⚠️ 站內仍有約 14 頁 inline `:root` 重宣告了 `--wg9`/`--wg11`（歷史遺留），改色票時這些頁吃不到 global，須逐頁同步——這正是「不要 redeclare」的理由。
+獨立頁面／工具新增時**不要 redeclare** 上述基底變數；只在需要新顏色時補新變數（譬如 `--warn`、`--blue`）。2026-08 設計 review 已把全站頁內重宣告的色票／body／header 織紋／容器全部收斂回 global（實害案例：finance.css 自帶的舊灰 `#898480` 沒跟上 2026-06 的無障礙修正，淺底只有 3.0:1）；各頁 extraStyles 現在**只留與 global 真正不同的覆寫**，並以註解標明「其餘沿用 global」。
+
+## 容器覆寫規則（2026-08 定案，新頁必守）
+
+`.main` 的完整規格在 global.css：桌面置中、600–840px 平板帶左右 40px、手機 20px。頁面若需要不同的**上下** padding，**只能寫 longhand**：
+
+```css
+.main { padding-top: 32px; padding-bottom: 72px; }   /* ✅ 左右交給 global */
+.main { padding: 32px 0 72px; }                      /* ❌ 四向縮寫會把 global 的平板帶側距蓋成 0 */
+```
+
+原因：頁面樣式載於 global 之後，同 specificity 的非 media 縮寫規則會壓過 global 的 `@media` 側距——這正是 2026-07「26 頁平板直立貼邊」歷史 bug 的根源。寬版頁只覆寫 `--page-max-width` 並自補 `@media(min-width:601px) and (max-width:寬+80px)` 的側距帶（**601 起算**，別讓它涵蓋手機）。例外：admin／保全機台系列頁刻意「全寬度一律 20px 側距」，那是不同容器規格，保留 shorthand 並加註解。
 
 ## 字型
 
@@ -106,5 +117,6 @@
 
 - **`minutes.css :root` 重新宣告 `--dp` / `--dn`**——違反「不要 redeclare 基底變數」原則，屬歷史遺留
 - **`minutes.css` 額外變數**：`--warn: #8C5A00`（警示棕黃）、`--blue: #2B4A6B`（會議紀錄專用藍）
-- **`finance.css` 自帶平行命名系統**：使用 `--ink` / `--paper` / `--gold` / `--red` / `--green` / `--blue` / `--border`，**不直接讀 `--wg*` 家族**。源自財報設計 separate evolution，視覺輸出仍與全站對齊（色值對應），但變數名稱沒整合
+- **`finance.css` 自帶財報命名系統**：`--ink` / `--ink2` / `--paper` / `--red` / `--green` / `--blue` / `--border`。2026-08 起 `--ink3` 已改為 `var(--wg9)` 別名、未用的 `--gold` 已刪；其餘仍是各自存值（色值與 `--wg*` 對應）。完整對接到 `--wg*` 家族是下一步，改動時以 `--ink3` 的別名寫法為範本
+- **頁籤無障礙**：內容檔的頁籤是 `<div class="tab" onclick="sw('key')">` 極簡寫法，role／aria／鍵盤操作由共用 `tabs-a11y.js` 在載入後補上（finance.njk 與長期財務模型共用）；要改頁籤行為只改那一檔
 - **`notice.css` / `regulations.css`**：依規範使用 `--wg*` 家族，符合本文 spec
