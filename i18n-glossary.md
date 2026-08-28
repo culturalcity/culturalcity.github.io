@@ -222,6 +222,21 @@
 | 公寓大廈管理條例 | Condominium Management Act | 公寓大廈管理条例 |
 | 內政部營建署 | Construction and Planning Agency, MOI | 内政部営建署 |
 
+## L. 公告類別（frontmatter 的 typeZh／typeEn／typeJa，成套使用）
+> 類別是固定集合，**不可臨時自創**；pillType 是機器代碼，決定色條與篩選。
+
+| 中文（typeZh） | English（typeEn） | 日本語（typeJa） | pillType |
+|---|---|---|---|
+| 設備保養 | Maintenance | 設備保守 | work |
+| 安全警示 | Safety Alert | 安全のお知らせ | safety |
+| 規約規範 | Regulation | 規約規則 | rule |
+| 工程通知 | Construction Notice | 工事・修繕通知 | equip |
+| 節日活動 | Event | イベント | event |
+| 會議通知 | Meeting Notice | 会議通知 | meeting |
+| 會議公告 | Meeting Notice | 会議のお知らせ | meeting |
+| 節能活動 | Energy-Saving Program | 省エネ活動 | event |
+| 人事公告 | Personnel Notice | 人事のお知らせ | staff |
+
 ---
 
 # 二、片語／句型庫
@@ -320,3 +335,11 @@
 - 充電樁 EVチャージャー／charging station/point → EV Charger／EV充電器
 - 曳引鋼索日文「基板の持ち上げ」→「巻上ロープ」
 - 公告模板 bug：英文標題月份殘留「August」、機電欄英日誤貼成電梯內容、4月保養日文日期誤植、水塔「May and May」等。
+
+**2026-08-27 修訂（新增公告類別「人事公告」＋類別對照收錄）**：因總幹事異動公告新增第七個色條類別
+**人事公告／Personnel Notice／人事のお知らせ（pillType `staff`，色 `--c-staff:#6B3F72`，深色 header 版 `#C7A3CF`）**，
+涵蓋總幹事、保全、清潔等現場人員異動與物業人事訊息。同時把既有公告類別整套收進上方 L 區
+（此前對照表未收，是漂移來源）。**已知歷史漂移，暫不回改**：安全警示日文有「安全のお知らせ」(23)／「安全警示」(3)
+兩版、工程通知日文有「工事・修繕通知」(14)／「工事のお知らせ」(3)、設備保養英文有 Maintenance (54)／
+Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonical。同步狀態：① repo canonical、
+② Notion、③ Obsidian 皆已同步（2026-08-27）。

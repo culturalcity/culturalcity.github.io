@@ -7,6 +7,7 @@
   --c-meeting: #2B4A6B;
   --c-safety: #8C1F1F;
   --c-equip: #8C1F1F;
+  --c-staff: #6B3F72;   /* 人事公告（2026-08 新增）*/
   --page-max-width: 760px;  /* 標準寬（兩級制：760 標準 / 1060 寬內容）*/
 }
 
@@ -53,6 +54,7 @@ body {
 .pill-meeting { color: var(--c-meeting); border-color: rgba(43,74,107,.3); background: rgba(43,74,107,.06); }
 .pill-safety { color: var(--c-safety); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
 .pill-equip { color: var(--c-equip); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
+.pill-staff { color: var(--c-staff); border-color: rgba(107,63,114,.3); background: rgba(107,63,114,.06); }
 
 /* 深色 header 上的 pill 覆寫：用淺色版色相，避免暗紅/暗綠融進深底 */
 .header .pill-work    { color: #D49060; background: rgba(212,144,96,.12); border-color: rgba(212,144,96,.4); }
@@ -61,6 +63,7 @@ body {
 .header .pill-meeting { color: #94B5D6; background: rgba(148,181,214,.12); border-color: rgba(148,181,214,.4); }
 .header .pill-safety  { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
 .header .pill-equip   { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
+.header .pill-staff   { color: #C7A3CF; background: rgba(199,163,207,.12); border-color: rgba(199,163,207,.4); }
 
 /* ── 語言切換器 ── */
 .lang-bar {
