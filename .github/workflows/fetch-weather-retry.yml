@@ -59,5 +59,18 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             msg="data: 每日$(IFS=/; printf '%s' "${changed[*]}")更新（retry 補抓）"
             git commit -m "$msg"
-            git push
+            # push 撞車防護：他人或另一支 workflow 同時寫 main 會讓 push 被拒
+            # （2026-08-28 typhoon-alert 即因與人工 push 同秒落地而整支失敗）；
+            # rebase 後最多重試 3 次，仍失敗才讓這步真的紅燈。
+            pushed=0
+            for i in 1 2 3; do
+              if git push; then pushed=1; break; fi
+              echo "push 被拒（第 $i 次），rebase 後重試…"
+              git pull --rebase origin main || break
+              sleep 5
+            done
+            if [ "$pushed" -ne 1 ]; then
+              echo "::error::rebase 重試 3 次後仍無法 push"
+              exit 1
+            fi
           fi
