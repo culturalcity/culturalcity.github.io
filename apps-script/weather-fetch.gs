@@ -17,7 +17,9 @@
 //   邏輯鏡像（同 API、同哨兵規則、同 JSON 序列化 = JSON.stringify(arr)+'\n'），
 //   產出逐位元相同，兩邊互跑不會製造假 diff。改解析規則時兩支要一起改。
 //
-// 安裝（一次）：
+// 安裝（一次；與 heat-poll、apps-script-bills 一樣放 culturalcity85 帳號的 Apps Script，
+// 所有閱大安自動化集中一個帳號，交接只交一個帳號。帳單管線的 Cloud Run 早已持有
+// 同等權限的 GitHub token，這裡再放一把不擴大風險）：
 //   1. GitHub → Settings → Developer settings → Personal access tokens →
 //      Fine-grained → 只授權 culturalcity.github.io 這一個 repo、
 //      Permissions: Contents = Read and write（其餘不用）。
