@@ -25,13 +25,17 @@
 //      Permissions: Contents = Read and write（其餘不用）。
 //      ⚠️ token 有到期日（最長一年），到期抓取會靜默停止——到期前一週在
 //      主日曆放提醒，換新 token 貼回下面第 2 步。
-//   2. Apps Script 專案設定 → 指令碼屬性 → 新增 GITHUB_TOKEN = 上面的 token
+//   2. Apps Script 專案設定 → 指令碼屬性 → 新增 GITHUB_TOKEN = 上面的 token；
+//      順手再加 GITHUB_TOKEN_EXPIRES = 到期日（YYYY-MM-DD），剩 30／7／1 天會寄信提醒
 //   3. 先跑 previewNow()（只抓不寫）看 log 正常 → 跑 setup() 建 trigger
 //   4. 之後可跑 runNow() 手動補一次（無視時間視窗，會真的 commit）
 //
 // 觸發：每 30 分鐘一次，只在台北 06:00–13:59 內工作（鏡像 fetch-weather-retry
-// 的視窗）。每次先看 repo 裡昨天是否已有 → 有就結束（一天最多 16 次輕量 GET）。
-// 13:30 那一班若昨天仍缺，寄一封 email 給本專案擁有者（不是急件，純 awareness）。
+// 的視窗）。everyMinutes(30) 不保證正好落在 :00／:30，前後會漂 1–2 分——所以說法是
+// 「06 點後首班、13:30 後尾班」而不是「06:00 準時」。每次先看 repo 裡昨天是否已有
+// → 有就結束（一天最多 16 次輕量 GET）。
+// 尾班（13:25 起的那一班）若昨天仍缺或執行出錯，寄一封 email 給本專案擁有者
+// （不是急件，純 awareness）；GitHub API 回 401/403（token 到期）當天立刻寄一封。
 
 // ── 常數 ──────────────────────────────────────────
 
@@ -76,13 +80,40 @@ function ghFetch(path, method, payload) {
   var res = UrlFetchApp.fetch(GH_API + path, opts);
   var code = res.getResponseCode();
   var body = res.getContentText();
+  if (code === 401 || code === 403) alertTokenDead(code, body);   // PAT 到期／被撤銷：立刻通知，不等日曆提醒
   if (code < 200 || code >= 300) throw new Error('GitHub ' + method + ' ' + path + ' → HTTP ' + code + ': ' + body.slice(0, 200));
   return JSON.parse(body);
 }
 
-// 讀 repo 裡的 JSON 陣列（Contents API 回 base64；檔案 < 1MB 才能用這條路）
-function ghReadJson(path) {
-  var j = ghFetch('/repos/' + REPO + '/contents/' + path + '?ref=' + BRANCH);
+// 一天只寄一封（每 30 分一班，不設閘會連寄 16 封）
+function alertTokenDead(code, body) {
+  var props = PropertiesService.getScriptProperties();
+  var today = taipeiNow().toISOString().slice(0, 10);
+  if (props.getProperty('PAT_ALERT_DATE') === today) return;
+  props.setProperty('PAT_ALERT_DATE', today);
+  sendAlert('[閱大安] GitHub token 失效，weather-fetch 已停擺',
+    'GitHub API 回 HTTP ' + code + '（' + body.slice(0, 120) + '）。\n' +
+    '最可能：fine-grained PAT 到期或被撤銷。\n' +
+    '處理：GitHub → Settings → Developer settings → Personal access tokens 重新產生一把\n' +
+    '（只給 culturalcity.github.io、Contents 讀寫），貼回本 Apps Script 專案的指令碼屬性 GITHUB_TOKEN。\n' +
+    '停擺期間 GitHub Actions 備援仍會照舊抓（只是不準時）。');
+}
+
+function sendAlert(subject, text) {
+  try { MailApp.sendEmail(Session.getEffectiveUser().getEmail(), subject, text); }
+  catch (e) { Logger.log('寄信失敗：' + e.message); }
+}
+
+// 尾班判定：everyMinutes(30) 的觸發會前後漂移 1–2 分，13:29 跑過就不會再有 13:30 的班，
+// 所以從 13:25 起都算尾班（瑩兒 2026-08-30 提醒）
+function isLastRun(h, mi) { return h === 13 && mi >= 25; }
+
+// 讀 repo 裡的 JSON 陣列（Contents API 回 base64；檔案 < 1MB 才能用這條路）。
+// ref 一律傳「本班一開始固定下來的 HEAD SHA」而不是分支名：讀檔與 commit 之間若有人
+// push，我們的 parent 仍是舊 SHA → 更新 ref 會被拒 → 下一班重來，不會蓋掉別人的改動
+//（冰兒 2026-08-30 指出的競態）。
+function ghReadJson(path, ref) {
+  var j = ghFetch('/repos/' + REPO + '/contents/' + path + '?ref=' + ref);
   var text = Utilities.newBlob(Utilities.base64Decode(j.content.replace(/\n/g, ''))).getDataAsString('UTF-8');
   return JSON.parse(text);
 }
@@ -170,10 +201,12 @@ function serialize(arr) { return JSON.stringify(arr) + '\n'; }
 
 // ── GitHub 單一 commit（Git Data API） ─────────────
 
-function ghCommitFiles(files, message) {
-  // files: [{path, content}]
-  var ref = ghFetch('/repos/' + REPO + '/git/ref/heads/' + BRANCH);
-  var headSha = ref.object.sha;
+function ghHeadSha() {
+  return ghFetch('/repos/' + REPO + '/git/ref/heads/' + BRANCH).object.sha;
+}
+
+function ghCommitFiles(files, message, headSha) {
+  // files: [{path, content}]；headSha = 本班開頭讀檔時的 HEAD（同一個 SHA 當 parent）
   var headCommit = ghFetch('/repos/' + REPO + '/git/commits/' + headSha);
   var baseTree = headCommit.tree.sha;
 
@@ -184,10 +217,10 @@ function ghCommitFiles(files, message) {
   var newTree = ghFetch('/repos/' + REPO + '/git/trees', 'post', { base_tree: baseTree, tree: tree });
   var commit = ghFetch('/repos/' + REPO + '/git/commits', 'post', {
     message: message, tree: newTree.sha, parents: [headSha],
-    author: { name: 'weather-bot (Apps Script)', email: 'culturalcity85@gmail.com', date: new Date().toISOString() }
+    author: { name: 'weather-bot (Apps Script)', email: '269195393+culturalcity@users.noreply.github.com', date: new Date().toISOString() }
   });
-  // 若這一步因為別人同時 push 而 422，就讓它丟錯：下一班 30 分鐘後會重新
-  // 讀 repo、重新合併、重新 commit——天然重試，不必在這裡自己 rebase。
+  // 若 HEAD 已被別人推走，這一步會 422（non-fast-forward）：就讓它丟錯，下一班 30 分鐘後
+  // 會重新固定 HEAD、重新讀檔、重新合併、重新 commit——天然重試，不必在這裡自己 rebase。
   ghFetch('/repos/' + REPO + '/git/refs/heads/' + BRANCH, 'patch', { sha: commit.sha, force: false });
   return commit.sha;
 }
@@ -198,8 +231,9 @@ function fetchAndCommit(dryRun) {
   var yestISO = yesterdayTaipeiISO();
   var y = Number(yestISO.slice(0, 4)), m = Number(yestISO.slice(5, 7));
 
-  var tempArr = ghReadJson(TEMP_PATH);
-  var rainArr = ghReadJson(RAIN_PATH);
+  var headSha = ghHeadSha();   // 先固定 HEAD，之後讀檔與 commit 都綁這個 SHA
+  var tempArr = ghReadJson(TEMP_PATH, headSha);
+  var rainArr = ghReadJson(RAIN_PATH, headSha);
   var hasTemp = tempArr.some(function (r) { return r.d === yestISO; });
   var hasRain = rainArr.some(function (r) { return r.d === yestISO; });
   if (hasTemp && hasRain) {
@@ -227,11 +261,37 @@ function fetchAndCommit(dryRun) {
   }
 
   var names = files.map(function (f) { return f.path.indexOf('temp') >= 0 ? '氣溫' : '降雨'; }).join('/');
-  var sha = ghCommitFiles(files, 'data: 每日' + names + '更新（Apps Script weather-fetch）');
+  var sha = ghCommitFiles(files, 'data: 每日' + names + '更新（Apps Script weather-fetch）', headSha);
   Logger.log('✅ commit ' + sha.slice(0, 7) + '：' + files.map(function (f) { return f.path; }).join(', '));
 
-  var stillMissing = merged.temp.every(function (r) { return r.d !== yestISO; });
-  return { done: !stillMissing };
+  // 兩個維度都有昨天才算完成（只看 temp 會在 rain 缺值時誤報完成——冰兒指出）
+  var gotTemp = merged.temp.some(function (r) { return r.d === yestISO; });
+  var gotRain = merged.rain.some(function (r) { return r.d === yestISO; });
+  return { done: gotTemp && gotRain };
+}
+
+// ── PAT 到期預警 ──────────────────────────────────
+// 指令碼屬性 GITHUB_TOKEN_EXPIRES（YYYY-MM-DD，建 token 時順手填）；剩 30／7／1 天各寄一封，
+// 過期後每天一封。沒填就跳過（仍有 401/403 即時告警兜底）。
+function checkTokenExpiry() {
+  var props = PropertiesService.getScriptProperties();
+  var exp = props.getProperty('GITHUB_TOKEN_EXPIRES');
+  if (!exp) return;
+  var today = taipeiNow().toISOString().slice(0, 10);
+  var daysLeft = Math.round((new Date(exp + 'T00:00:00Z') - new Date(today + 'T00:00:00Z')) / 86400000);
+  var thresholds = [30, 7, 1];
+  var hit = null;
+  for (var i = 0; i < thresholds.length; i++) if (daysLeft <= thresholds[i]) hit = thresholds[i];
+  if (daysLeft <= 0) hit = 0;
+  if (hit === null) return;
+  var key = hit === 0 ? today : String(hit);   // 過期後每天一封；到期前每個門檻一封
+  if (props.getProperty('TOKEN_EXPIRY_ALERTED') === key) return;
+  props.setProperty('TOKEN_EXPIRY_ALERTED', key);
+  sendAlert('[閱大安] GitHub token ' + (daysLeft <= 0 ? '已過期' : '剩 ' + daysLeft + ' 天到期') + '（weather-fetch）',
+    'GITHUB_TOKEN 到期日：' + exp + '。\n' +
+    '請到 GitHub → Settings → Developer settings → Personal access tokens 重新產生\n' +
+    '（只給 culturalcity.github.io、Contents 讀寫），貼回本專案指令碼屬性 GITHUB_TOKEN，\n' +
+    '並把 GITHUB_TOKEN_EXPIRES 改成新到期日。');
 }
 
 // ── trigger 入口 ──────────────────────────────────
@@ -241,17 +301,25 @@ function checkWeather() {
   var h = t.getUTCHours(), mi = t.getUTCMinutes();
   if (h < 6 || h > 13) return;   // 06:00–13:59 台北
 
+  var yest = yesterdayTaipeiISO();
+  try { checkTokenExpiry(); } catch (e) { Logger.log('到期檢查失敗：' + e.message); }
   try {
     var r = fetchAndCommit(false);
-    if (!r.done && h === 13 && mi >= 30) {
-      var me = Session.getEffectiveUser().getEmail();
-      MailApp.sendEmail(me, '[閱大安] 昨日氣溫資料到 13:30 仍未取得',
-        yesterdayTaipeiISO() + ' 的 CODiS 資料到今天 13:30 仍缺，weather-fetch 已停止今日重試。\n' +
+    if (!r.done && isLastRun(h, mi)) {
+      sendAlert('[閱大安] 昨日氣溫資料到尾班仍未取得',
+        yest + ' 的 CODiS 資料到今天 13:30 仍缺，weather-fetch 已停止今日重試。\n' +
         '可能：CODiS 故障或回缺值哨兵。明天的班會連同今天一起補（抓整月）。\n' +
         '若連日皆缺，查 https://codis.cwa.gov.tw 是否異常。');
     }
   } catch (e) {
-    Logger.log('❌ ' + e.message);   // 不寄信：下一班 30 分鐘後自動重試
+    // 中間班次出錯不寄信（下一班 30 分後自動重試）；但尾班出錯必須寄，
+    // 否則整天靜默失敗沒人知道（瑩兒 2026-08-30 指出的漏洞）
+    Logger.log('❌ ' + e.message);
+    if (isLastRun(h, mi)) {
+      sendAlert('[閱大安] weather-fetch 尾班出錯，' + yest + ' 資料未寫入',
+        '最後一班（' + fmt2(h) + ':' + fmt2(mi) + '）執行失敗：\n' + e.message + '\n\n' +
+        '請看 Apps Script 執行紀錄。GitHub Actions 備援仍會照舊抓（只是不準時）。');
+    }
   }
 }
 

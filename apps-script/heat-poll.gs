@@ -2,7 +2,7 @@
 // 閱大安 Heat Alert Polling（Apps Script）
 // ═══════════════════════════════════════════════════════════════
 //
-// 每 5 分鐘 trigger：07:30-15:00 台北 window 內偵測 CWA W29 高溫資訊，
+// 每 5 分鐘 trigger：07:30-15:05 台北 window 內偵測 CWA W29 高溫資訊，
 // 若臺北今日有 advisory，建立 Google Calendar 全天事件給總幹事。
 // （2026-07-20 視窗從 07:30-09:00 拉長到 15:00：當日 CWA 11:35 才把臺北
 //   納入橘燈，落在舊視窗外而漏建。15:00 後才發的燈號離 17:00 失效太近，
@@ -149,11 +149,10 @@ function ensureCalendarEvent(level, today) {
     event = cal.createAllDayEvent(title, date, { description: desc });
     Logger.log('Created: ' + title);
   }
-  if (level.num === '3') {
-    event.setColor(CalendarApp.EventColor.RED);
-  } else {
-    event.setColor(CalendarApp.EventColor.ORANGE);
-  }
+  // 事件顏色跟燈色走（黃燈以前也塗橙色，冰兒 2026-08-30 點出；下次貼回後台生效）
+  if (level.num === '3') event.setColor(CalendarApp.EventColor.RED);
+  else if (level.num === '2') event.setColor(CalendarApp.EventColor.ORANGE);
+  else event.setColor(CalendarApp.EventColor.YELLOW);
 }
 
 // ── 主函數（trigger 呼叫） ────────────────────────
