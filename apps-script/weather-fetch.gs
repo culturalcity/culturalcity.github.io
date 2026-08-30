@@ -23,10 +23,11 @@
 //   1. GitHub → Settings → Developer settings → Personal access tokens →
 //      Fine-grained → 只授權 culturalcity.github.io 這一個 repo、
 //      Permissions: Contents = Read and write（其餘不用）。
-//      ⚠️ token 有到期日（最長一年），到期抓取會靜默停止——到期前一週在
-//      主日曆放提醒，換新 token 貼回下面第 2 步。
-//   2. Apps Script 專案設定 → 指令碼屬性 → 新增 GITHUB_TOKEN = 上面的 token；
-//      順手再加 GITHUB_TOKEN_EXPIRES = 到期日（YYYY-MM-DD），剩 30／7／1 天會寄信提醒
+//      Expiration 選 No expiration（2026-08-30 主委定案），就不會有「到期靜默停抓」
+//      的問題；若被撤銷，GitHub 回 401/403 時會當天寄信告警。
+//   2. Apps Script 專案設定 → 指令碼屬性 → 新增 GITHUB_TOKEN = 上面的 token。
+//      （只有在 token 設了到期日時，才另加 GITHUB_TOKEN_EXPIRES = YYYY-MM-DD，
+//        剩 30／7／1 天會寄信提醒；沒設到期日就不用填、程式會跳過檢查）
 //   3. 先跑 previewNow()（只抓不寫）看 log 正常 → 跑 setup() 建 trigger
 //   4. 之後可跑 runNow() 手動補一次（無視時間視窗，會真的 commit）
 //
