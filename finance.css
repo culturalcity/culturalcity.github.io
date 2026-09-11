@@ -75,25 +75,28 @@ body {
 /* ── 月份導覽 ── */
 .month-nav {
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(255,255,255,0.06);
+  background: var(--wg41);  /* 與刊頭同深底：本列夾在刊頭與頁籤兩條深色列之間。
+                               原 rgba(255,255,255,.06) 是它還在刊頭內時的疊色；
+                               2026-06-20 改由模板產生並搬到刊頭下方後就落在淺底上、等於沒有底色 */
   border-top: 1px solid rgba(234,231,225,0.1);
-  padding: 10px 48px;
+  /* 橫向內距跟著置中容器走，讓 ←/→ 與刊頭標題、內文切齊；視窗不夠寬時退回 40px */
+  padding: 10px max(40px, calc((100% - var(--page-max-width)) / 2));
 }
 .month-nav a, .month-nav span {
   font-size:15px; letter-spacing: .1em;
-  color: var(--wg9); text-decoration: none;
+  color: var(--wg7); text-decoration: none;  /* 深底用 wg7（wg9 是淺底用的，在深底僅約 2:1） */
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 0; transition: color .18s;
 }
-.month-nav a:hover { color: var(--wg41); }
+.month-nav a:hover { color: var(--wg1); }
 .month-nav .disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-@media (max-width: 600px) { .month-nav { padding: 10px 20px; } }
+@media (max-width: 600px) { .month-nav { padding: 10px 24px; } }  /* 對齊手機版 .header 的 24px */
 
 /* ── 分頁 ── */
 .tabs {
   display: flex; flex-wrap: wrap; /* 窄螢幕頁籤換行全顯示，不藏在右邊要人橫向滑 */
   background: var(--ink);  /* 原 --ink2 中灰底上未選頁籤文字無法達 AA 對比；改與 header 同深底，wg7 可過 4.9:1 */
-  padding: 0 40px; overflow-x: auto;
+  padding: 0 max(40px, calc((100% - var(--page-max-width)) / 2)); overflow-x: auto;  /* 同 .month-nav：跟著置中容器，別黏在視窗邊 */
 }
 .tab {
   padding: 11px 18px; font-size:16px;
@@ -241,5 +244,6 @@ tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04
 /* 手機：財報頁先前完全沒有側距（既有 bug），補齊並對齊全站 header24/內文20 慣例 */
 @media (max-width: 600px) {
   .header { padding-left: 24px; padding-right: 24px; }
+  .tabs { padding-left: 24px; padding-right: 24px; }
   .main { padding-left: 20px; padding-right: 20px; }
 }
