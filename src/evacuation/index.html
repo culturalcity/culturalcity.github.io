@@ -6,7 +6,7 @@ trilingual: true
 extraStyles: |
   :root{--exit:#1C6B3A;--fire:#8C1F1F;}
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／header 織紋／main 容器／lang-block 顯示機制與日文字型沿用 global */
-  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:18px;}
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:var(--fs-body);}
   .header{padding:36px 40px 28px;}
   .header-eyebrow{margin-bottom:8px;}
   .header h1{letter-spacing:.08em;line-height:1.35;}
@@ -14,7 +14,7 @@ extraStyles: |
   /* 語言切換鈕：深色 header 版（同公告 notice.css 慣例；global 的 .lang-btn 是淺色 pill 版，此處覆寫） */
   .lang-bar{background:var(--wg41);border-top:1px solid rgba(234,231,225,0.1);padding:0 40px;}
   .lang-bar-inner{max-width:var(--page-max-width);margin:0 auto;display:flex;}
-  .lang-btn{padding:10px 18px;font-size:15px;font-family:inherit;letter-spacing:.06em;color:var(--wg7);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;} /* 深底未選語言鈕統一 wg7 token（同 notice.css） */
+  .lang-btn{padding:10px 18px;font-size:var(--fs-small);font-family:inherit;letter-spacing:.06em;color:var(--wg7);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;} /* 深底未選語言鈕統一 wg7 token（同 notice.css） */
   .lang-btn:hover{color:var(--wg1);}
   .lang-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
   .main{padding-top:32px;}
@@ -22,7 +22,7 @@ extraStyles: |
   /* 說明 */
   .notice-box{border-left:3px solid var(--exit);margin-bottom:22px;}
   /* 文字圖例 */
-  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:22px;font-size:15px;color:var(--wg11);}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:22px;font-size:var(--fs-small);color:var(--wg11);}
   .legend .li{display:flex;align-items:center;gap:6px;}
   .legend .sw{width:22px;height:0;border-top-width:3px;border-top-style:solid;display:inline-block;}
   .legend .sw.exit{border-color:var(--exit);}
@@ -31,33 +31,33 @@ extraStyles: |
   .legend .dot.fire{background:var(--fire);}
   .legend .dot.you{background:#E8B400;border-radius:50%;}
   /* 樓層面板 */
-  .panel-label{font-size:13px;letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .panel-label{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
   .floor-panel{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:26px;}
   @media(max-width:560px){.floor-panel{grid-template-columns:repeat(4,1fr);}}
   .fbtn{appearance:none;font-family:inherit;cursor:pointer;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);color:var(--wg41);padding:12px 4px;text-align:center;transition:all .15s;line-height:1.25;}
   .fbtn:hover{border-color:var(--wg11);background:#F2F0EC;}
-  .fbtn .fn{display:block;font-size:18px;font-weight:700;letter-spacing:.04em;}
-  .fbtn .fs{display:block;font-size:13px;color:var(--wg9);letter-spacing:.04em;margin-top:1px;}
+  .fbtn .fn{display:block;font-size:var(--fs-body);font-weight:700;letter-spacing:.04em;}
+  .fbtn .fs{display:block;font-size:var(--fs-caption);color:var(--wg9);letter-spacing:.04em;margin-top:1px;}
   .fbtn.b{background:rgba(60,56,53,0.04);}
   .fbtn.active{background:var(--wg41);border-color:var(--wg41);color:var(--wg1);}
   .fbtn.active .fs{color:rgba(234,231,225,0.65);}
   /* 圖面檢視 */
   .viewer{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
   .viewer-hd{padding:11px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-  .viewer-title{font-size:17px;font-weight:700;color:var(--wg41);letter-spacing:.04em;}
-  .viewer-title .vt-sub{font-size:15px;font-weight:400;color:var(--wg9);margin-left:8px;letter-spacing:.02em;}
+  .viewer-title{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:.04em;}
+  .viewer-title .vt-sub{font-size:var(--fs-small);font-weight:400;color:var(--wg9);margin-left:8px;letter-spacing:.02em;}
   .viewer-acts{display:flex;gap:8px;}
-  .vbtn{appearance:none;font-family:inherit;font-size:15px;letter-spacing:.04em;cursor:pointer;background:transparent;border:1px solid var(--wg11);color:var(--wg11);border-radius:var(--radius);padding:6px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;}
+  .vbtn{appearance:none;font-family:inherit;font-size:var(--fs-small);letter-spacing:.04em;cursor:pointer;background:transparent;border:1px solid var(--wg11);color:var(--wg11);border-radius:var(--radius);padding:6px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;}
   .vbtn:hover{background:var(--wg11);color:var(--wg1);}
   .viewer-bd{padding:14px;background:#FBFAF8;}
   .viewer-bd img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius);cursor:zoom-in;background:#fff;}
-  .viewer-tip{font-size:15px;color:var(--wg9);text-align:center;padding:10px 14px 2px;letter-spacing:.04em;}
+  .viewer-tip{font-size:var(--fs-small);color:var(--wg9);text-align:center;padding:10px 14px 2px;letter-spacing:.04em;}
   /* 全螢幕燈箱 */
   .lightbox{position:fixed;inset:0;background:rgba(28,25,23,0.94);z-index:99;display:none;align-items:center;justify-content:center;overflow:auto;padding:16px;cursor:zoom-out;}
   .lightbox.open{display:flex;}
   .lightbox img{max-width:none;width:auto;min-width:60%;border-radius:2px;background:#fff;}
-  .lightbox-close{position:fixed;top:14px;right:18px;font-size:30px;line-height:1;color:rgba(234,231,225,0.8);cursor:pointer;background:none;border:none;z-index:100;}
-  .footer{padding-top:18px;margin-top:36px;font-size:15px;color:var(--wg9);letter-spacing:.06em;gap:6px;}
+  .lightbox-close{position:fixed;top:14px;right:18px;font-size:var(--fs-display);line-height:1;color:rgba(234,231,225,0.8);cursor:pointer;background:none;border:none;z-index:100;}
+  .footer{padding-top:18px;margin-top:36px;font-size:var(--fs-small);color:var(--wg9);letter-spacing:.06em;gap:6px;}
   /* 列印：只印當前樓層圖 */
   @media print{
     body{background:#fff;}

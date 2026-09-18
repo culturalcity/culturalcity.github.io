@@ -54,24 +54,34 @@
 
 ## 字型
 
-- `Noto Sans TC` 從 Google Fonts CDN 載入，weight 300 / 400 / 500 / 700
+- `Noto Sans TC` 從 Google Fonts CDN 載入，只載 weight 400 / 500 / 700
 - fallback：`Microsoft JhengHei`, sans-serif
-- 內文：18px / 行高 1.75（手機 17px）
 
-### 字級階梯（2026-06 向 gov.uk 對齊放大一級）
+### 字級表（2026-09 收斂，global.css `:root` 是唯一來源）
 
 走 gov.uk「大、少」精神：可讀性優先、用少數幾階、**不低於 13px**（受眾含長輩）。
 
-| 級 | px | 用途 |
+| 變數 | px | 用途 |
 |---|---|---|
-| 內文 | 18（手機 17） | 正文 body |
-| 次要 | 15 | 說明、表格欄、卡片描述、callout |
-| 小標/meta | 13 | eyebrow、副標、日期、標籤、footer、圖註（**最小級，勿再低於此**）|
-| 中標 | 16 / 17 | 區塊小標、強調文字 |
-| 標題 | 19 / 22 / 24 / 26 / 44 | h1／章節標題（未動，本就夠大）|
+| `--fs-caption` | 13 | 標籤、表頭、區塊小標、徽章（**最小級**）|
+| `--fs-small`   | 15 | 次要資訊：日期、廠商名、頁尾、按鈕、麵包屑 |
+| `--fs-dense`   | 16 | 表格、清單、卡片、提示框內文 |
+| `--fs-body`    | 18（手機 17） | 正文段落 |
+| `--fs-heading` | 22 | 頁內小標、數字重點 |
+| `--fs-title`   | 26（手機 22） | 頁面主標題 h1 |
+| `--fs-display` | 32 | 首頁刊頭、大數字 |
 
-> ⚠️ 字級散落各檔硬寫 px（**無 token**），改階梯需逐檔掃。2026-06 全站一次性放大（11/12→13、13/14→15、15→16、16→17、17→18、18→19）。
-> **例外不動**：`admin/`（總幹事工具＋每日公告卡片是**凍結像素**）、`minutes/agm-5-1-deck.html`（簡報用 vw 單位）、Chart.js 圖表內標籤（JS 設定）。
+**寫法規則**：`font-size` 一律寫 `var(--fs-*)`，不寫數字；圖示要放大才用 `calc(var(--fs-*) * N)`。
+要調整全站字級，只改 global.css 那七個數字。
+
+### 字重：只用三級
+
+`400` 一般、`500` 中等、`700` 粗。**不用 600**：網路字型沒有 600 這一檔，瀏覽器會直接顯示成 700，寫 600 以為是半粗，其實跟標題一樣粗（2026-09 前全站有 110 處這種假層級）。
+
+### 建置守門
+
+`scripts/check-type-scale.js` 在每次建置前掃 `src/` 與根目錄 css：出現數字字級或 400／500／700 以外的字重，**建置直接失敗**，錯誤訊息會列出檔名與行號。
+例外（不掃）：`minutes/agm-5-1-deck.html`（簡報用 vw 單位）、`admin/utility/`（每日公告卡片是凍結像素）、`images/` 下的 SVG。Chart.js 圖表標籤由 JS 設定，也不在範圍內。
 
 ## Header 紋理（全站共用）
 
@@ -93,9 +103,9 @@
 
 標準 header 三段結構（class 名稱固定，不要自創縮寫版）：
 
-1. 英文 eyebrow（`.header-eyebrow`，13px / letter-spacing .25em）
-2. 中文 h1（26px / letter-spacing .1em / 粗體）
-3. 副標（`.header-sub`，14px / letter-spacing .16em）——通常寫「`CULTURAL CITY COMMUNITY ・ 閱大安管理委員會`」
+1. 英文 eyebrow（`.header-eyebrow`，`--fs-small` / letter-spacing .25em）
+2. 中文 h1（`--fs-title` / letter-spacing .1em / 粗體）
+3. 副標（`.header-sub`，`--fs-small` / letter-spacing .16em）——通常寫「`CULTURAL CITY COMMUNITY ・ 閱大安管理委員會`」
 
 範例頁見 `src/index.html`。
 
@@ -113,7 +123,7 @@
 少數頁面是「自包式單一 HTML」，不走本 repo 的 11ty build、要能雙擊開啟或離線（例如得獎自評分析頁）。這類頁**吃不到 `base.njk` 與 `global.css`**，必須**自我內含**以下，才能與全站一致：
 
 - **色票／字型／圓角**：把上方 `:root` 變數、`Noto Sans TC`、`--radius:2px` 直接寫進該檔。此處 redeclare 是**必要例外**（與站內頁「不要 redeclare」相反——因為沒有 global 可繼承）。
-- **字級**：`body{font-size:18px; line-height:1.75}`，套上方字級階梯；資料密集表格可酌減但**不低於 13px**。
+- **字級**：把上方字級表的七個 `--fs-*` 變數一起寫進該檔的 `:root`，其餘照站內寫法用 `var(--fs-*)`。
 - **Header 紋理**：用上方官方那組 `repeating-linear-gradient`（120px／60px・wg1 3%/2%），**勿自創密斜紋**（2px/6px 那種）。
 - **Favicon（最易漏）**：不能用 `/favicon.svg` 絕對路徑（單檔無網站根 → 404）。改把 repo 根 `favicon.svg` 內嵌成 data-URI：
   ```html

@@ -7,14 +7,14 @@ extraStyles: |
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global。
      --ink／--paper 系列是本頁沿用財報色名的別名，對接 global 色票、不另存數值。 */
   :root{--ink:var(--wg41);--ink2:var(--wg11);--ink3:var(--wg9);--paper2:#F0EDE8;--border:var(--line);}
-  body{font-size:18px;line-height:1.7;}
+  body{font-size:var(--fs-body);line-height:1.7;}
   .header{color:#f8f5f0;padding:36px 32px 28px;border-bottom:3px solid var(--wg11);}
-  .header h1{font-size:24px;letter-spacing:.06em;margin-bottom:4px;}
-  .header p{font-size:15px;color:var(--wg7);letter-spacing:.1em;} /* 深底次要文字用 wg7 過 AA；rgba .45 僅 3.5:1 */
-  .header-badge{display:inline-block;margin-top:12px;background:rgba(234,231,225,.12);border:1px solid rgba(234,231,225,.25);color:var(--wg1);font-size:15px;padding:3px 10px;border-radius:10px;letter-spacing:.06em;}
+  .header h1{font-size:var(--fs-heading);letter-spacing:.06em;margin-bottom:4px;}
+  .header p{font-size:var(--fs-small);color:var(--wg7);letter-spacing:.1em;} /* 深底次要文字用 wg7 過 AA；rgba .45 僅 3.5:1 */
+  .header-badge{display:inline-block;margin-top:12px;background:rgba(234,231,225,.12);border:1px solid rgba(234,231,225,.25);color:var(--wg1);font-size:var(--fs-small);padding:3px 10px;border-radius:10px;letter-spacing:.06em;}
   .main{padding-top:32px;padding-bottom:60px;} /* 只覆寫上下，左右側距交給 global 的平板帶規則 */
-  .notice{background:rgba(105,100,96,.06);border:1px solid rgba(105,100,96,.18);border-radius:var(--radius);padding:12px 16px;font-size:15px;color:var(--ink3);margin-bottom:28px;line-height:1.8;}
-  .year-label{font-size:15px;font-weight:700;letter-spacing:.2em;color:var(--wg11);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+  .notice{background:rgba(105,100,96,.06);border:1px solid rgba(105,100,96,.18);border-radius:var(--radius);padding:12px 16px;font-size:var(--fs-small);color:var(--ink3);margin-bottom:28px;line-height:1.8;}
+  .year-label{font-size:var(--fs-small);font-weight:700;letter-spacing:.2em;color:var(--wg11);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
   .year-label::after{content:'';flex:1;height:1px;background:var(--border);}
   .report-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
   .report-card{display:flex;align-items:center;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--ink);transition:all .18s;position:relative;overflow:hidden;}
@@ -29,32 +29,32 @@ extraStyles: |
   .report-card:hover::before{background:var(--wg11);}
   .report-card.latest::before{background:var(--wg41);}
   .report-card.latest{border-color:rgba(60,56,53,.35);}
-  .card-month{font-size:20px;font-weight:700;color:var(--ink);min-width:60px;letter-spacing:-.01em;}
+  .card-month{font-size:var(--fs-heading);font-weight:700;color:var(--ink);min-width:60px;letter-spacing:-.01em;}
   .card-meta{flex:1;padding:0 14px;}
-  .card-title{font-size:16px;font-weight:500;color:var(--ink2);margin-bottom:2px;}
-  .card-period{font-size:15px;color:var(--ink3);}
+  .card-title{font-size:var(--fs-dense);font-weight:500;color:var(--ink2);margin-bottom:2px;}
+  .card-period{font-size:var(--fs-small);color:var(--ink3);}
   .card-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-  .badge{font-size:13px;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .badge{font-size:var(--fs-caption);padding:2px 8px;border-radius:10px;white-space:nowrap;}
   .badge-new{background:rgba(60,56,53,.1);color:var(--wg41);border:1px solid rgba(60,56,53,.25);}
   .badge-pos{background:rgba(31,92,56,.1);color:#1F5C38;border:1px solid rgba(31,92,56,.25);}
   .badge-neg{background:rgba(140,31,31,.1);color:#8C1F1F;border:1px solid rgba(140,31,31,.25);}
   .badge-nt{background:rgba(105,100,96,.1);color:var(--wg11);border:1px solid rgba(105,100,96,.3);}
-  .card-arrow{font-size:18px;color:var(--ink3);margin-left:8px;transition:transform .18s,color .18s;}
+  .card-arrow{font-size:var(--fs-body);color:var(--ink3);margin-left:8px;transition:transform .18s,color .18s;}
   .report-card:hover .card-arrow{transform:translateX(4px);color:var(--wg11);}
-  .pdf-link{cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:13px;letter-spacing:.06em;color:var(--wg9);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;transition:all .18s;white-space:nowrap;margin-top:5px;}
+  .pdf-link{cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-caption);letter-spacing:.06em;color:var(--wg9);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;transition:all .18s;white-space:nowrap;margin-top:5px;}
   .pdf-link:hover{color:var(--wg41);border-color:var(--wg11);background:var(--paper2);}
   .analysis-card{display:flex;align-items:center;background:var(--wg41);border-radius:var(--radius);padding:14px 18px;text-decoration:none;color:var(--wg1);margin-bottom:28px;transition:opacity .18s;}
   .analysis-card:hover{opacity:.88;}
-  .ac-icon{font-size:20px;margin-right:14px;flex-shrink:0;}
-  .ac-title{font-size:18px;font-weight:700;margin-bottom:2px;}
-  .ac-sub{font-size:15px;color:var(--wg7);}
-  .ac-arrow{margin-left:auto;font-size:19px;color:var(--wg7);padding-left:12px;}
-  .footer{text-align:center;font-size:15px;color:var(--ink3);line-height:1.9;} /* border／padding-top 沿用 global */
-  @media(max-width:480px){.header{padding:28px 20px 22px;}.header h1{font-size:19px;}.card-month{font-size:18px;min-width:48px;}.card-title{font-size:16px;}}
+  .ac-icon{font-size:var(--fs-heading);margin-right:14px;flex-shrink:0;}
+  .ac-title{font-size:var(--fs-body);font-weight:700;margin-bottom:2px;}
+  .ac-sub{font-size:var(--fs-small);color:var(--wg7);}
+  .ac-arrow{margin-left:auto;font-size:var(--fs-body);color:var(--wg7);padding-left:12px;}
+  .footer{text-align:center;font-size:var(--fs-small);color:var(--ink3);line-height:1.9;} /* border／padding-top 沿用 global */
+  @media(max-width:480px){.header{padding:28px 20px 22px;}.header h1{font-size:var(--fs-body);}.card-month{font-size:var(--fs-body);min-width:48px;}.card-title{font-size:var(--fs-dense);}}
 ---
 <div class="header">
   <div class="header-inner">
-    <div class="header-eyebrow" style="font-size:13px;letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;">MONTHLY FINANCIAL REPORT</div>
+    <div class="header-eyebrow" style="font-size:var(--fs-caption);letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;">MONTHLY FINANCIAL REPORT</div>
     <h1>財務月報</h1>
     <p>CULTURAL CITY COMMUNITY・閱大安管理委員會</p>
     <div class="header-badge">住戶公告專區</div>

@@ -17,13 +17,13 @@ body {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
   background: var(--paper);
   color: var(--ink);
-  font-size:18px;
+  font-size:var(--fs-body);
   line-height: 1.75;
 }
 
 @media print {
   .no-print { display: none !important; }
-  body { background: white; font-size:15px; }
+  body { background: white; font-size:var(--fs-small); }
   .page-break { page-break-before: always; }
   .panel, .kpi-card { break-inside: avoid; }
   canvas { max-height: 200px !important; }
@@ -56,21 +56,21 @@ body {
 .back-nav { display: flex; gap: 16px; margin-bottom: 14px; }
 .back-nav a {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size:15px; letter-spacing: .08em; color: var(--wg7);
+  font-size:var(--fs-small); letter-spacing: .08em; color: var(--wg7);
   text-decoration: none; transition: color .18s;
 }
 .back-nav a::before { content: '←'; }
 .back-nav a:hover { color: var(--wg1); }
 .header h1 {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
+  font-size: var(--fs-title); font-weight: 700; letter-spacing: 0.06em;
 }
 .header .period {
-  font-size:15px; color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
+  font-size:var(--fs-small); color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
   letter-spacing: 0.12em; margin-top: 3px;
 }
-.header-right { text-align: right; font-size:15px; color: var(--wg7); }
-.header-right strong { color: var(--wg1); font-size:16px; display: block; }
+.header-right { text-align: right; font-size:var(--fs-small); color: var(--wg7); }
+.header-right strong { color: var(--wg1); font-size:var(--fs-dense); display: block; }
 
 /* ── 月份導覽 ── */
 .month-nav {
@@ -83,7 +83,7 @@ body {
   padding: 10px max(40px, calc((100% - var(--page-max-width)) / 2));
 }
 .month-nav a, .month-nav span {
-  font-size:15px; letter-spacing: .1em;
+  font-size:var(--fs-small); letter-spacing: .1em;
   color: var(--wg7); text-decoration: none;  /* 深底用 wg7（wg9 是淺底用的，在深底僅約 2:1） */
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 0; transition: color .18s;
@@ -99,7 +99,7 @@ body {
   padding: 0 max(40px, calc((100% - var(--page-max-width)) / 2)); overflow-x: auto;  /* 同 .month-nav：跟著置中容器，別黏在視窗邊 */
 }
 .tab {
-  padding: 11px 18px; font-size:16px;
+  padding: 11px 18px; font-size:var(--fs-dense);
   color: var(--wg7); cursor: pointer;
   border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
   background: none; border-top: none; border-left: none; border-right: none;  /* 供 <button> 版頁籤 reset */
@@ -117,7 +117,7 @@ body {
 /* ── 區段標題 ── */
 .sl {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size:13px; letter-spacing: .2em; text-transform: uppercase;
+  font-size:var(--fs-caption); letter-spacing: .2em; text-transform: uppercase;
   color: var(--wg11); margin-bottom: 14px; padding-bottom: 7px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
@@ -136,16 +136,16 @@ body {
 .kpi-card.r::before { background: var(--red); }
 .kpi-card.gd::before { background: var(--wg9); }
 .kpi-card.b::before { background: var(--blue); }
-.kpi-title { font-size:13px; color: var(--ink3); letter-spacing: .05em; margin-bottom: 8px; }
+.kpi-title { font-size:var(--fs-caption); color: var(--ink3); letter-spacing: .05em; margin-bottom: 8px; }
 .kpi-val {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size: 22px; font-weight: 700; color: var(--ink);
+  font-size: var(--fs-heading); font-weight: 700; color: var(--ink);
 }
 .kpi-val.pos { color: var(--green); }
 .kpi-val.neg { color: var(--red); }
 .badge {
   display: inline-flex; align-items: center; gap: 2px;
-  font-size:13px; padding: 2px 6px; border-radius: 10px; margin-top: 6px;
+  font-size:var(--fs-caption); padding: 2px 6px; border-radius: 10px; margin-top: 6px;
 }
 .badge.up { background: rgba(31,92,56,.1); color: var(--green); }
 .badge.dn { background: rgba(140,31,31,.1); color: var(--red); }
@@ -164,11 +164,11 @@ body {
 .ph {
   padding: 11px 16px; background: var(--paper2);
   border-bottom: 1px solid var(--border);
-  font-size:15px; font-weight: 600; color: var(--ink2);
+  font-size:var(--fs-small); font-weight: 700; color: var(--ink2);
   display: flex; align-items: center; justify-content: space-between;
 }
 .tag {
-  font-size:13px; background: var(--wg11); color: var(--wg1);
+  font-size:var(--fs-caption); background: var(--wg11); color: var(--wg1);
   padding: 2px 7px; border-radius: 10px;
 }
 .tag.b { background: var(--blue); }
@@ -176,10 +176,10 @@ body {
 .pb { padding: 14px 16px; }
 
 /* ── 表格 ── */
-table { width: 100%; border-collapse: collapse; font-size:15px; }
+table { width: 100%; border-collapse: collapse; font-size:var(--fs-small); }
 th {
   text-align: left; padding: 6px 9px; background: var(--paper2);
-  color: var(--ink3); font-weight: 500; font-size:13px;
+  color: var(--ink3); font-weight: 500; font-size:var(--fs-caption);
   letter-spacing: .04em; border-bottom: 1px solid var(--border);
 }
 th:not(:first-child) { text-align: right; }
@@ -188,7 +188,7 @@ td {
 }
 td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
 tr:last-child td { border-bottom: none; }
-tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04); }
+tr.tot td { font-weight: 700; color: var(--ink); background: rgba(105,100,96,.04); }
 
 .dp { color: var(--green); }
 .dn2 { color: var(--red); }
@@ -202,24 +202,24 @@ tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04
 }
 .sumbox::before {
   content: '財務摘要'; position: absolute; top: 12px; right: 16px;
-  font-size: 44px; color: rgba(255,255,255,.04);
+  font-size: var(--fs-display); color: rgba(255,255,255,.04);
   font-weight: 700; pointer-events: none;
 }
-.sumbox h3 { font-size:16px; color: var(--wg1); margin-bottom: 12px; letter-spacing: .06em; }
+.sumbox h3 { font-size:var(--fs-dense); color: var(--wg1); margin-bottom: 12px; letter-spacing: .06em; }
 .si {
   display: flex; gap: 9px; margin-bottom: 9px;
-  font-size:15px; line-height: 1.7; color: rgba(248,245,240,.85);
+  font-size:var(--fs-small); line-height: 1.7; color: rgba(248,245,240,.85);
 }
-.si .bul { color: var(--wg1); font-size:18px; flex-shrink: 0; }
+.si .bul { color: var(--wg1); font-size:var(--fs-body); flex-shrink: 0; }
 .alert {
   background: rgba(140,31,31,.15); border-left: 2px solid var(--red);
   color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:15px; margin-top: 12px;
+  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-small); margin-top: 12px;
 }
 .ok {
   background: rgba(31,92,56,.12); border-left: 2px solid var(--green);
   color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:15px; margin-top: 8px;
+  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-small); margin-top: 8px;
 }
 
 /* ── 圖表 ── */
@@ -229,7 +229,7 @@ tr.tot td { font-weight: 600; color: var(--ink); background: rgba(105,100,96,.04
 /* ── 按鈕 ── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 18px; font-size:15px;
+  padding: 9px 18px; font-size:var(--fs-small);
   font-family: 'Noto Sans TC',sans-serif;
   border-radius: var(--radius); cursor: pointer;
   transition: all .2s; border: 1px solid var(--border);

@@ -31,23 +31,23 @@ body {
 .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
 .back {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size:15px; letter-spacing: .1em; color: var(--wg7);
+  font-size:var(--fs-small); letter-spacing: .1em; color: var(--wg7);
   text-decoration: none; margin-bottom: 6px; margin-right: 16px;
   transition: color .18s;
 }
 .back::before { content: '←'; }
 .back:hover { color: var(--wg1); }
 .header h1 {
-  font-size: 26px; font-weight: 700; letter-spacing: .04em;
+  font-size: var(--fs-title); font-weight: 700; letter-spacing: .04em;
   line-height: 1.35; margin-bottom: 6px;
 }
 .header-meta {
-  font-size:15px; color: var(--wg7); letter-spacing: .08em;
+  font-size:var(--fs-small); color: var(--wg7); letter-spacing: .08em;
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px;
 }
 
 /* ── 類型徽章 ── */
-.type-pill { font-size:13px; padding: 2px 9px; border-radius: 1px; border: 1px solid; }
+.type-pill { font-size:var(--fs-caption); padding: 2px 9px; border-radius: 1px; border: 1px solid; }
 .pill-work { color: var(--c-work); border-color: rgba(140,72,0,.3); background: rgba(140,72,0,.06); }
 .pill-rule { color: var(--c-rule); border-color: rgba(60,56,53,.25); background: rgba(60,56,53,.05); }
 .pill-event { color: var(--c-event); border-color: rgba(31,92,56,.3); background: rgba(31,92,56,.06); }
@@ -72,7 +72,7 @@ body {
 }
 .lang-bar-inner { max-width: var(--page-max-width); margin: 0 auto; display: flex; }
 .lang-btn {
-  padding: 10px 18px; font-size:15px; font-family: inherit;
+  padding: 10px 18px; font-size:var(--fs-small); font-family: inherit;
   letter-spacing: .06em; color: var(--wg7);  /* 深底未選語言鈕 wg7 過 AA（rgba .45 僅 3.2:1） */
   background: transparent; border: none; border-bottom: 2px solid transparent;
   cursor: pointer; transition: all .18s; white-space: nowrap;
@@ -97,7 +97,7 @@ body {
 /* ── 通用內容元件 ── */
 .sec { margin-bottom: 28px; }
 .sec-label {
-  font-size:13px; letter-spacing: .22em; color: var(--wg11);
+  font-size:var(--fs-caption); letter-spacing: .22em; color: var(--wg11);
   margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
   display: flex; align-items: center; gap: 8px;
 }
@@ -105,13 +105,13 @@ body {
 
 .note {
   background: rgba(60,56,53,0.05); border-left: 3px solid var(--wg11);
-  padding: 12px 16px; font-size:16px; color: var(--wg11);
+  padding: 12px 16px; font-size:var(--fs-dense); color: var(--wg11);
   line-height: 1.8; margin-top: 4px;
 }
 
 .footer {
   border-top: 1px solid var(--line); padding-top: 18px; margin-top: 40px;
-  font-size:15px; color: var(--wg9); letter-spacing: .06em;
+  font-size:var(--fs-small); color: var(--wg9); letter-spacing: .06em;
 }
 
 /* ── 保養通知 .maint-table 手機卡片堆疊（≤ 600px） ─────────────────
@@ -146,7 +146,7 @@ body {
   }
   .maint-table tbody td:last-child { border-bottom: none; }
   .maint-table tbody td:first-child {
-    font-size: 17px;
+    font-size: var(--fs-body);
     font-weight: 700;
     white-space: normal;
     background: rgba(60,56,53,0.04);

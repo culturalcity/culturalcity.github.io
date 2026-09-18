@@ -8,6 +8,13 @@ module.exports = function(eleventyConfig) {
   // 只影響開發期熱重載行為，不影響 build 產物與正式站。
   eleventyConfig.setServerOptions({ domDiff: false });
 
+  // ── 字級字重守門：font-size 只准 var(--fs-*)、font-weight 只准 400/500/700 ──
+  // 字級表在 global.css :root。違規直接讓建置失敗，新頁不會把數字字級帶回來。
+  eleventyConfig.on("eleventy.before", () => {
+    const bad = require("./scripts/check-type-scale.js")();
+    if (bad.length) throw new Error(`字級守門：${bad.length} 處違規（字級請用 var(--fs-*)，字重只用 400/500/700）\n` + bad.slice(0, 30).join("\n"));
+  });
+
   // ── markdown-it 改成 CJK 友善：解決 **中文「夾全形標點」** 不渲染粗體的問題
   // 預設 CommonMark flanking rule 在 CJK 字 + 全形標點交界時會判定 ** 開閉失敗
   const md = require("markdown-it")({ html: true, linkify: true, breaks: false })

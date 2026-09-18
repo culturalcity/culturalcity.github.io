@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
 :root {
   --wg1:  #EAE7E1;
@@ -12,6 +12,17 @@
   --dp: #1F5C38;
   --dn: #8C1F1F;
   --page-max-width: 760px;  /* header-inner / breadcrumb-inner 共用；非預設由各 layout/頁的 :root 覆寫 */
+
+  /* ── 字級表（全站唯一來源，2026-09 收斂）──
+     任何 font-size 一律寫 var(--fs-*)，不寫數字；建置時 scripts/check-type-scale.js 會擋。
+     字重只用三級：400 一般／500 中等／700 粗。600 不要用（網路字型沒載 600，瀏覽器會顯示成 700）。 */
+  --fs-caption: 13px;  /* 標籤、表頭、區塊小標、徽章 */
+  --fs-small:   15px;  /* 次要資訊：日期、廠商名、頁尾、按鈕、麵包屑 */
+  --fs-dense:   16px;  /* 表格、清單、卡片、提示框內文 */
+  --fs-body:    18px;  /* 正文段落（手機 17px，見下方響應式） */
+  --fs-heading: 22px;  /* 頁內小標、數字重點、區塊標題 */
+  --fs-title:   26px;  /* 頁面主標題 h1（手機 22px） */
+  --fs-display: 32px;  /* 首頁刊頭、大數字 */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,7 +31,7 @@ body {
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
   background: var(--wg1);
   color: var(--wg41);
-  font-size:18px;
+  font-size:var(--fs-body);
   line-height: 1.75;
   min-height: 100vh;
 }
@@ -55,16 +66,16 @@ body {
    跨過 840 斷點又跳回 760（內容寬跳 80px、左右邊界各移 40px）。帶內把 max-width 放寬 80px，內容寬才連續。 */
 @media (max-width: 840px) { .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); } }
 @media (max-width: 600px) { .main { padding: 28px 20px 48px; } }
-.header-eyebrow { font-size:15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
-.header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
-.header-sub { font-size:15px; color: var(--wg7); letter-spacing: 0.16em; }
+.header-eyebrow { font-size:var(--fs-small); letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
+.header h1 { font-size: var(--fs-title); font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
+.header-sub { font-size:var(--fs-small); color: var(--wg7); letter-spacing: 0.16em; }
 .header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
-.header-desc { font-size:17px; color: var(--wg7); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }  /* 深底描述文字 wg7 過 AA（rgba .55 僅 4.05:1） */
+.header-desc { font-size:var(--fs-body); color: var(--wg7); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }  /* 深底描述文字 wg7 過 AA（rgba .55 僅 4.05:1） */
 
 /* 返回連結 */
 .back-link {
   display: inline-flex; align-items: center; gap: 5px;
-  font-size:15px; letter-spacing: 0.1em; color: var(--wg7);
+  font-size:var(--fs-small); letter-spacing: 0.1em; color: var(--wg7);
   text-decoration: none; margin-bottom: 16px; transition: color 0.18s;
 }
 .back-link:hover { color: var(--wg1); }
@@ -76,7 +87,7 @@ body {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 14px 18px;
-  font-size:16px;
+  font-size:var(--fs-dense);
   color: var(--wg9);
   line-height: 1.85;
   margin-bottom: 24px;
@@ -93,14 +104,13 @@ body {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 8px;
 }
-.footer-left { font-size:15px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
-.footer-right { font-size:15px; color: var(--wg9); letter-spacing: 0.08em; }
+.footer-left { font-size:var(--fs-small); color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
+.footer-right { font-size:var(--fs-small); color: var(--wg9); letter-spacing: 0.08em; }
 
 /* ── 響應式（共用） ── */
 @media (max-width: 600px) {
+  :root { --fs-body: 17px; --fs-title: 22px; }
   .header { padding: 36px 24px 30px; }
-  .header h1 { font-size: 22px; }
-  body { font-size:17px; }
 }
 
 /* ── 無障礙 ── */
@@ -116,7 +126,7 @@ button, [role="button"] { cursor: pointer; }
 .breadcrumb {
   background: var(--wg41);
   color: var(--wg7);  /* 深底用 --wg7（4.92:1 ≥ AA 4.5:1）；wg9 是淺底用的，放這裡會掛無障礙 */
-  font-size: 13px;
+  font-size: var(--fs-caption);
   letter-spacing: .06em;
   padding: 0 40px;  /* 橫向 gutter 跟 .header 一致；垂直在 .breadcrumb-inner */
   position: relative;
@@ -190,7 +200,7 @@ button, [role="button"] { cursor: pointer; }
 .breadcrumb + .header { padding-top: 16px; }
 @media (max-width: 600px) {
   .breadcrumb { padding: 0 24px; }
-  .breadcrumb-inner { padding: 10px 0 4px; font-size: 12px; }
+  .breadcrumb-inner { padding: 10px 0 4px; font-size: var(--fs-caption); }
   .breadcrumb + .header { padding-top: 14px; }
 }
 
@@ -215,7 +225,7 @@ button, [role="button"] { cursor: pointer; }
 .site-search-panel-input {
   flex: 1;
   padding: 11px 16px;
-  font-size: 16px;
+  font-size: var(--fs-dense);
   font-family: inherit;
   background: var(--white);
   color: var(--wg41);
@@ -246,7 +256,7 @@ button, [role="button"] { cursor: pointer; }
 @media (max-width: 600px) {
   .site-search-panel { padding: 0 24px; }
   .site-search-panel-form { padding: 10px 0; gap: 6px; }
-  .site-search-panel-input { font-size: 15px; padding: 9px 12px; }
+  .site-search-panel-input { font-size: var(--fs-small); padding: 9px 12px; }
   /* 手機不再縮小搜尋送出鈕——觸控目標維持 44×44 */
 }
 
@@ -265,15 +275,15 @@ button, [role="button"] { cursor: pointer; }
   padding: 12px 40px;
   color: inherit;
   text-decoration: none;
-  font-size:16px;
+  font-size:var(--fs-dense);
   line-height: 1.45;
 }
 .alert-banner-link:hover { background: rgba(0,0,0,0.06); }
-.alert-banner-icon { font-size:19px; flex-shrink: 0; }
+.alert-banner-icon { font-size:var(--fs-body); flex-shrink: 0; }
 .alert-banner-text { flex: 1; font-weight: 500; }
 .alert-banner-cta {
   flex-shrink: 0;
-  font-size:15px;
+  font-size:var(--fs-small);
   letter-spacing: 0.04em;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -282,10 +292,10 @@ button, [role="button"] { cursor: pointer; }
   .alert-banner-link {
     padding: 10px 24px;
     gap: 10px;
-    font-size:15px;
+    font-size:var(--fs-small);
     flex-wrap: wrap;
   }
-  .alert-banner-cta { font-size:15px; width: 100%; padding-left: 32px; }
+  .alert-banner-cta { font-size:var(--fs-small); width: 100%; padding-left: 32px; }
 }
 
 /* ── 三語切換（共通預設機制）──────────────────────────────────
@@ -300,7 +310,7 @@ button, [role="button"] { cursor: pointer; }
 .lang-btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px;  /* 觸控目標高度（gov.uk 標準），原 ~39px 偏小 */
-  padding: 7px 16px; font-size:15px; font-family: inherit;
+  padding: 7px 16px; font-size:var(--fs-small); font-family: inherit;
   background: var(--white); color: var(--wg9);
   border: none; border-right: 1px solid var(--line);
   cursor: pointer; letter-spacing: .04em; transition: all .15s;

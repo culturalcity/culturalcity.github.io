@@ -8,15 +8,15 @@ extraStyles: |
     max-width: 760px; margin: 0 auto; padding: 56px 40px 80px;
   }
   .nf-h1 {
-    font-size: 28px; font-weight: 700; color: var(--wg41);
+    font-size: var(--fs-title); font-weight: 700; color: var(--wg41);
     letter-spacing: .04em; margin-bottom: 12px;
   }
   .nf-lede {
-    font-size: 17px; color: var(--wg11); line-height: 1.8;
+    font-size: var(--fs-body); color: var(--wg11); line-height: 1.8;
     margin-bottom: 32px;
   }
   .nf-sec-label {
-    font-size: 12px; letter-spacing: .28em; color: var(--wg9);
+    font-size: var(--fs-caption); letter-spacing: .28em; color: var(--wg9);
     margin-bottom: 14px; padding-bottom: 8px;
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; gap: 10px;
@@ -36,15 +36,15 @@ extraStyles: |
     background: #F2F0EC;
   }
   .nf-links a strong {
-    display: block; font-size: 16px; font-weight: 600;
+    display: block; font-size: var(--fs-dense); font-weight: 700;
     margin-bottom: 2px;
   }
   .nf-links a span {
-    font-size: 14px; color: var(--wg9);
+    font-size: var(--fs-small); color: var(--wg9);
   }
   @media (max-width: 600px) {
     .nf-main { padding: 36px 20px 56px; }
-    .nf-h1 { font-size: 22px; }
+    .nf-h1 { font-size: var(--fs-heading); }
   }
 ---
 <div class="header">

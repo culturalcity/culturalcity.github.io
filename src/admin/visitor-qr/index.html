@@ -15,18 +15,18 @@ title: 訪客登記 QR
 <div class="main">
   <style>
     .main{max-width:640px;padding:28px 20px 64px;} /* 置中沿用 global；本系列頁全寬度一律 20px 側距 */
-    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:15px;color:var(--wg9);line-height:1.85;margin-bottom:22px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-small);color:var(--wg9);line-height:1.85;margin-bottom:22px;}
     .intro strong{color:var(--wg41);}
-    .intro code{background:var(--wg1);padding:1px 6px;border-radius:3px;font-size:13px;word-break:break-all;}
+    .intro code{background:var(--wg1);padding:1px 6px;border-radius:3px;font-size:var(--fs-caption);word-break:break-all;}
     .qr-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px 26px;text-align:center;}
-    .qr-title{font-size:20px;font-weight:700;color:var(--wg41);letter-spacing:.06em;margin-bottom:4px;}
-    .qr-sub{font-size:14px;color:var(--wg9);letter-spacing:.1em;margin-bottom:20px;}
+    .qr-title{font-size:var(--fs-heading);font-weight:700;color:var(--wg41);letter-spacing:.06em;margin-bottom:4px;}
+    .qr-sub{font-size:var(--fs-small);color:var(--wg9);letter-spacing:.1em;margin-bottom:20px;}
     .qr-box{width:300px;max-width:80vw;margin:0 auto 18px;}
     .qr-box svg{width:100%;height:auto;display:block;}
-    .qr-cta{font-size:17px;font-weight:600;color:var(--wg41);margin-bottom:6px;}
-    .qr-url{font-size:12px;color:var(--wg9);word-break:break-all;}
+    .qr-cta{font-size:var(--fs-body);font-weight:700;color:var(--wg41);margin-bottom:6px;}
+    .qr-url{font-size:var(--fs-caption);color:var(--wg9);word-break:break-all;}
     .btn-row{display:flex;gap:12px;justify-content:center;margin-top:22px;}
-    .pbtn{font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.06em;padding:12px 24px;min-height:50px;border:1px solid var(--wg41);background:var(--wg41);color:var(--wg1);border-radius:var(--radius);cursor:pointer;}
+    .pbtn{font-family:inherit;font-size:var(--fs-dense);font-weight:700;letter-spacing:.06em;padding:12px 24px;min-height:50px;border:1px solid var(--wg41);background:var(--wg41);color:var(--wg1);border-radius:var(--radius);cursor:pointer;}
     .pbtn:hover{background:#2c2926;}
     @media print{
       /* 只印 QR 卡：藏 header／intro／按鈕 */
