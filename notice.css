@@ -103,6 +103,9 @@ body {
   font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-text);
 }
 
+/* 表格內第二行的廠商名（保養時程表等；2026-09-19 由 294 處相同行內樣式收成 class） */
+.vendor { font-size: var(--fs-text); font-weight: 400; color: var(--wg9); }
+
 /* ── 保養通知 .maint-table 手機卡片堆疊（≤ 600px） ─────────────────
    桌機維持原 3 欄表格；手機改為每列一張卡片，避開 390px 第 3 欄逐字換行。
    選擇器都以 .maint-table tbody 前綴（specificity 0,2,2 起跳），刻意比每篇
