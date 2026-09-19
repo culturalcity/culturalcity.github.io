@@ -15,6 +15,22 @@ module.exports = function(eleventyConfig) {
     if (bad.length) throw new Error(`字級守門：${bad.length} 處違規（字級請用 var(--fs-*)，字重只用 400/500/700）\n` + bad.slice(0, 30).join("\n"));
   });
 
+  // ── 設計表守門（2026-09-19）：scripts/check-design-tokens.js ──
+  // 建置前：寫死的顏色／行高／字距／間距、global 色票近似色 → 只警示。
+  // 建置後：逐頁（含連結的站內 CSS）查「用了 var(--x) 卻沒定義」→ 擋建置
+  //（年報 --amber、公告列表 --c-staff、年報與首頁的 --wg3 都是這類靜默失色）。
+  eleventyConfig.on("eleventy.before", () => {
+    const { warnSource, nearColors } = require("./scripts/check-design-tokens.js");
+    const w = warnSource(), n = nearColors();
+    if (w.length) console.warn(`[設計表] 寫死值 ${w.length} 處（請改用 token）：\n  ` + w.slice(0, 10).join("\n  "));
+    if (n.length) console.warn(`[設計表] global 色票近似色 ${n.length} 對：\n  ` + n.join("\n  "));
+  });
+  eleventyConfig.on("eleventy.after", ({ directories, dir }) => {
+    // 11ty 3 的 directories.output 會反映 --output 參數；dir.output 只是設定檔預設值
+    const bad = require("./scripts/check-design-tokens.js").checkOutput((directories && directories.output) || dir.output);
+    if (bad.length) throw new Error(`設計表守門：${bad.length} 頁用了未定義的 CSS 變數（瀏覽器不會報錯，只會靜默失色）\n` + bad.slice(0, 30).join("\n"));
+  });
+
   // ── markdown-it 改成 CJK 友善：解決 **中文「夾全形標點」** 不渲染粗體的問題
   // 預設 CommonMark flanking rule 在 CJK 字 + 全形標點交界時會判定 ** 開閉失敗
   const md = require("markdown-it")({ html: true, linkify: true, breaks: false })
