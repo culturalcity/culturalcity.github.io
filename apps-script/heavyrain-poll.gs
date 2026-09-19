@@ -159,21 +159,6 @@ function checkHeavyRain() {
   ensureCalendarEvent(info, todayTaipei());
 }
 
-// ── 一次性：清掉今天重複的防汛準備事件（留最早一筆） ──
-// 去重 bug 修好前已重複建出多筆時，手動跑這支清理；跑完可刪除本函式。
-function cleanupDupesToday() {
-  var cal = CalendarApp.getCalendarById(CALENDAR_ID);
-  var date = new Date(todayTaipei() + 'T00:00:00+08:00');
-  var events = cal.getEventsForDay(date).filter(function (e) {
-    return e.getTitle().indexOf(HEAVYRAIN_MARKER) >= 0;
-  });
-  Logger.log('找到 ' + events.length + ' 筆防汛準備事件');
-  for (var i = 1; i < events.length; i++) {  // 留 events[0]、刪其餘
-    events[i].deleteEvent();
-  }
-  Logger.log('已刪除 ' + Math.max(0, events.length - 1) + ' 筆重複，保留 1 筆');
-}
-
 // ── 測試用：手動跑一次（繞過任何時間限制） ──────────
 
 function testHeavyRainNow() {

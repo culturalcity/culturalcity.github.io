@@ -7,7 +7,7 @@
 ## 部署在哪
 
 - **Google 帳號**：`culturalcity85@gmail.com`（社區共用帳號）
-- **Apps Script**：[script.google.com](https://script.google.com) 用 culturalcity85 登入後可看到專案「閱大安澆水提醒」
+- **Apps Script**：[script.google.com](https://script.google.com) 用 culturalcity85 登入後可看到專案「閱大安・澆水提醒 → 行事曆＋每日摘要（watering-reminder）」
 - **觸發時機**：每天 08:00–09:00（台北）跑一次 `runDaily()`
 - **資料來源**：
   - 歷史降雨：`https://raw.githubusercontent.com/culturalcity/culturalcity.github.io/main/utility/data/daily-rain.json`（GitHub Pages 同 repo，每天清晨 06:00 由 `scripts/fetch-weather.js` 自動更新）
@@ -15,94 +15,33 @@
   - 預報：CWA OpenData F-D0047-063（臺北市 / 大安區 / 12 小時降雨機率＋最高溫度）
 - **輸出**：建在 culturalcity85 主 Calendar 的事件，標題以「💧」開頭
 
-## 部署方式：clasp CLI（推薦）
+## 部署方式：`scripts/deploy-apps-script.js`（本資料夾所有 .gs 共用）
 
-從本機 repo 用 [`@google/clasp`](https://github.com/google/clasp) 直接 push 到 Apps Script，不用每次手動複製貼上。已在 `package.json` 加 devDep，setup 跑一次就好。
-
-### 一次性 setup
-
-1. **在 culturalcity85 帳號開啟 Apps Script API**：用 culturalcity85 登入後開 [script.google.com/home/usersettings](https://script.google.com/home/usersettings)，把「Google Apps Script API」開到「**已開啟**」
-2. **複製 `.clasp.json.example` 為 `.clasp.json`**：
-   ```powershell
-   Copy-Item .clasp.json.example .clasp.json
-   ```
-3. **編輯 `.clasp.json` 填入 SCRIPT_ID**：從 Apps Script Editor URL 抓（`https://script.google.com/u/0/home/projects/<SCRIPT_ID>/edit`）
-4. **clasp login**：
-   ```powershell
-   npx clasp login --no-localhost
-   ```
-   - 印出一個 URL → 複製到登入了 culturalcity85 的瀏覽器完成 OAuth
-   - 完成後 Google redirect 到 `localhost:8888/?code=...`（會顯示「拒絕連線」是正常的）
-   - **從網址列複製整個 URL** 貼回 PowerShell prompt → Enter
-   - 看到「You are logged in as culturalcity85@gmail.com.」就成功
-5. **驗證**：
-   ```powershell
-   npx clasp list
-   ```
-   應該看到「閱大安澆水提醒」
-
-### 日常開發 / 部署
-
-改完 `watering-reminder.gs` 後：
+改完任何 `.gs` 後，由 Claude（或自己）在 repo 根目錄跑：
 
 ```powershell
-npx clasp push
+node scripts/deploy-apps-script.js                     # 總覽：culturalcity85 每支專案線上 vs repo 是否一致
+node scripts/deploy-apps-script.js watering-reminder   # 只看差異，不部署
+node scripts/deploy-apps-script.js watering-reminder --push   # 部署，推完拉回核對
 ```
 
-一行搞定，server 端 code 立即更新，trigger 不會壞（trigger 綁 function name，不綁 file）。
+- **怎麼對到專案**：culturalcity85 的專案一律命名「閱大安・輸入 → 輸出（檔名）」，腳本用括號內檔名自動配對，repo 不記 scriptId。新專案照這個命名就自動納入。
+- **一個專案只推它自己那支檔**，`appsscript.json` 沿用線上版本（權限範圍、時區不變）。觸發器綁函式名稱，部署不會壞。
+- **後台為準的幾支**（公設／訪客備份、颱風橋接、帳單信）repo 只是範本，腳本會拒絕部署，原因寫在腳本的 `BACKEND_IS_SOURCE`。
+- 差異裡 `-` 開頭的行是「線上有、repo 沒有」：代表有人直接在後台改過，推下去會被蓋掉，先把它補回 repo。
+- 已廢除：repo 根目錄的 `.clasp.json`（它把整個資料夾 8 支程式灌進同一個專案，會把專案弄壞）。
 
-從 server 拉回本機（譬如別人在 Apps Script Editor 改了東西）：
+### 一次性設定：用 culturalcity85 授權 clasp（換電腦／換主委時）
 
-```powershell
-npx clasp pull
-```
-
-> ⚠️ `.clasp.json` 在 `.gitignore` 內（內含 SCRIPT_ID 對 public repo 算 attempt vector），不會被 commit。每個開發者本機自己留一份。`.clasp.json.example` 是 template，可以 commit。
->
-> ⚠️ OAuth token 存在 `~/.clasprc.json`（user home 目錄，不在 repo），也不會被 commit。
-
-### clasp setup 常見坑（2026-05-12 實戰踩過的）
-
-#### `Insufficient Permission` 一切都 fail
-
-最可能兩個原因：
-
-1. **Apps Script API 沒開**：上 [script.google.com/home/usersettings](https://script.google.com/home/usersettings) 確認「Google Apps Script API」是「**已開啟**」。注意這個設定是 **per-Google-account** 的——必須是用 culturalcity85 登入時去開，不是用個人帳號開。
-2. **OAuth 用錯帳號**：你跑 `clasp login` 時 browser 的 default 帳號是你個人帳號，不小心拿個人帳號授權了。解法：`npx clasp logout` 清掉 → 重做 login flow → 在 OAuth 頁面確認上方頭像是 **culturalcity85**。
-
-#### 多瀏覽器：culturalcity85 在 Chrome、個人帳號在 Brave
-
-主委的真實狀況：個人用 Brave（預設瀏覽器）、culturalcity85 只在 Chrome 登入。`clasp login` 預設會開系統 default browser（Brave），但 OAuth 必須用 culturalcity85（在 Chrome）完成。
-
-兩條路：
-
-**A. 用 `--no-localhost` 手動貼 URL 到 Chrome（推薦）**
-
-```powershell
-npx clasp login --no-localhost
-```
-
-clasp 不開 browser、印一個長 URL 出來。**手動複製那個 URL → 貼到 Chrome 網址列**（已登入 culturalcity85）→ 走完 OAuth 授權。
-
-授權完成後 Google 會 redirect 到 `http://localhost:8888/?iss=...&code=...&scope=...`，**Chrome 顯示「無法連上這個網站 / 拒絕連線」是正常的**（clasp 沒在 localhost 起 server）。重點是：**從 Chrome 網址列複製整個 URL**（從 `http://` 到結尾），貼回 PowerShell prompt → Enter。
-
-⚠️ 貼**整個 URL**，不是只貼 `code=` 那一段。clasp 自己會 parse 出 code。我這次踩過坑：只貼 code 結果 `Missing code in response URL`。
-
-**B. 暫時切換系統 default browser 為 Chrome**
-
-Settings → Apps → Default apps → Web browser → Chrome。然後 `npx clasp login`（不加 `--no-localhost`）就能正常走完。做完再切回 Brave。
-
-#### OAuth code 10 分鐘失效
-
-從 Google 授權完成那一刻起算 10 分鐘。如果在這時間內沒把 URL 貼回 PowerShell，code 會 expired、要重跑 `npx clasp login --no-localhost`。
-
-#### `npx clasp` 在 home 目錄跑會說「could not determine executable」
-
-clasp 是裝在 repo 的 `node_modules`，必須先 `cd` 到 repo 目錄再跑 `npx clasp`。或用 `npx @google/clasp <command>` 直接指定 package（不依賴 cwd）。
-
-#### 第一次 push 後 server 端 file 名字變了
-
-如果你是先在 Apps Script Editor 用預設「程式碼」file 名手動貼過 code，後來才 setup clasp：第一次 `clasp push` 會把 server 端「程式碼」file 刪掉、改建一個跟 local file 同名的 file（譬如 `watering-reminder`）。這是正常的，trigger 綁 function name 不綁 file name，**不會壞**。
+1. culturalcity85 登入後開 [script.google.com/home/usersettings](https://script.google.com/home/usersettings)，確認「Google Apps Script API」為「已開啟」（2026-05 已開）。
+2. 開 **PowerShell 視窗**（對話框的 `!` 不能互動輸入）跑：
+   ```powershell
+   clasp login --user cc85 --no-localhost
+   ```
+   `--user cc85` 是把這組授權另存名稱，不影響同一台電腦上用個人帳號登入的 clasp。
+3. 把印出的網址貼到**已登入 culturalcity85 的瀏覽器**，確認右上頭像是 culturalcity85 再按允許（出現「Google 尚未驗證」→ 進階 → 前往）。
+4. 最後頁面顯示「無法連上這個網站」是正常的：把**網址列整條網址**複製貼回 PowerShell（10 分鐘內，只貼 code 那段會失敗）。
+5. 看到「You are logged in as …」即完成。授權存在 `~/.clasprc.json`（家目錄，不進 repo）。
 
 ---
 
@@ -217,7 +156,7 @@ const CONFIG = {
 };
 ```
 
-改完存檔即可，下次 trigger 跑時生效，不用重新部署。
+改完跑部署腳本（見上方「部署方式」）即可，下次 trigger 跑時生效。
 
 ## 怎麼新增 / 移除收件人
 
