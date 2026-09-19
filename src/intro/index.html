@@ -5,26 +5,26 @@ title: 認識閱大安・給潛在住戶與房屋仲介
 eleventyExcludeFromCollections: true
 hideSiteNav: true
 extraStyles: |
-  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:1.9;margin-bottom:28px;}
+  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:var(--lh-loose);margin-bottom:var(--sp-28);}
   .lede strong{color:var(--wg41);}
-  .sec-label{font-size:var(--fs-caption);letter-spacing:.28em;color:var(--wg9);margin:36px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+  .sec-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg9);margin:var(--sp-40) 0 var(--sp-16);padding-bottom:var(--sp-12);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-12);}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
-  .fact-table{width:100%;border-collapse:separate;border-spacing:0;font-size:var(--fs-text);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;}
-  .fact-table th{width:92px;text-align:left;padding:11px 14px;background:rgba(60,56,53,0.04);color:var(--wg9);font-weight:700;letter-spacing:.06em;vertical-align:top;border-bottom:1px solid var(--line);white-space:nowrap;}
-  .fact-table td{padding:11px 14px;color:var(--wg41);line-height:1.75;border-bottom:1px solid var(--line);}
+  .fact-table{width:100%;border-collapse:separate;border-spacing:0;font-size:var(--fs-text);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:var(--sp-24);}
+  .fact-table th{width:92px;text-align:left;padding:var(--sp-12) var(--sp-16);background:var(--tint);color:var(--wg9);font-weight:700;letter-spacing:var(--ls-text);vertical-align:top;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .fact-table td{padding:var(--sp-12) var(--sp-16);color:var(--wg41);line-height:var(--lh-text);border-bottom:1px solid var(--line);}
   .fact-table tr:last-child th,.fact-table tr:last-child td{border-bottom:none;}
-  .gov-intro{font-size:var(--fs-text);color:var(--wg41);line-height:1.85;margin-bottom:14px;}
-  .gov-list{list-style:none;padding:0;margin:0 0 8px;}
-  .gov-list li{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:12px 16px;margin-bottom:10px;font-size:var(--fs-text);color:var(--wg11);line-height:1.8;}
+  .gov-intro{font-size:var(--fs-text);color:var(--wg41);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+  .gov-list{list-style:none;padding:0;margin:0 0 var(--sp-8);}
+  .gov-list li{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:var(--sp-12) var(--sp-16);margin-bottom:var(--sp-12);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);}
   .gov-list li strong{color:var(--wg41);}
-  .rule-note{font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:16px;font-style:italic;}
+  .rule-note{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);margin-bottom:var(--sp-16);font-style:italic;}
   .rule-list{list-style:none;padding:0;margin:0;counter-reset:rule;}
-  .rule-list li{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 14px 52px;margin-bottom:10px;font-size:var(--fs-text);color:var(--wg11);line-height:1.85;position:relative;counter-increment:rule;}
+  .rule-list li{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-16) var(--sp-16) var(--sp-56);margin-bottom:var(--sp-12);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);position:relative;counter-increment:rule;}
   .rule-list li::before{content:counter(rule);position:absolute;left:16px;top:15px;width:24px;height:24px;background:var(--wg41);color:var(--wg1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--fs-caption);font-weight:700;}
   .rule-list li strong{color:var(--wg41);}
-  .agent-box{background:rgba(43,74,107,0.05);border:1px solid rgba(43,74,107,0.18);border-left:3px solid var(--blue, #2B4A6B);border-radius:var(--radius);padding:16px 18px;font-size:var(--fs-text);color:var(--wg41);line-height:1.9;margin-bottom:8px;}
-  .doc-links{list-style:none;padding:0;margin:0 0 16px;}
-  .doc-links li{margin-bottom:8px;font-size:var(--fs-text);line-height:1.7;}
+  .agent-box{background:var(--blue-bg);border:1px solid var(--blue-line);border-left:3px solid var(--blue, var(--blue));border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);color:var(--wg41);line-height:var(--lh-loose);margin-bottom:var(--sp-8);}
+  .doc-links{list-style:none;padding:0;margin:0 0 var(--sp-16);}
+  .doc-links li{margin-bottom:var(--sp-8);font-size:var(--fs-text);line-height:var(--lh-text);}
   .doc-links a{color:var(--dp);text-decoration:underline;text-underline-offset:2px;}
   .doc-links .doc-sub{color:var(--wg9);font-size:var(--fs-text);}
   .closing{font-size:var(--fs-text);color:var(--wg9);line-height:1.85;margin-top:28px;padding-top:16px;border-top:1px solid var(--line);}

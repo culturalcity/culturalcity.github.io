@@ -12,13 +12,13 @@ typeJa: 安全のお知らせ
 pillType: safety
 summary: 連續第二日臺北市高溫黃燈・建議補水防曬・室內降溫・彼此關照
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .heat-alert{background:rgba(140,90,0,0.06);border:1px solid rgba(140,90,0,0.22);border-left:4px solid #8C5A00;border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:var(--fs-text);color:var(--wg41);line-height:1.75;}
-  .heat-alert strong{color:#8C5A00;}
-  .care-list{list-style:none;padding:0;margin:4px 0;}
-  .care-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);line-height:1.75;align-items:flex-start;}
+  .heat-alert{background:var(--warn-bg);border:1px solid var(--warn-line);border-left:4px solid var(--warn);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-24);font-size:var(--fs-text);color:var(--wg41);line-height:var(--lh-text);}
+  .heat-alert strong{color:var(--warn);}
+  .care-list{list-style:none;padding:0;margin:var(--sp-4) 0;}
+  .care-list li{display:flex;gap:var(--sp-16);padding:var(--sp-12) 0;border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);align-items:flex-start;}
   .care-list li:last-child{border-bottom:none;}
   .care-num{flex-shrink:0;width:22px;height:22px;background:var(--wg41);color:var(--wg1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--fs-text);font-weight:700;margin-top:2px;}
   .care-content strong{color:var(--wg41);}

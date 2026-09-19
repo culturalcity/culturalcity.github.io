@@ -38,25 +38,25 @@ extraScripts: |
    因為 .css 會被 Cloudflare／瀏覽器邊緣快取，CSS 改了住戶端可能還拿到舊版，
    橫幅就會「有文字、沒樣式」。HTML 不被快取，inline style 永遠是新的。 */
 .pdf-banner {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px;
-  margin: 0 0 26px; padding: 14px 18px;
-  background: var(--paper2); border: 1px solid var(--border);
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-12) var(--sp-16);
+  margin: 0 0 var(--sp-28); padding: var(--sp-16) var(--sp-20);
+  background: var(--tint); border: 1px solid var(--line);
   border-left: 3px solid var(--blue); border-radius: 8px;
-  font-size: var(--fs-text); color: var(--ink2);
+  font-size: var(--fs-text); color: var(--wg11);
 }
-.pdf-banner .pdf-banner-label { display: inline-flex; align-items: center; gap: 7px; }
+.pdf-banner .pdf-banner-label { display: inline-flex; align-items: center; gap: var(--sp-8); }
 .pdf-banner a {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 16px; font-size: var(--fs-text); font-weight: 700;
-  color: var(--paper); background: var(--blue);
-  border-radius: 6px; text-decoration: none; letter-spacing: .02em;
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-16); font-size: var(--fs-text); font-weight: 700;
+  color: var(--wg1); background: var(--blue);
+  border-radius: 6px; text-decoration: none; letter-spacing: var(--ls-text);
   transition: opacity .18s;
 }
 .pdf-banner a:hover { opacity: .85; }
-@media (max-width: 600px) { .pdf-banner { padding: 12px 14px; } }
+@media (max-width: 600px) { .pdf-banner { padding: var(--sp-12) var(--sp-16); } }
 @media print {
-  .pdf-banner { border-left-color: #666; background: #f3f3f3; }
-  .pdf-banner a { color: #000; background: transparent; border: 1px solid #666; padding: 2px 6px; }
+  .pdf-banner { border-left-color: var(--wg11); background: var(--tint); }
+  .pdf-banner a { color: var(--wg41); background: transparent; border: 1px solid var(--wg11); padding: 2px var(--sp-8); }
 }
 </style>
 <script>

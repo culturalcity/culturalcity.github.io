@@ -5,27 +5,27 @@ title: 找不到這個頁面
 eleventyExcludeFromCollections: true
 extraStyles: |
   .nf-main {
-    max-width: 760px; margin: 0 auto; padding: 56px 40px 80px;
+    max-width: 760px; margin: 0 auto; padding: var(--sp-56) var(--sp-40) var(--sp-80);
   }
   .nf-h1 {
     font-size: var(--fs-title); font-weight: 700; color: var(--wg41);
-    letter-spacing: .04em; margin-bottom: 12px;
+    letter-spacing: var(--ls-text); margin-bottom: var(--sp-12);
   }
   .nf-lede {
-    font-size: var(--fs-body); color: var(--wg11); line-height: 1.8;
-    margin-bottom: 32px;
+    font-size: var(--fs-body); color: var(--wg11); line-height: var(--lh-text);
+    margin-bottom: var(--sp-32);
   }
   .nf-sec-label {
-    font-size: var(--fs-caption); letter-spacing: .28em; color: var(--wg9);
-    margin-bottom: 14px; padding-bottom: 8px;
+    font-size: var(--fs-caption); letter-spacing: var(--ls-caps); color: var(--wg9);
+    margin-bottom: var(--sp-16); padding-bottom: var(--sp-8);
     border-bottom: 1px solid var(--line);
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: var(--sp-12);
   }
   .nf-sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
   .nf-links { list-style: none; padding: 0; margin: 0; }
-  .nf-links li { margin-bottom: 4px; }
+  .nf-links li { margin-bottom: var(--sp-4); }
   .nf-links a {
-    display: block; padding: 14px 18px;
+    display: block; padding: var(--sp-16) var(--sp-20);
     background: var(--white); border: 1px solid var(--line);
     border-radius: var(--radius);
     color: var(--wg41); text-decoration: none;
@@ -33,7 +33,7 @@ extraStyles: |
   }
   .nf-links a:hover {
     border-color: var(--wg11);
-    background: #F2F0EC;
+    background: var(--tint);
   }
   .nf-links a strong {
     display: block; font-size: var(--fs-text); font-weight: 700;
@@ -43,7 +43,7 @@ extraStyles: |
     font-size: var(--fs-text); color: var(--wg9);
   }
   @media (max-width: 600px) {
-    .nf-main { padding: 36px 20px 56px; }
+    .nf-main { padding: var(--sp-40) var(--sp-20) var(--sp-56); }
     .nf-h1 { font-size: var(--fs-heading); }
   }
 ---

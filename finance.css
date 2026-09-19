@@ -1,29 +1,20 @@
 /* finance.css — 財務月報共用樣式 */
 
 :root {
-  --ink: #3C3835;
-  --ink2: #696460;
   --ink3: var(--wg9);  /* 對接 global.css 無障礙修正後的次要文字色（舊值 #898480 淺底僅 3.0:1 不過 AA） */
-  --paper: #EAE7E1;
-  --paper2: #F0EDE8;
-  --paper3: #E8E4DD;
-  --red: #8C1F1F;
-  --green: #1F5C38;
-  --blue: #2B4A6B;
-  --border: rgba(60,56,53,0.12);
-}
+  }
 
 body {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--wg1);
+  color: var(--wg41);
   font-size:var(--fs-body);
-  line-height: 1.75;
+  line-height: var(--lh-text);
 }
 
 @media print {
   .no-print { display: none !important; }
-  body { background: white; font-size:var(--fs-text); }
+  body { background: var(--white); font-size:var(--fs-text); }
   .page-break { page-break-before: always; }
   .panel, .kpi-card { break-inside: avoid; }
   canvas { max-height: 200px !important; }
@@ -34,8 +25,8 @@ body {
 :root { --page-max-width: 1060px; }
 
 .header {
-  background: var(--ink); color: var(--paper);
-  padding: 28px 40px 22px;
+  background: var(--wg41); color: var(--wg1);
+  padding: var(--sp-28) var(--sp-40) var(--sp-24);
   border-bottom: 2px solid var(--wg11);
   position: relative; overflow: hidden;
 }
@@ -45,29 +36,29 @@ body {
 .header::before {
   content: ''; position: absolute; inset: 0;
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    repeating-linear-gradient(92deg, transparent, transparent 120px, var(--tint-dark) 120px, var(--tint-dark) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, var(--tint-dark) 60px, var(--tint-dark) 61px);
   pointer-events: none;
 }
 .header-row {
   display: flex; align-items: flex-end; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px;
+  flex-wrap: wrap; gap: var(--sp-12);
 }
-.back-nav { display: flex; gap: 16px; margin-bottom: 14px; }
+.back-nav { display: flex; gap: var(--sp-16); margin-bottom: var(--sp-16); }
 .back-nav a {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size:var(--fs-text); letter-spacing: .08em; color: var(--wg7);
+  display: inline-flex; align-items: center; gap: var(--sp-4);
+  font-size:var(--fs-text); letter-spacing: var(--ls-label); color: var(--wg7);
   text-decoration: none; transition: color .18s;
 }
 .back-nav a::before { content: '←'; }
 .back-nav a:hover { color: var(--wg1); }
 .header h1 {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size: var(--fs-title); font-weight: 700; letter-spacing: 0.06em;
+  font-size: var(--fs-title); font-weight: 700; letter-spacing: var(--ls-text);
 }
 .header .period {
   font-size:var(--fs-text); color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
-  letter-spacing: 0.12em; margin-top: 3px;
+  letter-spacing: var(--ls-label); margin-top: var(--sp-4);
 }
 .header-right { text-align: right; font-size:var(--fs-text); color: var(--wg7); }
 .header-right strong { color: var(--wg1); font-size:var(--fs-text); display: block; }
@@ -78,28 +69,28 @@ body {
   background: var(--wg41);  /* 與刊頭同深底：本列夾在刊頭與頁籤兩條深色列之間。
                                原 rgba(255,255,255,.06) 是它還在刊頭內時的疊色；
                                2026-06-20 改由模板產生並搬到刊頭下方後就落在淺底上、等於沒有底色 */
-  border-top: 1px solid rgba(234,231,225,0.1);
+  border-top: 1px solid var(--line-dark);
   /* 橫向內距跟著置中容器走，讓 ←/→ 與刊頭標題、內文切齊；視窗不夠寬時退回 40px */
-  padding: 10px max(40px, calc((100% - var(--page-max-width)) / 2));
+  padding: var(--sp-12) max(var(--sp-40), calc((100% - var(--page-max-width)) / 2));
 }
 .month-nav a, .month-nav span {
-  font-size:var(--fs-text); letter-spacing: .1em;
+  font-size:var(--fs-text); letter-spacing: var(--ls-label);
   color: var(--wg7); text-decoration: none;  /* 深底用 wg7（wg9 是淺底用的，在深底僅約 2:1） */
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 5px 0; transition: color .18s;
+  display: inline-flex; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4) 0; transition: color .18s;
 }
 .month-nav a:hover { color: var(--wg1); }
 .month-nav .disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-@media (max-width: 600px) { .month-nav { padding: 10px 24px; } }  /* 對齊手機版 .header 的 24px */
+@media (max-width: 600px) { .month-nav { padding: var(--sp-12) var(--sp-24); } }  /* 對齊手機版 .header 的 24px */
 
 /* ── 分頁 ── */
 .tabs {
   display: flex; flex-wrap: wrap; /* 窄螢幕頁籤換行全顯示，不藏在右邊要人橫向滑 */
-  background: var(--ink);  /* 原 --ink2 中灰底上未選頁籤文字無法達 AA 對比；改與 header 同深底，wg7 可過 4.9:1 */
-  padding: 0 max(40px, calc((100% - var(--page-max-width)) / 2)); overflow-x: auto;  /* 同 .month-nav：跟著置中容器，別黏在視窗邊 */
+  background: var(--wg41);  /* 原 --ink2 中灰底上未選頁籤文字無法達 AA 對比；改與 header 同深底，wg7 可過 4.9:1 */
+  padding: 0 max(var(--sp-40), calc((100% - var(--page-max-width)) / 2)); overflow-x: auto;  /* 同 .month-nav：跟著置中容器，別黏在視窗邊 */
 }
 .tab {
-  padding: 11px 18px; font-size:var(--fs-text);
+  padding: var(--sp-12) var(--sp-20); font-size:var(--fs-text);
   color: var(--wg7); cursor: pointer;
   border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
   background: none; border-top: none; border-left: none; border-right: none;  /* 供 <button> 版頁籤 reset */
@@ -112,114 +103,114 @@ body {
 .tab-content.active { display: block; }
 
 /* ── MAIN ── */
-.main { max-width: var(--page-max-width); margin: 0 auto; padding: 28px 0 60px; }
+.main { max-width: var(--page-max-width); margin: 0 auto; padding: var(--sp-28) 0 var(--sp-64); }
 
 /* ── 區段標題 ── */
 .sl {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size:var(--fs-caption); letter-spacing: .2em; text-transform: uppercase;
-  color: var(--wg11); margin-bottom: 14px; padding-bottom: 7px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 8px;
+  font-size:var(--fs-caption); letter-spacing: var(--ls-caps); text-transform: uppercase;
+  color: var(--wg11); margin-bottom: var(--sp-16); padding-bottom: var(--sp-8);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--sp-8);
 }
-.sl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sl::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
 /* ── KPI 卡片 ── */
-.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-12); margin-bottom: var(--sp-24); }
 @media (max-width: 700px) { .kpi-row { grid-template-columns: 1fr 1fr; } }
 .kpi-card {
-  background: white; border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 16px 14px 12px; position: relative; overflow: hidden;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: var(--sp-16) var(--sp-16) var(--sp-12); position: relative; overflow: hidden;
 }
 .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.kpi-card.g::before { background: var(--green); }
-.kpi-card.r::before { background: var(--red); }
+.kpi-card.g::before { background: var(--dp); }
+.kpi-card.r::before { background: var(--dn); }
 .kpi-card.gd::before { background: var(--wg9); }
 .kpi-card.b::before { background: var(--blue); }
-.kpi-title { font-size:var(--fs-caption); color: var(--ink3); letter-spacing: .05em; margin-bottom: 8px; }
+.kpi-title { font-size:var(--fs-caption); color: var(--ink3); letter-spacing: var(--ls-text); margin-bottom: var(--sp-8); }
 .kpi-val {
   font-family: 'Noto Sans TC','Microsoft JhengHei',sans-serif;
-  font-size: var(--fs-heading); font-weight: 700; color: var(--ink);
+  font-size: var(--fs-heading); font-weight: 700; color: var(--wg41);
 }
-.kpi-val.pos { color: var(--green); }
-.kpi-val.neg { color: var(--red); }
+.kpi-val.pos { color: var(--dp); }
+.kpi-val.neg { color: var(--dn); }
 .badge {
   display: inline-flex; align-items: center; gap: 2px;
-  font-size:var(--fs-caption); padding: 2px 6px; border-radius: 10px; margin-top: 6px;
+  font-size:var(--fs-caption); padding: 2px var(--sp-8); border-radius: 10px; margin-top: var(--sp-8);
 }
-.badge.up { background: rgba(31,92,56,.1); color: var(--green); }
-.badge.dn { background: rgba(140,31,31,.1); color: var(--red); }
-.badge.nt { background: rgba(105,100,96,.1); color: var(--wg11); }
+.badge.up { background: var(--dp-bg); color: var(--dp); }
+.badge.dn { background: var(--dn-bg); color: var(--dn); }
+.badge.nt { background: var(--line); color: var(--wg11); }
 
 /* ── 面板 ── */
-.grid2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 18px; margin-bottom: 18px; }  /* minmax(0,…)：1fr 不能縮到比內容窄，寬表格會把整欄撐出手機螢幕；讓表格在 .tbl-wrap 裡自己橫捲 */
+.grid2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--sp-20); margin-bottom: var(--sp-20); }  /* minmax(0,…)：1fr 不能縮到比內容窄，寬表格會把整欄撐出手機螢幕；讓表格在 .tbl-wrap 裡自己橫捲 */
 @media (max-width: 700px) { .grid2 { grid-template-columns: minmax(0,1fr); } }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sp-20); margin-bottom: var(--sp-20); }
 @media (max-width: 800px) { .grid3 { grid-template-columns: 1fr; } }
 .panel {
-  background: white; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
   overflow: hidden; margin-bottom: 0;
 }
-.panel.mb { margin-bottom: 18px; }
+.panel.mb { margin-bottom: var(--sp-20); }
 .ph {
-  padding: 11px 16px; background: var(--paper2);
-  border-bottom: 1px solid var(--border);
-  font-size:var(--fs-text); font-weight: 700; color: var(--ink2);
+  padding: var(--sp-12) var(--sp-16); background: var(--tint);
+  border-bottom: 1px solid var(--line);
+  font-size:var(--fs-text); font-weight: 700; color: var(--wg11);
   display: flex; align-items: center; justify-content: space-between;
 }
 .tag {
   font-size:var(--fs-caption); background: var(--wg11); color: var(--wg1);
-  padding: 2px 7px; border-radius: 10px;
+  padding: 2px var(--sp-8); border-radius: 10px;
 }
 .tag.b { background: var(--blue); }
-.tag.g { background: var(--green); }
-.pb { padding: 14px 16px; }
+.tag.g { background: var(--dp); }
+.pb { padding: var(--sp-16) var(--sp-16); }
 
 /* ── 表格 ── */
 table { width: 100%; border-collapse: collapse; font-size:var(--fs-text); }
 th {
-  text-align: left; padding: 6px 9px; background: var(--paper2);
+  text-align: left; padding: var(--sp-8) var(--sp-8); background: var(--tint);
   color: var(--ink3); font-weight: 500; font-size:var(--fs-caption);
-  letter-spacing: .04em; border-bottom: 1px solid var(--border);
+  letter-spacing: var(--ls-text); border-bottom: 1px solid var(--line);
 }
 th:not(:first-child) { text-align: right; }
 td {
-  padding: 7px 9px; border-bottom: 1px solid rgba(60,56,53,.05); color: var(--ink2);
+  padding: var(--sp-8) var(--sp-8); border-bottom: 1px solid var(--line-soft); color: var(--wg11);
 }
 td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
 tr:last-child td { border-bottom: none; }
-tr.tot td { font-weight: 700; color: var(--ink); background: rgba(105,100,96,.04); }
+tr.tot td { font-weight: 700; color: var(--wg41); background: var(--tint); }
 
-.dp { color: var(--green); }
-.dn2 { color: var(--red); }
+.dp { color: var(--dp); }
+.dn2 { color: var(--dn); }
 .dz { color: var(--ink3); }
 
 /* ── 摘要區塊 ── */
 .sumbox {
-  background: var(--ink); color: var(--paper);
-  border-radius: var(--radius); padding: 22px 26px;
-  margin-bottom: 22px; position: relative; overflow: hidden;
+  background: var(--wg41); color: var(--wg1);
+  border-radius: var(--radius); padding: var(--sp-24) var(--sp-28);
+  margin-bottom: var(--sp-24); position: relative; overflow: hidden;
 }
 .sumbox::before {
   content: '財務摘要'; position: absolute; top: 12px; right: 16px;
-  font-size: var(--fs-display); color: rgba(255,255,255,.04);
+  font-size: var(--fs-display); color: var(--tint-dark);
   font-weight: 700; pointer-events: none;
 }
-.sumbox h3 { font-size:var(--fs-text); color: var(--wg1); margin-bottom: 12px; letter-spacing: .06em; }
+.sumbox h3 { font-size:var(--fs-text); color: var(--wg1); margin-bottom: var(--sp-12); letter-spacing: var(--ls-text); }
 .si {
-  display: flex; gap: 9px; margin-bottom: 9px;
-  font-size:var(--fs-text); line-height: 1.7; color: rgba(248,245,240,.85);
+  display: flex; gap: var(--sp-8); margin-bottom: var(--sp-8);
+  font-size:var(--fs-text); line-height: var(--lh-text); color: var(--wg1);
 }
 .si .bul { color: var(--wg1); font-size:var(--fs-body); flex-shrink: 0; }
 .alert {
-  background: rgba(140,31,31,.15); border-left: 2px solid var(--red);
-  color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-text); margin-top: 12px;
+  background: var(--dn-bg); border-left: 2px solid var(--dn);
+  color: var(--wg1);
+  padding: var(--sp-8) var(--sp-12); border-radius: 2px; font-size:var(--fs-text); margin-top: var(--sp-12);
 }
 .ok {
-  background: rgba(31,92,56,.12); border-left: 2px solid var(--green);
-  color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-text); margin-top: 8px;
+  background: var(--dp-bg); border-left: 2px solid var(--dp);
+  color: var(--wg1);
+  padding: var(--sp-8) var(--sp-12); border-radius: 2px; font-size:var(--fs-text); margin-top: var(--sp-8);
 }
 
 /* ── 圖表 ── */
@@ -228,22 +219,22 @@ tr.tot td { font-weight: 700; color: var(--ink); background: rgba(105,100,96,.04
 
 /* ── 按鈕 ── */
 .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 18px; font-size:var(--fs-text);
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-20); font-size:var(--fs-text);
   font-family: 'Noto Sans TC',sans-serif;
   border-radius: var(--radius); cursor: pointer;
-  transition: all .2s; border: 1px solid var(--border);
-  background: transparent; color: var(--ink2);
+  transition: all .2s; border: 1px solid var(--line);
+  background: transparent; color: var(--wg11);
 }
-.btn:hover { background: var(--paper2); }
+.btn:hover { background: var(--tint); }
 
 /* 601–1140px 帶：財報全系容器為 1060px，對齊 header 40px 內距避免內文貼邊 */
 @media (min-width: 601px) and (max-width: 1140px) {
-  .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); }  /* 同 global：帶內放寬 80px 免得 padding 吃內容寬 */
+  .main { padding-left: var(--sp-40); padding-right: var(--sp-40); max-width: calc(var(--page-max-width) + 80px); }  /* 同 global：帶內放寬 80px 免得 padding 吃內容寬 */
 }
 /* 手機：財報頁先前完全沒有側距（既有 bug），補齊並對齊全站 header24/內文20 慣例 */
 @media (max-width: 600px) {
-  .header { padding-left: 24px; padding-right: 24px; }
-  .tabs { padding-left: 24px; padding-right: 24px; }
-  .main { padding-left: 20px; padding-right: 20px; }
+  .header { padding-left: var(--sp-24); padding-right: var(--sp-24); }
+  .tabs { padding-left: var(--sp-24); padding-right: var(--sp-24); }
+  .main { padding-left: var(--sp-20); padding-right: var(--sp-20); }
 }

@@ -11,17 +11,17 @@ typeEn: Meeting Notice
 typeJa: 会議通知
 pillType: meeting
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;}
-  .info-row{display:flex;gap:16px;padding:6px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-20);}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:52px;flex-shrink:0;padding-top:2px;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:52px;flex-shrink:0;padding-top:2px;}
   .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;}
   .sched-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);}
-  .sched-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;}
-  .sched-table td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle;background:var(--white);}
+  .sched-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
+  .sched-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:middle;background:var(--white);}
   .sched-table td:first-child{color:var(--wg9);font-size:var(--fs-text);white-space:nowrap;width:130px;}
   .sched-table td:nth-child(2){font-weight:700;color:var(--wg41);white-space:nowrap;width:140px;}
   .sched-table tr:last-child td{border-bottom:none;}
@@ -41,7 +41,7 @@ extraStyles: |
         <div class="info-row"><span class="info-label">地點</span><span class="info-value">一樓閱覽室</span></div>
       </div>
       <div class="session-label">第一場</div>
-      <table class="sched-table" style="margin-bottom:16px;">
+      <table class="sched-table" style="margin-bottom:var(--sp-16);">
         <thead><tr><th>日期</th><th>時間</th><th>廠商</th></tr></thead>
         <tbody>
           <tr><td>11/13（四）晚間</td><td>19:00–20:00</td><td>上大</td></tr>
@@ -74,7 +74,7 @@ extraStyles: |
         <div class="info-row"><span class="info-label">Venue</span><span class="info-value">1F Lounge</span></div>
       </div>
       <div class="session-label">Session 1</div>
-      <table class="sched-table" style="margin-bottom:16px;">
+      <table class="sched-table" style="margin-bottom:var(--sp-16);">
         <thead><tr><th>Date</th><th>Time</th><th>Vendor</th></tr></thead>
         <tbody>
           <tr><td>11/13 (Thu) Evening</td><td>19:00–20:00</td><td>Shangda</td></tr>
@@ -107,7 +107,7 @@ extraStyles: |
         <div class="info-row"><span class="info-label">場所</span><span class="info-value">1階ラウンジ</span></div>
       </div>
       <div class="session-label">第1回</div>
-      <table class="sched-table" style="margin-bottom:16px;">
+      <table class="sched-table" style="margin-bottom:var(--sp-16);">
         <thead><tr><th>日付</th><th>時間</th><th>業者</th></tr></thead>
         <tbody>
           <tr><td>11/13（木）夜間</td><td>19:00–20:00</td><td>上大</td></tr>

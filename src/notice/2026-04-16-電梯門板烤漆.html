@@ -11,19 +11,19 @@ typeEn: Construction Notice
 typeJa: 工事のお知らせ
 pillType: equip
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
-  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin:var(--sp-4) 0;}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:76px;flex-shrink:0;padding-top:2px;}
-  .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;line-height:1.7;}
-  .floor-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
-  .floor-tag{font-size:var(--fs-text);font-weight:500;padding:4px 14px;background:rgba(140,31,31,.07);border:1px solid rgba(140,31,31,.2);border-radius:1px;color:var(--c-equip);}
-  .note.warn{border-left-color:var(--c-equip);background:rgba(140,31,31,0.04);color:#5A1010;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:76px;flex-shrink:0;padding-top:2px;}
+  .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;line-height:var(--lh-text);}
+  .floor-grid{display:flex;flex-wrap:wrap;gap:var(--sp-8);margin-top:var(--sp-4);}
+  .floor-tag{font-size:var(--fs-text);font-weight:500;padding:var(--sp-4) var(--sp-16);background:var(--dn-bg);border:1px solid var(--dn-line);border-radius:1px;color:var(--c-equip);}
+  .note.warn{border-left-color:var(--c-equip);background:var(--dn-bg);color:var(--dn);}
   .note ul{padding-left:1.2em;}
-  .note li{margin-bottom:6px;}
+  .note li{margin-bottom:var(--sp-8);}
   .note li:last-child{margin-bottom:0;}
 summary: 04/16–18・3、5、8、9、11、12、13、14樓門板・施工期間注意漆味
 ---
@@ -43,7 +43,7 @@ summary: 04/16–18・3、5、8、9、11、12、13、14樓門板・施工期間�
           <span class="info-label">施工範圍</span>
           <span class="info-value">
             以下樓層之電梯門板
-            <div class="floor-grid" style="margin-top:8px;">
+            <div class="floor-grid" style="margin-top:var(--sp-8);">
               <span class="floor-tag">3F</span>
               <span class="floor-tag">5F</span>
               <span class="floor-tag">8F</span>
@@ -86,7 +86,7 @@ summary: 04/16–18・3、5、8、9、11、12、13、14樓門板・施工期間�
           <span class="info-label">Scope</span>
           <span class="info-value">
             Elevator door panels on the following floors
-            <div class="floor-grid" style="margin-top:8px;">
+            <div class="floor-grid" style="margin-top:var(--sp-8);">
               <span class="floor-tag">3F</span>
               <span class="floor-tag">5F</span>
               <span class="floor-tag">8F</span>
@@ -129,7 +129,7 @@ summary: 04/16–18・3、5、8、9、11、12、13、14樓門板・施工期間�
           <span class="info-label">施工範囲</span>
           <span class="info-value">
             以下の階のエレベーター扉パネル
-            <div class="floor-grid" style="margin-top:8px;">
+            <div class="floor-grid" style="margin-top:var(--sp-8);">
               <span class="floor-tag">3F</span>
               <span class="floor-tag">5F</span>
               <span class="floor-tag">8F</span>

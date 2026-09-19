@@ -5,30 +5,30 @@ title: 社區規約與管理辦法
 eleventyExcludeFromCollections: true
 extraStyles: |
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
-  body{font-size:var(--fs-body);line-height:1.7;}
-  .header{padding:40px 40px 32px;}
-  .eyebrow{font-size:var(--fs-caption);letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
-  .header h1{font-size:var(--fs-heading);letter-spacing:.08em;margin-bottom:4px;}
-  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding-top:24px;padding-bottom:48px;}.header h1{font-size:var(--fs-heading);}}
-  .sec-label{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+  body{font-size:var(--fs-body);line-height:var(--lh-text);}
+  .header{padding:var(--sp-40) var(--sp-40) var(--sp-32);}
+  .eyebrow{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg7);margin-bottom:var(--sp-8);}
+  .header h1{font-size:var(--fs-heading);letter-spacing:var(--ls-label);margin-bottom:var(--sp-4);}
+  @media(max-width:600px){.header{padding:var(--sp-28) var(--sp-20) var(--sp-24);}.main{padding-top:var(--sp-24);padding-bottom:var(--sp-48);}.header h1{font-size:var(--fs-heading);}}
+  .sec-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin-bottom:var(--sp-12);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-12);}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
-  .reg-list{display:flex;flex-direction:column;gap:1px;margin-bottom:32px;}
+  .reg-list{display:flex;flex-direction:column;gap:1px;margin-bottom:var(--sp-32);}
   .reg-card{display:flex;align-items:center;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
   .reg-card+.reg-card{border-top:none;}
   .reg-card:first-child{border-radius:var(--radius) var(--radius) 0 0;}
   .reg-card:last-child{border-radius:0 0 var(--radius) var(--radius);}
   .reg-card:only-child{border-radius:var(--radius);}
-  .reg-card:hover{background:#F2F0EC;border-color:rgba(60,56,53,0.25);z-index:1;}
+  .reg-card:hover{background:var(--tint);border-color:var(--line-strong);z-index:1;}
   .left-stripe{width:3px;height:100%;flex-shrink:0;align-self:stretch;}
   .stripe-reg{background:var(--wg41);}
   .stripe-guide{background:var(--wg9);}
-  .card-inner{flex:1;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .card-inner{flex:1;padding:var(--sp-16) var(--sp-16);display:flex;align-items:center;gap:var(--sp-16);flex-wrap:wrap;}
   .card-title{font-size:var(--fs-body);font-weight:500;flex:1;min-width:160px;}
-  .card-meta{font-size:var(--fs-text);color:var(--wg9);white-space:nowrap;display:flex;gap:8px;}
-  .ver{padding:1px 7px;border:1px solid var(--line);border-radius:1px;font-size:var(--fs-caption);letter-spacing:.06em;}
-  .card-arrow{padding:0 16px;font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
+  .card-meta{font-size:var(--fs-text);color:var(--wg9);white-space:nowrap;display:flex;gap:var(--sp-8);}
+  .ver{padding:1px var(--sp-8);border:1px solid var(--line);border-radius:1px;font-size:var(--fs-caption);letter-spacing:var(--ls-text);}
+  .card-arrow{padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
   .reg-card:hover .card-arrow{transform:translateX(3px);}
-  .notice{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:28px;}
+  .notice{background:var(--tint);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:var(--sp-12) var(--sp-16);font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);margin-bottom:var(--sp-28);}
   .footer{padding-top:18px;margin-top:8px;font-size:var(--fs-text);color:var(--wg9);letter-spacing:.06em;line-height:1.9;gap:6px;}
 ---
 <div class="header">

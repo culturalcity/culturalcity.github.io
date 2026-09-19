@@ -12,20 +12,20 @@ typeJa: 人事のお知らせ
 pillType: staff
 summary: 譚安順總幹事因家中長輩照護於 115 年 8 月底離任；潤泰維護指派楊淑華女士接任
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
-  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin:var(--sp-4) 0;}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:110px;flex-shrink:0;padding-top:2px;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:110px;flex-shrink:0;padding-top:2px;}
   .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;}
-  .person-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;gap:20px;align-items:flex-start;margin:4px 0;}
+  .person-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20);display:flex;gap:var(--sp-20);align-items:flex-start;margin:var(--sp-4) 0;}
   .person-photo{width:140px;flex-shrink:0;}
   .person-photo img{width:100%;height:auto;display:block;border-radius:var(--radius);}
-  .person-photo figcaption{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:.06em;margin-top:6px;text-align:center;}
-  .person-body{flex:1;font-size:var(--fs-body);color:var(--wg41);line-height:1.85;}
-  .person-name{font-size:var(--fs-heading);font-weight:700;color:var(--wg41);margin-bottom:8px;letter-spacing:.04em;}
+  .person-photo figcaption{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:var(--ls-text);margin-top:var(--sp-8);text-align:center;}
+  .person-body{flex:1;font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-text);}
+  .person-name{font-size:var(--fs-heading);font-weight:700;color:var(--wg41);margin-bottom:var(--sp-8);letter-spacing:var(--ls-text);}
   @media (max-width:600px){.person-card{flex-direction:column;}.person-photo{width:100%;max-width:220px;margin:0 auto;}}
 ---
 <div class="lang-block active" data-lang="zh">

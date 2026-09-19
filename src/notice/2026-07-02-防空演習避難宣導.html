@@ -16,22 +16,22 @@ bannerFrom: 2026-08-06          # 排程：8/6 才自動跳出首頁警示條（
 bannerUntil: 2026-08-13         # 到期自動收掉
 bannerMessage: 8/13（四）14:30–15:00 防空演習・聽到空襲警報請就近進地下室避難
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  /* 演習資訊橫幅 */ .drill-alert{ background:rgba(140,31,31,0.06); border:1px solid rgba(140,31,31,0.2); border-left:4px solid var(--c-equip); border-radius:var(--radius); padding:14px 18px; margin-bottom:24px; font-size:var(--fs-text); color:var(--wg41); line-height:1.85; }
+  /* 演習資訊橫幅 */ .drill-alert{ background:var(--dn-bg); border:1px solid var(--dn-line); border-left:4px solid var(--c-equip); border-radius:var(--radius); padding:var(--sp-16) var(--sp-20); margin-bottom:var(--sp-24); font-size:var(--fs-text); color:var(--wg41); line-height:var(--lh-text); }
   .drill-alert strong{color:var(--c-equip);}
-  /* 演習資訊小表 */ .drill-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);margin:4px 0;}
-  .drill-table td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
+  /* 演習資訊小表 */ .drill-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);margin:var(--sp-4) 0;}
+  .drill-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
   .drill-table td:first-child{font-weight:700;color:var(--wg41);width:130px;}
   .drill-table tr:last-child td{border-bottom:none;}
-  /* 行動清單 */ .action-list{list-style:none;padding:0;margin:4px 0;}
-  .action-list li{ display:flex;gap:14px; padding:12px 0; border-bottom:1px solid var(--line); font-size:var(--fs-text); color:var(--wg11); line-height:1.75; align-items:flex-start; }
+  /* 行動清單 */ .action-list{list-style:none;padding:0;margin:var(--sp-4) 0;}
+  .action-list li{ display:flex;gap:var(--sp-16); padding:var(--sp-12) 0; border-bottom:1px solid var(--line); font-size:var(--fs-text); color:var(--wg11); line-height:var(--lh-text); align-items:flex-start; }
   .action-list li:last-child{border-bottom:none;}
   .action-num{ flex-shrink:0; width:22px;height:22px; background:var(--wg41);color:var(--wg1); border-radius:50%; display:flex;align-items:center;justify-content:center; font-size:var(--fs-text);font-weight:700; margin-top:2px; }
   .action-content strong{color:var(--wg41);}
-  .ul-clean{list-style:none;padding:0;margin:4px 0;}
-  .ul-clean li{padding:8px 0 8px 16px;border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);position:relative;line-height:1.75;}
+  .ul-clean{list-style:none;padding:0;margin:var(--sp-4) 0;}
+  .ul-clean li{padding:var(--sp-8) 0 var(--sp-8) var(--sp-16);border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);position:relative;line-height:var(--lh-text);}
   .ul-clean li::before{content:'·';position:absolute;left:0;color:var(--wg9);}
   .ul-clean li:last-child{border-bottom:none;}
 ---

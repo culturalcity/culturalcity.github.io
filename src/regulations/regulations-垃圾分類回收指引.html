@@ -5,34 +5,34 @@ title: 社區資源垃圾分類回收指引
 category: guide
 trilingual: true
 extraStyles: |
-  .note-box{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:var(--fs-text);color:var(--wg11);line-height:1.8;margin-bottom:20px;}
+  .note-box{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:var(--sp-12) var(--sp-16);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-20);}
   .tbl-wrap{overflow-x:auto;}
   table{width:100%;border-collapse:collapse;font-size:var(--fs-text);background:var(--white);}
-  th{background:var(--wg41);color:var(--wg1);padding:10px 14px;text-align:left;font-size:var(--fs-text);letter-spacing:.06em;font-weight:500;white-space:nowrap;}
-  td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--wg11);}
+  th{background:var(--wg41);color:var(--wg1);padding:var(--sp-12) var(--sp-16);text-align:left;font-size:var(--fs-text);letter-spacing:var(--ls-text);font-weight:500;white-space:nowrap;}
+  td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:top;color:var(--wg11);}
   td.cat{font-weight:700;color:var(--wg41);width:120px;white-space:nowrap;border-left:3px solid var(--wg9);}
-  td.cat.recycle{border-left-color:#2B4A6B;}
+  td.cat.recycle{border-left-color:var(--blue);}
   td.cat.general{border-left-color:var(--wg9);}
-  td.cat .cat-icon{display:block;width:48px;height:48px;margin:0 0 6px;}
+  td.cat .cat-icon{display:block;width:48px;height:48px;margin:0 0 var(--sp-8);}
   td.loc{width:180px;font-size:var(--fs-text);}
   td.note{font-size:var(--fs-text);}
-  tr:hover td{background:rgba(60,56,53,0.03);}
-  .footer{padding-top:16px;margin-top:20px;line-height:1.8;} /* 其餘沿用 regulations.css */
+  tr:hover td{background:var(--tint);}
+  .footer{padding-top:var(--sp-16);margin-top:var(--sp-20);line-height:var(--lh-text);} /* 其餘沿用 regulations.css */
   /* ── 手機：4 欄表格 → 卡片堆疊（桌面/平板維持原表格）── */
   @media (max-width:600px){
     .tbl-wrap{overflow-x:visible;}
     table,thead,tbody,tr,td{display:block;width:auto;}
     thead{display:none;}
-    tr{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--wg9);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;}
-    tr:has(td.cat.recycle){border-left-color:#2B4A6B;}
-    td{padding:11px 15px;border:none;border-bottom:1px solid var(--line);line-height:1.75;}
+    tr{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--wg9);border-radius:var(--radius);margin-bottom:var(--sp-16);overflow:hidden;}
+    tr:has(td.cat.recycle){border-left-color:var(--blue);}
+    td{padding:var(--sp-12) var(--sp-16);border:none;border-bottom:1px solid var(--line);line-height:var(--lh-text);}
     td:last-child{border-bottom:none;}
     td:empty{display:none;}
-    td.cat{width:auto;white-space:normal;border-left:none;font-size:var(--fs-text);background:rgba(60,56,53,0.04);display:flex;align-items:center;gap:10px;}
+    td.cat{width:auto;white-space:normal;border-left:none;font-size:var(--fs-text);background:var(--tint);display:flex;align-items:center;gap:var(--sp-12);}
     td.cat br{display:none;}
     td.cat .cat-icon{width:38px;height:38px;margin:0;flex:none;}
     td.loc,td.items{width:auto;}
-    td.items::before,td.loc::before,td.note::before{display:block;margin-bottom:3px;font-size:var(--fs-caption);font-weight:700;letter-spacing:.06em;color:var(--wg9);}
+    td.items::before,td.loc::before,td.note::before{display:block;margin-bottom:var(--sp-4);font-size:var(--fs-caption);font-weight:700;letter-spacing:var(--ls-text);color:var(--wg9);}
     .lang-block[data-lang="zh"] td.items::before{content:"常見項目";}
     .lang-block[data-lang="zh"] td.loc::before{content:"本社區丟置地點";}
     .lang-block[data-lang="zh"] td.note::before{content:"丟棄注意事項";}

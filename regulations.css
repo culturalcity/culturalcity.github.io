@@ -1,73 +1,71 @@
 /* regulations.css — 規約辦法頁面共用樣式 */
 
-:root {
-  --line2: rgba(60,56,53,0.05);
-}
+
 
 body {
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-  line-height: 1.9;
+  line-height: var(--lh-loose);
 }
 
 /* ── HEADER ── */
 .header {
   background: var(--wg41); color: var(--wg1);
-  padding: 36px 40px 28px; position: relative; overflow: hidden;
+  padding: var(--sp-40) var(--sp-40) var(--sp-28); position: relative; overflow: hidden;
 }
 .header::before {
   content: ''; position: absolute; inset: 0;
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    repeating-linear-gradient(92deg, transparent, transparent 120px, var(--tint-dark) 120px, var(--tint-dark) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, var(--tint-dark) 60px, var(--tint-dark) 61px);
   pointer-events: none;
 }
 .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
 .back {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size:var(--fs-text); letter-spacing: .1em; color: var(--wg7);
-  text-decoration: none; margin-bottom: 16px; transition: color .18s;
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  font-size:var(--fs-text); letter-spacing: var(--ls-label); color: var(--wg7);
+  text-decoration: none; margin-bottom: var(--sp-16); transition: color .18s;
 }
 .back::before { content: '←'; }
 .back:hover { color: var(--wg1); }
-.eyebrow { font-size:var(--fs-text); letter-spacing: .25em; color: var(--wg7); margin-bottom: 8px; }
+.eyebrow { font-size:var(--fs-text); letter-spacing: var(--ls-caps); color: var(--wg7); margin-bottom: var(--sp-8); }
 .header h1 {
-  font-size: var(--fs-title); font-weight: 700; letter-spacing: .06em;
-  line-height: 1.35; margin-bottom: 8px;
+  font-size: var(--fs-title); font-weight: 700; letter-spacing: var(--ls-text);
+  line-height: var(--lh-tight); margin-bottom: var(--sp-8);
 }
 .header-meta {
   font-size:var(--fs-text); color: var(--wg7);
-  display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px;
+  display: flex; gap: var(--sp-16); flex-wrap: wrap; margin-top: var(--sp-8);
 }
 .meta-pill {
-  border: 1px solid rgba(234,231,225,0.2);
-  padding: 2px 10px; border-radius: 1px;
-  font-size:var(--fs-caption); letter-spacing: .06em;
+  border: 1px solid var(--line-dark);
+  padding: 2px var(--sp-12); border-radius: 1px;
+  font-size:var(--fs-caption); letter-spacing: var(--ls-text);
 }
 
 /* ── MAIN ── */
-.main { max-width: 760px; margin: 0 auto; padding: 32px 0 72px; }
+.main { max-width: 760px; margin: 0 auto; padding: var(--sp-32) 0 var(--sp-80); }
 @media (max-width: 600px) {
-  .header { padding: 28px 20px 22px; }
-  .main { padding: 24px 20px 56px; }
+  .header { padding: var(--sp-28) var(--sp-20) var(--sp-24); }
+  .main { padding: var(--sp-24) var(--sp-20) var(--sp-56); }
 }
 
 /* ── 修訂紀錄 ── */
 .rev-summary {
-  cursor: pointer; font-size:var(--fs-text); letter-spacing: .1em;
-  color: var(--wg11); padding: 8px 0; user-select: none;
+  cursor: pointer; font-size:var(--fs-text); letter-spacing: var(--ls-label);
+  color: var(--wg11); padding: var(--sp-8) 0; user-select: none;
 }
 .rev-summary:hover { color: var(--wg41); }
 .rev-table {
   width: 100%; border-collapse: collapse; font-size:var(--fs-text);
-  margin: 8px 0 20px; background: var(--white); border: 1px solid var(--line);
+  margin: var(--sp-8) 0 var(--sp-20); background: var(--white); border: 1px solid var(--line);
 }
 .rev-table th {
   background: var(--wg41); color: var(--wg1);
-  padding: 8px 14px; text-align: left;
-  font-weight: 500; font-size:var(--fs-caption); letter-spacing: .08em;
+  padding: var(--sp-8) var(--sp-16); text-align: left;
+  font-weight: 500; font-size:var(--fs-caption); letter-spacing: var(--ls-label);
 }
 .rev-table td {
-  padding: 8px 14px; border-bottom: 1px solid var(--line2);
+  padding: var(--sp-8) var(--sp-16); border-bottom: 1px solid var(--line-soft);
   color: var(--wg11); vertical-align: top;
 }
 .rev-table tr:last-child td { border-bottom: none; }
@@ -75,34 +73,34 @@ body {
 /* ── 條文版型 ── */
 .doc-body {
   background: var(--white); border: 1px solid var(--line);
-  padding: 32px 36px; margin-bottom: 24px;
+  padding: var(--sp-32) var(--sp-40); margin-bottom: var(--sp-24);
 }
-@media (max-width: 600px) { .doc-body { padding: 20px 18px; } }
+@media (max-width: 600px) { .doc-body { padding: var(--sp-20) var(--sp-20); } }
 
 .chapter {
-  font-size:var(--fs-caption); font-weight: 700; letter-spacing: .2em;
-  color: var(--wg9); margin: 28px 0 8px; padding-bottom: 6px;
+  font-size:var(--fs-caption); font-weight: 700; letter-spacing: var(--ls-caps);
+  color: var(--wg9); margin: var(--sp-28) 0 var(--sp-8); padding-bottom: var(--sp-8);
   border-bottom: 1px solid var(--line);
 }
 .chapter:first-child { margin-top: 0; }
 
 .annex {
-  font-size:var(--fs-text); font-weight: 700; letter-spacing: .04em;
-  color: var(--wg41); margin: 48px 0 16px;
-  padding: 20px 0 12px;
+  font-size:var(--fs-text); font-weight: 700; letter-spacing: var(--ls-text);
+  color: var(--wg41); margin: var(--sp-48) 0 var(--sp-16);
+  padding: var(--sp-20) 0 var(--sp-12);
   border-top: 2px solid var(--wg11); border-bottom: 1px solid var(--line);
 }
 
-.art-block { padding: 12px 0 8px; border-top: 1px solid var(--line2); }
+.art-block { padding: var(--sp-12) 0 var(--sp-8); border-top: 1px solid var(--line-soft); }
 .art-block:first-child { border-top: none; padding-top: 0; }
-.art-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.art-title { display: flex; align-items: baseline; gap: var(--sp-12); margin-bottom: var(--sp-8); }
 .art-num {
   font-size:var(--fs-text); font-weight: 700; color: var(--wg41);
-  letter-spacing: .04em; flex-shrink: 0; min-width: 54px;
+  letter-spacing: var(--ls-text); flex-shrink: 0; min-width: 54px;
 }
 .art-name { font-size:var(--fs-text); font-weight: 700; color: var(--wg11); }
-.art-body { font-size:var(--fs-text); color: var(--wg11); line-height: 1.9; }
-.art-body p { margin-bottom: 6px; padding-left: 0; }
+.art-body { font-size:var(--fs-text); color: var(--wg11); line-height: var(--lh-loose); }
+.art-body p { margin-bottom: var(--sp-8); padding-left: 0; }
 .art-body p:last-child { margin-bottom: 0; }
 .art-body p.indent-1 { padding-left: 2em; text-indent: -2em; }
 .art-body p.indent-2 { padding-left: 3.5em; text-indent: -1.5em; }
@@ -112,11 +110,11 @@ body {
 .art-body p.indent-3-cont { padding-left: 5em; }
 
 .footer {
-  border-top: 1px solid var(--line); padding-top: 18px;
+  border-top: 1px solid var(--line); padding-top: var(--sp-20);
   font-size:var(--fs-text); color: var(--wg9);
 }
 
 /* 601–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
 @media (min-width: 601px) and (max-width: 840px) {
-  .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); }  /* 同 global：帶內放寬 80px 免得 padding 吃內容寬 */
+  .main { padding-left: var(--sp-40); padding-right: var(--sp-40); max-width: calc(var(--page-max-width) + 80px); }  /* 同 global：帶內放寬 80px 免得 padding 吃內容寬 */
 }

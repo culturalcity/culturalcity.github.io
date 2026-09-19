@@ -10,28 +10,28 @@ extraStyles: |
     }
     /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器一律沿用 global。
        .main 只覆寫上下 padding（longhand），左右交給 global 的 600–840 平板帶側距規則。 */
-    body { font-size:var(--fs-body); line-height: 1.7; }
-    .header h1 { font-size:var(--fs-display); letter-spacing: 0.12em; line-height: 1.2; }
-    .header-sub { letter-spacing: 0.18em; }
+    body { font-size:var(--fs-body); line-height: var(--lh-text); }
+    .header h1 { font-size:var(--fs-display); letter-spacing: var(--ls-label); line-height: var(--lh-tight); }
+    .header-sub { letter-spacing: var(--ls-caps); }
     .header-desc { font-size:var(--fs-text); }
-    .main { padding-top: 48px; padding-bottom: 72px; }
+    .main { padding-top: var(--sp-48); padding-bottom: var(--sp-80); }
     @media(max-width:600px) {
-      .main { padding-top: 32px; padding-bottom: 56px; }
+      .main { padding-top: var(--sp-32); padding-bottom: var(--sp-56); }
       .header h1 { font-size:var(--fs-heading); }
     }
     /* ── SECTION LABEL ── */
     .sec-label {
-      font-size:var(--fs-caption); letter-spacing: 0.28em; color: var(--wg9);
-      margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
-      display: flex; align-items: center; gap: 10px;
+      font-size:var(--fs-caption); letter-spacing: var(--ls-caps); color: var(--wg9);
+      margin-bottom: var(--sp-16); padding-bottom: var(--sp-12); border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: var(--sp-12);
     }
     .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
     /* ── MODULE CARDS ── */
     .module-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
-      gap: 12px;
-      margin-bottom: 48px;
+      gap: var(--sp-12);
+      margin-bottom: var(--sp-48);
     }
     @media(max-width:700px) { .module-grid { grid-template-columns: 1fr 1fr; } }
     @media(max-width:400px) { .module-grid { grid-template-columns: 1fr; } }
@@ -40,20 +40,20 @@ extraStyles: |
       text-decoration: none; color: var(--wg41); display: block; overflow: hidden;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .module-card:hover { border-color: var(--wg11); box-shadow: 0 4px 16px rgba(60,56,53,0.08); }
+    .module-card:hover { border-color: var(--wg11); box-shadow: 0 4px 16px var(--line-soft); }
     .mc-accent { height: 3px; }
     .module-card.finance .mc-accent { background: var(--c-finance); }
     .module-card.minutes .mc-accent { background: var(--c-minutes); }
     .module-card.notice  .mc-accent { background: var(--c-notice); }
     .module-card.utility .mc-accent { background: var(--wg9); }
     .module-card.netzero .mc-accent { background: var(--dp); }
-    .module-card.evac    .mc-accent { background: #8C1F1F; }
-    .mc-body { padding: 20px 20px 16px; }
-    .mc-icon { font-size:var(--fs-heading); margin-bottom: 10px; display: block; }
-    .mc-title { font-size:var(--fs-body); font-weight: 700; color: var(--wg41); letter-spacing: 0.05em; margin-bottom: 4px; }
-    .mc-desc { font-size:var(--fs-text); color: var(--wg9); line-height: 1.7; margin-bottom: 14px; }
-    .mc-link { font-size:var(--fs-text); letter-spacing: 0.1em; color: var(--wg11); display: flex; align-items: center; gap: 5px; transition: gap 0.18s; }
-    .module-card:hover .mc-link { gap: 9px; }
+    .module-card.evac    .mc-accent { background: var(--dn); }
+    .mc-body { padding: var(--sp-20) var(--sp-20) var(--sp-16); }
+    .mc-icon { font-size:var(--fs-heading); margin-bottom: var(--sp-12); display: block; }
+    .mc-title { font-size:var(--fs-body); font-weight: 700; color: var(--wg41); letter-spacing: var(--ls-text); margin-bottom: var(--sp-4); }
+    .mc-desc { font-size:var(--fs-text); color: var(--wg9); line-height: var(--lh-text); margin-bottom: var(--sp-16); }
+    .mc-link { font-size:var(--fs-text); letter-spacing: var(--ls-label); color: var(--wg11); display: flex; align-items: center; gap: var(--sp-4); transition: gap 0.18s; }
+    .module-card:hover .mc-link { gap: var(--sp-8); }
     .mc-link::after { content: '→'; }
     /* ── TIMELINE ── */
     .timeline { margin-bottom: 0; }
@@ -65,8 +65,8 @@ extraStyles: |
     /* 左側日期+類型欄 */
     .tl-left {
       width: 100px; flex-shrink: 0;
-      padding: 11px 16px 11px 0;
-      display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+      padding: var(--sp-12) var(--sp-16) var(--sp-12) 0;
+      display: flex; flex-direction: column; align-items: flex-end; gap: var(--sp-4);
       border-right: 1px solid var(--line);
       position: relative;
     }
@@ -83,21 +83,21 @@ extraStyles: |
     .tl-item.finance .tl-left::after { background: var(--c-finance); }
     .tl-item.minutes .tl-left::after { background: var(--c-minutes); }
     .tl-item.notice  .tl-left::after { background: var(--c-notice); }
-    .tl-date { font-size:var(--fs-text); color: var(--wg9); letter-spacing: 0.04em; }
+    .tl-date { font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-text); }
     .tl-type {
-      font-size:var(--fs-caption); letter-spacing: 0.1em; padding: 1px 6px; border-radius: 1px; border: 1px solid;
+      font-size:var(--fs-caption); letter-spacing: var(--ls-label); padding: 1px var(--sp-8); border-radius: 1px; border: 1px solid;
     }
-    .tl-item.finance .tl-type { color: var(--c-finance); border-color: rgba(43,74,107,0.3); background: rgba(43,74,107,0.06); }
-    .tl-item.minutes .tl-type { color: var(--c-minutes); border-color: rgba(60,56,53,0.25); background: rgba(60,56,53,0.05); }
-    .tl-item.notice  .tl-type { color: var(--c-notice);  border-color: rgba(107,58,31,0.3);  background: rgba(107,58,31,0.06); }
+    .tl-item.finance .tl-type { color: var(--c-finance); border-color: var(--blue-line); background: var(--blue-bg); }
+    .tl-item.minutes .tl-type { color: var(--c-minutes); border-color: var(--line-strong); background: var(--tint); }
+    .tl-item.notice  .tl-type { color: var(--c-notice);  border-color: var(--line-strong);  background: var(--tint); }
     /* 右側內容欄 */
     .tl-right {
-      flex: 1; padding: 11px 0 11px 20px;
+      flex: 1; padding: var(--sp-12) 0 var(--sp-12) var(--sp-20);
       background: var(--white); border: 1px solid var(--line); border-left: none;
       transition: background 0.18s;
       display: flex; flex-direction: column; justify-content: center; /* 純標題列垂直置中，不留空下半部 */
     }
-    .tl-item:hover .tl-right { background: #F2F0EC; }
+    .tl-item:hover .tl-right { background: var(--tint); }
     .tl-title { font-size:var(--fs-body); font-weight: 500; color: var(--wg41); margin-bottom: 2px; }
     .tl-desc { font-size:var(--fs-text); color: var(--wg9); }
     /* 時間軸第一項頂部圓角、最後項底部圓角 */
@@ -107,43 +107,43 @@ extraStyles: |
     .tl-item.tl-last-visible .tl-right { border-radius: 0 0 var(--radius) 0; }
     .tl-more-btn {
       display: block; width: 100%; margin: 1px 0 0;
-      padding: 11px 16px; border: none; cursor: pointer;
-      font-family: inherit; font-size:var(--fs-text); letter-spacing: 0.04em;
-      color: var(--wg9); background: #F2F0EC;
+      padding: var(--sp-12) var(--sp-16); border: none; cursor: pointer;
+      font-family: inherit; font-size:var(--fs-text); letter-spacing: var(--ls-text);
+      color: var(--wg9); background: var(--tint);
       border-radius: 0 0 var(--radius) var(--radius);
       transition: background 0.15s;
     }
-    .tl-more-btn:hover { background: #E8E5E0; color: var(--wg3); }
-    .tl-archive { font-size:var(--fs-text); color: var(--wg9); margin: 12px 2px 48px; letter-spacing: 0.04em; }
+    .tl-more-btn:hover { background: var(--tint); color: var(--wg3); }
+    .tl-archive { font-size:var(--fs-text); color: var(--wg9); margin: var(--sp-12) 2px var(--sp-48); letter-spacing: var(--ls-text); }
     .tl-archive a { color: var(--wg11); text-decoration: underline; text-underline-offset: 2px; }
     .tl-archive a:hover { color: var(--wg41); }
     @media(max-width:500px) {
-      .tl-left { width: 76px; padding-right: 12px; }
+      .tl-left { width: 76px; padding-right: var(--sp-12); }
       .tl-date { font-size:var(--fs-caption); }
-      .tl-right { padding-left: 14px; }
+      .tl-right { padding-left: var(--sp-16); }
     }
     /* ── INFO STRIP ── */
     .info-strip {
       background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 20px 24px;
+      padding: var(--sp-20) var(--sp-24);
       display: grid; grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 48px;
+      margin-bottom: var(--sp-48);
     }
     @media(max-width:520px) { .info-strip { grid-template-columns: 1fr; } }
-    .info-item { padding: 0 20px; border-left: 1px solid var(--line); }
+    .info-item { padding: 0 var(--sp-20); border-left: 1px solid var(--line); }
     .info-item:first-child { padding-left: 0; border-left: none; }
     @media(max-width:520px) {
-      .info-item { padding: 14px 0; border-left: none; border-top: 1px solid var(--line); }
+      .info-item { padding: var(--sp-16) 0; border-left: none; border-top: 1px solid var(--line); }
       .info-item:first-child { padding-top: 0; border-top: none; }
     }
-    .info-label { font-size:var(--fs-caption); letter-spacing: 0.16em; color: var(--wg9); margin-bottom: 4px; }
-    .info-value { font-size:var(--fs-text); color: var(--wg41); font-weight: 500; line-height: 1.5; }
+    .info-label { font-size:var(--fs-caption); letter-spacing: var(--ls-caps); color: var(--wg9); margin-bottom: var(--sp-4); }
+    .info-value { font-size:var(--fs-text); color: var(--wg41); font-weight: 500; line-height: var(--lh-tight); }
     /* FOOTER：沿用 global.css 的 .footer／.footer-left／.footer-right，本頁無差異 */
     /* ── 站內搜尋框 ── */
-    .home-search { margin-bottom: 28px; }
+    .home-search { margin-bottom: var(--sp-28); }
     .home-search-form { display: flex; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); overflow: hidden; transition: border-color .18s, box-shadow .18s; }
-    .home-search-form:focus-within { border-color: var(--wg11); box-shadow: 0 0 0 3px rgba(60,56,53,.06); }
-    .home-search-input { flex: 1; padding: 13px 16px; font-size: var(--fs-text); font-family: inherit; background: transparent; border: none; color: var(--wg41); }
+    .home-search-form:focus-within { border-color: var(--wg11); box-shadow: 0 0 0 3px var(--line-soft); }
+    .home-search-input { flex: 1; padding: var(--sp-12) var(--sp-16); font-size: var(--fs-text); font-family: inherit; background: transparent; border: none; color: var(--wg41); }
     .home-search-input:focus { outline: none; }
     .home-search-btn { width: 56px; display: inline-flex; align-items: center; justify-content: center; background: var(--wg41); color: var(--wg1); border: none; cursor: pointer; transition: background .15s; }
     .home-search-btn:hover { background: var(--wg11); }
@@ -174,9 +174,9 @@ extraStyles: |
   </form>
 
   <!-- ── 限時：節電獎勵活動橫幅（活動至 2026/12/31，結束後可移除） ── -->
-  <a href="./notice/2026-06-16-節電獎百萬.html" style="display:block;text-decoration:none;background:#1F5C38;color:#fff;border-radius:var(--radius);padding:14px 20px;margin-bottom:36px;line-height:1.65;">
-    <span style="font-weight:700;letter-spacing:.03em;">🏆 節電3%獎百萬</span>
-    <span style="color:rgba(255,255,255,0.92);font-size:var(--fs-text);"> ── 市府節電獎勵活動進行中，省電還能抽 400 萬元；活動延續至 12/31，現在登錄仍可參加抽獎 →</span>
+  <a href="./notice/2026-06-16-節電獎百萬.html" style="display:block;text-decoration:none;background:var(--dp);color:var(--white);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-40);line-height:var(--lh-text);">
+    <span style="font-weight:700;letter-spacing:var(--ls-text);">🏆 節電3%獎百萬</span>
+    <span style="color:var(--white);font-size:var(--fs-text);"> ── 市府節電獎勵活動進行中，省電還能抽 400 萬元；活動延續至 12/31，現在登錄仍可參加抽獎 →</span>
   </a>
 
   <!-- ── 服務入口 ── -->

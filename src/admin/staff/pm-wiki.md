@@ -573,7 +573,7 @@ flowchart TD
 
 **物理空間配置（剖面示意）**：
 
-<img src="/images/diagrams/osf-cross-section.svg" alt="流出抑制設施剖面示意圖" style="max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;border:1px solid var(--line);border-radius:2px;padding:8px;">
+<img src="/images/diagrams/osf-cross-section.svg" alt="流出抑制設施剖面示意圖" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto;background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);">
 
 #### 1.11.3 五個核心零件
 
@@ -619,7 +619,7 @@ flowchart TD
 
 **完整理解圖（拍照部位 + 名詞 + 簡單記法一張看完）**：
 
-<img src="/images/diagrams/osf-system-cheatsheet.webp" alt="流出抑制設施完整系統示意圖（含拍照部位）" style="max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;border:1px solid var(--line);border-radius:2px;padding:8px;">
+<img src="/images/diagrams/osf-system-cheatsheet.webp" alt="流出抑制設施完整系統示意圖（含拍照部位）" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto;background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);">
 
 > 此圖由 AI 生成，**照片部分為示意非本社區實景**，僅供總幹事與管委會教育學習用。**不可上傳市政平台**——平台要求社區實景照片。
 

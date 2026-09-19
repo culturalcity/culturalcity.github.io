@@ -5,23 +5,23 @@ title: 綠色交通資訊專區
 eleventyExcludeFromCollections: true
 trilingual: true
 extraStyles: |
-  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:36px 0 64px;}
-  @media(max-width:840px){.wrap{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
-  @media(max-width:600px){.wrap{padding:24px 24px 48px;}}
-  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:1.85;margin-bottom:28px;}
+  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:var(--sp-40) 0 var(--sp-64);}
+  @media(max-width:840px){.wrap{padding-left:var(--sp-40);padding-right:var(--sp-40);}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
+  @media(max-width:600px){.wrap{padding:var(--sp-24) var(--sp-24) var(--sp-48);}}
+  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-28);}
   .lede strong{color:var(--wg41);}
-  .gt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
-  .gt-card{background:var(--white);padding:18px 20px;display:flex;flex-direction:column;gap:6px;}
-  .gt-illus{display:block;width:100%;max-width:320px;margin:0 auto 6px;}
-  .gt-mode{display:flex;align-items:center;gap:9px;font-size:var(--fs-text);font-weight:700;letter-spacing:.12em;color:var(--wg11);}
-  .gt-name{font-size:var(--fs-body);font-weight:500;color:var(--wg41);line-height:1.5;margin-top:2px;}
-  .gt-meta{font-size:var(--fs-text);color:var(--wg9);line-height:1.7;}
-  .gt-link{margin-top:6px;font-size:var(--fs-text);letter-spacing:.02em;color:var(--dp);text-decoration:none;display:inline-flex;align-items:center;gap:5px;align-self:flex-start;}
+  .gt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:var(--sp-28);}
+  .gt-card{background:var(--white);padding:var(--sp-20) var(--sp-20);display:flex;flex-direction:column;gap:var(--sp-8);}
+  .gt-illus{display:block;width:100%;max-width:320px;margin:0 auto var(--sp-8);}
+  .gt-mode{display:flex;align-items:center;gap:var(--sp-8);font-size:var(--fs-text);font-weight:700;letter-spacing:var(--ls-label);color:var(--wg11);}
+  .gt-name{font-size:var(--fs-body);font-weight:500;color:var(--wg41);line-height:var(--lh-tight);margin-top:2px;}
+  .gt-meta{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);}
+  .gt-link{margin-top:var(--sp-8);font-size:var(--fs-text);letter-spacing:var(--ls-text);color:var(--dp);text-decoration:none;display:inline-flex;align-items:center;gap:var(--sp-4);align-self:flex-start;}
   .gt-link::after{content:'↗';font-size:var(--fs-caption);}
   .gt-link:hover{text-decoration:underline;}
-  .gt-maptitle{font-size:var(--fs-text);letter-spacing:.16em;color:var(--wg11);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .gt-maptitle{font-size:var(--fs-text);letter-spacing:var(--ls-caps);color:var(--wg11);font-weight:700;margin-bottom:var(--sp-12);display:flex;align-items:center;gap:var(--sp-8);}
   .gt-maptitle::after{content:'';flex:1;height:1px;background:var(--line);}
-  .gt-map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;line-height:0;}
+  .gt-map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;line-height:var(--lh-solid);}
   .gt-map iframe{width:100%;height:340px;border:0;display:block;}
   .gt-asof{margin-top:14px;font-size:var(--fs-text);color:var(--wg9);line-height:1.8;}
 ---
