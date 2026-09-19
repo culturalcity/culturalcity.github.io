@@ -163,3 +163,17 @@ body {
 @media (min-width: 601px) and (max-width: 840px) {
   .main, .lang-bar-inner { padding-left: 40px; padding-right: 40px; }
 }
+
+/* ── 公告內一般表格：手機允許換行（≤ 600px） ─────────────────────────
+   2026-09-19 稽核：物業評選 .sched-table、電梯門片 .impact-table 在 English
+   狀態撐到 422／436px——各篇 extraStyles 為中文排版寫了 white-space:nowrap
+   ＋固定欄寬，英文字串一長就撐破。這裡統一放開：不改桌機、不動 .maint-table
+   （已有卡片堆疊）。specificity 0,2,2 起跳，壓過頁內 .x-table td:first-child（0,2,1）。 */
+@media (max-width: 600px) {
+  .main table:not(.maint-table) th,
+  .main table:not(.maint-table) td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    width: auto;
+  }
+}
