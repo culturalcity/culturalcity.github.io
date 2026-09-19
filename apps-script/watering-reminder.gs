@@ -42,6 +42,10 @@ const CONFIG = {
   CWA_FORECAST_URL: 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063',
   CWA_LOCATION: '大安區',
 
+  // 澆灌用水係數（度/分）＝頂樓＋1樓同澆（實測 0.14＋0.0765＝0.2165，含 buffer）。
+  // 與 src/admin/utility/index.html 的 dayTypeMax() 同一個數；那邊改，這裡要跟著改。
+  WATER_PER_MIN: 0.25,
+
   // CWA 自動雨量站即時資料（每 10 分鐘更新），用 CAAH60「大安森林」站
   // 文件：https://opendata.cwa.gov.tw/dataset/observation/O-A0002-001
   // 為什麼 CAAH60 不是 466920：
@@ -842,7 +846,7 @@ function sendDailySummary_(today, result) {
   // 建議澆水量（只在 WATER 日）
   if (isWater && result.wateringMin) {
     lines.push('【建議澆水量】');
-    lines.push(`  ${result.wateringMin} 分鐘（約 ${(result.wateringMin * 0.2).toFixed(1)} 度公水）`);
+    lines.push(`  ${result.wateringMin} 分鐘（約 ${(result.wateringMin * CONFIG.WATER_PER_MIN).toFixed(1)} 度公水）`);
     if (result.wateringBreakdown && result.wateringBreakdown.length) {
       result.wateringBreakdown.forEach(p => lines.push(`  · ${p}`));
     }

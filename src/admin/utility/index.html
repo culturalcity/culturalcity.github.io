@@ -635,6 +635,7 @@ function calcEStatus(eYd,tmax){
 // 用水門檻：基底 0.2 度 + 清潔日 +0.3 + 澆灌每分鐘 +0.25（0~15 分）
 // 澆灌係數 0.25 = 頂樓+1樓同澆（實測合計 0.2165 度/分：頂樓 0.14 + 1樓 0.0765，
 // 1樓 2026-07-26 實測 12 分鐘 0.91837 度），buffer +15.5%。兩區一律澆相同分鐘數。
+// 改係數時同步改 apps-script/watering-reminder.gs 的 CONFIG.WATER_PER_MIN（提醒信估水量用）。
 function normIrrigMin(m){var n=Number(m)||0;if(n<0)n=0;if(n>15)n=15;return Math.round(n);}
 function dayTypeLabel(isClean,irrigMin){
   var m=normIrrigMin(irrigMin);
