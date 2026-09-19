@@ -37,7 +37,8 @@ const kebab = s => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
 function jsChunks(text) {
   const out = [];
   for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${m[4] || ''}`);
-  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1/g)) out.push(m[2]);
+  // 例外註解可寫在字串內（每條宣告後）或整句後；整句後的 design-ok 視為整段放行
+  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1\s*\)?\s*;?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) if (!m[3]) out.push(m[2]);
   return out;
 }
 function cssChunks(file, text) {
@@ -62,7 +63,7 @@ function warnSource() {
     for (const chunk of cssChunks(f, fs.readFileSync(f, 'utf8'))) {
       for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) {
         const [, prop, raw, ok] = m, v = raw.replace(/\/\*[\s\S]*?\*\//g, '').trim();
-        if (ok) continue;                                            // 已寫明理由的例外
+        if (ok || /\/\*\s*design-ok:[^*]+\*\//.test(raw)) continue;  // 已寫明理由的例外（註解緊接在值後）
         if (prop.startsWith('--')) continue;                       // token 定義本身不算
         if (prop === 'line-height' && /^\d*\.?\d+$/.test(v) && v !== '0') warns.push(`${rel}  line-height: ${v} → var(--lh-*)`);
         else if (prop === 'letter-spacing' && /^-?\d*\.?\d+(em|px)/.test(v) && !/^0(em|px)?$/.test(v)) warns.push(`${rel}  letter-spacing: ${v} → var(--ls-*)`);
