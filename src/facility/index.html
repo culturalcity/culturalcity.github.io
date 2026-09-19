@@ -16,17 +16,17 @@ title: 公設使用登記
 
   <style>
     .main{padding:28px 20px 64px;} /* 寬度與置中沿用 global；本系列頁全寬度一律 20px 側距 */
-    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-dense);color:var(--wg9);line-height:1.8;margin-bottom:22px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:22px;}
     .intro strong{color:var(--wg41);}
     .intro a{color:var(--dp);}
-    .syncbar{display:flex;align-items:center;gap:8px;font-size:var(--fs-small);color:var(--wg9);letter-spacing:.04em;margin-bottom:14px;}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:var(--fs-text);color:var(--wg9);letter-spacing:.04em;margin-bottom:14px;}
     .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
     .syncbar.is-saving .syncdot{background:#B8860B;}
     .syncbar.is-offline .syncdot{background:var(--wg11);}
     .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 24px;margin-bottom:28px;}
     .card-hd{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:.04em;margin-bottom:18px;}
     .field{margin-bottom:18px;}
-    .field > label{display:block;font-size:var(--fs-small);font-weight:500;color:var(--wg11);letter-spacing:.06em;margin-bottom:8px;}
+    .field > label{display:block;font-size:var(--fs-text);font-weight:500;color:var(--wg11);letter-spacing:.06em;margin-bottom:8px;}
     .field .req{color:var(--dn);font-weight:700;margin-left:2px;}
     .seg{display:flex;flex-wrap:wrap;gap:10px;}
     .seg button{font-family:inherit;font-size:var(--fs-body);letter-spacing:.04em;padding:13px 16px;min-height:50px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:120px;}
@@ -39,40 +39,40 @@ title: 公設使用登記
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
     @media(max-width:560px){.row2{grid-template-columns:1fr;}}
     .pair{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-    .pair span{color:var(--wg9);font-size:var(--fs-dense);flex-shrink:0;}
+    .pair span{color:var(--wg9);font-size:var(--fs-text);flex-shrink:0;}
     .pair input[type=time]{flex:1 1 120px;min-width:0;}
     .tp{display:inline-flex;align-items:center;gap:5px;}
     .tp select{width:auto;min-width:64px;padding:13px 26px 13px 12px;background-position:right 8px center;}
     .tp b{color:var(--wg9);font-weight:400;}
     .tp select:disabled{opacity:.45;background-color:var(--wg1);cursor:not-allowed;}
-    .allday-btn{font-family:inherit;font-size:var(--fs-dense);padding:0 16px;min-height:50px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;flex-shrink:0;transition:all .15s;}
+    .allday-btn{font-family:inherit;font-size:var(--fs-text);padding:0 16px;min-height:50px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;flex-shrink:0;transition:all .15s;}
     .allday-btn:hover{background:rgba(60,56,53,0.04);}
     .allday-btn.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
     input[type=time]:disabled{opacity:.45;background:var(--wg1);cursor:not-allowed;}
-    .hint{font-size:var(--fs-small);color:var(--wg9);line-height:1.7;margin-top:8px;}
-    .fac-hours{font-size:var(--fs-small);color:var(--wg11);line-height:1.7;margin-top:8px;display:none;}
+    .hint{font-size:var(--fs-text);color:var(--wg9);line-height:1.7;margin-top:8px;}
+    .fac-hours{font-size:var(--fs-text);color:var(--wg11);line-height:1.7;margin-top:8px;display:none;}
     .fac-hours strong{color:var(--wg41);}
-    .exc-hint{font-size:var(--fs-small);color:var(--dn);line-height:1.7;margin-top:10px;display:none;}
+    .exc-hint{font-size:var(--fs-text);color:var(--dn);line-height:1.7;margin-top:10px;display:none;}
     .exc-hint.show{display:block;}
     /* 當日使用狀況 */
     .occ-box{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.18);border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:none;}
-    .occ-hd{font-size:var(--fs-small);font-weight:700;color:var(--wg41);margin-bottom:6px;}
-    .occ-empty{font-size:var(--fs-small);color:var(--dp);}
-    .occ-sub{font-size:var(--fs-small);color:var(--wg9);margin-bottom:6px;}
-    .occ-row{font-size:var(--fs-small);color:var(--wg41);padding:2px 0;}
+    .occ-hd{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:6px;}
+    .occ-empty{font-size:var(--fs-text);color:var(--dp);}
+    .occ-sub{font-size:var(--fs-text);color:var(--wg9);margin-bottom:6px;}
+    .occ-row{font-size:var(--fs-text);color:var(--wg41);padding:2px 0;}
     .occ-exc{font-size:var(--fs-caption);background:var(--dn);color:#fff;padding:1px 7px;border-radius:3px;margin-left:4px;}
     .submit-btn{width:100%;font-family:inherit;font-size:var(--fs-body);font-weight:700;letter-spacing:.12em;color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:16px;min-height:58px;cursor:pointer;margin-top:6px;transition:background .15s;}
     .submit-btn:hover{background:#2c2926;}
     .submit-btn:disabled{opacity:.5;cursor:default;}
-    .form-msg{font-size:var(--fs-small);line-height:1.7;margin-top:12px;min-height:1px;}
+    .form-msg{font-size:var(--fs-text);line-height:1.7;margin-top:12px;min-height:1px;}
     .form-msg.err{color:var(--dn);}
     .form-msg.ok{color:var(--dp);}
     .filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
-    .filter button{font-family:inherit;font-size:var(--fs-small);letter-spacing:.04em;padding:8px 15px;border:1px solid var(--line);background:var(--white);color:var(--wg9);border-radius:999px;cursor:pointer;transition:all .15s;}
+    .filter button{font-family:inherit;font-size:var(--fs-text);letter-spacing:.04em;padding:8px 15px;border:1px solid var(--line);background:var(--white);color:var(--wg9);border-radius:999px;cursor:pointer;transition:all .15s;}
     .filter button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
     .list-hd{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:0 0 6px;}
-    .list-note{font-size:var(--fs-small);color:var(--wg9);line-height:1.7;margin-bottom:14px;}
-    .sub-hd{font-size:var(--fs-small);font-weight:700;color:var(--wg9);letter-spacing:.1em;margin:24px 0 12px;}
+    .list-note{font-size:var(--fs-text);color:var(--wg9);line-height:1.7;margin-bottom:14px;}
+    .sub-hd{font-size:var(--fs-text);font-weight:700;color:var(--wg9);letter-spacing:.1em;margin:24px 0 12px;}
     .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:13px 16px;margin-bottom:12px;}
     .entry.exc{border-left-color:var(--dn);background:rgba(140,31,31,0.03);}
     .entry-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
@@ -82,9 +82,9 @@ title: 公設使用登記
     .entry-when{font-size:var(--fs-body);font-weight:500;color:var(--wg41);}
     .entry-stamp{font-size:var(--fs-caption);color:var(--wg9);margin-top:5px;letter-spacing:.03em;}
     .occ-stamp{color:var(--wg9);font-size:var(--fs-caption);}
-    .cancel-btn{margin-top:10px;font-family:inherit;font-size:var(--fs-small);color:var(--wg9);background:none;border:1px solid var(--line);border-radius:var(--radius);padding:6px 13px;cursor:pointer;transition:all .15s;}
+    .cancel-btn{margin-top:10px;font-family:inherit;font-size:var(--fs-text);color:var(--wg9);background:none;border:1px solid var(--line);border-radius:var(--radius);padding:6px 13px;cursor:pointer;transition:all .15s;}
     .cancel-btn:hover{color:#fff;background:var(--dn);border-color:var(--dn);}
-    .empty{font-size:var(--fs-dense);color:var(--wg9);padding:24px 0;text-align:center;}
+    .empty{font-size:var(--fs-text);color:var(--wg9);padding:24px 0;text-align:center;}
   </style>
 
   <div class="intro">

@@ -23,7 +23,7 @@ body {
 
 @media print {
   .no-print { display: none !important; }
-  body { background: white; font-size:var(--fs-small); }
+  body { background: white; font-size:var(--fs-text); }
   .page-break { page-break-before: always; }
   .panel, .kpi-card { break-inside: avoid; }
   canvas { max-height: 200px !important; }
@@ -56,7 +56,7 @@ body {
 .back-nav { display: flex; gap: 16px; margin-bottom: 14px; }
 .back-nav a {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size:var(--fs-small); letter-spacing: .08em; color: var(--wg7);
+  font-size:var(--fs-text); letter-spacing: .08em; color: var(--wg7);
   text-decoration: none; transition: color .18s;
 }
 .back-nav a::before { content: '←'; }
@@ -66,11 +66,11 @@ body {
   font-size: var(--fs-title); font-weight: 700; letter-spacing: 0.06em;
 }
 .header .period {
-  font-size:var(--fs-small); color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
+  font-size:var(--fs-text); color: var(--wg7);  /* 深底次要文字一律 wg7 才過 AA（rgba 半透明白最高只到 ~4:1） */
   letter-spacing: 0.12em; margin-top: 3px;
 }
-.header-right { text-align: right; font-size:var(--fs-small); color: var(--wg7); }
-.header-right strong { color: var(--wg1); font-size:var(--fs-dense); display: block; }
+.header-right { text-align: right; font-size:var(--fs-text); color: var(--wg7); }
+.header-right strong { color: var(--wg1); font-size:var(--fs-text); display: block; }
 
 /* ── 月份導覽 ── */
 .month-nav {
@@ -83,7 +83,7 @@ body {
   padding: 10px max(40px, calc((100% - var(--page-max-width)) / 2));
 }
 .month-nav a, .month-nav span {
-  font-size:var(--fs-small); letter-spacing: .1em;
+  font-size:var(--fs-text); letter-spacing: .1em;
   color: var(--wg7); text-decoration: none;  /* 深底用 wg7（wg9 是淺底用的，在深底僅約 2:1） */
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 0; transition: color .18s;
@@ -99,7 +99,7 @@ body {
   padding: 0 max(40px, calc((100% - var(--page-max-width)) / 2)); overflow-x: auto;  /* 同 .month-nav：跟著置中容器，別黏在視窗邊 */
 }
 .tab {
-  padding: 11px 18px; font-size:var(--fs-dense);
+  padding: 11px 18px; font-size:var(--fs-text);
   color: var(--wg7); cursor: pointer;
   border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
   background: none; border-top: none; border-left: none; border-right: none;  /* 供 <button> 版頁籤 reset */
@@ -152,8 +152,8 @@ body {
 .badge.nt { background: rgba(105,100,96,.1); color: var(--wg11); }
 
 /* ── 面板 ── */
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+.grid2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 18px; margin-bottom: 18px; }  /* minmax(0,…)：1fr 不能縮到比內容窄，寬表格會把整欄撐出手機螢幕；讓表格在 .tbl-wrap 裡自己橫捲 */
+@media (max-width: 700px) { .grid2 { grid-template-columns: minmax(0,1fr); } }
 .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 @media (max-width: 800px) { .grid3 { grid-template-columns: 1fr; } }
 .panel {
@@ -164,7 +164,7 @@ body {
 .ph {
   padding: 11px 16px; background: var(--paper2);
   border-bottom: 1px solid var(--border);
-  font-size:var(--fs-small); font-weight: 700; color: var(--ink2);
+  font-size:var(--fs-text); font-weight: 700; color: var(--ink2);
   display: flex; align-items: center; justify-content: space-between;
 }
 .tag {
@@ -176,7 +176,7 @@ body {
 .pb { padding: 14px 16px; }
 
 /* ── 表格 ── */
-table { width: 100%; border-collapse: collapse; font-size:var(--fs-small); }
+table { width: 100%; border-collapse: collapse; font-size:var(--fs-text); }
 th {
   text-align: left; padding: 6px 9px; background: var(--paper2);
   color: var(--ink3); font-weight: 500; font-size:var(--fs-caption);
@@ -205,21 +205,21 @@ tr.tot td { font-weight: 700; color: var(--ink); background: rgba(105,100,96,.04
   font-size: var(--fs-display); color: rgba(255,255,255,.04);
   font-weight: 700; pointer-events: none;
 }
-.sumbox h3 { font-size:var(--fs-dense); color: var(--wg1); margin-bottom: 12px; letter-spacing: .06em; }
+.sumbox h3 { font-size:var(--fs-text); color: var(--wg1); margin-bottom: 12px; letter-spacing: .06em; }
 .si {
   display: flex; gap: 9px; margin-bottom: 9px;
-  font-size:var(--fs-small); line-height: 1.7; color: rgba(248,245,240,.85);
+  font-size:var(--fs-text); line-height: 1.7; color: rgba(248,245,240,.85);
 }
 .si .bul { color: var(--wg1); font-size:var(--fs-body); flex-shrink: 0; }
 .alert {
   background: rgba(140,31,31,.15); border-left: 2px solid var(--red);
   color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-small); margin-top: 12px;
+  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-text); margin-top: 12px;
 }
 .ok {
   background: rgba(31,92,56,.12); border-left: 2px solid var(--green);
   color: rgba(248,245,240,.9);
-  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-small); margin-top: 8px;
+  padding: 9px 13px; border-radius: 2px; font-size:var(--fs-text); margin-top: 8px;
 }
 
 /* ── 圖表 ── */
@@ -229,7 +229,7 @@ tr.tot td { font-weight: 700; color: var(--ink); background: rgba(105,100,96,.04
 /* ── 按鈕 ── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 18px; font-size:var(--fs-small);
+  padding: 9px 18px; font-size:var(--fs-text);
   font-family: 'Noto Sans TC',sans-serif;
   border-radius: var(--radius); cursor: pointer;
   transition: all .2s; border: 1px solid var(--border);

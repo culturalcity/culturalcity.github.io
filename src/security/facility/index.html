@@ -16,10 +16,10 @@ title: 公設使用台
 
   <style>
     .main{max-width:860px;padding:28px 20px 64px;} /* 置中沿用 global；本系列頁全寬度一律 20px 側距 */
-    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;font-size:var(--fs-small);color:var(--wg9);line-height:1.8;margin-bottom:16px;}
+    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:16px;}
     .intro strong{color:var(--wg41);}
     .intro a{color:var(--dp);}
-    .syncbar{display:flex;align-items:center;gap:8px;font-size:var(--fs-small);color:var(--wg9);margin-bottom:16px;}
+    .syncbar{display:flex;align-items:center;gap:8px;font-size:var(--fs-text);color:var(--wg9);margin-bottom:16px;}
     .syncdot{width:9px;height:9px;border-radius:50%;background:var(--dp);flex-shrink:0;}
     .syncbar.is-offline .syncdot{background:var(--dn);}
     .refresh{margin-left:auto;font-family:inherit;font-size:var(--fs-caption);letter-spacing:.04em;padding:6px 12px;min-height:34px;border:1px solid var(--line);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;}
@@ -32,7 +32,7 @@ title: 公設使用台
     .kpi.exc::before{background:var(--dn);}
     .kpi-label{font-size:var(--fs-caption);color:var(--wg9);margin-bottom:7px;}
     .kpi-val{font-size:var(--fs-title);font-weight:700;color:var(--wg41);line-height:1;}
-    .kpi-unit{font-size:var(--fs-small);color:var(--wg9);margin-left:3px;font-weight:400;}
+    .kpi-unit{font-size:var(--fs-text);color:var(--wg9);margin-left:3px;font-weight:400;}
     .sect-hd{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:.04em;margin:26px 0 12px;}
     .entry{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);border-left:3px solid var(--wg11);padding:14px 16px;margin-bottom:12px;}
     .entry.live{border-left-color:var(--dp);background:rgba(31,92,56,0.03);}
@@ -46,23 +46,23 @@ title: 公設使用台
     .badge.exc{background:var(--dn);color:#fff;}
     .badge.stale{background:#B8860B;color:#fff;}
     .ename{font-size:var(--fs-body);font-weight:700;color:var(--wg41);}
-    .emeta{font-size:var(--fs-small);color:var(--wg9);line-height:1.85;}
+    .emeta{font-size:var(--fs-text);color:var(--wg9);line-height:1.85;}
     .emeta b{color:var(--wg41);font-weight:500;}
     .emeta.note{color:var(--wg41);background:rgba(60,56,53,0.05);border-radius:var(--radius);padding:6px 11px;margin-top:8px;}
     .erow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
-    .erow .lbl{font-size:var(--fs-small);color:var(--wg9);}
-    .erow select,.erow input{font-family:inherit;font-size:var(--fs-small);padding:8px 10px;min-height:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    .erow .lbl{font-size:var(--fs-text);color:var(--wg9);}
+    .erow select,.erow input{font-family:inherit;font-size:var(--fs-text);padding:8px 10px;min-height:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
     .erow select{appearance:none;-webkit-appearance:none;min-width:66px;padding-right:24px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 8px center;}
     .erow .sign-in{flex:1;min-width:120px;}
-    .btn{font-family:inherit;font-size:var(--fs-small);letter-spacing:.04em;padding:8px 13px;min-height:40px;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;}
+    .btn{font-family:inherit;font-size:var(--fs-text);letter-spacing:.04em;padding:8px 13px;min-height:40px;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;}
     .btn:hover{background:var(--wg11);color:var(--wg1);}
     .btn.out{border-color:var(--dp);color:var(--dp);}
     .btn.out:hover{background:var(--dp);color:#fff;}
     .btn.del{border-color:var(--line);color:var(--wg9);margin-left:auto;}
     .btn.del:hover{background:var(--dn);border-color:var(--dn);color:#fff;}
-    .done-line{font-size:var(--fs-small);color:var(--wg41);margin-top:4px;}
+    .done-line{font-size:var(--fs-text);color:var(--wg41);margin-top:4px;}
     .done-line b{font-weight:700;}
-    .empty{font-size:var(--fs-dense);color:var(--wg9);padding:22px 0;text-align:center;}
+    .empty{font-size:var(--fs-text);color:var(--wg9);padding:22px 0;text-align:center;}
   </style>
 
   <div class="intro">

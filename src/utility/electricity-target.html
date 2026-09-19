@@ -18,7 +18,7 @@ extraStyles: |
   .notice-box{line-height:1.8;}
   /* 查詢卡 */
   .query-card{background:var(--wg41);border-radius:var(--radius);padding:22px 24px;margin-bottom:24px;}
-  .query-card label{display:block;font-size:var(--fs-small);letter-spacing:.08em;color:rgba(234,231,225,0.65);margin-bottom:10px;}
+  .query-card label{display:block;font-size:var(--fs-text);letter-spacing:.08em;color:rgba(234,231,225,0.65);margin-bottom:10px;}
   .input-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
   .input-row input[type=number]{
     font-family:inherit;font-size:var(--fs-body);font-weight:500;
@@ -27,20 +27,20 @@ extraStyles: |
   }
   .result-box{background:rgba(234,231,225,0.1);border-radius:var(--radius);padding:12px 16px;flex:1;min-width:140px;}
   .result-box.warn{background:rgba(196,90,48,0.18);}
-  .rl{font-size:var(--fs-small);letter-spacing:.06em;color:rgba(234,231,225,0.82);margin-bottom:3px;}
+  .rl{font-size:var(--fs-text);letter-spacing:.06em;color:rgba(234,231,225,0.82);margin-bottom:3px;}
   .rv{font-size:var(--fs-heading);font-weight:700;color:var(--wg1);}
-  .rv .ru{font-size:var(--fs-small);color:rgba(234,231,225,0.82);margin-left:4px;font-weight:400;} /* 單位字疊在半透明 .result-box 上（合成底色比 wg41 淺），wg7 在此只有 ~3.7–4.2:1；改用與 .rl 同的 .82 白（合成後 ~5.3:1，一般／警示兩種卡片底皆過 AA） */
+  .rv .ru{font-size:var(--fs-text);color:rgba(234,231,225,0.82);margin-left:4px;font-weight:400;} /* 單位字疊在半透明 .result-box 上（合成底色比 wg41 淺），wg7 在此只有 ~3.7–4.2:1；改用與 .rl 同的 .82 白（合成後 ~5.3:1，一般／警示兩種卡片底皆過 AA） */
   .warn .rv{color:#E8996E;}
-  .ac-note{margin-top:12px;font-size:var(--fs-small);padding:8px 12px;border-radius:var(--radius);}
+  .ac-note{margin-top:12px;font-size:var(--fs-text);padding:8px 12px;border-radius:var(--radius);}
   .ac-note.no-ac{background:rgba(234,231,225,0.07);color:rgba(234,231,225,0.7);}
   .ac-note.yes-ac{background:rgba(196,90,48,0.18);color:#E8996E;}
   /* 圖表卡 */
   .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
   .panel-hd{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px;}
-  .panel-title{font-size:var(--fs-dense);font-weight:500;color:var(--wg41);letter-spacing:.04em;}
-  .panel-sub{font-size:var(--fs-small);color:var(--wg9);letter-spacing:.04em;}
+  .panel-title{font-size:var(--fs-text);font-weight:500;color:var(--wg41);letter-spacing:.04em;}
+  .panel-sub{font-size:var(--fs-text);color:var(--wg9);letter-spacing:.04em;}
   .panel-bd{padding:16px 18px;}
-  .legend{display:flex;gap:14px;margin-bottom:12px;font-size:var(--fs-small);color:var(--wg9);flex-wrap:wrap;align-items:center;}
+  .legend{display:flex;gap:14px;margin-bottom:12px;font-size:var(--fs-text);color:var(--wg9);flex-wrap:wrap;align-items:center;}
   .li{display:flex;align-items:center;gap:5px;}
   .dot-n{width:8px;height:8px;border-radius:50%;background:rgba(24,95,165,0.35);display:inline-block;}
   .dot-s{width:8px;height:8px;border-radius:50%;background:rgba(196,90,48,0.45);display:inline-block;}
@@ -49,20 +49,20 @@ extraStyles: |
   .sec-label{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
   .tbl-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
   table{width:100%;border-collapse:collapse;}
-  thead th{font-size:var(--fs-small);font-weight:500;color:var(--wg9);letter-spacing:.06em;padding:11px 16px;text-align:right;border-bottom:1px solid var(--line);background:var(--wg1);}
+  thead th{font-size:var(--fs-text);font-weight:500;color:var(--wg9);letter-spacing:.06em;padding:11px 16px;text-align:right;border-bottom:1px solid var(--line);background:var(--wg1);}
   thead th:first-child{text-align:center;}
   tbody tr{border-bottom:1px solid rgba(60,56,53,0.06);}
   tbody tr:last-child{border-bottom:none;}
   tbody tr.summer{background:#FEFAF8;}
   tbody tr.highlight{background:#FEF4EE;}
-  tbody td{font-size:var(--fs-dense);padding:10px 16px;text-align:right;color:var(--wg11);}
+  tbody td{font-size:var(--fs-text);padding:10px 16px;text-align:right;color:var(--wg11);}
   tbody td:first-child{text-align:center;font-weight:500;color:var(--wg41);}
   .badge{font-size:var(--fs-caption);background:rgba(28,107,58,0.1);color:var(--c-target);border-radius:2px;padding:1px 5px;margin-left:4px;letter-spacing:.04em;}
   .badge.rec{background:rgba(196,90,48,0.1);color:var(--c-warn);}
   .t-pred{color:var(--wg11);}
   .t-warn{font-weight:500;color:var(--c-warn);}
   .t-warn.ok{color:var(--c-target);}
-  .footer{padding-top:18px;margin-top:40px;font-size:var(--fs-small);color:var(--wg9);letter-spacing:.06em;gap:6px;}
+  .footer{padding-top:18px;margin-top:40px;font-size:var(--fs-text);color:var(--wg9);letter-spacing:.06em;gap:6px;}
 ---
 <div class="header">
   <div class="header-inner">

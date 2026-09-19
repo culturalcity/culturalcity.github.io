@@ -22,12 +22,15 @@ function files() {
 
 function check() {
   const bad = [];
+  // 只認 global.css 真的有定義的字級名：打錯字或用到已退役的名字（如 --fs-small），瀏覽器不會報錯、只會悄悄變回預設 16px
+  const defined = new Set([...fs.readFileSync(path.join(ROOT, 'global.css'), 'utf8').matchAll(/(--fs-[a-z]+)\s*:/g)].map(m => m[1]));
+  const undefinedToken = v => [...v.matchAll(/var\((--fs-[a-z]+)\)/g)].some(m => !defined.has(m[1]));
   for (const p of files()) {
     fs.readFileSync(p, 'utf8').split('\n').forEach((line, i) => {
       for (const m of line.matchAll(/font-size\s*:\s*([^;"'}]+)/g)) {
         const v = m[1].trim();
         // 允許 calc(var(--fs-x) * N)：只給圖示類（如大打勾）放大用，仍以字級表為錨
-        if (!/^(var\(--fs-[a-z]+\)|calc\(var\(--fs-[a-z]+\) \* [0-9.]+\))(\s*!important)?$/.test(v) && !/^(inherit|unset|initial)$/.test(v))
+        if ((!/^(var\(--fs-[a-z]+\)|calc\(var\(--fs-[a-z]+\) \* [0-9.]+\))(\s*!important)?$/.test(v) || undefinedToken(v)) && !/^(inherit|unset|initial)$/.test(v))
           bad.push(`${path.relative(ROOT, p)}:${i + 1}  font-size: ${v}`);
       }
       for (const m of line.matchAll(/font-weight\s*:\s*([^;"'}]+)/g)) {
