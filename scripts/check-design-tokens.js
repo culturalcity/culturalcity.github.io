@@ -36,8 +36,9 @@ function cssChunks(file, text) {
   const out = [];
   for (const m of text.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) out.push(m[1]);
   for (const m of text.matchAll(/\bstyle="([^"]*)"/g)) out.push(m[1]);
-  const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (fm) { const x = fm[1].match(/^extraStyles:[ \t]*[|>][-+]?[ \t]*\r?\n((?:[ \t]+.*\r?\n|[ \t]*\r?\n)*)/m); if (x) out.push(x[1]); }
+  const fm = text.match(/^﻿?---\r?\n([\s\S]*?)\r?\n---/);   // 少數檔開頭有 BOM
+  // 區塊最後一行緊貼 frontmatter 結尾的 ---，沒有換行，要一併收
+  if (fm) { const x = (fm[1] + '\n').match(/^extraStyles:[ \t]*[|>][-+]?[ \t]*\r?\n((?:[ \t]+.*\r?\n|[ \t]*\r?\n)*)/m); if (x) out.push(x[1]); }
   return out;
 }
 
