@@ -16,13 +16,13 @@ module.exports = function(eleventyConfig) {
   });
 
   // ── 設計表守門（2026-09-19）：scripts/check-design-tokens.js ──
-  // 建置前：寫死的顏色／行高／字距／間距、global 色票近似色 → 只警示。
+  // 建置前：寫死的顏色／行高／字距／間距 → 擋建置（例外須寫 design-ok 理由）；global 色票近似色 → 警示。
   // 建置後：逐頁（含連結的站內 CSS）查「用了 var(--x) 卻沒定義」→ 擋建置
   //（年報 --amber、公告列表 --c-staff、年報與首頁的 --wg3 都是這類靜默失色）。
   eleventyConfig.on("eleventy.before", () => {
     const { warnSource, nearColors } = require("./scripts/check-design-tokens.js");
     const w = warnSource(), n = nearColors();
-    if (w.length) console.warn(`[設計表] 寫死值 ${w.length} 處（請改用 token）：\n  ` + w.slice(0, 10).join("\n  "));
+    if (w.length) throw new Error(`設計表守門：寫死值 ${w.length} 處（改用 token；真有例外在宣告後加 /* design-ok: 理由 */）\n  ` + w.slice(0, 30).join("\n  "));
     if (n.length) console.warn(`[設計表] global 色票近似色 ${n.length} 對：\n  ` + n.join("\n  "));
   });
   eleventyConfig.on("eleventy.after", ({ directories, dir }) => {

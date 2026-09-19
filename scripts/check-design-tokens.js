@@ -2,7 +2,8 @@
 //
 // 兩段檢查：
 //   warnSource()  建置前：CSS 語境（*.css、<style>、style=""、frontmatter extraStyles）裡寫死的
-//                 顏色／行高／字距／間距 → 只警示不擋（歷史頁與資料視覺化難免有例外）；
+//                 顏色／行高／字距／間距 → 擋建置（2026-09-19 審閱後由警示改為阻擋）。真有例外，在該宣告後
+//                 緊接註解 /* design-ok: 理由 */ 即放行（理由必寫，對應 SHARED-CORE「超過要寫理由」）；
 //                 並列出 global.css 色票中 ΔE<3（肉眼分不出）的近似色對。
 //   checkOutput() 建置後：逐頁把「頁面本身＋它連結的站內 CSS」合起來看，
 //                 用了 var(--x)（無 fallback）卻整頁都沒定義 → 擋建置。
@@ -48,8 +49,9 @@ function warnSource() {
   for (const f of sourceFiles()) {
     const rel = path.relative(ROOT, f);
     for (const chunk of cssChunks(f, fs.readFileSync(f, 'utf8'))) {
-      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+)/g)) {
-        const [, prop, raw] = m, v = raw.trim();
+      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) {
+        const [, prop, raw, ok] = m, v = raw.replace(/\/\*[\s\S]*?\*\//g, '').trim();
+        if (ok) continue;                                            // 已寫明理由的例外
         if (prop.startsWith('--')) continue;                       // token 定義本身不算
         if (prop === 'line-height' && /^\d*\.?\d+$/.test(v) && v !== '0') warns.push(`${rel}  line-height: ${v} → var(--lh-*)`);
         else if (prop === 'letter-spacing' && /^-?\d*\.?\d+(em|px)/.test(v) && !/^0(em|px)?$/.test(v)) warns.push(`${rel}  letter-spacing: ${v} → var(--ls-*)`);
@@ -95,7 +97,15 @@ function checkOutput(outDir = path.join(ROOT, '_site')) {
     if (EXEMPT.test(path.sep + rel.replace(/\//g, path.sep))) continue;
     const html = fs.readFileSync(f, 'utf8');
     let text = html;
-    for (const m of html.matchAll(/<link[^>]+rel=["']?stylesheet["']?[^>]*href=["'](\/[^"']+\.css[^"']*)["']/g)) text += '\n' + readCss(m[1]);
+    // 站內 CSS 與 JS：屬性順序不拘、相對路徑以頁面位置解析；外部網址略過
+    const pageDir = '/' + path.posix.dirname(rel) + '/';
+    const local = href => /^(https?:)?\/\//.test(href) ? null : path.posix.normalize(href.startsWith('/') ? href : pageDir + href);
+    for (const m of html.matchAll(/<link\b[^>]*>/gi)) {
+      const tag = m[0]; if (!/rel=["']?stylesheet/i.test(tag)) continue;
+      const h = (tag.match(/href=["']([^"']+)["']/i) || [])[1]; const p = h && local(h); if (p) text += '\n' + readCss(p);
+    }
+    for (const m of html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)) { const p = local(m[1]); if (p) text += '\n' + readCss(p); }
+    text = text.replace(/\/\*[\s\S]*?\*\//g, '');                   // 註解裡的「--x:」不算定義
     const defined = new Set([...text.matchAll(/(--[\w-]+)\s*:/g)].map(m => m[1]));
     for (const m of text.matchAll(/setProperty\(\s*['"](--[\w-]+)/g)) defined.add(m[1]);
     const missing = new Set();
@@ -113,7 +123,8 @@ module.exports = { warnSource, nearColors, checkOutput };
 
 if (require.main === module) {
   const w = warnSource(), n = nearColors(), b = checkOutput(process.argv[2]);
-  console.log(`設計表警示：寫死值 ${w.length} 處${w.length ? '\n  ' + w.slice(0, 40).join('\n  ') : ''}`);
+  console.log(`設計表：寫死值 ${w.length} 處${w.length ? '\n  ' + w.slice(0, 40).join('\n  ') : ''}`);
+  if (w.length) process.exitCode = 1;
   console.log(`近似色（ΔE<3）：${n.length} 對${n.length ? '\n  ' + n.join('\n  ') : ''}`);
   if (b.length) { console.error(`未定義變數：${b.length} 頁\n  ` + b.join('\n  ')); process.exit(1); }
   console.log('未定義變數：無');
