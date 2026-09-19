@@ -25,18 +25,29 @@ function walk(dir, re, acc = []) {
 }
 
 function sourceFiles() {
-  const acc = fs.readdirSync(ROOT).filter(f => f.endsWith('.css')).map(f => path.join(ROOT, f));
-  walk(path.join(ROOT, 'src'), /\.(html|njk|md|css)$/, acc);
+  const acc = fs.readdirSync(ROOT).filter(f => /\.(css|js)$/.test(f) && !/^(_migrate|\.eleventy)/.test(f)).map(f => path.join(ROOT, f));
+  walk(path.join(ROOT, 'src'), /\.(html|njk|md|css|js)$/, acc);
   walk(path.join(ROOT, 'admin'), /\.html$/, acc);
   return acc.filter(p => !EXEMPT.test(p));
 }
 
-// CSS 語境：CSS 檔整份；HTML 的 <style>、style=""、frontmatter extraStyles
+// CSS 語境：CSS 檔整份；HTML 的 <style>、style=""／style=''、frontmatter extraStyles；
+// JS（.js 檔與頁內 <script>）的 el.style.xxx = '值' 與 cssText 字串（2026-09-19 審閱補：單引號與 JS 都能繞過）
+const kebab = s => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
+function jsChunks(text) {
+  const out = [];
+  for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${m[4] || ''}`);
+  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1/g)) out.push(m[2]);
+  return out;
+}
 function cssChunks(file, text) {
   if (file.endsWith('.css')) return [text];
+  if (file.endsWith('.js')) return jsChunks(text);
   const out = [];
   for (const m of text.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) out.push(m[1]);
   for (const m of text.matchAll(/\bstyle="([^"]*)"/g)) out.push(m[1]);
+  for (const m of text.matchAll(/\bstyle='([^']*)'/g)) out.push(m[1]);
+  for (const m of text.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) out.push(...jsChunks(m[1]));
   const fm = text.match(/^﻿?---\r?\n([\s\S]*?)\r?\n---/);   // 少數檔開頭有 BOM
   // 區塊最後一行緊貼 frontmatter 結尾的 ---，沒有換行，要一併收
   if (fm) { const x = (fm[1] + '\n').match(/^extraStyles:[ \t]*[|>][-+]?[ \t]*\r?\n((?:[ \t]+.*\r?\n|[ \t]*\r?\n)*)/m); if (x) out.push(x[1]); }
