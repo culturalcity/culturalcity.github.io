@@ -11,6 +11,7 @@
   --radius: 2px;
   --dp: #1F5C38;
   --dn: #8C1F1F;
+  --warn: #8C5A00;  /* 琥珀警示（注意、待辦、超預算）：卡片底 5.4:1、頁底 4.8:1 過 AA。2026-09-19 由 minutes.css／各頁重宣告收回 global；年報原寫的 --amber 從未定義，改用本色 */
   --page-max-width: 760px;  /* header-inner / breadcrumb-inner 共用；非預設由各 layout/頁的 :root 覆寫 */
 
   /* ── 字級表（全站唯一來源，2026-09 收斂）──
