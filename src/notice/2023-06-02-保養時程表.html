@@ -12,12 +12,12 @@ typeJa: 設備保守
 pillType: work
 extraStyles: |
   .maint-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);}
-  .maint-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;}
-  .maint-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
+  .maint-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
+  .maint-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
   .maint-table td:first-child{font-weight:700;color:var(--wg41);white-space:nowrap;width:110px;}
   .maint-table td:nth-child(2){color:var(--wg11);white-space:nowrap;width:140px;}
   .maint-table td ul{padding-left:1.2em;color:var(--wg11);}
-  .maint-table td ul li{margin-bottom:3px;}
+  .maint-table td ul li{margin-bottom:var(--sp-4);}
   .maint-table tr:last-child td{border-bottom:none;}
 ---
 <div class="lang-block active" data-lang="zh">
@@ -27,7 +27,7 @@ extraStyles: |
         <thead><tr><th>項目</th><th>日期時間</th><th>施作範圍</th></tr></thead>
         <tbody>
           <tr>
-            <td>修繕<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">信創營造・承盛機電</span></td>
+            <td>修繕<br><span class="vendor">信創營造・承盛機電</span></td>
             <td>6/2（五）<br>09:00–17:00</td>
             <td><ul>
               <li>83-8 店面外鋁包板漏水處修繕</li>
@@ -74,7 +74,7 @@ extraStyles: |
         <thead><tr><th>Item</th><th>Date &amp; Time</th><th>Scope of Work</th></tr></thead>
         <tbody>
           <tr>
-            <td>Repairs<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">Trust Creating Co. / Chengsheng M&amp;E</span></td>
+            <td>Repairs<br><span class="vendor">Trust Creating Co. / Chengsheng M&amp;E</span></td>
             <td>6/2 (Fri)<br>09:00–17:00</td>
             <td><ul>
               <li>Repair of the leaking aluminum cladding outside storefront 83-8</li>
@@ -121,7 +121,7 @@ extraStyles: |
         <thead><tr><th>項目</th><th>実施日時</th><th>実施範囲</th></tr></thead>
         <tbody>
           <tr>
-            <td>修繕<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">信創建設・承盛機電</span></td>
+            <td>修繕<br><span class="vendor">信創建設・承盛機電</span></td>
             <td>6/2（金）<br>09:00〜17:00</td>
             <td><ul>
               <li>83-8店舗外のアルミパネル漏水箇所の補修</li>

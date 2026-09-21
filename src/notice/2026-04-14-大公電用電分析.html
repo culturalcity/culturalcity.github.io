@@ -11,35 +11,35 @@ typeEn: Facility Maintenance
 typeJa: 設備保守
 pillType: work
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
-  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin:var(--sp-4) 0;}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:80px;flex-shrink:0;padding-top:2px;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:80px;flex-shrink:0;padding-top:2px;}
   .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;}
-  .note.alert{border-left-color:#8C1F1F;background:rgba(140,31,31,0.04);color:#5A1010;}
-  /* 圖表區塊 */ .chart-section{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;margin-bottom:16px;}
+  .note.alert{border-left-color:var(--dn);background:var(--dn-bg);color:var(--dn);}
+  /* 圖表區塊 */ .chart-section{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-24) var(--sp-24) var(--sp-20);margin-bottom:var(--sp-16);}
   .chart-title{font-size:var(--fs-text);font-weight:500;margin-bottom:2px;color:var(--wg41);}
-  .chart-sub{font-size:var(--fs-text);color:var(--wg9);margin-bottom:12px;}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-  .card{background:var(--wg1);border-radius:4px;padding:14px 16px;}
-  .card.alert-card{background:#FAECE7;}
-  .card-label{font-size:var(--fs-text);color:var(--wg9);margin-bottom:4px;}
-  .card.alert-card .card-label{color:#712B13;}
+  .chart-sub{font-size:var(--fs-text);color:var(--wg9);margin-bottom:var(--sp-12);}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-bottom:var(--sp-16);}
+  .card{background:var(--wg1);border-radius:4px;padding:var(--sp-16) var(--sp-16);}
+  .card.alert-card{background:var(--dn-bg);}
+  .card-label{font-size:var(--fs-text);color:var(--wg9);margin-bottom:var(--sp-4);}
+  .card.alert-card .card-label{color:var(--dn);}
   .card-value{font-size:var(--fs-heading);font-weight:500;}
-  .card.alert-card .card-value{color:#712B13;}
-  .legend{display:flex;gap:14px;margin-bottom:10px;font-size:var(--fs-text);color:var(--wg9);align-items:center;flex-wrap:wrap;}
-  .legend-item{display:flex;align-items:center;gap:4px;}
-  .legend-line{width:22px;height:2px;background:#185FA5;display:inline-block;}
-  .legend-dash{width:20px;height:0;border-top:2px dashed #888780;display:inline-block;}
-  .legend-dot{width:9px;height:9px;border-radius:50%;background:#C45A30;display:inline-block;}
+  .card.alert-card .card-value{color:var(--dn);}
+  .legend{display:flex;gap:var(--sp-16);margin-bottom:var(--sp-12);font-size:var(--fs-text);color:var(--wg9);align-items:center;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:var(--sp-4);}
+  .legend-line{width:22px;height:2px;background:var(--viz-blue);display:inline-block;}
+  .legend-dash{width:20px;height:0;border-top:2px dashed var(--viz-line);display:inline-block;}
+  .legend-dot{width:9px;height:9px;border-radius:50%;background:var(--viz-orange);display:inline-block;}
   .legend-box{width:12px;height:12px;border-radius:2px;display:inline-block;}
-  .legend-sq{width:12px;height:12px;background:#FAECE7;border:0.5px solid #C45A30;display:inline-block;}
+  .legend-sq{width:12px;height:12px;background:var(--dn-bg);border:0.5px solid var(--viz-orange);display:inline-block;}
   .chart-wrap{position:relative;width:100%;}
-  .divider{border:none;border-top:1px solid var(--line);margin:20px 0;}
-  .data-source{font-size:var(--fs-caption);color:var(--wg9);margin-top:10px;letter-spacing:.04em;}
+  .divider{border:none;border-top:1px solid var(--line);margin:var(--sp-20) 0;}
+  .data-source{font-size:var(--fs-caption);color:var(--wg9);margin-top:var(--sp-12);letter-spacing:var(--ls-text);}
 summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均值 +78%）'
 ---
 <div class="lang-block active" data-lang="zh">
@@ -63,7 +63,7 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
     <div class="note">請於離開公共區域時隨手關閉不必要的照明與空調設備。節約用電不僅有助降低每戶分攤費用，也是社區環境永續的重要一環。感謝各位住戶的配合。</div>
 
     <!-- 圖表（共用，置於中文區塊內，語言切換僅切換文字說明） -->
-    <div class="sec" style="margin-top:24px;">
+    <div class="sec" style="margin-top:var(--sp-24);">
       <div class="sec-label">用電分析圖表</div>
 
       <div class="chart-section">
@@ -113,8 +113,8 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
         <p class="chart-title">月線　2025年4月 — 2026年4月（月平均）</p>
         <p class="chart-sub">2026年4月為截至4月13日之13天平均</p>
         <div class="legend">
-          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6–9月）</span>
-          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>其他月份</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-orange);"></span>夏季（6–9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-gray);"></span>其他月份</span>
         </div>
         <div class="chart-wrap" style="height:220px;">
           <canvas id="monthlyChart" role="img" aria-label="月線圖"></canvas>
@@ -147,7 +147,7 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
     </div>
     <div class="note">Please remember to turn off unnecessary lighting and air-conditioning when leaving shared areas. Conserving energy helps reduce shared costs for all residents and supports the community's sustainability goals. Thank you for your cooperation.</div>
 
-    <div class="sec" style="margin-top:24px;">
+    <div class="sec" style="margin-top:var(--sp-24);">
       <div class="sec-label">Usage Charts</div>
       <div class="chart-section">
         <p class="chart-title">Daily — Last 31 Days (2026/3/14–4/13)</p>
@@ -179,8 +179,8 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
         <p class="chart-title">Monthly — Apr 2025 to Apr 2026 (monthly average)</p>
         <p class="chart-sub">April 2026: 13-day average as of April 13</p>
         <div class="legend">
-          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>Summer (Jun–Sep)</span>
-          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>Other months</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-orange);"></span>Summer (Jun–Sep)</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-gray);"></span>Other months</span>
         </div>
         <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartEn"></canvas></div>
       </div>
@@ -209,7 +209,7 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
     </div>
     <div class="note">共用エリアをご利用後は、不要な照明や空調の電源をお切りいただきますようお願いいたします。節電は各住居の按分負担の軽減につながり、コミュニティの持続可能な環境づくりにも貢献します。ご協力ありがとうございます。</div>
 
-    <div class="sec" style="margin-top:24px;">
+    <div class="sec" style="margin-top:var(--sp-24);">
       <div class="sec-label">使用量グラフ</div>
       <div class="chart-section">
         <p class="chart-title">日別　直近31日（2026/3/14–4/13）</p>
@@ -241,8 +241,8 @@ summary: '4/7 起用電量急速跳升，4/13 單日達 379 度（較三月均�
         <p class="chart-title">月別　2025年4月 — 2026年4月（月平均）</p>
         <p class="chart-sub">2026年4月は4月13日時点の13日間平均</p>
         <div class="legend">
-          <span class="legend-item"><span class="legend-box" style="background:#C45A30;"></span>夏季（6〜9月）</span>
-          <span class="legend-item"><span class="legend-box" style="background:#B4B2A9;"></span>その他の月</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-orange);"></span>夏季（6〜9月）</span>
+          <span class="legend-item"><span class="legend-box" style="background:var(--viz-gray);"></span>その他の月</span>
         </div>
         <div class="chart-wrap" style="height:220px;"><canvas id="monthlyChartJa"></canvas></div>
       </div>

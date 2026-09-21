@@ -11,20 +11,20 @@ typeEn: Construction Notice
 typeJa: 工事のお知らせ
 pillType: equip
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
-  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin:var(--sp-4) 0;}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:96px;flex-shrink:0;padding-top:2px;}
-  .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;line-height:1.7;}
-  .alert-banner{background:rgba(140,31,31,.06);border:1px solid rgba(140,31,31,.2);border-left:3px solid var(--c-safety);border-radius:1px;padding:14px 18px;margin-bottom:20px;font-size:var(--fs-body);color:var(--wg41);line-height:1.8;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:96px;flex-shrink:0;padding-top:2px;}
+  .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;line-height:var(--lh-text);}
+  .alert-banner{background:var(--dn-bg);border:1px solid var(--dn-line);border-left:3px solid var(--c-safety);border-radius:1px;padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-20);font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-text);}
   .alert-banner strong{color:var(--c-safety);}
-  .alert-banner .alert-title{font-size:var(--fs-text);font-weight:700;color:var(--c-safety);letter-spacing:.06em;margin-bottom:6px;}
-  .note.warn{border-left-color:var(--c-safety);background:rgba(140,31,31,0.04);color:#5A1010;}
+  .alert-banner .alert-title{font-size:var(--fs-text);font-weight:700;color:var(--c-safety);letter-spacing:var(--ls-text);margin-bottom:var(--sp-8);}
+  .note.warn{border-left-color:var(--c-safety);background:var(--dn-bg);color:var(--dn);}
   .note ul{padding-left:1.2em;}
-  .note li{margin-bottom:6px;}
+  .note li{margin-bottom:var(--sp-8);}
   .note li:last-child{margin-bottom:0;}
 summary: 04/29 09:30–17:00・年度消防缺失改善・期間警鈴會啟動與廣播通報，屬測試請勿驚慌
 ---

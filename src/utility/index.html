@@ -8,49 +8,49 @@ extraStyles: |
   :root{--page-max-width:1060px;} /* 寬內容頁（兩級制 1060）；header-inner／main 由 global 讀此變數 */
     /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
     body{font-size:var(--fs-body);}
-    .header{padding:36px 40px 28px;border-bottom:2px solid var(--wg11);}
-    .header-eyebrow{margin-bottom:8px;}
-    .header h1{letter-spacing:.08em;line-height:1.35;}
-    .header-sub{letter-spacing:.14em;}
-    .main{padding-top:32px;}
-  @media(min-width:601px) and (max-width:1140px){.main{padding-left:40px;padding-right:40px;max-width:calc(var(--page-max-width) + 80px);}} /* 寬版容器 1060 的平板帶側距（＝寬＋80，帶內放寬 80px 免得 padding 吃內容寬）；601 起算，手機側距由下方 600px 規則設 16px（公共事業系列頁規格） */
+    .header{padding:var(--sp-40) var(--sp-40) var(--sp-28);border-bottom:2px solid var(--wg11);}
+    .header-eyebrow{margin-bottom:var(--sp-8);}
+    .header h1{letter-spacing:var(--ls-label);line-height:var(--lh-tight);}
+    .header-sub{letter-spacing:var(--ls-caps);}
+    .main{padding-top:var(--sp-32);}
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:var(--sp-40);padding-right:var(--sp-40);max-width:calc(var(--page-max-width) + 80px);}} /* 寬版容器 1060 的平板帶側距（＝寬＋80，帶內放寬 80px 免得 padding 吃內容寬）；601 起算，手機側距由下方 600px 規則設 16px（公共事業系列頁規格） */
     /* TABS */
-    .tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--line);}
-    .tab{padding:10px 22px;font-size:var(--fs-body);font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:.04em;background:none;}
+    .tabs{display:flex;gap:0;margin-bottom:var(--sp-28);border-bottom:1px solid var(--line);}
+    .tab{padding:var(--sp-12) var(--sp-24);font-size:var(--fs-body);font-family:'Noto Sans TC',sans-serif;color:var(--wg9);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;letter-spacing:var(--ls-text);background:none;}
     .tab:hover{color:var(--wg41);}
     .tab.active{color:var(--wg41);border-bottom-color:var(--wg41);font-weight:500;}
     .tab-content{display:none;}.tab-content.active{display:block;}
     /* UPLOAD ROW */
-    .upload-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:var(--fs-text);color:var(--wg9);}
+    .upload-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-20);display:flex;align-items:center;gap:var(--sp-16);flex-wrap:wrap;font-size:var(--fs-text);color:var(--wg9);}
     .upload-row strong{color:var(--wg41);}
-    .upload-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;font-size:var(--fs-text);letter-spacing:.06em;border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .18s;text-decoration:none;}
+    .upload-btn{display:inline-flex;align-items:center;gap:var(--sp-4);padding:var(--sp-8) var(--sp-16);font-size:var(--fs-text);letter-spacing:var(--ls-text);border:1px solid var(--wg11);background:transparent;color:var(--wg11);border-radius:var(--radius);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .18s;text-decoration:none;}
     .upload-btn:hover{background:var(--wg11);color:var(--wg1);}
     /* KPI ROW */
-    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-12);margin-bottom:var(--sp-24);}
     @media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
-    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 12px;position:relative;}
+    .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-16) var(--sp-12);position:relative;}
     .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
-    .kpi-label{font-size:var(--fs-text);color:var(--wg9);letter-spacing:.06em;margin-bottom:7px;}
+    .kpi-label{font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);margin-bottom:var(--sp-8);}
     .kpi-val{font-size:var(--fs-heading);font-weight:700;color:var(--wg41);}
-    .kpi-sub{font-size:var(--fs-text);margin-top:5px;}
+    .kpi-sub{font-size:var(--fs-text);margin-top:var(--sp-4);}
     /* CHART */
-    .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
-    .panel-hd{padding:11px 18px;border-bottom:1px solid var(--line);font-size:var(--fs-text);font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:.04em;}
-    .panel-bd{padding:16px 18px;}
+    .chart-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:var(--sp-20);overflow:hidden;}
+    .panel-hd{padding:var(--sp-12) var(--sp-20);border-bottom:1px solid var(--line);font-size:var(--fs-text);font-weight:500;color:var(--wg11);display:flex;align-items:center;justify-content:space-between;letter-spacing:var(--ls-text);}
+    .panel-bd{padding:var(--sp-16) var(--sp-20);}
     .chart-wrap{position:relative;height:220px;}
     .chart-wrap-sm{position:relative;height:170px;}
-    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-16);margin-bottom:var(--sp-20);}
     @media(max-width:700px){.chart-grid{grid-template-columns:1fr;}}
     /* TABLE */
     .tbl-wrap{overflow-x:auto;}
     /* separate+spacing 0：視覺同 collapse，但 sticky 凍結欄的背景才能畫滿不漏縫 */
     table{width:100%;border-collapse:separate;border-spacing:0;font-size:var(--fs-text);}
-    th{text-align:left;padding:8px 10px;background:var(--wg1);color:var(--wg9);font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;border-bottom:1px solid var(--line);white-space:nowrap;}
+    th{text-align:left;padding:var(--sp-8) var(--sp-12);background:var(--wg1);color:var(--wg9);font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);border-bottom:1px solid var(--line);white-space:nowrap;}
     th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
-    td{padding:8px 10px;border-bottom:1px solid rgba(60,56,53,0.06);color:var(--wg11);white-space:nowrap;}
+    td{padding:var(--sp-8) var(--sp-12);border-bottom:1px solid var(--line-soft);color:var(--wg11);white-space:nowrap;}
     td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){text-align:right;}
     tr:last-child td{border-bottom:none;}
-    tr.latest td{font-weight:500;color:var(--wg41);background:rgba(60,56,53,0.03);}
+    tr.latest td{font-weight:500;color:var(--wg41);background:var(--tint);}
     /* 凍結前兩欄（年度＋帳期）：橫向捲動時固定在左緣，同 Excel 凍結窗格。
        --c1 = 第一欄實寬，由 stickyCols() 量測後設定 */
     /* left 取負值/減 2px：欄寬常是小數，凍結格彼此重疊 1-2px 吃掉次像素縫隙，
@@ -59,62 +59,62 @@ extraStyles: |
     .tbl-wrap th:nth-child(2),.tbl-wrap td:nth-child(2){position:sticky;left:calc(var(--c1,96px) - 2px);z-index:1;border-right:1px solid var(--line);}
     .tbl-wrap td:first-child,.tbl-wrap td:nth-child(2){background:var(--white);}
     .tbl-wrap th:first-child,.tbl-wrap th:nth-child(2){z-index:2;}
-    .tbl-wrap tr.latest td:first-child,.tbl-wrap tr.latest td:nth-child(2){background:#F1EFEC;} /* rgba(60,56,53,.03) 疊 --white 的不透明等值 */
+    .tbl-wrap tr.latest td:first-child,.tbl-wrap tr.latest td:nth-child(2){background:var(--tint);} /* rgba(60,56,53,.03) 疊 --white 的不透明等值 */
     /* .dp／.dn 與 .notice-box 沿用 global，只留差異 */
-    .notice-box{margin-bottom:20px;}
+    .notice-box{margin-bottom:var(--sp-20);}
     /* 能源管理機制區塊 */
-    .emgmt{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;}
-    .emgmt-hd{font-size:var(--fs-text);font-weight:700;color:var(--wg41);letter-spacing:.04em;margin-bottom:4px;}
-    .emgmt-lead{font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:14px;}
-    .emgmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .emgmt{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin-bottom:var(--sp-24);}
+    .emgmt-hd{font-size:var(--fs-text);font-weight:700;color:var(--wg41);letter-spacing:var(--ls-text);margin-bottom:var(--sp-4);}
+    .emgmt-lead{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+    .emgmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-12);}
     @media(max-width:620px){.emgmt-grid{grid-template-columns:1fr;}}
-    .emgmt-item{border:1px solid var(--line);border-radius:var(--radius);padding:11px 14px;}
-    .emgmt-item h4{font-size:var(--fs-text);font-weight:700;color:var(--dp);letter-spacing:.06em;margin:0 0 4px;}
-    .emgmt-item p{font-size:var(--fs-text);color:var(--wg11);line-height:1.7;margin:0;}
+    .emgmt-item{border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-16);}
+    .emgmt-item h4{font-size:var(--fs-text);font-weight:700;color:var(--dp);letter-spacing:var(--ls-text);margin:0 0 var(--sp-4);}
+    .emgmt-item p{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin:0;}
     .emgmt-item strong{color:var(--wg41);}
-    @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}}
+    @media(max-width:600px){.header{padding:var(--sp-28) var(--sp-20) var(--sp-24);}.main{padding:var(--sp-24) var(--sp-16) var(--sp-48);}}
     /* DRIVE LINK */
     .drive-link{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
-    .drive-link:hover{background:#F2F0EC;border-color:var(--wg11);}
+    .drive-link:hover{background:var(--tint);border-color:var(--wg11);}
     .drive-accent{width:3px;flex-shrink:0;background:var(--wg11);}
-    .drive-body{flex:1;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+    .drive-body{flex:1;padding:var(--sp-12) var(--sp-16);display:flex;align-items:center;gap:var(--sp-12);}
     .drive-icon{font-size:var(--fs-body);flex-shrink:0;opacity:0.65;}
     .drive-text{flex:1;display:flex;flex-direction:column;gap:2px;}
-    .drive-text strong{font-size:var(--fs-text);font-weight:500;color:var(--wg41);letter-spacing:.02em;}
-    .drive-text span{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:.08em;}
-    .drive-cta{font-size:var(--fs-text);color:var(--wg9);padding:0 16px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
-    .drive-link:hover .drive-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+    .drive-text strong{font-size:var(--fs-text);font-weight:500;color:var(--wg41);letter-spacing:var(--ls-text);}
+    .drive-text span{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:var(--ls-label);}
+    .drive-cta{font-size:var(--fs-text);color:var(--wg9);padding:0 var(--sp-16);border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:var(--ls-text);white-space:nowrap;transition:all .18s;}
+    .drive-link:hover .drive-cta{color:var(--wg41);background:var(--tint);}
     /* SECTIONS within tab */
-    .util-section{margin-bottom:36px;}
-    .util-section-hd{font-size:var(--fs-text);font-weight:700;letter-spacing:.08em;color:var(--wg41);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
-    .util-section-hd .util-section-sub{font-size:var(--fs-caption);font-weight:400;color:var(--wg9);letter-spacing:.04em;}
+    .util-section{margin-bottom:var(--sp-40);}
+    .util-section-hd{font-size:var(--fs-text);font-weight:700;letter-spacing:var(--ls-label);color:var(--wg41);margin:0 0 var(--sp-16);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-12);}
+    .util-section-hd .util-section-sub{font-size:var(--fs-caption);font-weight:400;color:var(--wg9);letter-spacing:var(--ls-text);}
     /* CHART CONTROLS（時間粒度切換）*/
-    .chart-controls{display:flex;gap:0;margin-bottom:12px;}
-    .chart-controls button{padding:6px 16px;font-size:var(--fs-text);background:var(--white);border:1px solid var(--line);border-right:0;cursor:pointer;font-family:'Noto Sans TC',sans-serif;color:var(--wg11);letter-spacing:.04em;transition:all .15s;}
+    .chart-controls{display:flex;gap:0;margin-bottom:var(--sp-12);}
+    .chart-controls button{padding:var(--sp-8) var(--sp-16);font-size:var(--fs-text);background:var(--white);border:1px solid var(--line);border-right:0;cursor:pointer;font-family:'Noto Sans TC',sans-serif;color:var(--wg11);letter-spacing:var(--ls-text);transition:all .15s;}
     .chart-controls button:last-child{border-right:1px solid var(--line);}
     .chart-controls button:hover{background:var(--wg1);}
     .chart-controls button.active{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
     /* SCROLLABLE CHART */
-    .chart-scroll{overflow-x:auto;width:100%;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+    .chart-scroll{overflow-x:auto;width:100%;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);}
     .chart-scroll-inner{position:relative;height:280px;}
     /* 凍結縱軸（Excel 凍結窗格效果）：sticky 小畫布黏在可視左緣，蓋住捲過去的長條 */
     .axis-freeze{position:sticky;left:0;width:0;height:0;z-index:2;pointer-events:none;}
     .axis-freeze canvas{display:block;background:var(--white);}
-    .chart-meta{font-size:var(--fs-caption);color:var(--wg9);margin-top:6px;}
+    .chart-meta{font-size:var(--fs-caption);color:var(--wg9);margin-top:var(--sp-8);}
     /* TOOL CARDS */
-    .tool-section{margin-bottom:28px;}
-    .tool-section-label{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);}
-    .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .tool-section{margin-bottom:var(--sp-28);}
+    .tool-section-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin-bottom:var(--sp-12);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);}
+    .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-12);}
     @media(max-width:600px){.tool-grid{grid-template-columns:1fr;}}
     .tool-card{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
-    .tool-card:hover{background:#F2F0EC;border-color:var(--wg11);}
-    .tool-accent{width:3px;flex-shrink:0;background:#185FA5;}
+    .tool-card:hover{background:var(--tint);border-color:var(--wg11);}
+    .tool-accent{width:3px;flex-shrink:0;background:var(--viz-blue);}
     .tool-accent.target{background:var(--dp);}
-    .tool-body{flex:1;padding:14px 16px;}
-    .tool-body strong{display:block;font-size:var(--fs-text);font-weight:500;letter-spacing:.02em;margin-bottom:3px;}
-    .tool-body span{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:.06em;line-height:1.75;}
-    .tool-cta{font-size:var(--fs-text);color:var(--wg9);padding:0 14px;border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:.06em;white-space:nowrap;transition:all .18s;}
-    .tool-card:hover .tool-cta{color:var(--wg41);background:rgba(60,56,53,0.04);}
+    .tool-body{flex:1;padding:var(--sp-16) var(--sp-16);}
+    .tool-body strong{display:block;font-size:var(--fs-text);font-weight:500;letter-spacing:var(--ls-text);margin-bottom:var(--sp-4);}
+    .tool-body span{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:var(--ls-text);line-height:var(--lh-text);}
+    .tool-cta{font-size:var(--fs-text);color:var(--wg9);padding:0 var(--sp-16);border-left:1px solid var(--line);display:flex;align-items:center;letter-spacing:var(--ls-text);white-space:nowrap;transition:all .18s;}
+    .tool-card:hover .tool-cta{color:var(--wg41);background:var(--tint);}
 ---
 <div class="header">
   <div class="header-inner">
@@ -147,12 +147,12 @@ extraStyles: |
   <div id="tab-elec" class="tab-content active" role="tabpanel">
 
     <!-- ─ 節電獎勵活動導流 ─ -->
-    <div style="background:rgba(31,92,56,0.06);border:1px solid rgba(31,92,56,0.2);border-left:3px solid var(--dp);border-radius:var(--radius);padding:16px 18px;margin-bottom:22px;line-height:1.85;">
-      <div style="font-weight:700;color:var(--dp);font-size:var(--fs-body);margin-bottom:6px;">🏆 一起參加市府「節電3%獎百萬」</div>
+    <div style="background:var(--dp-bg);border:1px solid var(--dp-line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-24);line-height:var(--lh-text);">
+      <div style="font-weight:700;color:var(--dp);font-size:var(--fs-body);margin-bottom:var(--sp-8);">🏆 一起參加市府「節電3%獎百萬」</div>
       <div style="font-size:var(--fs-text);color:var(--wg41);">社區公共用電上半年已較去年同期 <strong>約 −9%</strong>——這正是活動鼓勵的方向。住戶自家只要每半年用電比去年同期省 3% 以上，即可抽獎（總獎額 400 萬元／共 400 名）。<strong>活動延續至 12/31，現在登錄仍可參加抽獎。</strong></div>
-      <div style="margin-top:12px;">
-        <a href="https://energysaving.gov.taipei/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--dp);color:#fff;text-decoration:none;padding:10px 18px;border-radius:var(--radius);font-size:var(--fs-text);font-weight:700;">前往活動官網報名 ↗</a>
-        <a href="/notice/2026-06-16-節電獎百萬.html" style="display:inline-block;margin-left:14px;font-size:var(--fs-text);color:var(--dp);text-decoration:underline;">看活動公告</a>
+      <div style="margin-top:var(--sp-12);">
+        <a href="https://energysaving.gov.taipei/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:var(--sp-8);background:var(--dp);color:var(--white);text-decoration:none;padding:var(--sp-12) var(--sp-20);border-radius:var(--radius);font-size:var(--fs-text);font-weight:700;">前往活動官網報名 ↗</a>
+        <a href="/notice/2026-06-16-節電獎百萬.html" style="display:inline-block;margin-left:var(--sp-16);font-size:var(--fs-text);color:var(--dp);text-decoration:underline;">看活動公告</a>
       </div>
     </div>
 
@@ -651,7 +651,7 @@ function kpiHtml(label, val, diff, unit, inverse, compareLabel){
   const diffStr = diff!==null?`<span class="${cls}">${sign}${Math.round(diff).toLocaleString()} ${unit}${pctStr}</span>`:'';
   const lbl = compareLabel || '同比';
   return `<div class="kpi"><div class="kpi-label">${label}</div>
-    <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:var(--fs-text);font-weight:400;margin-left:3px">${unit}</span></div>
+    <div class="kpi-val">${Math.round(val).toLocaleString()}<span style="font-size:var(--fs-text);font-weight:400;margin-left:var(--sp-4)">${unit}</span></div>
     <div class="kpi-sub">${diffStr?lbl+' '+diffStr:''}</div></div>`;
 }
 

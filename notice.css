@@ -1,79 +1,68 @@
 /* notice.css — 公告頁面共用樣式 */
 
-:root {
-  --c-work: #8C4800;
-  --c-rule: #3C3835;
-  --c-event: #1F5C38;
-  --c-meeting: #2B4A6B;
-  --c-safety: #8C1F1F;
-  --c-equip: #8C1F1F;
-  --c-staff: #6B3F72;   /* 人事公告（2026-08 新增）*/
-  --page-max-width: 760px;  /* 標準寬（兩級制：760 標準 / 1060 寬內容）*/
-}
-
 body {
   font-family: 'Noto Sans TC', 'Noto Sans JP', 'Microsoft JhengHei', sans-serif;
-  line-height: 1.8;
+  line-height: var(--lh-text);
 }
 
 /* ── HEADER ── */
 .header {
   background: var(--wg41); color: var(--wg1);
-  padding: 36px 40px 28px; position: relative; overflow: hidden;
+  padding: var(--sp-40) var(--sp-40) var(--sp-28); position: relative; overflow: hidden;
 }
 .header::before {
   content: ''; position: absolute; inset: 0;
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    repeating-linear-gradient(92deg, transparent, transparent 120px, var(--tint-dark) 120px, var(--tint-dark) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, var(--tint-dark) 60px, var(--tint-dark) 61px);
   pointer-events: none;
 }
 .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
 .back {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size:var(--fs-text); letter-spacing: .1em; color: var(--wg7);
-  text-decoration: none; margin-bottom: 6px; margin-right: 16px;
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  font-size:var(--fs-text); letter-spacing: var(--ls-label); color: var(--wg7);
+  text-decoration: none; margin-bottom: var(--sp-8); margin-right: var(--sp-16);
   transition: color .18s;
 }
 .back::before { content: '←'; }
 .back:hover { color: var(--wg1); }
 .header h1 {
-  font-size: var(--fs-title); font-weight: 700; letter-spacing: .04em;
-  line-height: 1.35; margin-bottom: 6px;
+  font-size: var(--fs-title); font-weight: 700; letter-spacing: var(--ls-text);
+  line-height: var(--lh-tight); margin-bottom: var(--sp-8);
 }
 .header-meta {
-  font-size:var(--fs-text); color: var(--wg7); letter-spacing: .08em;
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px;
+  font-size:var(--fs-text); color: var(--wg7); letter-spacing: var(--ls-label);
+  display: flex; align-items: center; gap: var(--sp-12); flex-wrap: wrap; margin-top: var(--sp-12);
 }
 
 /* ── 類型徽章 ── */
-.type-pill { font-size:var(--fs-caption); padding: 2px 9px; border-radius: 1px; border: 1px solid; }
-.pill-work { color: var(--c-work); border-color: rgba(140,72,0,.3); background: rgba(140,72,0,.06); }
-.pill-rule { color: var(--c-rule); border-color: rgba(60,56,53,.25); background: rgba(60,56,53,.05); }
-.pill-event { color: var(--c-event); border-color: rgba(31,92,56,.3); background: rgba(31,92,56,.06); }
-.pill-meeting { color: var(--c-meeting); border-color: rgba(43,74,107,.3); background: rgba(43,74,107,.06); }
-.pill-safety { color: var(--c-safety); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
-.pill-equip { color: var(--c-equip); border-color: rgba(140,31,31,.3); background: rgba(140,31,31,.06); }
-.pill-staff { color: var(--c-staff); border-color: rgba(107,63,114,.3); background: rgba(107,63,114,.06); }
+.type-pill { font-size:var(--fs-caption); padding: 2px var(--sp-8); border-radius: 1px; border: 1px solid; }
+.pill-work { color: var(--c-work); border-color: var(--warn-line); background: var(--warn-bg); }
+.pill-rule { color: var(--c-rule); border-color: var(--line-strong); background: var(--tint); }
+.pill-event { color: var(--c-event); border-color: var(--dp-line); background: var(--dp-bg); }
+.pill-meeting { color: var(--c-meeting); border-color: var(--blue-line); background: var(--blue-bg); }
+.pill-safety { color: var(--c-safety); border-color: var(--dn-line); background: var(--dn-bg); }
+.pill-equip { color: var(--c-equip); border-color: var(--dn-line); background: var(--dn-bg); }
+.pill-staff { color: var(--c-staff); border-color: var(--c-staff-line); background: var(--c-staff-bg); }
 
 /* 深色 header 上的 pill 覆寫：用淺色版色相，避免暗紅/暗綠融進深底 */
-.header .pill-work    { color: #D49060; background: rgba(212,144,96,.12); border-color: rgba(212,144,96,.4); }
-.header .pill-rule    { color: #C8C3BD; background: rgba(255,255,255,.08);  border-color: rgba(255,255,255,.22); }
-.header .pill-event   { color: #7BB893; background: rgba(123,184,147,.12); border-color: rgba(123,184,147,.4); }
-.header .pill-meeting { color: #94B5D6; background: rgba(148,181,214,.12); border-color: rgba(148,181,214,.4); }
-.header .pill-safety  { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
-.header .pill-equip   { color: #D08585; background: rgba(208,133,133,.12); border-color: rgba(208,133,133,.4); }
-.header .pill-staff   { color: #C7A3CF; background: rgba(199,163,207,.12); border-color: rgba(199,163,207,.4); }
+.header .pill-work    { color: var(--warn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-rule    { color: var(--wg7); background: var(--tint-dark-strong);  border-color: var(--line-dark); }
+.header .pill-event   { color: var(--dp-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-meeting { color: var(--blue-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-safety  { color: var(--dn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-equip   { color: var(--dn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-staff   { color: var(--c-staff-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
 
 /* ── 語言切換器 ── */
 .lang-bar {
-  background: var(--wg41); border-top: 1px solid rgba(234,231,225,0.1);
-  padding: 0 40px;
+  background: var(--wg41); border-top: 1px solid var(--line-dark);
+  padding: 0 var(--sp-40);
 }
 .lang-bar-inner { max-width: var(--page-max-width); margin: 0 auto; display: flex; }
 .lang-btn {
-  padding: 10px 18px; font-size:var(--fs-text); font-family: inherit;
-  letter-spacing: .06em; color: var(--wg7);  /* 深底未選語言鈕 wg7 過 AA（rgba .45 僅 3.2:1） */
+  padding: var(--sp-12) var(--sp-20); font-size:var(--fs-text); font-family: inherit;
+  letter-spacing: var(--ls-text); color: var(--wg7);  /* 深底未選語言鈕 wg7 過 AA（rgba .45 僅 3.2:1） */
   background: transparent; border: none; border-bottom: 2px solid transparent;
   cursor: pointer; transition: all .18s; white-space: nowrap;
 }
@@ -81,11 +70,11 @@ body {
 .lang-btn.active { color: var(--wg1); border-bottom-color: var(--wg1); }
 
 /* ── MAIN ── */
-.main { max-width: var(--page-max-width); margin: 0 auto; padding: 36px 0 64px; }
+.main { max-width: var(--page-max-width); margin: 0 auto; padding: var(--sp-40) 0 var(--sp-64); }
 @media (max-width: 600px) {
-  .header { padding: 28px 20px 22px; }
-  .lang-bar { padding: 0 20px; }
-  .main { padding: 28px 20px 48px; }
+  .header { padding: var(--sp-28) var(--sp-20) var(--sp-24); }
+  .lang-bar { padding: 0 var(--sp-20); }
+  .main { padding: var(--sp-28) var(--sp-20) var(--sp-48); }
 }
 
 /* ── 語言區塊切換 ── */
@@ -95,24 +84,27 @@ body {
 .lang-block[data-lang="ja"], [data-lang-text="ja"] { font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', 'Noto Sans TC', sans-serif; }
 
 /* ── 通用內容元件 ── */
-.sec { margin-bottom: 28px; }
+.sec { margin-bottom: var(--sp-28); }
 .sec-label {
-  font-size:var(--fs-caption); letter-spacing: .22em; color: var(--wg11);
-  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; gap: 8px;
+  font-size:var(--fs-caption); letter-spacing: var(--ls-caps); color: var(--wg11);
+  margin-bottom: var(--sp-12); padding-bottom: var(--sp-8); border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--sp-8);
 }
 .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
 .note {
-  background: rgba(60,56,53,0.05); border-left: 3px solid var(--wg11);
-  padding: 12px 16px; font-size:var(--fs-text); color: var(--wg11);
-  line-height: 1.8; margin-top: 4px;
+  background: var(--tint); border-left: 3px solid var(--wg11);
+  padding: var(--sp-12) var(--sp-16); font-size:var(--fs-text); color: var(--wg11);
+  line-height: var(--lh-text); margin-top: var(--sp-4);
 }
 
 .footer {
-  border-top: 1px solid var(--line); padding-top: 18px; margin-top: 40px;
-  font-size:var(--fs-text); color: var(--wg9); letter-spacing: .06em;
+  border-top: 1px solid var(--line); padding-top: var(--sp-20); margin-top: var(--sp-40);
+  font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-text);
 }
+
+/* 表格內第二行的廠商名（保養時程表等；2026-09-19 由 294 處相同行內樣式收成 class） */
+.vendor { font-size: var(--fs-text); font-weight: 400; color: var(--wg9); }
 
 /* ── 保養通知 .maint-table 手機卡片堆疊（≤ 600px） ─────────────────
    桌機維持原 3 欄表格；手機改為每列一張卡片，避開 390px 第 3 欄逐字換行。
@@ -135,11 +127,11 @@ body {
     border: 1px solid var(--line);
     border-left: 4px solid var(--wg9);
     border-radius: var(--radius);
-    margin-bottom: 14px;
+    margin-bottom: var(--sp-16);
     overflow: hidden;
   }
   .maint-table tbody td {
-    padding: 11px 16px;
+    padding: var(--sp-12) var(--sp-16);
     border: none;
     border-bottom: 1px solid var(--line);
     white-space: normal;
@@ -149,7 +141,7 @@ body {
     font-size: var(--fs-body);
     font-weight: 700;
     white-space: normal;
-    background: rgba(60,56,53,0.04);
+    background: var(--tint);
   }
   .maint-table tbody td:nth-child(2) {
     white-space: normal;
@@ -161,5 +153,19 @@ body {
 
 /* 601–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊（<600 交給上方手機規則） */
 @media (min-width: 601px) and (max-width: 840px) {
-  .main, .lang-bar-inner { padding-left: 40px; padding-right: 40px; }
+  .main, .lang-bar-inner { padding-left: var(--sp-40); padding-right: var(--sp-40); }
+}
+
+/* ── 公告內一般表格：手機允許換行（≤ 600px） ─────────────────────────
+   2026-09-19 稽核：物業評選 .sched-table、電梯門片 .impact-table 在 English
+   狀態撐到 422／436px——各篇 extraStyles 為中文排版寫了 white-space:nowrap
+   ＋固定欄寬，英文字串一長就撐破。這裡統一放開：不改桌機、不動 .maint-table
+   （已有卡片堆疊）。specificity 0,2,2 起跳，壓過頁內 .x-table td:first-child（0,2,1）。 */
+@media (max-width: 600px) {
+  .main table:not(.maint-table) th,
+  .main table:not(.maint-table) td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    width: auto;
+  }
 }

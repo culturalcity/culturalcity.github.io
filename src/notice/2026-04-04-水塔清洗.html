@@ -11,21 +11,21 @@ typeEn: Facility Maintenance
 typeJa: 設備保守
 pillType: work
 extraStyles: |
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
-  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:4px 0;}
-  .info-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .info-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);margin:var(--sp-4) 0;}
+  .info-row{display:flex;gap:var(--sp-16);padding:var(--sp-8) 0;border-bottom:1px solid var(--line);}
   .info-row:last-child{border-bottom:none;}
-  .info-label{font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg9);width:70px;flex-shrink:0;padding-top:2px;}
+  .info-label{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);width:70px;flex-shrink:0;padding-top:2px;}
   .info-value{font-size:var(--fs-body);color:var(--wg41);font-weight:500;}
   /* 時程表格 */ .schedule-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:var(--fs-text);}
-  .schedule-table th{background:rgba(60,56,53,0.06);font-size:var(--fs-text);letter-spacing:.08em;color:var(--wg11);font-weight:500;padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);}
-  .schedule-table td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7;}
+  .schedule-table th{background:var(--tint);font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg11);font-weight:500;padding:var(--sp-12) var(--sp-16);text-align:left;border-bottom:1px solid var(--line);}
+  .schedule-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:top;line-height:var(--lh-text);}
   .schedule-table tr:last-child td{border-bottom:none;}
   .schedule-table td:first-child{white-space:nowrap;font-weight:500;color:var(--wg11);width:110px;}
   .schedule-table ul{padding-left:1.2em;margin:0;}
-  .schedule-table li{margin-bottom:4px;}
+  .schedule-table li{margin-bottom:var(--sp-4);}
   .schedule-table li:last-child{margin-bottom:0;}
 summary: '04/07（二）09:00–17:00，頂樓及地下室水池全日清洗'
 ---

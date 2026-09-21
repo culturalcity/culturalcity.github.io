@@ -5,93 +5,93 @@ title: 新住戶須知
 trilingual: true
 lastUpdated: 2026/06/21
 extraStyles: |
-  :root{--blue:#2B4A6B;--warn:#8C5A00;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／header 織紋／main 容器沿用 global */
-  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:var(--fs-body);line-height:1.8;}
+  body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:var(--fs-body);line-height:var(--lh-text);}
   /* ── HEADER ── */
-  .header{padding:36px 40px 32px;}
-  .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-  .eyebrow{font-size:var(--fs-caption);letter-spacing:.28em;color:var(--wg7);margin-bottom:10px;}
-  .header h1{font-size:var(--fs-heading);letter-spacing:.08em;}
-  .header-sub{letter-spacing:.14em;}
+  .header{padding:var(--sp-40) var(--sp-40) var(--sp-32);}
+  .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--sp-12);}
+  .eyebrow{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg7);margin-bottom:var(--sp-12);}
+  .header h1{font-size:var(--fs-heading);letter-spacing:var(--ls-label);}
+  .header-sub{letter-spacing:var(--ls-caps);}
   /* ── LANG SWITCHER ── */
-  .lang-switcher{display:flex;gap:6px;flex-shrink:0;margin-top:4px;}
-  .lang-btn{padding:4px 10px;font-size:var(--fs-caption);letter-spacing:.06em;border:1px solid rgba(234,231,225,0.25);background:transparent;color:var(--wg7);cursor:pointer;border-radius:1px;transition:all .18s;font-family:inherit;} /* 深底未選語言鈕 wg7 過 AA */
-  .lang-btn:hover{color:var(--wg1);border-color:rgba(234,231,225,0.6);}
-  .lang-btn.active{color:var(--wg1);border-color:var(--wg1);background:rgba(234,231,225,0.1);}
+  .lang-switcher{display:flex;gap:var(--sp-8);flex-shrink:0;margin-top:var(--sp-4);}
+  .lang-btn{padding:var(--sp-4) var(--sp-12);font-size:var(--fs-caption);letter-spacing:var(--ls-text);border:1px solid var(--line-dark);background:transparent;color:var(--wg7);cursor:pointer;border-radius:1px;transition:all .18s;font-family:inherit;} /* 深底未選語言鈕 wg7 過 AA */
+  .lang-btn:hover{color:var(--wg1);border-color:var(--line-dark);}
+  .lang-btn.active{color:var(--wg1);border-color:var(--wg1);background:var(--tint-dark-strong);}
   /* ── MAIN ── */
-  .main{padding-bottom:72px;}
-  @media(max-width:600px){.header{padding:28px 20px 24px;}.main{padding-top:24px;padding-bottom:56px;}.header h1{font-size:var(--fs-heading);}}
+  .main{padding-bottom:var(--sp-80);}
+  @media(max-width:600px){.header{padding:var(--sp-28) var(--sp-20) var(--sp-24);}.main{padding-top:var(--sp-24);padding-bottom:var(--sp-56);}.header h1{font-size:var(--fs-heading);}}
   /* ── SECTION LABEL ── */
-  .sec-label{font-size:var(--fs-caption);letter-spacing:.28em;color:var(--wg9);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+  .sec-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg9);margin-bottom:var(--sp-16);padding-bottom:var(--sp-12);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-12);}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
   /* ── INTRO BANNER ── */
-  .intro{background:var(--wg41);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;color:var(--wg1);}
-  .intro-title{font-size:var(--fs-body);font-weight:700;letter-spacing:.04em;margin-bottom:8px;}
-  .intro-text{font-size:var(--fs-text);color:rgba(234,231,225,0.7);line-height:1.85;}
+  .intro{background:var(--wg41);border-radius:var(--radius);padding:var(--sp-20) var(--sp-24);margin-bottom:var(--sp-16);color:var(--wg1);}
+  .intro-title{font-size:var(--fs-body);font-weight:700;letter-spacing:var(--ls-text);margin-bottom:var(--sp-8);}
+  .intro-text{font-size:var(--fs-text);color:var(--wg1);line-height:var(--lh-text);}
   /* ── TRANSITION CTA ── */
-  .transition-cta{display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;margin-bottom:40px;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:background .15s;}
+  .transition-cta{display:flex;align-items:center;gap:var(--sp-16);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-40);text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:background .15s;}
   .transition-cta::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);}
-  .transition-cta:hover{background:#F2F0EC;}
-  .tc-icon{font-size:var(--fs-heading);flex-shrink:0;line-height:1;}
+  .transition-cta:hover{background:var(--tint);}
+  .tc-icon{font-size:var(--fs-heading);flex-shrink:0;line-height:var(--lh-solid);}
   .tc-body{flex:1;min-width:0;}
-  .tc-eyebrow{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--blue);font-weight:700;margin-bottom:3px;}
-  .tc-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:3px;line-height:1.5;letter-spacing:.03em;}
-  .tc-desc{font-size:var(--fs-text);color:var(--wg11);line-height:1.7;}
+  .tc-eyebrow{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--blue);font-weight:700;margin-bottom:var(--sp-4);}
+  .tc-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:var(--sp-4);line-height:var(--lh-tight);letter-spacing:var(--ls-text);}
+  .tc-desc{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);}
   .tc-arrow{color:var(--blue);font-size:var(--fs-body);flex-shrink:0;transition:transform .15s;}
   .transition-cta:hover .tc-arrow{transform:translateX(3px);}
   /* ── CARD GRID ── */
-  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px;}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-12);margin-bottom:var(--sp-40);}
   @media(max-width:560px){.card-grid{grid-template-columns:1fr;}}
-  .info-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative;overflow:hidden;}
+  .info-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);position:relative;overflow:hidden;}
   .info-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--wg11);}
   .info-card.blue::before{background:var(--blue);}
   .info-card.green::before{background:var(--dp);}
   .info-card.warn::before{background:var(--warn);}
-  .card-illus{display:block;width:100%;max-width:300px;height:135px;object-fit:contain;margin:2px auto 12px;} /* 固定圖框高：七卡標題基線對齊，矮圖自動上下留白 */
-  .card-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:8px;letter-spacing:.03em;}
-  .card-body{font-size:var(--fs-text);color:var(--wg11);line-height:1.85;}
+  .card-illus{display:block;width:100%;max-width:300px;height:135px;object-fit:contain;margin:2px auto var(--sp-12);} /* 固定圖框高：七卡標題基線對齊，矮圖自動上下留白 */
+  .card-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:var(--sp-8);letter-spacing:var(--ls-text);}
+  .card-body{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);}
   .card-body strong{color:var(--wg41);}
-  .card-body .amount{font-size:var(--fs-body);font-weight:700;color:var(--blue);display:block;margin:4px 0 2px;}
-  .card-body .note{font-size:var(--fs-text);color:var(--wg9);margin-top:4px;}
-  .card-link{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-text);letter-spacing:.06em;color:var(--blue);text-decoration:none;margin-top:10px;transition:gap .15s;}
-  .card-link:hover{gap:8px;}
+  .card-body .amount{font-size:var(--fs-body);font-weight:700;color:var(--blue);display:block;margin:var(--sp-4) 0 2px;}
+  .card-body .note{font-size:var(--fs-text);color:var(--wg9);margin-top:var(--sp-4);}
+  .card-link{display:inline-flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-text);letter-spacing:var(--ls-text);color:var(--blue);text-decoration:none;margin-top:var(--sp-12);transition:gap .15s;}
+  .card-link:hover{gap:var(--sp-8);}
   .card-link::after{content:'→';}
   /* ── DETAIL LIST ── */
-  .detail-block{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;}
-  .detail-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s;}
-  .detail-head:hover{background:#F2F0EC;}
-  .detail-head-left{display:flex;align-items:center;gap:10px;}
-  .detail-illus{display:block;width:100%;max-width:340px;margin:8px auto 14px;}
+  .detail-block{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:var(--sp-12);overflow:hidden;}
+  .detail-head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-12) var(--sp-16);cursor:pointer;user-select:none;transition:background .15s;}
+  .detail-head:hover{background:var(--tint);}
+  .detail-head-left{display:flex;align-items:center;gap:var(--sp-12);}
+  .detail-illus{display:block;width:100%;max-width:340px;margin:var(--sp-8) auto var(--sp-16);}
   .detail-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);}
   .detail-chevron{font-size:var(--fs-text);color:var(--wg9);transition:transform .2s;}
   .detail-block.open .detail-chevron{transform:rotate(90deg);}
-  .detail-body{display:none;padding:4px 16px 16px;border-top:1px solid var(--line);}
+  .detail-body{display:none;padding:var(--sp-4) var(--sp-16) var(--sp-16);border-top:1px solid var(--line);}
   .detail-block.open .detail-body{display:block;}
-  .detail-body p{font-size:var(--fs-text);color:var(--wg11);line-height:1.85;margin-bottom:8px;}
+  .detail-body p{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-8);}
   .detail-body p:last-child{margin-bottom:0;}
-  .detail-body ul{padding-left:1.4em;margin:6px 0;}
-  .detail-body li{font-size:var(--fs-text);color:var(--wg11);line-height:1.85;margin-bottom:4px;}
+  .detail-body ul{padding-left:1.4em;margin:var(--sp-8) 0;}
+  .detail-body li{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-4);}
   .detail-body strong{color:var(--wg41);}
-  .detail-body .ref-link{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-text);color:var(--blue);text-decoration:none;letter-spacing:.04em;margin-top:8px;transition:gap .15s;}
-  .detail-body .ref-link:hover{gap:8px;}
+  .detail-body .ref-link{display:inline-flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-text);color:var(--blue);text-decoration:none;letter-spacing:var(--ls-text);margin-top:var(--sp-8);transition:gap .15s;}
+  .detail-body .ref-link:hover{gap:var(--sp-8);}
   .detail-body .ref-link::after{content:'→';}
-  .detail-body .highlight{background:rgba(43,74,107,0.06);border-left:3px solid var(--blue);padding:8px 12px;font-size:var(--fs-text);color:var(--wg41);margin:8px 0;border-radius:0 var(--radius) var(--radius) 0;}
-  .detail-body .warn-box{background:rgba(140,90,0,0.05);border-left:3px solid var(--warn);padding:8px 12px;font-size:var(--fs-text);color:var(--wg41);margin:8px 0;border-radius:0 var(--radius) var(--radius) 0;}
+  .detail-body .highlight{background:var(--blue-bg);border-left:3px solid var(--blue);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--wg41);margin:var(--sp-8) 0;border-radius:0 var(--radius) var(--radius) 0;}
+  .detail-body .warn-box{background:var(--warn-bg);border-left:3px solid var(--warn);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--wg41);margin:var(--sp-8) 0;border-radius:0 var(--radius) var(--radius) 0;}
   /* ── TODO LIST ── */
-  .todo-list{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;}
-  .todo-item{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;}
+  .todo-list{display:flex;flex-direction:column;gap:var(--sp-8);margin-bottom:var(--sp-40);}
+  .todo-item{display:flex;align-items:flex-start;gap:var(--sp-12);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-16);}
   .todo-num{font-size:var(--fs-text);font-weight:700;color:var(--white);background:var(--wg41);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
   .todo-content{flex:1;}
   .todo-title{font-size:var(--fs-text);font-weight:700;color:var(--wg41);margin-bottom:2px;}
-  .todo-desc{font-size:var(--fs-text);color:var(--wg9);line-height:1.7;}
+  .todo-desc{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);}
   /* ── CONTACT ── */
-  .contact-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;}
+  .contact-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:var(--sp-40);}
   @media(max-width:500px){.contact-strip{grid-template-columns:1fr;}}
-  .contact-cell{background:var(--white);padding:14px 16px;}
-  .contact-label{font-size:var(--fs-caption);letter-spacing:.12em;color:var(--wg9);margin-bottom:4px;}
+  .contact-cell{background:var(--white);padding:var(--sp-16) var(--sp-16);}
+  .contact-label{font-size:var(--fs-caption);letter-spacing:var(--ls-label);color:var(--wg9);margin-bottom:var(--sp-4);}
   .contact-val{font-size:var(--fs-body);font-weight:700;color:var(--wg41);}
-  .footer{padding-top:18px;font-size:var(--fs-text);color:var(--wg9);gap:6px;}
+  .footer{padding-top:var(--sp-20);font-size:var(--fs-text);color:var(--wg9);gap:var(--sp-8);}
 extraScripts: |
   // 三語切換用共用 /lang.js（trilingual:true）。此頁獨有的「標題隨語言改字」插在掛鉤上。
   // 核心切換(.lang-btn/.lang-block by data-lang)＋html lang 由 lang.js 處理。
@@ -269,7 +269,7 @@ extraScripts: |
       <p><strong>實務做法：</strong>設計／施工廠商通常會把這道許可納入服務範圍（建築師約 6–8 萬元、合格室內裝修公司約 4–6 萬元）。發包前請<strong>主動向廠商確認此項是否含在報價內</strong>，並要求取得核准文件後再進場施工。</p>
       <p><strong>省錢小提醒：</strong>不少人覺得「裝修許可只是多一筆錢」而想跳過——其實閱大安已有不少戶辦過。發包前可<strong>請管理中心任職較久的物業管理公司同仁協助打聽</strong>：他們認識曾辦過裝修許可的住戶，能幫忙詢問實際使用的承辦廠商與費用，多比較幾家再決定，往往可以找到比設計公司報價更實惠的選擇。</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">裝潢修繕施工管理辦法</a>　<a href="./transition.html#sec-interior" class="ref-link">從老社區搬來的觀念對比 § 05</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">裝潢修繕施工管理辦法</a>　<a href="./transition.html#sec-interior" class="ref-link">從老社區搬來的觀念對比 § 05</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -300,7 +300,7 @@ extraScripts: |
       </ul>
       <p>涉及裝潢設計的規定（陽台外推、鐵窗、冷氣室外機位置、防墜措施、室內隔間）已整併至上方<strong>裝潢施工申請流程</strong>一節。</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">社區規約</a>　<a href="./transition.html#sec-appearance" class="ref-link">從老社區搬來的觀念對比 § 04</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">社區規約</a>　<a href="./transition.html#sec-appearance" class="ref-link">從老社區搬來的觀念對比 § 04</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -312,7 +312,7 @@ extraScripts: |
       <img class="detail-illus" src="/images/welcome-nosmoking.svg" alt="" loading="lazy">
       <p>依區分所有權人會議通過的規約，本社區<strong>共用部分及約定專用部分全面禁止吸菸</strong>——範圍包括大廳、梯廳、樓梯間、走道、停車空間、樓頂平台等室內外空間。</p>
       <p>自家室內與陽台依法不屬管委會可管理的範圍，但菸味會隨氣流飄入鄰戶，是公寓大廈常見的鄰里困擾，誠摯希望您也一併避免。</p>
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">社區規約</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">社區規約</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -371,7 +371,7 @@ extraScripts: |
         <li>周邊店家／餐廳資訊</li>
       </ul>
 
-      <p style="margin-top:14px;">需要任何一項服務時，請洽<strong>管理中心電話 (02) 2367-7065</strong>或<strong>行動 0989-648-285</strong>。</p>
+      <p style="margin-top:var(--sp-16);">需要任何一項服務時，請洽<strong>管理中心電話 (02) 2367-7065</strong>或<strong>行動 0989-648-285</strong>。</p>
     </div>
   </div>
   <div class="detail-block">
@@ -541,7 +541,7 @@ extraScripts: |
       <p><strong>Practical Note:</strong> Design/construction firms typically include this permit in their service scope (architects: NT$60,000–80,000; certified interior renovation firms: NT$40,000–60,000). Before signing a contract, <strong>confirm with your contractor that the permit is included in the quote</strong>, and require the approval document before construction begins.</p>
       <p><strong>Money-saving tip:</strong> Some residents try to skip the permit to save money — but Cultural City already has many neighbors who have gone through this process. Before signing, you can <strong>ask long-serving property-management staff at the Management Center to help inquire</strong>: they know neighbors who have applied and can help find out which contractors and fees were used. Comparing several options often reveals more affordable choices than design-firm quotes.</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">Renovation Management Rules</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">Renovation Management Rules</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -572,7 +572,7 @@ extraScripts: |
       </ul>
       <p>Rules that concern interior design decisions (balcony extensions, window grilles, AC outdoor unit locations, fall-prevention measures, interior partitions) have been consolidated into the <strong>Renovation Application Process</strong> section above.</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">Community Regulations</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">Community Regulations</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -584,7 +584,7 @@ extraScripts: |
       <img class="detail-illus" src="/images/welcome-nosmoking.svg" alt="" loading="lazy">
       <p>Under the Community Bylaws adopted by the Owners' General Meeting, smoking is <strong>prohibited throughout all Common Portions and Designated-Exclusive Portions</strong> — including the lobby, elevator halls, stairwells, corridors, the basement parking lot and the rooftop, indoors and outdoors alike.</p>
       <p>Your own home and balcony fall outside what the Management Committee may regulate by law, but cigarette smoke drifts into neighboring units with the airflow — a common source of friction in apartment living. We sincerely ask you to refrain there as well.</p>
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">Community Regulations</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">Community Regulations</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -643,7 +643,7 @@ extraScripts: |
         <li>Information on nearby shops and restaurants</li>
       </ul>
 
-      <p style="margin-top:14px;">For any of these services, call the <strong>Management Center at (02) 2367-7065</strong> or <strong>mobile 0989-648-285</strong>.</p>
+      <p style="margin-top:var(--sp-16);">For any of these services, call the <strong>Management Center at (02) 2367-7065</strong> or <strong>mobile 0989-648-285</strong>.</p>
     </div>
   </div>
   <div class="detail-block">
@@ -813,7 +813,7 @@ extraScripts: |
       <p><strong>実務的なご案内：</strong>設計・施工業者は通常このサービスに許可申請を含めています（建築士：NT$60,000〜80,000、資格を有する内装工事業者：NT$40,000〜60,000）。発注前に、<strong>許可申請が見積もりに含まれているか業者に確認</strong>し、承認書類を取得してから工事開始するように依頼してください。</p>
       <p><strong>節約のヒント：</strong>「許可申請は追加費用」と感じて飛ばしたいと思う方もいますが、閱大安にはすでに多くの世帯がこの手続きを経験しています。発注前に、<strong>管理センターで長年勤務している物業管理スタッフに問い合わせのサポートを依頼</strong>することができます：彼らは過去に許可を取得した近所の方々を知っており、実際に使用された業者と費用について聞き取りを手伝ってくれます。複数の選択肢を比較することで、設計事務所の見積もりよりも手頃な選択肢が見つかることがよくあります。</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">リノベーション工事管理規則</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-裝潢修繕施工管理辦法.html" class="ref-link">リノベーション工事管理規則</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -844,7 +844,7 @@ extraScripts: |
       </ul>
       <p>内装デザインに関わる規定（バルコニー張り出し、面格子、エアコン室外機の位置、落下防止措置、室内間仕切り）は、上記の<strong>リノベーション申請の流れ</strong>にまとめて記載しています。</p>
 
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">管理規約</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">管理規約</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -856,7 +856,7 @@ extraScripts: |
       <img class="detail-illus" src="/images/welcome-nosmoking.svg" alt="" loading="lazy">
       <p>管理組合の総会で可決された管理規約により、当コミュニティでは<strong>共用部分および約定専用部分での喫煙が全面的に禁止</strong>されています——エントランスホール、エレベーターホール、階段ホール、共用廊下、地下駐車場、屋上など、屋内外の空間が対象です。</p>
       <p>ご自宅の室内やバルコニーは、法令上理事会が管理できる範囲ではありませんが、タバコの煙は気流に乗って隣戸へ流れ込み、集合住宅でよくある近隣トラブルのもとになります。ご自宅でも喫煙をお控えいただきますよう、心よりお願いいたします。</p>
-      <p style="margin-top:14px;"><a href="../regulations/regulations-社區規約.html" class="ref-link">管理規約</a></p>
+      <p style="margin-top:var(--sp-16);"><a href="../regulations/regulations-社區規約.html" class="ref-link">管理規約</a></p>
     </div>
   </div>
   <div class="detail-block">
@@ -915,7 +915,7 @@ extraScripts: |
         <li>周辺店舗・飲食店の案内</li>
       </ul>
 
-      <p style="margin-top:14px;">いずれかのサービスをご利用の際は、<strong>管理センター電話 (02) 2367-7065</strong> または <strong>携帯 0989-648-285</strong> までご連絡ください。</p>
+      <p style="margin-top:var(--sp-16);">いずれかのサービスをご利用の際は、<strong>管理センター電話 (02) 2367-7065</strong> または <strong>携帯 0989-648-285</strong> までご連絡ください。</p>
     </div>
   </div>
   <div class="detail-block">
@@ -945,7 +945,7 @@ extraScripts: |
 
 </div><!-- /content-ja -->
 
-  <div style="text-align:center;font-size:var(--fs-caption);color:var(--wg7);letter-spacing:.08em;padding:18px 0 0;margin-top:8px;border-top:1px solid var(--line);">
+  <div style="text-align:center;font-size:var(--fs-caption);color:var(--wg7);letter-spacing:var(--ls-label);padding:var(--sp-20) 0 0;margin-top:var(--sp-8);border-top:1px solid var(--line);">
     最後更新 / Last updated / 最終更新：{{ lastUpdated }}
   </div>
 

@@ -11,25 +11,25 @@ typeEn: Construction Notice
 typeJa: 工事・修繕通知
 pillType: equip
 extraStyles: |
-  .pill-equip{color:var(--c-equip);border-color:rgba(140,31,31,.3);background:rgba(140,31,31,.06);}
-  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:1.9;}
+  .pill-equip{color:var(--c-equip);border-color:var(--dn-line);background:var(--dn-bg);}
+  .body-text{font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-loose);}
   .body-text p{margin-bottom:1em;}
   .body-text p:last-child{margin-bottom:0;}
   .sched-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);}
-  .sched-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;}
-  .sched-table td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle;background:var(--white);}
+  .sched-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
+  .sched-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:middle;background:var(--white);}
   .sched-table td:first-child{font-weight:700;color:var(--wg41);white-space:nowrap;width:140px;}
   .sched-table tr:last-child td{border-bottom:none;}
   .impact-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);}
-  .impact-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;}
-  .impact-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
+  .impact-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
+  .impact-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);vertical-align:top;background:var(--white);}
   .impact-table td:first-child{font-weight:700;color:var(--wg41);white-space:nowrap;width:120px;}
   .impact-table tr:last-child td{border-bottom:none;}
-  .ul-clean{list-style:none;padding:0;margin:4px 0;}
-  .ul-clean li{padding:6px 0 6px 16px;border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);position:relative;}
+  .ul-clean{list-style:none;padding:0;margin:var(--sp-4) 0;}
+  .ul-clean li{padding:var(--sp-8) 0 var(--sp-8) var(--sp-16);border-bottom:1px solid var(--line);font-size:var(--fs-text);color:var(--wg11);position:relative;}
   .ul-clean li::before{content:'·';position:absolute;left:0;color:var(--wg9);}
   .ul-clean li:last-child{border-bottom:none;}
-  .apology{background:rgba(140,31,31,0.04);border-left:3px solid var(--c-equip);padding:12px 16px;font-size:var(--fs-text);color:var(--wg11);line-height:1.8;margin-bottom:20px;}
+  .apology{background:var(--dn-bg);border-left:3px solid var(--c-equip);padding:var(--sp-12) var(--sp-16);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-20);}
 ---
 <div class="lang-block active" data-lang="zh">
 <div class="apology">由於三菱電梯昨日（11/17）才臨時排定施工日期，導致本公告發出時間較為倉促，管委會對此造成的不便，向全體住戶致上最深的歉意。</div>
@@ -57,7 +57,7 @@ extraStyles: |
         <thead><tr><th>電梯類型</th><th>施工內容</th><th>影響說明</th></tr></thead>
         <tbody>
           <tr>
-            <td>客梯<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">影響較小</span></td>
+            <td>客梯<br><span class="vendor">影響較小</span></td>
             <td>僅更換電梯「內部」的門片</td>
             <td>暫停服務時間較短</td>
           </tr>
@@ -105,7 +105,7 @@ extraStyles: |
         <thead><tr><th>Elevator Type</th><th>Scope of Work</th><th>Impact</th></tr></thead>
         <tbody>
           <tr>
-            <td>Passenger Lift<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">Minor impact</span></td>
+            <td>Passenger Lift<br><span class="vendor">Minor impact</span></td>
             <td>Replacement of interior door panels only</td>
             <td>Shorter service suspension period</td>
           </tr>
@@ -153,7 +153,7 @@ extraStyles: |
         <thead><tr><th>種別</th><th>工事内容</th><th>影響</th></tr></thead>
         <tbody>
           <tr>
-            <td>旅客用<br><span style="font-size:var(--fs-text);font-weight:400;color:var(--wg9)">影響小</span></td>
+            <td>旅客用<br><span class="vendor">影響小</span></td>
             <td>エレベーター「内部」扉パネルのみ交換</td>
             <td>運転停止時間は比較的短い</td>
           </tr>

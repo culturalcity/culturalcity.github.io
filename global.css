@@ -1,16 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
 :root {
-  --wg1:  #EAE7E1;
+  /* ══ 設計表（2026-09-19 產品設計稽核後補齊；規則見 SHARED-CORE「成品開工先定設計表」與 VI.md）══
+     元件只准引用下列變數；要加新值先說明現有級數為何不夠。scripts/check-type-scale.js 會擋未定義變數、
+     警示寫死的顏色／行高／字距／間距。 */
+
+  /* ── 色票：文字 ── 淺底用 wg41／wg11／wg9，深底用 wg1／wg7（深淺兩組各 ≤3，合計 5 種：深淺底必須分開才過 AA） */
+  --wg1:  #EAE7E1;  /* 頁面底色；深底上的主文字 */
   --wg7:  #ADA8A2;  /* 較亮的灰：用於「深色 header」上的次要文字（深底需 ≥4.5:1，#ADA8A2=4.92:1）*/
   --wg9:  #5F5A55;  /* 次要文字灰：2026-06 由 #898480 調深以過 WCAG AA；訂在 #5F5A55 是為了連半透明深色卡片(notice-box，疊後約 #e1ded8)上也達 4.5:1；深底文字改用 --wg7 */
-  --wg11: #696460;
-  --wg41: #3C3835;
-  --white: #F7F5F2;
-  --line:  rgba(60,56,53,0.12);
+  --wg11: #696460;  /* 中灰：強調一點的標籤、左邊線、hover 底（與 wg9 ΔE 4.2，可分辨） */
+  --wg41: #3C3835;  /* 主文字；深色 header／深色按鈕底 */
+  /* ── 色票：背景（≤4）── */
+  --white: #F7F5F2;                        /* 卡片底 */
+  --tint: rgba(60,56,53,0.04);             /* 淺底上的淡填：表頭、hover、區塊底（取代 #F0EDE8／#F2F0EC 等一串米白） */
+  --tint-dark: rgba(234,231,225,0.03);     /* 深底上的淡填（深色卡片、紋理） */
+  --tint-dark-strong: rgba(234,231,225,0.1); /* 深底上的 hover／選取 */
+  /* ── 色票：線（≤4）── */
+  --line-soft:   rgba(60,56,53,0.06);      /* 表格內格線、極淡分隔 */
+  --line:        rgba(60,56,53,0.12);      /* 一般分隔線、卡片邊框 */
+  --line-strong: rgba(60,56,53,0.25);      /* 需要被看見的框（輸入框、強調框） */
+  --line-dark:   rgba(234,231,225,0.2);    /* 深底上的線 */
+  /* ── 色票：狀態（每種一組 ink／bg／line；on-dark 給深色 header 用）── */
+  --dp: #1F5C38;  --dp-bg: rgba(31,92,56,0.06);   --dp-line: rgba(31,92,56,0.25);   --dp-on-dark: #7BB893;  /* 正向：達標、通過（深底 5.0:1） */
+  --dn: #8C1F1F;  --dn-bg: rgba(140,31,31,0.06);  --dn-line: rgba(140,31,31,0.25);  --dn-on-dark: #F0958A;  /* 負向：警告、否決（深底 5.2:1） */
+  --warn: #8C5A00; --warn-bg: rgba(140,90,0,0.06); --warn-line: rgba(140,90,0,0.25); /* 琥珀：注意、待辦、超預算。卡片底 5.4:1、頁底 4.8:1 過 AA。2026-09-19 由各頁重宣告收回；年報原寫的 --amber 從未定義，改用本色 */
+  --blue: #2B4A6B; --blue-bg: rgba(43,74,107,0.06); --blue-line: rgba(43,74,107,0.25); --blue-on-dark: #94B5D6; /* 資訊：說明、會議類（深底 5.4:1） */
+  --warn-on-dark: #E8996E;  /* 琥珀的深底版（深底 5.1:1） */
+  /* 深底上的狀態底色與框線一律用中性 --tint-dark-strong／--line-dark，色相只留在文字上 */
+  /* ── 資料視覺化色盤（不佔文字／背景額度；圖表 JS 內的線色要與此一致）── */
+  --viz-blue: #185FA5; --viz-blue-soft: rgba(24,95,165,0.35); --viz-orange: #C45A30; --viz-gray: #B4B2A9; --viz-line: #888780; --viz-yellow: #E8B400;
+  --overlay: rgba(28,25,23,0.94);  /* 全螢幕燈箱遮罩 */
+  /* ── 公告類別色盤（公告頁 pill、公告列表篩選、首頁卡片共用；2026-09-19 由 notice.css／notice/index 兩處不一致的宣告收回，
+        列表頁原缺 --c-staff 致人事 pill 失色；安全類統一用棕色以與設備類紅色區分）── */
+  --c-meeting: #2B4A6B; --c-work: #8C4800; --c-equip: #8C1F1F; --c-safety: #5C3A1F;
+  --c-rule: #3C3835;    --c-event: #1F5C38; --c-staff: #6B3F72;
+  --c-staff-bg: rgba(107,63,114,.06); --c-staff-line: rgba(107,63,114,.3); --c-staff-on-dark: #C7A3CF;
+  /* 緊急橫條：國際慣例黃黑配色，刻意不走 wg 系列 */
+  --alert-bg: #FFD33D;
+  --alert-ink: #1A1612;
+
+  /* ── 行高（4 級）── */
+  --lh-solid: 1;     /* 單行元件：圖示、徽章、大數字 */
+  --lh-tight: 1.4;   /* 標題、表格、標籤、按鈕 */
+  --lh-text:  1.75;  /* 正文（body 預設） */
+  --lh-loose: 2;     /* 條文、需要逐行對照的長清單 */
+
+  /* ── 字距（3 級＋0）── */
+  --ls-text:  0.04em;  /* 中文標籤、按鈕微調 */
+  --ls-label: 0.1em;   /* 小標、副標、表頭 */
+  --ls-caps:  0.18em;  /* 英文 eyebrow、全大寫標籤、區塊小標 */
+
+  /* ── 間距（4px 倍數；1～2px 髮絲線可直接寫 1px／2px）── */
+  --sp-4: 4px;   --sp-8: 8px;   --sp-12: 12px; --sp-16: 16px;
+  --sp-20: 20px; --sp-24: 24px; --sp-28: 28px; --sp-32: 32px;
+  --sp-40: 40px; --sp-48: 48px; --sp-56: 56px; --sp-64: 64px; --sp-80: 80px;
+
   --radius: 2px;
-  --dp: #1F5C38;
-  --dn: #8C1F1F;
   --page-max-width: 760px;  /* header-inner / breadcrumb-inner 共用；非預設由各 layout/頁的 :root 覆寫 */
 
   /* ── 字級表（全站唯一來源，2026-09 收斂）──
@@ -32,7 +78,7 @@ body {
   background: var(--wg1);
   color: var(--wg41);
   font-size:var(--fs-body);
-  line-height: 1.75;
+  line-height: var(--lh-text);
   min-height: 100vh;
 }
 
@@ -40,7 +86,7 @@ body {
 .header {
   background: var(--wg41);
   color: var(--wg1);
-  padding: 48px 40px 40px;
+  padding: var(--sp-48) var(--sp-40) var(--sp-40);
   position: relative;
   overflow: hidden;
 }
@@ -49,8 +95,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    repeating-linear-gradient(92deg, transparent, transparent 120px, var(--tint-dark) 120px, var(--tint-dark) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, var(--tint-dark) 60px, var(--tint-dark) 61px);
   pointer-events: none;
 }
 .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
@@ -61,36 +107,36 @@ body {
    複製到 26 頁——視窗 600–840px（平板直立）內文全站貼邊。以下三段是完整規格：
    桌面置中、600–840 帶側距對齊 header 的 40px、手機 20px。
    若頁面需要更寬容器（覆寫 --page-max-width 至 W），帶斷點須自行補至 W+80px。 */
-.main { max-width: var(--page-max-width); margin: 0 auto; padding: 36px 0 64px; }
+.main { max-width: var(--page-max-width); margin: 0 auto; padding: var(--sp-40) 0 var(--sp-64); }
 /* 平板帶：全站 box-sizing:border-box，若只加 padding 會把 80px 吃進 max-width 內、內容縮成 680，
    跨過 840 斷點又跳回 760（內容寬跳 80px、左右邊界各移 40px）。帶內把 max-width 放寬 80px，內容寬才連續。 */
-@media (max-width: 840px) { .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); } }
-@media (max-width: 600px) { .main { padding: 28px 20px 48px; } }
-.header-eyebrow { font-size:var(--fs-text); letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
-.header h1 { font-size: var(--fs-title); font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
-.header-sub { font-size:var(--fs-text); color: var(--wg7); letter-spacing: 0.16em; }
-.header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
-.header-desc { font-size:var(--fs-body); color: var(--wg7); max-width: 400px; line-height: 1.8; letter-spacing: 0.02em; }  /* 深底描述文字 wg7 過 AA（rgba .55 僅 4.05:1） */
+@media (max-width: 840px) { .main { padding-left: var(--sp-40); padding-right: var(--sp-40); max-width: calc(var(--page-max-width) + 80px); } }
+@media (max-width: 600px) { .main { padding: var(--sp-28) var(--sp-20) var(--sp-48); } }
+.header-eyebrow { font-size:var(--fs-text); letter-spacing: var(--ls-caps); color: var(--wg7); margin-bottom: var(--sp-12); }
+.header h1 { font-size: var(--fs-title); font-weight: 700; letter-spacing: var(--ls-label); color: var(--white); margin-bottom: var(--sp-8); line-height: var(--lh-tight); }
+.header-sub { font-size:var(--fs-text); color: var(--wg7); letter-spacing: var(--ls-caps); }
+.header-rule { width: 36px; height: 1px; background: var(--wg7); margin: var(--sp-20) 0; }
+.header-desc { font-size:var(--fs-body); color: var(--wg7); max-width: 400px; line-height: var(--lh-text); letter-spacing: var(--ls-text); }  /* 深底描述文字 wg7 過 AA（rgba .55 僅 4.05:1） */
 
 /* 返回連結 */
 .back-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size:var(--fs-text); letter-spacing: 0.1em; color: var(--wg7);
-  text-decoration: none; margin-bottom: 16px; transition: color 0.18s;
+  display: inline-flex; align-items: center; gap: var(--sp-4);
+  font-size:var(--fs-text); letter-spacing: var(--ls-label); color: var(--wg7);
+  text-decoration: none; margin-bottom: var(--sp-16); transition: color 0.18s;
 }
 .back-link:hover { color: var(--wg1); }
 .back-link::before { content: '←'; }
 
 /* ── 通用元件 ── */
 .notice-box {
-  background: rgba(60,56,53,0.05);
+  background: var(--tint);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 14px 18px;
+  padding: var(--sp-16) var(--sp-20);
   font-size:var(--fs-text);
   color: var(--wg9);
-  line-height: 1.85;
-  margin-bottom: 24px;
+  line-height: var(--lh-text);
+  margin-bottom: var(--sp-24);
 }
 .notice-box strong { color: var(--wg41); }
 
@@ -100,17 +146,17 @@ body {
 /* ── FOOTER（共用） ── */
 .footer {
   border-top: 1px solid var(--line);
-  padding-top: 20px;
+  padding-top: var(--sp-20);
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 8px;
+  flex-wrap: wrap; gap: var(--sp-8);
 }
-.footer-left { font-size:var(--fs-text); color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
-.footer-right { font-size:var(--fs-text); color: var(--wg9); letter-spacing: 0.08em; }
+.footer-left { font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-text); line-height: var(--lh-text); }
+.footer-right { font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-label); }
 
 /* ── 響應式（共用） ── */
 @media (max-width: 600px) {
   :root { --fs-title: 22px; }
-  .header { padding: 36px 24px 30px; }
+  .header { padding: var(--sp-40) var(--sp-24) var(--sp-32); }
 }
 
 /* ── 無障礙 ── */
@@ -127,8 +173,8 @@ button, [role="button"] { cursor: pointer; }
   background: var(--wg41);
   color: var(--wg7);  /* 深底用 --wg7（4.92:1 ≥ AA 4.5:1）；wg9 是淺底用的，放這裡會掛無障礙 */
   font-size: var(--fs-caption);
-  letter-spacing: .06em;
-  padding: 0 40px;  /* 橫向 gutter 跟 .header 一致；垂直在 .breadcrumb-inner */
+  letter-spacing: var(--ls-text);
+  padding: 0 var(--sp-40);  /* 橫向 gutter 跟 .header 一致；垂直在 .breadcrumb-inner */
   position: relative;
 }
 .breadcrumb::before {
@@ -137,26 +183,26 @@ button, [role="button"] { cursor: pointer; }
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
-    repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+    repeating-linear-gradient(92deg, transparent, transparent 120px, var(--tint-dark) 120px, var(--tint-dark) 121px),
+    repeating-linear-gradient(178deg, transparent, transparent 60px, var(--tint-dark) 60px, var(--tint-dark) 61px);
   pointer-events: none;
 }
 .breadcrumb-inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 8px 0;  /* 橫向 padding 已上移到 .breadcrumb，此處只管垂直 */
-  line-height: 1.6;
+  padding: var(--sp-8) 0;  /* 橫向 padding 已上移到 .breadcrumb，此處只管垂直 */
+  line-height: var(--lh-text);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--sp-12);
 }
 .breadcrumb-path { min-height: 22px; }  /* 即便空（首頁/404）也保留高度，icon 不跳 */
 .site-search-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;  /* 觸控目標 44×44（gov.uk 標準）；負 margin 抵銷佔位，版面高度不變 */
-  margin: -6px -4px;
+  margin: calc(var(--sp-8) * -1) calc(var(--sp-4) * -1);
   color: var(--wg7);
   background: transparent;  /* reset <button> 預設灰底 */
   border: none;              /* reset <button> 預設邊框 */
@@ -169,7 +215,7 @@ button, [role="button"] { cursor: pointer; }
 }
 .site-search-icon:hover {
   color: var(--wg1);
-  background: rgba(234,231,225,0.08);
+  background: var(--tint-dark-strong);
   text-decoration: none;
   box-shadow: inset 0 -3px 0 var(--wg1);  /* gov.uk pattern：hover 在 icon 下方加底線（button 無文字，text-decoration 不會渲染，改用 inset shadow）*/
 }
@@ -197,11 +243,11 @@ button, [role="button"] { cursor: pointer; }
   color: var(--wg7);  /* 跟 link 同色；游標 + hover 區分；wg1 太亮會搶 h1 注意力 */
 }
 /* 緊接 breadcrumb 的 .header 縮上方 padding，視覺融成一塊 */
-.breadcrumb + .header { padding-top: 16px; }
+.breadcrumb + .header { padding-top: var(--sp-16); }
 @media (max-width: 600px) {
-  .breadcrumb { padding: 0 24px; }
-  .breadcrumb-inner { padding: 10px 0 4px; font-size: var(--fs-caption); }
-  .breadcrumb + .header { padding-top: 14px; }
+  .breadcrumb { padding: 0 var(--sp-24); }
+  .breadcrumb-inner { padding: var(--sp-12) 0 var(--sp-4); font-size: var(--fs-caption); }
+  .breadcrumb + .header { padding-top: var(--sp-16); }
 }
 
 /* ── 站內搜尋滑出區塊（點 🔍 icon 出現，gov.uk pattern） ── */
@@ -210,53 +256,53 @@ button, [role="button"] { cursor: pointer; }
 .site-search-panel {
   background: var(--wg41);
   color: var(--wg1);
-  border-top: 1px solid rgba(234,231,225,0.15);
-  border-bottom: 1px solid rgba(234,231,225,0.15);  /* gov.uk pattern：panel 用上下細線跟周圍 dark bg 區隔 */
-  padding: 0 40px;
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);  /* gov.uk pattern：panel 用上下細線跟周圍 dark bg 區隔 */
+  padding: 0 var(--sp-40);
 }
 .site-search-panel-form {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: 14px 0;
+  padding: var(--sp-16) 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-8);
 }
 .site-search-panel-input {
   flex: 1;
-  padding: 11px 16px;
+  padding: var(--sp-12) var(--sp-16);
   font-size: var(--fs-text);
   font-family: inherit;
   background: var(--white);
   color: var(--wg41);
-  border: 1px solid rgba(234,231,225,0.25);
+  border: 1px solid var(--line-dark);
   border-radius: var(--radius);
   outline: none;
 }
 .site-search-panel-input:focus {
   border-color: var(--wg1);
-  box-shadow: 0 0 0 3px rgba(234,231,225,0.25);
+  box-shadow: 0 0 0 3px var(--line-dark);
 }
 .site-search-panel-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;  /* 觸控目標 44×44（gov.uk 標準） */
   background: transparent;
   color: var(--wg7);
-  border: 1px solid rgba(234,231,225,0.2);
+  border: 1px solid var(--line-dark);
   border-radius: var(--radius);
   cursor: pointer;
   transition: color .15s, background .15s, border-color .15s;
 }
 .site-search-panel-btn:hover {
   color: var(--wg1);
-  background: rgba(234,231,225,0.08);
-  border-color: rgba(234,231,225,0.4);
+  background: var(--tint-dark-strong);
+  border-color: var(--line-dark);
 }
 .site-search-panel-btn:focus-visible { outline: 2px solid var(--wg7); outline-offset: 2px; }
 @media (max-width: 600px) {
-  .site-search-panel { padding: 0 24px; }
-  .site-search-panel-form { padding: 10px 0; gap: 6px; }
-  .site-search-panel-input { font-size: var(--fs-text); padding: 9px 12px; }
+  .site-search-panel { padding: 0 var(--sp-24); }
+  .site-search-panel-form { padding: var(--sp-12) 0; gap: var(--sp-8); }
+  .site-search-panel-input { font-size: var(--fs-text); padding: var(--sp-8) var(--sp-12); }
   /* 手機不再縮小搜尋送出鈕——觸控目標維持 44×44 */
 }
 
@@ -264,45 +310,45 @@ button, [role="button"] { cursor: pointer; }
 /* 由 notice frontmatter banner:true + bannerUntil 驅動，build 時自動掃描注入 base.njk */
 /* 顏色固定（不走 --wg* 系列）以對應「緊急」國際慣例的黃黑配色 */
 .alert-banner {
-  background: #FFD33D;
-  color: #1A1612;
-  border-bottom: 2px solid #1A1612;
+  background: var(--alert-bg);
+  color: var(--alert-ink);
+  border-bottom: 2px solid var(--alert-ink);
 }
 .alert-banner-link {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; gap: var(--sp-16);
   max-width: 760px;
   margin: 0 auto;
-  padding: 12px 40px;
+  padding: var(--sp-12) var(--sp-40);
   color: inherit;
   text-decoration: none;
   font-size:var(--fs-text);
-  line-height: 1.45;
+  line-height: var(--lh-tight);
 }
-.alert-banner-link:hover { background: rgba(0,0,0,0.06); }
+.alert-banner-link:hover { background: var(--tint); }
 .alert-banner-icon { font-size:var(--fs-body); flex-shrink: 0; }
 .alert-banner-text { flex: 1; font-weight: 500; }
 .alert-banner-cta {
   flex-shrink: 0;
   font-size:var(--fs-text);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-text);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 @media (max-width: 600px) {
   .alert-banner-link {
-    padding: 10px 24px;
-    gap: 10px;
+    padding: var(--sp-12) var(--sp-24);
+    gap: var(--sp-12);
     font-size:var(--fs-text);
     flex-wrap: wrap;
   }
-  .alert-banner-cta { font-size:var(--fs-text); width: 100%; padding-left: 32px; }
+  .alert-banner-cta { font-size:var(--fs-text); width: 100%; padding-left: var(--sp-32); }
 }
 
 /* ── 三語切換（共通預設機制）──────────────────────────────────
    全站標準：頁面 frontmatter 設 trilingual:true → base.njk 自動載入 /lang.js。
    markup 慣例見 CLAUDE.md「三語標準實現」。預設靠 .lang-block.active 顯示中文，
    JS 壞了也能看中文。notice.njk 與 evacuation/welcome 各有自有版（例外，見 lang.js）。 */
-.lang-bar { margin-bottom: 28px; }
+.lang-bar { margin-bottom: var(--sp-28); }
 .lang-bar-inner {
   display: inline-flex; border: 1px solid var(--line);
   border-radius: var(--radius); overflow: hidden;
@@ -310,10 +356,10 @@ button, [role="button"] { cursor: pointer; }
 .lang-btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px;  /* 觸控目標高度（gov.uk 標準），原 ~39px 偏小 */
-  padding: 7px 16px; font-size:var(--fs-text); font-family: inherit;
+  padding: var(--sp-8) var(--sp-16); font-size:var(--fs-text); font-family: inherit;
   background: var(--white); color: var(--wg9);
   border: none; border-right: 1px solid var(--line);
-  cursor: pointer; letter-spacing: .04em; transition: all .15s;
+  cursor: pointer; letter-spacing: var(--ls-text); transition: all .15s;
 }
 .lang-btn:last-child { border-right: none; }
 .lang-btn:hover { color: var(--wg41); }

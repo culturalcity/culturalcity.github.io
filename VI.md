@@ -3,33 +3,48 @@
 > CSS 是 single source of truth；本文件是說明性整理，CSS 異動請同步更新本文。
 > 最後一節「實作現況」記錄已知差異。
 
-## 色票（global.css `:root`）
+## 設計表（global.css `:root` 是唯一來源；2026-09-19 補齊）
 
-`--wg*` ＝ **w**arm **g**ray（暖灰）灰階，**數字越大越深**（wg1 最淺 → wg41 最深）。編號不連續是正常的——只給實際用到的幾階編號，沒有 wg2～wg6 等中間號。
+全站寫第一個元件前就先定好的「表」：色票、字級、字重、行高、字距、間距。**元件只准引用變數，不寫數字、不寫色碼**；要加新值先說明現有級數為何不夠。這張表的由來：2026-09-19 產品設計稽核量到字級收斂後，行高仍有 20 種、字距 22 種、寫死顏色 261 種，還有三個從沒定義的變數（`--amber`、`--c-staff`、`--wg3`）讓標記靜默失色。
 
-| 變數 | 色碼 | 用途 |
+### 色票
+
+`--wg*` ＝ **w**arm **g**ray（暖灰），**數字越大越深**；編號不連續是正常的，只給實際用到的階。
+
+| 分組 | 變數 | 值 | 用途 |
+|---|---|---|---|
+| 文字（淺底） | `--wg41` | `#3C3835` | 主文字；也是深色 header／深色按鈕底 |
+| | `--wg11` | `#696460` | 中灰：強調一點的標籤、左邊線、hover 底 |
+| | `--wg9` | `#5F5A55` | 次要文字（說明、標籤、日期、廠商名） |
+| 文字（深底） | `--wg1` | `#EAE7E1` | 深底主文字；也是頁面底色 |
+| | `--wg7` | `#ADA8A2` | 深底次要文字 |
+| 背景 | `--white` | `#F7F5F2` | 卡片底 |
+| | `--tint` | ink 4% | 淺底上的淡填：表頭、hover、區塊底（一串近似米白 #F0EDE8／#F2F0EC… 已全併入） |
+| | `--tint-dark`／`--tint-dark-strong` | wg1 3%／10% | 深底上的淡填／hover |
+| 線 | `--line-soft`／`--line`／`--line-strong` | ink 6%／12%／25% | 表內格線／一般分隔與卡片框／輸入框與強調框 |
+| | `--line-dark` | wg1 20% | 深底上的線 |
+| 狀態 | `--dp`、`--dn`、`--warn`、`--blue` | 綠／紅／琥珀／藍 | 各一組 `-bg`（6%）、`-line`（25%）、`-on-dark`（深底用淺色版） |
+| 公告類別 | `--c-meeting` `--c-work` `--c-equip` `--c-safety` `--c-rule` `--c-event` `--c-staff` | | 公告 pill、列表篩選共用（安全類棕、設備類紅，刻意區分） |
+| 資料視覺化 | `--viz-blue` `--viz-orange` `--viz-gray` `--viz-line` `--viz-yellow` | | 圖表與圖例；不佔文字／背景額度。**Chart.js 的線色寫在 JS 裡，改色要兩邊一起改** |
+| 其他 | `--alert-bg`／`--alert-ink` | 黃 #FFD33D／黑 | 緊急橫條（國際慣例黃黑，刻意不走 wg） |
+| | `--overlay` | | 全螢幕燈箱遮罩 |
+
+**對比規則（WCAG AA ≥ 4.5:1）**：次要灰字依**底色明暗**二擇一——淺底用 `--wg9`、深底用 `--wg7`；深底上的狀態色一律用 `-on-dark` 版（原本 `#D08585` 在深底只有 4.1:1，已換掉）。`--wg9` 2026-06 由 `#898480` 調深至 `#5F5A55` 才過 AA，連半透明深色卡片（notice-box，疊後約 #e1ded8）上也達標。
+
+獨立頁面與工具**不要 redeclare** 上述變數，缺顏色就在 global.css 設計表補一個有名字的變數。2026-09-19 已把各頁重宣告（finance.css 的 `--ink／--paper／--red…` 別名、minutes.css 與各頁的 `--warn／--blue`、公告兩處不一致的類別色）全部收回 global。
+
+### 行高・字距・間距
+
+| 變數 | 值 | 用途 |
 |---|---|---|
-| `--wg1`   | `#EAE7E1` | 背景米白 |
-| `--white` | `#F7F5F2` | 卡片底色 |
-| `--wg7`   | `#ADA8A2` | 次要文字（**深色底**用：深 header／深卡片） |
-| `--wg9`   | `#5F5A55` | 次要文字（**淺色底**用：說明、標籤、日期） |
-| `--wg11`  | `#696460` | 灰文字（中等強度：邊框、強調一點的標籤） |
-| `--wg41`  | `#3C3835` | 主文字（最深）／深色 header 底色 |
-| `--line`  | `rgba(60,56,53,0.12)` | 分隔線、邊框 |
-| `--dp`    | `#1F5C38` | 正向強調（達標、通過） |
-| `--dn`    | `#8C1F1F` | 負向強調（警告、否決） |
-| `--radius`| `2px`     | 圓角統一 2px（極微） |
-
-### 次要文字對比規則（WCAG AA）
-
-次要灰字依**底色明暗**二擇一，確保對比 ≥ 4.5:1（含半透明深色卡片如 notice-box 疊後約 #e1ded8 的情況）：
-
-- **淺底** 的次要文字 → `--wg9`（深灰 #5F5A55）
-- **深底**（深 header／深色卡片）的次要文字 → `--wg7`（淺灰 #ADA8A2）
-
-> `--wg9` 2026-06 由舊值 `#898480` 調深至 `#5F5A55`；`--wg7` 為同次無障礙修正新增。詳見 axe 體檢結論（全站 0 對比違規）。
-
-獨立頁面／工具新增時**不要 redeclare** 上述基底變數；只在需要新顏色時補新變數（譬如 `--warn`、`--blue`）。2026-08 設計 review 已把全站頁內重宣告的色票／body／header 織紋／容器全部收斂回 global（實害案例：finance.css 自帶的舊灰 `#898480` 沒跟上 2026-06 的無障礙修正，淺底只有 3.0:1）；各頁 extraStyles 現在**只留與 global 真正不同的覆寫**，並以註解標明「其餘沿用 global」。
+| `--lh-solid` | 1 | 單行元件：圖示、徽章、大數字 |
+| `--lh-tight` | 1.4 | 標題、表格、標籤、按鈕 |
+| `--lh-text` | 1.75 | 正文（body 預設） |
+| `--lh-loose` | 2 | 條文、需要逐行對照的長清單 |
+| `--ls-text` | .04em | 中文標籤、按鈕微調 |
+| `--ls-label` | .1em | 小標、h1、表頭 |
+| `--ls-caps` | .18em | 英文 eyebrow、全大寫標籤、header 副標 |
+| `--sp-4` … `--sp-80` | 4 8 12 16 20 24 28 32 40 48 56 64 80 px | margin／padding／gap。1～2px 髮絲線可直接寫 |
 
 ## 容器覆寫規則（2026-08 定案，新頁必守）
 
@@ -80,8 +95,12 @@
 
 ### 建置守門
 
-`scripts/check-type-scale.js` 在每次建置前掃 `src/` 與根目錄 css：出現數字字級或 400／500／700 以外的字重，**建置直接失敗**，錯誤訊息會列出檔名與行號。
-例外（不掃）：`minutes/agm-5-1-deck.html`（簡報用 vw 單位）、`admin/utility/`（每日公告卡片是凍結像素）、`images/` 下的 SVG。Chart.js 圖表標籤由 JS 設定，也不在範圍內。
+兩支腳本掛在 `.eleventy.js`，本機 build 與 GitHub Actions 都會跑：
+
+- `scripts/check-type-scale.js`（建置前）：掃 `src/`、根目錄 css、根目錄 `admin/`，出現數字字級或 400／500／700 以外的字重，**建置失敗**並列檔名行號。
+- `scripts/check-design-tokens.js`：建置前對寫死的顏色／行高／字距／間距與 global 色票近似色（ΔE<3）**列警示**；建置後逐頁把頁面與它連結的站內 CSS 合起來看，**用了 `var(--x)` 卻沒定義就讓建置失敗**（瀏覽器遇到未定義變數不報錯，只會靜默失色）。單獨執行：`node scripts/check-design-tokens.js [輸出資料夾]`。
+
+例外（不掃）：`minutes/agm-5-1-deck.html`（簡報用 vw 單位）、`admin/utility/`（每日公告卡片是凍結像素）、`images/` 下的 SVG。Chart.js 圖表標籤與線色由 JS 設定，不在範圍內。
 
 ## Header 紋理（全站共用）
 
@@ -103,9 +122,9 @@
 
 標準 header 三段結構（class 名稱固定，不要自創縮寫版）：
 
-1. 英文 eyebrow（`.header-eyebrow`，`--fs-text` / letter-spacing .25em）
-2. 中文 h1（`--fs-title` / letter-spacing .1em / 粗體）
-3. 副標（`.header-sub`，`--fs-text` / letter-spacing .16em）——通常寫「`CULTURAL CITY COMMUNITY ・ 閱大安管理委員會`」
+1. 英文 eyebrow（`.header-eyebrow`，`--fs-text` / `--ls-caps`）
+2. 中文 h1（`--fs-title` / `--ls-label` / 粗體）
+3. 副標（`.header-sub`，`--fs-text` / `--ls-caps`）——通常寫「`CULTURAL CITY COMMUNITY ・ 閱大安管理委員會`」
 
 範例頁見 `src/index.html`。
 
@@ -122,7 +141,7 @@
 
 少數頁面是「自包式單一 HTML」，不走本 repo 的 11ty build、要能雙擊開啟或離線（例如得獎自評分析頁）。這類頁**吃不到 `base.njk` 與 `global.css`**，必須**自我內含**以下，才能與全站一致：
 
-- **色票／字型／圓角**：把上方 `:root` 變數、`Noto Sans TC`、`--radius:2px` 直接寫進該檔。此處 redeclare 是**必要例外**（與站內頁「不要 redeclare」相反——因為沒有 global 可繼承）。
+- **設計表／字型／圓角**：把上方設計表用到的變數、`Noto Sans TC`、`--radius:2px` 直接寫進該檔。此處 redeclare 是**必要例外**（與站內頁「不要 redeclare」相反——因為沒有 global 可繼承）。
 - **字級**：把上方字級表的六個 `--fs-*` 變數一起寫進該檔的 `:root`，其餘照站內寫法用 `var(--fs-*)`。
 - **Header 紋理**：用上方官方那組 `repeating-linear-gradient`（120px／60px・wg1 3%/2%），**勿自創密斜紋**（2px/6px 那種）。
 - **Favicon（最易漏）**：不能用 `/favicon.svg` 絕對路徑（單檔無網站根 → 404）。改把 repo 根 `favicon.svg` 內嵌成 data-URI：
@@ -133,10 +152,6 @@
 
 ## 實作現況（已知差異）
 
-以下是目前 CSS 與本文 spec 的偏離，未來重構時整理：
-
-- **`minutes.css :root` 重新宣告 `--dp` / `--dn`**——違反「不要 redeclare 基底變數」原則，屬歷史遺留
-- **`minutes.css` 額外變數**：`--warn: #8C5A00`（警示棕黃）、`--blue: #2B4A6B`（會議紀錄專用藍）
-- **`finance.css` 自帶財報命名系統**：`--ink` / `--ink2` / `--paper` / `--red` / `--green` / `--blue` / `--border`。2026-08 起 `--ink3` 已改為 `var(--wg9)` 別名、未用的 `--gold` 已刪；其餘仍是各自存值（色值與 `--wg*` 對應）。完整對接到 `--wg*` 家族是下一步，改動時以 `--ink3` 的別名寫法為範本
+- **豁免區仍用自己的值**：AGM 簡報 deck（`minutes/agm-5-1-deck.html`，vw 單位、自帶 `--wg2` 等）與每日水電公告產生器（`admin/utility/`，卡片凍結像素）不套設計表。
+- **Chart.js 線色在 JS**：財報、用電頁的圖表顏色寫在 `<script>` 裡，與 `--viz-*`／狀態色同值但不連動；改色時兩邊一起改。
 - **頁籤無障礙**：內容檔的頁籤是 `<div class="tab" onclick="sw('key')">` 極簡寫法，role／aria／roving tabindex／鍵盤操作由共用 `tabs-a11y.js` 在載入後補上；要改頁籤行為只改那一檔。**它不會自動套用到所有 `.tabs`**——啟用方式：套 `base.njk` 的頁在 frontmatter 加 `tabsA11y: true`（finance.njk 已加，所有財報月報自動有）；不套 base 的獨立 HTML 自行在 `<head>` 加 `<script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>`（長期財務模型即此例）
-- **`notice.css` / `regulations.css`**：依規範使用 `--wg*` 家族，符合本文 spec

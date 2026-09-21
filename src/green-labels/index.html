@@ -5,40 +5,40 @@ title: 綠色標章選購指南
 eleventyExcludeFromCollections: true
 trilingual: true
 extraStyles: |
-  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:40px 0 64px;}
-  @media(max-width:840px){.wrap{padding-left:40px;padding-right:40px;}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
-  @media(max-width:600px){.wrap{padding:28px 24px 48px;}}
-  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:1.9;margin-bottom:22px;}
+  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:var(--sp-40) 0 var(--sp-64);}
+  @media(max-width:840px){.wrap{padding-left:var(--sp-40);padding-right:var(--sp-40);}} /* 600–840px 帶：對齊 header 40px 內距，避免內文貼邊 */
+  @media(max-width:600px){.wrap{padding:var(--sp-28) var(--sp-24) var(--sp-48);}}
+  .lede{font-size:var(--fs-body);color:var(--wg11);line-height:var(--lh-loose);margin-bottom:var(--sp-24);}
   .lede strong{color:var(--wg41);}
-  .official{background:rgba(31,92,56,0.05);border:1px solid rgba(31,92,56,0.18);border-left:3px solid var(--dp);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-text);color:var(--wg11);line-height:1.85;margin-bottom:36px;}
+  .official{background:var(--dp-bg);border:1px solid var(--dp-line);border-left:3px solid var(--dp);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);margin-bottom:var(--sp-40);}
   .official strong{color:var(--dp);}
-  .label-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:22px 24px;margin-bottom:14px;display:flex;gap:22px;align-items:flex-start;}
-  @media(max-width:560px){.label-card{flex-direction:column;gap:14px;align-items:center;}}
-  .label-logo{flex-shrink:0;width:168px;height:152px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px;}
+  .label-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:var(--sp-24) var(--sp-24);margin-bottom:var(--sp-16);display:flex;gap:var(--sp-24);align-items:flex-start;}
+  @media(max-width:560px){.label-card{flex-direction:column;gap:var(--sp-16);align-items:center;}}
+  .label-logo{flex-shrink:0;width:168px;height:152px;display:flex;align-items:center;justify-content:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8);}
   @media(max-width:560px){.label-logo{width:200px;height:160px;}}
   .label-logo img{max-width:100%;max-height:100%;object-fit:contain;}
   .label-main{flex:1;min-width:0;}
   @media(max-width:560px){.label-main{text-align:center;}}
-  .label-head{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:4px;}
+  .label-head{display:flex;align-items:center;gap:var(--sp-12);flex-wrap:wrap;margin-bottom:var(--sp-4);}
   @media(max-width:560px){.label-head{justify-content:center;}}
-  .label-name{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:.04em;}
-  .label-badge{flex-shrink:0;font-size:var(--fs-caption);font-weight:700;letter-spacing:.04em;padding:2px 9px;border-radius:999px;}
-  .label-badge.compulsory{background:#fbe9e7;color:#c0492f;}
-  .label-badge.voluntary{background:rgba(31,92,56,0.1);color:var(--dp);}
-  .label-en{font-size:var(--fs-caption);letter-spacing:.08em;color:var(--wg9);margin-bottom:11px;}
-  .label-symbol{font-size:var(--fs-text);color:var(--wg9);font-style:italic;line-height:1.7;margin:0 0 13px;padding-bottom:12px;border-bottom:1px dashed var(--line);}
+  .label-name{font-size:var(--fs-body);font-weight:700;color:var(--wg41);letter-spacing:var(--ls-text);}
+  .label-badge{flex-shrink:0;font-size:var(--fs-caption);font-weight:700;letter-spacing:var(--ls-text);padding:2px var(--sp-8);border-radius:999px;}
+  .label-badge.compulsory{background:var(--dn-bg);color:var(--dn);}
+  .label-badge.voluntary{background:var(--dp-bg);color:var(--dp);}
+  .label-en{font-size:var(--fs-caption);letter-spacing:var(--ls-label);color:var(--wg9);margin-bottom:var(--sp-12);}
+  .label-symbol{font-size:var(--fs-text);color:var(--wg9);font-style:italic;line-height:var(--lh-text);margin:0 0 var(--sp-12);padding-bottom:var(--sp-12);border-bottom:1px dashed var(--line);}
   .label-facts{margin:0;}
-  .label-facts > div{display:flex;gap:12px;font-size:var(--fs-text);line-height:1.8;margin-bottom:8px;}
+  .label-facts > div{display:flex;gap:var(--sp-12);font-size:var(--fs-text);line-height:var(--lh-text);margin-bottom:var(--sp-8);}
   .label-facts > div:last-child{margin-bottom:0;}
   @media(max-width:560px){.label-facts > div{flex-direction:column;gap:2px;text-align:left;}}
-  .label-facts dt{flex-shrink:0;width:64px;font-weight:700;color:var(--dp);letter-spacing:.04em;}
+  .label-facts dt{flex-shrink:0;width:64px;font-weight:700;color:var(--dp);letter-spacing:var(--ls-text);}
   .label-facts dd{flex:1;margin:0;color:var(--wg41);}
   .label-facts dd strong{color:var(--wg41);font-weight:700;}
-  .closing{font-size:var(--fs-text);color:var(--wg9);line-height:1.85;margin-top:30px;}
-  .gl-cta{background:var(--dp);color:#fff;border-radius:var(--radius);padding:20px 22px;margin-top:34px;}
-  .gl-cta-h{font-size:var(--fs-body);font-weight:700;letter-spacing:.04em;margin-bottom:9px;}
-  .gl-cta-p{font-size:var(--fs-text);line-height:1.85;color:rgba(255,255,255,0.92);margin-bottom:14px;}
-  .gl-cta-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--dp);text-decoration:none;padding:11px 20px;border-radius:var(--radius);font-size:var(--fs-text);font-weight:700;letter-spacing:.04em;}
+  .closing{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);margin-top:var(--sp-32);}
+  .gl-cta{background:var(--dp);color:var(--white);border-radius:var(--radius);padding:var(--sp-20) var(--sp-24);margin-top:var(--sp-32);}
+  .gl-cta-h{font-size:var(--fs-body);font-weight:700;letter-spacing:var(--ls-text);margin-bottom:var(--sp-8);}
+  .gl-cta-p{font-size:var(--fs-text);line-height:var(--lh-text);color:var(--white);margin-bottom:var(--sp-16);}
+  .gl-cta-btn{display:inline-flex;align-items:center;gap:var(--sp-8);background:var(--white);color:var(--dp);text-decoration:none;padding:var(--sp-12) var(--sp-20);border-radius:var(--radius);font-size:var(--fs-text);font-weight:700;letter-spacing:var(--ls-text);}
   .gl-cta-btn::after{content:'↗';font-size:var(--fs-caption);}
   .gl-cta-btn:hover{opacity:.92;}
 ---

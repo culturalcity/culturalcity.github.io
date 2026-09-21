@@ -16,33 +16,33 @@ title: 訪客登記
   <style>
     /* kiosk：隱藏全站導覽列與搜尋，避免訪客跳離本頁 */
     .breadcrumb{display:none !important;}
-    .main{max-width:720px;padding:26px 20px 64px;position:relative;} /* 置中沿用 global；本系列頁全寬度一律 20px 側距 */
-    .intro{background:rgba(60,56,53,0.05);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-body);color:var(--wg9);line-height:1.8;margin-bottom:22px;}
+    .main{max-width:720px;padding:var(--sp-28) var(--sp-20) var(--sp-64);position:relative;} /* 置中沿用 global；本系列頁全寬度一律 20px 側距 */
+    .intro{background:var(--tint);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-body);color:var(--wg9);line-height:var(--lh-text);margin-bottom:var(--sp-24);}
     .intro strong{color:var(--wg41);}
-    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 26px;}
-    .field{margin-bottom:20px;}
-    .field > label{display:block;font-size:var(--fs-text);font-weight:500;color:var(--wg11);letter-spacing:.04em;margin-bottom:9px;}
-    .field .req{color:var(--dn);font-weight:700;margin-left:3px;}
-    .opt{color:var(--wg9);font-size:var(--fs-text);font-weight:400;margin-left:4px;}
-    .seg{display:flex;flex-wrap:wrap;gap:10px;}
-    .seg button{font-family:inherit;font-size:var(--fs-body);letter-spacing:.02em;padding:13px 16px;min-height:52px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:130px;}
-    .seg button:hover{background:rgba(60,56,53,0.04);}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-24) var(--sp-24) var(--sp-28);}
+    .field{margin-bottom:var(--sp-20);}
+    .field > label{display:block;font-size:var(--fs-text);font-weight:500;color:var(--wg11);letter-spacing:var(--ls-text);margin-bottom:var(--sp-8);}
+    .field .req{color:var(--dn);font-weight:700;margin-left:var(--sp-4);}
+    .opt{color:var(--wg9);font-size:var(--fs-text);font-weight:400;margin-left:var(--sp-4);}
+    .seg{display:flex;flex-wrap:wrap;gap:var(--sp-12);}
+    .seg button{font-family:inherit;font-size:var(--fs-body);letter-spacing:var(--ls-text);padding:var(--sp-12) var(--sp-16);min-height:52px;border:1px solid var(--wg11);background:var(--white);color:var(--wg11);border-radius:var(--radius);cursor:pointer;transition:all .15s;flex:1 1 auto;min-width:130px;}
+    .seg button:hover{background:var(--tint);}
     .seg button.on{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);font-weight:500;}
-    input,select{width:100%;font-family:inherit;font-size:var(--fs-body);padding:14px 14px;min-height:54px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
-    select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+    input,select{width:100%;font-family:inherit;font-size:var(--fs-body);padding:var(--sp-16) var(--sp-16);min-height:54px;border:1px solid var(--wg11);border-radius:var(--radius);background:var(--white);color:var(--wg41);}
+    select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23696460' stroke-width='2.4'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:var(--sp-40);}
     input:focus,select:focus{outline:2px solid var(--wg41);outline-offset:-1px;}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-16);}
     @media(max-width:560px){.row2{grid-template-columns:1fr;}}
-    .submit-btn{width:100%;font-family:inherit;font-size:var(--fs-heading);font-weight:700;letter-spacing:.14em;color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:18px;min-height:62px;cursor:pointer;margin-top:8px;transition:background .15s;}
-    .submit-btn:hover{background:#2c2926;}
+    .submit-btn{width:100%;font-family:inherit;font-size:var(--fs-heading);font-weight:700;letter-spacing:var(--ls-caps);color:var(--wg1);background:var(--wg41);border:none;border-radius:var(--radius);padding:var(--sp-20);min-height:62px;cursor:pointer;margin-top:var(--sp-8);transition:background .15s;}
+    .submit-btn:hover{background:var(--wg11);}
     .submit-btn:disabled{opacity:.5;cursor:default;}
-    .form-msg{font-size:var(--fs-text);line-height:1.7;margin-top:12px;min-height:1px;color:var(--dn);}
+    .form-msg{font-size:var(--fs-text);line-height:var(--lh-text);margin-top:var(--sp-12);min-height:1px;color:var(--dn);}
     /* 完成畫面（蓋住表單） */
-    .done{position:fixed;inset:0;background:var(--wg1);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;z-index:50;}
+    .done{position:fixed;inset:0;background:var(--wg1);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--sp-40);z-index:50;}
     .done.show{display:flex;}
-    .done-tick{font-size:calc(var(--fs-display) * 2);color:var(--dp);margin-bottom:18px;}  /* 打勾是圖示，放大兩倍 */
-    .done-hd{font-size:var(--fs-display);font-weight:700;color:var(--wg41);letter-spacing:.05em;margin-bottom:12px;}
-    .done-sub{font-size:var(--fs-body);color:var(--wg9);line-height:1.8;}
+    .done-tick{font-size:calc(var(--fs-display) * 2);color:var(--dp);margin-bottom:var(--sp-20);}  /* 打勾是圖示，放大兩倍 */
+    .done-hd{font-size:var(--fs-display);font-weight:700;color:var(--wg41);letter-spacing:var(--ls-text);margin-bottom:var(--sp-12);}
+    .done-sub{font-size:var(--fs-body);color:var(--wg9);line-height:var(--lh-text);}
   </style>
 
   <div class="intro">
@@ -110,7 +110,7 @@ title: 訪客登記
       <input type="text" id="v-org" placeholder="例：黑貓宅配">
     </div>
 
-    <div class="field" style="margin-bottom:8px;">
+    <div class="field" style="margin-bottom:var(--sp-8);">
       <label>備註<span class="opt">（選填）</span></label>
       <input type="text" id="v-note" placeholder="其他需要說明的事項">
     </div>

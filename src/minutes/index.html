@@ -4,84 +4,84 @@ permalink: /minutes/index.html
 title: 會議紀錄
 eleventyExcludeFromCollections: true
 extraStyles: |
-  :root{--blue:#2B4A6B;--orange:#6B3A1F;}
+  :root{--orange:#6B3A1F;}
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
-  body{font-size:var(--fs-body);line-height:1.7;}
+  body{font-size:var(--fs-body);line-height:var(--lh-text);}
   /* ── HEADER ── */
-  .header{padding:40px 40px 0;}
-  .eyebrow{font-size:var(--fs-caption);letter-spacing:.25em;color:var(--wg7);margin-bottom:8px;}
-  .header h1{font-size:var(--fs-heading);letter-spacing:.08em;margin-bottom:4px;}
-  .header-sub{margin-bottom:24px;}
+  .header{padding:var(--sp-40) var(--sp-40) 0;}
+  .eyebrow{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg7);margin-bottom:var(--sp-8);}
+  .header h1{font-size:var(--fs-heading);letter-spacing:var(--ls-label);margin-bottom:var(--sp-4);}
+  .header-sub{margin-bottom:var(--sp-24);}
   /* ── TABS ── */
-  .tabs{display:flex;gap:0;border-top:1px solid rgba(234,231,225,0.1);}
+  .tabs{display:flex;gap:0;border-top:1px solid var(--line-dark);}
   .tab-btn{
-    padding:12px 24px;font-size:var(--fs-text);
+    padding:var(--sp-12) var(--sp-24);font-size:var(--fs-text);
     font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
-    letter-spacing:.08em;color:var(--wg7); /* 深底未選頁籤 wg7 過 AA（rgba .45 僅 3.2:1） */
+    letter-spacing:var(--ls-label);color:var(--wg7); /* 深底未選頁籤 wg7 過 AA（rgba .45 僅 3.2:1） */
     background:transparent;border:none;border-bottom:2px solid transparent;
     cursor:pointer;transition:all .18s;white-space:nowrap;
   }
   .tab-btn:hover{color:var(--wg1);}
   .tab-btn.active{color:var(--wg1);border-bottom-color:var(--wg1);}
   @media(max-width:600px){
-    .header{padding:28px 20px 0;}.main{padding-top:24px;padding-bottom:48px;}.header h1{font-size:var(--fs-heading);}
-    .tab-btn{padding:10px 16px;font-size:var(--fs-text);}
+    .header{padding:var(--sp-28) var(--sp-20) 0;}.main{padding-top:var(--sp-24);padding-bottom:var(--sp-48);}.header h1{font-size:var(--fs-heading);}
+    .tab-btn{padding:var(--sp-12) var(--sp-16);font-size:var(--fs-text);}
   }
   .tab-content{display:none;}.tab-content.active{display:block;}
   /* ── NOTICE BANNER ── */
-  .notice{background:rgba(60,56,53,.05);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:12px 16px;font-size:var(--fs-text);color:var(--wg9);line-height:1.8;margin-bottom:28px;}
+  .notice{background:var(--tint);border:1px solid var(--line);border-left:3px solid var(--wg11);padding:var(--sp-12) var(--sp-16);font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);margin-bottom:var(--sp-28);}
   /* ── ACCORDION (屆次) ── */
-  .term-block{margin-bottom:16px;}
+  .term-block{margin-bottom:var(--sp-16);}
   .term-toggle{
     display:flex;align-items:center;justify-content:space-between;
     width:100%;background:none;border:none;cursor:pointer;
-    padding:9px 0;border-bottom:1px solid var(--line);
+    padding:var(--sp-8) 0;border-bottom:1px solid var(--line);
     font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
   }
   .term-toggle:hover .term-label-text{color:var(--wg41);}
-  .term-label-text{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);display:flex;align-items:center;gap:10px;}
+  .term-label-text{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);display:flex;align-items:center;gap:var(--sp-12);}
   .term-label-text::before{content:'';flex:0 0 0;}
-  .term-count{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:.06em;}
+  .term-count{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:var(--ls-text);}
   .term-chevron{font-size:var(--fs-text);color:var(--wg9);transition:transform .22s;flex-shrink:0;}
   .term-block.open .term-chevron{transform:rotate(90deg);}
-  .term-body{display:none;padding-top:6px;}
+  .term-body{display:none;padding-top:var(--sp-8);}
   .term-block.open .term-body{display:block;}
   /* ── MEETING LIST ── */
-  .meeting-list{display:flex;flex-direction:column;gap:1px;margin-bottom:8px;}
+  .meeting-list{display:flex;flex-direction:column;gap:1px;margin-bottom:var(--sp-8);}
   .mc{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;}
   .mc+.mc{border-top:none;}
   .mc:first-child{border-radius:var(--radius) var(--radius) 0 0;}
   .mc:last-child{border-radius:0 0 var(--radius) var(--radius);}
-  .mc:hover{background:#F2F0EC;border-color:rgba(60,56,53,.25);z-index:1;}
+  .mc:hover{background:var(--tint);border-color:var(--line-strong);z-index:1;}
   .mc-stripe{width:3px;flex-shrink:0;background:var(--blue);}
   .mc-stripe.orange{background:var(--orange);}
-  .mc-body{flex:1;padding:13px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-  .mc-seq{font-size:var(--fs-heading);font-weight:700;color:var(--blue);min-width:32px;letter-spacing:-.02em;flex-shrink:0;}
+  .mc-body{flex:1;padding:var(--sp-12) var(--sp-16);display:flex;align-items:center;gap:var(--sp-16);flex-wrap:wrap;}
+  .mc-seq{font-size:var(--fs-heading);font-weight:700;color:var(--blue);min-width:32px;letter-spacing:var(--ls-text);flex-shrink:0;}
   .mc-seq.orange{color:var(--orange);}
   .mc-info{flex:1;}
   .mc-title{font-size:var(--fs-body);font-weight:500;color:var(--wg41);margin-bottom:2px;}
   .mc-date{font-size:var(--fs-text);color:var(--wg9);}
-  .mc-badge{font-size:var(--fs-caption);padding:2px 8px;border:1px solid rgba(43,74,107,.25);border-radius:1px;color:var(--blue);background:rgba(43,74,107,.05);white-space:nowrap;}
-  .mc-badge.orange{border-color:rgba(107,58,31,.25);color:var(--orange);background:rgba(107,58,31,.05);}
-  .mc-arrow{padding:0 16px;font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
+  .mc-badge{font-size:var(--fs-caption);padding:2px var(--sp-8);border:1px solid var(--blue-line);border-radius:1px;color:var(--blue);background:var(--blue-bg);white-space:nowrap;}
+  .mc-badge.orange{border-color:var(--line-strong);color:var(--orange);background:var(--tint);}
+  .mc-arrow{padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
   .mc:hover .mc-arrow{transform:translateX(3px);}
   /* 區權人會議用較大的序號排版 */
-  .agm-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+  .agm-list{display:flex;flex-direction:column;gap:var(--sp-12);margin-bottom:var(--sp-8);}
   .agm{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;border-radius:var(--radius);}
-  .agm:hover{background:#F2F0EC;border-color:rgba(60,56,53,.25);}
+  .agm:hover{background:var(--tint);border-color:var(--line-strong);}
   .agm-stripe{width:3px;flex-shrink:0;background:var(--orange);}
-  .agm-body{flex:1;padding:16px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
-  .agm-term{font-size:var(--fs-title);font-weight:700;color:var(--orange);min-width:36px;letter-spacing:-.02em;flex-shrink:0;line-height:1;}
+  .agm-body{flex:1;padding:var(--sp-16) var(--sp-20);display:flex;align-items:center;gap:var(--sp-20);flex-wrap:wrap;}
+  .agm-term{font-size:var(--fs-title);font-weight:700;color:var(--orange);min-width:36px;letter-spacing:var(--ls-text);flex-shrink:0;line-height:var(--lh-solid);}
   .agm-info{flex:1;}
-  .agm-title{font-size:var(--fs-body);font-weight:700;color:var(--wg41);margin-bottom:3px;}
-  .agm-meta{font-size:var(--fs-text);color:var(--wg9);line-height:1.7;}
-  .agm-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-  .agm-badge{font-size:var(--fs-caption);padding:2px 8px;border:1px solid rgba(107,58,31,.25);border-radius:1px;color:var(--orange);background:rgba(107,58,31,.05);white-space:nowrap;}
-  .agm-arrow{padding:0 16px;font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
+  .agm-title{font-size:var(--fs-body);font-weight:700;color:var(--wg41);margin-bottom:var(--sp-4);}
+  .agm-meta{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);}
+  .agm-badges{display:flex;gap:var(--sp-8);flex-wrap:wrap;margin-top:var(--sp-8);}
+  .agm-badge{font-size:var(--fs-caption);padding:2px var(--sp-8);border:1px solid var(--line-strong);border-radius:1px;color:var(--orange);background:var(--tint);white-space:nowrap;}
+  .agm-arrow{padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
   .agm:hover .agm-arrow{transform:translateX(3px);}
   /* ── PLACEHOLDER ── */
-  .placeholder{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px;font-size:var(--fs-text);color:var(--wg9);text-align:center;line-height:1.8;}
-  .footer{padding-top:18px;font-size:var(--fs-text);color:var(--wg9);letter-spacing:.06em;gap:6px;}
+  .placeholder{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-20);font-size:var(--fs-text);color:var(--wg9);text-align:center;line-height:var(--lh-text);}
+  .footer{padding-top:var(--sp-20);font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);gap:var(--sp-8);}
 extraScripts: |
   function switchTab(tab){
     document.querySelectorAll('.tab-btn').forEach(b=>{
@@ -125,7 +125,7 @@ extraScripts: |
   <div class="term-block open">
     <button class="term-toggle" onclick="toggleTerm(this)">
       <span class="term-label-text">第五屆管理委員會　2026/07 ～ 2027/06</span>
-      <span style="display:flex;align-items:center;gap:10px">
+      <span style="display:flex;align-items:center;gap:var(--sp-12)">
         <span class="term-count">{{ collections.term5Board | length }} 次會議</span>
         <span class="term-chevron">›</span>
       </span>
@@ -163,7 +163,7 @@ extraScripts: |
   <div class="term-block">
     <button class="term-toggle" onclick="toggleTerm(this)">
       <span class="term-label-text">{{ termInfo.label }}　{{ termInfo.period }}</span>
-      <span style="display:flex;align-items:center;gap:10px">
+      <span style="display:flex;align-items:center;gap:var(--sp-12)">
         <span class="term-count">{{ termInfo.coll | length }} 次會議</span>
         <span class="term-chevron">›</span>
       </span>

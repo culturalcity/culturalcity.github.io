@@ -6,45 +6,45 @@ extraStyles: |
   :root{--c-target:#1C6B3A;--c-warn:#A8481F;--c-blue:#2B4A6B;}
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器／notice-box 沿用 global */
   body{font-size:var(--fs-body);}
-  .header{padding:36px 40px 28px;border-bottom:2px solid var(--wg11);}
-  .back-link{margin-bottom:6px;margin-right:14px;}
-  .header-eyebrow{margin-bottom:8px;margin-top:10px;}
-  .header h1{letter-spacing:.08em;line-height:1.35;}
-  .header-sub{letter-spacing:.14em;}
-  .main{padding-top:32px;}
-  @media(max-width:600px){.header{padding:28px 20px 22px;}.main{padding:24px 16px 48px;}}
-  .notice-box{line-height:1.8;}
+  .header{padding:var(--sp-40) var(--sp-40) var(--sp-28);border-bottom:2px solid var(--wg11);}
+  .back-link{margin-bottom:var(--sp-8);margin-right:var(--sp-16);}
+  .header-eyebrow{margin-bottom:var(--sp-8);margin-top:var(--sp-12);}
+  .header h1{letter-spacing:var(--ls-label);line-height:var(--lh-tight);}
+  .header-sub{letter-spacing:var(--ls-caps);}
+  .main{padding-top:var(--sp-32);}
+  @media(max-width:600px){.header{padding:var(--sp-28) var(--sp-20) var(--sp-24);}.main{padding:var(--sp-24) var(--sp-16) var(--sp-48);}}
+  .notice-box{line-height:var(--lh-text);}
   /* 段落標籤 */
-  .sl{font-size:var(--fs-caption);letter-spacing:.22em;color:var(--wg11);margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+  .sl{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin:var(--sp-32) 0 var(--sp-12);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-12);}
   .sl::before{content:attr(data-num);font-weight:700;color:var(--wg7);}
   .sl::after{content:'';flex:1;height:1px;background:var(--line);}
-  h2.pt{font-size:var(--fs-heading);font-weight:700;letter-spacing:.04em;margin-bottom:10px;}
-  p{margin-bottom:14px;}
+  h2.pt{font-size:var(--fs-heading);font-weight:700;letter-spacing:var(--ls-text);margin-bottom:var(--sp-12);}
+  p{margin-bottom:var(--sp-16);}
   /* 公式卡 */
-  .formula-card{background:var(--wg41);color:var(--wg1);border-radius:var(--radius);padding:22px 24px;margin:18px 0 22px;}
-  .formula-card .f-label{font-size:var(--fs-text);letter-spacing:.18em;color:var(--wg7);margin-bottom:10px;}
-  .formula-card .f-body{font-size:var(--fs-heading);font-weight:500;line-height:1.9;letter-spacing:.02em;}
-  .formula-card .f-body b{color:#D4C48A;font-weight:700;}
+  .formula-card{background:var(--wg41);color:var(--wg1);border-radius:var(--radius);padding:var(--sp-24) var(--sp-24);margin:var(--sp-20) 0 var(--sp-24);}
+  .formula-card .f-label{font-size:var(--fs-text);letter-spacing:var(--ls-caps);color:var(--wg7);margin-bottom:var(--sp-12);}
+  .formula-card .f-body{font-size:var(--fs-heading);font-weight:500;line-height:var(--lh-loose);letter-spacing:var(--ls-text);}
+  .formula-card .f-body b{color:var(--warn-on-dark);font-weight:700;}
   /* 查詢卡 */
-  .query-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:18px 0 24px;}
-  .query-card .q-title{font-size:var(--fs-text);letter-spacing:.1em;color:var(--wg9);margin-bottom:14px;}
-  .q-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
-  .q-row label{display:flex;align-items:center;gap:8px;font-size:var(--fs-body);cursor:pointer;}
+  .query-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-20) var(--sp-24);margin:var(--sp-20) 0 var(--sp-24);}
+  .query-card .q-title{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);margin-bottom:var(--sp-16);}
+  .q-row{display:flex;gap:var(--sp-20);align-items:center;flex-wrap:wrap;}
+  .q-row label{display:flex;align-items:center;gap:var(--sp-8);font-size:var(--fs-body);cursor:pointer;}
   .q-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--c-target);}
-  .q-row input[type=number]{font-family:inherit;font-size:var(--fs-body);font-weight:500;color:var(--wg41);background:var(--wg1);border:1px solid var(--line);border-radius:var(--radius);padding:8px 12px;width:88px;outline:none;}
-  .q-result{margin-left:auto;background:rgba(31,92,56,0.08);border:1px solid rgba(31,92,56,0.25);border-radius:var(--radius);padding:10px 18px;font-size:var(--fs-text);color:var(--wg9);}
-  .q-result strong{color:var(--c-target);font-size:var(--fs-heading);font-weight:700;margin-left:6px;}
+  .q-row input[type=number]{font-family:inherit;font-size:var(--fs-body);font-weight:500;color:var(--wg41);background:var(--wg1);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);width:88px;outline:none;}
+  .q-result{margin-left:auto;background:var(--dp-bg);border:1px solid var(--dp-line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-20);font-size:var(--fs-text);color:var(--wg9);}
+  .q-result strong{color:var(--c-target);font-size:var(--fs-heading);font-weight:700;margin-left:var(--sp-8);}
   /* 對照表 */
-  .rule-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);margin:14px 0 6px;}
-  .rule-table th{background:var(--wg41);color:var(--wg1);padding:9px 14px;text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:.06em;}
-  .rule-table td{padding:11px 14px;border-bottom:1px solid var(--line);background:var(--white);font-variant-numeric:tabular-nums;}
+  .rule-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);margin:var(--sp-16) 0 var(--sp-8);}
+  .rule-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
+  .rule-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);background:var(--white);font-variant-numeric:tabular-nums;}
   .rule-table tr:last-child td{border-bottom:none;}
   .rule-table .num{text-align:right;font-weight:700;}
-  .ok-box{background:rgba(31,92,56,0.06);border-left:3px solid var(--c-target);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-text);line-height:1.85;margin:18px 0;}
+  .ok-box{background:var(--dp-bg);border-left:3px solid var(--c-target);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
   .ok-box strong{color:var(--c-target);}
-  .warn-box{background:rgba(168,72,31,0.06);border-left:3px solid var(--c-warn);border-radius:var(--radius);padding:14px 18px;font-size:var(--fs-text);line-height:1.85;margin:18px 0;}
+  .warn-box{background:var(--warn-bg);border-left:3px solid var(--c-warn);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
   .warn-box strong{color:var(--c-warn);}
-  .footer{padding-top:18px;margin-top:44px;font-size:var(--fs-text);color:var(--wg9);letter-spacing:.06em;line-height:1.9;gap:6px;}
+  .footer{padding-top:var(--sp-20);margin-top:var(--sp-48);font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);line-height:var(--lh-loose);gap:var(--sp-8);}
 ---
 <div class="header">
   <div class="header-inner">
