@@ -22,7 +22,7 @@
   var cs = w.getComputedStyle(d.documentElement), VIZ = {};
   for (var k in KEYS) {
     var v = cs.getPropertyValue(KEYS[k]).trim();
-    VIZ[k] = v || '#000';   // 取不到（極舊瀏覽器）就退黑色，至少看得見
+    VIZ[k] = v || '#000'; /* design-ok: 取不到 CSS 變數時（極舊瀏覽器）的最後退路，不是主題色 */
   }
   VIZ.token = function (name) { return cs.getPropertyValue(name).trim(); };
   // 同一個色的半透明版（面積填色、淡化的線）：只從色盤取色，不另外寫色碼
@@ -38,6 +38,12 @@
   // 分類色盤（財報月報圓餅／長條）：VIZ.cat(i, alpha) 依序取色，超過長度就循環
   VIZ.CAT = ['navy', 'red', 'gold', 'green', 'purple', 'brown', 'olive', 'sky', 'moss', 'gray'];
   VIZ.cat = function (i, a) {
+    // 超過色盤長度就會循環＝兩個類別同色且看不出來（2026-09-22 冰兒審閱指出）。
+    // 這裡出聲警告，請到 global.css 的分類色盤加色並補進 VIZ.CAT，別讓它默默撞色。
+    if (i >= VIZ.CAT.length && w.console && console.warn) {
+      console.warn('[VIZ] 分類色盤只有 ' + VIZ.CAT.length + ' 色，第 ' + (i + 1) + ' 類會與第 ' +
+        (i % VIZ.CAT.length + 1) + ' 類同色——請在 global.css 加 --viz-* 並補進 VIZ.CAT');
+    }
     var c = VIZ[VIZ.CAT[i % VIZ.CAT.length]];
     return a == null ? c : VIZ.alpha(c, a);
   };

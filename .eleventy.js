@@ -20,8 +20,9 @@ module.exports = function(eleventyConfig) {
   // 建置後：逐頁（含連結的站內 CSS）查「用了 var(--x) 卻沒定義」→ 擋建置
   //（年報 --amber、公告列表 --c-staff、年報與首頁的 --wg3 都是這類靜默失色）。
   eleventyConfig.on("eleventy.before", () => {
-    const { warnSource, nearColors, jsColors } = require("./scripts/check-design-tokens.js");
-    const w = warnSource(), n = nearColors(), j = jsColors();
+    const { warnSource, nearColors, jsColors, dataColors } = require("./scripts/check-design-tokens.js");
+    const w = warnSource(), n = nearColors(), j = jsColors(), dc = dataColors();
+    if (dc.length) throw new Error(`設計表守門：資料檔存了顏色 ${dc.length} 處（圖表年度色由 src/utility/index.html 的 seriesColor() 指派）\n  ` + dc.slice(0, 20).join("\n  "));
     if (w.length) throw new Error(`設計表守門：寫死值 ${w.length} 處（改用 token；真有例外在宣告後加 /* design-ok: 理由 */）\n  ` + w.slice(0, 30).join("\n  "));
     if (j.length) throw new Error(`設計表守門：圖表 JS 寫死色碼 ${j.length} 處（改用 viz.js 的 VIZ.*／VIZ.token()）\n  ` + j.slice(0, 30).join("\n  "));
     if (n.length) console.warn(`[設計表] global 色票近似色 ${n.length} 對：\n  ` + n.join("\n  "));

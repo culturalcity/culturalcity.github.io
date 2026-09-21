@@ -108,8 +108,13 @@ function jsColors() {
       // 例外註解寫在同一行、色碼之後即可（中間允許 ; , ) } 等收尾符號）
       for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*]\s*design-ok:[^\n*]*)?/g)) {
         if (m[3]) continue;                                    // 寫了理由
+        // 一行內有多個色碼時（例：QR code 的黑白兩色），理由寫在行末即整行放行
+        const lineEnd = b.indexOf('\n', m.index), line = b.slice(b.lastIndexOf('\n', m.index) + 1, lineEnd < 0 ? undefined : lineEnd);
+        if (/design-ok:/.test(line)) continue;
+        // 2026-09-22 冰兒審閱：原本「值等於色盤」就放行，但那仍是寫死值——改色時色盤變、JS 不變就分岔。
+        // 一律要求走 VIZ.*；真要寫死就寫 design-ok 理由。
         const v = norm(m[2]);
-        if (!pal.has(v) && !pal.has(v.replace(/,1\)$/, ')'))) bad.push(`${rel}  圖表色寫死 ${m[2]} → 用 VIZ.*／VIZ.token()（色盤在 global.css）`);
+        bad.push(`${rel}  圖表色寫死 ${m[2]}${pal.has(v) || pal.has(v.replace(/,1\)$/, ')')) ? '（值雖與色盤相同，仍會在改色時分岔）' : ''} → 用 VIZ.*／VIZ.token()（色盤在 global.css）`);
       }
     }
   }
@@ -171,14 +176,30 @@ function checkOutput(outDir = path.join(ROOT, '_site')) {
   return bad;
 }
 
-module.exports = { warnSource, nearColors, checkOutput, jsColors };
+// 資料檔不得存色（2026-09-22 冰兒審閱指出）：utility/data/*.json 的年度系列色已改由色盤指派，
+// 但帳單 skill 或手動編輯仍可能把 backgroundColor／色碼寫回去，靠文件約束不夠，這裡直接擋。
+function dataColors() {
+  const bad = [], dirs = [path.join(ROOT, 'utility', 'data'), path.join(ROOT, 'src', 'utility', 'data')];
+  for (const d of dirs) for (const f of walk(d, /\.json$/)) {
+    const rel = path.relative(ROOT, f), t = fs.readFileSync(f, 'utf8');
+    const j = JSON.parse(t.replace(/^﻿/, ''));
+    const note = String(j._comment || '');                     // _comment 裡提到 backgroundColor 是說明文字，不算
+    for (const m of t.matchAll(/"(backgroundColor|borderColor|color)"\s*:/g)) bad.push(`${rel}  資料檔存了顏色欄位 "${m[1]}" → 年度系列色由 src/utility/index.html 的 seriesColor() 指派`);
+    for (const m of t.matchAll(/"(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))"/g)) if (!note.includes(m[1])) bad.push(`${rel}  資料檔存了色碼 ${m[1]}`);
+  }
+  return [...new Set(bad)];
+}
+
+module.exports = { warnSource, nearColors, checkOutput, jsColors, dataColors };
 
 if (require.main === module) {
-  const w = warnSource(), j = jsColors(), n = nearColors(), b = checkOutput(process.argv[2]);
+  const w = warnSource(), j = jsColors(), dc = dataColors(), n = nearColors(), b = checkOutput(process.argv[2]);
   console.log(`設計表：寫死值 ${w.length} 處${w.length ? '\n  ' + w.slice(0, 40).join('\n  ') : ''}`);
   if (w.length) process.exitCode = 1;
   console.log(`圖表 JS 色碼：${j.length} 處${j.length ? '\n  ' + j.slice(0, 40).join('\n  ') : ''}`);
   if (j.length) process.exitCode = 1;
+  console.log(`資料檔顏色：${dc.length} 處${dc.length ? '\n  ' + dc.slice(0, 20).join('\n  ') : ''}`);
+  if (dc.length) process.exitCode = 1;
   console.log(`近似色（ΔE<3）：${n.length} 對${n.length ? '\n  ' + n.join('\n  ') : ''}`);
   if (b.length) { console.error(`未定義變數：${b.length} 頁\n  ` + b.join('\n  ')); process.exit(1); }
   console.log('未定義變數：無');

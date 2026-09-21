@@ -416,8 +416,11 @@ extraStyles: |
 // 規則：最新一年用 --viz-blue 強調，往前的年份用 --wg11 由深到淺（色盤的 --viz-gray 太亮，長條在白底上會糊掉）。
 function seriesColor(i, n) {
   if (i === n - 1) return VIZ.alpha(VIZ.blue, 0.85);
-  const steps = [0.35, 0.5, 0.65, 0.8];                // 由舊到新；超過四筆時最舊的共用 0.35
-  return VIZ.alpha(VIZ.token('--wg11'), steps[Math.max(0, steps.length - (n - 1 - i))] || 0.35);
+  // 透明度下限 0.78：長條是「要看懂圖必需的圖形元件」，對底色要 ≥3:1（WCAG 1.4.11）。
+  // --wg11 疊白底：0.78→3.5:1、0.86→4.3:1、0.93→5.0:1、1.0→5.9:1；疊頁底 --wg1 分別 3.1／3.7／4.2／4.7:1。
+  // （原本 0.35 只有 1.65:1，長條幾乎看不見——2026-09-22 冰兒審閱指出後改。）
+  const steps = [0.78, 0.86, 0.93, 1];                 // 由舊到新；超過四筆時最舊的共用 0.78
+  return VIZ.alpha(VIZ.token('--wg11'), steps[Math.max(0, steps.length - (n - 1 - i))] || 0.78);
 }
 let ELEC_PERIOD_LABELS = [], ELEC_DATASETS = [];
 let WATER_PERIOD_LABELS = [], WATER_DATASETS = [];
