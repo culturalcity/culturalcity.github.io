@@ -3,7 +3,8 @@
 // 兩段檢查：
 //   warnSource()  建置前：CSS 語境（*.css、<style>、style=""、frontmatter extraStyles）裡寫死的
 //                 顏色／行高／字距／間距 → 擋建置（2026-09-19 審閱後由警示改為阻擋）。真有例外，在該宣告後
-//                 緊接註解 /* design-ok: 理由 */ 即放行（理由必寫，對應 SHARED-CORE「超過要寫理由」）；
+//                 緊接註解 /* design-ok: 理由 */ 即放行（理由必寫且要有實質文字——空的 design-ok: 一樣擋，
+//                 2026-09-22 冰兒審閱補；對應 SHARED-CORE「超過要寫理由」）；
 //                 並列出 global.css 色票中 ΔE<3（肉眼分不出）的近似色對。
 //   jsColors()    建置前：圖表 JS（<script> 與站內 *.js）裡的色碼字面值 → 擋建置（2026-09-21 新增）。
 //                 圖表色一律用 viz.js 的 VIZ.*／VIZ.token() 讀 global.css 色盤：色碼寫在 JS 就等於色盤有兩份，
@@ -49,9 +50,9 @@ function sourceFiles() {
 const kebab = s => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
 function jsChunks(text) {
   const out = [];
-  for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${m[4] || ''}`);
+  for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${m[4] || ''}`);
   // 例外註解可寫在字串內（每條宣告後）或整句後；整句後的 design-ok 視為整段放行
-  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1\s*\)?\s*;?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) if (!m[3]) out.push(m[2]);
+  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1\s*\)?\s*;?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) if (!m[3]) out.push(m[2]);
   return out;
 }
 function cssChunks(file, text) {
@@ -74,9 +75,9 @@ function warnSource() {
   for (const f of sourceFiles()) {
     const rel = path.relative(ROOT, f);
     for (const chunk of cssChunks(f, fs.readFileSync(f, 'utf8'))) {
-      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*\s*design-ok:[^*]+\*\/)?/g)) {
+      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) {
         const [, prop, raw, ok] = m, v = raw.replace(/\/\*[\s\S]*?\*\//g, '').trim();
-        if (ok || /\/\*\s*design-ok:[^*]+\*\//.test(raw)) continue;  // 已寫明理由的例外（註解緊接在值後）
+        if (ok || /\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\//.test(raw)) continue;  // 已寫明理由的例外（註解緊接在值後）
         if (prop.startsWith('--')) continue;                       // token 定義本身不算
         if (prop === 'line-height' && /^\d*\.?\d+$/.test(v) && v !== '0') warns.push(`${rel}  line-height: ${v} → var(--lh-*)`);
         else if (prop === 'letter-spacing' && /^-?\d*\.?\d+(em|px)/.test(v) && !/^0(em|px)?$/.test(v)) warns.push(`${rel}  letter-spacing: ${v} → var(--ls-*)`);
@@ -110,11 +111,11 @@ function jsColors() {
       : [...text.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
     for (const b of blocks) {
       // 例外註解寫在同一行、色碼之後即可（中間允許 ; , ) } 等收尾符號）
-      for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*]\s*design-ok:[^\n*]*)?/g)) {
+      for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*]\s*design-ok:[^\n*]*\S{2}[^\n*]*)?/g)) {
         if (m[3]) continue;                                    // 寫了理由
         // 一行內有多個色碼時（例：QR code 的黑白兩色），理由寫在行末即整行放行
         const lineEnd = b.indexOf('\n', m.index), line = b.slice(b.lastIndexOf('\n', m.index) + 1, lineEnd < 0 ? undefined : lineEnd);
-        if (/design-ok:/.test(line)) continue;
+        if (/design-ok:[^\n]*\S{2}/.test(line)) continue;      // 理由必須有實質文字，空的 design-ok: 不放行
         // 2026-09-22 冰兒審閱：原本「值等於色盤」就放行，但那仍是寫死值——改色時色盤變、JS 不變就分岔。
         // 一律要求走 VIZ.*；真要寫死就寫 design-ok 理由。
         const v = norm(m[2]);
