@@ -50,9 +50,9 @@ function sourceFiles() {
 const kebab = s => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
 function jsChunks(text) {
   const out = [];
-  for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${m[4] || ''}`);
+  for (const m of text.matchAll(/\.style\.([a-zA-Z]+)\s*=\s*(['"`])([^'"`]*)\2\s*;?(\s*\/\*[^*]*\*\/)?/g)) out.push(`${kebab(m[1])}: ${m[3]};${hasReason(m[4]) ? m[4] : ''}`);
   // 例外註解可寫在字串內（每條宣告後）或整句後；整句後的 design-ok 視為整段放行
-  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1\s*\)?\s*;?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) if (!m[3]) out.push(m[2]);
+  for (const m of text.matchAll(/(?:cssText|setAttribute\(\s*['"]style['"]\s*,)\s*=?\s*(['"`])([^'"`]*)\1\s*\)?\s*;?(\s*\/\*[^*]*\*\/)?/g)) if (!hasReason(m[3])) out.push(m[2]);
   return out;
 }
 function cssChunks(file, text) {
@@ -69,15 +69,25 @@ function cssChunks(file, text) {
   return out;
 }
 
+// design-ok 的理由驗證（2026-09-22 第 8 輪審閱）：把 design-ok: 之後的文字取出來，
+// 去掉註解結尾 */ 與空白後，至少要有 2 個字（不必相連）。原本用 /\S{2}/ 會把結尾的 */
+// 當成理由，也會誤擋「a b」這種中間有空白的合法理由。
+const REASON = /design-ok:([^\n]*)/;
+function hasReason(text) {
+  const m = REASON.exec(text || '');
+  if (!m) return false;
+  return m[1].replace(/\*\/[\s\S]*$/, '').replace(/\s+/g, '').length >= 2;
+}
+
 const LIT_COLOR = /#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)/;
 function warnSource() {
   const warns = [];
   for (const f of sourceFiles()) {
     const rel = path.relative(ROOT, f);
     for (const chunk of cssChunks(f, fs.readFileSync(f, 'utf8'))) {
-      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\/)?/g)) {
+      for (const m of chunk.matchAll(/(?<![\w-])([a-z-]+)\s*:\s*([^;{}"]+);?(\s*\/\*[^*]*\*\/)?/g)) {
         const [, prop, raw, ok] = m, v = raw.replace(/\/\*[\s\S]*?\*\//g, '').trim();
-        if (ok || /\/\*\s*design-ok:[^*\n]*\S{2}[^*\n]*\*\//.test(raw)) continue;  // 已寫明理由的例外（註解緊接在值後）
+        if (hasReason(ok) || hasReason(raw)) continue;  // 已寫明理由的例外（註解緊接在值後）
         if (prop.startsWith('--')) continue;                       // token 定義本身不算
         if (prop === 'line-height' && /^\d*\.?\d+$/.test(v) && v !== '0') warns.push(`${rel}  line-height: ${v} → var(--lh-*)`);
         else if (prop === 'letter-spacing' && /^-?\d*\.?\d+(em|px)/.test(v) && !/^0(em|px)?$/.test(v)) warns.push(`${rel}  letter-spacing: ${v} → var(--ls-*)`);
@@ -111,11 +121,11 @@ function jsColors() {
       : [...text.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
     for (const b of blocks) {
       // 例外註解寫在同一行、色碼之後即可（中間允許 ; , ) } 等收尾符號）
-      for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*]\s*design-ok:[^\n*]*\S{2}[^\n*]*)?/g)) {
-        if (m[3]) continue;                                    // 寫了理由
+      for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*][^\n]*)?/g)) {
+        if (hasReason(m[3])) continue;                         // 寫了理由（且理由非空）
         // 一行內有多個色碼時（例：QR code 的黑白兩色），理由寫在行末即整行放行
         const lineEnd = b.indexOf('\n', m.index), line = b.slice(b.lastIndexOf('\n', m.index) + 1, lineEnd < 0 ? undefined : lineEnd);
-        if (/design-ok:[^\n]*\S{2}/.test(line)) continue;      // 理由必須有實質文字，空的 design-ok: 不放行
+        if (hasReason(line)) continue;                         // 一行多色碼時，理由寫在行末即整行放行
         // 2026-09-22 冰兒審閱：原本「值等於色盤」就放行，但那仍是寫死值——改色時色盤變、JS 不變就分岔。
         // 一律要求走 VIZ.*；真要寫死就寫 design-ok 理由。
         const v = norm(m[2]);
