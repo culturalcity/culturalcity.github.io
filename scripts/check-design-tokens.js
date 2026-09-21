@@ -8,7 +8,11 @@
 //   jsColors()    建置前：圖表 JS（<script> 與站內 *.js）裡的色碼字面值 → 擋建置（2026-09-21 新增）。
 //                 圖表色一律用 viz.js 的 VIZ.*／VIZ.token() 讀 global.css 色盤：色碼寫在 JS 就等於色盤有兩份，
 //                 改色只改一邊就會走鐘——用電目標頁的警戒線圖例是 #A8481F、線卻畫成 #C45A30，正是這樣來的。
-//                 允許的值：global.css :root 定義過的任何色、純中性（#fff／#000／transparent），或寫 design-ok 理由。
+//                 2026-09-22 起**一律擋**：值即使與色盤相同也不放行（色盤改了、JS 沒改就分岔）。
+//                 要留寫死值就在**同一行**寫 `// design-ok: 理由`（一行有多個色碼時整行放行，例：QR code 的黑白）。
+//   dataColors()  建置前：utility/data/*.json 的顏色欄位（backgroundColor／borderColor／color）與色碼 → 擋建置
+//                 （2026-09-22 新增）。圖表年度系列色改由 src/utility/index.html 的 seriesColor() 從色盤指派，
+//                 資料檔只存數字；帳單 skill 若把色寫回來，這裡會擋。
 //   checkOutput() 建置後：逐頁把「頁面本身＋它連結的站內 CSS」合起來看，
 //                 用了 var(--x)（無 fallback）卻整頁都沒定義 → 擋建置。
 //                 （2026-09 實例：年報的 --amber、公告列表的 --c-staff 從未定義，標記點與 pill 靜默失色。）
@@ -182,10 +186,11 @@ function dataColors() {
   const bad = [], dirs = [path.join(ROOT, 'utility', 'data'), path.join(ROOT, 'src', 'utility', 'data')];
   for (const d of dirs) for (const f of walk(d, /\.json$/)) {
     const rel = path.relative(ROOT, f), t = fs.readFileSync(f, 'utf8');
-    const j = JSON.parse(t.replace(/^﻿/, ''));
-    const note = String(j._comment || '');                     // _comment 裡提到 backgroundColor 是說明文字，不算
-    for (const m of t.matchAll(/"(backgroundColor|borderColor|color)"\s*:/g)) bad.push(`${rel}  資料檔存了顏色欄位 "${m[1]}" → 年度系列色由 src/utility/index.html 的 seriesColor() 指派`);
-    for (const m of t.matchAll(/"(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))"/g)) if (!note.includes(m[1])) bad.push(`${rel}  資料檔存了色碼 ${m[1]}`);
+    // _comment 是給人看的說明（裡面會提到 backgroundColor 這個字），檢查前先把該欄位的值整段挖掉，
+    // 但只挖 _comment 自己——正文若出現同一個色碼仍要擋（2026-09-22 冰兒審閱指出原本用字串比對會誤豁免）。
+    const body = t.replace(/"_comment"\s*:\s*"(?:[^"\\]|\\.)*"/g, '"_comment":""');
+    for (const m of body.matchAll(/"(backgroundColor|borderColor|color)"\s*:/g)) bad.push(`${rel}  資料檔存了顏色欄位 "${m[1]}" → 年度系列色由 src/utility/index.html 的 seriesColor() 指派`);
+    for (const m of body.matchAll(/"(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))"/g)) bad.push(`${rel}  資料檔存了色碼 ${m[1]}`);
   }
   return [...new Set(bad)];
 }
