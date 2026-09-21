@@ -437,7 +437,7 @@ const pieLabel={
   plugins:{
     legend:{position:'right',labels:{font:{family:'Noto Sans TC',size:10},boxWidth:10}},
     datalabels:{
-      color:'#fff',font:{family:'Noto Sans TC',size:10,weight:'600'},
+      color:VIZ.onFill,font:{family:'Noto Sans TC',size:10,weight:'600'},
       formatter:(val,ctx)=>{
         const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
         const pct=(val/total*100);return pct>=4?pct.toFixed(1)+'%':'';
@@ -496,7 +496,7 @@ function drawOverview(){
     type:'line',
     data:{labels:['2025/01','2025/12','2026/01'],
       datasets:[{label:'現金+存款',data:[6433915,5963317,6345836],
-        borderColor:'#b8860b',backgroundColor:'rgba(184,134,11,.12)',tension:.3,pointRadius:5,fill:true}]},
+        borderColor:VIZ.gold,backgroundColor:VIZ.goldBg,tension:.3,pointRadius:5,fill:true}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
       scales:{y:{ticks:{font:{family:FONT,size:10},callback:tc}}}}
   });
@@ -535,7 +535,7 @@ function drawBS(){
       datasets:[
         {label:'資產總計',data:[6467964,5963317,6345836],backgroundColor:['rgba(26,74,107,.4)','rgba(26,74,107,.4)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
         {label:'流動負債',data:[1398818,202823,432056],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
-        {type:'line',label:'業主權益',data:[5069146,5760494,5913780],borderColor:'#b8860b',backgroundColor:'transparent',tension:.3,pointRadius:5}
+        {type:'line',label:'業主權益',data:[5069146,5760494,5913780],borderColor:VIZ.gold,backgroundColor:'transparent',tension:.3,pointRadius:5}
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
       scales:{y:{ticks:{font:{family:FONT,size:10},callback:tc}}}}

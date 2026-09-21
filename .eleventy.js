@@ -20,9 +20,10 @@ module.exports = function(eleventyConfig) {
   // 建置後：逐頁（含連結的站內 CSS）查「用了 var(--x) 卻沒定義」→ 擋建置
   //（年報 --amber、公告列表 --c-staff、年報與首頁的 --wg3 都是這類靜默失色）。
   eleventyConfig.on("eleventy.before", () => {
-    const { warnSource, nearColors } = require("./scripts/check-design-tokens.js");
-    const w = warnSource(), n = nearColors();
+    const { warnSource, nearColors, jsColors } = require("./scripts/check-design-tokens.js");
+    const w = warnSource(), n = nearColors(), j = jsColors();
     if (w.length) throw new Error(`設計表守門：寫死值 ${w.length} 處（改用 token；真有例外在宣告後加 /* design-ok: 理由 */）\n  ` + w.slice(0, 30).join("\n  "));
+    if (j.length) throw new Error(`設計表守門：圖表 JS 寫死色碼 ${j.length} 處（改用 viz.js 的 VIZ.*／VIZ.token()）\n  ` + j.slice(0, 30).join("\n  "));
     if (n.length) console.warn(`[設計表] global 色票近似色 ${n.length} 對：\n  ` + n.join("\n  "));
   });
   eleventyConfig.on("eleventy.after", ({ directories, dir }) => {
@@ -164,6 +165,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("lang.js");
   // 頁籤無障礙漸進增強共用檔（finance.njk 與長期財務模型以 defer 載入）
   eleventyConfig.addPassthroughCopy("tabs-a11y.js");
+  // 資料視覺化色盤橋接：圖表頁（viz:true）由 base.njk 在圖表程式之前同步載入
+  eleventyConfig.addPassthroughCopy("viz.js");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");

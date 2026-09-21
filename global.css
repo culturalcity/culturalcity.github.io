@@ -28,8 +28,16 @@
   --blue: #2B4A6B; --blue-bg: rgba(43,74,107,0.06); --blue-line: rgba(43,74,107,0.25); --blue-on-dark: #94B5D6; /* 資訊：說明、會議類（深底 5.4:1） */
   --warn-on-dark: #E8996E;  /* 琥珀的深底版（深底 5.1:1） */
   /* 深底上的狀態底色與框線一律用中性 --tint-dark-strong／--line-dark，色相只留在文字上 */
-  /* ── 資料視覺化色盤（不佔文字／背景額度；圖表 JS 內的線色要與此一致）── */
+  /* ── 資料視覺化色盤（不佔文字／背景額度）。圖表 JS 一律用 viz.js 的 VIZ.* 讀本區，不再各自寫色碼 ── */
   --viz-blue: #185FA5; --viz-blue-soft: rgba(24,95,165,0.35); --viz-orange: #C45A30; --viz-gray: #B4B2A9; --viz-line: #888780; --viz-yellow: #E8B400;
+  --viz-green: #1C6B3A;   /* 目標線／逃生出口綠：比 --dp 亮（ΔE 10），圖表與標示上才跳得出來；卡片底 6.0:1 可當文字色 */
+  --viz-alert: #A8481F;   /* 警戒線與其圖例文字：--viz-orange 只有 3.98:1 僅能當填色，要寫字用本色（5.3:1） */
+  --viz-gold: #B8860B; --viz-gold-bg: rgba(184,134,11,.12);  /* 財報月報的累積趨勢線 */
+  /* ── 網站分區色（首頁模組卡與時間軸、搜尋結果、各列表頁的區塊強調）。只有棕與墨綠是新值，其餘引用既有色 ── */
+  --sec-notice: #6B3A1F;   /* 棕：公告；會議紀錄列表的區權人會議（AGM）強調亦用此棕 */
+  --sec-vendor: #3C5A4A;   /* 墨綠：廠商通訊錄 */
+  --sec-minutes: var(--wg41); --sec-finance: var(--blue); --sec-regulation: var(--dp);
+  --sec-guide: var(--warn); --sec-other: var(--wg9);
   --overlay: rgba(28,25,23,0.94);  /* 全螢幕燈箱遮罩 */
   /* ── 公告類別色盤（公告頁 pill、公告列表篩選、首頁卡片共用；2026-09-19 由 notice.css／notice/index 兩處不一致的宣告收回，
         列表頁原缺 --c-staff 致人事 pill 失色；安全類統一用棕色以與設備類紅色區分）── */

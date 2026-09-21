@@ -12,6 +12,8 @@
 {% if extraHead %}{{ extraHead | safe }}{% endif %}
 {% if trilingual %}<script src="{{ '/lang.js' | cssBust }}" defer></script>{% endif %}
 {% if tabsA11y %}<script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>{% endif %}
+{# 圖表色盤橋接：不加 defer，圖表程式取用 VIZ 時必須已就緒 #}
+{% if viz %}<script src="{{ '/viz.js' | cssBust }}"></script>{% endif %}
 </head>
 <body>
 {%- set alertBanner = collections.notice | activeBanner -%}

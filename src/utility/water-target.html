@@ -3,7 +3,7 @@ layout: base.njk
 permalink: /utility/water-target.html
 title: 每日用水目標訂定
 extraStyles: |
-  :root{--c-target:#1C6B3A;--c-warn:#A8481F;--c-blue:#2B4A6B;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器／notice-box 沿用 global */
   body{font-size:var(--fs-body);}
   .header{padding:var(--sp-40) var(--sp-40) var(--sp-28);border-bottom:2px solid var(--wg11);}
@@ -30,20 +30,20 @@ extraStyles: |
   .query-card .q-title{font-size:var(--fs-text);letter-spacing:var(--ls-label);color:var(--wg9);margin-bottom:var(--sp-16);}
   .q-row{display:flex;gap:var(--sp-20);align-items:center;flex-wrap:wrap;}
   .q-row label{display:flex;align-items:center;gap:var(--sp-8);font-size:var(--fs-body);cursor:pointer;}
-  .q-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--c-target);}
+  .q-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--viz-green);}
   .q-row input[type=number]{font-family:inherit;font-size:var(--fs-body);font-weight:500;color:var(--wg41);background:var(--wg1);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);width:88px;outline:none;}
   .q-result{margin-left:auto;background:var(--dp-bg);border:1px solid var(--dp-line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-20);font-size:var(--fs-text);color:var(--wg9);}
-  .q-result strong{color:var(--c-target);font-size:var(--fs-heading);font-weight:700;margin-left:var(--sp-8);}
+  .q-result strong{color:var(--viz-green);font-size:var(--fs-heading);font-weight:700;margin-left:var(--sp-8);}
   /* 對照表 */
   .rule-table{width:100%;border-collapse:collapse;font-size:var(--fs-text);margin:var(--sp-16) 0 var(--sp-8);}
   .rule-table th{background:var(--wg41);color:var(--wg1);padding:var(--sp-8) var(--sp-16);text-align:left;font-weight:500;font-size:var(--fs-text);letter-spacing:var(--ls-text);}
   .rule-table td{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--line);background:var(--white);font-variant-numeric:tabular-nums;}
   .rule-table tr:last-child td{border-bottom:none;}
   .rule-table .num{text-align:right;font-weight:700;}
-  .ok-box{background:var(--dp-bg);border-left:3px solid var(--c-target);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
-  .ok-box strong{color:var(--c-target);}
-  .warn-box{background:var(--warn-bg);border-left:3px solid var(--c-warn);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
-  .warn-box strong{color:var(--c-warn);}
+  .ok-box{background:var(--dp-bg);border-left:3px solid var(--viz-green);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
+  .ok-box strong{color:var(--viz-green);}
+  .warn-box{background:var(--warn-bg);border-left:3px solid var(--viz-alert);border-radius:var(--radius);padding:var(--sp-16) var(--sp-20);font-size:var(--fs-text);line-height:var(--lh-text);margin:var(--sp-20) 0;}
+  .warn-box strong{color:var(--viz-alert);}
   .footer{padding-top:var(--sp-20);margin-top:var(--sp-48);font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);line-height:var(--lh-loose);gap:var(--sp-8);}
 ---
 <div class="header">
@@ -79,7 +79,7 @@ extraStyles: |
   </table>
 
   <div class="sl" data-num="03">讓雨量決定澆不澆</div>
-  <p>台北年雨量逾 2,000 mm，植栽大量靠天吃飯。澆灌分鐘數由「每日澆水預告」規則引擎自動產生（氣象署 CODiS 雨量＋預報：雨後跳過、連日少雨必澆、高溫加時），<strong>只補老天沒下的部分</strong>。依 2022–2026 年實際雨量回測，這套規則一年約澆 <strong>120–190 天</strong>（平均約 160 天，實際因預報跳過會更少）——換句話說，<strong>一年有超過半數的日子由老天代勞</strong>。每日公告將水表讀數對上當日上限——<span style="color:var(--c-target);font-weight:700">≤上限＝用水正常</span>；<span style="color:var(--c-warn);font-weight:700">＞上限＝當天查原因</span>（未登記的清潔或澆灌、設備異常）。</p>
+  <p>台北年雨量逾 2,000 mm，植栽大量靠天吃飯。澆灌分鐘數由「每日澆水預告」規則引擎自動產生（氣象署 CODiS 雨量＋預報：雨後跳過、連日少雨必澆、高溫加時），<strong>只補老天沒下的部分</strong>。依 2022–2026 年實際雨量回測，這套規則一年約澆 <strong>120–190 天</strong>（平均約 160 天，實際因預報跳過會更少）——換句話說，<strong>一年有超過半數的日子由老天代勞</strong>。每日公告將水表讀數對上當日上限——<span style="color:var(--viz-green);font-weight:700">≤上限＝用水正常</span>；<span style="color:var(--viz-alert);font-weight:700">＞上限＝當天查原因</span>（未登記的清潔或澆灌、設備異常）。</p>
 
   <div class="sl" data-num="04">三個洞見</div>
   <p><strong>一、日常用水很小</strong>——保全與清潔合計不過 0.2–0.5 度／日，不是主角。</p>

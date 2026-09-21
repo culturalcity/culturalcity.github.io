@@ -227,7 +227,7 @@ pdfUrl: 'https://drive.google.com/file/d/1w8uQren_1X1FgDyvxV4m0o4laSdORCg1/view?
 
 <script>
 Chart.unregister(ChartDataLabels);
-const pieLabel={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Noto Sans TC',size:10},boxWidth:10}},datalabels:{color:'#fff',font:{family:'Noto Sans TC',size:10,weight:'600'},formatter:(val,ctx)=>{const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);const pct=(val/total*100);return pct>=4?pct.toFixed(1)+'%':'';},anchor:'center',align:'center',textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)'}}};
+const pieLabel={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Noto Sans TC',size:10},boxWidth:10}},datalabels:{color:VIZ.onFill,font:{family:'Noto Sans TC',size:10,weight:'600'},formatter:(val,ctx)=>{const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);const pct=(val/total*100);return pct>=4?pct.toFixed(1)+'%':'';},anchor:'center',align:'center',textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)'}}};
 function sw(name){
   const names=['overview','mom','bs','summary'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));

@@ -4,7 +4,7 @@ permalink: /directory/index.html
 title: 社區廠商聯絡簿
 eleventyExcludeFromCollections: true
 extraStyles: |
-  :root{--accent:#3C5A4A;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
   body{font-size:var(--fs-body);line-height:var(--lh-text);}
   .header{padding:var(--sp-40) var(--sp-40) var(--sp-32);}
@@ -24,7 +24,7 @@ extraStyles: |
   /* 搜尋框 */
   .search-wrap{position:relative;margin-bottom:var(--sp-32);}
   .search{width:100%;font-family:inherit;font-size:var(--fs-body);color:var(--wg41);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-16) var(--sp-12) var(--sp-40);transition:border-color .18s;}
-  .search:focus{outline:none;border-color:var(--accent);}
+  .search:focus{outline:none;border-color:var(--sec-vendor);}
   .search-wrap::before{content:'🔍';position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:var(--fs-text);opacity:.5;}
   .no-result{display:none;text-align:center;color:var(--wg9);font-size:var(--fs-text);padding:var(--sp-32) 0;}
   /* 分類 */
@@ -45,17 +45,17 @@ extraStyles: |
   .v-name{font-size:var(--fs-text);color:var(--wg9);margin-top:var(--sp-4);}
   .v-window{font-size:var(--fs-text);color:var(--wg11);margin-top:var(--sp-4);}
   .v-window .lbl{color:var(--wg9);}
-  .v-brand{display:inline-block;font-size:var(--fs-caption);letter-spacing:var(--ls-text);color:var(--accent);border:1px solid var(--dp-line);background:var(--dp-bg);border-radius:1px;padding:0 var(--sp-8);margin-left:var(--sp-8);vertical-align:1px;}
+  .v-brand{display:inline-block;font-size:var(--fs-caption);letter-spacing:var(--ls-text);color:var(--sec-vendor);border:1px solid var(--dp-line);background:var(--dp-bg);border-radius:1px;padding:0 var(--sp-8);margin-left:var(--sp-8);vertical-align:1px;}
   /* 右側：公司市話 + 窗口手機（堆疊）*/
   .v-contacts{display:flex;flex-direction:column;align-items:flex-end;gap:var(--sp-8);flex-shrink:0;}
-  .v-phone{white-space:nowrap;font-size:var(--fs-body);letter-spacing:var(--ls-text);color:var(--accent);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:var(--sp-8);}
+  .v-phone{white-space:nowrap;font-size:var(--fs-body);letter-spacing:var(--ls-text);color:var(--sec-vendor);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:var(--sp-8);}
   .v-phone::before{content:'📞';font-size:var(--fs-text);}
   .v-phone:hover{text-decoration:underline;}
   .v-phone.tbd{color:var(--wg9);font-weight:400;}
   .v-phone.tbd::before{content:'—';}
   .v-mob{white-space:nowrap;font-size:var(--fs-text);letter-spacing:var(--ls-text);color:var(--wg11);text-decoration:none;display:inline-flex;align-items:center;gap:var(--sp-8);}
   .v-mob::before{content:'📱';font-size:var(--fs-text);}
-  .v-mob:hover{text-decoration:underline;color:var(--accent);}
+  .v-mob:hover{text-decoration:underline;color:var(--sec-vendor);}
   @media(max-width:480px){.v-contacts{align-items:flex-start;width:100%;}}
   .footer{padding-top:var(--sp-20);margin-top:var(--sp-8);font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);line-height:var(--lh-loose);gap:var(--sp-8);}
   @media(max-width:480px){.v-card{gap:var(--sp-8) var(--sp-16);}.v-main{min-width:140px;}}

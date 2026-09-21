@@ -12,6 +12,7 @@ eleventyExcludeFromCollections: true
 <link rel="stylesheet" href="{{ '/global.css' | cssBust }}">
 
 <title>閱大安・長期財務模型</title>
+<script src="/viz.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>
 <style>
@@ -729,7 +730,7 @@ function renderOverview(){
     if(r.assets<0){ _broken=true; return 0; }
     return r.assets;
   });
-  const bgColors = cf.map(r=>r.assets<0?'rgba(140,31,31,0.7)':r.assets<safetyVal?'rgba(140,90,0,0.65)':'rgba(43,74,107,0.65)');
+  const bgColors = cf.map(r=>r.assets<0?VIZ.alpha(VIZ.token('--dn'),0.7):r.assets<safetyVal?VIZ.alpha(VIZ.token('--warn'),0.65):VIZ.alpha(VIZ.token('--blue'),0.65));
   charts['chart-assets']=new Chart(document.getElementById('chart-assets'),{
     type:'bar',
     data:{
@@ -737,14 +738,14 @@ function renderOverview(){
       datasets:[
         {label:'期末資產',data:dataClipped,backgroundColor:bgColors,borderWidth:0,order:2},
         {type:'line',label:`安全警戒線 ${gp('p-safety')}萬`,data:cf.map(()=>safetyVal),
-          borderColor:'rgba(140,31,31,0.6)',borderDash:[5,3],borderWidth:1.5,
+          borderColor:VIZ.alpha(VIZ.token('--dn'),0.6),borderDash:[5,3],borderWidth:1.5,
           backgroundColor:'transparent',pointRadius:0,order:1},
       ]
     },
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
       scales:{
-        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:'rgba(60,56,53,0.06)'}},
+        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
         x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
       }
     }
@@ -755,14 +756,14 @@ function renderOverview(){
   charts['chart-annual']=new Chart(document.getElementById('chart-annual'),{
     type:'bar',
     data:{labels:cf.map(r=>r.year),datasets:[
-      {label:'收入',data:cf.map(r=>r.income+r.interest),backgroundColor:'rgba(31,92,56,0.55)',stack:'a'},
-      {label:'營運支出',data:cf.map(r=>-r.opex),backgroundColor:'rgba(140,31,31,0.5)',stack:'b'},
-      {label:'資本支出',data:cf.map(r=>-r.capex),backgroundColor:'rgba(140,90,0,0.55)',stack:'b'},
+      {label:'收入',data:cf.map(r=>r.income+r.interest),backgroundColor:VIZ.alpha(VIZ.token('--dp'),0.55),stack:'a'},
+      {label:'營運支出',data:cf.map(r=>-r.opex),backgroundColor:VIZ.alpha(VIZ.token('--dn'),0.5),stack:'b'},
+      {label:'資本支出',data:cf.map(r=>-r.capex),backgroundColor:VIZ.alpha(VIZ.token('--warn'),0.55),stack:'b'},
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
       scales:{
-        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:'rgba(60,56,53,0.06)'}},
+        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
         x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
       }
     }
@@ -774,13 +775,13 @@ function renderOverview(){
     type:'bar',
     data:{labels:cf.map(r=>r.year),datasets:[{
       label:'資本支出',data:cf.map(r=>r.capex),
-      backgroundColor:cf.map(r=>r.capex>2000000?'rgba(140,31,31,0.75)':r.capex>500000?'rgba(140,90,0,0.65)':'rgba(105,100,96,0.55)'),
+      backgroundColor:cf.map(r=>r.capex>2000000?VIZ.alpha(VIZ.token('--dn'),0.75):r.capex>500000?VIZ.alpha(VIZ.token('--warn'),0.65):VIZ.alpha(VIZ.token('--wg11'),0.55)),
       borderWidth:0
     }]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false}},
       scales:{
-        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:'rgba(60,56,53,0.06)'}},
+        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
         x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
       }
     }
@@ -1053,14 +1054,14 @@ function renderStress(){
   });
   const cf_base=getCF();
   const colors=[
-    'rgba(140,31,31,0.65)',  // 150 紅—現況早 fail
-    'rgba(140,31,31,0.40)',  // 200 淡紅
-    'rgba(140,90,0,0.55)',   // 250 橘
-    'rgba(140,90,0,0.40)',   // 300 淡橘
-    'rgba(60,56,53,0.55)',   // 350 灰
-    'rgba(60,56,53,0.85)',   // 400 深灰—borderline 剛好踩進
-    'rgba(31,92,56,0.90)',   // 410 深綠—一價到底最低值
-    'rgba(31,92,56,0.40)',   // 500 淡綠—over-fund 對照
+    VIZ.alpha(VIZ.token('--dn'),0.65),  // 150 紅—現況早 fail
+    VIZ.alpha(VIZ.token('--dn'),0.40),  // 200 淡紅
+    VIZ.alpha(VIZ.token('--warn'),0.55),   // 250 橘
+    VIZ.alpha(VIZ.token('--warn'),0.40),   // 300 淡橘
+    VIZ.alpha(VIZ.token('--wg41'),0.55),   // 350 灰
+    VIZ.alpha(VIZ.token('--wg41'),0.85),   // 400 深灰—borderline 剛好踩進
+    VIZ.alpha(VIZ.token('--dp'),0.90),   // 410 深綠—一價到底最低值
+    VIZ.alpha(VIZ.token('--dp'),0.40),   // 500 淡綠—over-fund 對照
   ];
   const datasets=testRates.map((rate,i)=>{
     const cf=calcCashflow(rate);
@@ -1075,14 +1076,14 @@ function renderStress(){
     return {
       label:labelText,
       data:dataClipped,
-      borderColor:colors[i]||'rgba(60,56,53,0.5)',
+      borderColor:colors[i]||VIZ.alpha(VIZ.token('--wg41'),0.5),
       backgroundColor:'transparent',borderWidth:1,pointRadius:0,tension:0.2,
       borderDash:[3,2],
       spanGaps:false
     };
   });
   // Add geometric scenarios
-  const geoColors=['rgba(31,92,56,0.9)'];
+  const geoColors=[VIZ.alpha(VIZ.token('--dp'),0.9)];
   geoScenarios.forEach((gs,i)=>{
     const cf_geo = calcCashflowFromSchedule(gs.sched);
     datasets.push({
@@ -1095,7 +1096,7 @@ function renderStress(){
   datasets.push({
     label:`警戒線${gp('p-safety')}萬`,
     data:cf_base.map(()=>safety),
-    borderColor:'rgba(140,31,31,0.5)',borderDash:[5,3],borderWidth:1,
+    borderColor:VIZ.alpha(VIZ.token('--dn'),0.5),borderDash:[5,3],borderWidth:1,
     backgroundColor:'transparent',pointRadius:0
   });
   charts['stress-chart']=new Chart(document.getElementById('stress-chart'),{
@@ -1104,7 +1105,7 @@ function renderStress(){
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
       scales:{
-        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:'rgba(60,56,53,0.06)'}},
+        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
         x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
       }
     }

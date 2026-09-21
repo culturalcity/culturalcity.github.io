@@ -4,10 +4,7 @@ permalink: /search.html
 title: 全站搜尋
 eleventyExcludeFromCollections: true
 extraStyles: |
-  :root{
-    --c-notice:#6B3A1F;--c-minutes:#3C3835;--c-finance:#2B4A6B;
-    --c-regulation:#1F5C38;--c-guide:#8C5A00;--c-other:#5F5A55;
-  }
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header／main 容器沿用 global */
   body{font-size:var(--fs-body);line-height:var(--lh-text);}
   .header h1{letter-spacing:var(--ls-label);color:var(--wg1);margin-bottom:var(--sp-4);}
@@ -34,20 +31,20 @@ extraStyles: |
   .r:first-child{border-radius:var(--radius) var(--radius) 0 0;}
   .r:last-child{border-radius:0 0 var(--radius) var(--radius);}
   .r:hover{background:var(--tint);}
-  .r.t-notice{border-left-color:var(--c-notice);}
-  .r.t-minutes{border-left-color:var(--c-minutes);}
-  .r.t-finance{border-left-color:var(--c-finance);}
-  .r.t-regulation{border-left-color:var(--c-regulation);}
-  .r.t-guide,.r.t-directory,.r.t-evacuation,.r.t-utility,.r.t-net-zero,.r.t-transport{border-left-color:var(--c-guide);}
+  .r.t-notice{border-left-color:var(--sec-notice);}
+  .r.t-minutes{border-left-color:var(--sec-minutes);}
+  .r.t-finance{border-left-color:var(--sec-finance);}
+  .r.t-regulation{border-left-color:var(--sec-regulation);}
+  .r.t-guide,.r.t-directory,.r.t-evacuation,.r.t-utility,.r.t-net-zero,.r.t-transport{border-left-color:var(--sec-guide);}
   .r-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-12);margin-bottom:var(--sp-8);flex-wrap:wrap;}
   .r-title{font-size:var(--fs-body);font-weight:500;color:var(--wg41);flex:1;min-width:0;}
   .r-meta{font-size:var(--fs-caption);color:var(--wg9);white-space:nowrap;display:flex;gap:var(--sp-12);align-items:center;}
   .r-type{font-size:var(--fs-caption);letter-spacing:var(--ls-text);padding:1px var(--sp-8);border-radius:2px;border:1px solid;}
-  .r-type.t-notice{color:var(--c-notice);border-color:var(--line-strong);background:var(--tint);}
-  .r-type.t-minutes{color:var(--c-minutes);border-color:var(--line-strong);background:var(--tint);}
-  .r-type.t-finance{color:var(--c-finance);border-color:var(--blue-line);background:var(--blue-bg);}
-  .r-type.t-regulation{color:var(--c-regulation);border-color:var(--dp-line);background:var(--dp-bg);}
-  .r-type.t-guide,.r-type.t-directory,.r-type.t-evacuation,.r-type.t-utility,.r-type.t-net-zero,.r-type.t-transport{color:var(--c-guide);border-color:var(--warn-line);background:var(--warn-bg);}
+  .r-type.t-notice{color:var(--sec-notice);border-color:var(--line-strong);background:var(--tint);}
+  .r-type.t-minutes{color:var(--sec-minutes);border-color:var(--line-strong);background:var(--tint);}
+  .r-type.t-finance{color:var(--sec-finance);border-color:var(--blue-line);background:var(--blue-bg);}
+  .r-type.t-regulation{color:var(--sec-regulation);border-color:var(--dp-line);background:var(--dp-bg);}
+  .r-type.t-guide,.r-type.t-directory,.r-type.t-evacuation,.r-type.t-utility,.r-type.t-net-zero,.r-type.t-transport{color:var(--sec-guide);border-color:var(--warn-line);background:var(--warn-bg);}
   .r-snippet{font-size:var(--fs-text);color:var(--wg11);line-height:var(--lh-text);}
   .r-snippet mark{background:var(--line);color:var(--wg41);padding:0 2px;border-radius:1px;font-weight:500;}
   .empty{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-32) var(--sp-20);text-align:center;color:var(--wg9);font-size:var(--fs-text);line-height:var(--lh-text);}

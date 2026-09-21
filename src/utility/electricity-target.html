@@ -1,11 +1,12 @@
 ---
 layout: base.njk
+viz: true
 permalink: /utility/electricity-target.html
 title: 每日用電目標速查表
 extraHead: |
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 extraStyles: |
-  :root{--c-target:#1C6B3A;--c-warn:#A8481F;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器／notice-box 沿用 global */
   body{font-size:var(--fs-body);}
   .header{padding:var(--sp-40) var(--sp-40) var(--sp-28);border-bottom:2px solid var(--wg11);}
@@ -57,11 +58,11 @@ extraStyles: |
   tbody tr.highlight{background:var(--warn-bg);}
   tbody td{font-size:var(--fs-text);padding:var(--sp-12) var(--sp-16);text-align:right;color:var(--wg11);}
   tbody td:first-child{text-align:center;font-weight:500;color:var(--wg41);}
-  .badge{font-size:var(--fs-caption);background:var(--dp-bg);color:var(--c-target);border-radius:2px;padding:1px var(--sp-4);margin-left:var(--sp-4);letter-spacing:var(--ls-text);}
-  .badge.rec{background:var(--tint-dark-strong);color:var(--c-warn);}
+  .badge{font-size:var(--fs-caption);background:var(--dp-bg);color:var(--viz-green);border-radius:2px;padding:1px var(--sp-4);margin-left:var(--sp-4);letter-spacing:var(--ls-text);}
+  .badge.rec{background:var(--tint-dark-strong);color:var(--viz-alert);}
   .t-pred{color:var(--wg11);}
-  .t-warn{font-weight:500;color:var(--c-warn);}
-  .t-warn.ok{color:var(--c-target);}
+  .t-warn{font-weight:500;color:var(--viz-alert);}
+  .t-warn.ok{color:var(--viz-green);}
   .footer{padding-top:var(--sp-20);margin-top:var(--sp-40);font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);gap:var(--sp-8);}
 ---
 <div class="header">
@@ -104,8 +105,8 @@ extraStyles: |
       <div class="legend">
         <span class="li"><span class="dot-n"></span>非夏季</span>
         <span class="li"><span class="dot-s"></span>夏季（6–9月）</span>
-        <span class="li"><span style="display:inline-block;width:22px;border-top:2px solid var(--c-target);"></span>目標值</span>
-        <span class="li"><span style="display:inline-block;width:22px;border-top:2px dashed var(--c-warn);"></span>警戒線（×1.1）</span>
+        <span class="li"><span style="display:inline-block;width:22px;border-top:2px solid var(--viz-green);"></span>目標值</span>
+        <span class="li"><span style="display:inline-block;width:22px;border-top:2px dashed var(--viz-alert);"></span>警戒線（×1.1）</span>
       </div>
       <div class="chart-wrap">
         <canvas id="chart" role="img" aria-label="用電目標折線與散佈圖"></canvas>
@@ -167,14 +168,14 @@ const floorPlugin = {
     if (!ca) return;
     const x = scales.x.getPixelForValue(16.6);
     ctx.save();
-    ctx.strokeStyle = 'rgba(60,56,53,0.3)';
+    ctx.strokeStyle = VIZ.token('--line-strong');
     ctx.lineWidth = 1.5;
     ctx.setLineDash([4,3]);
     ctx.beginPath();
     ctx.moveTo(x, ca.top);
     ctx.lineTo(x, ca.bottom);
     ctx.stroke();
-    ctx.fillStyle = 'rgba(60,56,53,0.6)';
+    ctx.fillStyle = VIZ.axis;
     ctx.font = '11px sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText('基線 ↔ 回歸  16.6°C', x + 4, ca.top + 14);
@@ -185,10 +186,10 @@ const floorPlugin = {
 new Chart(document.getElementById('chart'), {
   type:'scatter',
   data:{datasets:[
-    {label:'非夏季',data:normal,backgroundColor:'rgba(24,95,165,0.28)',pointRadius:3,pointHoverRadius:5},
-    {label:'夏季',data:summer,backgroundColor:'rgba(196,90,48,0.38)',pointRadius:3,pointHoverRadius:5},
-    {label:'回歸目標值',data:targetLine,type:'line',borderColor:'#1C6B3A',borderWidth:2,pointRadius:0,fill:false,tension:0,showLine:true},
-    {label:'警戒線（×1.1）',data:warnLine,type:'line',borderColor:'#C45A30',borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false,tension:0,showLine:true},
+    {label:'非夏季',data:normal,backgroundColor:VIZ.alpha(VIZ.blue,0.28),pointRadius:3,pointHoverRadius:5},
+    {label:'夏季',data:summer,backgroundColor:VIZ.alpha(VIZ.orange,0.38),pointRadius:3,pointHoverRadius:5},
+    {label:'回歸目標值',data:targetLine,type:'line',borderColor:VIZ.green,borderWidth:2,pointRadius:0,fill:false,tension:0,showLine:true},
+    {label:'警戒線（×1.1）',data:warnLine,type:'line',borderColor:VIZ.alert,borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false,tension:0,showLine:true},
   ]},
   plugins:[floorPlugin],
   options:{
@@ -205,13 +206,13 @@ new Chart(document.getElementById('chart'), {
     },
     scales:{
       x:{min:9,max:39,
-        title:{display:true,text:'當日最高氣溫（°C）',color:'#898480',font:{size:13}},
-        ticks:{color:'#898480',callback:v=>v+'°C',font:{size:13}},
-        grid:{color:'rgba(0,0,0,0.05)'}},
+        title:{display:true,text:'當日最高氣溫（°C）',color:VIZ.axis,font:{size:13}},
+        ticks:{color:VIZ.axis,callback:v=>v+'°C',font:{size:13}},
+        grid:{color:VIZ.token('--line-soft')}},
       y:{min:150,max:450,
-        title:{display:true,text:'大公電用電度數',color:'#898480',font:{size:13}},
-        ticks:{color:'#898480',callback:v=>v+' 度',font:{size:13}},
-        grid:{color:'rgba(0,0,0,0.05)'}}
+        title:{display:true,text:'大公電用電度數',color:VIZ.axis,font:{size:13}},
+        ticks:{color:VIZ.axis,callback:v=>v+' 度',font:{size:13}},
+        grid:{color:VIZ.token('--line-soft')}}
     }
   }
 });

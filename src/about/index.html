@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+viz: true
 permalink: /about/index.html
 title: 社區身世
 extraHead: |
@@ -64,7 +65,7 @@ extraScripts: |
       '空照 1980': t1980,
       '現代地圖': modern
     }, null, { collapsed:false }).addTo(map);
-    L.circleMarker([lat,lon], { radius:8, color:'#8C1F1F', weight:2, fillColor:'#8C1F1F', fillOpacity:0.55 })
+    L.circleMarker([lat,lon], { radius:8, color:VIZ.token('--dn'), weight:2, fillColor:VIZ.token('--dn'), fillOpacity:0.55 })
       .addTo(map).bindPopup('閱大安・今日位置');
   })();
 ---

@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+viz: true
 permalink: /utility/index.html
 title: 公共事業
 extraHead: |
@@ -519,7 +520,7 @@ function renderDaily(canvasId, innerId, rows, key, grain, color, unit) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#3C3835',
+          backgroundColor: VIZ.ink,
           titleFont: { family: FONT, size: 12, weight: '500' },
           bodyFont: { family: FONT, size: 13 },
           padding: 10,
@@ -587,12 +588,12 @@ function freezeYAxis(canvasId, innerId) {
 
 function initDailyElec() {
   if (!DAILY_ELEC.length) return;
-  renderDaily('daily-elec-chart', 'daily-elec-inner', DAILY_ELEC, 'k', GRAIN_ELEC, 'rgba(43,74,107,0.85)', '度');
+  renderDaily('daily-elec-chart', 'daily-elec-inner', DAILY_ELEC, 'k', GRAIN_ELEC, VIZ.alpha(VIZ.token('--blue'),0.85), '度');
 }
 
 function initDailyWater() {
   if (!DAILY_WATER.length) return;
-  renderDaily('daily-water-chart', 'daily-water-inner', DAILY_WATER, 'w', GRAIN_WATER, 'rgba(43,74,107,0.85)', '度');
+  renderDaily('daily-water-chart', 'daily-water-inner', DAILY_WATER, 'w', GRAIN_WATER, VIZ.alpha(VIZ.token('--blue'),0.85), '度');
 }
 
 
@@ -866,8 +867,8 @@ function initTelecom(){
     type:'bar',
     data:{labels:TELECOM_LABELS,
       datasets:[
-        {label:'市話 (02) 2367-7065', data:latestYear.phone, backgroundColor:'rgba(105,100,96,0.75)', borderColor:'rgba(105,100,96,0.75)', borderWidth:1, stack:'s1'},
-        {label:'行動 0989-648-285', data:latestYear.mobile, backgroundColor:'rgba(43,74,107,0.85)', borderColor:'rgba(43,74,107,0.85)', borderWidth:1, stack:'s1'}
+        {label:'市話 (02) 2367-7065', data:latestYear.phone, backgroundColor:VIZ.alpha(VIZ.token('--wg11'),0.75), borderColor:VIZ.alpha(VIZ.token('--wg11'),0.75), borderWidth:1, stack:'s1'},
+        {label:'行動 0989-648-285', data:latestYear.mobile, backgroundColor:VIZ.alpha(VIZ.token('--blue'),0.85), borderColor:VIZ.alpha(VIZ.token('--blue'),0.85), borderWidth:1, stack:'s1'}
       ]},
     options:{...opts(), scales:{x:{stacked:true,ticks:{font:{family:FONT,size:10}}},y:{stacked:true,ticks:{font:{family:FONT,size:10}}}}}
   });

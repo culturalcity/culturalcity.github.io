@@ -4,7 +4,7 @@ permalink: /minutes/index.html
 title: 會議紀錄
 eleventyExcludeFromCollections: true
 extraStyles: |
-  :root{--orange:#6B3A1F;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／body／header 織紋／main 容器沿用 global */
   body{font-size:var(--fs-body);line-height:var(--lh-text);}
   /* ── HEADER ── */
@@ -54,29 +54,29 @@ extraStyles: |
   .mc:last-child{border-radius:0 0 var(--radius) var(--radius);}
   .mc:hover{background:var(--tint);border-color:var(--line-strong);z-index:1;}
   .mc-stripe{width:3px;flex-shrink:0;background:var(--blue);}
-  .mc-stripe.orange{background:var(--orange);}
+  .mc-stripe.orange{background:var(--sec-notice);}
   .mc-body{flex:1;padding:var(--sp-12) var(--sp-16);display:flex;align-items:center;gap:var(--sp-16);flex-wrap:wrap;}
   .mc-seq{font-size:var(--fs-heading);font-weight:700;color:var(--blue);min-width:32px;letter-spacing:var(--ls-text);flex-shrink:0;}
-  .mc-seq.orange{color:var(--orange);}
+  .mc-seq.orange{color:var(--sec-notice);}
   .mc-info{flex:1;}
   .mc-title{font-size:var(--fs-body);font-weight:500;color:var(--wg41);margin-bottom:2px;}
   .mc-date{font-size:var(--fs-text);color:var(--wg9);}
   .mc-badge{font-size:var(--fs-caption);padding:2px var(--sp-8);border:1px solid var(--blue-line);border-radius:1px;color:var(--blue);background:var(--blue-bg);white-space:nowrap;}
-  .mc-badge.orange{border-color:var(--line-strong);color:var(--orange);background:var(--tint);}
+  .mc-badge.orange{border-color:var(--line-strong);color:var(--sec-notice);background:var(--tint);}
   .mc-arrow{padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
   .mc:hover .mc-arrow{transform:translateX(3px);}
   /* 區權人會議用較大的序號排版 */
   .agm-list{display:flex;flex-direction:column;gap:var(--sp-12);margin-bottom:var(--sp-8);}
   .agm{display:flex;align-items:stretch;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--wg41);transition:all .18s;overflow:hidden;border-radius:var(--radius);}
   .agm:hover{background:var(--tint);border-color:var(--line-strong);}
-  .agm-stripe{width:3px;flex-shrink:0;background:var(--orange);}
+  .agm-stripe{width:3px;flex-shrink:0;background:var(--sec-notice);}
   .agm-body{flex:1;padding:var(--sp-16) var(--sp-20);display:flex;align-items:center;gap:var(--sp-20);flex-wrap:wrap;}
-  .agm-term{font-size:var(--fs-title);font-weight:700;color:var(--orange);min-width:36px;letter-spacing:var(--ls-text);flex-shrink:0;line-height:var(--lh-solid);}
+  .agm-term{font-size:var(--fs-title);font-weight:700;color:var(--sec-notice);min-width:36px;letter-spacing:var(--ls-text);flex-shrink:0;line-height:var(--lh-solid);}
   .agm-info{flex:1;}
   .agm-title{font-size:var(--fs-body);font-weight:700;color:var(--wg41);margin-bottom:var(--sp-4);}
   .agm-meta{font-size:var(--fs-text);color:var(--wg9);line-height:var(--lh-text);}
   .agm-badges{display:flex;gap:var(--sp-8);flex-wrap:wrap;margin-top:var(--sp-8);}
-  .agm-badge{font-size:var(--fs-caption);padding:2px var(--sp-8);border:1px solid var(--line-strong);border-radius:1px;color:var(--orange);background:var(--tint);white-space:nowrap;}
+  .agm-badge{font-size:var(--fs-caption);padding:2px var(--sp-8);border:1px solid var(--line-strong);border-radius:1px;color:var(--sec-notice);background:var(--tint);white-space:nowrap;}
   .agm-arrow{padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
   .agm:hover .agm-arrow{transform:translateX(3px);}
   /* ── PLACEHOLDER ── */

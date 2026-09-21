@@ -5,6 +5,10 @@
 //                 顏色／行高／字距／間距 → 擋建置（2026-09-19 審閱後由警示改為阻擋）。真有例外，在該宣告後
 //                 緊接註解 /* design-ok: 理由 */ 即放行（理由必寫，對應 SHARED-CORE「超過要寫理由」）；
 //                 並列出 global.css 色票中 ΔE<3（肉眼分不出）的近似色對。
+//   jsColors()    建置前：圖表 JS（<script> 與站內 *.js）裡的色碼字面值 → 擋建置（2026-09-21 新增）。
+//                 圖表色一律用 viz.js 的 VIZ.*／VIZ.token() 讀 global.css 色盤：色碼寫在 JS 就等於色盤有兩份，
+//                 改色只改一邊就會走鐘——用電目標頁的警戒線圖例是 #A8481F、線卻畫成 #C45A30，正是這樣來的。
+//                 允許的值：global.css :root 定義過的任何色、純中性（#fff／#000／transparent），或寫 design-ok 理由。
 //   checkOutput() 建置後：逐頁把「頁面本身＋它連結的站內 CSS」合起來看，
 //                 用了 var(--x)（無 fallback）卻整頁都沒定義 → 擋建置。
 //                 （2026-09 實例：年報的 --amber、公告列表的 --c-staff 從未定義，標記點與 pill 靜默失色。）
@@ -13,6 +17,9 @@
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const EXEMPT = /agm-5-1-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
+// 圖表色檢查的額外豁免：財務月報是「一頁一個月、發布後就凍結」的存檔，各月圖表色寫在當月頁內，
+// 且由 culturalcity-finance-monthly skill 產生（範本在本 repo 外）。等該 skill 改成輸出 VIZ.* 後可拿掉這條。
+const EXEMPT_JS_COLOR = /[\\/]finance[\\/]\d{4}-(\d{2}|annual)\.html$|[\\/]finance[\\/]fy\d-annual\.html$/;
 
 function walk(dir, re, acc = []) {
   if (!fs.existsSync(dir)) return acc;
@@ -76,6 +83,37 @@ function warnSource() {
   return [...new Set(warns)];
 }
 
+// ── 圖表 JS 裡的色碼字面值（2026-09-21）──
+const norm = c => c.toLowerCase().replace(/\s+/g, '');
+function paletteValues() {
+  const g = fs.readFileSync(path.join(ROOT, 'global.css'), 'utf8');
+  const vals = new Set(['#fff', '#ffffff', '#000', '#000000', 'transparent', 'currentcolor', 'none']);
+  for (const m of g.matchAll(/--[\w-]+\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/g)) {
+    vals.add(norm(m[1]));
+    const h = /^#([0-9a-fA-F]{6})$/.exec(m[1]);               // #RRGGBB 的 rgb()／rgba() 等值也算（VIZ.alpha 產出的形狀）
+    if (h) { const n = parseInt(h[1], 16); vals.add(`rgb(${n >> 16 & 255},${n >> 8 & 255},${n & 255})`); }
+  }
+  return vals;
+}
+function jsColors() {
+  const bad = [], pal = paletteValues();
+  for (const f of sourceFiles()) {
+    if (EXEMPT_JS_COLOR.test(f)) continue;
+    const rel = path.relative(ROOT, f), text = fs.readFileSync(f, 'utf8');
+    const blocks = f.endsWith('.js') ? [text]
+      : [...text.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+    for (const b of blocks) {
+      // 例外註解寫在同一行、色碼之後即可（中間允許 ; , ) } 等收尾符號）
+      for (const m of b.matchAll(/(['"`])(#[0-9a-fA-F]{3,8}|rgba?\([\d.,\s]*\))\1[^\S\n]*[;,)\]}]*[^\S\n]*(\/[/*]\s*design-ok:[^\n*]*)?/g)) {
+        if (m[3]) continue;                                    // 寫了理由
+        const v = norm(m[2]);
+        if (!pal.has(v) && !pal.has(v.replace(/,1\)$/, ')'))) bad.push(`${rel}  圖表色寫死 ${m[2]} → 用 VIZ.*／VIZ.token()（色盤在 global.css）`);
+      }
+    }
+  }
+  return [...new Set(bad)];
+}
+
 // ── 近似色（CIELAB ΔE76，只比 global.css 不透明色票）──
 function lab(hex) {
   const h = hex.replace('#', ''); const c = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255)
@@ -131,12 +169,14 @@ function checkOutput(outDir = path.join(ROOT, '_site')) {
   return bad;
 }
 
-module.exports = { warnSource, nearColors, checkOutput };
+module.exports = { warnSource, nearColors, checkOutput, jsColors };
 
 if (require.main === module) {
-  const w = warnSource(), n = nearColors(), b = checkOutput(process.argv[2]);
+  const w = warnSource(), j = jsColors(), n = nearColors(), b = checkOutput(process.argv[2]);
   console.log(`設計表：寫死值 ${w.length} 處${w.length ? '\n  ' + w.slice(0, 40).join('\n  ') : ''}`);
   if (w.length) process.exitCode = 1;
+  console.log(`圖表 JS 色碼：${j.length} 處${j.length ? '\n  ' + j.slice(0, 40).join('\n  ') : ''}`);
+  if (j.length) process.exitCode = 1;
   console.log(`近似色（ΔE<3）：${n.length} 對${n.length ? '\n  ' + n.join('\n  ') : ''}`);
   if (b.length) { console.error(`未定義變數：${b.length} 頁\n  ` + b.join('\n  ')); process.exit(1); }
   console.log('未定義變數：無');

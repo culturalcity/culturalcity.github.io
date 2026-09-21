@@ -4,7 +4,7 @@ permalink: /evacuation/index.html
 title: 緊急避難圖
 trilingual: true
 extraStyles: |
-  :root{--exit:#1C6B3A;--fire:#8C1F1F;}
+  
   /* 以下僅列與 global.css 不同的覆寫（2026-08 收斂）：色票／header 織紋／main 容器／lang-block 顯示機制與日文字型沿用 global */
   body{font-family:'Noto Sans TC','Noto Sans JP','Microsoft JhengHei',sans-serif;font-size:var(--fs-body);}
   .header{padding:var(--sp-40) var(--sp-40) var(--sp-28);}
@@ -20,15 +20,15 @@ extraStyles: |
   .main{padding-top:var(--sp-32);}
   @media(max-width:600px){.header{padding:var(--sp-28) var(--sp-20) var(--sp-24);}.lang-bar{padding:0 var(--sp-20);}.main{padding:var(--sp-24) var(--sp-16) var(--sp-48);}}
   /* 說明 */
-  .notice-box{border-left:3px solid var(--exit);margin-bottom:var(--sp-24);}
+  .notice-box{border-left:3px solid var(--viz-green);margin-bottom:var(--sp-24);}
   /* 文字圖例 */
   .legend{display:flex;flex-wrap:wrap;gap:var(--sp-8) var(--sp-20);margin-bottom:var(--sp-24);font-size:var(--fs-text);color:var(--wg11);}
   .legend .li{display:flex;align-items:center;gap:var(--sp-8);}
   .legend .sw{width:22px;height:0;border-top-width:3px;border-top-style:solid;display:inline-block;}
-  .legend .sw.exit{border-color:var(--exit);}
-  .legend .sw.dir{border-color:var(--exit);border-top-style:dashed;}
+  .legend .sw.exit{border-color:var(--viz-green);}
+  .legend .sw.dir{border-color:var(--viz-green);border-top-style:dashed;}
   .legend .dot{width:11px;height:11px;border-radius:2px;display:inline-block;}
-  .legend .dot.fire{background:var(--fire);}
+  .legend .dot.fire{background:var(--dn);}
   .legend .dot.you{background:var(--viz-yellow);border-radius:50%;}
   /* 樓層面板 */
   .panel-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin-bottom:var(--sp-12);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);}

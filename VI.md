@@ -25,13 +25,29 @@
 | | `--line-dark` | wg1 20% | 深底上的線 |
 | 狀態 | `--dp`、`--dn`、`--warn`、`--blue` | 綠／紅／琥珀／藍 | 各一組 `-bg`（6%）、`-line`（25%）、`-on-dark`（深底用淺色版） |
 | 公告類別 | `--c-meeting` `--c-work` `--c-equip` `--c-safety` `--c-rule` `--c-event` `--c-staff` | | 公告 pill、列表篩選共用（安全類棕、設備類紅，刻意區分） |
-| 資料視覺化 | `--viz-blue` `--viz-orange` `--viz-gray` `--viz-line` `--viz-yellow` | | 圖表與圖例；不佔文字／背景額度。**Chart.js 的線色寫在 JS 裡，改色要兩邊一起改** |
+| 資料視覺化 | `--viz-blue` `--viz-orange` `--viz-green` `--viz-alert` `--viz-gold`(`-bg`) `--viz-gray` `--viz-line` `--viz-yellow` | | 圖表與圖例；不佔文字／背景額度。**JS 一律用 `VIZ.*` 讀本組，不自己寫色碼**（見下節） |
+| 網站分區色 | `--sec-notice` `--sec-minutes` `--sec-finance` `--sec-regulation` `--sec-guide` `--sec-other` `--sec-vendor` | | 首頁模組卡與時間軸、搜尋結果、列表頁的區塊強調。2026-09-21 由 7 頁的 18 處自行宣告收回；只有公告棕 `#6B3A1F`（會議紀錄列表的 AGM 強調共用）與通訊錄墨綠 `#3C5A4A` 是新值，其餘引用既有色 |
 | 其他 | `--alert-bg`／`--alert-ink` | 黃 #FFD33D／黑 | 緊急橫條（國際慣例黃黑，刻意不走 wg） |
 | | `--overlay` | | 全螢幕燈箱遮罩 |
 
 **對比規則（WCAG AA ≥ 4.5:1）**：次要灰字依**底色明暗**二擇一——淺底用 `--wg9`、深底用 `--wg7`；深底上的狀態色一律用 `-on-dark` 版（原本 `#D08585` 在深底只有 4.1:1，已換掉）。`--wg9` 2026-06 由 `#898480` 調深至 `#5F5A55` 才過 AA，連半透明深色卡片（notice-box，疊後約 #e1ded8）上也達標。
 
-獨立頁面與工具**不要 redeclare** 上述變數，缺顏色就在 global.css 設計表補一個有名字的變數。2026-09-19 已把各頁重宣告（finance.css 的 `--ink／--paper／--red…` 別名、minutes.css 與各頁的 `--warn／--blue`、公告兩處不一致的類別色）全部收回 global。
+獨立頁面與工具**不要 redeclare** 上述變數，缺顏色就在 global.css 設計表補一個有名字的變數。2026-09-19 已把各頁重宣告（finance.css 的 `--ink／--paper／--red…` 別名、minutes.css 與各頁的 `--warn／--blue`、公告兩處不一致的類別色）全部收回 global；2026-09-21 再收回首頁、搜尋、會議紀錄列表、通訊錄、避難、用電與用水目標 7 頁的 18 處，頁內色 token 宣告歸零。
+
+### 圖表色：JS 用 `VIZ.*`，不寫色碼
+
+`viz.js` 開頭以 `getComputedStyle` 把資料視覺化色盤讀成 `VIZ` 物件，圖表頁在 frontmatter 加 `viz: true`（base.njk 會在圖表程式之前同步載入；不走版型的獨立頁自己加 `<script src="/viz.js"></script>`）：
+
+```js
+borderColor: VIZ.green,                       // 目標線
+borderColor: VIZ.alert,                       // 警戒線
+backgroundColor: VIZ.alpha(VIZ.blue, 0.28),   // 同一個色的半透明版
+ticks: { color: VIZ.axis }, grid: { color: VIZ.token('--line-soft') }
+```
+
+**為什麼**：色碼寫在 JS 就等於色盤有兩份，改色只改一邊就會走鐘——用電目標頁的警戒線圖例是 `--c-warn`(#A8481F)、線卻畫成 #C45A30，軸標籤還用著 2026-06 已淘汰、沒過 AA 的 #898480（2026-09-21 一併修）。`scripts/check-design-tokens.js` 的 `jsColors()` 會擋 JS 裡的色碼字面值（含色盤色的自訂透明度版），真有例外在同一行寫 `// design-ok: 理由`。
+
+**兩處已知例外**（寫在守門的 `EXEMPT_JS_COLOR`／此處）：①財務月報存檔頁 `finance/YYYY-MM.html`——一頁一個月、發布後凍結，且由 culturalcity-finance-monthly skill 產生（範本在本 repo 外），等該 skill 改成輸出 `VIZ.*` 再拿掉豁免；②`utility/data/*-chart.json` 的年度系列色是資料檔的一部分，由大公電帳單 skill 產生，不在 CSS 管轄內。
 
 ### 行高・字距・間距
 
