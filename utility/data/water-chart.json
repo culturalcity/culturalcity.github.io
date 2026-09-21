@@ -34,7 +34,6 @@
         114,
         312
       ],
-      "backgroundColor": "rgba(60,56,53,0.5)",
       "usagePeriods": [
         null,
         null,
@@ -62,7 +61,6 @@
         102,
         151
       ],
-      "backgroundColor": "rgba(137,132,128,0.5)",
       "usagePeriods": [
         "10/26-12/23",
         "12/24-03/02",
@@ -90,7 +88,6 @@
         57,
         41
       ],
-      "backgroundColor": "rgba(105,100,96,0.65)",
       "usagePeriods": [
         "10/26-12/22",
         "12/23-02/27",
@@ -118,7 +115,6 @@
         126,
         155
       ],
-      "backgroundColor": "rgba(60,56,53,0.75)",
       "usagePeriods": [
         "10/29-12/24",
         "12/25-03/03",
@@ -146,7 +142,6 @@
         73,
         null
       ],
-      "backgroundColor": "rgba(43,74,107,0.85)",
       "usagePeriods": [
         "10/29-12/24",
         "12/25-03/04",
@@ -156,5 +151,6 @@
         null
       ]
     }
-  ]
+  ],
+  "_comment": "年度系列色不存在本檔：由 src/utility/index.html 的 seriesColor() 從 global.css 資料視覺化色盤指派（2026-09-22）。新增年度只加資料，不要加 backgroundColor。"
 }

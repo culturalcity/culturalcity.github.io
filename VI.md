@@ -47,7 +47,7 @@ ticks: { color: VIZ.axis }, grid: { color: VIZ.token('--line-soft') }
 
 **為什麼**：色碼寫在 JS 就等於色盤有兩份，改色只改一邊就會走鐘——用電目標頁的警戒線圖例是 `--c-warn`(#A8481F)、線卻畫成 #C45A30，軸標籤還用著 2026-06 已淘汰、沒過 AA 的 #898480（2026-09-21 一併修）。`scripts/check-design-tokens.js` 的 `jsColors()` 會擋 JS 裡的色碼字面值（含色盤色的自訂透明度版），真有例外在同一行寫 `// design-ok: 理由`。
 
-**兩處已知例外**（寫在守門的 `EXEMPT_JS_COLOR`／此處）：①財務月報存檔頁 `finance/YYYY-MM.html`——一頁一個月、發布後凍結，且由 culturalcity-finance-monthly skill 產生（範本在本 repo 外），等該 skill 改成輸出 `VIZ.*` 再拿掉豁免；②`utility/data/*-chart.json` 的年度系列色是資料檔的一部分，由大公電帳單 skill 產生，不在 CSS 管轄內。
+**兩處已知例外**（寫在守門的 `EXEMPT_JS_COLOR`／此處）：①財務月報存檔頁 `finance/YYYY-MM.html`——一頁一個月、發布後凍結，且由 culturalcity-finance-monthly skill 產生（範本在本 repo 外），等該 skill 改成輸出 `VIZ.*` 再拿掉豁免。（原本的第二個例外「`utility/data/*-chart.json` 的年度系列色」已於 2026-09-22 取消：資料檔不再存色，改由 `src/utility/index.html` 的 `seriesColor()` 從資料視覺化色盤指派——最新年 `--viz-blue`、往前 `--viz-gray` 遞淺；`scripts/extract-telecom-bills.js` 與大公電帳單 skill 的說明同步改為「只寫資料、不寫色」。順帶汰除資料檔裡 2026-06 已淘汰的舊灰 #898480。）
 
 ### 行高・字距・間距
 

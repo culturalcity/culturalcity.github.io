@@ -85,17 +85,13 @@ async function extractOne(filename) {
     byYear[ad].total[r.month - 1] = r.total;
   });
 
-  const colors = {
-    2025: 'rgba(60,56,53,0.75)',
-    2026: 'rgba(43,74,107,0.85)',
-  };
-
+  // 年度系列色不寫進資料檔（2026-09-22）：由 src/utility/index.html 的 seriesColor() 從
+  // global.css 資料視覺化色盤指派（最新年 --viz-blue、往前 --viz-gray 遞淺），新增年度不必挑色。
   const datasets = Object.keys(byYear).sort().map(year => ({
     label: `${parseInt(year) - 1911}年（${year}）`,
     phone: byYear[year].phone,
     mobile: byYear[year].mobile,
     total: byYear[year].total,
-    backgroundColor: colors[year] || 'rgba(105,100,96,0.65)'
   }));
 
   const out = {

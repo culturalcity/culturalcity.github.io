@@ -411,6 +411,14 @@ extraStyles: |
 <script>
 
 // Chart data loaded from external JSON files
+// 年度系列色：由色盤指派，不存在資料檔裡（2026-09-22；原本每個 dataset 帶 backgroundColor，
+// 其中還有 2026-06 已淘汰、沒過 AA 的舊灰 #898480；且帳單 skill 每年新增一筆就要再挑一次色）。
+// 規則：最新一年用 --viz-blue 強調，往前的年份用 --wg11 由深到淺（色盤的 --viz-gray 太亮，長條在白底上會糊掉）。
+function seriesColor(i, n) {
+  if (i === n - 1) return VIZ.alpha(VIZ.blue, 0.85);
+  const steps = [0.35, 0.5, 0.65, 0.8];                // 由舊到新；超過四筆時最舊的共用 0.35
+  return VIZ.alpha(VIZ.token('--wg11'), steps[Math.max(0, steps.length - (n - 1 - i))] || 0.35);
+}
 let ELEC_PERIOD_LABELS = [], ELEC_DATASETS = [];
 let WATER_PERIOD_LABELS = [], WATER_DATASETS = [];
 let TELECOM_LABELS = [], TELECOM_DATASETS = [], TELECOM_ROWS = [];
@@ -667,13 +675,13 @@ function initElec(){
   charts['elec-fee-chart']=new Chart(document.getElementById('elec-fee-chart'),{
     type:'bar',
     data:{labels:ELEC_PERIOD_LABELS,
-      datasets:ELEC_DATASETS.map(d=>({label:d.label,data:d.data,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+      datasets:ELEC_DATASETS.map((d,i,a)=>({label:d.label,data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts('電費（元）')
   });
   charts['elec-kwh-chart']=new Chart(document.getElementById('elec-kwh-chart'),{
     type:'bar',
     data:{labels:ELEC_PERIOD_LABELS,
-      datasets:ELEC_DATASETS.map(d=>({label:d.label,data:d.kwh,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+      datasets:ELEC_DATASETS.map((d,i,a)=>({label:d.label,data:d.kwh,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts('度數（度）')
   });
   // KPI
@@ -763,13 +771,13 @@ function initWater(){
   charts['water-fee-chart']=new Chart(document.getElementById('water-fee-chart'),{
     type:'bar',
     data:{labels:WATER_PERIOD_LABELS,
-      datasets:WATER_DATASETS.map(d=>({label:d.label,data:d.data,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+      datasets:WATER_DATASETS.map((d,i,a)=>({label:d.label,data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
   charts['water-ton-chart']=new Chart(document.getElementById('water-ton-chart'),{
     type:'bar',
     data:{labels:WATER_PERIOD_LABELS,
-      datasets:WATER_DATASETS.map(d=>({label:d.label,data:d.tonnes,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+      datasets:WATER_DATASETS.map((d,i,a)=>({label:d.label,data:d.tonnes,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
   // KPI
@@ -857,7 +865,7 @@ function initTelecom(){
   charts['telecom-total-chart']=new Chart(document.getElementById('telecom-total-chart'),{
     type:'bar',
     data:{labels:TELECOM_LABELS,
-      datasets:TELECOM_DATASETS.map(d=>({label:d.label,data:d.total,backgroundColor:d.backgroundColor,borderColor:d.backgroundColor,borderWidth:1}))},
+      datasets:TELECOM_DATASETS.map((d,i,a)=>({label:d.label,data:d.total,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
 
