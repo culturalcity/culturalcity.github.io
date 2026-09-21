@@ -1,5 +1,6 @@
 ---
 layout: finance.njk
+viz: true
 permalink: /finance/2026-08.html
 title: 2026年8月 財務月報
 date: 2026-08-31
@@ -486,7 +487,7 @@ const pieLabel={
         return pct>=4?pct.toFixed(1)+'%':'';
       },
       anchor:'center',align:'center',
-      textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)'
+      textShadowBlur:4,textShadowColor:'rgba(0,0,0,0.5)' /* design-ok: 圓餅圖數字標籤的描邊陰影，純黑半透明是可讀性技法、不是主題色 */
     }
   }
 };
@@ -499,7 +500,7 @@ function drawOverview(){
     plugins:[ChartDataLabels],
     data:{labels:['管理費收入','車位清潔費','利息收入','回饋金收入','機車清潔費','充電樁電費收入','充電樁收入','E-tag收入','臨停清潔費收入','影印收入'],
       datasets:[{data:[377419,39200,3132,3000,3000,2489,1650,200,130,124],
-        backgroundColor:['rgba(26,74,107,.85)','rgba(184,134,11,.85)','rgba(100,60,180,.75)','rgba(26,107,60,.6)','rgba(122,118,112,.75)','rgba(192,57,43,.75)','rgba(26,107,60,.85)','rgba(60,120,180,.7)','rgba(180,160,50,.6)','rgba(150,110,80,.6)'],borderWidth:1}]},
+        backgroundColor:[VIZ.alpha(VIZ.navy,0.85),VIZ.alpha(VIZ.gold,0.85),VIZ.alpha(VIZ.purple,0.75),VIZ.alpha(VIZ.green,0.6),VIZ.alpha(VIZ.token('--wg11'),0.75),VIZ.alpha(VIZ.red,0.75),VIZ.alpha(VIZ.green,0.85),VIZ.alpha(VIZ.sky,0.7),VIZ.alpha(VIZ.olive,0.6),VIZ.alpha(VIZ.brown,0.6)],borderWidth:1}]},
     options:pieLabel
   });
   // Pie expense
@@ -509,7 +510,7 @@ function drawOverview(){
     plugins:[ChartDataLabels],
     data:{labels:['保全服務費','管理服務費','維修基金提撥','修繕費','電梯維護費','園藝維護費','雜項支出','機電保養費','公共電費','清潔用品','電信費','機電耗材','手續費','郵電費'],
       datasets:[{data:[189000,126000,60000,13125,12870,7500,6378,4600,3402,2620,1006,891,350,36],
-        backgroundColor:['rgba(192,57,43,.85)','rgba(192,57,43,.7)','rgba(26,74,107,.5)','rgba(150,90,40,.8)','rgba(184,134,11,.8)','rgba(100,160,60,.75)','rgba(180,160,50,.5)','rgba(26,74,107,.7)','rgba(100,60,180,.65)','rgba(200,150,100,.5)','rgba(122,118,112,.65)','rgba(140,100,60,.6)','rgba(150,150,150,.6)','rgba(140,140,60,.55)'],borderWidth:1}]},
+        backgroundColor:[VIZ.alpha(VIZ.red,0.85),VIZ.alpha(VIZ.red,0.7),VIZ.alpha(VIZ.navy,0.5),VIZ.alpha(VIZ.brown,0.8),VIZ.alpha(VIZ.gold,0.8),VIZ.alpha(VIZ.moss,0.75),VIZ.alpha(VIZ.olive,0.5),VIZ.alpha(VIZ.navy,0.7),VIZ.alpha(VIZ.purple,0.65),VIZ.alpha(VIZ.brown,0.5),VIZ.alpha(VIZ.token('--wg11'),0.65),VIZ.alpha(VIZ.brown,0.6),VIZ.alpha(VIZ.token('--wg11'),0.6),VIZ.alpha(VIZ.olive,0.55)],borderWidth:1}]},
     options:pieLabel
   });
   // 3-period bar
@@ -518,9 +519,9 @@ function drawOverview(){
     type:'bar',
     data:{labels:['2025/08 同期','2026/07 上月','2026/08 本月'],
       datasets:[
-        {label:'收入',data:[432052,427269,430344],backgroundColor:['rgba(26,74,107,.5)','rgba(26,74,107,.5)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
-        {label:'支出',data:[498565,461765,427778],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
-        {label:'盈虧',data:[-66513,-34496,2566],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(26,107,60,.85)'],borderColor:'rgba(122,118,112,1)',borderWidth:1}
+        {label:'收入',data:[432052,427269,430344],backgroundColor:[VIZ.alpha(VIZ.navy,0.5),VIZ.alpha(VIZ.navy,0.5),VIZ.alpha(VIZ.navy,0.8)],borderColor:VIZ.alpha(VIZ.navy,1),borderWidth:1},
+        {label:'支出',data:[498565,461765,427778],backgroundColor:[VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.red,0.7)],borderColor:VIZ.alpha(VIZ.red,1),borderWidth:1},
+        {label:'盈虧',data:[-66513,-34496,2566],backgroundColor:[VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.green,0.85)],borderColor:VIZ.alpha(VIZ.token('--wg11'),1),borderWidth:1}
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
       scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
@@ -543,8 +544,8 @@ function drawMoM(){
     type:'bar',
     data:{labels:['修繕費','機電耗材','垃圾清運費','雜項支出','公共電費','支出合計','盈虧'],
       datasets:[
-        {label:'2026/07',data:[29965,14592,10500,2088,2479,461765,-34496],backgroundColor:'rgba(122,118,112,.4)',borderColor:'rgba(122,118,112,.8)',borderWidth:1},
-        {label:'2026/08',data:[13125,891,0,6378,3402,427778,2566],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+        {label:'2026/07',data:[29965,14592,10500,2088,2479,461765,-34496],backgroundColor:VIZ.alpha(VIZ.token('--wg11'),0.4),borderColor:VIZ.alpha(VIZ.token('--wg11'),0.8),borderWidth:1},
+        {label:'2026/08',data:[13125,891,0,6378,3402,427778,2566],backgroundColor:VIZ.alpha(VIZ.navy,0.7),borderColor:VIZ.alpha(VIZ.navy,1),borderWidth:1}
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
       scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
@@ -557,8 +558,8 @@ function drawYoY(){
     type:'bar',
     data:{labels:['管理服務費','垃圾清運費','社區維護','修繕費','公共電費','支出合計','盈虧'],
       datasets:[
-        {label:'2025/08',data:[116000,9450,42000,41299,6077,498565,-66513],backgroundColor:'rgba(184,134,11,.45)',borderColor:'rgba(184,134,11,.8)',borderWidth:1},
-        {label:'2026/08',data:[126000,0,0,13125,3402,427778,2566],backgroundColor:'rgba(26,74,107,.7)',borderColor:'rgba(26,74,107,1)',borderWidth:1}
+        {label:'2025/08',data:[116000,9450,42000,41299,6077,498565,-66513],backgroundColor:VIZ.alpha(VIZ.gold,0.45),borderColor:VIZ.alpha(VIZ.gold,0.8),borderWidth:1},
+        {label:'2026/08',data:[126000,0,0,13125,3402,427778,2566],backgroundColor:VIZ.alpha(VIZ.navy,0.7),borderColor:VIZ.alpha(VIZ.navy,1),borderWidth:1}
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},
       scales:{y:{ticks:{font:{family:FONT,size:10},callback:tickCb}}}}
@@ -571,8 +572,8 @@ function drawBS(){
     type:'bar',
     data:{labels:['2025/08 同期','2026/07 上月','2026/08 本月'],
       datasets:[
-        {label:'資產總計',data:[5878274,6491066,6518110],backgroundColor:['rgba(26,74,107,.4)','rgba(26,74,107,.4)','rgba(26,74,107,.8)'],borderColor:'rgba(26,74,107,1)',borderWidth:1},
-        {label:'流動負債',data:[378525,323790,288268],backgroundColor:['rgba(192,57,43,.4)','rgba(192,57,43,.4)','rgba(192,57,43,.7)'],borderColor:'rgba(192,57,43,1)',borderWidth:1},
+        {label:'資產總計',data:[5878274,6491066,6518110],backgroundColor:[VIZ.alpha(VIZ.navy,0.4),VIZ.alpha(VIZ.navy,0.4),VIZ.alpha(VIZ.navy,0.8)],borderColor:VIZ.alpha(VIZ.navy,1),borderWidth:1},
+        {label:'流動負債',data:[378525,323790,288268],backgroundColor:[VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.red,0.4),VIZ.alpha(VIZ.red,0.7)],borderColor:VIZ.alpha(VIZ.red,1),borderWidth:1},
         {type:'line',label:'業主權益',data:[5499749,6167276,6229842],borderColor:VIZ.gold,backgroundColor:'transparent',tension:.3,pointRadius:5}
       ]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:FONT,size:11}}}},

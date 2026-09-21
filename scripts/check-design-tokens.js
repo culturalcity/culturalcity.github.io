@@ -17,9 +17,11 @@
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const EXEMPT = /agm-5-1-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
-// 圖表色檢查的額外豁免：財務月報是「一頁一個月、發布後就凍結」的存檔，各月圖表色寫在當月頁內，
-// 且由 culturalcity-finance-monthly skill 產生（範本在本 repo 外）。等該 skill 改成輸出 VIZ.* 後可拿掉這條。
-const EXEMPT_JS_COLOR = /[\\/]finance[\\/]\d{4}-(\d{2}|annual)\.html$|[\\/]finance[\\/]fy\d-annual\.html$/;
+// 圖表色檢查的額外豁免：**2026-07 以前**的財務月報與年報是已發布凍結的存檔，圖表色寫在當月頁內，
+// 重寫它們只會讓存檔與當初發布的樣子不一致，故永久豁免。
+// 2026-08 起的月報已改用 VIZ.cat()／VIZ.*（分類色盤在 global.css），不在豁免內——月報是「複製上個月」
+// 產生的，所以新月份會自然沿用 token；skill 的 SKILL.md 也已註明不要複製色碼。
+const EXEMPT_JS_COLOR = /[\\/]finance[\\/](2025-\d{2}|2026-0[1-7]|\d{4}-annual|fy\d-annual)\.html$/;
 
 function walk(dir, re, acc = []) {
   if (!fs.existsSync(dir)) return acc;

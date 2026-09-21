@@ -33,6 +33,11 @@
   --viz-green: #1C6B3A;   /* 目標線／逃生出口綠：比 --dp 亮（ΔE 10），圖表與標示上才跳得出來；卡片底 6.0:1 可當文字色 */
   --viz-alert: #A8481F;   /* 警戒線與其圖例文字：--viz-orange 只有 3.98:1 僅能當填色，要寫字用本色（5.3:1） */
   --viz-gold: #B8860B; --viz-gold-bg: rgba(184,134,11,.12);  /* 財報月報的累積趨勢線 */
+  /* 財報月報圓餅／長條的分類色盤（收支科目十餘項，需要可區分的色相；屬資料視覺化，不佔文字／背景額度）。
+     色相依序取：navy 收入、red 支出、gold、green、purple、brown、olive、sky、moss、gray。
+     月報頁一律用 VIZ.cat(i, alpha)／VIZ.navy 等，不再各自寫 rgba（2026-09-22 收斂，原本每頁自帶 16 組色碼）。 */
+  --viz-navy: #1A4A6B; --viz-red: #C0392B; --viz-purple: #643CB4; --viz-brown: #965A28;
+  --viz-olive: #B4A032; --viz-sky: #3C78B4; --viz-moss: #64A03C;
   /* ── 網站分區色（首頁模組卡與時間軸、搜尋結果、各列表頁的區塊強調）。只有棕與墨綠是新值，其餘引用既有色 ── */
   --sec-notice: #6B3A1F;   /* 棕：公告；會議紀錄列表的區權人會議（AGM）強調亦用此棕 */
   --sec-vendor: #3C5A4A;   /* 墨綠：廠商通訊錄 */

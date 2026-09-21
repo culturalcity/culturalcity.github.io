@@ -13,6 +13,8 @@
     blue: '--viz-blue', blueSoft: '--viz-blue-soft', orange: '--viz-orange',
     green: '--viz-green', alert: '--viz-alert', gold: '--viz-gold', goldBg: '--viz-gold-bg',
     gray: '--viz-gray', yellow: '--viz-yellow',
+    navy: '--viz-navy', red: '--viz-red', purple: '--viz-purple', brown: '--viz-brown',
+    olive: '--viz-olive', sky: '--viz-sky', moss: '--viz-moss',
     line: '--viz-line',      // 格線
     axis: '--wg9',           // 軸標籤與軸標題（淺底次要文字，過 AA）
     ink: '--wg41', onFill: '--white'
@@ -32,6 +34,12 @@
     }
     m = /^rgba?\(([^)]+)\)$/.exec(color);          // 來源本身已是 rgba：換掉 alpha
     return m ? 'rgba(' + m[1].split(',').slice(0, 3).join(',') + ',' + a + ')' : color;
+  };
+  // 分類色盤（財報月報圓餅／長條）：VIZ.cat(i, alpha) 依序取色，超過長度就循環
+  VIZ.CAT = ['navy', 'red', 'gold', 'green', 'purple', 'brown', 'olive', 'sky', 'moss', 'gray'];
+  VIZ.cat = function (i, a) {
+    var c = VIZ[VIZ.CAT[i % VIZ.CAT.length]];
+    return a == null ? c : VIZ.alpha(c, a);
   };
   w.VIZ = VIZ;
 })(window, document);
