@@ -23,9 +23,6 @@ extraStyles: |
   .ul-clean li{padding:var(--sp-8) 0 var(--sp-8) var(--sp-20);border-bottom:1px solid var(--line);font-size:var(--fs-body);color:var(--wg41);line-height:var(--lh-text);position:relative;}
   .ul-clean li::before{content:'·';position:absolute;left:0;color:var(--wg9);font-weight:700;}
   .ul-clean li:last-child{border-bottom:none;}
-  /* 手機：notice.css 對 .main table 統一放開 nowrap／width（2026-09-19 稽核，防英文撐破），
-     第一欄因此窄到逐字斷行。只補 min-width 下限（含 border-box 的左右 padding，否則內容寬不足兩字），不動 width／white-space。 */
-  @media (max-width:600px){.rule-table td:first-child{min-width:calc(2em + var(--sp-16) * 2 + 8px);}}
 summary: 9/24(四)09:00–17:00・B4F 消防機房內裝設不鏽鋼角鐵，將連續壁滲水導至既有落水頭・車輛停放與進出不受影響
 ---
 <div class="lang-block active" data-lang="zh">

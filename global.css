@@ -125,6 +125,14 @@ body {
    跨過 840 斷點又跳回 760（內容寬跳 80px、左右邊界各移 40px）。帶內把 max-width 放寬 80px，內容寬才連續。 */
 @media (max-width: 840px) { .main { padding-left: var(--sp-40); padding-right: var(--sp-40); max-width: calc(var(--page-max-width) + 80px); } }
 @media (max-width: 600px) { .main { padding: var(--sp-28) var(--sp-20) var(--sp-48); } }
+/* 手機表格的標籤欄下限（2026-09-22）：表格 auto layout 會把窄的第一欄壓到只剩一個字寬，
+   "日期" 變成「日／期」。實測受害：財報年報（修繕費／保險費，欄寬 48px）、社區規約（版本，49px）、
+   公告的施工資訊表。只設 min-width 下限，不動 width／white-space——英文長標籤仍可換行，
+   不會像舊的 nowrap 寫法撐破手機（那正是 notice.css 2026-09-19 放開它的原因）。
+   box-sizing 是 border-box，故下限須含左右 padding；2em 保證兩字單行，四字標籤退為 2+2 行可接受。 */
+@media (max-width: 600px) {
+  .main table:not(.maint-table) td:first-child { min-width: calc(2em + var(--sp-16) * 2 + 8px); }
+}
 .header-eyebrow { font-size:var(--fs-text); letter-spacing: var(--ls-caps); color: var(--wg7); margin-bottom: var(--sp-12); }
 .header h1 { font-size: var(--fs-title); font-weight: 700; letter-spacing: var(--ls-label); color: var(--white); margin-bottom: var(--sp-8); line-height: var(--lh-tight); }
 .header-sub { font-size:var(--fs-text); color: var(--wg7); letter-spacing: var(--ls-caps); }
