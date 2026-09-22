@@ -96,6 +96,7 @@
 | 中文 | English | 日本語 |
 |---|---|---|
 | 消防安全設備 | Fire Safety Equipment | 消防設備 |
+| 消防機房（＝消防泵浦室，同一空間兩種稱呼） | Fire Pump Room | 消防ポンプ室 |
 | 火警自動警報設備 | Automatic Fire Alarm Devices | 火災自動警報設備 |
 | 預檢 / 事前點檢 | Pre-Inspection | 事前点検 |
 | 緊急照明 | Emergency Lighting | 非常用照明 |
@@ -216,6 +217,10 @@
 | 承重牆 | Load-Bearing Wall | 耐力壁 |
 | 連續壁（地下室擋土結構牆） | Diaphragm Wall | 連続壁 |
 | 複壁（連續壁室內側裝飾牆，牆後有排水溝） | Double Wall | 二重壁 |
+| 導水角鐵（不鏽鋼角鐵；亦作角鋼） | Stainless Steel Angle Drainage Channel | ステンレス製アングル導水溝 |
+| 落水頭 | Floor Drain | 排水口 |
+| 粉刷層 | Plaster Layer | モルタル層 |
+| 剔除（打除表層） | Removal / Chipping Off | はつり |
 | 建築法 | Building Act | 建築法 |
 | 建築法第 77-2 條 | Article 77-2 of the Building Act | 建築法第77-2条 |
 | 建築法第 95-1 條 | Article 95-1 of the Building Act | 建築法第95-1条 |
@@ -343,3 +348,17 @@
 兩版、工程通知日文有「工事・修繕通知」(14)／「工事のお知らせ」(3)、設備保養英文有 Maintenance (54)／
 Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonical。同步狀態：① repo canonical、
 ② Notion、③ Obsidian 皆已同步（2026-08-27）。
+
+**2026-09-22 修訂（9/24 地下室兩則工程公告）**：新增——消防機房（**Fire Pump Room**／**消防ポンプ室**，主委定案）、導水角鐵／不鏽鋼角鐵
+（**Stainless Steel Angle Drainage Channel**／**ステンレス製アングル導水溝**，主委定案；日文「導水溝」與上方複壁條目
+的排水溝語境呼應）、落水頭（Floor Drain／排水口）、粉刷層（Plaster Layer／モルタル層）、剔除（Removal / Chipping Off／はつり）。
+**用語判準**：「角鐵」與「角鋼」指同一種 L 形斷面型材（angle／angle iron／steel angle）。「角鐵」沿自 angle iron
+（19 世紀鍛鐵時代的名稱），「角鋼」是 CNS 現行正名。本案**採購文件全程作「角鐵」**——信盛工程 115/7/20 報價單品名為
+「**5*5CM L形不鏽鋼角鐵安裝（以矽利康固定）**」13 米，信創營造徐處長現勘時亦稱角鐵（5-1）；**僅會議紀錄 5-2 撰寫時
+正名為「不鏽鋼角鋼導水槽」**。對外文件從採購文件用語「角鐵」，以利與請款、驗收憑證對帳；會議紀錄歷史用語不回改。
+**空間名稱判準**：「消防機房」與「消防泵浦室」是**同一空間**的兩種稱呼，社區內長期並存——議案標題用泵浦室
+（4-11、5-1、5-2、5-3 四次一致），報價單、財報科目、pm-wiki、工作日誌用機房（4-11 同一份紀錄兩者都出現）。
+**對住戶公告從採購與財務文件用語「消防機房」**（主委定案），英日譯仍取 Fire Pump Room／消防ポンプ室（描述功能最準）；
+會議紀錄歷史用語不回改。
+**「壁癌」不入表**：主委定案避開該詞，公告改寫症狀「受潮、粉刷層劣化剝落」，三語照症狀直譯，住戶較易理解。
+同步狀態：① repo canonical ✅、② Notion（待同步）、③ Obsidian（待同步）。
