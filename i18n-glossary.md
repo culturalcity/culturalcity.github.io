@@ -29,6 +29,8 @@
 | 女兒牆 | Parapet | パラペット |
 | 陽台 | Balcony | バルコニー |
 | 露臺 | Terrace | テラス |
+| 羅斯福路側／81巷側（建物前後立面） | Roosevelt Road side / Lane 81 side | 羅斯福路側／81巷側 |
+| 往公館側／往古亭側（建物兩端立面） | Gongguan side / Guting side | 公館側／古亭側 |
 | 窗台 / 窗邊 | Windowsill | 窓際 |
 
 ## B. 公共空間與設施
@@ -191,6 +193,7 @@
 | 綠石園藝 | Emerald Co. | 綠石園芸 |
 | 信創營造 | Trust Creating Co. | 信創建設 |
 | 信盛工程（2026-08 B4F 複壁修繕施工方） | Trust Same Construction | 信盛工程 |
+| 世新事業（2026-11 外牆清洗施工方） | New World | 世新事業 |
 | 新美齊（物業/清潔） | Jean Property Management Co. | 新美齊 |
 | 潤泰維護（現任物業） | Ruentex Maintenance | 潤泰維護 |
 | 敦寶建設（建設公司；首屆副主委、2025 外牆修繕施工方） | Dunbao Construction | 敦寶建設 |
@@ -218,9 +221,12 @@
 | 連續壁（地下室擋土結構牆） | Diaphragm Wall | 連続壁 |
 | 複壁（連續壁室內側裝飾牆，牆後有排水溝） | Double Wall | 二重壁 |
 | 導水角鐵（不鏽鋼角鐵；亦作角鋼） | Stainless Steel Angle Drainage Channel | ステンレス製アングル導水溝 |
-| 落水頭 | Floor Drain | 排水口 |
+| 落水頭 / 陽台地漏 | Floor Drain | 排水口 |
 | 粉刷層 | Plaster Layer | モルタル層 |
 | 剔除（打除表層） | Removal / Chipping Off | はつり |
+| 外牆清洗 | Exterior Wall Cleaning | 外壁清掃 |
+| 格柵（外牆立面） | Facade Louvers | ルーバー |
+| 高空繩索作業（俗稱蜘蛛人） | Rope Access Work at Height | ロープアクセスによる高所作業 |
 | 建築法 | Building Act | 建築法 |
 | 建築法第 77-2 條 | Article 77-2 of the Building Act | 建築法第77-2条 |
 | 建築法第 95-1 條 | Article 95-1 of the Building Act | 建築法第95-1条 |
@@ -362,3 +368,5 @@ Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonic
 會議紀錄歷史用語不回改。
 **「壁癌」不入表**：主委定案避開該詞，公告改寫症狀「受潮、粉刷層劣化剝落」，三語照症狀直譯，住戶較易理解。
 同步狀態：① repo canonical、② Notion、③ Obsidian 皆已同步（2026-09-22）。
+
+**2026-09-24 修訂（11 月外牆清洗工程公告）**：新增——世新事業（**New World**，主委定案；官網 newworld.com.tw，日文保留漢字 世新事業）、外牆清洗（Exterior Wall Cleaning／外壁清掃）、格柵（**Facade Louvers**／**ルーバー**，主委定案）、高空繩索作業（Rope Access Work at Height／ロープアクセスによる高所作業）、立面方位詞 羅斯福路側／81巷側／往公館側／往古亭側（**Roosevelt Road side／Lane 81 side／Gongguan side／Guting side**，主委定案；日文去「往」字）。「陽台地漏」併入既有「落水頭」條（同為 Floor Drain／排水口）。同步狀態：① repo canonical、② Notion、③ Obsidian 皆已同步（2026-09-24）。
