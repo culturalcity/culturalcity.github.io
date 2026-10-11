@@ -290,7 +290,7 @@ extraStyles: |
       <div class="util-section-hd">公水帳單歷史</div>
 
     <div class="notice-box">
-      📌 公水帳單約每兩個月發出一次，計費期間請以「使用期間」為準。115年（2026年）第一期用水量較去年同期大幅增加，主因為當時澆灌系統的運轉時間；2026/04 起澆灌改為依雨量排程後已大幅回落。
+      📌 公水帳單約每兩個月發出一次，計費期間請以「使用期間」為準。2026年第一期用水量較去年同期大幅增加，主因為當時澆灌系統的運轉時間；2026/04 起澆灌改為依雨量排程後已大幅回落。
     </div>
 
     <div class="bill-section">
@@ -424,6 +424,9 @@ function seriesColor(i, n) {
 }
 let ELEC_PERIOD_LABELS = [], ELEC_DATASETS = [];
 let WATER_PERIOD_LABELS = [], WATER_DATASETS = [];
+// 帳單資料的年度標籤是民國（"115年（2026）"，帳單管線原樣寫入），顯示一律轉西元 "2026年"
+const adYear = label => { const m = String(label).match(/（(\d{4})）/); return m ? m[1] + '年' : label; };
+const lastAdYear = dsets => dsets.length ? adYear(dsets[dsets.length-1].label) : '';
 let TELECOM_LABELS = [], TELECOM_DATASETS = [], TELECOM_ROWS = [];
 let DAILY_ELEC = [], DAILY_WATER = [];
 let GRAIN_ELEC = 'day', GRAIN_WATER = 'day';
@@ -678,13 +681,13 @@ function initElec(){
   charts['elec-fee-chart']=new Chart(document.getElementById('elec-fee-chart'),{
     type:'bar',
     data:{labels:ELEC_PERIOD_LABELS,
-      datasets:ELEC_DATASETS.map((d,i,a)=>({label:d.label,data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
+      datasets:ELEC_DATASETS.map((d,i,a)=>({label:adYear(d.label),data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts('電費（元）')
   });
   charts['elec-kwh-chart']=new Chart(document.getElementById('elec-kwh-chart'),{
     type:'bar',
     data:{labels:ELEC_PERIOD_LABELS,
-      datasets:ELEC_DATASETS.map((d,i,a)=>({label:d.label,data:d.kwh,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
+      datasets:ELEC_DATASETS.map((d,i,a)=>({label:adYear(d.label),data:d.kwh,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts('度數（度）')
   });
   // KPI
@@ -692,8 +695,8 @@ function initElec(){
   document.getElementById('elec-kpi').innerHTML =
     kpiHtml('最新帳單電費', k.lastFee, k.feeDiff, '元', true) +
     kpiHtml('最新帳單度數', k.lastKwh, k.kwhDiff, '度', true) +
-    kpiHtml('115年截至同期累計電費', k.totalFee, k.totalFeeDiff, '元', true) +
-    kpiHtml('115年截至同期累計度數', k.totalKwh, k.totalKwhDiff, '度', true);
+    kpiHtml(lastAdYear(ELEC_DATASETS) + '截至同期累計電費', k.totalFee, k.totalFeeDiff, '元', true) +
+    kpiHtml(lastAdYear(ELEC_DATASETS) + '截至同期累計度數', k.totalKwh, k.totalKwhDiff, '度', true);
   buildElecTable();
 }
 
@@ -714,7 +717,7 @@ function buildElecTable(){
   let html = '';
   for (let i = dsets.length - 1; i >= 0; i--) {          // 年份新→舊
     const ds = dsets[i], prev = dsets[i-1] || null;
-    const yearCell = ds.label.replace('年（', '（');      // "115年（2026）" → "115（2026）"
+    const yearCell = adYear(ds.label);                   // "115年（2026）" → "2026年"
     for (let s = ELEC_PERIOD_LABELS.length - 1; s >= 0; s--) {  // 帳期新→舊
       if (ds.kwh[s] == null && ds.data[s] == null) continue;    // 無資料的帳期不出列
       const period = (ds.usagePeriods || [])[s] || '—';
@@ -774,13 +777,13 @@ function initWater(){
   charts['water-fee-chart']=new Chart(document.getElementById('water-fee-chart'),{
     type:'bar',
     data:{labels:WATER_PERIOD_LABELS,
-      datasets:WATER_DATASETS.map((d,i,a)=>({label:d.label,data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
+      datasets:WATER_DATASETS.map((d,i,a)=>({label:adYear(d.label),data:d.data,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
   charts['water-ton-chart']=new Chart(document.getElementById('water-ton-chart'),{
     type:'bar',
     data:{labels:WATER_PERIOD_LABELS,
-      datasets:WATER_DATASETS.map((d,i,a)=>({label:d.label,data:d.tonnes,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
+      datasets:WATER_DATASETS.map((d,i,a)=>({label:adYear(d.label),data:d.tonnes,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
   // KPI
@@ -788,8 +791,8 @@ function initWater(){
   document.getElementById('water-kpi').innerHTML =
     kpiHtml('最新帳單水費', k.lastFee, k.feeDiff, '元', true) +
     kpiHtml('最新帳單用水量', k.lastTon, k.tonDiff, '度', true) +
-    kpiHtml('115年截至同期累計水費', k.totalFee, k.totalFeeDiff, '元', true) +
-    kpiHtml('115年截至同期累計用水量', k.totalTon, k.totalTonDiff, '度', true);
+    kpiHtml(lastAdYear(WATER_DATASETS) + '截至同期累計水費', k.totalFee, k.totalFeeDiff, '元', true) +
+    kpiHtml(lastAdYear(WATER_DATASETS) + '截至同期累計用水量', k.totalTon, k.totalTonDiff, '度', true);
   buildWaterTable();
 }
 
@@ -810,7 +813,7 @@ function buildWaterTable(){
   let html = '';
   for (let i = dsets.length - 1; i >= 0; i--) {          // 年份新→舊
     const ds = dsets[i], prev = dsets[i-1] || null;
-    const yearCell = ds.label.replace('年（', '（');      // "115年（2026）" → "115（2026）"
+    const yearCell = adYear(ds.label);                   // "115年（2026）" → "2026年"
     for (let s = WATER_PERIOD_LABELS.length - 1; s >= 0; s--) {  // 帳期新→舊
       if (ds.tonnes[s] == null && ds.data[s] == null) continue;  // 無資料的帳期不出列
       const period = (ds.usagePeriods || [])[s] || '—';
@@ -833,15 +836,16 @@ function latestTelecomKpi(){
   if (!rows.length) return null;
   const latest = rows[rows.length-1];
   const prev = rows.length >= 2 ? rows[rows.length-2] : null;
-  // 115 年累計
-  const ytdRows = rows.filter(r => r.rocYearMonth.startsWith('115/'));
+  // 最新帳單所屬年度累計（由資料推算，不寫死年份）
+  const curY = parseInt(latest.rocYearMonth, 10);
+  const ytdRows = rows.filter(r => parseInt(r.rocYearMonth, 10) === curY);
   const ytdTotal = ytdRows.reduce((a,r)=>a+(r.total||0),0);
   const ytdMobile = ytdRows.reduce((a,r)=>a+(r.mobile||0),0);
   const ytdPhone = ytdRows.reduce((a,r)=>a+(r.phone||0),0);
-  // 截至同期累計同比：114 年同月或更早的 row 加總
+  // 截至同期累計同比：前一年同月或更早的 row 加總
   const maxMonth = ytdRows.reduce((m,r) => Math.max(m, parseInt(r.rocYearMonth.split('/')[1])), 0);
   const prevYtdRows = rows.filter(r =>
-    r.rocYearMonth.startsWith('114/') && parseInt(r.rocYearMonth.split('/')[1]) <= maxMonth
+    parseInt(r.rocYearMonth, 10) === curY - 1 && parseInt(r.rocYearMonth.split('/')[1]) <= maxMonth
   );
   const prevYtdTotal = prevYtdRows.reduce((a,r)=>a+(r.total||0),0);
   return {
@@ -868,7 +872,7 @@ function initTelecom(){
   charts['telecom-total-chart']=new Chart(document.getElementById('telecom-total-chart'),{
     type:'bar',
     data:{labels:TELECOM_LABELS,
-      datasets:TELECOM_DATASETS.map((d,i,a)=>({label:d.label,data:d.total,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
+      datasets:TELECOM_DATASETS.map((d,i,a)=>({label:adYear(d.label),data:d.total,backgroundColor:seriesColor(i,a.length),borderColor:seriesColor(i,a.length),borderWidth:1}))},
     options:opts()
   });
 
@@ -891,18 +895,18 @@ function initTelecom(){
       kpiHtml('最新帳單合計', k.latest.total, k.totalDiff, '元', true, '環比') +
       kpiHtml('最新帳單市話', k.latest.phone, null, '元', true) +
       kpiHtml('最新帳單行動', k.latest.mobile, k.mobileDiff, '元', true, '環比') +
-      kpiHtml('115 年截至同期累計', k.ytdTotal, k.ytdTotalDiff, '元 ／ '+k.ytdMonths+' 個月', true);
+      kpiHtml((parseInt(k.latest.rocYearMonth, 10) + 1911) + '年截至同期累計', k.ytdTotal, k.ytdTotalDiff, '元 ／ '+k.ytdMonths+' 個月', true);
   }
 
   // 表格
   const tbody = document.getElementById('telecom-tbody');
   const fmt = v => (v == null ? '—' : v.toLocaleString());
   tbody.innerHTML = TELECOM_ROWS.slice().reverse().map(r => {
-    const cls = r.rocYearMonth.startsWith('115/') ? ' class="latest"' : '';
-    // rocYearMonth "115/05" 拆成 年度「115（2026）」＋帳期「5月」，與電力/自來水表格式統一
+    const cls = parseInt(r.rocYearMonth, 10) === parseInt(TELECOM_ROWS[TELECOM_ROWS.length-1].rocYearMonth, 10) ? ' class="latest"' : '';
+    // rocYearMonth "115/05" 拆成 年度「2026年」＋帳期「5月」，與電力/自來水表格式統一
     const [ry, rm] = r.rocYearMonth.split('/');
     return `<tr${cls}>
-      <td>${ry}（${parseInt(ry, 10) + 1911}）</td>
+      <td>${parseInt(ry, 10) + 1911}年</td>
       <td>${parseInt(rm, 10)}月</td>
       <td>${r.period || '—'}</td>
       <td>${fmt(r.phone)}</td>
