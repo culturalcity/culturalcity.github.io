@@ -17,11 +17,11 @@
 //   checkOutput() 建置後：逐頁把「頁面本身＋它連結的站內 CSS」合起來看，
 //                 用了 var(--x)（無 fallback）卻整頁都沒定義 → 擋建置。
 //                 （2026-09 實例：年報的 --amber、公告列表的 --c-staff 從未定義，標記點與 pill 靜默失色。）
-// 豁免：AGM 簡報 deck（vw 單位另案）、admin/utility 水電公告產生器（卡片設計凍結值）、images/。
+// 豁免：簡報 deck（檔名以 -deck.html 結尾，vw/cqw 單位另案）、admin/utility 水電公告產生器（卡片設計凍結值）、images/。
 // 單獨執行：node scripts/check-design-tokens.js [建置輸出資料夾，預設 _site]
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-const EXEMPT = /agm-5-1-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
+const EXEMPT = /-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
 // 圖表色檢查的額外豁免：**2026-07 以前**的財務月報與年報是已發布凍結的存檔，圖表色寫在當月頁內，
 // 重寫它們只會讓存檔與當初發布的樣子不一致，故永久豁免。
 // 2026-08 起的月報已改用 VIZ.cat()／VIZ.*（分類色盤在 global.css），不在豁免內——月報是「複製上個月」

@@ -307,6 +307,12 @@
 | 中文 | English | 日本語 |
 |---|---|---|
 | 邁向 2050 淨零排放 | Reaching net-zero emissions by 2050 | 2050年のネットゼロ達成 |
+| 臺北市氣候行動獎 | Taipei City Climate Action Award | 台北市気候アクション賞 |
+| 淨零新生活績優獎 | Net-Zero Green Living Merit Award | ネットゼロ新生活優秀賞 |
+| 綠能節電（氣候行動獎構面） | Green Energy & Power Saving | グリーンエネルギー・節電 |
+| 淨零新生活（氣候行動獎構面） | Net-Zero Green Living | ネットゼロ新生活 |
+| 氣候變遷調適（氣候行動獎構面） | Climate Change Adaptation | 気候変動への適応 |
+| 實地檢核簡報 | on-site review slides | 現地審査スライド |
 | 食・衣・住・行・育樂・購 | food, clothing, housing, transport, leisure, purchasing | 食・衣・住・行・育楽・購 |
 | 閱大安的作為／你可以這樣做 | What We Do / What You Can Do | 私たちの取組／あなたにできること |
 | 本社區無須使用專用垃圾袋 | No special garbage bags required. | 専用ごみ袋は不要です。 |

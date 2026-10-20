@@ -3,11 +3,11 @@
 //   1. font-size 只能寫 var(--fs-*)，圖示放大可寫 calc(var(--fs-*) * N)；任何數字（px/em/rem）一律擋
 //   2. font-weight 只能是 400 / 500 / 700（或 normal / bold / inherit）
 // 範圍：src/、根目錄 *.css、根目錄 admin/*.html；顏色／行高／字距／間距與未定義變數另由 scripts/check-design-tokens.js 把關。
-// 例外：簡報 deck（vw 單位另案）、水電公告產生器（卡片設計凍結值）、images/ 下的 SVG 圖檔。
+// 例外：簡報 deck（檔名以 -deck.html 結尾，vw/cqw 單位另案）、水電公告產生器（卡片設計凍結值）、images/ 下的 SVG 圖檔。
 // 單獨執行：node scripts/check-type-scale.js
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-const EXEMPT = /agm-5-1-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
+const EXEMPT = /-deck\.html$|[\\/]admin[\\/]utility[\\/]|[\\/]images[\\/]/;
 
 function files() {
   const acc = fs.readdirSync(ROOT).filter(f => f.endsWith('.css')).map(f => path.join(ROOT, f));
