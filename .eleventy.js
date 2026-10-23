@@ -156,7 +156,8 @@ module.exports = function(eleventyConfig) {
           return st.active === true;
         } catch (e) { return false; }   // state 檔缺失/壞掉 → 寧可不顯示
       })
-      .sort((a, b) => b.date - a.date);
+      // 颱風警報期間颱風橫條一律優先（其他排程橫條等警報解除才輪到）；其餘取最新一則
+      .sort((a, b) => (!!b.data.bannerWhileTyphoon - !!a.data.bannerWhileTyphoon) || (b.date - a.date));
     return active[0] || null;
   });
 
