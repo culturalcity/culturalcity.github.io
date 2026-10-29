@@ -313,6 +313,10 @@
 | 淨零新生活（氣候行動獎構面） | Net-Zero Green Living | ネットゼロ新生活 |
 | 氣候變遷調適（氣候行動獎構面） | Climate Change Adaptation | 気候変動への適応 |
 | 實地檢核簡報 | on-site review slides | 現地審査スライド |
+| 契約容量 | contracted (electricity) capacity | 契約電力 |
+| 綠色採購 | green procurement | グリーン購入 |
+| 感謝狀 | certificate of appreciation | 感謝状 |
+| 市府新聞稿 | city press release | 市政府プレスリリース |
 | 食・衣・住・行・育樂・購 | food, clothing, housing, transport, leisure, purchasing | 食・衣・住・行・育楽・購 |
 | 閱大安的作為／你可以這樣做 | What We Do / What You Can Do | 私たちの取組／あなたにできること |
 | 本社區無須使用專用垃圾袋 | No special garbage bags required. | 専用ごみ袋は不要です。 |
