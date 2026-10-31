@@ -33,11 +33,12 @@ const STATE_PATH = path.resolve(__dirname, '..', 'utility', 'data', 'typhoon-sta
 const DRY_RUN = process.argv.includes('--dry-run');
 
 // 2026-07-11 方案A（單一資料源）：事件不再內嵌施作清單，改連到主委親撰的 canonical SOP。
-// 防颱準備＝Notion「颱風公設防颱準備施作項目」（12 項、每項含現場照片，公開分享連結）；
+// 防颱準備＝總幹事專區 /admin/staff/typhoon-prep/「颱風公設防颱準備施作項目」（13 項、含現場照片；
+// 2026-10-31 由 Notion 搬到網站成為正本）；
 // 災後巡查＝總幹事 Wiki 第五章 §1.2.2。改清單內容一律改該兩處，不要回頭在這裡加項目
 // ——本檔曾內嵌一份 AI 代擬、未經主委審核的 9 項清單，2026-07-10 巴威颱風實戰時發現與
 // 實際 SOP 不符（閘門是手動組裝式、非「下放」式），故廢除內嵌清單。
-const PREP_SOP_URL = 'https://dynamic-jaw-6be.notion.site/227a3786c38980e08baade2670e06396';
+const PREP_SOP_URL = 'https://culturalcity.org/admin/staff/typhoon-prep/';
 const PM_WIKI_URL = 'https://culturalcity.org/admin/staff/pm-wiki/';
 
 function get(url) {
@@ -165,7 +166,7 @@ function saveState(state) {
       title: `🌀 颱風陸上警報・防颱準備清單（${currentPhenomena}）`,
       description:
         `中央氣象署發布陸上颱風警報，臺北市在警戒區。\n\n` +
-        `**防颱準備施作項目（12 項，含現場照片）**：\n${PREP_SOP_URL}\n\n` +
+        `**防颱準備施作項目（13 項，含現場照片）**：\n${PREP_SOP_URL}\n\n` +
         `⏱ 時效提醒（詳細步驟見上方連結）：\n` +
         `  ・前後門防水閘門「支柱」趁風雨未明顯時先裝好（前後門各約 40 分鐘，門片可先暫放定位）\n` +
         `  ・沙包平時收在 B4 消防機房，先運上頂樓室內空間出入口\n` +
