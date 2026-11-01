@@ -3,7 +3,7 @@ layout: handbook.njk
 permalink: /admin/staff/pm-wiki/index.html
 title: 閱大安總幹事 Wiki
 docTitle: 總幹事 Wiki
-lastUpdate: '2026-09-12'
+lastUpdate: '2026-11-01'
 eleventyExcludeFromCollections: true
 ---
 # 前言
@@ -1377,6 +1377,7 @@ flowchart TD
 
 巡查項目：
 
+- 颱風前收納或拆除的物品歸回原位（例如空中花園桌椅）
 - 地下室排水溝、機房地坪是否積水
 - 頂樓植栽倒伏、盆器破損狀況
 - 外牆磁磚剝落（從對街用望遠鏡或無人機檢查）
