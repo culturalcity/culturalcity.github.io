@@ -342,6 +342,10 @@ body {
 .alloc-table .text-right { text-align:right;font-variant-numeric:tabular-nums; }
 .alloc-table .row-total { background:var(--tint);font-weight:700;color:var(--wg41); }
 .alloc-table tbody tr:last-child td { border-bottom:none; }
+/* 手機：四欄金額在 390px 會撐出 29px（5-3 起即有），收窄左右內距即可放下 */
+@media (max-width: 480px) {
+  .alloc-table th, .alloc-table td { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+}
 
 /* 641–840px 帶（平板直立）：對齊 header 40px 內距，避免內文貼邊 */
 @media (min-width: 641px) and (max-width: 840px) {
