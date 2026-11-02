@@ -93,7 +93,28 @@ function jarString(jar) {
   return Object.keys(jar).map(function (k) { return k + '=' + jar[k]; }).join('; ');
 }
 
+// 網站把通行證（session＋防偽 token）綁在同一來源；Apps Script 每個請求可能從
+// Google 不同機器發出，偶爾會被判 403 Invalid CSRF token（2026-11-01 起實際發生，
+// 同一流程從固定 IP 連跑 8 次全過）。所以整組流程重試，全部失敗才算失敗。
+var FETCH_ATTEMPTS = 6;
+
 function fetchCases(fromDate, toDate) {
+  var lastErr;
+  for (var i = 1; i <= FETCH_ATTEMPTS; i++) {
+    try {
+      var list = fetchCasesOnce(fromDate, toDate);
+      if (i > 1) Logger.log('第 ' + i + ' 次嘗試成功');
+      return list;
+    } catch (e) {
+      lastErr = e;
+      Logger.log('第 ' + i + ' 次嘗試失敗：' + e.message);
+      if (i < FETCH_ATTEMPTS) Utilities.sleep(5000 * i);
+    }
+  }
+  throw new Error('連續 ' + FETCH_ATTEMPTS + ' 次都失敗，最後一次：' + lastErr.message);
+}
+
+function fetchCasesOnce(fromDate, toDate) {
   var jar = {};
   var r = UrlFetchApp.fetch(SITE, { muteHttpExceptions: true, followRedirects: true });
   cookieHeader(r, jar);
