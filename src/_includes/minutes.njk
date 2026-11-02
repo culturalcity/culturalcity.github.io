@@ -33,3 +33,48 @@ extraScripts: |
 {%- endif %}
 
 {{ content | safe }}
+{% if pdfUrl %}
+<style>
+/* 簽名正本 PDF 連結（仿財報 pdf-banner）。寫在 HTML 內隨頁出貨，不放 minutes.css——
+   .css 會被邊緣快取，改了住戶端可能拿到舊版而「有文字沒樣式」。 */
+.pdf-banner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-12) var(--sp-16);
+  margin: 0 0 var(--sp-28); padding: var(--sp-16) var(--sp-20);
+  background: var(--tint); border: 1px solid var(--line);
+  border-left: 3px solid var(--blue); border-radius: 8px;
+  font-size: var(--fs-text); color: var(--wg11);
+}
+.pdf-banner a {
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-16); font-size: var(--fs-text); font-weight: 700;
+  color: var(--wg1); background: var(--blue);
+  border-radius: 6px; text-decoration: none; letter-spacing: var(--ls-text);
+}
+.pdf-banner a:hover { opacity: .85; }
+.sign-pdf { text-align: right; margin-top: var(--sp-8); font-size: var(--fs-caption); color: var(--wg9); }
+.sign-pdf a { color: var(--blue); }
+@media (max-width: 600px) { .pdf-banner { padding: var(--sp-12) var(--sp-16); } }
+@media print { .pdf-banner, .sign-pdf { display: none; } }
+</style>
+<script>
+/* frontmatter 有 pdfUrl（主委簽名後的正本）時：①會議紀錄頁籤頂端插橫幅 ②簽名欄下加一行小字。 */
+(function () {
+  var url = "{{ pdfUrl }}";
+  var tab = document.getElementById("tab-minutes");
+  if (!url || !tab) return;
+  var bar = document.createElement("div");
+  bar.className = "pdf-banner";
+  bar.innerHTML =
+    '<span>📄 本頁為會議紀錄之數位彙整，經主任委員簽名之正本可於此查閱：</span>' +
+    '<a href="' + url + '" target="_blank" rel="noopener">↓ 檢視簽名正本 PDF</a>';
+  tab.insertBefore(bar, tab.firstChild);
+  var sign = tab.querySelector(".sign-area");
+  if (sign) {
+    var p = document.createElement("div");
+    p.className = "sign-pdf";
+    p.innerHTML = '簽名正本：<a href="' + url + '" target="_blank" rel="noopener">PDF</a>';
+    sign.parentNode.insertBefore(p, sign.nextSibling);
+  }
+})();
+</script>
+{% endif %}
