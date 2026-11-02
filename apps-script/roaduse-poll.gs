@@ -96,7 +96,8 @@ function jarString(jar) {
 // 網站把通行證（session＋防偽 token）綁在同一來源；Apps Script 每個請求可能從
 // Google 不同機器發出，偶爾會被判 403 Invalid CSRF token（2026-11-01 起實際發生，
 // 同一流程從固定 IP 連跑 8 次全過）。所以整組流程重試，全部失敗才算失敗。
-var FETCH_ATTEMPTS = 6;
+// 11-02 實測 4 次中失敗 3 次，6 次全敗機率約 18%；提高到 15 次（約 1%），間隔固定 3 秒。
+var FETCH_ATTEMPTS = 15;
 
 function fetchCases(fromDate, toDate) {
   var lastErr;
@@ -108,18 +109,16 @@ function fetchCases(fromDate, toDate) {
     } catch (e) {
       lastErr = e;
       Logger.log('第 ' + i + ' 次嘗試失敗：' + e.message);
-      if (i < FETCH_ATTEMPTS) Utilities.sleep(5000 * i);
+      if (i < FETCH_ATTEMPTS) Utilities.sleep(3000);
     }
   }
   throw new Error('連續 ' + FETCH_ATTEMPTS + ' 次都失敗，最後一次：' + lastErr.message);
 }
 
 function fetchCasesOnce(fromDate, toDate) {
+  // 首頁本身不發 cookie，直接從取 token 開始（請求越少，中途換來源機器的機會越小）
   var jar = {};
-  var r = UrlFetchApp.fetch(SITE, { muteHttpExceptions: true, followRedirects: true });
-  cookieHeader(r, jar);
-
-  r = UrlFetchApp.fetch(SITE + 'api/JwtToken/GetToken', {
+  var r = UrlFetchApp.fetch(SITE + 'api/JwtToken/GetToken', {
     method: 'post', contentType: 'application/json; charset=utf-8', payload: '',
     headers: { Cookie: jarString(jar) }, muteHttpExceptions: true
   });
