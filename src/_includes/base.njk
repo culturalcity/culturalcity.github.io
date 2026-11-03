@@ -8,6 +8,13 @@
 <link rel="stylesheet" href="{{ '/global.css' | cssBust }}">
 {% if pageCss %}<link rel="stylesheet" href="{{ ('/' + pageCss) | cssBust }}">{% endif %}
 <title>閱大安{% if title %}・{{ title }}{% endif %}</title>
+{# LINE／社群連結預覽卡（溝通層：設計師綠大理石原稿）。住戶區被登入頁擋住時，預覽改由 Worker 登入頁的同組標籤提供 #}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="閱大安社區網站">
+<meta property="og:title" content="閱大安{% if title %}・{{ title }}{% endif %}">
+<meta property="og:image" content="https://culturalcity.org/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 {% if extraStyles %}<style>{{ extraStyles | safe }}</style>{% endif %}
 {% if extraHead %}{{ extraHead | safe }}{% endif %}
 {% if trilingual %}<script src="{{ '/lang.js' | cssBust }}" defer></script>{% endif %}
