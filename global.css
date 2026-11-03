@@ -173,6 +173,7 @@ body {
 }
 .footer-left { font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-text); line-height: var(--lh-text); }
 .footer-right { font-size:var(--fs-text); color: var(--wg9); letter-spacing: var(--ls-label); }
+.footer-mark { display: block; height: var(--sp-40); width: auto; } /* 字標署名（空間資訊層：412C 字＋金色 Cultural city，同大樓外柱面字），見 09. 美工檔案\閱大安識別應用 */
 
 /* ── 響應式（共用） ── */
 @media (max-width: 600px) {
