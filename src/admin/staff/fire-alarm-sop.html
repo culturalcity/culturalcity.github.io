@@ -5,7 +5,7 @@ title: 消防警報值勤流程
 docTitle: 值勤程序
 eyebrow: CULTURAL CITY · SECURITY SOP
 headerSub: 閱大安管理委員會・內部文件　｜　草案・待物業與廠商確認
-lastUpdate: '2026-08-16'
+lastUpdate: '2026-11-04'
 eleventyExcludeFromCollections: true
 ---
 
@@ -53,6 +53,11 @@ eleventyExcludeFromCollections: true
     color: var(--dn); border-radius: var(--radius); padding: var(--sp-12) var(--sp-16);
     font-size: var(--fs-text); font-weight: 700; text-align: center; letter-spacing: var(--ls-text); }
   .fa-valve small { display: block; font-weight: 400; font-size: var(--fs-caption); margin-top: 2px; }
+  .fa-rule { margin: var(--sp-16) 0 var(--sp-8); border: 2px solid var(--wg41); background: var(--white);
+    border-radius: var(--radius); padding: var(--sp-12) var(--sp-16); font-size: var(--fs-text); line-height: var(--lh-text); }
+  .fa-rule b { color: var(--dn); }
+  .fa-times { display: inline-block; margin-top: var(--sp-8); font-size: var(--fs-caption); font-weight: 700; color: var(--wg41); }
+  .fa-note { margin-top: var(--sp-8); font-size: var(--fs-caption); color: var(--wg9); line-height: var(--lh-text); }
 
   .fa-script { background: var(--white); border: 1px solid var(--line); border-left-width: 4px;
     border-radius: var(--radius); padding: var(--sp-12) var(--sp-16); margin-bottom: var(--sp-12); break-inside: avoid; }
@@ -83,6 +88,11 @@ eleventyExcludeFromCollections: true
 第一報廣播在<strong>離開管理室之前</strong>完成，目標為警報響起兩分鐘內，
 讓住戶在現場確認的空窗期間就知道訊號位置與處理狀態。</p>
 
+<div class="fa-rule">
+  <b>執行鐵則：未經現場確認，不得廣播「誤報」。</b>第一報只安撫並說明「正在確認」；
+  確認有火煙，立即撥 119，依消防防護計畫、現場狀況及消防人員指示疏散。
+</div>
+
 <div class="fa-flow">
   <div class="fa-alarm">🔔 消防警報響起（全棟自動廣播鳴動）</div>
   <div class="fa-conn"></div>
@@ -92,13 +102,13 @@ eleventyExcludeFromCollections: true
   </div>
   <div class="fa-conn"></div>
   <div class="fa-step">
-    <div class="fa-t"><span class="fa-num">2</span>📢 第一報廣播<small>目標：2 分鐘內・照卡念</small></div>
-    <div class="fa-d">「火警訊號來自＿樓，正前往確認」　＋LINE 第一報（可選・貼模板）</div>
+    <div class="fa-t"><span class="fa-num">2</span>📢 第一報廣播<small>目標：2 分鐘內・照卡念・播 1 次</small></div>
+    <div class="fa-d">「接獲＿樓火警訊號，正前往確認，請保持冷靜」　＋LINE 第一報（可選・貼模板）</div>
   </div>
   <div class="fa-conn"></div>
   <div class="fa-step">
-    <div class="fa-t"><span class="fa-num">3</span>帶裝備下樓</div>
-    <div class="fa-d">手機・機房鑰匙・手電筒　※確認期間警報持續鳴響屬正常</div>
+    <div class="fa-t"><span class="fa-num">3</span>帶裝備前往確認</div>
+    <div class="fa-d">公務機（管理中心同步掌握狀況）・機房鑰匙・手電筒　※確認期間警報持續鳴響屬正常</div>
   </div>
   <div class="fa-conn"></div>
   <div class="fa-step">
@@ -128,7 +138,7 @@ eleventyExcludeFromCollections: true
     <div class="fa-mconn"></div>
     <div class="fa-mini"><b>回管理室・總機復舊</b><span class="fa-d">復舊即關閉警報——這是警鈴停止的時點</span></div>
     <div class="fa-mconn"></div>
-    <div class="fa-mini"><b>📢 解除廣播＋💬 LINE 解除報</b><span class="fa-d">LINE 必發・貼模板</span></div>
+    <div class="fa-mini"><b>📢 解除廣播＋💬 LINE 解除報</b><span class="fa-d">廣播播 2 次・LINE 必發・貼模板</span></div>
     <div class="fa-mconn"></div>
     <div class="fa-mini"><b>記錄・通知</b><span class="fa-d">值勤日誌＋通知總幹事／主委</span></div>
   </section>
@@ -138,7 +148,7 @@ eleventyExcludeFromCollections: true
     <p class="fa-cond">任何火光、煙、燒焦味</p>
     <div class="fa-mini"><b>📞 立即撥 119</b><span class="fa-d">報地址＋起火樓層</span></div>
     <div class="fa-mconn"></div>
-    <div class="fa-mini"><b>📢 疏散廣播</b><span class="fa-d">照卡念（見下方疏散報）</span></div>
+    <div class="fa-mini"><b>📢 疏散廣播</b><span class="fa-d">照卡念・播 3 次；起火在地下樓層用地下版（見下方疏散報）</span></div>
     <div class="fa-mconn"></div>
     <div class="fa-mini"><b>至大門引導消防隊</b><span class="fa-d">告知起火樓層＋設備位置</span></div>
   </section>
@@ -148,7 +158,7 @@ eleventyExcludeFromCollections: true
     <p class="fa-cond">無火煙，也找不到動作裝置</p>
     <div class="fa-mini"><b>📞 通報廠商</b><span class="fa-d">太古華電 24 小時維修專線 0800-060-199＋通知總幹事／主委</span></div>
     <div class="fa-mconn"></div>
-    <div class="fa-mini"><b>📢 續查廣播</b><span class="fa-d">照卡念（見下方續查報）</span></div>
+    <div class="fa-mini"><b>📢 續查廣播</b><span class="fa-d">照卡念・播 1 次（見下方續查報）</span></div>
     <div class="fa-mconn"></div>
     <div class="fa-mini"><b>管理室待命</b><span class="fa-d">依廠商電話指示處理　⚠ 此分支警報停止方式待廠商確認（見待確認事項）</span></div>
   </section>
@@ -161,27 +171,39 @@ eleventyExcludeFromCollections: true
 
 <h1>廣播與 LINE 定型稿</h1>
 
-<p>定型稿與本頁一同護貝，貼於受信總機旁；LINE 模板另存於值勤手機的 LINE 記事本。
+<p>定型稿印成 A4 護貝卡，貼於受信總機旁（護貝卡另附緊急聯絡人電話）；LINE 模板另存於公務機的 LINE 記事本。
 <span class="fa-blank">＿＿</span>為現場填空處。</p>
 
 <div class="fa-script fa-s1">
   <h3>第一報<span class="fa-when">警報響起 2 分鐘內・離開管理室之前</span></h3>
-  <p>「這裡是管理中心。火警訊號來自<span class="fa-blank">＿＿樓</span>，值勤人員正前往確認，請住戶留意後續廣播。再重複一次：火警訊號來自<span class="fa-blank">＿＿樓</span>，正在確認中，請留意後續廣播。」</p>
+  <p>「管理中心報告：目前接獲<span class="fa-blank">＿＿樓</span>火警警報訊號，值勤人員正前往確認，請住戶保持冷靜、暫勿驚慌，確認後會再廣播通知。再重複一次：<span class="fa-blank">＿＿樓</span>火警訊號正在確認中，請留意後續廣播。」</p>
+  <span class="fa-times">播 1 次（稿內已含重複）</span>
 </div>
 
 <div class="fa-script fa-s2">
-  <h3>解除報<span class="fa-when">總機復舊完成後</span></h3>
-  <p>「這裡是管理中心。剛才的火警訊號經現場確認為設備誤發，並無火災，警報已解除，造成打擾非常抱歉。再重複一次：經確認並無火災，警報已解除。」</p>
+  <h3>解除報<span class="fa-when">現場確認無火煙・總機復舊完成後</span></h3>
+  <p>「管理中心報告：剛才<span class="fa-blank">＿＿樓</span>的火警警報，經現場確認為設備誤發，並無火災，警報已解除，請住戶安心。造成打擾，敬請見諒。」</p>
+  <span class="fa-times">播 2 次</span>
 </div>
 
 <div class="fa-script fa-s3">
-  <h3>疏散報<span class="fa-when">發現火煙・撥完 119 後・重複播放</span></h3>
-  <p>「這裡是管理中心，<span class="fa-blank">＿＿樓</span>發生火災，消防隊已在途中。起火樓層與其上一層住戶請立即避難。其他樓層住戶開門前請先確認樓梯間狀況：樓梯間無煙，請鎮定由樓梯避難，勿搭電梯；樓梯間有濃煙，請留在屋內、關門、以濕布塞住門縫等待救援。」</p>
+  <h3>疏散報（一般版）<span class="fa-when">起火點在地上樓層・撥完 119 後</span></h3>
+  <p>「管理中心緊急廣播：<span class="fa-blank">＿＿樓</span>發生火災，已通報消防隊，消防隊正在途中。請勿搭乘電梯！請勿搭乘電梯！<span class="fa-blank">＿＿樓</span>及上一層的住戶，請立即由樓梯避難。其他樓層住戶，開門前請先確認樓梯間：沒有煙，請由樓梯往下避難；有濃煙，請不要出門，關緊大門，用濕毛巾塞住門縫，在屋內等待救援。」</p>
+  <span class="fa-times">播 3 次</span>
+  <p class="fa-note">為什麼分開講：起火樓層與上一層最先被火煙波及，一律立即離開；其他樓層出門前先看樓梯間——火災傷亡多半來自濃煙，樓梯間有煙時關門留在屋內，比穿越濃煙安全（「小火快逃、濃煙關門」）。</p>
+</div>
+
+<div class="fa-script fa-s3">
+  <h3>疏散報（地下樓層版）<span class="fa-when">起火點在 B1～B4・撥完 119 後</span></h3>
+  <p>「管理中心緊急廣播：地下<span class="fa-blank">＿＿樓</span>發生火災，已通報消防隊，消防隊正在途中。請勿搭乘電梯！請勿搭乘電梯！請勿進入地下室，也不要下樓取車。各樓層住戶開門前請先確認樓梯間：沒有煙，請由樓梯往下，到一樓即由大門離開大樓，不要再往地下室走；有濃煙，請不要出門，關緊大門，用濕毛巾塞住門縫，在屋內等待救援。」</p>
+  <span class="fa-times">播 3 次</span>
+  <p class="fa-note">為什麼另寫一版：地下室起火時，煙會順著樓梯間與電梯井往上竄，全棟各層都可能受影響，沒有「起火樓層與上一層」可講；同時要防止住戶往下走進火場或下樓取車。一樓起火用一般版（填「一樓」，上一層即二樓）。</p>
 </div>
 
 <div class="fa-script fa-s4">
   <h3>續查報<span class="fa-when">查無原因・通報廠商後</span></h3>
-  <p>「這裡是管理中心。經現場初步確認目前並無火災跡象，詳細原因仍在查明中，請住戶放心，有進一步結果會再廣播。」</p>
+  <p>「管理中心報告：經現場初步確認，目前並無火災跡象，詳細原因仍在查明中，請住戶安心，有進一步結果會再廣播。」</p>
+  <span class="fa-times">播 1 次</span>
 </div>
 
 <div class="fa-script fa-s1">
@@ -202,10 +224,12 @@ eleventyExcludeFromCollections: true
   <li><strong>119 報案用完整地址</strong>——填入疏散報流程（值勤卡上直接印出）。</li>
   <li><strong>裝置復位方式</strong>——待太古華電確認：話筒掛回即可？探測器復位保全可否自行操作？</li>
   <li><strong>受信總機靜音限制與警報停止時點</strong>——現況為須持續壓住發話器按鈕才能中斷自動廣播，待太古華電確認：有無正規的音響停止／連動停止模式？誤報時警報以「裝置復位＋總機復舊」為唯一停止方式是否正確？<strong>查無原因（無裝置可復位）時，警報要如何停止？</strong>真火警時警報是否應持續鳴響至消防隊接手？</li>
+  <li><strong>疏散報兩版稿</strong>——請防火管理人依本社區消防防護計畫核對避難指示（避難方向、集合地點）是否一致。</li>
   <li><strong>物業公司背書</strong>——本流程送潤泰確認為保全標準程序（含第一報廣播納入正式 SOP），並安排實際演練一次。</li>
 </ul>
 
 <p>廠商聯絡：太古華電（消防・機電保養）24 小時維修專線 0800-060-199；日間保養窗口 王國棟 0905-198-156。</p>
 
 <p>背景：2026-08-12 深夜 B4 緊急廣播啟動用緊急電話話筒鬆脫誤觸全棟警報（自 2026 年 3 月以來已發生數次），
-住戶建議縮短警報後的資訊空窗，經討論後定此流程。話筒固定方式另與太古華電研議中。</p>
+住戶建議縮短警報後的資訊空窗，經討論後定此流程。話筒固定方式另與太古華電研議中。
+2026-11-04 併入總幹事整理的「火警警報三階段廣播標準表」：各廣播播放次數、執行鐵則（未確認不得宣稱誤報）、帶公務機前往確認。</p>
