@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" width="720" height="560" role="img" aria-labelledby="roster-sets-title roster-sets-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
   <title id="roster-sets-title">閱大安住戶名單的範圍</title>
-  <desc id="roster-sets-desc">集合圖：法定住戶之中，區分所有權人與承租人合為主動維護的基準集合；其他經區權人同意的使用者只在被動得知時補入名單；訪客不屬於住戶。</desc>
+  <desc id="roster-sets-desc">集合圖：法定住戶之中，區分所有權人與承租人合為主動維護的基準集合；其他經區權人同意的使用者不主動探詢，但得知後即時補入名單；訪客不屬於住戶。</desc>
   <rect width="720" height="560" fill="#f5f5f5"/>
 
   <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="600">住戶名單的範圍</text>
@@ -43,7 +43,7 @@
   <rect x="40" y="528" width="20" height="12" rx="2" fill="none" stroke="#eb6c36" stroke-width="2"/>
   <text x="68" y="539" fill="#4f5d75" font-size="12">主動維護</text>
   <rect x="160" y="528" width="20" height="12" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1" stroke-dasharray="4,4"/>
-  <text x="188" y="539" fill="#4f5d75" font-size="12">被動補入</text>
+  <text x="188" y="539" fill="#4f5d75" font-size="12">得知即補登</text>
   <rect x="280" y="528" width="20" height="12" rx="2" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/>
   <text x="308" y="539" fill="#4f5d75" font-size="12">法定住戶全體（名單不求完整）</text>
 </svg>
