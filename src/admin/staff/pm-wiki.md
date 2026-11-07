@@ -730,6 +730,10 @@ flowchart TD
 
 滲水是本社區最常見的修繕議題。地下室外牆是連續壁，本身就會滲水，所以不是每一處潮濕都是施工瑕疵：先分清楚屬於哪一類，才知道找誰、誰付費。
 
+<a href="/images/diagrams/seepage-decision.svg" target="_blank" rel="noopener"><img src="/images/diagrams/seepage-decision.svg" alt="滲水的處理流程與費用歸屬：發現、回報、會勘報價與議決，依保固與原因分四類，最後驗收確認不再滲漏" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
+
+<p style="text-align:center;font-size:var(--fs-caption);color:var(--wg9);margin-top:0;">點圖可開原尺寸</p>
+
 **發現時的處理流程**
 
 1. 拍照記錄位置與日期（**不開閃光燈**，閃光會蓋掉水痕），雨後再拍一次對照。
@@ -845,6 +849,10 @@ flowchart TD
 
 停電、漏水、火警時，最先要找到的是下列東西。到職第一週請由前任或保全帶著實地走一次。
 
+<a href="/images/diagrams/equipment-locations.svg" target="_blank" rel="noopener"><img src="/images/diagrams/equipment-locations.svg" alt="關鍵設備與鑰匙位置：大樓剖面示意，標出 1F 管理中心、B1 配電室與電錶走廊、B2 發電機房、B4 消防機房與揚水馬達等位置" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
+
+<p style="text-align:center;font-size:var(--fs-caption);color:var(--wg9);margin-top:0;">點圖可開原尺寸</p>
+
 | 設備 | 位置 | 備註 |
 |---|---|---|
 | 火警受信總機 | 1F 管理中心櫃檯 | |
@@ -869,6 +877,10 @@ flowchart TD
 ## 1. 年度循環行事曆
 
 > 總幹事每月初檢視本表，對照當月應啟動的議題。
+
+<a href="/images/diagrams/annual-calendar.svg" target="_blank" rel="noopener"><img src="/images/diagrams/annual-calendar.svg" alt="年度循環行事曆：以月份為列、治理與會議／物業換約／保險與電梯合約／設施與法規／節慶公告五類為欄" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
+
+<p style="text-align:center;font-size:var(--fs-caption);color:var(--wg9);margin-top:0;">點圖可開原尺寸</p>
 
 | 月份 | 應啟動議題 | 對照章節 |
 |---|---|---|

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 664" width="720" height="664" role="img" aria-labelledby="sp-title sp-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
+  <title id="sp-title">滲水的處理流程與費用歸屬</title>
+  <desc id="sp-desc">流程圖：發現滲水後拍照記錄（不開閃光燈）並在雨後再拍一次；回報管委會群組或列入會議；由建設公司或信盛工程帶防水廠商會勘、報價並判斷原因，經管委會議決後施工。對照過去案例分四種：仍在保固期內由建設公司出資；判定為施工缺失則發函敦寶、福一並請信創營造負管理監督責任；已過保固期由社區付費，報價單寫明施工保固；連續壁先天滲水以導水處理、社區付費。最後都要驗收確認不再滲漏，社區付費的案件驗收通過才付款。修繕窗口是信盛工程；外牆入戶施工須書面通知；排水孔每月至少巡視兩次。</desc>
+  <rect width="720" height="664" fill="#f5f5f5"/>
+  <defs>
+    <marker id="sp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4f5d75"/>
+    </marker>
+  </defs>
+  <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="700">滲水的處理流程與費用歸屬</text>
+  <text x="40" y="64" fill="#2d3142" font-size="12">地下室外牆是連續壁，本身會滲水；先判斷屬於哪一類，再決定找誰、誰付費</text>
+  <rect x="160" y="84" width="400" height="44" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="360.0" y="101.0" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">① 發現：拍照記錄位置與日期</text>
+  <text x="360.0" y="119.0" fill="#4f5d75" font-size="12" text-anchor="middle">不開閃光燈（會蓋掉水痕）；雨後再拍一次對照</text>
+  <line x1="360" y1="128" x2="360" y2="150" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="160" y="152" width="400" height="32" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="360.0" y="172.0" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">② 回報：管委會群組，或列入下次會議</text>
+  <line x1="360" y1="184" x2="360" y2="206" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="160" y="208" width="400" height="44" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="360.0" y="225.0" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">③ 會勘、報價：判斷原因，經管委會議決後施工</text>
+  <text x="360.0" y="243.0" fill="#4f5d75" font-size="12" text-anchor="middle">建設公司（敦寶、福一）或信盛工程帶防水廠商到場</text>
+  <line x1="360" y1="252" x2="360" y2="284" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <text x="372" y="272" fill="#4f5d75" font-size="12">對照過去案例，看原因與保固狀態</text>
+  <line x1="96" y1="284" x2="624" y2="284" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="96" y1="284" x2="96" y2="298" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <line x1="272" y1="284" x2="272" y2="298" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <line x1="448" y1="284" x2="448" y2="298" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <line x1="624" y1="284" x2="624" y2="298" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="24" y="300" width="144" height="32" rx="16" fill="rgba(79,93,117,0.10)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="96" y="321" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">仍在保固期內</text>
+  <line x1="96" y1="332" x2="96" y2="350" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="200" y="300" width="144" height="32" rx="16" fill="rgba(79,93,117,0.10)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="272" y="321" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">判定為施工缺失</text>
+  <line x1="272" y1="332" x2="272" y2="350" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="376" y="300" width="144" height="32" rx="16" fill="rgba(79,93,117,0.10)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="448" y="321" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">已過保固期</text>
+  <line x1="448" y1="332" x2="448" y2="350" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="552" y="300" width="144" height="32" rx="16" fill="rgba(79,93,117,0.10)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="624" y="321" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">連續壁先天滲水</text>
+  <line x1="624" y1="332" x2="624" y2="350" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="24" y="352" width="144" height="92" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="96" y="376" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">建設公司出資</text>
+  <text x="96" y="396" fill="#4f5d75" font-size="12" text-anchor="middle">社區不付費</text>
+  <text x="96" y="436" fill="#4f5d75" font-size="12" text-anchor="middle">前例：021、083</text>
+  <rect x="200" y="352" width="144" height="92" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="272" y="376" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">發函敦寶、福一</text>
+  <text x="272" y="396" fill="#4f5d75" font-size="12" text-anchor="middle">請信創營造負</text>
+  <text x="272" y="416" fill="#4f5d75" font-size="12" text-anchor="middle">管理監督責任</text>
+  <text x="272" y="436" fill="#4f5d75" font-size="12" text-anchor="middle">前例：122</text>
+  <rect x="376" y="352" width="144" height="92" rx="6" fill="#ffffff" stroke="#eb6c36" stroke-width="1"/>
+  <text x="448" y="376" fill="#eb6c36" font-size="12" font-weight="700" text-anchor="middle">社區付費</text>
+  <text x="448" y="396" fill="#4f5d75" font-size="12" text-anchor="middle">報價單寫明施工保固</text>
+  <text x="448" y="436" fill="#4f5d75" font-size="12" text-anchor="middle">前例：131</text>
+  <rect x="552" y="352" width="144" height="92" rx="6" fill="#ffffff" stroke="#eb6c36" stroke-width="1"/>
+  <text x="624" y="376" fill="#eb6c36" font-size="12" font-weight="700" text-anchor="middle">社區付費</text>
+  <text x="624" y="396" fill="#4f5d75" font-size="12" text-anchor="middle">導水（角鐵、落水頭）</text>
+  <text x="624" y="436" fill="#4f5d75" font-size="12" text-anchor="middle">前例：167</text>
+  <line x1="96" y1="444" x2="96" y2="464" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="272" y1="444" x2="272" y2="464" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="448" y1="444" x2="448" y2="464" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="624" y1="444" x2="624" y2="464" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="96" y1="464" x2="624" y2="464" stroke="#4f5d75" stroke-width="1.5" fill="none"/>
+  <line x1="360" y1="464" x2="360" y2="482" stroke="#4f5d75" stroke-width="1.5" fill="none" marker-end="url(#sp-arrow)"/>
+  <rect x="160" y="484" width="400" height="62" rx="6" fill="#2d3142" stroke="#2d3142" stroke-width="1"/>
+  <text x="360.0" y="501.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">④ 驗收：確認不再滲漏</text>
+  <text x="360.0" y="519.0" fill="#ffffff" font-size="12" text-anchor="middle">雨季或颱風過後再看，或由社區自行試水</text>
+  <text x="360.0" y="537.0" fill="#ffffff" font-size="12" text-anchor="middle">社區付費的案件，驗收通過才付款</text>
+  <text x="40" y="576" fill="#4f5d75" font-size="12">修繕窗口：信盛工程（信創營造旗下）；展裕防水是信盛找來施工的外包廠商。</text>
+  <text x="40" y="596" fill="#4f5d75" font-size="12">外牆屬公設：需進入住戶專有部分施工時，依公寓大廈管理條例第 6 條第 3 款書面通知該戶（前例 039）。</text>
+  <text x="40" y="616" fill="#4f5d75" font-size="12">前例數字是 Notion 議題事項追蹤的 ID，可查當時的會勘與決議經過。</text>
+  <text x="40" y="636" fill="#4f5d75" font-size="12">日常預防：連續壁排水孔每月至少巡視兩次、颱風前預防性清孔（第四章 §1.9）。</text>
+</svg>

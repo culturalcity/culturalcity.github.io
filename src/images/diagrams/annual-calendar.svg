@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" width="720" height="720" role="img" aria-labelledby="cal-title cal-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
+  <title id="cal-title">閱大安年度循環行事曆</title>
+  <desc id="cal-desc">以月份為列、五類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）。物業換約：1 月用印完成與合約存查、9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印。保險與電梯合約：11 月公共意外險與火險比價、電梯保養合約議價（兩年期到期年），12 月保險續保完成。設施與法規：公共安全檢查每 3 年一次，1 月議價、2 月執行；10 至 11 月大公電契約容量檢討。節慶公告：2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）。每月固定追蹤台電四張帳單並更新氣候行動獎明細。</desc>
+  <rect width="720" height="720" fill="#f5f5f5"/>
+  <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="700">年度循環行事曆</text>
+  <text x="40" y="64" fill="#2d3142" font-size="12">每月初對照當月要啟動的事。農曆節日依當年日期調整；標「任期年」的只在換屆那年做</text>
+  <text x="128" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">治理與會議</text>
+  <text x="256" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">物業換約</text>
+  <text x="384" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">保險與電梯合約</text>
+  <text x="512" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">設施與法規</text>
+  <text x="640" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">節慶公告</text>
+  <line x1="16" y1="108" x2="704" y2="108" stroke="#d4d4d4" stroke-width="1"/>
+  <line x1="16" y1="152" x2="704" y2="152" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="136.0" fill="#4f5d75" font-size="12" text-anchor="end">1 月</text>
+  <line x1="16" y1="192" x2="704" y2="192" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="176.0" fill="#4f5d75" font-size="12" text-anchor="end">2 月</text>
+  <line x1="16" y1="232" x2="704" y2="232" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="216.0" fill="#4f5d75" font-size="12" text-anchor="end">3 月</text>
+  <line x1="16" y1="272" x2="704" y2="272" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="256.0" fill="#4f5d75" font-size="12" text-anchor="end">4 月</text>
+  <line x1="16" y1="312" x2="704" y2="312" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="296.0" fill="#4f5d75" font-size="12" text-anchor="end">5 月</text>
+  <line x1="16" y1="352" x2="704" y2="352" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="336.0" fill="#4f5d75" font-size="12" text-anchor="end">6 月</text>
+  <line x1="16" y1="392" x2="704" y2="392" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="376.0" fill="#4f5d75" font-size="12" text-anchor="end">7 月</text>
+  <line x1="16" y1="432" x2="704" y2="432" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="416.0" fill="#4f5d75" font-size="12" text-anchor="end">8 月</text>
+  <line x1="16" y1="472" x2="704" y2="472" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="456.0" fill="#4f5d75" font-size="12" text-anchor="end">9 月</text>
+  <line x1="16" y1="512" x2="704" y2="512" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="496.0" fill="#4f5d75" font-size="12" text-anchor="end">10 月</text>
+  <line x1="16" y1="576" x2="704" y2="576" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="548.0" fill="#4f5d75" font-size="12" text-anchor="end">11 月</text>
+  <line x1="16" y1="616" x2="704" y2="616" stroke="#d4d4d4" stroke-width="1"/>
+  <text x="56" y="600.0" fill="#4f5d75" font-size="12" text-anchor="end">12 月</text>
+  <rect x="68" y="196" width="120" height="72" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="128" y="228.0" fill="#2d3142" font-size="12" text-anchor="middle">區權會前置作業</text>
+  <text x="128" y="244.0" fill="#4f5d75" font-size="12" text-anchor="middle">（任期年）</text>
+  <rect x="68" y="276" width="120" height="32" rx="4" fill="#2d3142" stroke="#2d3142" stroke-width="1"/>
+  <text x="128" y="296.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">召開區權會</text>
+  <rect x="68" y="316" width="120" height="32" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="128" y="328.0" fill="#2d3142" font-size="12" text-anchor="middle">月底換屆交接</text>
+  <text x="128" y="344.0" fill="#4f5d75" font-size="12" text-anchor="middle">（任期年）</text>
+  <rect x="196" y="116" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="256" y="128.0" fill="#2d3142" font-size="12" text-anchor="middle">用印完成</text>
+  <text x="256" y="144.0" fill="#2d3142" font-size="12" text-anchor="middle">合約存查</text>
+  <rect x="196" y="436" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="256" y="456.0" fill="#2d3142" font-size="12" text-anchor="middle">討論：續約或招標</text>
+  <rect x="196" y="476" width="120" height="32" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="256" y="496.0" fill="#2d3142" font-size="12" text-anchor="middle">刊登招標（如招標）</text>
+  <rect x="196" y="516" width="120" height="56" rx="4" fill="#2d3142" stroke="#2d3142" stroke-width="1"/>
+  <text x="256" y="540.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">月初書審、月中簡報</text>
+  <text x="256" y="556.0" fill="#ffffff" font-size="12" text-anchor="middle">月底決定續約對象</text>
+  <rect x="196" y="580" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="256" y="600.0" fill="#2d3142" font-size="12" text-anchor="middle">合約用印</text>
+  <rect x="324" y="580" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="384" y="600.0" fill="#2d3142" font-size="12" text-anchor="middle">保險續保完成</text>
+  <rect x="452" y="116" width="120" height="72" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="512" y="140.0" fill="#2d3142" font-size="12" text-anchor="middle">公共安全檢查</text>
+  <text x="512" y="156.0" fill="#2d3142" font-size="12" text-anchor="middle">1 月議價、2 月執行</text>
+  <text x="512" y="172.0" fill="#4f5d75" font-size="12" text-anchor="middle">（每 3 年）</text>
+  <rect x="452" y="476" width="120" height="96" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="512" y="520.0" fill="#2d3142" font-size="12" text-anchor="middle">大公電</text>
+  <text x="512" y="536.0" fill="#2d3142" font-size="12" text-anchor="middle">契約容量檢討</text>
+  <rect x="580" y="156" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="640" y="176.0" fill="#2d3142" font-size="12" text-anchor="middle">農曆新年公告</text>
+  <rect x="580" y="356" width="120" height="72" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="640" y="388.0" fill="#2d3142" font-size="12" text-anchor="middle">中元普渡籌備</text>
+  <text x="640" y="404.0" fill="#4f5d75" font-size="12" text-anchor="middle">（依農曆）</text>
+  <rect x="324" y="516" width="120" height="26" rx="4" fill="#2d3142" stroke="#2d3142" stroke-width="1"/>
+  <text x="384" y="533.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">公責險・火險比價</text>
+  <rect x="324" y="546" width="120" height="26" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="384" y="563.0" fill="#2d3142" font-size="12" text-anchor="middle">電梯議價（每 2 年）</text>
+  <rect x="40" y="634" width="20" height="12" rx="2" fill="#2d3142"/>
+  <text x="68" y="644" fill="#2d3142" font-size="12">決定或執行的關鍵月</text>
+  <rect x="216" y="634" width="20" height="12" rx="2" fill="#ffffff" stroke="#2d3142"/>
+  <text x="244" y="644" fill="#2d3142" font-size="12">每年例行</text>
+  <rect x="336" y="634" width="20" height="12" rx="2" fill="#ffffff" stroke="#4f5d75" stroke-dasharray="4,3"/>
+  <text x="364" y="644" fill="#2d3142" font-size="12">非每年都有（任期年、每 3 年、兩年期到期、選擇招標時）</text>
+  <rect x="40" y="662" width="640" height="32" rx="4" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="56" y="683" fill="#2d3142" font-size="12"><tspan font-weight="700">每月固定：</tspan>追蹤台電四張帳單、更新氣候行動獎明細</text>
+</svg>
