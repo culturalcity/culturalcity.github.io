@@ -1609,7 +1609,7 @@ flowchart LR
 
 ### 2.4 住戶資料與磁扣
 
-以下是依現行規約的作業方式，目的是讓名冊「該完整的部分完整、其他部分不必強求」。
+以下是依現行規約的作業方式，目的是讓名冊「該完整的部分完整、其他部分不必強求」。區權人讓誰使用自己的房子（家人、同住者、幫傭等），不必經過管委會，也會隨時變動，名冊本來就無法掌握完整；所以只主動維護有文件可查的區權人與承租人，其他人交由該戶負責。
 
 <img src="/images/diagrams/resident-roster-sets.svg" alt="住戶名單的範圍：區權人與承租人為主動維護的基準集合，其他經同意的使用者只在被動得知時補入" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto;background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);">
 
