@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" width="720" height="720" role="img" aria-labelledby="cal-title cal-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
   <title id="cal-title">閱大安年度循環行事曆</title>
-  <desc id="cal-desc">以月份為列、五類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）。物業換約：1 月用印完成與合約存查、9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印。保險與電梯合約：11 月公共意外險與火險比價、電梯保養合約議價（兩年期到期年），12 月保險續保完成。設施與法規：公共安全檢查每 3 年一次，1 月議價、2 月執行；10 至 11 月大公電契約容量檢討。節慶公告：2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）。每月固定追蹤台電四張帳單並更新氣候行動獎明細。</desc>
+  <desc id="cal-desc">以月份為列、五類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）。物業換約：1 月用印完成與合約存查、9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印。保險與電梯合約：11 月公共意外險與火險比價、電梯保養合約議價（兩年期到期年），12 月保險續保完成。設施與法規：公共安全檢查每 3 年一次，1 月議價、2 月執行；4 月流出抑制設施維護文件上傳（法定，每年）；10 至 11 月大公電契約容量檢討。節慶公告：2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）。每月固定追蹤台電四張帳單並更新氣候行動獎明細。</desc>
   <rect width="720" height="720" fill="#f5f5f5"/>
   <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="700">年度循環行事曆</text>
   <text x="40" y="64" fill="#2d3142" font-size="12">每月初對照當月要啟動的事。農曆節日依當年日期調整；標「任期年」的只在換屆那年做</text>
@@ -60,6 +60,9 @@
   <text x="512" y="140.0" fill="#2d3142" font-size="12" text-anchor="middle">公共安全檢查</text>
   <text x="512" y="156.0" fill="#2d3142" font-size="12" text-anchor="middle">1 月議價、2 月執行</text>
   <text x="512" y="172.0" fill="#4f5d75" font-size="12" text-anchor="middle">（每 3 年）</text>
+  <rect x="452" y="236" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="512" y="248.0" fill="#2d3142" font-size="12" text-anchor="middle">流出抑制設施</text>
+  <text x="512" y="264.0" fill="#2d3142" font-size="12" text-anchor="middle">維護文件上傳</text>
   <rect x="452" y="476" width="120" height="96" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="512" y="520.0" fill="#2d3142" font-size="12" text-anchor="middle">大公電</text>
   <text x="512" y="536.0" fill="#2d3142" font-size="12" text-anchor="middle">契約容量檢討</text>
