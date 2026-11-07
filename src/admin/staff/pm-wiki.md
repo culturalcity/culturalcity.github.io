@@ -1611,6 +1611,8 @@ flowchart LR
 
 以下是依現行規約的作業方式，目的是讓名冊「該完整的部分完整、其他部分不必強求」。
 
+<img src="/images/diagrams/resident-roster-sets.svg" alt="住戶名單的範圍：區權人與承租人為主動維護的基準集合，其他經同意的使用者只在被動得知時補入" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto;background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);">
+
 - **名冊在哪裡**：Notion 社區資料中心 →「住戶與人員管理」→「區權人與使用者」資料庫。
 - **一定要維護完整的（基準）**：
     - **區分所有權人**（含車位所有權人）：依地政登記；買賣過戶時更新。

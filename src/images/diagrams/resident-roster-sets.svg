@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" width="720" height="560" role="img" aria-labelledby="roster-sets-title roster-sets-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
+  <title id="roster-sets-title">閱大安住戶名單的範圍</title>
+  <desc id="roster-sets-desc">集合圖：法定住戶之中，區分所有權人與承租人合為主動維護的基準集合；其他經區權人同意的使用者只在被動得知時補入名單；訪客不屬於住戶。</desc>
+  <rect width="720" height="560" fill="#f5f5f5"/>
+
+  <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="600">住戶名單的範圍</text>
+
+  <!-- 法定住戶 -->
+  <rect x="40" y="64" width="640" height="400" rx="8" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/>
+  <text x="56" y="92" fill="#2d3142" font-size="12" font-weight="600">法定住戶（條例第 3 條第 8 款）</text>
+  <text x="56" y="112" fill="#4f5d75" font-size="12">經區權人同意、使用專有部分的人；與是否居住、戶籍無關</text>
+
+  <!-- 基準集合 -->
+  <rect x="72" y="132" width="368" height="300" rx="8" fill="none" stroke="#eb6c36" stroke-width="2"/>
+  <text x="88" y="156" fill="#eb6c36" font-size="12" font-weight="600">基準集合・主動維護</text>
+
+  <circle cx="192" cy="296" r="104" fill="rgba(45,49,66,0.05)" stroke="#2d3142" stroke-width="1"/>
+  <text x="192" y="292" fill="#2d3142" font-size="16" font-weight="600" text-anchor="middle">區分所有權人</text>
+  <text x="192" y="316" fill="#4f5d75" font-size="12" text-anchor="middle">依地政登記</text>
+  <text x="192" y="336" fill="#4f5d75" font-size="12" text-anchor="middle">含車位所有權人</text>
+
+  <circle cx="368" cy="296" r="64" fill="rgba(79,93,117,0.06)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="368" y="292" fill="#2d3142" font-size="16" font-weight="600" text-anchor="middle">承租人</text>
+  <text x="368" y="316" fill="#4f5d75" font-size="12" text-anchor="middle">依租賃切結書</text>
+
+  <!-- 其他使用者 -->
+  <text x="568" y="156" fill="#2d3142" font-size="12" font-weight="600" text-anchor="middle">其他經同意的使用者</text>
+  <text x="568" y="176" fill="#4f5d75" font-size="12" text-anchor="middle">家人・同住者・幫傭等</text>
+
+  <circle cx="568" cy="296" r="72" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="568" y="292" fill="#eb6c36" font-size="16" font-weight="600" text-anchor="middle">被動得知</text>
+  <text x="568" y="316" fill="#4f5d75" font-size="12" text-anchor="middle">申請・登記</text>
+  <text x="568" y="336" fill="#4f5d75" font-size="12" text-anchor="middle">自行告知</text>
+
+  <text x="568" y="420" fill="#7a8399" font-size="12" text-anchor="middle">其餘不主動探詢</text>
+
+  <!-- 外部 -->
+  <text x="40" y="496" fill="#7a8399" font-size="12">框外：訪客（非住戶）</text>
+  <text x="680" y="496" fill="#2d3142" font-size="16" font-weight="600" text-anchor="end">住戶名單 ＝ 基準集合 ∪ 被動得知</text>
+
+  <!-- 圖例 -->
+  <line x1="40" y1="516" x2="680" y2="516" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+  <rect x="40" y="528" width="20" height="12" rx="2" fill="none" stroke="#eb6c36" stroke-width="2"/>
+  <text x="68" y="539" fill="#4f5d75" font-size="12">主動維護</text>
+  <rect x="160" y="528" width="20" height="12" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="188" y="539" fill="#4f5d75" font-size="12">被動補入</text>
+  <rect x="280" y="528" width="20" height="12" rx="2" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/>
+  <text x="308" y="539" fill="#4f5d75" font-size="12">法定住戶全體（名單不求完整）</text>
+</svg>
