@@ -21,6 +21,7 @@ extraStyles: |
   .filter-btn[data-filter="event"].active{background:var(--c-event);border-color:var(--c-event);}
   .filter-btn[data-filter="safety"].active{background:var(--c-safety);border-color:var(--c-safety);}
   .filter-btn[data-filter="staff"].active{background:var(--c-staff);border-color:var(--c-staff);}
+  .filter-btn[data-filter="clean"].active{background:var(--c-clean);border-color:var(--c-clean);}
   .year-label{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin-bottom:var(--sp-12);margin-top:var(--sp-28);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-12);}
   .year-label:first-child{margin-top:0;}
   .year-label::after{content:'';flex:1;height:1px;background:var(--line);}
@@ -39,6 +40,7 @@ extraStyles: |
   .notice-card.event   .type-stripe{background:var(--c-event);}
   .notice-card.safety  .type-stripe{background:var(--c-safety);}
   .notice-card.staff   .type-stripe{background:var(--c-staff);}
+  .notice-card.clean   .type-stripe{background:var(--c-clean);}
   .card-inner{flex:1;padding:var(--sp-12) var(--sp-16);display:flex;align-items:center;gap:var(--sp-16);flex-wrap:wrap;}
   .type-pill{font-size:var(--fs-caption);letter-spacing:var(--ls-text);padding:2px var(--sp-8);border-radius:1px;border:1px solid;white-space:nowrap;flex-shrink:0;}
   .notice-card.meeting .type-pill{color:var(--c-meeting);border-color:var(--blue-line);background:var(--blue-bg);}
@@ -48,6 +50,7 @@ extraStyles: |
   .notice-card.event   .type-pill{color:var(--c-event);border-color:var(--dp-line);background:var(--dp-bg);}
   .notice-card.safety  .type-pill{color:var(--c-safety);border-color:var(--line-strong);background:var(--tint);}
   .notice-card.staff   .type-pill{color:var(--c-staff);border-color:var(--c-staff-line);background:var(--c-staff-bg);}
+  .notice-card.clean   .type-pill{color:var(--c-clean);border-color:var(--c-clean-line);background:var(--c-clean-bg);}
   .card-title{font-size:var(--fs-body);font-weight:500;flex:1;min-width:160px;color:var(--wg41);}
   .card-date{font-size:var(--fs-text);color:var(--wg9);letter-spacing:var(--ls-text);white-space:nowrap;}
   .card-arrow{display:flex;align-items:center;padding:0 var(--sp-16);font-size:var(--fs-body);color:var(--wg9);transition:transform .18s;}
@@ -69,6 +72,7 @@ extraStyles: |
     <button class="filter-btn"        data-filter="staff"   aria-pressed="false" onclick="filter('staff')">人事公告</button>
     <button class="filter-btn"        data-filter="rule"    aria-pressed="false" onclick="filter('rule')">規約規範</button>
     <button class="filter-btn"        data-filter="work"    aria-pressed="false" onclick="filter('work')">設備保養</button>
+    <button class="filter-btn"        data-filter="clean"   aria-pressed="false" onclick="filter('clean')">清潔</button>
     <button class="filter-btn"        data-filter="equip"   aria-pressed="false" onclick="filter('equip')">工程通知</button>
     <button class="filter-btn"        data-filter="safety"  aria-pressed="false" onclick="filter('safety')">安全警示</button>
     <button class="filter-btn"        data-filter="event"   aria-pressed="false" onclick="filter('event')">節日活動</button>

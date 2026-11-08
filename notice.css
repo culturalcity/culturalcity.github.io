@@ -44,6 +44,7 @@ body {
 .pill-safety { color: var(--c-safety); border-color: var(--dn-line); background: var(--dn-bg); }
 .pill-equip { color: var(--c-equip); border-color: var(--dn-line); background: var(--dn-bg); }
 .pill-staff { color: var(--c-staff); border-color: var(--c-staff-line); background: var(--c-staff-bg); }
+.pill-clean { color: var(--c-clean); border-color: var(--c-clean-line); background: var(--c-clean-bg); }
 
 /* 深色 header 上的 pill 覆寫：用淺色版色相，避免暗紅/暗綠融進深底 */
 .header .pill-work    { color: var(--warn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
@@ -53,6 +54,7 @@ body {
 .header .pill-safety  { color: var(--dn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
 .header .pill-equip   { color: var(--dn-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
 .header .pill-staff   { color: var(--c-staff-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
+.header .pill-clean   { color: var(--c-clean-on-dark); background: var(--tint-dark-strong); border-color: var(--line-dark); }
 
 /* ── 語言切換器 ── */
 .lang-bar {

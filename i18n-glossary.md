@@ -110,6 +110,8 @@
 | 消防栓 | Fire Hydrant | 消火栓 |
 | 滅火器 | Fire Extinguisher | 消火器 |
 | 逃生梯 / 非常階段 | Emergency Stairs | 非常階段 |
+| A 梯／B 梯／C 梯 | Staircase A / B / C | A階段／B階段／C階段 |
+| R2F–R3F（頂樓以上的機房、水錶室樓層） | R2F–R3F | R2〜R3階 |
 | 防火門 | Fire Door | 防火戸 |
 | 防水閘門 | Floodgate | 防水ゲート |
 | 颱風（陸上）警報 | (Land) Typhoon Warning | 陸上台風警報 |
@@ -247,6 +249,7 @@
 | 會議公告 | Meeting Notice | 会議のお知らせ | meeting |
 | 節能活動 | Energy-Saving Program | 省エネ活動 | event |
 | 人事公告 | Personnel Notice | 人事のお知らせ | staff |
+| 清潔 | Cleaning | 清掃 | clean |
 
 ---
 
@@ -380,3 +383,5 @@ Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonic
 同步狀態：① repo canonical、② Notion、③ Obsidian 皆已同步（2026-09-22）。
 
 **2026-09-24 修訂（11 月外牆清洗工程公告）**：新增——世新事業（**New World**，主委定案；官網 newworld.com.tw，日文保留漢字 世新事業）、外牆清洗（Exterior Wall Cleaning／外壁清掃）、格柵（**Facade Louvers**／**ルーバー**，主委定案）、高空繩索作業（Rope Access Work at Height／ロープアクセスによる高所作業）、立面方位詞 羅斯福路側／81巷側／往公館側／往古亭側（**Roosevelt Road side／Lane 81 side／Gongguan side／Guting side**，主委定案；日文去「往」字）。「陽台地漏」併入既有「落水頭」條（同為 Floor Drain／排水口）。同步狀態：① repo canonical、② Notion、③ Obsidian 皆已同步（2026-09-24）。
+
+**2026-11-08 修訂（11 月清潔排程公告）**：新增公告類別「**清潔**／Cleaning／清掃」（pillType `clean`，色 `--c-clean:#12666B`，深色 header 版 `#8CC7CA`）；新增 **C 梯**（Staircase C／C階段，比照 A／B 梯）、**R2F–R3F**（英文照寫、日文 R2〜R3階），主委定案。清潔日曆的「1F 閱覽室」「R1F 閱覽室」在公告中依本表寫「1F 交誼廳」「頂樓室內空間」。

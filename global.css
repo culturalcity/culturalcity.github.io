@@ -49,6 +49,7 @@
   --c-meeting: #2B4A6B; --c-work: #8C4800; --c-equip: #8C1F1F; --c-safety: #5C3A1F;
   --c-rule: #3C3835;    --c-event: #1F5C38; --c-staff: #6B3F72;
   --c-staff-bg: rgba(107,63,114,.06); --c-staff-line: rgba(107,63,114,.3); --c-staff-on-dark: #C7A3CF;
+  --c-clean: #12666B; --c-clean-bg: rgba(18,102,107,.06); --c-clean-line: rgba(18,102,107,.3); --c-clean-on-dark: #8CC7CA;  /* 清潔（2026-11-08 新增） */
   /* 緊急橫條：國際慣例黃黑配色，刻意不走 wg 系列 */
   --alert-bg: #FFD33D;
   --alert-ink: #1A1612;
