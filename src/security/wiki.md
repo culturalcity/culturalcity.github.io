@@ -158,6 +158,7 @@ eleventyExcludeFromCollections: true
 - [停車場車道門降下、車輛無法進出](/security/sop/garage-door/)
 - [颱風防颱準備施作項目](/security/sop/typhoon/)、[強風時正門改手動](/security/sop/strong-wind/)
 - [防空演習門禁戒護](/security/sop/civil-defense-drill/)
+- [住戶室內裝修](/security/sop/renovation/)（施工人員換證、施工時間、巡檢重點）
 
 櫃台張貼的緊急聯絡卡（派出所、消防隊、社區統編與地址、電梯與機電緊急報修、各廠商）是聯絡電話的正本，網站不重抄電話號碼。
 
