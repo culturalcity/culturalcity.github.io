@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="680" height="540" viewBox="0 0 680 540" font-family="'Noto Sans TC', 'Noto Sans CJK TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">
 <title>雨水流出抑制設施剖面示意圖</title>
-<desc>建築物雨水從屋頂經雨水管收集至地下雨水池，雨水池內由浮球感測水位、控制沈水馬達抽水，並經止水閥排放至公共雨水下水道。</desc>
+<desc>建築物雨水從屋頂經雨水管收集至地下雨水池，雨水池內由浮球感測水位、控制沈水馬達抽水，並經逆止閥排放至公共雨水下水道。</desc>
 
 <style>
   .th { font-size: 14px; font-weight: 500; fill: #3C3835; }
@@ -103,7 +103,7 @@
 
 <line class="leader" x1="470" y1="282" x2="555" y2="198"/>
 <circle cx="470" cy="282" r="1.8" fill="#76716C"/>
-<text class="th" x="555" y="202">止水閥</text>
+<text class="th" x="555" y="202">逆止閥</text>
 <text class="ts" x="555" y="218">防止下水道倒灌</text>
 
 <text class="ts" x="548" y="294">→ 公共雨水下水道</text>
