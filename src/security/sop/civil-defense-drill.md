@@ -1,6 +1,6 @@
 ---
 layout: handbook.njk
-permalink: /security/civil-defense-drill/index.html
+permalink: /security/sop/civil-defense-drill/index.html
 title: 防空演習門禁戒護作業程序
 docTitle: 防空演習門禁戒護
 eyebrow: CULTURAL CITY · CIVIL DEFENSE DRILL

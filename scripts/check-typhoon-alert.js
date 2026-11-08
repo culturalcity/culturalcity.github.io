@@ -33,12 +33,12 @@ const STATE_PATH = path.resolve(__dirname, '..', 'utility', 'data', 'typhoon-sta
 const DRY_RUN = process.argv.includes('--dry-run');
 
 // 2026-07-11 方案A（單一資料源）：事件不再內嵌施作清單，改連到主委親撰的 canonical SOP。
-// 防颱準備＝保全專區 /security/typhoon-prep/（2026-11-08 由總幹事專區搬來，保全與總幹事共用；舊網址自動轉址）「颱風公設防颱準備施作項目」（含現場照片；
+// 防颱準備＝保全專區 /security/sop/typhoon/（2026-11-08 由總幹事專區搬來，保全與總幹事共用；舊網址自動轉址）「颱風公設防颱準備施作項目」（含現場照片；
 // 2026-10-31 由 Notion 搬到網站成為正本）；
-// 災後巡查＝總幹事 Wiki 第五章 §1.2.2。改清單內容一律改該兩處，不要回頭在這裡加項目
+// 災後巡查＝防颱施作項目頁「警報解除後」一節（/security/sop/typhoon/#after）。改清單內容一律改該兩處，不要回頭在這裡加項目
 // ——本檔曾內嵌一份 AI 代擬、未經主委審核的 9 項清單，2026-07-10 巴威颱風實戰時發現與
 // 實際 SOP 不符（閘門是手動組裝式、非「下放」式），故廢除內嵌清單。
-const PREP_SOP_URL = 'https://culturalcity.org/security/typhoon-prep/';
+const PREP_SOP_URL = 'https://culturalcity.org/security/sop/typhoon/';
 const PM_WIKI_URL = 'https://culturalcity.org/admin/staff/pm-wiki/';
 
 function get(url) {
@@ -189,7 +189,7 @@ function saveState(state) {
       title: `🔍 颱風後巡查清單（${prevState.phenomena || '陸上警報'} 解除後）`,
       description:
         `陸上颱風警報已解除。建議於今日視天氣狀況、明日全面執行災後巡查。\n\n` +
-        `**災後巡查清單**：見總幹事 Wiki 第五章 §1.2.2\n${PM_WIKI_URL}\n\n` +
+        `**災後巡查清單**：見防颱施作項目頁「警報解除後」\n${PREP_SOP_URL}#after\n\n` +
         `巡查發現異常處請拍照記錄、通知主委、視損害程度決定是否動用社區公基金修繕。\n\n` +
         `**本次警報期間**：${prevState.activeSince || '?'} ~ ${nowTaipeiISO()}\n\n` +
         `📌 由 typhoon-alert 系統自動建立\n` +
