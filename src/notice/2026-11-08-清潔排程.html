@@ -21,12 +21,36 @@ extraStyles: |
   .clean-table td.wkend{color:var(--dn);}
   .clean-table tr.off td{background:var(--tint);color:var(--wg9);}
   .clean-table tr.off td:first-child{color:var(--wg9);font-weight:400;}
+  .clean-table.floor-table td:first-child{width:auto;}
+  .main .sec .clean-table.floor-table td:nth-child(2){white-space:normal;width:auto;color:var(--wg41);}
+  .clean-table .d{white-space:nowrap;}
 summary: 各樓層走道與梯間每月輪流清掃兩次；本月排休 11/03、08、14、18、22、26、30
 ---
 <div class="lang-block active" data-lang="zh">
 <div class="sec">
-      <div class="sec-label">本月清掃日期</div>
+      <div class="sec-label">依樓層查</div>
       <p>清潔人員依下表輪流清掃各樓層公共區域，3F–15F 走道與梯間、2F 健身房、B2F–B4F 地下室本月各清掃兩次。</p>
+      <table class="clean-table floor-table">
+        <thead><tr><th>樓層</th><th>本月清掃日</th></tr></thead>
+        <tbody>
+          <tr><td>RF（含 R2F–R3F）</td><td><span class="d">11/13（五）</span></td></tr>
+          <tr><td>14F、15F</td><td><span class="d">11/12（四）</span>、<span class="d">11/29（日）</span></td></tr>
+          <tr><td>12F、13F</td><td><span class="d">11/11（三）</span>、<span class="d">11/28（六）</span></td></tr>
+          <tr><td>10F、11F</td><td><span class="d">11/10（二）</span>、<span class="d">11/27（五）</span></td></tr>
+          <tr><td>8F、9F</td><td><span class="d">11/09（一）</span>、<span class="d">11/25（三）</span></td></tr>
+          <tr><td>6F、7F</td><td><span class="d">11/07（六）</span>、<span class="d">11/24（二）</span></td></tr>
+          <tr><td>4F、5F</td><td><span class="d">11/06（五）</span>、<span class="d">11/23（一）</span></td></tr>
+          <tr><td>2F、3F</td><td><span class="d">11/05（四）</span>、<span class="d">11/21（六）</span></td></tr>
+          <tr><td>1F</td><td><span class="d">11/15（日）</span></td></tr>
+          <tr><td>B1F</td><td><span class="d">11/16（一）</span></td></tr>
+          <tr><td>B2F</td><td><span class="d">11/01（日）</span>、<span class="d">11/17（二）</span></td></tr>
+          <tr><td>B3F</td><td><span class="d">11/02（一）</span>、<span class="d">11/19（四）</span></td></tr>
+          <tr><td>B4F</td><td><span class="d">11/04（三）</span>、<span class="d">11/20（五）</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+<div class="sec">
+      <div class="sec-label">依日期查</div>
       <table class="clean-table">
         <thead><tr><th>日期</th><th>星期</th><th>清掃區域</th></tr></thead>
         <tbody>
@@ -68,8 +92,29 @@ summary: 各樓層走道與梯間每月輪流清掃兩次；本月排休 11/03�
 
 <div class="lang-block" data-lang="en">
 <div class="sec">
-      <div class="sec-label">Cleaning Dates This Month</div>
+      <div class="sec-label">Find Your Floor</div>
       <p>Our cleaning staff clean the common areas floor by floor according to the schedule below. This month, the corridors and stairwells on 3F–15F, the 2F Gym, and B2F–B4F are each cleaned twice.</p>
+      <table class="clean-table floor-table">
+        <thead><tr><th>Floor</th><th>Cleaning Days</th></tr></thead>
+        <tbody>
+          <tr><td>RF (incl. R2F–R3F)</td><td><span class="d">11/13 (Fri)</span></td></tr>
+          <tr><td>14F &amp; 15F</td><td><span class="d">11/12 (Thu)</span>, <span class="d">11/29 (Sun)</span></td></tr>
+          <tr><td>12F &amp; 13F</td><td><span class="d">11/11 (Wed)</span>, <span class="d">11/28 (Sat)</span></td></tr>
+          <tr><td>10F &amp; 11F</td><td><span class="d">11/10 (Tue)</span>, <span class="d">11/27 (Fri)</span></td></tr>
+          <tr><td>8F &amp; 9F</td><td><span class="d">11/09 (Mon)</span>, <span class="d">11/25 (Wed)</span></td></tr>
+          <tr><td>6F &amp; 7F</td><td><span class="d">11/07 (Sat)</span>, <span class="d">11/24 (Tue)</span></td></tr>
+          <tr><td>4F &amp; 5F</td><td><span class="d">11/06 (Fri)</span>, <span class="d">11/23 (Mon)</span></td></tr>
+          <tr><td>2F &amp; 3F</td><td><span class="d">11/05 (Thu)</span>, <span class="d">11/21 (Sat)</span></td></tr>
+          <tr><td>1F</td><td><span class="d">11/15 (Sun)</span></td></tr>
+          <tr><td>B1F</td><td><span class="d">11/16 (Mon)</span></td></tr>
+          <tr><td>B2F</td><td><span class="d">11/01 (Sun)</span>, <span class="d">11/17 (Tue)</span></td></tr>
+          <tr><td>B3F</td><td><span class="d">11/02 (Mon)</span>, <span class="d">11/19 (Thu)</span></td></tr>
+          <tr><td>B4F</td><td><span class="d">11/04 (Wed)</span>, <span class="d">11/20 (Fri)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+<div class="sec">
+      <div class="sec-label">By Date</div>
       <table class="clean-table">
         <thead><tr><th>Date</th><th>Day</th><th>Area</th></tr></thead>
         <tbody>
@@ -111,8 +156,29 @@ summary: 各樓層走道與梯間每月輪流清掃兩次；本月排休 11/03�
 
 <div class="lang-block" data-lang="ja">
 <div class="sec">
-      <div class="sec-label">今月の清掃日</div>
+      <div class="sec-label">階別の清掃日</div>
       <p>清掃スタッフが下表のとおり各階の共用部分を順番に清掃します。今月は 3F〜15F の廊下と階段、2F ジム、B2F〜B4F をそれぞれ 2 回清掃します。</p>
+      <table class="clean-table floor-table">
+        <thead><tr><th>階</th><th>清掃日</th></tr></thead>
+        <tbody>
+          <tr><td>RF（R2〜R3階を含む）</td><td><span class="d">11/13（金）</span></td></tr>
+          <tr><td>14F・15F</td><td><span class="d">11/12（木）</span>、<span class="d">11/29（日）</span></td></tr>
+          <tr><td>12F・13F</td><td><span class="d">11/11（水）</span>、<span class="d">11/28（土）</span></td></tr>
+          <tr><td>10F・11F</td><td><span class="d">11/10（火）</span>、<span class="d">11/27（金）</span></td></tr>
+          <tr><td>8F・9F</td><td><span class="d">11/09（月）</span>、<span class="d">11/25（水）</span></td></tr>
+          <tr><td>6F・7F</td><td><span class="d">11/07（土）</span>、<span class="d">11/24（火）</span></td></tr>
+          <tr><td>4F・5F</td><td><span class="d">11/06（金）</span>、<span class="d">11/23（月）</span></td></tr>
+          <tr><td>2F・3F</td><td><span class="d">11/05（木）</span>、<span class="d">11/21（土）</span></td></tr>
+          <tr><td>1F</td><td><span class="d">11/15（日）</span></td></tr>
+          <tr><td>B1F</td><td><span class="d">11/16（月）</span></td></tr>
+          <tr><td>B2F</td><td><span class="d">11/01（日）</span>、<span class="d">11/17（火）</span></td></tr>
+          <tr><td>B3F</td><td><span class="d">11/02（月）</span>、<span class="d">11/19（木）</span></td></tr>
+          <tr><td>B4F</td><td><span class="d">11/04（水）</span>、<span class="d">11/20（金）</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+<div class="sec">
+      <div class="sec-label">日付別</div>
       <table class="clean-table">
         <thead><tr><th>日付</th><th>曜日</th><th>清掃エリア</th></tr></thead>
         <tbody>
