@@ -842,7 +842,7 @@ flowchart TD
 
 > 總幹事每月初檢視本表，對照當月應啟動的議題。
 
-<a href="/images/diagrams/annual-calendar.svg" target="_blank" rel="noopener"><img src="/images/diagrams/annual-calendar.svg" alt="年度循環行事曆：以月份為列、治理與會議／物業換約／保險與其他合約／設施與法規／節慶公告五類為欄" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
+<a href="/images/diagrams/annual-calendar.svg?v=20261109" target="_blank" rel="noopener"><img src="/images/diagrams/annual-calendar.svg?v=20261109" alt="年度循環行事曆：以月份為列、治理與會議／物業換約／保險與其他合約／設施與法規／節慶公告五類為欄" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
 
 <p style="text-align:center;font-size:var(--fs-caption);color:var(--wg9);margin-top:0;">點圖可開原尺寸</p>
 
