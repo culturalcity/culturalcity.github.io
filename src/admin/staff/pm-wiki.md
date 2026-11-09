@@ -842,7 +842,7 @@ flowchart TD
 
 > 總幹事每月初檢視本表，對照當月應啟動的議題。
 
-<a href="/images/diagrams/annual-calendar.svg?v=20261109" target="_blank" rel="noopener"><img src="/images/diagrams/annual-calendar.svg?v=20261109" alt="年度循環行事曆：以月份為列、治理與會議／物業換約／保險與其他合約／設施與法規／節慶公告五類為欄" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
+<a href="/images/diagrams/annual-calendar.svg?v=20261109b" target="_blank" rel="noopener"><img src="/images/diagrams/annual-calendar.svg?v=20261109b" alt="年度循環行事曆：以月份為列、治理與會議／物業換約／保險與其他合約／設施與法規／節慶公告五類為欄" style="max-width:100%;height:auto;display:block;margin:var(--sp-16) auto var(--sp-4);background:var(--white);border:1px solid var(--line);border-radius:2px;padding:var(--sp-8);"></a>
 
 <p style="text-align:center;font-size:var(--fs-caption);color:var(--wg9);margin-top:0;">點圖可開原尺寸</p>
 
@@ -876,7 +876,8 @@ flowchart TD
 | 12 月 | **垃圾清運**議價（合約規劃為每年 1–12 月，現約到 2027-01 底）| 第四章 §3.1 |
 | 12 月 | **公設冷氣保養清洗**（淡季）| 第四章 §1.7 |
 | 12 月 | 聖誕新年布置；跨年注意事項公告、頂樓跨年煙火維安 | 主日曆 12 月提醒事件 |
-| **每月** | 台電四張帳單追蹤、更新氣候行動獎明細 | 第六章 §3.1 |
+| **每月** | **充電樁電費分攤**：依台電 B1+B2、B3+B4 兩張充電樁帳單，算出各戶充電費，併入智生活管理費匯入檔（充電費版），檔案在 Google One `02. 財務管理\03. 管理費\管理費單製作\` | 第六章 §3.1 |
+| **每月** | 公共事業帳單：台電每月、中華電信每月、自來水每兩月，寄到 culturalcity85 信箱後自動存檔；大公電由主委自台電網站下載。總幹事只需留意信件有沒有被標「帳單需檢視」 | 第二章 §2.3、第六章 §3 |
 | **每月** | 月底前兩天排好下個月的清潔排程與保養日期 | 第二章 §2.3 |
 | **每半年** | **物業附帶三項**：水塔清洗（附停水三段提醒）、環境消毒（1F、B1–B4、RF）、高壓沖洗（1F 前門、1F 後門與車道、頂樓室外），上半年、下半年各一次。實際日期依物業排程，只能抓大概的時間段，排定後登錄維養日曆（過去大約：水塔 4、10 月，消毒 5、12 月，高壓沖洗 7、12 月）| 第四章 §1.5、§1.6、§4 |
 
@@ -1105,7 +1106,7 @@ flowchart TD
 
 ### 3.1 台灣電力公司（四張帳單）
 
-需每月追蹤並更新至「氣候行動獎」相關明細表：
+四張帳單的電子帳單都寄到 culturalcity85 信箱，系統自動存檔（第二章 §2.3）。大公電的用電明細由主委更新；兩張充電樁帳單是總幹事每月**充電樁電費分攤**的依據（併入智生活管理費匯入檔的充電費版）。
 
 1. **大公電（分攤到各戶電費單中）**
     - 契約：低壓電力非時間電價（契約容量 50瓩）。
