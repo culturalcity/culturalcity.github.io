@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 752" width="800" height="752" role="img" aria-labelledby="cal-title cal-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
   <title id="cal-title">閱大安年度循環行事曆</title>
-  <desc id="cal-desc">以月份為列、六類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）、10 月年度預算與工作計畫準備。物業換約：9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印、1 月合約存查。其他合約與保險：10 月園藝與 AED 議價，合約到期年另有電梯、機電、大門；11 月公共意外險與火險比價、垃圾整月秤重；12 月保險續保完成、垃圾清運議價。定期保養：2 月與 8 月 UPS 電池放電；4 月與 10 月水塔清洗、5 月與 12 月環境消毒、7 月與 12 月高壓沖洗（三項為物業附帶服務）；12 月公設冷氣保養清洗。法規與安全：公共安全檢查每 3 年一次，1 月議價、2 月執行；2 月消防安全設備檢修申報；4 月流出抑制設施維護文件上傳；6 月防颱與高溫準備；7 至 8 月防空演習（依市府公告）；10 至 11 月大公電契約容量檢討。節慶公告：1 月聖誕布置撤除、2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）、12 月聖誕布置與跨年注意事項、頂樓煙火維安。每月固定追蹤台電四張帳單並更新氣候行動獎明細，月底前兩天排好下個月的清潔與保養日曆。</desc>
+  <desc id="cal-desc">以月份為列、六類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）、10 月年度預算與工作計畫準備。物業換約：9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印、1 月合約存查。其他合約與保險：10 月園藝與 AED 議價，合約到期年另有電梯、機電、大門；11 月公共意外險與火險比價、垃圾整月秤重；12 月保險續保完成、垃圾清運議價。定期保養：2 月與 8 月 UPS 電池放電；物業附帶的水塔清洗、環境消毒、高壓沖洗上半年與下半年各一次，日期依物業排程；12 月公設冷氣保養清洗。法規與安全：公共安全檢查每 3 年一次，1 月議價、2 月執行；2 月消防安全設備檢修申報；4 月流出抑制設施維護文件上傳；6 月防颱與高溫準備；7 至 8 月防空演習（依市府公告）；10 至 11 月大公電契約容量檢討。節慶公告：1 月聖誕布置撤除、2 月春節安排（值勤輪班、禁止裝修）、7 至 8 月中元普渡籌備（依農曆）、12 月聖誕布置與跨年注意事項、頂樓煙火維安。每月固定追蹤台電四張帳單並更新氣候行動獎明細，月底前兩天排好下個月的清潔與保養日曆。</desc>
   <rect width="800" height="752" fill="#f5f5f5"/>
   <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="700">年度循環行事曆</text>
   <text x="40" y="64" fill="#2d3142" font-size="12">每月初對照當月要啟動的事。農曆節日依當年日期調整；標「任期年」的只在換屆那年做</text>
@@ -70,24 +70,22 @@
   <text x="368" y="632.0" fill="#2d3142" font-size="12" text-anchor="middle">垃圾清運議價</text>
   <rect x="430" y="156" width="116" height="48" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="488" y="184.0" fill="#2d3142" font-size="12" text-anchor="middle">UPS 電池放電</text>
-  <rect x="430" y="252" width="116" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="488" y="264.0" fill="#2d3142" font-size="12" text-anchor="middle">水塔清洗</text>
-  <text x="488" y="280.0" fill="#4f5d75" font-size="12" text-anchor="middle">（物業附帶）</text>
-  <rect x="430" y="292" width="116" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="488" y="304.0" fill="#2d3142" font-size="12" text-anchor="middle">環境消毒</text>
-  <text x="488" y="320.0" fill="#4f5d75" font-size="12" text-anchor="middle">（物業附帶）</text>
-  <rect x="430" y="372" width="116" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="488" y="384.0" fill="#2d3142" font-size="12" text-anchor="middle">高壓沖洗</text>
-  <text x="488" y="400.0" fill="#4f5d75" font-size="12" text-anchor="middle">（物業附帶）</text>
+  <rect x="430" y="212" width="116" height="152" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="488" y="260.0" fill="#2d3142" font-size="12" text-anchor="middle">物業附帶・上半年</text>
+  <text x="488" y="276.0" fill="#2d3142" font-size="12" text-anchor="middle">水塔清洗</text>
+  <text x="488" y="292.0" fill="#2d3142" font-size="12" text-anchor="middle">環境消毒</text>
+  <text x="488" y="308.0" fill="#2d3142" font-size="12" text-anchor="middle">高壓沖洗</text>
+  <text x="488" y="324.0" fill="#4f5d75" font-size="12" text-anchor="middle">（日期依物業排程）</text>
   <rect x="430" y="412" width="116" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="488" y="432.0" fill="#2d3142" font-size="12" text-anchor="middle">UPS 電池放電</text>
-  <rect x="430" y="492" width="116" height="48" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="488" y="512.0" fill="#2d3142" font-size="12" text-anchor="middle">水塔清洗</text>
-  <text x="488" y="528.0" fill="#4f5d75" font-size="12" text-anchor="middle">（物業附帶）</text>
+  <rect x="430" y="452" width="116" height="136" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="488" y="492.0" fill="#2d3142" font-size="12" text-anchor="middle">物業附帶・下半年</text>
+  <text x="488" y="508.0" fill="#2d3142" font-size="12" text-anchor="middle">水塔清洗</text>
+  <text x="488" y="524.0" fill="#2d3142" font-size="12" text-anchor="middle">環境消毒</text>
+  <text x="488" y="540.0" fill="#2d3142" font-size="12" text-anchor="middle">高壓沖洗</text>
+  <text x="488" y="556.0" fill="#4f5d75" font-size="12" text-anchor="middle">（日期依物業排程）</text>
   <rect x="430" y="596" width="116" height="48" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="488" y="608.0" fill="#2d3142" font-size="12" text-anchor="middle">公設冷氣保養清洗</text>
-  <text x="488" y="624.0" fill="#2d3142" font-size="12" text-anchor="middle">環境消毒・高壓沖洗</text>
-  <text x="488" y="640.0" fill="#4f5d75" font-size="12" text-anchor="middle">（後兩項物業附帶）</text>
+  <text x="488" y="624.0" fill="#2d3142" font-size="12" text-anchor="middle">公設冷氣保養清洗</text>
   <rect x="550" y="116" width="116" height="32" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
   <text x="608" y="128.0" fill="#2d3142" font-size="12" text-anchor="middle">公安檢查議價</text>
   <text x="608" y="144.0" fill="#4f5d75" font-size="12" text-anchor="middle">（每 3 年）</text>
@@ -109,7 +107,8 @@
   <rect x="670" y="116" width="116" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="728" y="136.0" fill="#2d3142" font-size="12" text-anchor="middle">聖誕布置撤除</text>
   <rect x="670" y="156" width="116" height="48" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
-  <text x="728" y="184.0" fill="#2d3142" font-size="12" text-anchor="middle">農曆新年公告</text>
+  <text x="728" y="176.0" fill="#2d3142" font-size="12" text-anchor="middle">春節安排</text>
+  <text x="728" y="192.0" fill="#4f5d75" font-size="12" text-anchor="middle">（值勤、禁止裝修）</text>
   <rect x="670" y="372" width="116" height="72" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="728" y="404.0" fill="#2d3142" font-size="12" text-anchor="middle">中元普渡籌備</text>
   <text x="728" y="420.0" fill="#4f5d75" font-size="12" text-anchor="middle">（依農曆）</text>
