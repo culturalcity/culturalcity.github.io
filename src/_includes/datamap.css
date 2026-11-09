@@ -1,0 +1,26 @@
+/* 閱大安資料連動圖：共用樣式。只用變數，--dm-* 顏色與字級、間距 token 由各頁面定義。 */
+.dm-legend{display:flex;flex-wrap:wrap;gap:var(--sp-8) var(--sp-16);font-size:var(--fs-caption);color:var(--dm-muted)}
+.dm-legend span{display:inline-flex;align-items:center;gap:var(--sp-4)}
+.dm-sw{width:22px;height:3px;display:inline-block}
+.dm-tier{width:12px;height:12px;display:inline-block;border:1px solid var(--dm-line)}
+.dm-box{background:var(--dm-panel);border:1px solid var(--dm-line);border-radius:var(--radius)}
+.dm-scroll{overflow-x:auto;padding:var(--sp-8) 0}
+.dm-scroll svg{display:block}
+.dm-node{cursor:pointer}
+.dm-node rect{stroke:var(--dm-line)}
+.dm-node rect.dm-base{fill:var(--dm-panel);stroke:none}
+.dm-node text{fill:var(--dm-fg);font-size:var(--fs-caption)}
+.dm-node.on rect{stroke:var(--dm-fg);stroke-width:2}
+.dm-node:focus-visible rect{stroke:var(--dm-fg);stroke-width:2.5}
+.dm-link{fill:none;stroke-width:1.5;opacity:.5}
+.dm-link.on{stroke-width:2.4;opacity:1}
+.dm-dim{opacity:.35}
+.dm-detail{padding:var(--sp-16) var(--sp-20)}
+.dm-detail h2{font-size:var(--fs-body);margin:0 0 var(--sp-4)}
+.dm-hint{color:var(--dm-muted);font-size:var(--fs-caption);margin:0 0 var(--sp-8)}
+.dm-tw{overflow-x:auto}
+.dm-table{border-collapse:collapse;width:100%;font-size:var(--fs-text)}
+.dm-table th{text-align:left;font-weight:500;color:var(--dm-muted);font-size:var(--fs-caption);padding:var(--sp-8);border-bottom:1px solid var(--dm-line);white-space:nowrap}
+.dm-table td{padding:var(--sp-8);border-bottom:1px solid var(--dm-line);vertical-align:top}
+.dm-who{display:inline-block;font-size:var(--fs-caption);font-weight:700;padding:0 var(--sp-8);border:1px solid currentColor;border-radius:999px;white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){.dm-node,.dm-link{transition:opacity .2s}}

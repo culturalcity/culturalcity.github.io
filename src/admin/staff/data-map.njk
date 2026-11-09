@@ -1,0 +1,51 @@
+---
+layout: base.njk
+permalink: /admin/staff/data-map/index.html
+title: 資料連動圖
+eleventyExcludeFromCollections: true
+extraStyles: |
+  :root { --page-max-width: 1120px; }
+  .dm-page { --dm-auto: var(--blue); --dm-ai: var(--dp); --dm-gm: var(--warn); --dm-chair: var(--c-staff);
+    --dm-t-ext: var(--line-strong); --dm-t-gm: var(--warn-line); --dm-t-res: var(--dp-line); --dm-t-chair: var(--c-staff-line);
+    --dm-fg: var(--wg41); --dm-muted: var(--wg9); --dm-line: var(--line-strong); --dm-panel: var(--white); }
+  .dm-page { display: grid; gap: var(--sp-20); }
+  .dm-page p { margin: 0; }
+  .dm-intro { color: var(--wg9); line-height: var(--lh-text); }
+  .dm-page h2.dm-sec { font-size: var(--fs-heading); margin: var(--sp-20) 0 0; }
+  .dm-page ul { margin: 0; padding-left: 1.2em; line-height: var(--lh-text); }
+---
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">CULTURAL CITY · DATA MAP</div>
+    <h1>資料連動圖</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="main dm-page">
+  <a class="back-link" href="/admin/staff/pm-wiki/">返回總幹事 Wiki</a>
+  <style>{% include "datamap.css" %}</style>
+
+  <p class="dm-intro">每一份文件是一個點，箭頭代表資料從哪裡流到哪裡，大致由左往右。點任一個點，看它的資料從哪裡來、更新時要連動哪些地方。點的顏色代表誰看得到，箭頭顏色代表由誰更新。</p>
+
+  <div class="dm-legend" id="dmLegend" aria-label="圖例"></div>
+
+  <div class="dm-box dm-scroll"><svg id="dmNet" role="img" aria-label="各文件之間的連動網狀圖"></svg></div>
+
+  <section class="dm-box dm-detail" aria-live="polite">
+    <h2 id="dmTitle"></h2>
+    <p class="dm-hint" id="dmHint"></p>
+    <div class="dm-tw"><table class="dm-table"><thead><tr><th>方向與文件</th><th>由誰</th><th>時機與做法</th></tr></thead><tbody id="dmBody"></tbody></table></div>
+  </section>
+
+  <h2 class="dm-sec">原則</h2>
+  <ul id="dmPrinciples"></ul>
+
+  <h2 class="dm-sec">全部連動一覽</h2>
+  <div class="dm-box dm-detail dm-tw"><table class="dm-table"><thead><tr><th>來源</th><th>連動到</th><th>由誰</th><th>時機與做法</th></tr></thead><tbody id="dmAll"></tbody></table></div>
+</div>
+
+<script>
+{% include "datamap.js" %}
+renderDataMap({{ dataMap | dump | safe }});
+</script>
