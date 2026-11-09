@@ -13,7 +13,7 @@
 //   - 「閱大安-清潔」日曆：下個月每一天都要有事件（打掃區域或「清潔排休」）
 //       排好 → 產公告 HTML、commit 到 repo（內審版：不進列表與首頁）→ 寄信＋主日曆 📢 待辦
 //       之後總幹事又改了日曆 → 公告還沒轉正式就自動更新並再寄信
-//   - 「閱大安-維養」日曆：下個月要有每月固定的三項（機電、電梯、園藝保養）
+//   - 「閱大安-維養」日曆：下個月要有每月必有的機電保養、電梯保養（園藝不是每月都有，不檢查）
 //       排好 → 寄信＋主日曆 📢 待辦「確認發布保養公告」
 //   - 還沒排好 → 每天寄一封提醒（最多 3 封），寫給總幹事、列出缺哪些
 //
@@ -32,7 +32,7 @@ var MAINT_CAL = 'cultralcity85@gmail.com';   // 維養日曆的 id 少一個 u�
 var MAIN_CAL = 'culturalcity85@gmail.com';   // 主日曆：📢 待辦放這裡
 var NOTIFY_EMAIL = 'culturalcity85@gmail.com';
 var DAYS_BEFORE_END = 2;                     // 月底前幾天開始檢查（2026-11-09 主委定：月底前兩天，2 月也涵蓋）
-var MONTHLY_ITEMS = ['機電保養', '電梯保養', '園藝保養'];  // 維養每月固定項目（事件標題開頭）
+var MONTHLY_ITEMS = ['機電保養', '電梯保養'];  // 維養每月必有的項目（事件標題開頭）。園藝合約 1、2、11 月沒有，不列入
 var REPO = 'culturalcity/culturalcity.github.io';
 var BRANCH = 'main';
 var SITE = 'https://culturalcity.org';
@@ -257,7 +257,7 @@ function statusLines(nm, cl, mt) {
   if (!cl.missing.length) lines.push('✓ 清潔排程：' + nm.m + ' 月每天都排好了');
   else if (cl.missing.length === nm.days) lines.push('✗ 清潔排程：' + nm.m + ' 月還完全沒排');
   else lines.push('✗ 清潔排程：還缺 ' + cl.missing.length + ' 天（' + cl.missing.map(function (d) { return mdw(nm, d); }).join('、') + '）');
-  if (!mt.missing.length) lines.push('✓ 維修保養：機電、電梯、園藝三項都排好了');
+  if (!mt.missing.length) lines.push('✓ 維修保養：機電、電梯保養都排好了');
   else lines.push('✗ 維修保養：還沒排 ' + mt.missing.join('、'));
   return lines;
 }
@@ -308,9 +308,9 @@ function runDaily() {
   // 維修保養（A）：排好就提醒主委找晰兒做公告（每月一次）
   if (!mt.missing.length && !props.getProperty('maint_done_' + nm.key)) {
     var ev = todo('📢 確認發布 ' + nm.m + ' 月維修保養公告',
-      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯、園藝保養。\n主委跟晰兒說「做 ' + nm.m + ' 月保養公告」即可。');
+      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n主委跟晰兒說「做 ' + nm.m + ' 月保養公告」即可。');
     mail('【閱大安】' + nm.m + ' 月維修保養已排好，可以準備保養公告',
-      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯、園藝保養。\n\n' +
+      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n\n' +
       '下一步：主委跟晰兒說「做 ' + nm.m + ' 月保養公告」，晰兒會掃日曆、做三語公告給主委確認。\n' +
       '（主日曆今天已建待辦「' + ev + '」）');
     props.setProperty('maint_done_' + nm.key, t.iso);
