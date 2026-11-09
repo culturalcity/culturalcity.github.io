@@ -51,7 +51,9 @@ ${css}
   <header><h1>閱大安資料連動圖</h1>
   <p class="sub">主委版：比網站上的總幹事版多了只有主委看得到的文件與說明。每一份文件是一個點，箭頭代表資料流向；點任一個點看上下游。</p></header>
   <div class="dm-legend" id="dmLegend" aria-label="圖例"></div>
-  <div class="dm-box dm-scroll"><svg id="dmNet" role="img" aria-label="各文件之間的連動網狀圖"></svg></div>
+  <div class="dm-tabs" role="tablist"><button class="dm-tab" id="dmTabNet" role="tab" aria-selected="true">網狀圖</button><button class="dm-tab" id="dmTabFlow" role="tab" aria-selected="false">輸入 → 輸出</button></div>
+  <div class="dm-box dm-scroll" id="dmNetView"><svg id="dmNet" role="img" aria-label="各文件之間的連動網狀圖"></svg></div>
+  <div class="dm-box dm-scroll" id="dmFlowView" hidden><svg id="dmFlow" role="img" aria-label="輸入與輸出的連動圖"></svg></div>
   <section class="dm-box dm-detail" aria-live="polite"><h2 id="dmTitle"></h2><p class="dm-hint" id="dmHint"></p>
   <div class="dm-tw"><table class="dm-table"><thead><tr><th>方向與文件</th><th>由誰</th><th>時機與做法</th></tr></thead><tbody id="dmBody"></tbody></table></div></section>
   <h2 class="sec">原則</h2><ul id="dmPrinciples"></ul>

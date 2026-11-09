@@ -30,7 +30,9 @@ extraStyles: |
 
   <div class="dm-legend" id="dmLegend" aria-label="圖例"></div>
 
-  <div class="dm-box dm-scroll"><svg id="dmNet" role="img" aria-label="各文件之間的連動網狀圖"></svg></div>
+  <div class="dm-tabs" role="tablist"><button class="dm-tab" id="dmTabNet" role="tab" aria-selected="true">網狀圖</button><button class="dm-tab" id="dmTabFlow" role="tab" aria-selected="false">輸入 → 輸出</button></div>
+  <div class="dm-box dm-scroll" id="dmNetView"><svg id="dmNet" role="img" aria-label="各文件之間的連動網狀圖"></svg></div>
+  <div class="dm-box dm-scroll" id="dmFlowView" hidden><svg id="dmFlow" role="img" aria-label="輸入與輸出的連動圖"></svg></div>
 
   <section class="dm-box dm-detail" aria-live="polite">
     <h2 id="dmTitle"></h2>
