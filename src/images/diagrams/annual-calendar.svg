@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 704" width="720" height="704" role="img" aria-labelledby="cal-title cal-desc" font-family="'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif">
   <title id="cal-title">閱大安年度循環行事曆</title>
-  <desc id="cal-desc">以月份為列、五類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）。物業換約：1 月用印完成與合約存查、9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印。保險與電梯合約：10 月電梯保養合約議價（合約到期年；合約會照原條件自動續約，要換廠商須在 9/30 前書面通知），11 月公共意外險與火險比價，12 月保險續保完成。設施與法規：公共安全檢查每 3 年一次，1 月議價、2 月執行；4 月流出抑制設施維護文件上傳（法定，每年）；10 至 11 月大公電契約容量檢討。節慶公告：2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）。每月固定追蹤台電四張帳單並更新氣候行動獎明細。</desc>
+  <desc id="cal-desc">以月份為列、五類工作為欄的年度行事曆。治理與會議：3 至 4 月區權會前置作業（任期年）、5 月召開區權會、6 月底換屆交接（任期年）。物業換約：1 月用印完成與合約存查、9 月討論續約或招標、10 月如招標則刊登、11 月月初書審月中簡報月底決定續約對象、12 月合約用印。保險與其他合約：10 月電梯保養合約議價（合約到期年；合約會照原條件自動續約，要換廠商須在 9/30 前書面通知），11 月公共意外險與火險比價、垃圾整月秤重（垃圾清運換約前），12 月保險續保完成。設施與法規：公共安全檢查每 3 年一次，1 月議價、2 月執行；4 月流出抑制設施維護文件上傳（法定，每年）；10 至 11 月大公電契約容量檢討。節慶公告：2 月農曆新年公告、7 至 8 月中元普渡籌備（依農曆）。每月固定追蹤台電四張帳單並更新氣候行動獎明細。</desc>
   <rect width="720" height="704" fill="#f5f5f5"/>
   <text x="40" y="40" fill="#2d3142" font-size="20" font-weight="700">年度循環行事曆</text>
   <text x="40" y="64" fill="#2d3142" font-size="12">每月初對照當月要啟動的事。農曆節日依當年日期調整；標「任期年」的只在換屆那年做</text>
   <text x="128" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">治理與會議</text>
   <text x="256" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">物業換約</text>
-  <text x="384" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">保險與電梯合約</text>
+  <text x="384" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">保險與其他合約</text>
   <text x="512" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">設施與法規</text>
   <text x="640" y="100" fill="#2d3142" font-size="12" font-weight="700" text-anchor="middle">節慶公告</text>
   <line x1="16" y1="108" x2="704" y2="108" stroke="#d4d4d4" stroke-width="1"/>
@@ -58,7 +58,8 @@
   <text x="384" y="488.0" fill="#2d3142" font-size="12" text-anchor="middle">電梯議價（到期年）</text>
   <text x="384" y="504.0" fill="#2d3142" font-size="12" text-anchor="middle">換廠商 9/30 前通知</text>
   <rect x="324" y="516" width="120" height="40" rx="4" fill="#2d3142" stroke="#2d3142" stroke-width="1"/>
-  <text x="384" y="540.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">公責險・火險比價</text>
+  <text x="384" y="532.0" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">公責險・火險比價</text>
+  <text x="384" y="548.0" fill="#ffffff" font-size="12" text-anchor="middle">垃圾整月秤重</text>
   <rect x="324" y="564" width="120" height="32" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
   <text x="384" y="584.0" fill="#2d3142" font-size="12" text-anchor="middle">保險續保完成</text>
   <rect x="452" y="116" width="120" height="72" rx="4" fill="#ffffff" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
