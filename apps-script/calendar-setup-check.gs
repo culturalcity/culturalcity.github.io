@@ -242,12 +242,18 @@ function readCleanEvents(nm) {
 
 function checkMaint(nm) {
   var r = monthRange(nm);
-  var titles = CalendarApp.getCalendarById(MAINT_CAL).getEvents(r.start, r.end)
-    .map(function (e) { return e.getTitle().trim(); });
+  var events = CalendarApp.getCalendarById(MAINT_CAL).getEvents(r.start, r.end);
+  var titles = events.map(function (e) { return e.getTitle().trim(); });
   var missing = MONTHLY_ITEMS.filter(function (item) {
     return !titles.some(function (t) { return t.indexOf(item) === 0; });
   });
-  return { titles: titles, missing: missing };
+  // 給主委確認「本月是不是就只有這幾項」：日期時間＋標題，說明欄空白的標「內部事項，不進公告」
+  var list = events.map(function (e) {
+    var when = e.isAllDayEvent() ? fmt(e.getAllDayStartDate(), 'M/dd') + '（全天）'
+      : fmt(e.getStartTime(), 'M/dd HH:mm') + '–' + fmt(e.getEndTime(), 'HH:mm');
+    return '・' + when + '　' + e.getTitle().trim() + (String(e.getDescription() || '').trim() ? '' : '　← 說明欄空白：內部事項，不進公告');
+  });
+  return { titles: titles, missing: missing, list: list };
 }
 
 function mdw(nm, d) { return nm.m + '/' + pad2(d) + '（' + WD.zh.charAt(weekday(nm.y, nm.m, d)) + '）'; }
@@ -311,6 +317,7 @@ function runDaily() {
       '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n主委跟晰兒說「做 ' + nm.m + ' 月保養公告」即可。');
     mail('【閱大安】' + nm.m + ' 月維修保養已排好，可以準備保養公告',
       '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n\n' +
+      '日曆上 ' + nm.m + ' 月目前排了這些，請確認是不是就只有這幾項：\n' + mt.list.join('\n') + '\n\n' +
       '下一步：主委跟晰兒說「做 ' + nm.m + ' 月保養公告」，晰兒會掃日曆、做三語公告給主委確認。\n' +
       '（主日曆今天已建待辦「' + ev + '」）');
     props.setProperty('maint_done_' + nm.key, t.iso);
