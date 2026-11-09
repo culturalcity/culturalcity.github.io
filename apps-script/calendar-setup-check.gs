@@ -399,6 +399,12 @@ function previewCleanMonth(key) {
   Logger.log(buildNoticeHtml(y, m, '2026-01-01', cl.S));
 }
 
+// 確認 GITHUB_TOKEN 能讀 repo（只讀不寫）
+function testGitHub() {
+  var f = ghGetFile('i18n-glossary.md');
+  Logger.log(f ? 'GitHub token 正常：讀得到 repo（i18n-glossary.md ' + f.text.length + ' 字）' : '讀不到檔案');
+}
+
 function setup() {
   ScriptApp.getProjectTriggers().forEach(function (tr) {
     if (tr.getHandlerFunction() === 'runDaily') ScriptApp.deleteTrigger(tr);
