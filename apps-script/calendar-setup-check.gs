@@ -202,7 +202,7 @@ function buildNoticeHtml(y, m, pub, S) {
     "titleEn: 'Common Area Cleaning Schedule – " + MONTH_EN[m - 1] + ' ' + y + "'",
     'titleJa: ' + y + '年' + m + '月　共用部分清掃スケジュール',
     'displayDate: ' + pub.replace(/-/g, '/'),
-    'typeZh: 清潔',
+    'typeZh: 環境清潔',
     'typeEn: Cleaning',
     'typeJa: 清掃',
     'pillType: clean',
