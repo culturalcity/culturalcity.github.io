@@ -9,17 +9,17 @@
 // 做法：每天 09:00 跑，只在「月底前兩天」起動作（31 天的月 29 日起、30 天的月 28 日起、2 月 26 日起）：
 //   - 檢查「閱大安-清潔」日曆：下個月每一天都要有事件（打掃區域或「清潔排休」）
 //   - 檢查「閱大安-維養」日曆：下個月要有每月固定的三項（機電、電梯、園藝保養）
-//   - 還沒排好 → 每天寄信給主委（最多 3 封），列出缺哪些，附一段可轉給總幹事的話
+//   - 還沒排好 → 每天寄信（最多 3 封），寫給總幹事、列出缺哪些
 //   - 兩本都排好 → 當月寄一次「可以準備公告了」
 //
-// 只寄給主委，不寄 culturalcity85（那個信箱總幹事看得到）。
+// 收件人：culturalcity85（總幹事收信、主委也看得到；不寫個人信箱，換屆不必改）。信是寫給總幹事的，語氣要柔和。
 // 安裝：跑 previewNow() 看下個月目前的檢查結果（只看不寄）→ 跑 setup() 建每日 trigger。
 
 // ── 常數 ──────────────────────────────────────────
 
 var CLEAN_CAL = '92d9e32e58a759f9f2116192198b4f431b91e2fe0ebe934ce399d100a79c10d7@group.calendar.google.com';
 var MAINT_CAL = 'cultralcity85@gmail.com';   // 維養日曆的 id 少一個 u，是建立時的原樣，不是筆誤
-var NOTIFY_EMAIL = 'wentaihsu@gmail.com';
+var NOTIFY_EMAIL = 'culturalcity85@gmail.com';  // 只寄社區帳號：總幹事收得到、主委也看得到，換屆不必改程式（2026-11-09 主委定）
 var DAYS_BEFORE_END = 2;                     // 月底前幾天開始檢查（2026-11-09 主委定：月底前兩天，2 月也涵蓋）
 var MONTHLY_ITEMS = ['機電保養', '電梯保養', '園藝保養'];  // 每月固定項目（事件標題開頭）
 var DONE_KEY = 'done_notified_';             // + YYYY-MM：當月已寄「完成」
@@ -115,11 +115,11 @@ function runDaily() {
   if (c.missing.length) asks.push(nm.m + ' 月的清潔排程');
   if (m.missing.length) asks.push(nm.m + ' 月的' + m.missing.join('、') + '日期');
   MailApp.sendEmail(NOTIFY_EMAIL,
-    '【閱大安】總幹事還沒排好 ' + nm.m + ' 月的' + (c.missing.length && m.missing.length ? '清潔排程與維修保養' : c.missing.length ? '清潔排程' : '維修保養'),
-    '今天 ' + t.m + '/' + t.d + ' 檢查日曆的結果：\n\n' + lines.join('\n') +
-    '\n\n月底要發公告給住戶，可以轉給總幹事的話：\n' +
-    '「主任您好，想麻煩您這兩天幫忙把' + asks.join('，以及') + '排進 Google 日曆，' +
-    '月底要發給住戶的公告會用到，謝謝！」' + footer());
+    '【閱大安】提醒：' + asks.join('、') + '還沒排進 Google 日曆',
+    '主任您好：\n\n月底要發給住戶的維修保養公告與清潔排程公告，會用到 Google 日曆裡下個月的行程。' +
+    '今天（' + t.m + '/' + t.d + '）檢查的結果如下：\n\n' + lines.join('\n') +
+    '\n\n想麻煩您這兩天幫忙把' + asks.join('，以及') + '排進日曆，謝謝！' +
+    '\n\n（已經排好的話，明天檢查通過就不會再收到這封信。）' + footer());
 }
 
 function footer() {
@@ -134,7 +134,7 @@ function previewNow() {
   Logger.log('維養事件：' + m.titles.join('｜'));
 }
 
-// 手動：跳過日期限制，立刻照提醒格式寄一封給主委（測試用）
+// 手動：跳過日期限制，立刻寄一封檢查結果到 culturalcity85（測試用）
 function testMailNow() {
   var t = todayParts(), nm = nextMonth(t);
   var c = checkClean(nm), m = checkMaint(nm);
