@@ -237,6 +237,7 @@
 | 漏洗 | Missed Spots | 洗い残し |
 | 著色 | Staining | 着色汚れ |
 | 結晶化玻璃 | Crystallized Glass Panel | 結晶化ガラス |
+| 平臺（外牆外凸的水平面） | Exterior Ledge | 張り出し部 |
 
 ## L. 公告類別（frontmatter 的 typeZh／typeEn／typeJa，成套使用）
 > 類別是固定集合，**不可臨時自創**；pillType 是機器代碼，決定色條與篩選。
@@ -391,4 +392,4 @@ Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonic
 
 **2026-11-09 修訂**：公告類別中文名「清潔」改為「**環境清潔**」，與其他類別一致為四字（英日 Cleaning／清掃 不變，pillType 仍為 `clean`）。主委定案。同步狀態：① 本檔、② Notion、③ Obsidian 皆已同步（2026-11-09）。
 
-**2026-11-11 修訂（外牆清洗漏洗與著色說明公告）**：新增——漏洗（Missed Spots／洗い残し）、著色（Staining／着色汚れ）、結晶化玻璃（Crystallized Glass Panel／結晶化ガラス）。主委定案。
+**2026-11-11 修訂（外牆清洗漏洗與著色說明公告）**：新增——漏洗（Missed Spots／洗い残し）、著色（Staining／着色汚れ）、結晶化玻璃（Crystallized Glass Panel／結晶化ガラス）、平臺（外牆外凸的水平面；Exterior Ledge／張り出し部，避免 Platform 被讀成可站立的露臺）。主委定案。
