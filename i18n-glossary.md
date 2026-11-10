@@ -234,6 +234,9 @@
 | 建築法第 95-1 條 | Article 95-1 of the Building Act | 建築法第95-1条 |
 | 公寓大廈管理條例 | Condominium Management Act | 公寓大廈管理条例 |
 | 內政部營建署 | Construction and Planning Agency, MOI | 内政部営建署 |
+| 漏洗 | Missed Spots | 洗い残し |
+| 著色 | Staining | 着色汚れ |
+| 結晶化玻璃 | Crystallized Glass Panel | 結晶化ガラス |
 
 ## L. 公告類別（frontmatter 的 typeZh／typeEn／typeJa，成套使用）
 > 類別是固定集合，**不可臨時自創**；pillType 是機器代碼，決定色條與篩選。
@@ -387,3 +390,5 @@ Facility Maintenance (2)；括號內為出現次數，多數者即上表 canonic
 **2026-11-08 修訂（11 月清潔排程公告）**：新增公告類別「**清潔**／Cleaning／清掃」（pillType `clean`，色 `--c-clean:#12666B`，深色 header 版 `#8CC7CA`）；新增 **C 梯**（Staircase C／C階段，比照 A／B 梯）、**R2F–R3F**（英文照寫、日文 R2〜R3階），主委定案。清潔日曆的「1F 閱覽室」「R1F 閱覽室」在公告中依本表寫「1F 交誼廳」「頂樓室內空間」。同步狀態：① repo canonical、② Notion、③ Obsidian 皆已同步（2026-11-08）。
 
 **2026-11-09 修訂**：公告類別中文名「清潔」改為「**環境清潔**」，與其他類別一致為四字（英日 Cleaning／清掃 不變，pillType 仍為 `clean`）。主委定案。同步狀態：① 本檔、② Notion、③ Obsidian 皆已同步（2026-11-09）。
+
+**2026-11-11 修訂（外牆清洗漏洗與著色說明公告）**：新增——漏洗（Missed Spots／洗い残し）、著色（Staining／着色汚れ）、結晶化玻璃（Crystallized Glass Panel／結晶化ガラス）。主委定案。
