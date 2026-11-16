@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>電梯電力回生系統評估筆記（議案七）・閱大安管理委員會</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iNiIgZmlsbD0iIzFBM0QyQiIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyLCAzMikgc2NhbGUoMC42MikiPgogICAgPHBhdGggZD0iTTIwLC00NiBDMjAsLTM0IC0yMCwtMzQgLTIwLC0yMiAgQy0yMCwtMTAgMjAsLTEwIDIwLCAyICAgQzIwLDE0IC0yMCwxNCAtMjAsMjYiIHN0cm9rZT0iI0M5QTg0QyIgc3Ryb2tlLXdpZHRoPSI1LjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJidXR0Ii8+CiAgICA8cGF0aCBkPSJNMjAsLTM2IEMyMCwtMjYgLTIwLC0yNiAtMjAsLTE0ICBDLTIwLC0yICAyMCwtMiAgMjAsMTAgICBDMjAsMjIgLTIwLDIyIC0yMCwzNiIgc3Ryb2tlPSIjQzlBODRDIiBzdHJva2Utd2lkdGg9IjUuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz4KICAgIDxwYXRoIGQ9Ik0yMCwtMjYgQzIwLC0xOCAtMjAsLTE4IC0yMCwtNiAgIEMtMjAsIDYgIDIwLCA2ICAyMCwxOCAgIEMyMCwzMCAtMjAsMzAgLTIwLDQ2IiBzdHJva2U9IiNDOUE4NEMiIHN0cm9rZS13aWR0aD0iNS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPgogIDwvZz4KPC9zdmc+Cg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* 單檔自包含頁：依 VI.md「單獨頁面」規則，色票／字型／刊頭織紋在本檔內宣告 */
+  :root {
+    --wg1:  #EAE7E1;
+    --wg7:  #ADA8A2;
+    --wg9:  #5F5A55;
+    --wg11: #696460;
+    --wg41: #3C3835;
+    --white: #F7F5F2;
+    --line:  rgba(60,56,53,0.12);
+    --radius: 2px;
+    --dp: #1F5C38;
+    --dn: #8C1F1F;
+    --page-max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--wg1);
+    color: var(--wg41);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  .header { background: var(--wg41); color: var(--wg1); padding: 48px 40px 40px; position: relative; overflow: hidden; }
+  .header::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(92deg, transparent, transparent 120px, rgba(234,231,225,0.03) 120px, rgba(234,231,225,0.03) 121px),
+      repeating-linear-gradient(178deg, transparent, transparent 60px, rgba(234,231,225,0.02) 60px, rgba(234,231,225,0.02) 61px);
+  }
+  .header-inner { max-width: var(--page-max-width); margin: 0 auto; position: relative; }
+  .header-eyebrow { font-size: 15px; letter-spacing: 0.25em; color: var(--wg7); margin-bottom: 12px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
+  .header-sub { font-size: 15px; color: var(--wg7); letter-spacing: 0.16em; }
+  .header-rule { width: 36px; height: 1px; background: var(--wg7); margin: 20px 0; }
+  .header-desc { font-size: 17px; color: var(--wg7); max-width: 480px; line-height: 1.8; letter-spacing: 0.02em; }
+
+  .main { max-width: var(--page-max-width); margin: 0 auto; padding: 36px 0 64px; }
+  @media (max-width: 840px) { .main { padding-left: 40px; padding-right: 40px; max-width: calc(var(--page-max-width) + 80px); } }
+  @media (max-width: 600px) { .main { padding: 28px 20px 48px; } }
+
+  h2 { font-size: 22px; font-weight: 700; letter-spacing: 0.06em; margin: 44px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 17px; font-weight: 700; letter-spacing: 0.04em; margin: 26px 0 8px; color: var(--wg41); }
+  p { margin-bottom: 14px; }
+  ul, ol { margin: 0 0 14px 1.4em; }
+  li { margin-bottom: 6px; }
+  strong { font-weight: 700; }
+  .dp { color: var(--dp); font-weight: 500; }
+  .dn { color: var(--dn); font-weight: 500; }
+  .muted { color: var(--wg9); font-size: 15px; }
+
+  .notice-box {
+    background: rgba(60,56,53,0.05); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 18px; font-size: 16px; color: var(--wg9); line-height: 1.85; margin-bottom: 24px;
+  }
+  .notice-box strong { color: var(--wg41); }
+  .notice-box p:last-child { margin-bottom: 0; }
+
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; margin: 14px 0 22px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 10px 0 20px; background: var(--white); }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); line-height: 1.6; }
+  th { font-weight: 700; color: var(--wg41); background: rgba(60,56,53,0.05); letter-spacing: 0.04em; font-size: 14px; }
+  td.num, th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  .todo td:first-child { white-space: nowrap; font-weight: 700; }
+  .todo th:nth-child(3), .todo td:nth-child(3), .todo th:nth-child(4), .todo td:nth-child(4) { white-space: nowrap; }
+
+  figure { margin: 18px 0 26px; }
+  figure svg { width: 100%; height: auto; display: block; background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius); }
+  figcaption { font-size: 13px; color: var(--wg9); margin-top: 8px; line-height: 1.7; letter-spacing: 0.02em; }
+
+  .glossary dt { font-weight: 700; margin-top: 10px; }
+  .glossary dd { margin-left: 0; color: var(--wg41); font-size: 16px; }
+
+  .footer { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .footer-left, .footer-right { font-size: 15px; color: var(--wg9); letter-spacing: 0.06em; line-height: 1.8; }
+
+  @media (max-width: 600px) {
+    .header { padding: 36px 24px 30px; }
+    .header h1 { font-size: 22px; }
+    body { font-size: 17px; }
+    h2 { font-size: 20px; }
+  }
+
+  /* 手機：資料表改「一列一卡」，避免窄欄直排字 */
+  @media (max-width: 600px) {
+    table.stack thead { display: none; }
+    table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+    table.stack tr { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; padding: 6px 0; background: var(--white); }
+    table.stack td { border: none; padding: 4px 14px; }
+    table.stack td[data-label]::before { content: attr(data-label); display: block; font-size: 13px; color: var(--wg9); letter-spacing: 0.06em; margin-bottom: 1px; }
+    table.stack td.lead { font-weight: 700; font-size: 16px; padding-top: 8px; }
+    table.stack.todo td:first-child { display: none; }
+    table.stack.todo td.lead::before { content: '#' attr(data-num) '　'; display: inline; color: var(--wg9); font-weight: 400; }
+  }
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .header { padding: 24px 0 18px; }
+    .main { max-width: none; padding: 16px 0; }
+    figure svg { border: none; }
+    h2 { page-break-after: avoid; }
+    table, figure { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">BOARD MEETING 5-3 · AGENDA ITEM 7</div>
+    <h1>電梯電力回生系統評估筆記</h1>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+    <div class="header-rule"></div>
+    <div class="header-desc">第五屆第三次管理委員會・議案七・主任委員評估筆記・2026 年 9 月 14 日</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="notice-box">
+    <p><strong>一頁結論。</strong>電梯在重載下降或輕載上升時，馬達會像發電機一樣發電，這套系統把原本燒成熱的電送回大樓自己用。三菱報價一台 128,300 元。依三菱自己的實測數字粗估，<strong>沒有補助大概不划算；有 49% 補助、且裝置能用滿 15 年，才接近門檻</strong>，即使把電梯趟次量出來，最好的結果也只是 15 年打平，沒有一個情境會變成「值得做」。本筆記建議本次決議<strong>不採購、結案</strong>；若 116 年度補助條件大幅放寬，再重新評估。</p>
+  </div>
+
+  <h2>一、它是什麼</h2>
+
+  <p>電梯不是馬達硬把整台車廂拉上去。井道另一側掛著一塊「配重」，重量等於空車廂加上大約一半的載客量，像水井吊桶另一頭綁了石頭。馬達只需要搬「兩邊的差額」，所以載客剛好半滿時，馬達幾乎不用出力（仍有摩擦與加減速的耗電）。</p>
+
+  <figure>
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig1t">
+      <title id="fig1t">圖一：力行運轉與回生運轉</title>
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
+        </marker>
+      </defs>
+      <g font-family="Noto Sans TC, Microsoft JhengHei, sans-serif">
+        <text x="180" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#3C3835">力行運轉（吃電）</text>
+        <text x="180" y="52" text-anchor="middle" font-size="13" fill="#5F5A55">重的一邊要被拉上去，馬達出力</text>
+        <path d="M152,196 L152,100 A28,28 0 0 1 208,100 L208,150" fill="none" stroke="#3C3835" stroke-width="2.5"/>
+        <circle cx="180" cy="100" r="28" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <circle cx="180" cy="100" r="5" fill="#3C3835"/>
+        <text x="180" y="105" text-anchor="middle" font-size="11" fill="#3C3835" dx="0" dy="-13">曳引機</text>
+        <rect x="120" y="196" width="64" height="66" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <text x="152" y="224" text-anchor="middle" font-size="13" fill="#3C3835">車廂</text>
+        <text x="152" y="244" text-anchor="middle" font-size="12" fill="#5F5A55">滿載・重</text>
+        <rect x="190" y="150" width="36" height="50" fill="#696460" stroke="#3C3835" stroke-width="2"/>
+        <text x="208" y="180" text-anchor="middle" font-size="12" fill="#F7F5F2">配重</text>
+        <line x1="98" y1="252" x2="98" y2="212" stroke="#8C1F1F" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="98" y="272" text-anchor="middle" font-size="13" font-weight="700" fill="#8C1F1F">上升</text>
+        <path d="M60,100 L144,100" stroke="#8C1F1F" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="60" y="90" text-anchor="start" font-size="13" font-weight="700" fill="#8C1F1F">市電供電給馬達</text>
+      </g>
+      <line x1="360" y1="20" x2="360" y2="280" stroke="#3C3835" stroke-opacity="0.15" stroke-dasharray="4 4"/>
+      <g font-family="Noto Sans TC, Microsoft JhengHei, sans-serif">
+        <text x="540" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#3C3835">回生運轉（發電）</text>
+        <text x="540" y="52" text-anchor="middle" font-size="13" fill="#5F5A55">重的一邊受重力帶動、受控下降，馬達被拖著轉</text>
+        <path d="M512,150 L512,100 A28,28 0 0 1 568,100 L568,196" fill="none" stroke="#3C3835" stroke-width="2.5"/>
+        <circle cx="540" cy="100" r="28" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <circle cx="540" cy="100" r="5" fill="#3C3835"/>
+        <text x="540" y="105" text-anchor="middle" font-size="11" fill="#3C3835" dx="0" dy="-13">曳引機</text>
+        <rect x="480" y="150" width="64" height="66" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <text x="512" y="178" text-anchor="middle" font-size="13" fill="#3C3835">車廂</text>
+        <text x="512" y="198" text-anchor="middle" font-size="12" fill="#5F5A55">滿載・重</text>
+        <rect x="550" y="196" width="36" height="50" fill="#696460" stroke="#3C3835" stroke-width="2"/>
+        <text x="568" y="226" text-anchor="middle" font-size="12" fill="#F7F5F2">配重</text>
+        <line x1="458" y1="166" x2="458" y2="206" stroke="#1F5C38" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="458" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#1F5C38">下降</text>
+        <path d="M576,100 L660,100" stroke="#1F5C38" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="660" y="90" text-anchor="end" font-size="13" font-weight="700" fill="#1F5C38">馬達發電送出</text>
+      </g>
+    </svg>
+    <figcaption>圖一・電梯的兩種運轉。重的一邊被拉上去要吃電（力行）；重的一邊受重力帶動、受控下降時，馬達被拖著轉、變成發電機（回生）。輕載上升也是回生，因為那時配重才是重的一邊。</figcaption>
+  </figure>
+
+  <p>回生時發出來的電往哪裡去，就是兩種系統的唯一差別。傳統做法把電導進一顆電阻燒成熱，等於在機房裝一台吹風機。回生系統把電變回市電的樣子送回大樓配電盤，大廳的燈、抽水泵順手用掉，電表就走得慢。</p>
+
+  <figure>
+    <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig2t">
+      <title id="fig2t">圖二：回生的電往哪裡去</title>
+      <g font-family="Noto Sans TC, Microsoft JhengHei, sans-serif">
+        <!-- 左：傳統 -->
+        <text x="180" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#3C3835">傳統：燒掉</text>
+        <rect x="120" y="60" width="120" height="50" rx="2" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <text x="180" y="91" text-anchor="middle" font-size="14" fill="#3C3835">電梯馬達發電</text>
+        <path d="M180,110 L180,160" stroke="#8C1F1F" stroke-width="3" marker-end="url(#ah)"/>
+        <rect x="120" y="165" width="120" height="50" rx="2" fill="#F7F5F2" stroke="#8C1F1F" stroke-width="2"/>
+        <text x="180" y="188" text-anchor="middle" font-size="14" fill="#8C1F1F">電阻</text>
+        <text x="180" y="206" text-anchor="middle" font-size="12" fill="#5F5A55">變成熱，機房變熱</text>
+        <text x="180" y="245" text-anchor="middle" font-size="13" fill="#5F5A55">回收：0</text>
+        <!-- 分隔 -->
+        <line x1="360" y1="20" x2="360" y2="250" stroke="#3C3835" stroke-opacity="0.15" stroke-dasharray="4 4"/>
+        <!-- 右：回生 -->
+        <text x="540" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#3C3835">回生系統：送回去用</text>
+        <rect x="480" y="60" width="120" height="50" rx="2" fill="#F7F5F2" stroke="#3C3835" stroke-width="2"/>
+        <text x="540" y="91" text-anchor="middle" font-size="14" fill="#3C3835">電梯馬達發電</text>
+        <path d="M540,110 L540,160" stroke="#1F5C38" stroke-width="3" marker-end="url(#ah)"/>
+        <rect x="450" y="165" width="180" height="50" rx="2" fill="#F7F5F2" stroke="#1F5C38" stroke-width="2"/>
+        <text x="540" y="188" text-anchor="middle" font-size="14" fill="#1F5C38">回生轉換器（PCNV）</text>
+        <text x="540" y="206" text-anchor="middle" font-size="12" fill="#5F5A55">把電變回市電的樣子</text>
+        <path d="M630,190 L690,190" stroke="#1F5C38" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="660" y="178" text-anchor="middle" font-size="12" fill="#1F5C38">配電盤</text>
+        <text x="540" y="245" text-anchor="middle" font-size="13" fill="#1F5C38" font-weight="700">大廳燈、泵浦用掉，電表走慢</text>
+      </g>
+    </svg>
+    <figcaption>圖二・回生的電往哪裡去。三菱報價的裝置就是右邊那顆「回生轉換器」，加裝在既有控制盤上，並附一顆能分開記「送出」與「收回」的電表。</figcaption>
+  </figure>
+
+  <h3>三菱資料裡的名詞</h3>
+  <dl class="glossary">
+    <dt>力行運轉／回生運轉</dt>
+    <dd>日文鐵道用語直譯。力行＝馬達出力吃電；回生＝馬達被拖著轉、發電。</dd>
+    <dt>卷上機、卷上馬達</dt>
+    <dd>日文「巻上機」，就是曳引機，鋼索掛在它上面。</dd>
+    <dt>積載量 45% 到 50%</dt>
+    <dd>配重的平衡點。載客量在這附近時兩邊一樣重，馬達幾乎不出力，也幾乎不發電。</dd>
+    <dt>PCNV</dt>
+    <dd>三菱回生轉換器的型號代碼。加裝在既有控制盤上，把馬達發的電變回市電的樣子送回配電盤。</dd>
+    <dt>起動回數</dt>
+    <dd>控制盤自動累計的「電梯發車次數」。它只算次數，不含跑了幾層。</dd>
+    <dt>全程當量</dt>
+    <dd>本筆記用來換算的單位：把長短不一的行程折算成「跑完全程」的趟數。例如從 8 樓到 1 樓約算半趟。</dd>
+  </dl>
+
+  <h2>二、三菱資料裡的實測數字</h2>
+
+  <p>三菱 2020 年的教育資料附了三份實測，省電比落在兩成到三成六之間。三份場景不同，解讀比背數字重要。</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>場景</th><th>量測者</th><th class="num">省電比</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>新竹工廠宿舍，新機兩台對照</td><td>三菱自測</td><td class="num">36.5%</td><td>750 kg、90 m/min，與閱大安電梯相近</td></tr>
+      <tr><td>同一組電梯，含照明</td><td>德國萊因（TÜV）</td><td class="num">約 30%</td><td>假設每小時起動 150 次、每天 8 小時，是工廠節奏</td></tr>
+      <tr><td>某企業總部，舊機加裝</td><td>現場電表</td><td class="num">20.4%</td><td>唯一的真實大樓加裝案例，與閱大安情境最像</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>兩個提醒。第一，<strong>這些比例主要作用在「驅動用電」</strong>：三菱自測與企業總部兩案只算驅動用電，德國萊因那案含照明，三案口徑不同；車廂風扇與控制盤待機都不在裡面，而住宅電梯的待機常占大宗。第二，三菱的趟次假設是工廠宿舍的節奏，閱大安要用自己的趟次算。</p>
+
+  <h2>三、閱大安的現況資料（已查證）</h2>
+
+  <div class="table-wrap">
+  <table class="stack">
+    <thead><tr><th>項目</th><th>內容</th><th>來源</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">三菱報價</td><td>增設電力回生 PCNV＋電力計，機種 NEXIEZ-MR，<strong>128,300 元／台</strong>。同單另有車廂風扇 13,200 元，是獨立項目。效期 90 天，約 2026 年 9 月底到期。只報一台，未註明哪一台。</td><td data-label="來源">115/6/30 估價單</td></tr>
+      <tr><td class="lead">貨梯（B4 到 RF）</td><td>12 人 800 kg，速度 105 m/min，20 站</td><td data-label="來源">使用許可證</td></tr>
+      <tr><td class="lead">客梯（1 到 15F）</td><td>12 人 800 kg，速度 105 m/min，15 站</td><td data-label="來源">使用許可證</td></tr>
+      <tr><td class="lead">大公電邊際電價</td><td>電力需量非營業用、非時間電價。流動電費夏月 4.08、非夏月 3.87 元／度，加功率因數折扣與營業稅後<strong>約 4.1 元／度</strong>。基本電費按契約容量收，回生省不到它。</td><td data-label="來源">2026 年 3 月與 8 月台電帳單</td></tr>
+      <tr><td class="lead">緊急發電機</td><td>大同 TPU-313，250 kW。三菱資料提醒回生會反推發電機，容量要夠；對兩台十幾 kW 級的電梯比例寬裕，但可否選配由三菱書面判斷。</td><td data-label="來源">技師簽證報告（110/7/17）</td></tr>
+      <tr><td class="lead">逆潮流防止裝置</td><td>社區沒有太陽光電，一般不會裝此裝置。三菱資料提醒若有此裝置則不能選配。</td><td data-label="來源">主委確認</td></tr>
+      <tr><td class="lead">補助</td><td>臺北市住宅社區節能補助明列「電梯電力回生裝置」，社區方案補助 49%、上限 100 萬，申請人為管委會。115 年度已額滿；116 年度若沿例約 2027 年 6 月開放。</td><td data-label="來源">powersaving.org.tw（2026-08 查）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>四、粗估：回本門檻要每天跑幾趟</h2>
+
+  <p class="muted">本節數字是主委拿三菱實測數字外推的，不是閱大安的量測。用途是看清楚「哪個變數決定答案」，不是結論。</p>
+
+  <p>三菱測試機空車與滿載一趟來回（揚程 25.6 公尺）回收 11 到 15 Wh，換算每公尺揚程、來回一趟約 0.43 到 0.59 Wh。以每層 3.3 公尺估算，套到閱大安：</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>電梯</th><th class="num">全程高度（估）</th><th class="num">每趟全程來回可回收</th></tr></thead>
+    <tbody>
+      <tr><td>客梯</td><td class="num">約 46 m</td><td class="num">約 20 到 27 Wh</td></tr>
+      <tr><td>貨梯</td><td class="num">約 63 m</td><td class="num">約 27 到 37 Wh</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>一台裝置 128,300 元，以 4.1 元／度計，一生要省回約 31,000 度才回本。分攤 15 年是每年約 2,100 度、每天約 5.7 度。除以每趟回收量，得到「一台電梯每天要跑幾趟全程來回，15 年才回本」：</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>情境</th><th class="num">客梯</th><th class="num">貨梯</th></tr></thead>
+    <tbody>
+      <tr><td>無補助</td><td class="num">約 210 到 290 趟</td><td class="num">約 160 到 210 趟</td></tr>
+      <tr><td>補助 49%（淨自付約 65,400 元）</td><td class="num">約 110 到 150 趟</td><td class="num">約 80 到 110 趟</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>閱大安固定住戶約 200 人，多數行程是「大廳到自家樓層」，一趟約全程的六成。若每人每天搭兩個來回，兩台合計約 240 趟全程當量，一台約 100 到 120 趟。這是人次，不是車次：共乘會讓車次變少，空車調度會讓車次變多，兩台的分配也不平均（貨梯通到停車場，可能較忙），所以只能當數量級看。對照上表：<span class="dn">無補助差距很大，大概不划算</span>；<span class="dp">有補助則接近門檻</span>，客梯略低於門檻、貨梯在門檻附近，兩台的答案可能不同。換算成錢，以一台每天 100 到 120 趟全程當量計，一年省的電費粗估客梯約 3,000 到 4,900 元、貨梯約 4,000 到 6,600 元。</p>
+
+  <div class="card">
+    <p><strong>兩個會改變答案的因素</strong></p>
+    <ul>
+      <li><strong>趟次與趟長是真正的變數。</strong>上面的「每人每天兩個來回、一趟六成」是猜的。控制盤的起動回數抄兩次能把趟次換成實數，但要注意單位：起動回數算的是「單程發車次數」，上表用的是「全程來回趟數」。換算式：全程來回趟數 ＝ 每天起動回數 ÷ 2 × 平均每趟占全程的比例（暫估六成）；若控制盤有累計走行距離，直接用「距離 ÷（全程高度 × 2）」更準。</li>
+      <li><strong>控制盤壽命。</strong>控制盤 2021 年裝，零件耐用基準表寫控制盤電驛 15 年，約 2036 年前後可能要更新控制盤。若回生裝置不能沿用到新控制盤，評估年限只有 10 年，上表趟數要再乘 1.5，補助情境也會變成不划算。</li>
+    </ul>
+  </div>
+
+  <h2>五、建議與後續</h2>
+
+  <p>本筆記建議：本次決議<strong>不採購、結案</strong>。理由不是數字算得夠準，而是再多的資料也改不了答案：</p>
+  <ul>
+    <li><strong>無補助</strong>：門檻每天 210 到 290 趟全程來回，換成起動回數約 700 到 900 次，是辦公大樓的忙碌度，90 戶住宅不可能達到。不必量就能排除。</li>
+    <li><strong>有補助、裝置能用滿 15 年</strong>：門檻 110 到 150 趟，住宅電梯典型的起動數大約落在附近。但「剛好回本」是 15 年後淨賺零，中間承擔補助不確定、裝置壽命、控制盤更新三個風險，沒有任何回報。這是打平，不是投資。</li>
+    <li><strong>有補助、只能用 10 年</strong>：控制盤 2021 年裝、耐用基準 15 年，約 2036 年更新，這是最可能的情境。門檻乘 1.5，回到不划算。</li>
+  </ul>
+  <p>量測的最好結果只是把「不划算」改成「打平」，資訊價值為零，所以不再抄起動回數、不再追補助、不再等重新報價。一台一年省的電費約 3,000 到 6,600 元，對社區的財務也不構成議題。</p>
+
+  <div class="card">
+    <p><strong>唯一保留的條件</strong></p>
+    <p>若 116 年度或之後的補助條件大幅放寬（補助成數明顯高於 49%，或另有電梯專案補助），再重新評估；屆時請三菱重新報價即可，本筆記的門檻表可直接沿用。</p>
+  </div>
+
+  <p class="muted">另：同一張估價單上的<strong>車廂風扇 13,200 元</strong>是獨立項目，與回生系統無關，可在本次會議分開決定。</p>
+
+  <h2>六、資料來源</h2>
+  <ul class="muted">
+    <li>台灣三菱電梯《NEXIEZ 電梯能源再生（PCNV）簡介》教育資料，2020 年 9 月版，2026 年 8 月 28 日取得。</li>
+    <li>台灣三菱電梯估價單，115 年 6 月 30 日，加裝電力回生系統與風扇。</li>
+    <li>建築物昇降設備使用許可證兩張，114 年 6 月 9 日。</li>
+    <li>台電電費帳單，電號 00-81-5173-01-9 大公電，2026 年 3 月與 8 月。</li>
+    <li>建築物緊急電源（發電機組）設置性能專業技師簽證報告，110 年 7 月 17 日。</li>
+    <li>電梯組件耐用基準參考表與三菱零件牌價，2026 年 3 月與 4 月。</li>
+    <li>臺北市住宅社區創能儲能及節能補助計畫網站，2026 年 8 月查詢。</li>
+  </ul>
+
+  <div class="footer">
+    <div class="footer-left">閱大安管理委員會・第五屆第三次管理委員會・議案七</div>
+    <div class="footer-right">主任委員評估筆記・2026 年 9 月 14 日</div>
+  </div>
+
+</div>
+</body>
+</html>

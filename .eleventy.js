@@ -181,6 +181,11 @@ module.exports = function(eleventyConfig) {
   // 線上路徑為 /admin/utility/，由 Cloudflare Worker 加 Basic Auth 保護
   eleventyConfig.addPassthroughCopy("admin");
 
+  // 報告區（2026-11-16 起）：評估報告、分析等「凍結的單檔文件」原樣複製，住戶級；
+  // 由 Notion 議題追蹤連過來。資料夾名 YYYY-MM-DD-英文slug，網址 /reports/<資料夾>/。
+  // 總幹事級的放 admin/staff/docs/，只限主委的不放網站。
+  eleventyConfig.addPassthroughCopy("reports");
+
   // 圖片：src/images/* → _site/images/*（網址為 /images/檔名）
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
 
