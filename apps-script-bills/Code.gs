@@ -277,7 +277,7 @@ function financeShortcutName(filename) {
   const base = filename.replace(/\.pdf$/i, '');
   const m = base.match(/^(.*?)\s*(\d{4})-(\d{2})((?:（[^）]*）)?)$/);
   if (!m) return null;
-  return { year: m[2], name: m[2] + m[3] + ' ' + m[1] + m[4] };
+  return { year: m[2], name: m[2] + m[3] + ' ' + m[1] + m[4] + '.pdf' };  // 留 .pdf：電腦版雲端硬碟才認得副檔名、雙擊能開
 }
 
 function getChildFolder(parent, name, create) {
