@@ -37,7 +37,7 @@ const BACKEND_IS_SOURCE = {
   'facility-backup': 'repo 的 SHEET_ID 是範本字串，線上填的是真的備份試算表',
   'visitor-backup': 'repo 的 SHEET_ID 是範本字串，線上填的是真的備份試算表',
   'calendar-bridge': '網頁應用程式（Web App）走固定版本部署，推程式碼不會生效，且線上有 repo 沒有的授權函式',
-  'apps-script-bills': 'repo 與線上內容分歧已久（函式排列與內容皆不同），未逐一核對前不覆蓋',
+  'apps-script-bills': '線上檔名是「程式碼」不是 Code，用本腳本推會多出一份重複檔；2026-11-19 已把 repo 同步成線上版，改完請用 clasp clone 到暫存夾、改「程式碼.js」再 push',
 };
 
 function clasp(args, cwd) {
