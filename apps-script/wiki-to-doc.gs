@@ -90,22 +90,47 @@ function buildText_() {
       (url ? '【來源】' + url + '\n' : '') +
       (fm.lastUpdate ? '【最後更新】' + fm.lastUpdate + '\n' : '') +
       '==================================================\n\n' +
-      fm.body.trim());
+      (/\.html$/.test(p) ? htmlToText_(fm.body) : fm.body).trim());
   });
   return parts.join('\n');
 }
 
 // 從 SOP 目錄頁（sop.md）的連結找出各支 SOP。不用 GitHub API：
 // 匿名呼叫從 Google 共用 IP 出去，常被限流回 403（2026-11-23 實測）。
-// 目錄頁上有、但正本是 .html 的（火警、颱風）讀不到 .md，略過。
+// 正本是 .md 的直接收；是 .html 的（火警、颱風）先試 .md、讀不到再收 .html，由 buildText_ 轉純文字。
 function listSops_() {
   const index = fetchText_(RAW + encodePath_('src/security/sop.md'));
   const slugs = {};
   (index.match(/\/security\/sop\/[a-z0-9-]+\//g) || [])
     .forEach(m => { slugs[m.split('/')[3]] = true; });
-  return Object.keys(slugs).sort()
-    .map(s => SOP_DIR + '/' + s + '.md')
-    .filter(p => fetchText_(RAW + encodePath_(p), true) !== null);
+  const out = [];
+  Object.keys(slugs).sort().forEach(s => {
+    for (const ext of ['.md', '.html']) {
+      const p = SOP_DIR + '/' + s + ext;
+      if (fetchText_(RAW + encodePath_(p), true) !== null) { out.push(p); return; }
+    }
+    Logger.log('找不到 SOP 原始檔：' + s);
+  });
+  return out;
+}
+
+// HTML 頁轉成 Markdown 風格純文字：去掉樣式與程式、標題轉 #、表格欄位用 ｜ 分隔
+function htmlToText_(html) {
+  return html
+    .replace(/<(style|script)[\s\S]*?<\/\1>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<h([1-6])[^>]*>/gi, (m, n) => '\n\n' + '#'.repeat(Number(n)) + ' ')
+    .replace(/<\/h[1-6]>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '\n- ')
+    .replace(/<\/t[dh]>\s*<t[dh][^>]*>/gi, ' ｜ ')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|tr|table|ul|ol|section|blockquote)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+    .replace(/[ \t]+\n/g, '\n').replace(/\n[ \t]+/g, '\n')
+    .replace(/\n-\s*(?=\n)/g, '')
+    .replace(/\n{3,}/g, '\n\n');
 }
 
 function fetchText_(url, allowMissing) {
