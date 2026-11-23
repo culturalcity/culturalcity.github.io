@@ -13,6 +13,9 @@
  *       「閱大安・總幹事與保全 Wiki → NotebookLM 來源文件（wiki-to-doc）」
  *       repo 根目錄跑 node scripts/deploy-apps-script.js wiki-to-doc --push
  * 初次：先跑 runNow()（授權＋建文件），再跑 setup() 建每日觸發器。
+ * 權限：本專案線上 appsscript.json 明列 oauthScopes（documents、drive、script.external_request、
+ *       script.scriptapp）。自動偵測只會給 drive 唯讀，Drive API 覆寫文件會 403（2026-11-23 實測）。
+ *       deploy-apps-script.js 沿用線上 manifest，不會蓋掉；重建專案時要補回。
  */
 
 const REPO = 'culturalcity/culturalcity.github.io';
@@ -35,27 +38,43 @@ function runNow() {
     Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, text, Utilities.Charset.UTF_8));
 
   let docId = props.getProperty('DOC_ID');
-  let doc = null;
+  let file = null;
   if (docId) {
-    try { doc = DocumentApp.openById(docId); } catch (e) { doc = null; }
+    try { file = DriveApp.getFileById(docId); } catch (e) { file = null; }
   }
-  if (!doc) {
-    doc = DocumentApp.create(DOC_NAME);
-    docId = doc.getId();
+  if (!file) {
+    docId = DocumentApp.create(DOC_NAME).getId();
+    file = DriveApp.getFileById(docId);
     props.setProperty('DOC_ID', docId);
     props.deleteProperty('HASH');
-    Logger.log('已建立新文件：' + doc.getUrl());
+    Logger.log('已建立新文件：' + file.getUrl());
   }
 
   if (props.getProperty('HASH') === hash) {
-    Logger.log('Wiki 無變化，略過。文件：' + doc.getUrl());
+    Logger.log('Wiki 無變化，略過。文件：' + file.getUrl());
     return;
   }
-  doc.getBody().setText(text);
-  doc.saveAndClose();
+  overwriteDoc_(docId, text);
   props.setProperty('HASH', hash);
   props.setProperty('UPDATED', new Date().toISOString());
-  Logger.log('已更新（' + text.length + ' 字元）：' + doc.getUrl());
+  Logger.log('已更新（' + text.length + ' 字元）：' + file.getUrl());
+}
+
+// 用 Drive API 把整份 Markdown 上傳覆蓋同一個 Google 文件（ID 不變，筆記本來源不斷）。
+// 不用 DocumentApp 的 setText：清掉 7 萬多字再重寫會逾時「文件服務無法正常運作」（2026-11-23 實測）。
+// Markdown 匯入會轉成真正的標題與表格；萬一 Drive 不收 markdown，退回純文字。
+function overwriteDoc_(docId, text) {
+  const url = 'https://www.googleapis.com/upload/drive/v3/files/' + docId + '?uploadType=media';
+  const headers = { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() };
+  for (const type of ['text/markdown', 'text/plain']) {
+    const res = UrlFetchApp.fetch(url, {
+      method: 'patch', contentType: type, headers: headers,
+      payload: Utilities.newBlob(text, type).getBytes(), muteHttpExceptions: true,
+    });
+    if (res.getResponseCode() === 200) { Logger.log('以 ' + type + ' 匯入'); return; }
+    Logger.log(type + ' 匯入失敗 HTTP ' + res.getResponseCode() + '：' + res.getContentText().slice(0, 300));
+  }
+  throw new Error('覆寫文件失敗，見上方紀錄');
 }
 
 function previewNow() {
