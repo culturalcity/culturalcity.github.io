@@ -1,0 +1,1219 @@
+---
+permalink: /finance/長期財務模型-2027區權會版.html
+# 內審版（工作版）：屆中持續更新，2027 區權會前定稿，會後換到正式網址
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ '/global.css' | cssBust }}">
+
+<title>閱大安・長期財務模型（2027 區權會版・工作版）</title>
+<script src="/viz.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="{{ '/tabs-a11y.js' | cssBust }}" defer></script>
+<style>
+:root{--page-max-width: 1060px;}
+.tabs{background:var(--wg41);display:flex;flex-wrap:wrap;padding:0 var(--sp-40);overflow-x:auto;border-bottom:1px solid var(--line-strong);}  /* flex-wrap：窄螢幕頁籤換行全顯示，不藏在右邊 */
+.tab{padding:var(--sp-8) var(--sp-16);font-size:var(--fs-text);color:var(--wg7);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:var(--ls-text);}  /* 深底用 wg7（wg9 在深底不過無障礙對比） */
+.tab:hover{color:var(--wg1);}.tab.active{color:var(--wg1);border-bottom-color:var(--wg1);}
+.main{padding-top:var(--sp-20);padding-bottom:var(--sp-64);}  /* 容器寬度與置中沿用 global（讀 --page-max-width），只覆寫上下 */
+  @media(min-width:601px) and (max-width:1140px){.main{padding-left:var(--sp-40);padding-right:var(--sp-40);max-width:calc(var(--page-max-width) + 80px);}} /* 寬版容器 1060 的平板帶側距（＝寬＋80，帶內放寬 80px 免得 padding 吃內容寬）；手機交給 global 20px */
+.tab-content{display:none;}.tab-content.active{display:block;}
+.sl{font-size:var(--fs-caption);letter-spacing:var(--ls-caps);color:var(--wg11);margin-bottom:var(--sp-12);padding-bottom:var(--sp-8);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--sp-8);}
+.sl::after{content:'';flex:1;height:1px;background:var(--line);}
+.sl-gap{margin-top:var(--sp-20);}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:var(--sp-16);}
+.ph{padding:var(--sp-8) var(--sp-16);background:var(--tint);border-bottom:1px solid var(--line);font-size:var(--fs-text);font-weight:700;color:var(--wg11);letter-spacing:var(--ls-text);display:flex;align-items:center;justify-content:space-between;}
+.pb{padding:var(--sp-12) var(--sp-16);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-16);margin-bottom:var(--sp-16);}
+@media(max-width:800px){.grid2{grid-template-columns:1fr;}}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-12);margin-bottom:var(--sp-16);}
+@media(max-width:800px){.kpi-row{grid-template-columns:1fr 1fr;}}
+.kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-12) var(--sp-12) var(--sp-8);position:relative;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--wg11);}
+.kpi.red::before{background:var(--dn);}.kpi.green::before{background:var(--dp);}.kpi.warn::before{background:var(--warn);}
+.kpi-label{font-size:var(--fs-caption);color:var(--wg9);letter-spacing:var(--ls-text);margin-bottom:var(--sp-4);}
+.kpi-val{font-size:var(--fs-body);font-weight:700;color:var(--wg41);}
+.kpi-val.pos{color:var(--dp);}.kpi-val.neg{color:var(--dn);}
+.kpi-sub{font-size:var(--fs-caption);color:var(--wg9);margin-top:var(--sp-4);}
+input[type=number],input[type=text]{border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-4) var(--sp-8);font-size:var(--fs-text);font-family:'Noto Sans TC',sans-serif;background:var(--wg1);color:var(--wg41);transition:border-color .15s;width:100%;}
+input[type=number]:focus,input[type=text]:focus{outline:none;border-color:var(--wg11);background:var(--white);}
+input[type=range]{width:100%;accent-color:var(--wg41);}
+.ch{position:relative;height:280px;}
+.ch-sm{position:relative;height:180px;}
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-caption);}
+th{text-align:left;padding:var(--sp-4) var(--sp-8);background:var(--tint);color:var(--wg9);font-weight:500;font-size:var(--fs-caption);letter-spacing:var(--ls-text);border-bottom:1px solid var(--line);white-space:nowrap;}
+th.r,td.r{text-align:right;}
+td{padding:var(--sp-4) var(--sp-8);border-bottom:1px solid var(--line-soft);color:var(--wg11);white-space:nowrap;font-variant-numeric:tabular-nums;}
+tr:last-child td{border-bottom:none;}
+tr.tot td{font-weight:700;color:var(--wg41);background:var(--tint);}
+tr.neg-row td{color:var(--dn);}
+tr.warn-row td{color:var(--warn);}
+tr.peak-row td{background:var(--warn-bg);}
+.dw{color:var(--warn);font-weight:500;}  /* .dp／.dn 沿用 global */
+.alert-box{background:var(--dn-bg);border:1px solid var(--dn-line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--dn);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+.ok-box{background:var(--dp-bg);border:1px solid var(--dp-line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--dp);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+.warn-box{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--warn);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+.info-box{background:var(--blue-bg);border:1px solid var(--blue-line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-text);color:var(--blue);line-height:var(--lh-text);margin-bottom:var(--sp-16);}
+.btn{display:inline-flex;align-items:center;gap:var(--sp-4);padding:var(--sp-8) var(--sp-16);font-size:var(--fs-text);font-family:'Noto Sans TC',sans-serif;border-radius:var(--radius);cursor:pointer;transition:all .18s;border:1px solid var(--line);background:transparent;color:var(--wg11);}
+.btn:hover{background:var(--wg1);border-color:var(--wg11);}
+.btn-primary{background:var(--wg41);color:var(--wg1);border-color:var(--wg41);}
+.btn-primary:hover{background:var(--wg11);}
+.btn-danger{background:transparent;color:var(--dn);border-color:var(--dn-line);}
+.btn-danger:hover{background:var(--dn-bg);}
+.btn-sm{padding:var(--sp-4) var(--sp-12);font-size:var(--fs-text);}
+/* CAPEX CARDS */
+.capex-list{display:flex;flex-direction:column;gap:var(--sp-8);margin-bottom:var(--sp-12);}
+.capex-row{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;gap:var(--sp-12);padding:var(--sp-12) var(--sp-16);position:relative;overflow:hidden;}
+.capex-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--wg9);}
+.capex-row.large::before{background:var(--dn);}
+.capex-row.mega::before{background:var(--dn);width:4px;}
+.capex-name-wrap{flex:2;min-width:140px;}
+.capex-name{font-size:var(--fs-text);font-weight:500;color:var(--wg41);}
+.capex-vendor{font-size:var(--fs-caption);color:var(--wg9);margin-top:1px;}
+.capex-fields{display:flex;gap:var(--sp-8);flex:3;flex-wrap:wrap;}
+.capex-field{display:flex;flex-direction:column;gap:2px;min-width:90px;}
+.capex-field label{font-size:var(--fs-caption);color:var(--wg9);}
+.capex-field input{width:100%;}
+/* RATE SCHEDULE */
+.rate-schedule-list{display:flex;flex-direction:column;gap:var(--sp-8);margin-bottom:var(--sp-12);}
+.rate-row{display:flex;align-items:center;gap:var(--sp-12);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);}
+.rate-row-label{font-size:var(--fs-text);color:var(--wg9);width:60px;flex-shrink:0;}
+.rate-row-fields{display:flex;gap:var(--sp-8);flex:1;flex-wrap:wrap;}
+.rate-field{display:flex;flex-direction:column;gap:2px;}
+.rate-field label{font-size:var(--fs-caption);color:var(--wg9);}
+.rate-field input{width:90px;}
+.rate-row-del{margin-left:auto;flex-shrink:0;}
+
+/* ── 對齊全站字級規範（覆蓋上方工具預設） ── */
+.tabs{padding:0 max(var(--sp-20),calc((100vw - var(--page-max-width))/2 + var(--sp-20)));}
+.kpi-val{font-size:var(--fs-heading);}
+table{font-size:var(--fs-text);}
+td{padding:var(--sp-8) var(--sp-12);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">LONG-TERM FINANCIAL MODEL・45 年現金流互動工具</div>
+    <h1>閱大安・長期財務模型</h1>
+    <div class="header-sub">2027 區權會版・工作版（內審，屆中持續更新）</div>
+    <div class="header-sub">CULTURAL CITY COMMUNITY・閱大安管理委員會</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab" onclick="sw('params')">⚙ 參數設定</div>
+  <div class="tab" onclick="sw('recurring')">📋 經常性支出</div>
+  <div class="tab" onclick="sw('capex')">🔧 非經常性支出</div>
+  <div class="tab" onclick="sw('rate')">💰 費率規劃</div>
+  <div class="tab" onclick="sw('cashflow')">📈 45年現金流</div>
+  <div class="tab active" onclick="sw('overview')">📊 總覽</div>
+  <div class="tab" onclick="sw('stress')">🔍 壓力測試</div>
+  <div class="tab" onclick="sw('diff')">🆚 版本差異</div>
+</div>
+
+<div class="main">
+
+<!-- ══ 總覽 ══ -->
+<div id="tab-overview" class="tab-content active">
+  <div class="kpi-row" id="kpi-overview"></div>
+  <div id="alert-overview"></div>
+  <div class="panel">
+    <div class="ph">45年資產水位 <span style="font-size:var(--fs-caption);color:var(--wg9);font-weight:400">屋齡5～50年・含安全警戒線與大型資本支出標示</span></div>
+    <div class="pb"><div class="ch"><canvas id="chart-assets"></canvas></div></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">年度收支結構</div>
+      <div class="pb"><div class="ch-sm"><canvas id="chart-annual"></canvas></div></div>
+    </div>
+    <div class="panel">
+      <div class="ph">非經常性資本支出時間軸</div>
+      <div class="pb"><div class="ch-sm"><canvas id="chart-capex-timeline"></canvas></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 費率規劃 ══ -->
+<div id="tab-rate" class="tab-content">
+  <div class="info-box">
+    💡 可設定任意數量的費率調整點，每筆指定「生效年度（西元年）」與「費率（元/坪）」。系統會在對應年度起套用新費率，直到下一個調整點。調整點數量無上限，顆粒度可以精細到每一年。
+  </div>
+  <div class="sl">費率調整計畫</div>
+  <div class="rate-schedule-list" id="rate-schedule-list"></div>
+  <div style="display:flex;gap:var(--sp-8);margin-bottom:var(--sp-20);flex-wrap:wrap;">
+    <button class="btn" onclick="addRateRow()">＋ 新增調整點</button>
+    <button class="btn btn-primary" onclick="recalc();sw('overview')">▶ 重新計算</button>
+    <button class="btn" onclick="resetRateSchedule()">重設費率</button>
+  </div>
+
+  <div class="sl sl-gap">主推方案</div>
+  <div style="display:flex;gap:var(--sp-12);flex-wrap:wrap;margin-bottom:var(--sp-8);">
+    <button class="btn btn-primary" onclick="applyPreset('proposal')">📌 主推方案：5 年週期 × 4.2%（起 180、2062 凍結 750 元）</button>
+    <button class="btn" onclick="applyPreset('proposal_uncapped')">↔ 對比：不凍結版（持續調漲至 2072）</button>
+  </div>
+  <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-16)">兩段式設計：<strong>2027-2062 每 5 年調漲一次（×4.2%）</strong>累積 sinking fund cover 屋齡 20（2042）跟屋齡 40（2062）兩波大修；<strong>2062 起費率凍結在 750 元</strong>不再調漲，讓累積資金順勢消耗至都更時點。45 年內全程不破產、不跌警戒；50 年資產約 555 萬接近 0，符合「死後不留遺產」設計。<br>按「對比」按鈕可看「若不凍結繼續調漲」的結果——終費率拉到 1,130 元、50 年資產累積到 4,394 萬（over-fund，違反「死後不留遺產」原則）。</div>
+
+  <div class="sl sl-gap">其他變體（情境試算用）</div>
+  <div style="font-size:var(--fs-caption);letter-spacing:var(--ls-label);color:var(--wg11);margin-bottom:var(--sp-8)">等差調法</div>
+  <div style="display:flex;gap:var(--sp-8);flex-wrap:wrap;margin-bottom:var(--sp-12);">
+    <button class="btn btn-sm" onclick="applyPreset('flat150')">固定150元</button>
+    <button class="btn btn-sm" onclick="applyPreset('every5_10')">每5年+10元</button>
+    <button class="btn btn-sm" onclick="applyPreset('every5_15')">每5年+15元</button>
+    <button class="btn btn-sm" onclick="applyPreset('every3_10')">每3年+10元</button>
+  </div>
+  <div style="font-size:var(--fs-caption);letter-spacing:var(--ls-label);color:var(--wg11);margin-bottom:var(--sp-8)">等比調法產生器（自訂節奏，住戶現場提問可即時試算）</div>
+  <div style="display:flex;gap:var(--sp-12);align-items:end;flex-wrap:wrap;margin-bottom:var(--sp-8)">
+    <div class="rate-field"><label>第一調年</label>
+      <input id="custom-start-year" type="number" value="2027" min="2027" max="2072" style="width:80px"></div>
+    <div class="rate-field"><label>第一調費率</label>
+      <input id="custom-start-rate" type="number" value="170" min="100" max="500" step="10" style="width:80px"></div>
+    <div class="rate-field"><label>間隔（年）</label>
+      <input id="custom-interval" type="number" value="3" min="1" max="20" style="width:60px"></div>
+    <div class="rate-field"><label>每次×成長率（%）</label>
+      <input id="custom-growth" type="number" value="4.0" step="0.1" min="0" max="20" style="width:80px"></div>
+    <div class="rate-field"><label>凍結年（選填）</label>
+      <input id="custom-stop-year" type="number" value="2062" placeholder="不凍結" min="2027" max="2072" style="width:80px"></div>
+    <button class="btn btn-primary" onclick="applyCustomGeometric()">▶ 產生並套用</button>
+  </div>
+  <div id="rate-disclaimer" style="font-size:var(--fs-text);color:var(--wg9);margin-bottom:var(--sp-16);line-height:var(--lh-loose);background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-12);">
+    <!-- 由 renderRateDisclaimer() 動態填入 -->
+  </div>
+
+  <div class="panel">
+    <div class="ph">當前費率計畫預覽</div>
+    <div class="pb">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>生效年度</th><th>屋齡</th><th class="r">費率（元/坪）</th><th class="r">年收入（萬）</th><th>說明</th></tr></thead>
+          <tbody id="rate-preview-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 參數設定 ══ -->
+<div id="tab-params" class="tab-content">
+  <div class="sl">基本參數</div>
+  <div class="panel"><div class="pb">
+    <div class="grid2">
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">計費總坪數</div>
+        <input type="number" id="p-sqm" value="2515.94" step="0.01" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">平面車位數</div>
+        <input type="number" id="p-parking" value="49" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">車位清潔費（元/位/月）</div>
+        <input type="number" id="p-park-fee" value="800" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">起始業主權益（元）<span style="color:var(--wg11);font-weight:400">・<strong>暫估</strong> 2026/12/31 業主權益（不含充電樁基金）：10 月實數 6,300,528 ＋ 11–12 月常態約 13.3 萬 − 外牆等已決議款 33.4 萬 − 12 月年繳保險約 2.4 萬 − 充電樁基金約 4.4 萬；12 月財報出來後換實數</span></div>
+        <input type="number" id="p-assets" value="6030000" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">定存年利率（%）</div>
+        <input type="number" id="p-tdrate" value="1.6" step="0.1" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">資產安全警戒線（萬元）</div>
+        <input type="number" id="p-safety" value="500" step="50" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">不定期修繕雜支基準（元/年）<span style="color:var(--wg11);font-weight:400">・來源 2025/7-2026/4 維修事件全年化 26 萬，按 5% 推到 2027 年＝27.3 萬；2026/7–11 實績年化約 25～30 萬，相符</span></div>
+        <input type="number" id="p-misc" value="273000" step="10000" oninput="_cf=null">
+      </div>
+      <div>
+        <div style="font-size:var(--fs-caption);color:var(--wg9);margin-bottom:var(--sp-4)">不定期修繕雜支通膨率（%/年）<span style="color:var(--wg11);font-weight:400">・物價 4% + 老化 1%</span></div>
+        <input type="number" id="p-misc-infl" value="5.0" step="0.1" oninput="_cf=null">
+      </div>
+    </div>
+  </div></div>
+  <div class="sl sl-gap">通膨參數</div>
+  <div class="panel"><div class="pb">
+    <div style="display:flex;flex-direction:column;gap:var(--sp-12);">
+      <div style="display:flex;align-items:center;gap:var(--sp-12);flex-wrap:wrap;">
+        <span style="flex:1;min-width:200px;font-size:var(--fs-text);color:var(--wg11)">人力服務類（保全・物業・清潔）</span>
+        <div style="display:flex;align-items:center;gap:var(--sp-8);"><input type="number" id="infl-human" value="4.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:var(--fs-text);color:var(--wg9)">%/年</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--sp-12);flex-wrap:wrap;">
+        <span style="flex:1;min-width:200px;font-size:var(--fs-text);color:var(--wg11)">技術營繕類（電梯・機電・消防）</span>
+        <div style="display:flex;align-items:center;gap:var(--sp-8);"><input type="number" id="infl-tech" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:var(--fs-text);color:var(--wg9)">%/年</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--sp-12);flex-wrap:wrap;">
+        <span style="flex:1;min-width:200px;font-size:var(--fs-text);color:var(--wg11)">一般物價與規費類（保險・水電・耗材）</span>
+        <div style="display:flex;align-items:center;gap:var(--sp-8);"><input type="number" id="infl-gen" value="2.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:var(--fs-text);color:var(--wg9)">%/年</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--sp-12);flex-wrap:wrap;">
+        <span style="flex:1;min-width:200px;font-size:var(--fs-text);color:var(--wg11)">非經常性支出（資本支出通膨）</span>
+        <div style="display:flex;align-items:center;gap:var(--sp-8);"><input type="number" id="infl-capex" value="3.0" step="0.1" style="width:70px" oninput="_cf=null"><span style="font-size:var(--fs-text);color:var(--wg9)">%/年</span></div>
+      </div>
+    </div>
+  </div></div>
+  <div style="display:flex;gap:var(--sp-8);margin-top:var(--sp-8);">
+    <button class="btn btn-primary" onclick="recalc();sw('overview')">▶ 重新計算</button>
+    <button class="btn" onclick="resetParams()">重設參數</button>
+  </div>
+</div>
+
+<!-- ══ 經常性支出 ══ -->
+<div id="tab-recurring" class="tab-content">
+  <div class="info-box">
+    💡 你可以直接修改各科目的金額或通膨率，也可以新增或刪除科目，探索不同支出結構對財務的影響。<br>
+    <strong>通膨類別</strong>決定該科目的長期成長率：人力服務類 4%、技術營繕類 3%、一般物價與規費類 2%（可在參數設定中調整）。<br>
+    依各項目金額加權後，<strong>經常性支出綜合年通膨約 4.0%</strong>（精算值 3.91%，溝通時以 4.0% 為準）。
+  </div>
+  <div id="recurring-content"></div>
+  <div style="display:flex;gap:var(--sp-8);margin-top:var(--sp-12);flex-wrap:wrap;align-items:center;">
+    <span style="font-size:var(--fs-text);color:var(--wg9)">新增至：</span>
+    <button class="btn" onclick="addRecurringItem(0)">＋ 合約與固定月費</button>
+    <button class="btn" onclick="addRecurringItem(1)">＋ 年度費用</button>
+    <button class="btn" onclick="addRecurringItem(2)">＋ 耗材費用</button>
+    <button class="btn btn-primary" onclick="recalcRecurring();recalc();sw('overview')">▶ 重新計算</button>
+    <button class="btn" onclick="resetRecurring()">重設為原始資料</button>
+  </div>
+</div>
+
+<!-- ══ 非經常性支出 ══ -->
+<div id="tab-capex" class="tab-content">
+  <div class="info-box">
+    💡 <strong>維護說明：</strong>每個項目只需填寫一次（現值、週期、首次執行屋齡），系統自動按週期展開至屋齡50年，無需手動重複輸入。<br>
+    點「＋ 新增項目」可加入新的資本支出；點每列右側「刪除」可移除。修改後點「重新計算」即時更新所有年度的現金流。
+  </div>
+  <div class="capex-list" id="capex-list"></div>
+  <div style="display:flex;gap:var(--sp-8);margin-bottom:var(--sp-16);flex-wrap:wrap;">
+    <button class="btn" onclick="addCapexItem()">＋ 新增項目</button>
+    <button class="btn btn-primary" onclick="recalc();sw('cashflow')">▶ 重新計算並查看現金流</button>
+  </div>
+  <div class="panel">
+    <div class="ph">非經常性支出展開預覽（屋齡5～50年）</div>
+    <div class="pb">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>屋齡</th><th>年度</th><th>項目</th><th class="r">預估造價（元）</th></tr></thead>
+          <tbody id="capex-preview-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 45年現金流 ══ -->
+<div id="tab-cashflow" class="tab-content">
+  <div class="panel">
+    <div class="ph">45年現金流明細</div>
+    <div class="pb">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>年度</th><th>屋齡</th><th class="r">費率</th>
+            <th class="r">管理費收入</th><th class="r">利息</th>
+            <th class="r">經常性支出</th><th class="r">不定期修繕雜支</th><th class="r">非經常性支出</th>
+            <th class="r">年度結餘</th><th class="r">期末資產</th><th>狀態</th>
+          </tr></thead>
+          <tbody id="cf-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 壓力測試 ══ -->
+<div id="tab-stress" class="tab-content">
+  <div class="info-box">
+    以下左圖同時顯示固定費率與等比費率情境對比，幫助評估長期資產水位差異。<br>
+    <strong>等比費率在圖例中標示 ★</strong>，可看出等比調法對資產水位的保護效果。
+  </div>
+  <div class="panel">
+    <div class="ph">各費率水位對比</div>
+    <div class="pb"><div class="ch" style="height:560px"><canvas id="stress-chart"></canvas></div></div>
+  </div>
+  <div class="panel">
+    <div class="ph">固定費率分析表</div>
+    <div class="pb">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th class="r">費率</th><th class="r">30年最低資產</th><th class="r">50年最低資產</th>
+            <th>轉負年度</th><th>跌破警戒線年度</th><th>判斷</th>
+          </tr></thead>
+          <tbody id="stress-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 版本差異（工作版專用） ══ -->
+<div id="tab-diff" class="tab-content">
+  <div class="info-box">
+    本頁是<strong>2027 區權會版的工作版</strong>：第五屆任內一有新費用就更新這裡，2027 年 5 月區權會前定稿。
+    住戶目前看到的<a href="/finance/長期財務模型.html">正式版</a>（2026 區權會版，2026-05-15 最後更新）維持不動。
+    起點從 2026 改為 2027：2026 年已發生的費用（例如外牆清洗 28.5 萬）反映在起始資產裡，不再列入預測；所有單價換成 2027 年價格。
+  </div>
+  <div class="panel">
+    <div class="ph">結果比較（兩版都用主推費率方案：2027 年起 180 元、每 5 年 +4.2%、2062 凍結）</div>
+    <div class="pb"><div class="tbl-wrap"><table>
+      <thead><tr><th>指標</th><th class="r">正式版</th><th class="r">工作版</th><th class="r">差異</th></tr></thead>
+      <tbody id="diff-kpi"></tbody>
+    </table></div></div>
+  </div>
+  <div class="panel">
+    <div class="ph">假設改動（已決議或已付款才改）</div>
+    <div class="pb"><div class="tbl-wrap"><table>
+      <thead><tr><th>日期</th><th>項目</th><th>正式版</th><th>工作版</th><th>依據</th></tr></thead>
+      <tbody id="diff-changes"></tbody>
+    </table></div></div>
+  </div>
+  <div class="panel">
+    <div class="ph">待定（還沒決議，暫不改數字）</div>
+    <div class="pb"><div class="tbl-wrap"><table>
+      <thead><tr><th>項目</th><th>模型目前</th><th>可能變成</th><th>何時定</th></tr></thead>
+      <tbody id="diff-pending"></tbody>
+    </table></div></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const ORIG_PARAMS = {"目前屋齡 (2027起始)":5,"計費總坪數":2515.94,"平面車位數":49,"起始總資產（含管理費+公共基金；不含充電樁公用線路維修基金)":5953089,"目前管理費率":150,"目標調整費率":150,"車位清潔費 (單價)":800,"定存年利率 (預估)":0.016,"合約與固定月費支出小計":4368565,"年度費用小計":122833,"耗材費用小計":155020,"年度修繕雜支":200000,"基期營運總支出（年）":4846418,"人力服務類":0.04,"技術營繕類":0.03,"一般物價與規費類":0.02,"經常性支出綜合通膨率":0.0385937769697001,"非經常性支出綜合通膨率":0.03};
+const ORIG_RECURRING = [{"id":1,"name":"管理服務費","vendor":"潤泰公寓大廈管理維護（股）公司","freq":"每月","monthly":130000,"annual":1560000,"infl_type":"人力服務類","infl_rate":0.04,"note":"20261123：第五屆第五次會議物業續約每月 325,000 元（含稅，2027-01 起），依原 126,000：189,000 比例拆分為 130,000（1,512,000 → 1,560,000）。\n20250101：編制：\n(1名)社區經理、(1名)清潔人員\n20240101：編制： \n (1名) 社區經理 (日班8小時，國定假日休，排休) ：$69,00"},{"id":2,"name":"保全服務費","vendor":"潤泰保全（股）公司","freq":"每月","monthly":195000,"annual":2340000,"infl_type":"人力服務類","infl_rate":0.04,"note":"20261123：同上，物業續約 325,000 元比例拆分為 195,000（2,268,000 → 2,340,000）。\n20250101：編制：\n(1哨)保全人員(24小時):$189,000/月\n20240101：編制： \n (1名) 社區經理 (日班8小時，國定假日休，排休)"},{"id":3,"name":"電梯保養","vendor":"三菱電梯（股）公司","freq":"每月","monthly":13256.083333333334,"annual":159073,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（154,440 → 159,073）。\n20251125：行動不便電梯（貨梯）一台7,207元；一般電梯（客梯）一台5,663元。二年一約保養期限至2027年11月30日（維持原價；三菱電梯預告兩年後"},{"id":4,"name":"機電保養","vendor":"太古華電實業（股）公司","freq":"每月","monthly":4738,"annual":56856,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（55,200 → 56,856）。\n20251215：仍由太古華電承攬社區機電保養。每月$4,600，二年一約（維持原價）\n20240201：仍由太古華電承攬社區機電保養。每月$4,600，二年一"},{"id":5,"name":"垃圾清運","vendor":"極速環保有限公司","freq":"每月","monthly":10500,"annual":126000,"infl_type":"人力服務類","infl_rate":0.04,"note":"20261123：2027-01 仍為 10,500 元；2027-02 新約待議（見版本差異「待定」），暫不加通膨（126,000 → 126,000）。\n20260201：垃圾清運廠商更換為與禾聯發同家族集團之極速環保，單價維持為每噸6,000元，由於本社區垃圾量有稍微成長，極速環保更新本社區估計垃圾量為每月1."},{"id":6,"name":"園藝維護","vendor":"綠石文化有限公司","freq":"每年\n九個月","monthly":5850,"annual":70200,"infl_type":"人力服務類","infl_rate":0.04,"note":"20261123：模型起點改為 2027，2026 單價按「人力服務類」4% 推一年（67,500 → 70,200）。\n20260515：因雜草成長速度，本年起由每年 7 次增至 9 次保養（每次 $7,500，全年 9 次合計 $67,500，分攤每月 $5,625）。未來若再增頻屆時依實際調整 baseline。\n20231130：綠石續簽園藝維護，每年三、五、六、七、八、十、十二月保養，共七次，每次$7,500\n20230427：確認由綠石園藝維護，每年三、五、六、七、"},{"id":7,"name":"一樓大門保養","vendor":"美德亞有限公司","freq":"每季","monthly":2884,"annual":34608,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（33,600 → 34,608）。\n20240313：美德亞報價每三個月保養一次$8,400（含稅），一年4次，每月費用均攤$2,800\n20230724：美德亞報價每兩個月$6,000，尚待議價"},{"id":8,"name":"社區公共水費","vendor":"台北自來水事業處","freq":"兩個月","monthly":510,"annual":6120,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（6,000 → 6,120）。\n20260206：根據2025年度實際水費6,553元將水費目標調降為每年6,000元\n20230922：兩個月繳納一次，因調漲預估每次費用$1500，實報實銷"},{"id":9,"name":"B1F電信室電費","vendor":"台灣電力公司","freq":"兩個月","monthly":85,"annual":1020,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（1,000 → 1,020）。\n20231107：電費調漲每二個月扣款一次，一次173元，每月$86.5，一年1,038元，每月費用均攤87元\n20230427：新增B1電信室電費項目；每二個"},{"id":10,"name":"電信費","vendor":"中華電信","freq":"每月","monthly":1224,"annual":14688,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（14,400 → 14,688）。\n20251002：行動電話由遠傳電信攜碼至中華電信，預估每月費用$1,200，為實報實銷；本社區公設部分網路由凱擘與今網寬頻贊助，故無支出\n20230427：市"},{"id":11,"name":"管理費信用卡繳款手續費","vendor":"智生活","freq":"每月","monthly":520,"annual":6240,"infl_type":"人力服務類","infl_rate":0.04,"note":"20261123：模型起點改為 2027，2026 單價按「人力服務類」4% 推一年（6,000 → 6,240）。\n20260206：將智生活信用卡繳款手續費獨立成項，2025年為$5,780，平均每月$481，抓$500。"},{"id":11,"name":"公共意外責任險","vendor":"國泰產險","freq":"每年","monthly":529.1666666666666,"annual":6350,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：國泰 2027 年度續保同價 6,350 元（第五屆第五次會議），不加通膨（6,350 → 6,350）。\n20251215：公共意外險由國泰承保，費用為 $6,350；\n2023/12/31：此費用為投保公共意外責任險，$7,294元含稅/年（不含自付額），每月費用"},{"id":12,"name":"商業火災保險","vendor":"新光產險","freq":"每年","monthly":308,"annual":3696,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：第五屆第五次會議決議改保新光 3,696 元（2027 年度）（4,620 → 3,696）。\n20251215：商業火險由富邦承保，費用為 $4,620；"},{"id":15,"name":"建築物公共安全申報","vendor":"大台北建築物公共安全檢查（股）公司","freq":"三年","monthly":411.75,"annual":4941,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（4,796.667 → 4,941）。\n20260112：取得大台北建築公共安全檢查（股）公司的最新報價為14,390元/三年一次=$4,797/年($8,800/12個月=每月費用均攤$733)\n2"},{"id":16,"name":"大樓瓦斯緊急遮斷設備維護檢查","vendor":"大台北瓦斯（股）公司","freq":"半年","monthly":1619.8333333333333,"annual":19438,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（18,872 → 19,438）。\n20240313：新增大樓瓦斯緊急遮斷設備保養。大台北瓦斯人員建議保養（保固期一年內已有來兩次）$9,436/半年（含稅），每月費用均攤$1,573\n20230"},{"id":17,"name":"AED（自動體外心臟電擊去顫器）租賃費用","vendor":"新光電通（股）公司","freq":"每年","monthly":1200,"annual":14400,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：續約降為每月 1,200 元（第五屆第四次會議）（15,120 → 14,400）。\n20240101：向新光電通起租，以月租$1,260報價卻是年租年繳$15,120，因此列於年度費用。"},{"id":18,"name":"公設空調設備保養","vendor":"君穎工程行","freq":"每年","monthly":4720.833333333333,"annual":56650,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（55,000 → 56,650）。\n20251215：2025年度的公設空調設備保養由君穎工程行執行，報價$51,000；預算抓$55,000\n20230909：年度金額由$36,000改為$50"},{"id":24,"name":"社區會議","vendor":"管理委員會","freq":"每年","monthly":510,"annual":6120,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（6,000 → 6,120）。\n20260206：將社區活動與社區會議科目拆開以對應潤泰新都興財務系統。2025年區權會花費$2,596，另需外加原本列於雜項支出的調權狀謄本的費用$1,880"},{"id":25,"name":"社區活動","vendor":"管理委員會","freq":"每年","monthly":340,"annual":4080,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（4,000 → 4,080）。\n20260206：將社區活動與社區會議科目拆開以對應潤泰新都興財務系統。2025年中元節活動花費$2,660，2026年編列$4,000元以預留物價波動及臨時性"},{"id":26,"name":"Google雲端空間與軟體訂閱","vendor":"Google","freq":"每年","monthly":76.5,"annual":918,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（900 → 918）。\n20250729：Google雲端空間升級為200GB，年費900元"},{"id":27,"name":"消防設備檢測(耗材)","vendor":"太古華電實業（股）公司","freq":"每年","monthly":3433.3333333333335,"annual":41200,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（40,000 → 41,200）。\n20250204：年度消防缺失修繕報價為$44,531，後經議價為$40,000，改以此數字進行估計。\n20240206：目前最多項消防缺失修繕（更換滅火器藥劑"},{"id":28,"name":"電梯耗材","vendor":"三菱電梯（股）公司","freq":"每年","monthly":5150,"annual":61800,"infl_type":"技術營繕類","infl_rate":0.03,"note":"20261123：模型起點改為 2027，2026 單價按「技術營繕類」3% 推一年（60,000 → 61,800）。\n20260206：[遞延維護成本] 原廠評估之老化零件(電池/機板)已屆使用年限，2025年雖未發生故障但風險遞延至本年度，故維持預算以備突發更換。\n20240"},{"id":29,"name":"照明零件、燈具(耗材)","vendor":"多家廠商","freq":"每月","monthly":1275,"annual":15300,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（15,000 → 15,300）。\n20260206：2025年財報機電耗材科目為$5,625，然2025年係消耗減盞回收之舊品庫存致支出偏低。本年度需恢復正常採購以回補庫存，並含大廳高空燈具整批"},{"id":30,"name":"清潔用品購置","vendor":"多家廠商","freq":"每月","monthly":2040,"annual":24480,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（24,000 → 24,480）。\n20260203：依照2025年度損益表與年度現金收支統計表「清潔用品」科目數字（分別為19,228元與22,242元）再加上原本歸屬於雜項支出的飲水濾心費用3"},{"id":31,"name":"行政雜項費用","vendor":"多家廠商","freq":"每月","monthly":1020,"annual":12240,"infl_type":"一般物價與規費類","infl_rate":0.02,"note":"20261123：模型起點改為 2027，2026 單價按「一般物價與規費類」2% 推一年（12,000 → 12,240）。\n20260206：根據2025年財報之雜項支出$33,225應移除頂樓石材桌板修繕（歸於修繕費）、Google One訂閱費用（另外獨立成項）、房屋所有權狀謄本"}];
+const ORIG_CAPEX = [{"name":"地面石材晶化保養(一樓&交誼廳&電梯)","vendor":"鼎峰石材行","freq":3,"base_cost":30900,"age":5,"future_cost":30900,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：晶化保養週期由 2 年改為 3 年，首次執行屋齡由 4 改為 5。\n20240308：經議價，開收據，砍尾數可30,000施作，每月費用均攤$1,250\n20240308：鼎峰石材行（信創"},{"name":"外牆＋玻璃全棟清洗","vendor":"世新事業","freq":4,"base_cost":236900,"age":8,"future_cost":236900,"note":"20261123：依世新 2026-11-06 報價「全棟 23 萬」（2027 價格 ×1.03＝236,900）；2030 年（屋齡 8）起每 4 年一次，與玻璃清洗錯開（主委定）。2026 年那次實付 285,000 元已反映在起始資產，不再列入。\n20260209：根據相近體量大樓大樓經驗，暫時以$150,000預估\n20240413：暫估計一次40萬(如果每平方公"},{"name":"建築玻璃清洗","vendor":"世新事業","freq":4,"base_cost":123600,"age":6,"future_cost":123600,"note":"20261123：依世新 2026-11-06 報價「僅玻璃 12 萬」（2027 價格 ×1.03＝123,600）。玻璃水垢長得快，洪老闆建議至少兩年洗一次；2028 年（屋齡 6）起每 4 年一次，與全棟清洗錯開，合起來玻璃每 2 年洗一次（主委定）。"},{"name":"緊急發電機電池更換","vendor":"太古華電實業（股）公司","freq":2,"base_cost":11330,"age":4,"future_cost":11330,"max_age":48,"note":"20261123：第五屆第五次會議追認，太古華電議價後 11,000 元（含稅，2027 價格 11,330；舊估 9,618）。2026 已換，下次 2028。\n20260210：太古華電王國棟保養員表示B級保養五年一次即可（附註：A級保養會將緊急發電機零件拆得更細，比較少見）。\n"},{"name":"緊急發電機B級保養","vendor":"太古華電實業（股）公司","freq":5,"base_cost":17866,"age":5,"future_cost":17866,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260210：太古華電王國棟保養員表示B級保養五年一次即可（附註：A級保養會將緊急發電機零件拆得更細，比較少見）。\n"},{"name":"行政電腦（NB）","vendor":"","freq":"6年","base_cost":25750,"age":6,"future_cost":25750,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"緊急發電機油箱清洗與換油","vendor":"太古華電實業（股）公司","freq":6,"base_cost":20600,"age":6,"future_cost":20600,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260203：問題： 發電機底部的油箱，柴油放久了會變質、長藻、產生油泥。\n建議： 雖然不需要像電瓶那樣頻繁更換，但"},{"name":"監控系統主機更新（PC）","vendor":"詮越科技（股）公司","freq":7,"base_cost":36050,"age":7,"future_cost":36050,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260209：詮越侯Sir提供預估，監控主機PC硬碟5-7年會因為耗損而需要更換，而也要做好硬碟技術升級後連同主機板"},{"name":"公佈欄電視（50吋）","vendor":"","freq":8,"base_cost":15450,"age":8,"future_cost":15450,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"雷射多功能事務機","vendor":"","freq":"6年","base_cost":25750,"age":8,"future_cost":25750,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"公務手機/平板","vendor":"","freq":"4年","base_cost":12360,"age":8,"future_cost":12360,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"監控/弱電設備維護（NVR主機與部分鏡頭備品採購）","vendor":"詮越科技（股）公司","freq":10,"base_cost":51500,"age":10,"future_cost":51500,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260209：詮越侯Sir提供預估，監控NVR主機其實極少損壞，因此暫估更換週期為10年，目前價格約$25,000，"},{"name":"2F投影機","vendor":"","freq":12,"base_cost":15450,"age":12,"future_cost":15450,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"公設電視（65吋）","vendor":"","freq":10,"base_cost":25750,"age":12,"future_cost":25750,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n"},{"name":"對講機與網路骨幹更新","vendor":"詮越科技（股）公司","freq":"15年","base_cost":206000,"age":15,"future_cost":206000,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260209：以下三個功能顯示對講機仍有維護價值：1. 保全確認訪客、2. SOS 求救訊號回傳 （跌倒）以及3. "},{"name":"電梯緊急電源蓄電池更新（4年）","vendor":"三菱電梯（股）公司","freq":4,"base_cost":7416,"age":4,"future_cost":7416,"note":"20261123：第五屆第四次會議同意更換，NP7-12 兩部各 4 顆、每顆 900 元＝7,200 元（2027 價格 7,416）。2026 年（屋齡第五年才）首次更換，週期由 2 年改 4 年（主委定），下次 2030。\n20260515：依三菱電梯組件耐用基準參考表 3-1 項，5 年週期。兩部合計 6,000×2=12,000。"},{"name":"電梯緊急呼叫裝置更新（5年）","vendor":"三菱電梯（股）公司","freq":5,"base_cost":12360,"age":4,"future_cost":12360,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表 3-1 項，5 年週期。兩部合計 6,000×2=12,000。"},{"name":"電梯主鋼索更換（8年）","vendor":"三菱電梯（股）公司","freq":8,"base_cost":515000,"age":7,"future_cost":515000,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表 2-5 項法規基準 8 年（業界實務約 15 年；本次依基準表保守採 8 年）。兩部合計 250,000×2=500,000。"},{"name":"電梯上下極限開關更新（10年）","vendor":"三菱電梯（股）公司","freq":10,"base_cost":82400,"age":9,"future_cost":82400,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表 1-8 項，10 年週期。兩部合計 40,000×2=80,000。"},{"name":"電梯15年組件大修（車廂門閉鎖/調速機/牽引驅動輪/調速機鋼索/控制盤）","vendor":"三菱電梯（股）公司","freq":15,"base_cost":537660,"age":14,"future_cost":537660,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表合併 5 項（1-2車廂門閉鎖$3,000、1-4調速機$50,000、2-3牽引驅動輪$80,000、3-3調速機鋼索$100,000、3-5控制盤主接觸器$28,000），每部小計$261,000×2部。"},{"name":"電梯20年組件大修（馬達電磁制動器/車廂緩衝器/車廂門驅動馬達）","vendor":"三菱電梯（股）公司","freq":20,"base_cost":710700,"age":19,"future_cost":710700,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表合併 3 項（1-1馬達電磁制動器$250,000、1-5車廂緩衝器$30,000、3-4車廂門驅動馬達$65,000），每部小計$345,000×2部。注意：原舊版誤將 2-1 馬達電動機（基準表標示 25 年）併入此 20 年組，已移至 25 年組。"},{"name":"電梯25年組件大修（安全鉗/機坑停止開關/超載警報/馬達電動機/轉向輪）","vendor":"三菱電梯（股）公司","freq":25,"base_cost":1631520,"age":24,"future_cost":1631520,"max_age":45,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：依三菱電梯組件耐用基準參考表合併 5 項（1-3安全鉗$120,000、1-6機坑停止開關$2,000、1-7超載警報$20,000、2-1馬達電動機$600,000、2-4轉向輪$50,000），每部小計$792,000×2部。"},{"name":"外牆預防性整修","vendor":"","freq":20,"base_cost":4120000,"age":20,"future_cost":4120000,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n鷹架+檢測+磁磚修補"},{"name":"電梯車廂內裝翻新（外觀，非組件耐用基準）","vendor":"三菱電梯（股）公司","freq":30,"base_cost":412000,"age":29,"future_cost":412000,"note":"20261123：模型起點改為 2027，金額 ×1.03 換成 2027 價格。\n20260515：外觀 翻新（僅貼皮/換地板）兩部合計，不屬三菱組件耐用基準參考表範圍；保留為長期 外觀 預算。"}];
+
+let capexItems = JSON.parse(JSON.stringify(ORIG_CAPEX));
+let _cf = null;
+let rateSchedule = [{year:2027, rate:150, note:'起始費率'}];
+
+const FONT = 'Noto Sans TC';
+const charts = {};
+const START_YEAR = 2027, START_AGE = 5, TOTAL_YEARS = 45;
+const BASE_OPEX = ORIG_PARAMS['基期營運總支出（年）'];
+const BLENDED_INFL = ORIG_PARAMS['經常性支出綜合通膨率'];
+
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+const fN = v => v==null?'—':Math.round(v).toLocaleString('zh-TW');
+const fM = v => (Math.round(v/10000)/100).toFixed(1)+'M';
+const f萬 = v => (v/10000).toFixed(0)+'萬';
+
+// ── TABS ──
+const ALL_TABS=['params','recurring','capex','rate','cashflow','overview','stress','diff'];
+function sw(name){
+  ALL_TABS.forEach((t,i)=>document.querySelectorAll('.tab')[i].classList.toggle('active',t===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='overview')renderOverview();
+  if(name==='rate')renderRateTab();
+  if(name==='recurring')renderRecurring();
+  if(name==='capex')renderCapexTab();
+  if(name==='cashflow')renderCashflow();
+  if(name==='stress')renderStress();
+  if(name==='diff')renderDiff();
+}
+
+
+// ── 版本差異（工作版專用）──
+// 正式版數字：以正式版頁面預設參數、主推費率方案跑出（2026-11-23）；正式版不再更新，故寫成定值。
+const PREV_RESULT = {start:6211328, startNote:'正式版自己推估的 2026 年底資產', opex2027:4881224, capex2746:16790953, y2046:8236245, y2072:5547325, firstBelow:null};
+const DIFF_CHANGES = [
+  ['2026-11-23','模型起點','2026 年（屋齡 4），46 年','2027 年（屋齡 5），45 年','主委定：2026 已發生的費用進起始資產，單價換 2027 價格'],
+  ['2026-11-23','起始資產','6,051,823（2026/4/30 業主權益）','6,030,000（暫估 2026/12/31）','12 月財報出來後換實數'],
+  ['2026-11-23','物業（管理＋保全）','每月 315,000，每年 +4%','每月 325,000（2027 實價）','第五屆第五次會議續約'],
+  ['2026-11-23','外牆清洗','每 4 年 22 萬，2026 起','全棟（外牆＋玻璃）每 4 年 23 萬，2030 起','世新 2026-11-06 報價；主委定'],
+  ['2026-11-23','建築玻璃清洗','無','每 4 年 12 萬，2028 起（與全棟錯開＝玻璃每 2 年一次）','世新 2026-11-06 報價；洪老闆建議至少兩年一次'],
+  ['2026-11-23','電梯緊急電源蓄電池','每 2 年 3,000','每 4 年 7,200，下次 2030','第五屆第四次會議；實際第五年才首換'],
+  ['2026-11-23','發電機電瓶','每 2 年 9,618','每 2 年 11,000，下次 2028','第五屆第五次會議追認'],
+  ['2026-11-23','商業火險','富邦 4,620','新光 3,696','第五屆第五次會議'],
+  ['2026-11-23','AED 租賃','每月 1,260','每月 1,200','第五屆第四次會議'],
+  ['2026-11-23','經常性支出基期','443.5 萬（未含後來新增的項目）','依明細加總重算','正式版的基期小計比「經常性支出」頁籤明細加總少 7.6 萬，工作版改為以明細為準'],
+];
+const DIFF_PENDING = [
+  ['垃圾清運（極速環保）','每月 10,500','每月 13,650（以 2.2 噸計，+30%）','2027-02 換約前；物業每日秤重中'],
+  ['園藝維護','每年 67,500（每次 7,500 × 9）','A 廠商 52,500／B 廠商 38,500','第五屆第六次會議（12 月）'],
+  ['ERP-BERSe 建築能效評定規費','無','金額待內政部公告','2027 區權會提案'],
+  ['電動車細水霧滅火系統','無','買斷 140 萬／租賃 36 期 152 萬','屬區權會等級支出，尚未提案'],
+];
+function renderDiff(){
+  const sched=[{year:2027,rate:150}].concat(generateGeometric(2027,180,5,4.2,'',2062));
+  const save=rateSchedule; rateSchedule=sched; const cf=calcCashflow(); rateSchedule=save;
+  const safety=(gp('p-safety')||500)*10000;
+  const at=y=>(cf.find(r=>r.year===y)||{}).assets;
+  const below=(cf.find(r=>r.assets<safety)||{}).year||null;
+  const now={start:gp('p-assets'), opex2027:cf[0].opex, capex2746:cf.filter(r=>r.year<=2046).reduce((a,b)=>a+b.capex,0), y2046:at(2046), y2072:at(2072), firstBelow:below};
+  const w=v=>(Math.round(v/1000)/10).toLocaleString()+' 萬';
+  const d=(a,b,goodUp)=>{const x=b-a; if(Math.abs(x)<500) return '—'; const cls=(x>0)===goodUp?'dp':'dn'; return '<span class="'+cls+'">'+(x>0?'+':'−')+w(Math.abs(x))+'</span>';};
+  const rows=[
+    ['起始資產（2027 年初）',PREV_RESULT.start,now.start,true],
+    ['2027 年營運支出（含修繕雜支）',PREV_RESULT.opex2027,now.opex2027,false],
+    ['2027–2046 非經常性支出合計',PREV_RESULT.capex2746,now.capex2746,false],
+    ['2046 年底資產（20 年後）',PREV_RESULT.y2046,now.y2046,true],
+    ['2072 年底資產（屋齡 50）',PREV_RESULT.y2072,now.y2072,true],
+  ];
+  let h=rows.map(r=>'<tr><td>'+r[0]+'</td><td class="r">'+w(r[1])+'</td><td class="r">'+w(r[2])+'</td><td class="r">'+d(r[1],r[2],r[3])+'</td></tr>').join('');
+  h+='<tr><td>首次跌破 '+(safety/10000)+' 萬警戒線</td><td class="r">'+(PREV_RESULT.firstBelow||'不會')+'</td><td class="r">'+(now.firstBelow||'不會')+'</td><td class="r">'+(PREV_RESULT.firstBelow===now.firstBelow?'—':'<span class="dn">變動</span>')+'</td></tr>';
+  document.getElementById('diff-kpi').innerHTML=h;
+  document.getElementById('diff-changes').innerHTML=DIFF_CHANGES.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+  document.getElementById('diff-pending').innerHTML=DIFF_PENDING.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+}
+
+// ── PARAMS ──
+const gp = id => parseFloat(document.getElementById(id)?.value||0);
+function resetParams(){
+  document.getElementById('p-sqm').value=2515.94;
+  document.getElementById('p-parking').value=49;
+  document.getElementById('p-park-fee').value=800;
+  document.getElementById('p-assets').value=6030000;
+  document.getElementById('p-tdrate').value=1.6;
+  document.getElementById('p-safety').value=500;
+  document.getElementById('infl-human').value=4.0;
+  document.getElementById('infl-tech').value=3.0;
+  document.getElementById('infl-gen').value=2.0;
+  document.getElementById('infl-capex').value=3.0;
+  document.getElementById('p-misc').value=273000;
+  document.getElementById('p-misc-infl').value=5.0;
+  _cf=null;
+}
+
+// ── RATE SCHEDULE ──
+function getRateForYear(yearOffset){
+  let r = rateSchedule[0]?.rate || 150;
+  for(const s of rateSchedule){
+    if(START_YEAR + yearOffset >= s.year) r = s.rate;
+  }
+  return r;
+}
+
+function addRateRow(year, rate, note){
+  const lastYear = rateSchedule.length>0 ? Math.max(...rateSchedule.map(s=>s.year)) : START_YEAR;
+  rateSchedule.push({year: year||lastYear+5, rate: rate||getRateForYear(lastYear-START_YEAR)+10, note:note||''});
+  rateSchedule.sort((a,b)=>a.year-b.year);
+  renderRateTab(); _cf=null;
+}
+
+function delRateRow(i){
+  if(rateSchedule.length<=1){alert('至少需要保留一個費率設定');return;}
+  rateSchedule.splice(i,1);
+  renderRateTab(); _cf=null;
+}
+
+function resetRateSchedule(){
+  rateSchedule=[{year:2027,rate:150,note:'起始費率'}];
+  renderRateTab(); _cf=null;
+}
+
+function generateGeometric(startYear, startRate, intervalYears, annualGrowthPct, notePrefix, stopYear){
+  // Discrete geometric: rate always multiples of 10, but increment grows over time
+  // annualGrowthPct is percentage (e.g. 4.0 means 4%)
+  // stopYear (optional): cap rate at this year; no further adjustments after (兩段式：cover 最後大修後凍結)
+  const schedule = [{year:startYear, rate:startRate, note:(notePrefix||'起始')}];
+  let rate = startRate;
+  let year = startYear;
+  const endYear = stopYear || (START_YEAR + TOTAL_YEARS);
+  while(year + intervalYears <= endYear){
+    year += intervalYears;
+    const raw = rate * Math.pow(1 + annualGrowthPct/100, intervalYears);
+    let rounded = Math.round(raw / 10) * 10;
+    if(rounded <= rate) rounded = rate + 10; // ensure at least +10
+    const age = START_AGE + (year - START_YEAR);
+    const delta = rounded - rate;
+    const isLast = (year + intervalYears) > endYear;
+    schedule.push({year, rate: rounded, note:`+${delta}元（屋齡${age}年）${stopYear && isLast ? '・凍結至都更' : ''}`});
+    rate = rounded;
+  }
+  return schedule;
+}
+
+function applyPreset(name){
+  const presets = {
+    flat150: [{year:2027,rate:150,note:'固定費率'}],
+    every5_10: [{year:2027,rate:150},{year:2031,rate:160},{year:2036,rate:170},{year:2041,rate:180},{year:2046,rate:190},{year:2051,rate:200},{year:2056,rate:210},{year:2061,rate:220},{year:2066,rate:230}],
+    every5_15: [{year:2027,rate:150},{year:2031,rate:170},{year:2036,rate:180},{year:2041,rate:200},{year:2046,rate:210},{year:2051,rate:230},{year:2056,rate:240}],
+    every3_10: [{year:2027,rate:150},{year:2029,rate:160},{year:2032,rate:170},{year:2035,rate:180},{year:2038,rate:190},{year:2041,rate:200},{year:2044,rate:210},{year:2047,rate:220},{year:2050,rate:230},{year:2053,rate:240}],
+    proposal: [{year:2027,rate:150,note:'現況'}].concat(generateGeometric(2027, 180, 5, 4.2, '', 2062)),
+    proposal_uncapped: [{year:2027,rate:150,note:'現況'}].concat(generateGeometric(2027, 180, 5, 4.2, '')),
+  };
+  if(presets[name]){rateSchedule=JSON.parse(JSON.stringify(presets[name]));renderRateTab();_cf=null;}
+}
+
+function applyCustomGeometric(){
+  const sy = gp('custom-start-year')||2027;
+  const sr = gp('custom-start-rate')||170;
+  const intv = gp('custom-interval')||3;
+  const grw = gp('custom-growth')||4.0;
+  const stopVal = gp('custom-stop-year');
+  const stop = stopVal > START_YEAR ? stopVal : null;
+  rateSchedule = [{year:2027,rate:150,note:'現況'}].concat(generateGeometric(sy, sr, intv, grw, '', stop));
+  renderRateTab();
+  _cf=null;
+}
+
+function renderRateTab(){
+  const sqm = gp('p-sqm')||2515.94;
+  const parking = gp('p-parking')||49;
+  const parkFee = gp('p-park-fee')||800;
+
+  let rowsHtml = '';
+  rateSchedule.forEach((s,i)=>{
+    rowsHtml += `<div class="rate-row">
+      <span class="rate-row-label">第${i+1}點</span>
+      <div class="rate-row-fields">
+        <div class="rate-field"><label>生效年度</label>
+          <input type="number" value="${s.year}" min="2027" max="2072" step="1"
+            oninput="rateSchedule[${i}].year=parseInt(this.value)||2027;rateSchedule.sort((a,b)=>a.year-b.year);_cf=null;renderRateTab()"></div>
+        <div class="rate-field"><label>費率（元/坪）</label>
+          <input type="number" value="${s.rate}" min="100" max="500" step="10"
+            oninput="rateSchedule[${i}].rate=parseFloat(this.value)||150;_cf=null;renderRateTab()"></div>
+        <div class="rate-field" style="min-width:160px"><label>說明（選填）</label>
+          <input type="text" value="${s.note||''}" placeholder="例：配合住戶大會決議"
+            oninput="rateSchedule[${i}].note=this.value"></div>
+      </div>
+      <div class="rate-row-del">${i>0?`<button class="btn btn-danger btn-sm" onclick="delRateRow(${i})">刪除</button>`:''}</div>
+    </div>`;
+  });
+  document.getElementById('rate-schedule-list').innerHTML = rowsHtml;
+
+  // Preview table
+  let prevHtml = '';
+  rateSchedule.forEach((s,i)=>{
+    const isLast = i === rateSchedule.length - 1;
+    const endYear = isLast ? 2072 : rateSchedule[i+1].year - 1;
+    const age = s.year - START_YEAR + START_AGE;
+    const endAge = endYear - START_YEAR + START_AGE;
+    const income = (Math.round(s.rate*sqm)*12 + parkFee*parking*12)/10000;
+    const yearRange = s.year === endYear ? `${s.year}` : `${s.year}～${endYear}`;
+    const ageRange = age === endAge ? `屋齡${age}年` : `屋齡${age}～${endAge}年`;
+    prevHtml += `<tr><td>${yearRange}</td><td>${ageRange}</td>
+      <td class="r"><strong>${s.rate}</strong></td><td class="r">${income.toFixed(1)}</td>
+      <td style="font-size:var(--fs-text);color:var(--wg9)">${s.note||''}</td></tr>`;
+  });
+  document.getElementById('rate-preview-tbody').innerHTML = prevHtml;
+  renderRateDisclaimer();
+}
+
+function renderRateDisclaimer(){
+  const el = document.getElementById('rate-disclaimer');
+  if(!el) return;
+  const cf = getCF();
+  const sched = rateSchedule;
+  const safety = (gp('p-safety')||500) * 10000;
+
+  // 節奏：平均間隔與平均調幅
+  let adjPcts = [], intervals = [];
+  for(let i=1; i<sched.length; i++){
+    intervals.push(sched[i].year - sched[i-1].year);
+    if(sched[i].rate > sched[i-1].rate){
+      adjPcts.push((sched[i].rate - sched[i-1].rate) / sched[i-1].rate * 100);
+    }
+  }
+  const avgInterval = intervals.length ? Math.round(intervals.reduce((a,b)=>a+b,0)/intervals.length) : 0;
+  const avgAdjPct = adjPcts.length ? (adjPcts.reduce((a,b)=>a+b,0)/adjPcts.length) : 0;
+
+  // 節奏描述
+  let pacingMsg;
+  if(sched.length === 1){
+    pacingMsg = `當前方案：費率維持 <strong>${sched[0].rate} 元/坪</strong> 不變。`;
+  } else if(sched.length === 2){
+    const delta = sched[1].rate - sched[0].rate;
+    pacingMsg = `當前方案：${sched[0].year}（${sched[0].rate} 元）→ ${sched[1].year}（${sched[1].rate} 元，${delta>=0?'+':''}${delta} 元）`;
+  } else {
+    pacingMsg = `當前方案：${sched[0].year}（${sched[0].rate} 元）→ ${sched[1].year}（${sched[1].rate} 元）` +
+      `，之後平均每 <strong>${avgInterval} 年</strong>調整一次，平均調幅 <strong>${avgAdjPct.toFixed(1)}%</strong>。`;
+  }
+
+  // 第 50 年終端評估
+  const finalRow = cf[cf.length-1];
+  const finalAmt = Math.round(finalRow.assets/10000).toLocaleString();
+  const finalRate = sched[sched.length-1].rate;
+  const finalMsg = `第 ${finalRow.age} 年（${finalRow.year}）資產約 <strong>${finalAmt} 萬</strong>，終端費率 ${finalRate} 元/坪。`;
+
+  // 最低資產
+  const minRow = cf.reduce((m,r) => r.assets < m.assets ? r : m, cf[0]);
+  const minAmt = Math.round(minRow.assets/10000).toLocaleString();
+  let safetyMsg;
+  if(minRow.assets >= safety){
+    safetyMsg = `<span class="dp">✓</span> 45 年內最低資產 ${minAmt} 萬（屋齡 ${minRow.age} 年，${minRow.year}），仍高於 ${(safety/10000).toLocaleString()} 萬警戒線。`;
+  } else {
+    const capexNames = (minRow.capexDetail||[]).map(c=>c.name.split('（')[0]).slice(0,3).join('、');
+    const capexAmt = minRow.capex>0 ? `${Math.round(minRow.capex/10000).toLocaleString()} 萬` : '';
+    safetyMsg = `<span class="dw">⚠</span> 最低資產出現在屋齡 <strong>${minRow.age} 年（${minRow.year}）</strong>，降至 <strong>${minAmt} 萬</strong>，<span class="dn">低於 ${(safety/10000).toLocaleString()} 萬警戒線</span>。` +
+      (capexAmt ? `<br>　 當年大支出 <strong>${capexAmt}</strong>${capexNames ? `（${capexNames}）` : ''}，屬週期性整修，下一輪費率調升後可回升。` : '');
+  }
+
+  // 主要大支出年份（取 capex >= 300 萬，最多 4 個）
+  const bigCapexYrs = cf.filter(r => r.capex >= 3000000).sort((a,b) => b.capex - a.capex).slice(0, 4)
+    .sort((a,b) => a.year - b.year);
+  let bigMsg = '';
+  if(bigCapexYrs.length > 0){
+    bigMsg = '<br>📌 主要支出年份：' + bigCapexYrs.map(r =>
+      `屋齡 ${r.age} 年（${r.year}）約 ${Math.round(r.capex/10000).toLocaleString()} 萬`
+    ).join('、') + '。';
+  }
+
+  el.innerHTML = `💡 <strong>當前方案說明</strong>（依下方「費率調整計畫」即時計算）：<br>` +
+    `${pacingMsg}<br><br>` +
+    `${finalMsg}<br>` +
+    `${safetyMsg}${bigMsg}`;
+}
+
+// ── CORE CALC ──
+function calcCapexForAge(age){
+  const ci = gp('infl-capex')/100 || 0.03;
+  const items = [];
+  capexItems.forEach(c=>{
+    const freq = parseInt(String(c.freq).replace(/[^0-9]/g,''))||999;
+    if(isNaN(freq)||freq<=0) return;
+    if(c.max_age && age > c.max_age) return; // 最後執行屋齡：超過即凍結（都更前準備期）
+    if(age >= c.age && (age - c.age) % freq === 0){
+      const cost = c.base_cost * Math.pow(1+ci, age-START_AGE);
+      items.push({name:c.name, cost:Math.round(cost)});
+    }
+  });
+  return items;
+}
+
+function calcCashflow(rateOverride){
+  const sqm = gp('p-sqm')||2515.94;
+  const parking = gp('p-parking')||49;
+  const parkFee = gp('p-park-fee')||800;
+  const startAssets = gp('p-assets')||6051823;
+  const tdRate = gp('p-tdrate')/100 || 0.016;
+
+  let assets = startAssets;
+  const rows = [];
+  for(let i=0;i<=TOTAL_YEARS;i++){
+    const year = START_YEAR+i, age = START_AGE+i;
+    const rate = rateOverride!==undefined ? rateOverride : getRateForYear(i);
+    const income = Math.round(rate*sqm)*12 + parkFee*parking*12;
+    // Use dynamic base opex if recurring items have been modified
+    const baseOpex = (window._baseOpex !== undefined) ? window._baseOpex : BASE_OPEX;
+    // 拆分不定期修繕雜支（baseline + 獨立通膨）vs 一般 OPEX（OPEX blended 通膨）
+    const oldMisc = ORIG_PARAMS['年度修繕雜支']||200000;
+    const normalBaseOpex = baseOpex - oldMisc;
+    const normalOpex = normalBaseOpex * Math.pow(1+BLENDED_INFL, i);
+    const miscBase = gp('p-misc')||260000;
+    const miscInfl = gp('p-misc-infl')/100||0.05;
+    const miscOpex = miscBase * Math.pow(1+miscInfl, i);
+    const opex = normalOpex + miscOpex;
+    const capexDetail = calcCapexForAge(age);
+    const capex = capexDetail.reduce((a,b)=>a+b.cost,0);
+    const interest = Math.max(assets,0)*tdRate;
+    const surplus = income+interest-opex-capex;
+    assets += surplus;
+    rows.push({year,age,rate,income,interest:Math.round(interest),opex:Math.round(opex),misc:Math.round(miscOpex),capex,surplus:Math.round(surplus),assets:Math.round(assets),capexDetail});
+  }
+  return rows;
+}
+
+function calcCashflowFromSchedule(schedule){
+  // schedule: [{year, rate}] sorted ascending
+  const sqm=gp('p-sqm')||2515.94, parking=gp('p-parking')||49;
+  const parkFee=gp('p-park-fee')||800, startAssets=gp('p-assets')||6051823;
+  const tdRate=gp('p-tdrate')/100||0.016;
+  let assets=startAssets;
+  const rows=[];
+  for(let i=0;i<=TOTAL_YEARS;i++){
+    const year=START_YEAR+i, age=START_AGE+i;
+    let rate=schedule[0]?.rate||150;
+    for(const s of schedule){ if(year>=s.year) rate=s.rate; }
+    const income=Math.round(rate*sqm)*12+parkFee*parking*12;
+    const baseOpex=(window._baseOpex!==undefined)?window._baseOpex:BASE_OPEX;
+    const oldMisc=ORIG_PARAMS['年度修繕雜支']||200000;
+    const normalBaseOpex=baseOpex-oldMisc;
+    const normalOpex=normalBaseOpex*Math.pow(1+BLENDED_INFL,i);
+    const miscBase=gp('p-misc')||300000;
+    const miscInfl=gp('p-misc-infl')/100||0.05;
+    const miscOpex=miscBase*Math.pow(1+miscInfl,i);
+    const opex=normalOpex+miscOpex;
+    const capexDetail=calcCapexForAge(age);
+    const capex=capexDetail.reduce((a,b)=>a+b.cost,0);
+    const interest=Math.max(assets,0)*tdRate;
+    assets+=income+interest-opex-capex;
+    rows.push({year,age,rate,income,assets:Math.round(assets)});
+  }
+  return rows;
+}
+
+function getCF(rate){
+  if(rate===undefined && _cf) return _cf;
+  const cf = calcCashflow(rate);
+  if(rate===undefined) _cf=cf;
+  return cf;
+}
+
+function recalc(){_cf=null;getCF();}
+
+// ── OVERVIEW ──
+function renderOverview(){
+  const cf = getCF();
+  const safety = (gp('p-safety')||500)*10000;
+  const firstNeg = cf.find(r=>r.assets<0);
+  const firstBelowSafety = cf.find(r=>r.assets<safety&&r.assets>=0);
+  // 破產情境下，「最低資產」改顯示破產前最低（破產後的大負數無意義）
+  const preBankruptRows = firstNeg ? cf.filter(r=>r.year < firstNeg.year) : cf;
+  const minA = preBankruptRows.length>0 ? Math.min(...preBankruptRows.map(r=>r.assets)) : 0;
+  const minRow = preBankruptRows.find(r=>r.assets===minA);
+  const finalA = cf[cf.length-1].assets;
+  const maxA = Math.max(...cf.map(r=>r.assets));
+  const maxR = cf.find(r=>r.assets===maxA);
+
+  document.getElementById('kpi-overview').innerHTML=`
+    <div class="kpi ${firstNeg?'red':minA<safety?'warn':'green'}">
+      <div class="kpi-label">資產轉負年度</div>
+      <div class="kpi-val ${firstNeg?'neg':'pos'}">${firstNeg?firstNeg.year:'無'}</div>
+      <div class="kpi-sub">${firstNeg?'屋齡'+firstNeg.age+'年':'45年內不轉負'}</div>
+    </div>
+    <div class="kpi ${minA<safety?'warn':'green'}">
+      <div class="kpi-label">${firstNeg?'破產前最低資產':'45年最低資產'}</div>
+      <div class="kpi-val">${f萬(minA)}</div>
+      <div class="kpi-sub">${minRow?.year}年</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">資產峰值</div>
+      <div class="kpi-val">${f萬(maxA)}</div>
+      <div class="kpi-sub">${maxR?.year}年（屋齡${maxR?.age}）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">第50年（2072）期末資產</div>
+      <div class="kpi-val ${finalA<0?'neg':''}">${firstNeg?'已破產':f萬(finalA)}</div>
+      <div class="kpi-sub">${firstNeg?'@'+firstNeg.year+'年':'費率'+cf[cf.length-1].rate+'元/坪'}</div>
+    </div>`;
+
+  let alertHtml='';
+  if(firstNeg) alertHtml+=`<div class="alert-box">⚠ 資產將於 <strong>${firstNeg.year}年（屋齡${firstNeg.age}年）</strong>轉為負值。請調整費率計畫或資本支出安排。</div>`;
+  else if(firstBelowSafety) alertHtml+=`<div class="warn-box">⚠ 資產將於 <strong>${firstBelowSafety.year}年（屋齡${firstBelowSafety.age}年）</strong>跌破安全警戒線（${gp('p-safety')}萬元）。</div>`;
+  else alertHtml+=`<div class="ok-box">✓ 45年內資產維持在安全警戒線以上，最低點 ${f萬(minA)}（${cf.find(r=>r.assets===minA)?.year}年）。</div>`;
+
+  // Add capex peaks info
+  const bigCapex = cf.filter(r=>r.capex>2000000);
+  if(bigCapex.length) alertHtml+=`<div class="info-box">📌 重大資本支出高峰（200萬以上）：${bigCapex.map(r=>`${r.year}年屋齡${r.age}（${f萬(r.capex)}）`).join('、')}</div>`;
+  document.getElementById('alert-overview').innerHTML=alertHtml;
+
+  // Asset chart with safety line and capex peaks
+  dc('chart-assets');
+  const safetyVal = (gp('p-safety')||500)*10000;
+  // 破產年後 clamp 至 0（紅色 bar 標示破產），避免大負數壓縮 positive axis
+  let _broken=false;
+  const dataClipped = cf.map(r=>{
+    if(_broken) return 0;
+    if(r.assets<0){ _broken=true; return 0; }
+    return r.assets;
+  });
+  const bgColors = cf.map(r=>r.assets<0?VIZ.alpha(VIZ.token('--dn'),0.7):r.assets<safetyVal?VIZ.alpha(VIZ.token('--warn'),0.65):VIZ.alpha(VIZ.token('--blue'),0.65));
+  charts['chart-assets']=new Chart(document.getElementById('chart-assets'),{
+    type:'bar',
+    data:{
+      labels:cf.map(r=>r.year),
+      datasets:[
+        {label:'期末資產',data:dataClipped,backgroundColor:bgColors,borderWidth:0,order:2},
+        {type:'line',label:`安全警戒線 ${gp('p-safety')}萬`,data:cf.map(()=>safetyVal),
+          borderColor:VIZ.alpha(VIZ.token('--dn'),0.6),borderDash:[5,3],borderWidth:1.5,
+          backgroundColor:'transparent',pointRadius:0,order:1},
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+      scales:{
+        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
+        x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
+      }
+    }
+  });
+
+  // Annual chart
+  dc('chart-annual');
+  charts['chart-annual']=new Chart(document.getElementById('chart-annual'),{
+    type:'bar',
+    data:{labels:cf.map(r=>r.year),datasets:[
+      {label:'收入',data:cf.map(r=>r.income+r.interest),backgroundColor:VIZ.alpha(VIZ.token('--dp'),0.55),stack:'a'},
+      {label:'營運支出',data:cf.map(r=>-r.opex),backgroundColor:VIZ.alpha(VIZ.token('--dn'),0.5),stack:'b'},
+      {label:'資本支出',data:cf.map(r=>-r.capex),backgroundColor:VIZ.alpha(VIZ.token('--warn'),0.55),stack:'b'},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+      scales:{
+        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
+        x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
+      }
+    }
+  });
+
+  // Capex timeline
+  dc('chart-capex-timeline');
+  charts['chart-capex-timeline']=new Chart(document.getElementById('chart-capex-timeline'),{
+    type:'bar',
+    data:{labels:cf.map(r=>r.year),datasets:[{
+      label:'資本支出',data:cf.map(r=>r.capex),
+      backgroundColor:cf.map(r=>r.capex>2000000?VIZ.alpha(VIZ.token('--dn'),0.75):r.capex>500000?VIZ.alpha(VIZ.token('--warn'),0.65):VIZ.alpha(VIZ.token('--wg11'),0.55)),
+      borderWidth:0
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        y:{ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
+        x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
+      }
+    }
+  });
+}
+
+// ── RECURRING (editable) ──
+let recurringItems = JSON.parse(JSON.stringify(ORIG_RECURRING));
+
+const INFL_TYPES = ['人力服務類','技術營繕類','一般物價與規費類'];
+const CAT_NAMES = ['合約與固定月費','年度費用','耗材費用'];
+const CAT_IDS = [
+  r => r.id<=11 && r.annual>0,
+  r => r.id>11 && r.id<=26 && r.annual>0 && !['消防設備檢測(耗材)','電梯耗材','照明零件、燈具(耗材)','清潔用品購置','行政雜項費用'].includes(r.name),
+  r => ['消防設備檢測(耗材)','電梯耗材','照明零件、燈具(耗材)','清潔用品購置','行政雜項費用'].includes(r.name)
+];
+
+function resetRecurring(){
+  recurringItems = JSON.parse(JSON.stringify(ORIG_RECURRING));
+  recalcRecurring();
+  renderRecurring();
+}
+
+function addRecurringItem(catIndex){
+  // catIndex: 0=合約, 1=年度, 2=耗材
+  var maxId = 0;
+  for(var x=0;x<recurringItems.length;x++) if((recurringItems[x].id||0)>maxId) maxId=recurringItems[x].id||0;
+  // Insert after last item of same category
+  var insertAfter = -1;
+  for(var x=0;x<recurringItems.length;x++){
+    if(getItemCatGlobal(recurringItems[x])===catIndex) insertAfter=x;
+  }
+  var inflTypes = ['人力服務類','技術營繕類','一般物價與規費類'];
+  var inflRates = [0.04, 0.03, 0.02];
+  var newItem = {id:maxId+1,name:'新科目',vendor:'',freq:'每月',monthly:0,annual:0,
+    infl_type:inflTypes[catIndex]||'一般物價與規費類',
+    infl_rate:inflRates[catIndex]||0.02,note:''};
+  if(insertAfter >= 0){
+    recurringItems.splice(insertAfter+1, 0, newItem);
+  } else {
+    recurringItems.push(newItem);
+  }
+  renderRecurring(); _cf=null;
+}
+
+function moveRecurringItem(i, dir){
+  // dir: -1 = up, +1 = down
+  var j = i + dir;
+  if(j < 0 || j >= recurringItems.length) return;
+  var tmp = recurringItems[i];
+  recurringItems[i] = recurringItems[j];
+  recurringItems[j] = tmp;
+  renderRecurring(); _cf=null;
+}
+
+function delRecurringItem(i){
+  if(!confirm('確定刪除「' + recurringItems[i].name + '」？')) return;
+  recurringItems.splice(i,1);
+  renderRecurring(); _cf=null;
+}
+
+function recalcRecurring(){
+  // Rebuild BASE_OPEX from current recurringItems + 年度修繕雜支
+  const annualSum = recurringItems.reduce((a,b)=>a+(b.annual||0),0);
+  const misc = ORIG_PARAMS['年度修繕雜支']||200000;
+  window._baseOpex = annualSum + misc;
+  _cf = null;
+}
+
+function getBaseOpex(){return window._baseOpex || BASE_OPEX;}
+
+var _CAT_耗材_LIST = ['消防設備檢測(耗材)','電梯耗材','照明零件、燈具(耗材)','清潔用品購置','行政雜項費用'];
+var _CAT_年度_LIST = ['公共意外責任險','商業火災保險','建築物公共安全申報','大樓瓦斯緊急遮斷設備維護檢查',
+  'AED（自動體外心臟電擊去顫器）租賃費用','公設空調設備保養','清洗水塔','高壓沖洗','環境消毒',
+  '地下室通風機保養','垃圾儲藏室設備維護','社區會議','社區活動','Google雲端空間與軟體訂閱'];
+
+function getItemCatGlobal(r){
+  if(_CAT_耗材_LIST.indexOf(r.name) >= 0) return 2;
+  if(_CAT_年度_LIST.indexOf(r.name) >= 0) return 1;
+  if(r.id > 26) return 2;
+  if(r.id > 10) return 1;
+  return 0;
+}
+
+function renderRecurring(){
+  var catNames = ['合約與固定月費','年度費用','耗材費用'];
+  var html = '';
+
+  for(var ci = 0; ci < 3; ci++){
+    var catItems = [];
+    for(var ii = 0; ii < recurringItems.length; ii++){
+      if(getItemCatGlobal(recurringItems[ii]) === ci){
+        catItems.push({r: recurringItems[ii], i: ii});
+      }
+    }
+    if(!catItems.length) continue;
+
+    var subMonthly = 0, subAnnual = 0;
+    for(var k=0;k<catItems.length;k++){
+      subMonthly += catItems[k].r.monthly || 0;
+      subAnnual  += catItems[k].r.annual  || (catItems[k].r.monthly||0)*12;
+    }
+
+    html += '<div class="sl ' + (html?'sl-gap':'') + '">' + catNames[ci];
+    html += '<span style="font-weight:400;color:var(--wg9);letter-spacing:0"> 小計 ' + fN(Math.round(subMonthly)) + '/月・' + fN(Math.round(subAnnual)) + '/年</span></div>';
+    html += '<div class="panel"><div class="pb"><div class="tbl-wrap"><table>';
+    html += '<thead><tr><th>科目名稱</th><th>廠商</th><th>頻率</th>';
+    html += '<th class="r">月金額（元）</th><th class="r">年金額</th>';
+    html += '<th>通膨類別</th><th class="r">通膨%</th><th>操作</th></tr></thead><tbody>';
+
+    for(var j=0;j<catItems.length;j++){
+      var r = catItems[j].r;
+      var i = catItems[j].i;
+      var monthly = r.monthly || 0;
+      var annual  = r.annual  || monthly*12;
+      var inflOpts = '';
+      for(var ti=0;ti<INFL_TYPES.length;ti++){
+        inflOpts += '<option value="' + INFL_TYPES[ti] + '"' + (r.infl_type===INFL_TYPES[ti]?' selected':'') + '>' + INFL_TYPES[ti] + '</option>';
+      }
+      html += '<tr>';
+      html += '<td><input type="text" value="' + r.name.replace(/"/g,'&quot;') + '" style="min-width:130px" oninput="recurringItems['+i+'].name=this.value"></td>';
+      html += '<td><input type="text" value="' + (r.vendor||'').replace(/"/g,'&quot;') + '" placeholder="廠商" oninput="recurringItems['+i+'].vendor=this.value" style="min-width:90px"></td>';
+      html += '<td><input type="text" value="' + (r.freq||'每月') + '" style="width:58px" oninput="recurringItems['+i+'].freq=this.value"></td>';
+      html += '<td class="r"><input type="number" value="' + Math.round(monthly) + '" style="width:88px;text-align:right" oninput="recurringItems['+i+'].monthly=parseFloat(this.value)||0;recurringItems['+i+'].annual=(parseFloat(this.value)||0)*12;_cf=null"></td>';
+      html += '<td class="r">' + fN(Math.round(annual)) + '</td>';
+      html += '<td><select style="font-size:var(--fs-text);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-4) var(--sp-4);background:var(--wg1);color:var(--wg41);font-family:sans-serif" onchange="recurringItems['+i+'].infl_type=this.value;_cf=null">' + inflOpts + '</select></td>';
+      html += '<td class="r"><input type="number" value="' + ((r.infl_rate||0.02)*100).toFixed(1) + '" step="0.1" style="width:52px;text-align:right" oninput="recurringItems['+i+'].infl_rate=(parseFloat(this.value)||2)/100;_cf=null"></td>';
+      html += '<td style="white-space:nowrap">';
+      html += '<button class="btn btn-sm" style="padding:var(--sp-4) var(--sp-8);font-size:var(--fs-text)" onclick="moveRecurringItem('+i+',-1)" title="上移">↑</button>';
+      html += '<button class="btn btn-sm" style="padding:var(--sp-4) var(--sp-8);font-size:var(--fs-text)" onclick="moveRecurringItem('+i+',1)" title="下移">↓</button>';
+      html += '<button class="btn btn-danger btn-sm" style="margin-left:var(--sp-4)" onclick="delRecurringItem('+i+')">刪</button>';
+      html += '</td>';
+      html += '</tr>';
+    }
+
+    html += '<tr class="tot"><td colspan="3">小計（' + catItems.length + '項）</td>';
+    html += '<td class="r">' + fN(Math.round(subMonthly)) + '</td>';
+    html += '<td class="r">' + fN(Math.round(subAnnual)) + '</td>';
+    html += '<td colspan="3"></td></tr>';
+    html += '</tbody></table></div></div></div>';
+  }
+
+  var totalMonthly = 0, totalAnnual = 0;
+  for(var m=0;m<recurringItems.length;m++){
+    totalMonthly += recurringItems[m].monthly || 0;
+    totalAnnual  += recurringItems[m].annual  || (recurringItems[m].monthly||0)*12;
+  }
+  html += '<div class="sl sl-gap">總計<span style="font-weight:400;color:var(--wg9);letter-spacing:0"> ' + recurringItems.length + '項・' + fN(Math.round(totalMonthly)) + '/月・' + fN(Math.round(totalAnnual)) + '/年</span></div>';
+
+  document.getElementById('recurring-content').innerHTML = html;
+}
+
+function addCapexItem(){
+  capexItems.push({name:'新項目',vendor:'',freq:10,base_cost:50000,age:10});
+  renderCapexTab(); _cf=null;
+}
+function delCapexItem(i){
+  if(!confirm(`確定刪除「${capexItems[i].name}」？`))return;
+  capexItems.splice(i,1);
+  renderCapexTab(); _cf=null;
+}
+
+function renderCapexTab(){
+  // 排序：首次執行屋齡（age）由小到大；相同 age 時，現值（base_cost）大者優先
+  capexItems.sort((a,b)=>{
+    if((a.age||0) !== (b.age||0)) return (a.age||0) - (b.age||0);
+    return (b.base_cost||0) - (a.base_cost||0);
+  });
+  // Build capex card list
+  let listHtml='';
+  capexItems.forEach((c,i)=>{
+    const isLarge=c.base_cost>=1000000, isMid=c.base_cost>=200000;
+    const cls=isLarge?'mega':isMid?'large':'';
+    const freq=parseInt(String(c.freq).replace(/[^0-9]/g,''))||0;
+    listHtml+=`<div class="capex-row ${cls}">
+      <div class="capex-name-wrap">
+        <div class="capex-name"><input type="text" value="${c.name}" style="font-weight:500;border:none;background:transparent;padding:0;font-size:var(--fs-text);width:100%;color:var(--wg41)"
+          oninput="capexItems[${i}].name=this.value;_cf=null;deferPreview()"></div>
+        <div class="capex-vendor"><input type="text" value="${c.vendor||''}" placeholder="廠商（選填）" style="font-size:var(--fs-text);border:none;background:transparent;padding:0;width:100%;color:var(--wg9)"
+          oninput="capexItems[${i}].vendor=this.value"></div>
+      </div>
+      <div class="capex-fields">
+        <div class="capex-field">
+          <label>現值（元）</label>
+          <input type="number" value="${c.base_cost}" oninput="capexItems[${i}].base_cost=parseFloat(this.value)||0;_cf=null;deferPreview()">
+        </div>
+        <div class="capex-field">
+          <label>週期（年）</label>
+          <input type="number" value="${freq}" oninput="capexItems[${i}].freq=parseInt(this.value)||999;_cf=null;deferPreview()">
+        </div>
+        <div class="capex-field">
+          <label>首次執行屋齡</label>
+          <input type="number" value="${c.age}" oninput="capexItems[${i}].age=parseInt(this.value)||4;_cf=null;deferPreview()">
+        </div>
+        <div class="capex-field">
+          <label>最後屋齡（選填）</label>
+          <input type="number" value="${c.max_age||''}" placeholder="不限" oninput="capexItems[${i}].max_age=parseInt(this.value)||null;_cf=null;deferPreview()">
+        </div>
+      </div>
+      <button class="btn btn-danger btn-sm" style="flex-shrink:0" onclick="delCapexItem(${i})">刪除</button>
+    </div>`;
+  });
+  document.getElementById('capex-list').innerHTML=listHtml;
+  renderCapexPreview();
+}
+
+let _previewTimer=null;
+function deferPreview(){clearTimeout(_previewTimer);_previewTimer=setTimeout(renderCapexPreview,400);}
+
+function renderCapexPreview(){
+  const ci=gp('infl-capex')/100||0.03;
+  const rows=[];
+  for(let age=START_AGE;age<=START_AGE+TOTAL_YEARS;age++){
+    capexItems.forEach(c=>{
+      const freq=parseInt(String(c.freq).replace(/[^0-9]/g,''))||999;
+      if(isNaN(freq)||freq<=0)return;
+      if(c.max_age && age > c.max_age) return; // 最後執行屋齡：超過即凍結（與 calcCapexForAge 邏輯一致）
+      if(age>=c.age&&(age-c.age)%freq===0){
+        const cost=c.base_cost*Math.pow(1+ci,age-START_AGE);
+        rows.push({age,year:START_YEAR+(age-START_AGE),name:c.name,cost:Math.round(cost)});
+      }
+    });
+  }
+  let html='';
+  rows.forEach(r=>{
+    const cls=r.cost>=2000000?'neg-row':r.cost>=500000?'warn-row':'';
+    html+=`<tr class="${cls}"><td>${r.age}</td><td>${r.year}</td><td>${r.name}</td><td class="r">${fN(r.cost)}</td></tr>`;
+  });
+  document.getElementById('capex-preview-tbody').innerHTML=html||'<tr><td colspan="4" style="text-align:center;color:var(--wg9);padding:var(--sp-16)">尚無資料</td></tr>';
+}
+
+// ── CASHFLOW TABLE ──
+function renderCashflow(){
+  const cf=getCF();
+  const safety=(gp('p-safety')||500)*10000;
+  let tbody='';
+  cf.forEach(r=>{
+    const hasBigCapex=r.capex>2000000;
+    const cls=r.assets<0?'neg-row':r.assets<safety?'warn-row':hasBigCapex?'peak-row':'';
+    const status=r.assets<0?'<span class="dn">⚠負值</span>':r.assets<safety?'<span class="dw">警示</span>':'<span class="dp">正常</span>';
+    const capexStr = r.capex > 0 ? fN(r.capex) : '—';
+    tbody+=`<tr class="${cls}">
+      <td>${r.year}</td><td>${r.age}</td><td class="r">${r.rate}</td>
+      <td class="r">${fN(r.income)}</td><td class="r">${fN(r.interest)}</td>
+      <td class="r">${fN(r.opex - r.misc)}</td>
+      <td class="r">${fN(r.misc)}</td>
+      <td class="r">${capexStr}</td>
+      <td class="r ${r.surplus<0?'dn':''}">${(r.surplus>=0?'+':'')}${fN(r.surplus)}</td>
+      <td class="r"><strong>${fN(r.assets)}</strong></td>
+      <td>${status}</td>
+    </tr>`;
+  });
+  document.getElementById('cf-tbody').innerHTML=tbody;
+}
+
+// ── STRESS TEST ──
+function renderStress(){
+  dc('stress-chart');
+  const safety=(gp('p-safety')||500)*10000;
+  const testRates=[150,200,250,300,350,400,410,500];
+  // 等比方案對比（label 從即時 cf 動態算出，避免 hardcoded 過時）
+  const geoSchedules=[
+    {tag:'主推：5y×4.2% 起180 + 2062 凍結 750', sched:[{year:2027,rate:150}].concat(generateGeometric(2027,180,5,4.2,'',2062))},
+  ];
+  const geoScenarios=geoSchedules.map(s=>{
+    const cfg=calcCashflowFromSchedule(s.sched);
+    const finalA=Math.round(cfg[cfg.length-1].assets/10000);
+    const minA=Math.round(Math.min(...cfg.map(r=>r.assets))/10000);
+    return {label:`★方案 ${s.tag}（50年 ${finalA.toLocaleString()}萬・最低 ${minA.toLocaleString()}萬）`, sched:s.sched};
+  });
+  const cf_base=getCF();
+  const colors=[
+    VIZ.alpha(VIZ.token('--dn'),0.65),  // 150 紅—現況早 fail
+    VIZ.alpha(VIZ.token('--dn'),0.40),  // 200 淡紅
+    VIZ.alpha(VIZ.token('--warn'),0.55),   // 250 橘
+    VIZ.alpha(VIZ.token('--warn'),0.40),   // 300 淡橘
+    VIZ.alpha(VIZ.token('--wg41'),0.55),   // 350 灰
+    VIZ.alpha(VIZ.token('--wg41'),0.85),   // 400 深灰—borderline 剛好踩進
+    VIZ.alpha(VIZ.token('--dp'),0.90),   // 410 深綠—一價到底最低值
+    VIZ.alpha(VIZ.token('--dp'),0.40),   // 500 淡綠—over-fund 對照
+  ];
+  const datasets=testRates.map((rate,i)=>{
+    const cf=calcCashflow(rate);
+    // clamp：一旦資產轉負，data 收成 0 後設 null（線會撞地後消失，破產視覺信號）
+    let broken=false, firstNegYr=null;
+    const dataClipped=cf.map(r=>{
+      if(broken) return null;
+      if(r.assets<0){ broken=true; firstNegYr=r.year; return 0; }
+      return r.assets;
+    });
+    const labelText=firstNegYr?`固定${rate}元（${firstNegYr} 破產）`:`固定${rate}元（撐住）`;
+    return {
+      label:labelText,
+      data:dataClipped,
+      borderColor:colors[i]||VIZ.alpha(VIZ.token('--wg41'),0.5),
+      backgroundColor:'transparent',borderWidth:1,pointRadius:0,tension:0.2,
+      borderDash:[3,2],
+      spanGaps:false
+    };
+  });
+  // Add geometric scenarios
+  const geoColors=[VIZ.alpha(VIZ.token('--dp'),0.9)];
+  geoScenarios.forEach((gs,i)=>{
+    const cf_geo = calcCashflowFromSchedule(gs.sched);
+    datasets.push({
+      label:gs.label,
+      data:cf_geo.map(r=>r.assets),
+      borderColor:geoColors[i],backgroundColor:'transparent',
+      borderWidth:2.5,pointRadius:0,tension:0.2
+    });
+  });
+  datasets.push({
+    label:`警戒線${gp('p-safety')}萬`,
+    data:cf_base.map(()=>safety),
+    borderColor:VIZ.alpha(VIZ.token('--dn'),0.5),borderDash:[5,3],borderWidth:1,
+    backgroundColor:'transparent',pointRadius:0
+  });
+  charts['stress-chart']=new Chart(document.getElementById('stress-chart'),{
+    type:'line',
+    data:{labels:cf_base.map(r=>r.year),datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{font:{family:FONT,size:10},boxWidth:10}}},
+      scales:{
+        y:{min:0,ticks:{font:{family:FONT,size:9},callback:v=>(v/10000).toFixed(0)+'萬'},grid:{color:VIZ.alpha(VIZ.token('--wg41'),0.06)}},
+        x:{ticks:{font:{family:FONT,size:9},maxTicksLimit:12},grid:{display:false}}
+      }
+    }
+  });
+
+  let tbody='';
+  testRates.forEach(rate=>{
+    const cf=calcCashflow(rate);
+    const minA30=Math.min(...cf.filter(r=>r.age<=34).map(r=>r.assets));
+    const minA50=Math.min(...cf.map(r=>r.assets));
+    const firstNeg=cf.find(r=>r.assets<0);
+    const firstWarn=cf.find(r=>r.assets<safety&&r.assets>=0);
+    const cls=firstNeg?'neg-row':firstWarn?'warn-row':'';
+    const status=firstNeg?`<span class="dn">${firstNeg.year}年轉負</span>`:minA50<safety?`<span class="dw">低於警戒</span>`:`<span class="dp">45年安全</span>`;
+    tbody+=`<tr class="${cls}"><td class="r">${rate}</td><td class="r">${f萬(minA30)}</td><td class="r">${f萬(minA50)}</td>
+      <td>${firstNeg?firstNeg.year+'（屋齡'+firstNeg.age+'）':'無'}</td>
+      <td>${firstWarn?firstWarn.year+'（屋齡'+firstWarn.age+'）':'無'}</td>
+      <td>${status}</td></tr>`;
+  });
+  document.getElementById('stress-tbody').innerHTML=tbody;
+}
+
+// ── INIT ──
+recalc();
+renderRateTab();
+renderOverview();
+// pre-render recurring for tab
+document.getElementById('tab-recurring').addEventListener('animationstart',()=>{},false);
+// 頁籤無障礙漸進增強由共用 /tabs-a11y.js 處理（head 以 defer 載入，與 finance.njk 同一份）
+</script>
+</body>
+</html>
