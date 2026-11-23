@@ -42,8 +42,11 @@
     ["util", "網站水電頁", "res", 3, 300],
     ["fee", "管理費繳款單", "res", 3, 380],
     ["finweb", "網站財報頁", "res", 3, 450],
-    ["mweb", "網站會議紀錄頁", "res", 3, 560],
-    ["line", "LINE 社區群組", "res", 3, 650]
+    ["mweb", "網站會議紀錄頁", "res", 3, 590],
+    ["line", "LINE 社區群組", "res", 3, 660],
+    ["ltfmw", "長期財務模型工作版", "gm", 2, 500],
+    ["ltfm", "網站長期財務模型", "res", 3, 520],
+    ["notebook", "Gemini Notebook 小幫手", "gm", 3, 760]
   ],
   "links": [
     ["chat", "pmwiki", "ai", "改變總幹事做法的定案，當下改"],
@@ -86,7 +89,12 @@
     ["fin3", "finx", "ai", "合併三大表存檔"],
     ["finx", "finweb", "ai", "內審版，簽核完成後正式發布"],
     ["garbage", "issues", "ai", "換約前把實測月噸數寫進垃圾清運換約案"],
-    ["mweb", "line", "ai", "開會通知與紀錄上線後產帶路圖"]
+    ["mweb", "line", "ai", "開會通知與紀錄上線後產帶路圖"],
+    ["finx", "ltfmw", "ai", "每月財報：合約變價、新項目、修繕累計超前，就改工作版並回報影響"],
+    ["mdocx", "ltfmw", "ai", "決議有新費用或改了合約價、週期，改工作版並回報影響"],
+    ["ltfmw", "ltfm", "ai", "區權會前定稿，會後換到正式網址；舊版凍結保存"],
+    ["pmwiki", "notebook", "auto", "每天 06:00 合併成來源文件，Notebook 自動同步"],
+    ["secwiki", "notebook", "auto", "每天 06:00 合併成來源文件，Notebook 自動同步"]
   ],
   "principles": [
     "一個日期只放一處：年度提醒只放 culturalcity85 主日曆，Notion 議題追蹤不填 Next Check Point。",
