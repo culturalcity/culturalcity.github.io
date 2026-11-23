@@ -5,7 +5,9 @@
  *       給 culturalcity85 的 NotebookLM「閱大安總幹事小幫手」當來源。
  *       正本永遠是 repo 的 .md；這份 Google 文件是自動產生的副本，不要手改（隔天會被蓋掉）。
  *
- * NotebookLM 不會自己更新來源：Wiki 改了之後，到 NotebookLM 點該來源→「與 Google 雲端硬碟同步」。
+ * 筆記本：culturalcity85 的 Gemini Notebook（原 NotebookLM）「閱大安總幹事小幫手」，以本文件為來源。
+ * Gemini Notebook 匯入雲端硬碟檔案後會自動同步（2026-11-23 介面說明），不必手動按同步。
+ * 時效：Wiki push 後，最晚隔天 06:00–07:00 本程式重寫文件，筆記本再自動跟上；急的話在後台手動跑 runNow()。
  *
  * 部署：culturalcity85 的 Apps Script 專案
  *       「閱大安・總幹事與保全 Wiki → NotebookLM 來源文件（wiki-to-doc）」
