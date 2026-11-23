@@ -370,6 +370,11 @@ eleventyExcludeFromCollections: true
 ### 6.5 AI 工具應用
 
 - 鼓勵總幹事使用 **ChatGPT** 或 **Gemini** 等生成式 AI 工具，協助草擬公告文案、信件回覆或活動企劃，提升行政效率。
+- **閱大安總幹事小幫手**：用社區 Google 帳號（culturalcity85）開 [Gemini Notebook](https://notebook.google.com/)，點「閱大安總幹事小幫手」，就能用問答的方式查本 Wiki、保全 Wiki 和所有保全 SOP，不用翻整本。
+    - 回答裡的數字標記是出處，點了會跳到原文。涉及金額、廠商、規約條文時，請點回原文確認再照做。
+    - 內容每天早上 6 點自動更新（Apps Script「閱大安・總幹事與保全 Wiki → NotebookLM 來源文件（wiki-to-doc）」），Wiki 改了最晚隔天就問得到。
+    - 來源文件「閱大安總幹事小幫手・來源（自動產生，勿手改）」不要手動修改，隔天會被覆蓋。要改內容請改 Wiki 本身。
+    - 小幫手答不出來或答錯的問題，請記下來回報主委：那通常就是 Wiki 該補的地方。
 
 
 ---
