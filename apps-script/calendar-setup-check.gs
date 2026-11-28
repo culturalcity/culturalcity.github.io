@@ -7,7 +7,7 @@
 // 主委就要臨時追（2026-11 的清潔排程 10/31 才排好）。2026-11-09 主委要求：
 //   - 自動檢查總幹事排好了沒，沒排好就提醒
 //   - 清潔排程排好了 → 自動做成網站「內審版」公告，請主委確認後轉正式（B 方案）
-//   - 維修保養排好了 → 提醒主委找晰兒做公告（A 方案；施作範圍要翻英日文，不自動）
+//   - 維修保養排好了 → 提醒主委用 Claude Code 做公告（A 方案；施作範圍要翻英日文，不自動）
 //
 // 做法：每天 09:00 跑，只在「月底前兩天」起動作（31 天的月 29 日起、30 天的月 28 日起、2 月 26 日起）：
 //   - 「閱大安-清潔」日曆：下個月每一天都要有事件（打掃區域或「清潔排休」）
@@ -18,7 +18,7 @@
 //   - 還沒排好 → 每天寄一封提醒（最多 3 封），寫給總幹事、列出缺哪些
 //
 // 收件人：culturalcity85（總幹事收信、主委也看得到；不寫個人信箱，換屆不必改）。
-// 轉正式由主委跟晰兒說「發 X 月清潔公告」：刪 eleventyExcludeFromCollections、檔名改發布日、push、LINE 帶路圖。
+// 轉正式由主委在 Claude Code 說「發 X 月清潔公告」：刪 eleventyExcludeFromCollections、檔名改發布日、push、LINE 帶路圖。
 //
 // 安裝：
 //   1. 專案設定 → 指令碼屬性 → 新增 GITHUB_TOKEN（與 weather-fetch 同一把：只給本 repo、Contents 讀寫）
@@ -189,7 +189,7 @@ var MONTH_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 function noticeSlug(pub, m) { return pub + '-' + m + '月清潔排程'; }
 
-// pub = 'YYYY-MM-DD'（產生日；轉正式時晰兒改成發布日）
+// pub = 'YYYY-MM-DD'（產生日；轉正式時 Claude 改成發布日）
 function buildNoticeHtml(y, m, pub, S) {
   var offs = Object.keys(S).map(Number).filter(function (d) { return S[d] === 'OFF'; }).sort(function (a, b) { return a - b; })
     .map(function (d, i) { return i ? pad2(d) : m + '/' + pad2(d); }).join('、');
@@ -308,17 +308,17 @@ function runDaily() {
   // 清潔排程（B）：排好就產內審版；之後日曆變了、仍是內審版就更新
   if (!cl.missing.length) {
     try { handleCleanDraft(nm, t, cl, props); }
-    catch (e) { mail('【閱大安】' + nm.m + ' 月清潔排程公告自動產生失敗', '錯誤：' + e.message + '\n\n請主委找晰兒手動產生。'); }
+    catch (e) { mail('【閱大安】' + nm.m + ' 月清潔排程公告自動產生失敗', '錯誤：' + e.message + '\n\n請主委在 Claude Code 手動產生。'); }
   }
 
-  // 維修保養（A）：排好就提醒主委找晰兒做公告（每月一次）
+  // 維修保養（A）：排好就提醒主委用 Claude Code 做公告（每月一次）
   if (!mt.missing.length && !props.getProperty('maint_done_' + nm.key)) {
     var ev = todo('📢 確認發布 ' + nm.m + ' 月維修保養公告',
-      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n主委跟晰兒說「做 ' + nm.m + ' 月保養公告」即可。');
+      '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n主委在 Claude Code 說「做 ' + nm.m + ' 月保養公告」即可。');
     mail('【閱大安】' + nm.m + ' 月維修保養已排好，可以準備保養公告',
       '總幹事已在「閱大安-維養」日曆排好 ' + nm.m + ' 月的機電、電梯保養。\n\n' +
       '日曆上 ' + nm.m + ' 月目前排了這些，請確認是不是就只有這幾項：\n' + mt.list.join('\n') + '\n\n' +
-      '下一步：主委跟晰兒說「做 ' + nm.m + ' 月保養公告」，晰兒會掃日曆、做三語公告給主委確認。\n' +
+      '下一步：主委在 Claude Code 說「做 ' + nm.m + ' 月保養公告」，Claude 會掃日曆、做三語公告給主委確認。\n' +
       '（主日曆今天已建待辦「' + ev + '」）');
     props.setProperty('maint_done_' + nm.key, t.iso);
   }
@@ -346,11 +346,11 @@ function handleCleanDraft(nm, t, cl, props) {
   var path = 'src/notice/' + noticeSlug(pub, nm.m) + '.html';
   var existing = ghGetFile(path);
   if (rec && (!existing || existing.text.indexOf('eleventyExcludeFromCollections: true') < 0)) {
-    // 已轉正式（或晰兒改了檔名）：不自動改正式公告，只通知一次
+    // 已轉正式（或 Claude 改了檔名）：不自動改正式公告，只通知一次
     if (rec.notifiedChange !== hash) {
       mail('【閱大安】' + nm.m + ' 月清潔排程在公告轉正式後又改了',
         '總幹事在「閱大安-清潔」日曆改了 ' + nm.m + ' 月的排程，但公告已經轉為正式，程式不會自動改正式公告。\n' +
-        '請主委找晰兒說「更新 ' + nm.m + ' 月清潔公告」。');
+        '請主委在 Claude Code 說「更新 ' + nm.m + ' 月清潔公告」。');
       rec.notifiedChange = hash; props.setProperty('clean_draft_' + nm.key, JSON.stringify(rec));
     }
     return;
@@ -361,11 +361,11 @@ function handleCleanDraft(nm, t, cl, props) {
   var url = SITE + '/notice/' + encodeURIComponent(noticeSlug(pub, nm.m)) + '.html';
   var extraTxt = cl.extras.length ? '\n\n以下臨時加做的項目，公告寫成「其他公共區域加強清潔」（有正式區域的日子就不列）：\n' + cl.extras.join('\n') : '';
   if (!rec) {
-    var ev = todo('📢 確認發布 ' + nm.m + ' 月清潔排程公告', '內審版已上線：' + url + '\n主委看過沒問題，跟晰兒說「發 ' + nm.m + ' 月清潔公告」。');
+    var ev = todo('📢 確認發布 ' + nm.m + ' 月清潔排程公告', '內審版已上線：' + url + '\n主委看過沒問題，在 Claude Code 說「發 ' + nm.m + ' 月清潔公告」。');
     mail('【閱大安】' + nm.m + ' 月清潔排程公告（內審版）已上線，請主委確認',
       '總幹事已排好 ' + nm.m + ' 月清潔排程，網站公告已自動做好（內審版：還不會出現在公告列表與首頁）。\n\n' +
       '預覽（約 2 分鐘後上線）：' + url + '\n\n' +
-      '主委看過沒問題，跟晰兒說「發 ' + nm.m + ' 月清潔公告」，晰兒會轉正式、推上網站、做 LINE 帶路圖。' + extraTxt +
+      '主委看過沒問題，在 Claude Code 說「發 ' + nm.m + ' 月清潔公告」，Claude 會轉正式、推上網站、做 LINE 帶路圖。' + extraTxt +
       '\n\n（主日曆今天已建待辦「' + ev + '」）');
   } else {
     mail('【閱大安】' + nm.m + ' 月清潔排程有異動，內審版公告已自動更新',
